@@ -1,0 +1,114 @@
+<div id="mainHelpWindow" class="help">
+	<h1>MAG Demographic Viewer Help</h1>
+	<hr>
+    <!--TabStrip Area-->
+        <div id="helpTaps">
+            <div id="tabstrip">
+                <ul>
+                    <li class="k-state-active tabs">
+                        About the viewer
+                    </li>
+                    <li class="tabs">
+                        How to make a map
+                    </li>
+                    <li class="tabs">
+                        How to make a report
+                    </li>
+                </ul>
+                <div id="tab1">
+                	<h2>About the MAG Demographic Viewer</h2>
+
+                    <p>The MAG Demographic Maps Viewer allows you to graphically view selected population and housing data for all or virtually any contiguous subset of Maricopa County and Pinal County, Arizona.  The viewer provides interactive mapping and reporting tools to allow exploration of data from Census 2010 and the American Community Survey (ACS) 2008-2012.  The data is shown by census block group geography.</p>
+
+                    <p>The viewer is composed of the map, which fills the entire window, and a series of panels which provide tools for interacting with the map and generating reports.  Each panel can be dragged around the viewer and can be minimized or hidden.  Each panel can be opened or closed by clicking on their title in the menu bar.  Each panel also has detailed help about the given tool which can be viewed by clicking on the <img src="app/resources/img/question-frame.png"> button.</p>
+
+                    <h2>Navigate around the map using your mouse.</h2>
+                    <ul>
+                        <li>To <b>Pan </b> (move the map), simply click and hold your mouse, then drag the map.</li>
+                        <li>To <b>Center and Zoom In </b> on a location, double click the location.</li>
+                        <li><b>Zoom In/Out </b>using the mouse scroll wheel.  You can also use the + and - buttons in the bottom left corner of the map.</li>
+                        <li>Select an area to <b>Zoom </b>to by holding down the shift key while drawing a box.</li>
+                        <li>Click on a <b>map feature </b>to reveal further information.</li>
+                    </ul>
+                    <hr>
+                    <p class="legal">Please note that while every effort has been made to ensure the accuracy of this information, the Maricopa Association of Governments makes no warranty, express or implied, as to its accuracy and expressly disclaims liability for the accuracy thereof.</p>
+
+                    <p class="legal">Data Source:  </p>
+                    <ul class="legal">
+                        <li>Census 2010</li>
+                        <li>ACS 2008-2012</li>
+                    	<li>Aerial imagery provided by ESRI last updated November 13, 2013</li>
+                    	<li>Street map provided by MAG last updated January 2014</li>
+                    </ul>
+
+                    <address>To provide comments or report problems please contact:
+                    	<a class="link" title="email link" href="#emailLink" role="navigation" data-bind="click: openEmailwin">Jason Howard, GIS Program Manager</a>
+                	</address>
+                    <br>
+                    <address>Visit our Website:
+                    	<a class="link" title="MAG website" role="navigation" target="_blank" href="http://www.azmag.gov/">www.azmag.gov</a>
+                    </address>
+
+                    <div id="copyR" class="legal">Copyright &copy; 2014 <a class="link" title="MAG website" role="navigation" target="_blank" href="http://www.azmag.gov/">Maricopa Association of Governments</a> | <span id="version"></span> | <a id="legal" class="link" title="Legal">Legal Disclaimer</a></div>
+
+                </div>
+                <div id="tab2">
+                    <h2>How to make a map</h2>
+
+                    <ol>
+                        <li>
+                            <strong>Choose a demographic map:</strong>
+                            <br>
+                            A hierarchical menu of available demographic maps is provided in the upper left corner of the viewer under the label <strong>Maps</strong>.  The maps are organized by topics (e.g. population, housing) and sub-categories (e.g. Age, Population by Race).  Note that changing a map will change the text in the viewer's header and also contents of the <strong>Legend</strong> panel.
+                        </li>
+                        <li>
+                            <strong>Navigate to an area of interest:</strong>
+                            <br>
+                            To navigate to an area of interest you can either interact with the map directly using your mouse or you can use the navigation tool located in the lower left corner of the viewer.
+
+                            <p>To interact with the map directly:&nbsp;&nbsp;zoom in by either using the mouse wheel or double clicking on a location in the map you wish to zoom to.  You can also zoom by holding the "Shift" key down then left click on the mouse button and drag.  A red shaded box will appear around the area you want to zoom to. To pan, hold the left mouse button down, drag to the map and release.</p>
+
+                            <p>To use the navigation tools:&nbsp;&nbsp;click on the "+" button to zoom in.  Click on the "-" button to zoom out.  Click on the "House" button to return the map to its original extent.</p>
+                        </li>
+                        <li>
+                            <strong>Export the map:</strong>
+                            <br>
+                            To export a formatted and printer-friendly version of your map, open the "Print Map" button at the top right of the page.  This will open a panel that will allow you to customize the output map.  For more information on the tool click on the <img src="app/resources/img/question-frame.png"> button in the upper right corner of its panel.
+                        </li>
+                    </ol>
+                </div>
+                <div id="tab3">
+                    <h2>How to make a report</h2>
+
+                    <ol>
+                        <li>
+                            <strong>Open the reports panel:</strong>
+                            <br>
+                            A panel with the title "Reports" should be visible by default.  If not, open the panel by clicking the "Reports" button in the tool-bar (located in the upper right corner of the map viewer).
+                        </li>
+                        <li>
+                            <strong>Choose from one of the available report summaries:</strong>
+                            <br>
+                            From within the Reports panel choose one of the four options:
+                            <ul>
+                                <li>Country Summary - to generate a report for the county</li>
+                                <li>City/Town Summary - to generate a report for a given jurisdiction</li>
+                                <li>Council District Summary - to generate a report for a given council district</li>
+                                <li>Supervisor District Summary - to generate a report for a given supervisorial district</li>
+                                <li>Custom Summary - to generate a report for a geographic area of interest</li>
+                                <li>Advanced Query - to generate a report for a specific interest</li>
+                            </ul>
+                            For more information on creating the report see detailed help by clicking the <img src="app/resources/img/question-frame.png"> button in the "Reports" panel.
+                        </li>
+                        <li>
+                            <strong>Explore report results:</strong>
+                            <br>
+                            The results will be displayed in a panel containing both tabular and graphical views of the report.  From within this report you have the option to export tabular reports into common formats (Excel, CSV) as well as exporting a formatted summary report to PDF.  For more information on interacting with the report results see detailed help by clicking the <img src="app/resources/img/question-frame.png"> button in the reports results panel.
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+</div>
+
+

@@ -1,0 +1,59 @@
+<div id="demographicView">
+    <div id="demTabStrip">
+        <ul>
+            <li>Summary Report</li>
+            <li class="k-state-active">Charts</li>
+        </ul>
+        <div id="demSummaryReportTab">
+            <div id="demSummaryOptionsRow" class="reportTabPageOptionRow">
+                <span>
+                    <input id="demUseComp" type="checkbox">
+                    <label id="demUseCompLabel" for="demUseComp" class="smallFont">Use Comparison</label>
+                </span>
+                <span class="reportExportSpan">
+                    <span>Export Results:</span>
+                    <input id="demExportSummary"/>
+                    <button id="demExportResults" type="button" data-bind="click: exportSummary">
+                        <img src="app/resources/img/i_excel.png" class="exportButtonImage">
+                    </button>
+                </span>
+            </div>
+        </div>
+        <div id="demChartsTab">
+            <div class="reportTabPageOptionRow">
+                <input id="displayLegend" type="checkbox" data-bind="checked: isChecked">
+                <label for="displayLegend" class="smallFont">Display chart legend</label>
+                
+				<span class="reportExportSpan">
+					<div id="exportReportRequest">
+						<span>Export Report to PDF:</span>
+						<button id="printSummary" type="button" data-bind="click: exportReport">
+							<img src="app/resources/img/i_pdf.png" class="exportButtonImage">
+						</button>
+					</div>
+				</span>
+            </div>
+			
+			<div class="reportTabPageOptionRow">
+				<div id="exportReportResponse"> </div>
+            </div>
+			
+			
+            <div id="demSplitContainer">
+                <div id="demChartAreaPane">
+
+                </div>
+                <div id="demChartListPane">
+                    <div id="demChartList"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <p id="demSource" class="legal"></p>
+
+    <script type="text/x-kendo-tmpl" id="demChartListTemplate">
+        <div class="demChartCategoryItem">
+            <button>#:chartCategory#</button>
+        </div>
+    </script>
+</div>

@@ -1,0 +1,63 @@
+# humanstxt.org/
+# The humans responsible & technology colophon
+
+# TEAM
+
+    Maricopa Association of Governments
+    	Name:  Vern Wolfley
+    	Role: GIS Analyst/Developer
+    	Contact:
+    	Twitter: @vernwolfley
+    	From: Litchfield Park, AZ
+
+    	Name:  Scott Bridwell
+    	Role: GIS Modeler/Developer
+    	Contact:
+    	Twitter:
+    	From: Chandler, AZ
+
+        Name:  Amanda Stanko
+        Role: GIS Analyst
+        Contact:
+        Twitter:
+        From: Phoenix, AZ
+
+    	Name:  Jason Howard
+    	Role: GIS Program Manager
+    	Contact:
+    	Twitter:
+    	From: Chandler, AZ
+
+        Name:  Anubhav Bagley
+        Role: Information Services Manager
+        Contact:
+        Twitter:
+        From: Phoenix, AZ
+
+
+# THANKS
+
+    Geographic Information Services, Inc.
+    	Justin Burns
+    	Kelley Lindish
+    	Caleb Carter
+        Brent Kastor
+        Katie Reiter
+        Calvin Echols
+
+
+# TECHNOLOGY COLOPHON
+
+    Standards: HTML5, CSS3
+    Components: HTML5BoilerPlate, Normalize.css, jQuery, Modernizr, Require.js, Kendo, Knockout, ESRI Javascript API, Grunt
+
+# SITE
+    Site Name: Demographic Maps Viewer
+    Site URL: http://http://geo.azmag.gov/maps/azdemographics/
+    Version: 1.0.0
+    Creation Date: 10/21/2014
+	Last updated: 10/21/2014
+	Language: English
+	Doctype: HTML5
+	IDE: Sublime Text
+
