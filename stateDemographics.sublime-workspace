@@ -519,6 +519,14 @@
 	},
 	"buffers":
 	[
+		{
+			"file": "app/main.js",
+			"settings":
+			{
+				"buffer_size": 2796,
+				"line_ending": "Windows"
+			}
+		}
 	],
 	"build_system": "Packages/JSHint/JSHint.sublime-build",
 	"command_palette":
@@ -580,11 +588,18 @@
 	},
 	"file_history":
 	[
+		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/vm/queryBuilderTwo-vm.js",
+		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/vm/panel-vm.js",
+		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/vm/legend-vm.js",
+		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/vm/interactiveTools-vm.js",
+		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/vm/cbr-vm.js",
+		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/vm/classificationFactory-vm.js",
+		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/vm/colorRamp-vm.js",
+		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/vm/demographic-vm.js",
 		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/CHANGELOG.md",
 		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/index.html",
 		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/run.js",
 		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/vm/social-vm.js",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/vm/demographic-vm.js",
 		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/config/demographicConfig.js",
 		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/config.js",
 		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/views/mainHelp-view.html",
@@ -593,21 +608,17 @@
 		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/humans.txt",
 		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/package.json",
 		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/README.md",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/vm/panel-vm.js",
 		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/main.js",
 		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/models/map-model.js",
 		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/config/cbrConfig.js",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/vm/queryBuilderTwo-vm.js",
 		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/views/panel-view.html",
 		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/config/queryBuilderConfig.js",
 		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/helpers/layer-delegate.js",
 		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/views/queryBuilderTwo-view.html",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/vm/cbr-vm.js",
 		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/views/cbrHelp-view.html",
 		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/views/interactiveTools-view.html",
 		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/views/queryBuilderHelp-view.html",
 		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/vm/cbrlaunchbar-vm.js",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/vm/classificationFactory-vm.js",
 		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/views/demographic-view.html",
 		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/resources/css/main.min.css",
 		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/views/help-view.html",
@@ -626,7 +637,6 @@
 		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/views/classBreaks-view.html",
 		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/views/helpLaunchbar-view.html",
 		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/views/print-view.html",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/vm/legend-vm.js",
 		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/vm/legendLaunchbar-vm.js",
 		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/stateDemographics.sublime-project",
 		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/views/printHelp-view.html",
@@ -705,9 +715,7 @@
 		"/I/Projects/ArcGIS Server/10.2/javascript_apps/Employment/employment_project/app/vm/classificationFactory-vm.js",
 		"/I/Projects/ArcGIS Server/10.2/javascript_apps/Employment/employment_project/app/vm/queryBuilder-vm.js",
 		"/I/Projects/ArcGIS Server/10.2/javascript_apps/Employment/employment_project/app/helpers/magNumberFormatter.js",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/Employment/employment_project/app/vm/launchbar-vm.js",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/Employment/deploy/build_2.0.0/app/config/cbrConfig.js",
-		"/C/Users/vwolfley/AppData/Roaming/Sublime Text 2/Packages/JsFormat/JsFormat.sublime-settings"
+		"/I/Projects/ArcGIS Server/10.2/javascript_apps/Employment/employment_project/app/vm/launchbar-vm.js"
 	],
 	"find":
 	{
@@ -725,6 +733,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"windowVM",
 			"copyR",
 			"layerInfo",
 			"legal",
@@ -851,8 +860,7 @@
 			"breakCount",
 			"error",
 			"Invalid",
-			"Invalid BreakCount",
-			"e."
+			"Invalid BreakCount"
 		],
 		"highlight": false,
 		"in_selection": false,
@@ -984,8 +992,141 @@
 	"groups":
 	[
 		{
+			"selected": 0,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "app/main.js",
+					"settings":
+					{
+						"buffer_size": 2796,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1271,
+								1271
+							]
+						],
+						"settings":
+						{
+							"codeintel": true,
+							"codeintel_config":
+							{
+								"JavaScript":
+								{
+									"codeintel_max_recursive_dir_depth": 2,
+									"codeintel_scan_files_in_project": false,
+									"javascriptExtraPaths":
+									[
+									]
+								},
+								"PHP":
+								{
+									"codeintel_max_recursive_dir_depth": 5,
+									"codeintel_scan_files_in_project": false,
+									"phpExtraPaths":
+									[
+									]
+								},
+								"Python":
+								{
+									"env":
+									{
+									}
+								}
+							},
+							"codeintel_enabled_languages":
+							[
+								"JavaScript",
+								"Mason",
+								"XBL",
+								"XUL",
+								"RHTML",
+								"SCSS",
+								"Python",
+								"HTML",
+								"Ruby",
+								"Python3",
+								"XML",
+								"Sass",
+								"XSLT",
+								"Django",
+								"HTML5",
+								"Perl",
+								"CSS",
+								"Twig",
+								"Less",
+								"Smarty",
+								"Node.js",
+								"Tcl",
+								"TemplateToolkit",
+								"PHP"
+							],
+							"codeintel_live": true,
+							"codeintel_live_enabled_languages":
+							[
+								"JavaScript",
+								"Mason",
+								"XBL",
+								"XUL",
+								"RHTML",
+								"SCSS",
+								"Python",
+								"HTML",
+								"Ruby",
+								"Python3",
+								"XML",
+								"Sass",
+								"XSLT",
+								"Django",
+								"HTML5",
+								"Perl",
+								"CSS",
+								"Twig",
+								"Less",
+								"Smarty",
+								"Node.js",
+								"Tcl",
+								"TemplateToolkit",
+								"PHP"
+							],
+							"codeintel_max_recursive_dir_depth": 10,
+							"codeintel_scan_exclude_dir":
+							{
+								"JavaScript":
+								[
+									"/build/",
+									"/min/"
+								]
+							},
+							"codeintel_scan_files_in_project": true,
+							"codeintel_selected_catalogs":
+							[
+								"PyWin32",
+								"jQuery",
+								"Rails"
+							],
+							"codeintel_snippets": true,
+							"codeintel_syntax_map":
+							{
+								"Python Django": "Python"
+							},
+							"codeintel_tooltips": "popup",
+							"sublime_auto_complete": true,
+							"syntax": "Packages/Better JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
 			]
 		}
 	],

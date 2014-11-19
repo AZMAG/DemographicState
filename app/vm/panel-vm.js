@@ -16,15 +16,15 @@
         "app/vm/help-vm",
         "dojo/text!app/views/panel-view.html",
         "app/helpers/layer-delegate",
-        "app/vm/window-vm",
         "app/vm/demographic-vm",
         "app/config/demographicConfig",
         "app/vm/interactiveTools-vm",
         "app/vm/queryBuilderTwo-vm",
+
         "vendor/kendo/web/js/jquery.min",
         "vendor/kendo/web/js/kendo.web.min"
     ],
-        function (dj, dc, tp, helpView, helpVM, view, layerDelegate, windowVM, demographicVM, demographicConfig, interactiveToolsVM, qbVM) {
+        function (dj, dc, tp, helpView, helpVM, view, layerDelegate, demographicVM, demographicConfig, interactiveToolsVM, qbVM) {
 
             var PanelVM = new function () {
 
@@ -352,7 +352,7 @@
                 //  *
                 //  * @method councilQueryHelper
                 //  * @param {FeatureSet} results - feature set returned by query.
-                 
+
                 // self.councilQueryHandler = function (results) {
                 //     var features = results.features;
 
@@ -384,15 +384,6 @@
                 //         }
                 //     });
                 // };
-
-                /**
-                 * Call open method on windowVM.
-                 *
-                 * @event click
-                 */
-                self.openTempWindow = function () {
-                    windowVM.openWindow();
-                };
 
                 self.displayStateChoice = function () {
                         $("#countyChoiceDiv, #placeChoiceDiv, #demInteractiveDiv").hide();
