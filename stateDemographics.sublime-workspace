@@ -519,86 +519,6 @@
 	},
 	"buffers":
 	[
-		{
-			"file": "app/vm/panel-vm.js",
-			"settings":
-			{
-				"buffer_size": 23148,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "app/views/mainHelp-view.html",
-			"settings":
-			{
-				"buffer_size": 7653,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "app/main.js",
-			"settings":
-			{
-				"buffer_size": 2912,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "app/models/map-model.js",
-			"settings":
-			{
-				"buffer_size": 23721,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "app/config/demographicConfig.js",
-			"settings":
-			{
-				"buffer_size": 137449,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "config.js",
-			"settings":
-			{
-				"buffer_size": 7098,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "app/config/cbrConfig.js",
-			"settings":
-			{
-				"buffer_size": 40726,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "app/vm/queryBuilderTwo-vm.js",
-			"settings":
-			{
-				"buffer_size": 20540,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "app/views/panel-view.html",
-			"settings":
-			{
-				"buffer_size": 1286,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "app/views/contacts-view.html",
-			"settings":
-			{
-				"buffer_size": 6021,
-				"line_ending": "Windows"
-			}
-		}
 	],
 	"build_system": "Packages/JSHint/JSHint.sublime-build",
 	"command_palette":
@@ -660,6 +580,25 @@
 	},
 	"file_history":
 	[
+		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/CHANGELOG.md",
+		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/index.html",
+		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/run.js",
+		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/vm/social-vm.js",
+		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/vm/demographic-vm.js",
+		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/config/demographicConfig.js",
+		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/config.js",
+		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/views/mainHelp-view.html",
+		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/views/contacts-view.html",
+		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/resources/css/main.css",
+		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/humans.txt",
+		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/package.json",
+		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/README.md",
+		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/vm/panel-vm.js",
+		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/main.js",
+		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/models/map-model.js",
+		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/config/cbrConfig.js",
+		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/vm/queryBuilderTwo-vm.js",
+		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/views/panel-view.html",
 		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/config/queryBuilderConfig.js",
 		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/helpers/layer-delegate.js",
 		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/views/queryBuilderTwo-view.html",
@@ -671,18 +610,9 @@
 		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/vm/classificationFactory-vm.js",
 		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/views/demographic-view.html",
 		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/resources/css/main.min.css",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/index.html",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/config.js",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/vm/demographic-vm.js",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/views/contacts-view.html",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/views/mainHelp-view.html",
 		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/views/help-view.html",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/config/demographicConfig.js",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/main.js",
 		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/views/social-view.html",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/resources/css/main.css",
 		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/views/legal-view.html",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/models/map-model.js",
 		"/I/Projects/ArcGIS Server/10.2/javascript_apps/Demographics/demographics_project_new/app/views/mainHelp-view.html",
 		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/views/socialHelp-view.html",
 		"/I/Projects/ArcGIS Server/10.2/javascript_apps/Demographics/demographics_project - Copy/app/views/help-view.html",
@@ -696,19 +626,13 @@
 		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/views/classBreaks-view.html",
 		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/views/helpLaunchbar-view.html",
 		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/views/print-view.html",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/views/panel-view.html",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/vm/panel-vm.js",
 		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/vm/legend-vm.js",
 		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/vm/legendLaunchbar-vm.js",
 		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/stateDemographics.sublime-project",
 		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/views/printHelp-view.html",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/README.md",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/CHANGELOG.md",
 		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/views/legend-view.html",
 		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/vm/print-vm.js",
 		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/views/legendHelp-view.html",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/package.json",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/humans.txt",
 		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/Gruntfile.js",
 		"/I/Projects/ArcGIS Server/10.2/javascript_apps/Employment/employment_project/app/vm/employment-vm.js",
 		"/I/Projects/ArcGIS Server/10.2/javascript_apps/Employment/employment_project/app/config/employmentConfig.js",
@@ -783,11 +707,7 @@
 		"/I/Projects/ArcGIS Server/10.2/javascript_apps/Employment/employment_project/app/helpers/magNumberFormatter.js",
 		"/I/Projects/ArcGIS Server/10.2/javascript_apps/Employment/employment_project/app/vm/launchbar-vm.js",
 		"/I/Projects/ArcGIS Server/10.2/javascript_apps/Employment/deploy/build_2.0.0/app/config/cbrConfig.js",
-		"/C/Users/vwolfley/AppData/Roaming/Sublime Text 2/Packages/JsFormat/JsFormat.sublime-settings",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/Employment/employment_project/app/vm/help-vm.js",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/Employment/employment_project/app/config/demographicConfig.js",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/Employment/employment_project/app/vm/window-vm.js",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/Employment/employment_project/Gruntfile.js"
+		"/C/Users/vwolfley/AppData/Roaming/Sublime Text 2/Packages/JsFormat/JsFormat.sublime-settings"
 	],
 	"find":
 	{
@@ -805,6 +725,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"copyR",
 			"layerInfo",
 			"legal",
 			"ico",
@@ -931,8 +852,7 @@
 			"error",
 			"Invalid",
 			"Invalid BreakCount",
-			"e.",
-			"me."
+			"e."
 		],
 		"highlight": false,
 		"in_selection": false,
@@ -1064,289 +984,8 @@
 	"groups":
 	[
 		{
-			"selected": 9,
 			"sheets":
 			[
-				{
-					"buffer": 0,
-					"file": "app/vm/panel-vm.js",
-					"settings":
-					{
-						"buffer_size": 23148,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								7385,
-								7385
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 1125.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "app/views/mainHelp-view.html",
-					"settings":
-					{
-						"buffer_size": 7653,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								6714,
-								6714
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/HTML/HTML.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 330.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "app/main.js",
-					"settings":
-					{
-						"buffer_size": 2912,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								728,
-								728
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "app/models/map-model.js",
-					"settings":
-					{
-						"buffer_size": 23721,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								23288,
-								23288
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 4005.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "app/config/demographicConfig.js",
-					"settings":
-					{
-						"buffer_size": 137449,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								673,
-								673
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "config.js",
-					"settings":
-					{
-						"buffer_size": 7098,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								3838,
-								3838
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 1665.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 6,
-					"file": "app/config/cbrConfig.js",
-					"settings":
-					{
-						"buffer_size": 40726,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								311,
-								311
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 7,
-					"file": "app/vm/queryBuilderTwo-vm.js",
-					"settings":
-					{
-						"buffer_size": 20540,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								5541,
-								5541
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 1710.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 8,
-					"file": "app/views/panel-view.html",
-					"settings":
-					{
-						"buffer_size": 1286,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1286,
-								1286
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/HTML/HTML.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 9,
-					"file": "app/views/contacts-view.html",
-					"settings":
-					{
-						"buffer_size": 6021,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								5216,
-								5216
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/HTML/HTML.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 540.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				}
 			]
 		}
 	],
