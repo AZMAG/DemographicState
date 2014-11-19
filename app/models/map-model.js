@@ -74,6 +74,8 @@
                     extent: new esri.geometry.Extent(appConfig.initExtent),
                     // fitExent: true,
                     lods: appConfig.lods,
+                    // minZoom: 7,
+                    //maxZoom: 19,
                     sliderPosition: "bottom-left",
                     showAttribution: false,
                     logo: false

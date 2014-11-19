@@ -107,9 +107,9 @@
                     // Hide the places div for now
                     $("#placeChoiceDiv").hide();
                     // Hide the supervisor div for now
-                    $("#supervisorChoiceDiv").hide();
+                    //$("#supervisorChoiceDiv").hide();
                     // Hide the council div for now
-                    $("#councilChoiceDiv").hide();
+                    //$("#councilChoiceDiv").hide();
 
                     // Load the county names
                     var url1 = demographicConfig.reports.countySummary.restUrl;
@@ -123,17 +123,17 @@
                     layerDelegate.query(url2, self.placeQueryHandler, self.placeQueryFault, null, whereClause2, false);
                     qbVM.init("display", "after");
 
-                    // Load the supervisor names
-                    var url3 = demographicConfig.reports.supervisorSummary.restUrl;
-                    var whereClause3 = demographicConfig.reports.supervisorSummary.whereClause;
-                    layerDelegate.query(url3, self.supervisorQueryHandler, self.supervisorQueryFault, null, whereClause3, false);
-                    qbVM.init("display", "after");
+                   //  // Load the supervisor names
+                   //  //var url3 = demographicConfig.reports.supervisorSummary.restUrl;
+                   // // var whereClause3 = demographicConfig.reports.supervisorSummary.whereClause;
+                   //  //layerDelegate.query(url3, self.supervisorQueryHandler, self.supervisorQueryFault, null, whereClause3, false);
+                   //  //qbVM.init("display", "after");
 
-                    // Load the council names
-                    var url4 = demographicConfig.reports.councilSummary.restUrl;
-                    var whereClause4 = demographicConfig.reports.councilSummary.whereClause;
-                    layerDelegate.query(url4, self.councilQueryHandler, self.councilQueryFault, null, whereClause4, false);
-                    qbVM.init("display", "after");
+                   //  // Load the council names
+                   //  var url4 = demographicConfig.reports.councilSummary.restUrl;
+                   //  var whereClause4 = demographicConfig.reports.councilSummary.whereClause;
+                   //  layerDelegate.query(url4, self.councilQueryHandler, self.councilQueryFault, null, whereClause4, false);
+                   //  qbVM.init("display", "after");
 
                 };//end init
 
@@ -179,6 +179,29 @@
                     resizeTimer = setTimeout(self.winResize, 200);
                 });
 
+                 /**
+                 * Callback method for errors returned by county query.
+                 *
+                 * @method countyQueryFault
+                 * @param {Error} error - error object
+                 */
+                self.stateQueryFault = function (error) {
+                    console.log(error.message);
+                };
+
+                /**
+                 * Callback method for results returned by county query.
+                 *
+                 * @method countyQueryHelper
+                 * @param {FeatureSet} results - feature set returned by query.
+                 */
+                // self.stateQueryHandler = function (results) {
+                //     var placeName = "Arizona";
+                //      // demographicVM.openWindow(placeName, "state");
+
+                // };
+
+
                 /**
                  * Callback method for errors returned by county query.
                  *
@@ -197,13 +220,24 @@
                  */
                 self.countyQueryHandler = function (results) {
                     var features = results.features;
-
+                    console.log(features);
                     var nameArray = [];
                     var countyField = demographicConfig.reports.countySummary.summaryField;
                     $.each(features, function (index, feature) {
                         var name = feature.attributes[countyField];
                         nameArray.push({ Name: name });
                     });
+                    // used to sort attributes and put into Array. vw
+                        function compare(a,b) {
+                            if (a.Name < b.Name) {
+                                return -1;
+                            }
+                            if (a.Name > b.Name) {
+                                return 1;
+                            }
+                            return 0;
+                        }
+                        nameArray.sort(compare);
 
                     $("#countyComboBox").kendoComboBox({
                         index: 0,
@@ -281,75 +315,75 @@
                  * @method supervisorQueryHelper
                  * @param {FeatureSet} results - feature set returned by query.
                  */
-                self.supervisorQueryHandler = function (results) {
-                    var features = results.features;
+                // self.supervisorQueryHandler = function (results) {
+                //     var features = results.features;
 
-                    var nameArray = [];
-                    var supervisorField = demographicConfig.reports.supervisorSummary.summaryField;
-                    $.each(features, function (index, feature) {
-                        var name = feature.attributes[supervisorField];
-                        nameArray.push({ Name: name });
-                    });
-                        // used to sort attributes and put into Array. vw
-                        function compare(a,b) {
-                            if (a.Name < b.Name) {
-                                return -1;
-                            }
-                            if (a.Name > b.Name) {
-                                return 1;
-                            }
-                            return 0;
-                        }
-                        nameArray.sort(compare);
+                //     var nameArray = [];
+                //     var supervisorField = demographicConfig.reports.supervisorSummary.summaryField;
+                //     $.each(features, function (index, feature) {
+                //         var name = feature.attributes[supervisorField];
+                //         nameArray.push({ Name: name });
+                //     });
+                //         // used to sort attributes and put into Array. vw
+                //         function compare(a,b) {
+                //             if (a.Name < b.Name) {
+                //                 return -1;
+                //             }
+                //             if (a.Name > b.Name) {
+                //                 return 1;
+                //             }
+                //             return 0;
+                //         }
+                //         nameArray.sort(compare);
 
-                    $("#supervisorComboBox").kendoComboBox({
-                        index: 0,
-                        dataTextField: "Name",
-                        dataValueField: "Name",
-                        filter: "contains",
-                        dataSource: {
-                            data: nameArray
-                        }
-                    });
-                };
+                //     $("#supervisorComboBox").kendoComboBox({
+                //         index: 0,
+                //         dataTextField: "Name",
+                //         dataValueField: "Name",
+                //         filter: "contains",
+                //         dataSource: {
+                //             data: nameArray
+                //         }
+                //     });
+                // };
 
-                /**
-                 * Callback method for results returned by council query.
-                 *
-                 * @method councilQueryHelper
-                 * @param {FeatureSet} results - feature set returned by query.
-                 */
-                self.councilQueryHandler = function (results) {
-                    var features = results.features;
+                // *
+                //  * Callback method for results returned by council query.
+                //  *
+                //  * @method councilQueryHelper
+                //  * @param {FeatureSet} results - feature set returned by query.
+                 
+                // self.councilQueryHandler = function (results) {
+                //     var features = results.features;
 
-                    var nameArray = [];
-                    var councilField = demographicConfig.reports.councilSummary.summaryField;
-                    $.each(features, function (index, feature) {
-                        var name = feature.attributes[councilField];
-                        nameArray.push({ Name: name });
-                    });
-                        // used to sort attributes and put into Array. vw
-                        function compare(a,b) {
-                            if (a.Name < b.Name) {
-                                return -1;
-                            }
-                            if (a.Name > b.Name) {
-                                return 1;
-                            }
-                            return 0;
-                        }
-                        nameArray.sort(compare);
+                //     var nameArray = [];
+                //     var councilField = demographicConfig.reports.councilSummary.summaryField;
+                //     $.each(features, function (index, feature) {
+                //         var name = feature.attributes[councilField];
+                //         nameArray.push({ Name: name });
+                //     });
+                //         // used to sort attributes and put into Array. vw
+                //         function compare(a,b) {
+                //             if (a.Name < b.Name) {
+                //                 return -1;
+                //             }
+                //             if (a.Name > b.Name) {
+                //                 return 1;
+                //             }
+                //             return 0;
+                //         }
+                //         nameArray.sort(compare);
 
-                    $("#councilComboBox").kendoComboBox({
-                        index: 0,
-                        dataTextField: "Name",
-                        dataValueField: "Name",
-                        filter: "contains",
-                        dataSource: {
-                            data: nameArray
-                        }
-                    });
-                };
+                //     $("#councilComboBox").kendoComboBox({
+                //         index: 0,
+                //         dataTextField: "Name",
+                //         dataValueField: "Name",
+                //         filter: "contains",
+                //         dataSource: {
+                //             data: nameArray
+                //         }
+                //     });
+                // };
 
                 /**
                  * Call open method on windowVM.
@@ -360,6 +394,10 @@
                     windowVM.openWindow();
                 };
 
+                self.displayStateChoice = function () {
+                        $("#countyChoiceDiv, #placeChoiceDiv, #demInteractiveDiv").hide();
+                };
+
                 /**
                  * Show/Hide div containing county combo box.
                  *
@@ -368,7 +406,7 @@
                 self.displayCountyChoice = function () {
                     if ($("#countyChoiceDiv").is(":hidden")) {
                         $("#countyChoiceDiv").show();
-                        $("#placeChoiceDiv, #demInteractiveDiv, #supervisorChoiceDiv, #councilChoiceDiv").hide();
+                        $("#placeChoiceDiv, #demInteractiveDiv").hide();
                     }
                     else {
                         $("#countyChoiceDiv").hide();
@@ -383,41 +421,54 @@
                 self.displayPlaceChoice = function () {
                     if ($("#placeChoiceDiv").is(":hidden")) {
                         $("#placeChoiceDiv").show();
-                        $("#countyChoiceDiv, #demInteractiveDiv, #supervisorChoiceDiv, #councilChoiceDiv").hide();
+                        $("#countyChoiceDiv, #demInteractiveDiv").hide();
                     }
                     else {
                         $("#placeChoiceDiv").hide();
                     }
                 };
 
-                /**
-                 * Show/Hide div containing supervisor combo box.
-                 *
-                 * @event click
-                 */
-                self.displaySupervisorChoice = function () {
-                    if ($("#supervisorChoiceDiv").is(":hidden")) {
-                        $("#supervisorChoiceDiv").show();
-                        $("#countyChoiceDiv, #demInteractiveDiv, #placeChoiceDiv, #councilChoiceDiv").hide();
-                    }
-                    else {
-                        $("#supervisorChoiceDiv").hide();
-                    }
-                };
+                // /**
+                //  * Show/Hide div containing supervisor combo box.
+                //  *
+                //  * @event click
+                //  */
+                // self.displaySupervisorChoice = function () {
+                //     if ($("#supervisorChoiceDiv").is(":hidden")) {
+                //         $("#supervisorChoiceDiv").show();
+                //         $("#countyChoiceDiv, #demInteractiveDiv, #placeChoiceDiv, #councilChoiceDiv").hide();
+                //     }
+                //     else {
+                //         $("#supervisorChoiceDiv").hide();
+                //     }
+                // };
+
+                // /**
+                //  * Show/Hide div containing council combo box.
+                //  *
+                //  * @event click
+                //  */
+                // self.displayCouncilChoice = function () {
+                //     if ($("#councilChoiceDiv").is(":hidden")) {
+                //         $("#councilChoiceDiv").show();
+                //         $("#countyChoiceDiv, #demInteractiveDiv, #placeChoiceDiv, #supervisorChoiceDiv").hide();
+                //     }
+                //     else {
+                //         $("#councilChoiceDiv").hide();
+                //     }
+                // };
 
                 /**
-                 * Show/Hide div containing council combo box.
+                 * Get the selected county name and call open method on demographicVM.
                  *
                  * @event click
                  */
-                self.displayCouncilChoice = function () {
-                    if ($("#councilChoiceDiv").is(":hidden")) {
-                        $("#councilChoiceDiv").show();
-                        $("#countyChoiceDiv, #demInteractiveDiv, #placeChoiceDiv, #supervisorChoiceDiv").hide();
-                    }
-                    else {
-                        $("#councilChoiceDiv").hide();
-                    }
+                self.openStateSummaryWindow = function () {
+                    // Get the place name selected
+                    var placeName = "Arizona";
+
+                    // Open the window
+                    demographicVM.openWindow(placeName, "state");
                 };
 
 
@@ -449,33 +500,33 @@
                     demographicVM.openWindow(placeName, "place");
                 };
 
-                /**
-                 * Get the selected place name and call open method on demographicVM.
-                 *
-                 * @event click
-                 */
-                self.openSupervisorSummaryWindow = function () {
-                    // Get the place name selected
-                    var selectedName = $("#supervisorComboBox").data("kendoComboBox").dataItem();
-                    var supervisorName = selectedName.Name;
+                // /**
+                //  * Get the selected place name and call open method on demographicVM.
+                //  *
+                //  * @event click
+                //  */
+                // self.openSupervisorSummaryWindow = function () {
+                //     // Get the place name selected
+                //     var selectedName = $("#supervisorComboBox").data("kendoComboBox").dataItem();
+                //     var supervisorName = selectedName.Name;
 
-                    // Open the window
-                    demographicVM.openWindow(supervisorName, "supervisor");
-                };
+                //     // Open the window
+                //     demographicVM.openWindow(supervisorName, "supervisor");
+                // };
 
-                /**
-                 * Get the selected place name and call open method on demographicVM.
-                 *
-                 * @event click
-                 */
-                self.openCouncilSummaryWindow = function () {
-                    // Get the place name selected
-                    var selectedName = $("#councilComboBox").data("kendoComboBox").dataItem();
-                    var councilName = selectedName.Name;
+                // /**
+                //  * Get the selected place name and call open method on demographicVM.
+                //  *
+                //  * @event click
+                //  */
+                // self.openCouncilSummaryWindow = function () {
+                //     // Get the place name selected
+                //     var selectedName = $("#councilComboBox").data("kendoComboBox").dataItem();
+                //     var councilName = selectedName.Name;
 
-                    // Open the window
-                    demographicVM.openWindow(councilName, "council");
-                };
+                //     // Open the window
+                //     demographicVM.openWindow(councilName, "council");
+                // };
 
                 /**
                  * Show/Hide div containing interactive tools.
@@ -491,7 +542,7 @@
                     else {
                         if (div.is(":hidden")) {
                             $("#demInteractiveDiv").show();
-                            $("#countyChoiceDiv, #placeChoiceDiv, #supervisorChoiceDiv, #councilChoiceDiv").hide();
+                            $("#countyChoiceDiv, #placeChoiceDiv").hide();
                         }
                         else {
                             interactiveToolsVM.clearSelection();
@@ -507,7 +558,7 @@
                  */
                 self.openQueryBuilder = function () {
                     qbVM.buildQuery(demographicVM.interactiveSelectionQueryHandler, demographicVM.interactiveSelectionQueryFault, demographicConfig.reports.censusTracts.restUrl, demographicConfig.queryFields, demographicConfig.CompareOperators);
-                    $("#countyChoiceDiv, #placeChoiceDiv, #demInteractiveDiv, #supervisorChoiceDiv, #councilChoiceDiv").hide();
+                    $("#countyChoiceDiv, #placeChoiceDiv, #demInteractiveDiv").hide();
                 };
 
             };// End of PanelVM

@@ -2,6 +2,27 @@ CHANGELOG for State Demographics Map Viewer
 =========================================
 `Major/Minor/Patch 0.0.0`
 
+### Version 1.2.0 (10/31/2014)
+* Added 'Contacts' button
+* created 'contacts-view.html'
+* created 'contact-vm.js'
+* created 'contactLaunchbar-vm.js'
+* Added Indian Communities and Places to Reports section
+* updated 'index.html'
+* updated 'demographicConfig.js'
+* updated 'config.js'
+* updated 'main.css'
+* updated 'main.js'
+* updated 'demographic-vm.js' for modified statewide reports output
+* updated 'panel-view.html'
+* updated 'legal-view.html'
+* updated 'socialHelp-view.html'
+* updated 'social-view.html'
+* updated 'mainHelp-view.html'
+* updated 'panel-vm.js'
+* updated 'demographic-vm.js'
+* added 'AZ-COG-MPO-logo.jpg' as new header logo
+* added 'stateFavicon.png' as favorites icon
 
 ### Version 1.0.0 (10/21/2014)
 
