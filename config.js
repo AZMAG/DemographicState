@@ -33,7 +33,7 @@
 
 var appConfig = new function() {
 
-    this.Version = "v1.3.0 | 11/19/2014";
+    this.Version = "v1.3.1 | 11/19/2014";
 
     this.ArcGISInstanceURL = "http://geo.azmag.gov/gismag/rest";
     //this.exportWebMapUrl = "http://geo.azmag.gov/gismag/rest/services/Utilities/PrintingTools/GPServer/Export%20Web%20Map%20Task";  // Generic Print Service
