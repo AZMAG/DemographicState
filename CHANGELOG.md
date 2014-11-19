@@ -4,7 +4,9 @@ CHANGELOG for State Demographics Map Viewer
 
 ### Version 1.3.0 (10/31/2014)
 
-
+* add closing of reports window if interactive summary is null
+* moved selected block group config to the demographic config file
+* change basemap layer from ESRI's Terrain Layer to World Street Layer
 * update Facebook SDK
 * upgrade ArcGIS API for JavaScript update `v3.11`
 * turn on Google Analytics

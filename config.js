@@ -94,7 +94,8 @@ var appConfig = new function() {
         }, {
             id: "MagBasemapUnder_3",
             title: "Terrain",
-            url: "http://server.arcgisonline.com/ArcGIS/rest/services/World_Terrain_Base/MapServer",
+            // url: "http://server.arcgisonline.com/ArcGIS/rest/services/World_Terrain_Base/MapServer",
+            url: "http://server.arcgisonline.com/arcgis/rest/services/World_Street_Map/MapServer",
             type: "tile",
             visible: true,
             isBasemap: true,
