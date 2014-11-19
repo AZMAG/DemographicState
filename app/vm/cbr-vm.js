@@ -18,11 +18,12 @@
         "dojo/text!app/views/cbrHelp-view.html",
         "app/vm/help-vm",
         "dojo/text!app/views/cbr-view.html",
-        "vendor/kendo/web/js/jquery.min",
+        "esri/tasks/GenerateRendererTask",
+        "esri/layers/agsdynamic",
+
+         "vendor/kendo/web/js/jquery.min",
         "vendor/kendo/web/js/kendo.web.min",
         "vendor/kendo/dataviz/js/kendo.dataviz.min",
-        "esri/tasks/GenerateRendererTask",
-        "esri/layers/agsdynamic"
     ],
         function (dj, dc, tp, conf, cRamp, magNum, custBreak, helpView, helpVM, view) {
 

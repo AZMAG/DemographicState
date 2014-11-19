@@ -30,12 +30,13 @@
             "app/models/map-model",
             "app/config/demographicConfig",
             "esri/graphicsUtils",
-            "vendor/kendo/web/js/jquery.min",
-            "vendor/kendo/web/js/kendo.web.min",
-            "vendor/kendo/dataviz/js/kendo.dataviz.min",
             "esri/symbols/SimpleLineSymbol",
             "esri/symbols/SimpleFillSymbol",
-            "dojo/_base/Color"
+            "dojo/_base/Color",
+
+            "vendor/kendo/web/js/jquery.min",
+            "vendor/kendo/web/js/kendo.web.min",
+            "vendor/kendo/dataviz/js/kendo.dataviz.min"
         ],
         function(dc, dom, tp, da, on, view, selFeatsView, chartHelpView, summaryHelpView,
             selFeatHelpView, helpVM, alertView1, alertView2, alert1VM, alert2VM, layerDelegate, printMapDelegate,

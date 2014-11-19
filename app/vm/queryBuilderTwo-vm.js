@@ -20,6 +20,7 @@
         "app/helpers/operation-bindingHandler",
         "app/helpers/subject-bindingHandler",
         "app/helpers/value-bindingHandler",
+
         "vendor/kendo/web/js/jquery.min",
         "vendor/kendo/web/js/kendo.web.min"
     ],

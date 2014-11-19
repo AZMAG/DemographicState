@@ -15,9 +15,10 @@
         "dojo/text!app/views/interactiveTools-view.html",
         "app/helpers/layer-delegate",
         "app/models/map-model",
+        "esri/toolbars/draw",
+
         "vendor/kendo/web/js/jquery.min",
         "vendor/kendo/web/js/kendo.web.min",
-        "esri/toolbars/draw"
     ],
         function (dc, dom, on, view, layerDelegate, mapModel) {
 

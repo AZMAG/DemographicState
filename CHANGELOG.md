@@ -2,6 +2,11 @@ CHANGELOG for State Demographics Map Viewer
 =========================================
 `Major/Minor/Patch 0.0.0`
 
+### Version 1.3.1 (11/19/2014)
+
+* cleaned up some kendo ui code
+* removed unnecessary widow vw
+
 ### Version 1.3.0 (11/19/2014)
 
 * add closing of reports window if interactive summary is null

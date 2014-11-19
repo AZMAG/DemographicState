@@ -17,6 +17,7 @@
         "dojo/text!app/views/legendHelp-view.html",
         "app/vm/help-vm",
         "dojo/text!app/views/legend-view.html",
+
         "vendor/kendo/web/js/jquery.min",
         "vendor/kendo/web/js/kendo.web.min"
     ],

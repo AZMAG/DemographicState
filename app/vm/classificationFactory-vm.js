@@ -16,6 +16,7 @@
         "dojo/text!app/views/classBreaksHelp-view.html",
         "app/vm/help-vm",
         "dojo/text!app/views/classBreaks-view.html",
+
         "vendor/kendo/web/js/jquery.min",
         "vendor/kendo/web/js/kendo.web.min",
         "vendor/kendo/dataviz/js/kendo.dataviz.min"
