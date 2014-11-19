@@ -12,6 +12,8 @@ define([
     "app/vm/helpLaunchbar-vm",
     "app/vm/printLaunchbar-vm",
     "app/vm/print-vm",
+    "app/vm/contactLaunchbar-vm",
+    "app/vm/contact-vm",
     "app/vm/window-vm",
     "app/vm/demographic-vm",
     "app/vm/cbr-vm",
@@ -34,6 +36,8 @@ define([
         helpLaunchVM,
         printLaunchVM,
         printVM,
+        contactLaunchVM,
+        contactVM,
         windowVM,
         demographicVM,
         cbrVM,
@@ -78,6 +82,9 @@ define([
         legalVM.init();
         kendo.bind($("legalWindow"), legalVM);
 
+        contactVM.init();
+        kendo.bind($("contactsWindowDiv"), contactVM);
+
         cbrVM.init("display", "after", mapModel.mapInstance);
 
         cbrlBarVM.init("titlebar", "after");
@@ -97,6 +104,9 @@ define([
 
         helpLaunchVM.init("titlebar", "after");
         kendo.bind($("#helplaunchbar"), helpLaunchVM);
+
+        contactLaunchVM.init("titlebar", "after");
+        kendo.bind($("#contactLaunchbar"), contactLaunchVM);
 
         interactiveToolsVM.init();
         kendo.bind($("#pnlInteractiveDiv"), interactiveToolsVM);

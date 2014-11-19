@@ -33,11 +33,11 @@
 
 var appConfig = new function() {
 
-        this.Version = "v1.0.0 | 10/21/2014";
+        this.Version = "v1.1.0 | 11/3/2014";
 
         this.ArcGISInstanceURL = "http://geo.azmag.gov/gismag/rest";
         //this.exportWebMapUrl = "http://geo.azmag.gov/gismag/rest/services/Utilities/PrintingTools/GPServer/Export%20Web%20Map%20Task";  // Generic Print Service
-        this.exportWebMapUrl = "http://geo.azmag.gov/gismag/rest/services/gp/CustomPrintService/GPServer/Export%20Web%20Map";  // Custom Print Service
+        this.exportWebMapUrl = "http://geo.azmag.gov/gismag/rest/services/gp/stateDemo/GPServer/Export%20Web%20Map";  // Custom Print Service
         this.webServicePasscode = "sun sand dry heat grand canyon";
 
         this.jasonemail = "https://www.azmag.gov/EmailPages/JasonHoward.asp";
@@ -45,10 +45,10 @@ var appConfig = new function() {
         this.layerInfo = [
             {
                 id: "census tracts",
-                title: "Census Tracts",
+                title: "Census Tract Labels",
                 type: "dynamic",
-                url: "http://geo.azmag.gov/gismag/rest/services/maps/TwoCountyCensusTractsWithLabels/MapServer",
-                queryUrl: "http://geo.azmag.gov/gismag/rest/services/maps/TwoCountyCensusTractsWithLabels/MapServer/0",
+                url: "http://geo.azmag.gov/gismag/rest/services/maps/StatewideDemographic_TractBounds/MapServer",
+                queryUrl: "http://geo.azmag.gov/gismag/rest/services/maps/StatewideDemographic_TractBounds/MapServer/0",
                 queryWhere: "1=1",
                 layers: [0, 1],
                 opacity: 1,
@@ -56,25 +56,42 @@ var appConfig = new function() {
                 selectable: true,
                 filters: [],
                 showTOC: true
-            },
+            },        
+          
             {
+                id: "county boundaries",
+                title: "County Boundaries",
+                type: "dynamic",
+                url: "http://geo.azmag.gov/gismag/rest/services/maps/StatewideDemographics/MapServer",
+                queryUrl: "http://geo.azmag.gov/gismag/rest/services/maps/StatewideDemographics/MapServer/2",
+                queryWhere: "1=1",
+                layers: [2],
+                opacity: 0.8,
+                visible: true,
+                selectable: false,
+                filters: [],
+                showTOC: true
+            },
+              {
                 id: "reference",
-                title: "Streets",
+                title: "Roads",
                 type: "tile",
-                url: "http://geo.azmag.gov/gismag/rest/services/maps/MagBaseMapOver_3/MapServer",
+                url: "http://server.arcgisonline.com/arcgis/rest/services/Reference/World_Transportation/MapServer",
                 visible: true,
                 showTOC: true
             },
+        
             {
                 id: "Census2010byBlockGroup",
                 title: "Census by Block Group, 2010",
                 type: "dynamic",
-                url: "http://geo.azmag.gov/gismag/rest/services/maps/TwoCountyCensus2010AndAcs2012update/MapServer",
+                url: "http://geo.azmag.gov/gismag/rest/services/maps/StatewideDemographics/MapServer",
                 layers: [0],
                 opacity: 0.8,
                 visible: true,
                 showTOC: false
             },
+          
             {
                 id: "esriImagery",
                 title: "Aerial",
@@ -86,17 +103,20 @@ var appConfig = new function() {
             {
                 id: "MagBasemapUnder_3",
                 title: "Terrain",
-                url: "http://geo.azmag.gov/gismag/rest/services/maps/MagBaseMapUnder_3/MapServer",
+                url: "http://server.arcgisonline.com/ArcGIS/rest/services/World_Terrain_Base/MapServer",
                 type: "tile",
                 visible: true,
                 isBasemap: true,
                 showTOC: true
             }
+              
         ]; // End layerInfo
 
     //levels of detail
         this.lods = [
-            // {"level" : 8, "resolution" : 611.49622628138, "scale" : 2311162.217155},
+
+            {"level" : 7, "resolution" : 1222.99245256249, "scale": 4622324.434309},
+            {"level" : 8, "resolution" : 611.49622628138, "scale" : 2311162.217155},
             {"level" : 9, "resolution" : 305.748113140558, "scale" : 1155581.108577},
             {"level" : 10, "resolution" : 152.874056570411, "scale" : 577790.554289},
             {"level" : 11, "resolution" : 76.4370282850732, "scale" : 288895.277144},
@@ -111,10 +131,10 @@ var appConfig = new function() {
         ];
 
         this.initExtent = {
-            "xmin": -12771099,
-            "ymin": 3769262,
-            "xmax": -12184063,
-            "ymax": 4060946,
+            "xmin": -13271172.93,
+            "ymin": 3506737.09,
+            "xmax": -11501054.53,
+            "ymax": 4612403.73,
             "spatialReference": {
                 "wkid": 102100
             }

@@ -16,7 +16,7 @@ This web app viewer was developed by MAG staff for MAG member agencies and the p
 
 ### Keywords
 
-`Demographics` `Census` `American Community Survey` `State of Arizona` `Maps` `MAG` `ESRI` `#MAGmaps`
+`Demographics` `Census` `2010` `American Community Survey` `State of Arizona` `Maps` `MAG` `ESRI` `#MAGmaps`
 
 ### Site URL's
 * [Site] (http://geo.azmag.gov/maps/AZdemographics/)

@@ -328,20 +328,18 @@
 
                      // Set the summary report config item
                     switch(sumName) {
+                        case "state":
+                            self.reportConfigItem = demographicConfig.reports.stateSummary;
+                            break;
                         case "county":
                             self.reportConfigItem = demographicConfig.reports.countySummary;
                             break;
                         case "place":
                             self.reportConfigItem = demographicConfig.reports.placeSummary;
                             break;
-                        case "supervisor":
-                            self.reportConfigItem = demographicConfig.reports.supervisorSummary;
-                            break;
-                        case "council":
-                            self.reportConfigItem = demographicConfig.reports.councilSummary;
-                            break;
                     }
 
+                     // console.log(sumName);
                     // Get the window and open it.
                     var win = $("#demographicView").data("kendoWindow");
                         win.title(self.windowTitle + communityName);
@@ -530,7 +528,7 @@
                         columnMenu: false,
                         columns: [
                             {field: "OBJECTID", hidden: true},
-                            {field: "COUNTYFP10", title: "County", width: "55px"},
+                            {field: "COUNTY_NAME", title: "County", width: "80px"},
                             {field: "TRACTCE10", title: "Tract", width: "55px"},
                             {field: "BLKGRPCE10", title: "Block Group", width: "60px"},
                             {field: "SQ_MI", title: "Square Miles*", width: "60px", format: "{0:n2}"},
@@ -1390,7 +1388,7 @@
                     // jQuery Ajax call to web service
                     var jqXHR = $.ajax(demographicConfig.exportSelectedFeaturesUrl, {
                         type : "POST",
-                        data : JSON.stringify({ passcode: appConfig.webServicePasscode, type: type, objectids: objectIds }),
+                        data : JSON.stringify({ passcode: appConfig.webServicePasscode, type: type, objectids: objectIds, ViewerType: "STATE_COGS" }),
                         contentType: "application/json; charset=utf-8",
                         error : function (jqXHR, status) {
                             alert("Export failed with status: " + status);
@@ -1521,7 +1519,7 @@
                     // Execute call to service
                     var jqXHR = $.ajax(demographicConfig.exportReportUrl, {
                         type : "POST",
-                        data : JSON.stringify({ passcode: appConfig.webServicePasscode, mapImageUrl: result.url, source: self.reportConfigItem.source, communities: communities, aggValues: self.aggValuesArray, chartCategories: chartCategories, charts: svgCharts }),
+                        data : JSON.stringify({ passcode: appConfig.webServicePasscode, mapImageUrl: result.url, source: self.reportConfigItem.source, communities: communities,  aggValues: self.aggValuesArray, chartCategories: chartCategories, charts: svgCharts, ViewerType: "STATE_COGS" }),
                         contentType: "application/json; charset=utf-8",
                         error : function (jqXHR, status) {
                             alert("Export failed with status: " + status);
