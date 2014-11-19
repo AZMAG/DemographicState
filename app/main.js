@@ -14,7 +14,6 @@ define([
     "app/vm/print-vm",
     "app/vm/contactLaunchbar-vm",
     "app/vm/contact-vm",
-    "app/vm/window-vm",
     "app/vm/demographic-vm",
     "app/vm/cbr-vm",
     "app/vm/cbrlaunchbar-vm",
@@ -38,7 +37,6 @@ define([
         printVM,
         contactLaunchVM,
         contactVM,
-        windowVM,
         demographicVM,
         cbrVM,
         cbrlBarVM,
@@ -57,9 +55,6 @@ define([
 
         helpVM.init();
         kendo.bind($("#helpWindow"), helpVM);
-
-        windowVM.init();
-        kendo.bind($("#tempWindow"), windowVM);
 
         demographicVM.init();
         kendo.bind($("#demographicView"), demographicVM);
