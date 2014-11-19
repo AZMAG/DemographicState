@@ -308,7 +308,8 @@ li.tb {
 #rplaunchbar,
 #printlaunchbar,
 #sharelaunchbar,
-#helplaunchbar {
+#helplaunchbar,
+#contactLaunchbar {
     height: inherit;
     float: right;
 }
@@ -452,7 +453,7 @@ li.tb {
 #version {
     text-align: center;
 }
-#copyR {
+.copyR {
     text-align: center;
     padding-top: 15px;
     padding-bottom: 5px;
@@ -472,6 +473,35 @@ input.mapTitle {
 .mapNotes, .mapTitle {
     color: #000000;
 }
+
+/* ==========================================
+**** contacts-view.html Window styles ****
+============================================= */
+#contactsWindow
+p {
+    margin: 5px;
+}
+#col-Right {
+    margin: 0px;
+    padding: 0px;
+    float: right;
+    width: 600px;
+    }
+.twoColLeft {
+    width: 270px;
+    margin-right: 20px;
+    float: left;
+    font-size: 0.9em;
+}
+.twoColRight {
+    float: left;
+    width: 270px;
+    font-size: 0.9em;
+}
+
+
+
+
 /* ==========================================
 **** Custom Kendow Window styles ****
 ============================================= */
@@ -561,12 +591,12 @@ input.mapTitle {
     left: 90px;
 }
 .breaksCount {
-    display: none;
+    /*display: none;*/
     width: 50px !important;
     margin: 2px 0 2px 0 !important;
 }
 .classScheme {
-    display: none;
+    /*display: none;*/
     width: 130px !important;
     margin: 2px 0 2px 20px !important;
 }

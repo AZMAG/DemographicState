@@ -2,12 +2,43 @@ CHANGELOG for State Demographics Map Viewer
 =========================================
 `Major/Minor/Patch 0.0.0`
 
+### Version 1.3.0 (11/19/2014)
+
+* add closing of reports window if interactive summary is null
+* moved selected block group config to the demographic config file
+* change basemap layer from ESRI's Terrain Layer to World Street Layer
+* update Facebook SDK
+* upgrade ArcGIS API for JavaScript update `v3.11`
+* turn on Google Analytics
+* move favicon
+* Kendo UI `Kendo UI Web Q1 2013 SP1 - v2013.1.514` [Site] (http://www.telerik.com/support/whats-new/kendo-ui/release-history)
+
+### Version 1.2.0 (10/31/2014)
+
+* Added 'Contacts' button
+* created 'contacts-view.html'
+* created 'contact-vm.js'
+* created 'contactLaunchbar-vm.js'
+* Added Indian Communities and Places to Reports section
+* updated 'index.html'
+* updated 'demographicConfig.js'
+* updated 'config.js'
+* updated 'main.css'
+* updated 'main.js'
+* updated 'demographic-vm.js' for modified statewide reports output
+* updated 'panel-view.html'
+* updated 'legal-view.html'
+* updated 'socialHelp-view.html'
+* updated 'social-view.html'
+* updated 'mainHelp-view.html'
+* updated 'panel-vm.js'
+* updated 'demographic-vm.js'
+* added 'AZ-COG-MPO-logo.jpg' as new header logo
+* added 'stateFavicon.png' as favorites icon
 
 ### Version 1.0.0 (10/21/2014)
 
-
 * Creation Date 10/21/2014
-
 
 ========================================================================================>
 ### Build Changes prior to State Demographics Viewer Build

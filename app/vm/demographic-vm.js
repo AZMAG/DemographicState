@@ -4,44 +4,44 @@
  * @class demographic-vm
  */
 
-(function () {
+(function() {
 
     "use strict";
 
     define([
-        "dojo/dom-construct",
-        "dojo/dom",
-        "dojo/topic",
-        "dojo/_base/array",
-        "dojo/on",
-        "dojo/text!app/views/demographic-view.html",
-        "dojo/text!app/views/selectedFeaturesTabPage-view.html",
-        "dojo/text!app/views/demographicChartHelp-view.html",
-        "dojo/text!app/views/demographicSummaryHelp-view.html",
-        "dojo/text!app/views/demographicSelFeaturesHelp-view.html",
-        "app/vm/help-vm",
-        "dojo/text!app/views/alert1-view.html",
-        "dojo/text!app/views/alert2-view.html",
-        "app/vm/alert1-vm",
-        "app/vm/alert2-vm",
-        "app/helpers/layer-delegate",
-        "app/helpers/printMap-delegate",
-        "app/helpers/magNumberFormatter",
-        "app/models/map-model",
-        "app/config/demographicConfig",
-        "esri/graphicsUtils",
-        "vendor/kendo/web/js/jquery.min",
-        "vendor/kendo/web/js/kendo.web.min",
-        "vendor/kendo/dataviz/js/kendo.dataviz.min",
-        "esri/symbols/SimpleLineSymbol",
-        "esri/symbols/SimpleFillSymbol",
-        "dojo/_base/Color"
-    ],
-        function (dc, dom, tp, da, on, view, selFeatsView, chartHelpView, summaryHelpView,
-                    selFeatHelpView, helpVM, alertView1, alertView2, alert1VM, alert2VM, layerDelegate, printMapDelegate,
-                    magNumberFormatter, mapModel, demographicConfig, graphicsUtils) {
+            "dojo/dom-construct",
+            "dojo/dom",
+            "dojo/topic",
+            "dojo/_base/array",
+            "dojo/on",
+            "dojo/text!app/views/demographic-view.html",
+            "dojo/text!app/views/selectedFeaturesTabPage-view.html",
+            "dojo/text!app/views/demographicChartHelp-view.html",
+            "dojo/text!app/views/demographicSummaryHelp-view.html",
+            "dojo/text!app/views/demographicSelFeaturesHelp-view.html",
+            "app/vm/help-vm",
+            "dojo/text!app/views/alert1-view.html",
+            "dojo/text!app/views/alert2-view.html",
+            "app/vm/alert1-vm",
+            "app/vm/alert2-vm",
+            "app/helpers/layer-delegate",
+            "app/helpers/printMap-delegate",
+            "app/helpers/magNumberFormatter",
+            "app/models/map-model",
+            "app/config/demographicConfig",
+            "esri/graphicsUtils",
+            "vendor/kendo/web/js/jquery.min",
+            "vendor/kendo/web/js/kendo.web.min",
+            "vendor/kendo/dataviz/js/kendo.dataviz.min",
+            "esri/symbols/SimpleLineSymbol",
+            "esri/symbols/SimpleFillSymbol",
+            "dojo/_base/Color"
+        ],
+        function(dc, dom, tp, da, on, view, selFeatsView, chartHelpView, summaryHelpView,
+            selFeatHelpView, helpVM, alertView1, alertView2, alert1VM, alert2VM, layerDelegate, printMapDelegate,
+            magNumberFormatter, mapModel, demographicConfig, graphicsUtils) {
 
-            var DemographicVM = new function () {
+            var DemographicVM = new function() {
 
                 /**
                  * Store reference to module this object.
@@ -73,7 +73,7 @@
                  * @property county
                  * @type {string}
                  */
-                 // vern change - moved to 2 county map
+                // vern change - moved to 2 county map
                 //var county = "Maricopa County";
 
                 /**
@@ -200,42 +200,42 @@
                 // used for reporting export progress. scott
                 self.progressInterval = null;
                 self.progressDots = null;
-                self.progressText= null;
+                self.progressText = null;
 
                 // used to size window for mobile. vw
                 self.winWidth = document.documentElement.clientWidth;
                 self.winHeight = document.documentElement.clientHeight;
 
-                    if (self.winWidth <= 668) {
-                        self.newWindowWidth = "600px";
-                        self.newWindowHeight = "300px";
-                    } else if (self.winWidth <= 800) {
-                        self.newWindowWidth = "630px";
-                        self.newWindowHeight = "auto";
-                    } else if (self.winWidth <= 1024) {
-                      self.newWindowWidth = "630px";
-                        self.newWindowHeight = "auto";
-                    } else if (self.winWidth <= 1200) {
-                        self.newWindowWidth = "630px";
-                        self.newWindowHeight = "auto";
-                    } else {
-                        self.newWindowWidth = "630px";
-                        self.newWindowHeight = "auto";
-                    }
+                if (self.winWidth <= 668) {
+                    self.newWindowWidth = "600px";
+                    self.newWindowHeight = "300px";
+                } else if (self.winWidth <= 800) {
+                    self.newWindowWidth = "630px";
+                    self.newWindowHeight = "auto";
+                } else if (self.winWidth <= 1024) {
+                    self.newWindowWidth = "630px";
+                    self.newWindowHeight = "auto";
+                } else if (self.winWidth <= 1200) {
+                    self.newWindowWidth = "630px";
+                    self.newWindowHeight = "auto";
+                } else {
+                    self.newWindowWidth = "630px";
+                    self.newWindowHeight = "auto";
+                }
 
                 /**
                  * Initialize the class.
                  *
                  * @method init
                  */
-                self.init = function () {
+                self.init = function() {
                     // Place the HTML from the view into the main application after the map div.
                     dc.place(view, "map", "after");
 
                     // Create the Kendo Window
                     var chartWindow = $("#demographicView").kendoWindow({
-                        width: self.newWindowWidth,  // "630px"
-                        height: self.newWindowHeight,  // "auto"
+                        width: self.newWindowWidth, // "630px"
+                        height: self.newWindowHeight, // "auto"
                         title: self.windowTitle,
                         actions: ["Help", "Minimize", "Close"],
                         modal: false,
@@ -245,7 +245,7 @@
                     }).data("kendoWindow").center();
 
                     // Display legend checkbox click event
-                    $("#displayLegend").bind("click", function () {
+                    $("#displayLegend").bind("click", function() {
                         self.legendVisible = this.checked;
 
                         if (self.selectedCategoryObj !== undefined && self.groupedItems !== undefined) {
@@ -265,13 +265,13 @@
                     $("#demExportSummary").kendoDropDownList({
                         index: 0,
                         dataSource: {
-                            data: [ "Excel", "CSV" ]
+                            data: ["Excel", "CSV"]
                         }
                     });
 
                     // Get the help button and assign the click event.
                     var helpButton = chartWindow.wrapper.find(".k-i-help");
-                    helpButton.click(function () {
+                    helpButton.click(function() {
                         var tabStrip = $("#demTabStrip").data("kendoTabStrip");
                         var tab = tabStrip.select();
 
@@ -285,19 +285,19 @@
                     });
 
                 }; // end Init
-//****************************************************************
+                //****************************************************************
                 /**
                  * Fired when the window closes
                  *
                  * @event close
                  * @param e - event arguments.
                  */
-                self.windowClosed = function () {
+                self.windowClosed = function() {
                     windowIsOpen = false;
                     redrawChart = false;
                     mapModel.clearGraphics();
 
-                    if(self.hasSelectedFeatures) {
+                    if (self.hasSelectedFeatures) {
                         self.selectedFeatures = null;
                         self.hasSelectedFeatures = false;
                         mapModel.clearGraphics();
@@ -306,7 +306,7 @@
                         var tabStrip = $("#demTabStrip").data("kendoTabStrip");
                         if (tabStrip !== undefined && tabStrip !== null) {
                             var firstTab = tabStrip.tabGroup.children("li:first");
-                            if(firstTab[0].textContent === "Selected Block Groups") {
+                            if (firstTab[0].textContent === "Selected Block Groups") {
                                 tabStrip.remove(0);
                                 tabStrip.select(1);
                             }
@@ -321,46 +321,44 @@
                  * @param {string} communityName - name of the community for the report.
                  * @param {string} sumName - name of the config for the report type. vw
                  */
-                self.openWindow = function (communityName, sumName) {
+                self.openWindow = function(communityName, sumName) {
                     self.hasSelectedFeatures = false;
                     self.commChanged = (self.communityName !== undefined && self.communityName !== "" && self.communityName !== communityName);
                     self.communityName = communityName;
 
-                     // Set the summary report config item
-                    switch(sumName) {
+                    // Set the summary report config item
+                    switch (sumName) {
+                        case "state":
+                            self.reportConfigItem = demographicConfig.reports.stateSummary;
+                            break;
                         case "county":
                             self.reportConfigItem = demographicConfig.reports.countySummary;
                             break;
                         case "place":
                             self.reportConfigItem = demographicConfig.reports.placeSummary;
                             break;
-                        case "supervisor":
-                            self.reportConfigItem = demographicConfig.reports.supervisorSummary;
-                            break;
-                        case "council":
-                            self.reportConfigItem = demographicConfig.reports.councilSummary;
-                            break;
                     }
 
+                    // console.log(sumName);
                     // Get the window and open it.
                     var win = $("#demographicView").data("kendoWindow");
-                        win.title(self.windowTitle + communityName);
-                        if(!windowIsOpen) {
-                            win.restore();
-                            win.center();
-                            redrawChart = true;
-                        }
+                    win.title(self.windowTitle + communityName);
+                    if (!windowIsOpen) {
                         win.restore();
                         win.center();
-                        win.open();
-                        windowIsOpen = true;
+                        redrawChart = true;
+                    }
+                    win.restore();
+                    win.center();
+                    win.open();
+                    windowIsOpen = true;
 
                     // Set the source
                     $("#demSource").text("Source: " + self.reportConfigItem.source);
 
                     // Create the Kendo tab strip
                     var tabStrip = $("#demTabStrip").data("kendoTabStrip");
-                    if(tabStrip === undefined) {
+                    if (tabStrip === undefined) {
                         $("#demTabStrip").kendoTabStrip({
                             activate: self.tabActivated
                         });
@@ -368,21 +366,25 @@
 
                     // Create the splitter
                     var splitter = $("#demSplitContainer").data("kendoSplitter");
-                    if(splitter === undefined) {
+                    if (splitter === undefined) {
                         $("#demSplitContainer").kendoSplitter({
-                            panes: [
-                                { collapsible: false, resizable: false },
-                                { collapsible: false, resizable: false, size: "30%" }
-                            ]
+                            panes: [{
+                                collapsible: false,
+                                resizable: false
+                            }, {
+                                collapsible: false,
+                                resizable: false,
+                                size: "30%"
+                            }]
                         });
                     }
 
                     self.getData();
 
-                    if(redrawChart) {
-                        setTimeout(function () {
+                    if (redrawChart) {
+                        setTimeout(function() {
                             var chart = $("#demChartArea").data("kendoChart");
-                            if(chart) {
+                            if (chart) {
                                 chart.redraw();
                             }
                         }, 500);
@@ -396,7 +398,7 @@
                  * @method interactiveSelectionQueryFault
                  * @param {Error} error - error object
                  */
-                self.interactiveSelectionQueryFault = function (error) {
+                self.interactiveSelectionQueryFault = function(error) {
                     console.log(error.message);
                 };
 
@@ -406,33 +408,36 @@
                  * @method interactiveSelectionQueryHandler
                  * @param {FeatureSet} results - feature set returned by query.
                  */
-                self.interactiveSelectionQueryHandler = function (results) {
+                self.interactiveSelectionQueryHandler = function(results) {
                     self.selectedFeatures = results.features;
                     // counts number of selected block groups. vw
                     var num = queryCountGlobal;
                     var numFeatures = magNumberFormatter.formatValue(num);
 
-                        // test for results. vw
-                        if (num === 0) {
-                            // Get the alert window and open it. vw
-                            alert2VM.openWindow(alertView2);
-                            esri.hide(dojo.byId("loading"));
-                            return;
-                        }
+                    // test for results. vw
+                    if (num === 0) {
+                        // close reports window
+                        $("#demographicView").data("kendoWindow").close();
+                        // Get the alert window and open it. vw
+                        alert2VM.openWindow(alertView2);
+                        // hide loading gif when window opens. vw
+                        esri.hide(dojo.byId("loading"));
+                        return;
+                    }
 
-                        // if (num >= 1000) {
-                        //     // Get the alert window and open it. vw
-                        //     alert1VM.openWindow(alertView1);
-                        //     // adds count of features to alert window. vw
-                        //     document.getElementById("fCount2").innerHTML = numFeatures;
-                        //         if ("AlertCancel" == "Cancel") {
-                        //             return;
-                        //         }
-                        //         if ("AlertYes" == "Yes") {
-                        //             alert("YES");
-                        //            return;
-                        //         }
-                        // }
+                    // if (num >= 1000) {
+                    //     // Get the alert window and open it. vw
+                    //     alert1VM.openWindow(alertView1);
+                    //     // adds count of features to alert window. vw
+                    //     document.getElementById("fCount2").innerHTML = numFeatures;
+                    //         if ("AlertCancel" == "Cancel") {
+                    //             return;
+                    //         }
+                    //         if ("AlertYes" == "Yes") {
+                    //             alert("YES");
+                    //            return;
+                    //         }
+                    // }
 
                     self.hasSelectedFeatures = true;
 
@@ -447,16 +452,16 @@
 
                     // Get the window and open it.
                     var win = $("#demographicView").data("kendoWindow");
-                        win.title(self.windowTitle + communityName);
-                        if(!windowIsOpen) {
-                            win.restore();
-                            win.center();
-                            redrawChart = true;
-                        }
+                    win.title(self.windowTitle + communityName);
+                    if (!windowIsOpen) {
                         win.restore();
                         win.center();
-                        win.open();
-                        windowIsOpen = true;
+                        redrawChart = true;
+                    }
+                    win.restore();
+                    win.center();
+                    win.open();
+                    windowIsOpen = true;
 
                     // hide loading gif when window opens. vw
                     esri.hide(dojo.byId("loading"));
@@ -466,7 +471,7 @@
 
                     // Create the Kendo tab strip
                     var tabStrip = $("#demTabStrip").data("kendoTabStrip");
-                    if(tabStrip === undefined) {
+                    if (tabStrip === undefined) {
                         $("#demTabStrip").kendoTabStrip({
                             activate: self.tabActivated
                         });
@@ -475,12 +480,16 @@
 
                     // Create the splitter
                     var splitter = $("#demSplitContainer").data("kendoSplitter");
-                    if(splitter === undefined) {
+                    if (splitter === undefined) {
                         $("#demSplitContainer").kendoSplitter({
-                            panes: [
-                                { collapsible: false, resizable: false },
-                                { collapsible: false, resizable: false, size: "30%" }
-                            ]
+                            panes: [{
+                                collapsible: false,
+                                resizable: false
+                            }, {
+                                collapsible: false,
+                                resizable: false,
+                                size: "30%"
+                            }]
                         });
                     }
 
@@ -489,13 +498,13 @@
 
                     // Create the feature attribute array
                     self.featureAttributeArray = [];
-                    $.each(self.selectedFeatures, function (index, feature) {
+                    $.each(self.selectedFeatures, function(index, feature) {
                         self.featureAttributeArray.push(feature.attributes);
                     });
 
                     // Check to see if the tab is already present
                     var firstTab = tabStrip.tabGroup.children("li:first");
-                    if(firstTab[0].textContent !== "Selected Block Groups") {
+                    if (firstTab[0].textContent !== "Selected Block Groups") {
                         // Add the Selected Block Groups tab
                         tabStrip.insertBefore({
                             text: "Selected Block Groups",
@@ -509,13 +518,16 @@
 
                     // Make sure grid doesn't already exist
                     var kendoGrid = $("#demFeatGrid").data("kendoGrid");
-                    if(kendoGrid !== undefined && kendoGrid !== null) {
+                    if (kendoGrid !== undefined && kendoGrid !== null) {
                         kendoGrid.destroy();
                         kendoGrid.element.remove();
                     }
 
                     // Add the grid
-                    dc.create("div", {id: "demFeatGrid", style: "margin: 5px 0 0 0; font-size: small;"}, "demSelFeatOptionsRow", "after");
+                    dc.create("div", {
+                        id: "demFeatGrid",
+                        style: "margin: 5px 0 0 0; font-size: small;"
+                    }, "demSelFeatOptionsRow", "after");
 
                     // grid for Selected Block Groups Tab vw
                     // Kendo-ize the grid
@@ -528,60 +540,7 @@
                         scrollable: true,
                         resizable: false,
                         columnMenu: false,
-                        columns: [
-                            {field: "OBJECTID", hidden: true},
-                            {field: "COUNTYFP10", title: "County", width: "55px"},
-                            {field: "TRACTCE10", title: "Tract", width: "55px"},
-                            {field: "BLKGRPCE10", title: "Block Group", width: "60px"},
-                            {field: "SQ_MI", title: "Square Miles*", width: "60px", format: "{0:n2}"},
-                            {field: "TOT_POP", title: "Total Population*", width: "80px", format: "{0:n0}"},
-                            {field: "MINORITY_POP", title: "Minority Population*", width: "80px", format: "{0:n0}"},
-                            {field: "MEDIAN_AGE", title: "Median Age*", width: "55px", format: "{0:n2}"},
-                            {field: "Under5", title: "Under 5*", width: "55px", format: "{0:n0}"},
-                            {field: "Age5to17", title: "Age 5 to 17*", width: "80px", format: "{0:n0}"},
-                            {field: "Age18to34", title: "Age 18 to 34*", width: "80px", format: "{0:n0}"},
-                            {field: "Age35to49", title: "Age 35 to 49*", width: "80px", format: "{0:n0}"},
-                            {field: "Age50to64", title: "Age 50 to 64*", width: "80px", format: "{0:n0}"},
-                            {field: "Age65to84", title: "Age 65 to 84*", width: "80px", format: "{0:n0}"},
-                            {field: "Age85Plus", title: "Age 85 and Over*", width: "80px", format: "{0:n0}"},
-                            {field: "Age50Plus", title: "Age 50 Plus*", width: "80px", format: "{0:n0}"},
-                            {field: "Age60Plus", title: "Age 60 Plus*", width: "80px", format: "{0:n0}"},
-                            {field: "Age65Plus", title: "Age 65 Plus*", width: "80px", format: "{0:n0}"},
-                            {field: "Age70Plus", title: "Age 70 Plus*", width: "80px", format: "{0:n0}"},
-                            {field: "Age75Plus", title: "Age 75 Plus*", width: "80px", format: "{0:n0}"},
-                            {field: "WHITE", title: "White*", width: "55px", format: "{0:n0}"},
-                            {field: "BLACK", title: "Black*", width: "55px", format: "{0:n0}"},
-                            {field: "NATIVE", title: "Native*", width: "55px", format: "{0:n0}"},
-                            {field: "ASIAN", title: "Asian*", width: "55px", format: "{0:n0}"},
-                            {field: "PACIFIC", title: "Pacific*", width: "55px", format: "{0:n0}"},
-                            {field: "TWO_OR_MORE", title: "Two or More*", width: "55px", format: "{0:n0}"},
-                            {field: "OTHER", title: "Other*", width: "55px", format: "{0:n0}"},
-                            {field: "HISPANIC", title: "Hispanic*", width: "60px", format: "{0:n0}"},
-                            {field: "NOT_HISPANIC", title: "Not Hispanic*", width: "60px", format: "{0:n0}"},
-                            {field: "TOTAL_HOUSEHOLDS", title: "Total Households^", width: "80px", format: "{0:n0}"},
-                            {field: "MEDIAN_HOUSEHOLD_INCOME", title: "Median Household Income^", width: "100px", format: "{0:c}"},
-                            {field: "HOUSEHOLDS_LESS_THAN_25000", title: "Households Less than $25,000^", width: "80px", format: "{0:n0}"},
-                            {field: "HOUSEHOLDS_25000_TO_49999", title: "Households $25,000 to $49,999^", width: "80px", format: "{0:n0}"},
-                            {field: "HOUSEHOLDS_50000_TO_99999", title: "Households $50,000 to $99,999^", width: "80px", format: "{0:n0}"},
-                            {field: "HOUSEHOLDS_100000_OR_MORE", title: "Households $100,000 or More^", width: "80px", format: "{0:n0}"},
-                            {field: "TOTAL_FAMILY", title: "Total Family^", width: "55px", format: "{0:n0}"},
-                            {field: "INCOME_BELOW_POVERTY_LEVEL", title: "Income Below  Poverty Level^", width: "80px", format: "{0:n0}"},
-                            {field: "POPULATION_25_YEARS_AND_OVER", title: "Population 25yrs and Over^", width: "80px", format: "{0:n0}"},
-                            {field: "LT9GRADE", title: "Less than 9th Grade^", width: "80px", format: "{0:n0}"},
-                            {field: "NOHSDIPLOMA", title: "No HS Diploma^", width: "80px", format: "{0:n0}"},
-                            {field: "HSGRAD", title: "High School Grad^", width: "80px", format: "{0:n0}"},
-                            {field: "SOMECOLLEGE", title: "Some College^", width: "55px", format: "{0:n0}"},
-                            {field: "ASSOCIATES", title: "Associates^", width: "80px", format: "{0:n0}"},
-                            {field: "BACHELORS", title: "Bachelors^", width: "80px", format: "{0:n0}"},
-                            {field: "GRADPROF", title: "Graduates^", width: "80px", format: "{0:n0}"},
-                            {field: "TOTAL_HU", title: "Total Housing Units*", width: "55px", format: "{0:n0}"},
-                            {field: "OCCUPIED_HU", title: "Occupied Housing Units*", width: "80px", format: "{0:n0}"},
-                            {field: "VACANT_HU", title: "Vacant Housing Units*", width: "80px", format: "{0:n0}"},
-                            {field: "OWNER_OCC_HU", title: "Owner Occupied Housing Units*", width: "80px", format: "{0:n0}"},
-                            {field: "RENTER_OCC_HU", title: "Renter Occupited Housing Units*", width: "80px", format: "{0:n0}"},
-                            {field: "MEDIAN_VALUE", title: "Median Value^", width: "100px", format: "{0:c}"},
-                            {field: "MEDIAN_GROSS_RENT", title: "Median Gross Rent^", width: "80px", format: "{0:c}"}
-                        ],
+                        columns: demographicConfig.selectedBlockGroups,
                         dataBound: self.gridRowHover
                     });
 
@@ -592,7 +551,7 @@
                     $("#demExportSelectedFeatures").kendoDropDownList({
                         index: 0,
                         dataSource: {
-                            data: [ "Excel", "CSV" ]
+                            data: ["Excel", "CSV"]
                         }
                     });
 
@@ -601,14 +560,14 @@
 
                     // Reload the chart to update to current data
                     var tab = tabStrip.select();
-                    if(tab[0].textContent === "Charts") {
+                    if (tab[0].textContent === "Charts") {
                         self.reloadChart();
                     }
 
-                    if(redrawChart) {
-                        setTimeout(function () {
+                    if (redrawChart) {
+                        setTimeout(function() {
                             var chart = $("#demChartArea").data("kendoChart");
-                            if(chart) {
+                            if (chart) {
                                 chart.redraw();
                             }
                         }, 1500);
@@ -621,9 +580,9 @@
                  *
                  * @method gridRowHover
                  */
-                self.gridRowHover = function () {
+                self.gridRowHover = function() {
                     $(".k-grid table tbody tr").hover(
-                        function () {
+                        function() {
                             var thisObj = $(this);
 
                             // Highlight the row
@@ -632,10 +591,10 @@
                             // Highlight the graphic
                             var objectId = thisObj[0].childNodes[0].innerHTML;
                             var objID = Number(objectId);
-                            $.each(mapModel.getGraphics().graphics, function (index, graphic) {
-                                if(graphic.attributes.OBJECTID === objID) {
+                            $.each(mapModel.getGraphics().graphics, function(index, graphic) {
+                                if (graphic.attributes.OBJECTID === objID) {
                                     var color = "cyan";
-                                    if(thisObj.hasClass("k-state-hover")) {
+                                    if (thisObj.hasClass("k-state-hover")) {
                                         color = "yellow";
                                     }
                                     mapModel.setSymbol(graphic, color);
@@ -651,15 +610,14 @@
                  * @event activate
                  * @param e - event arguments
                  */
-                self.tabActivated = function () {
+                self.tabActivated = function() {
                     var tabStrip = $("#demTabStrip").data("kendoTabStrip");
                     var tab = tabStrip.select();
 
                     // Reload the chart to ensure it is up-to-date
-                    if(tab[0].textContent === "Charts" && self.commChanged) {
+                    if (tab[0].textContent === "Charts" && self.commChanged) {
                         self.reloadChart();
-                    }
-                    else {
+                    } else {
                         $("#demChartArea").data("kendoChart").redraw();
                     }
                 };
@@ -669,7 +627,7 @@
                  *
                  * @method getData
                  */
-                self.getData = function () {
+                self.getData = function() {
                     var url = self.reportConfigItem.restUrl;
                     var whereClause = self.reportConfigItem.summaryField + " = '" + self.communityName + "'";
 
@@ -682,7 +640,7 @@
                  * @method dataQueryFault
                  * @param {Error} error - error object
                  */
-                self.dataQueryFault = function (error) {
+                self.dataQueryFault = function(error) {
                     console.log(error.message);
                 };
 
@@ -690,19 +648,19 @@
                  * Callback method for query results from getData method.
                  * @param {FeatureSet} results - feature set returned by query.
                  */
-                self.dataQueryHandler = function (results) {
+                self.dataQueryHandler = function(results) {
                     var features = results.features;
                     var featuresCount = features.length;
                     //var feature = features[0];  // There should only be one feature returned from query
 
-					// scott change set report output back to default and remove selected features if necessary
-					self.setReportExportBackToDefault();
+                    // scott change set report output back to default and remove selected features if necessary
+                    self.setReportExportBackToDefault();
 
                     // Clear the current graphics
                     mapModel.clearGraphics();
 
                     // Add the new graphics. vw
-                    if(features[0].geometry !== null) {
+                    if (features[0].geometry !== null) {
                         mapModel.addGraphics(features);
 
                         // Zoom to selected graphics. vw
@@ -711,9 +669,9 @@
                     }
 
                     var tabStrip = $("#demTabStrip").data("kendoTabStrip");
-                    if(tabStrip !== undefined && tabStrip !== null) {
+                    if (tabStrip !== undefined && tabStrip !== null) {
                         var firstTab = tabStrip.tabGroup.children("li:first");
-                        if(firstTab[0].textContent === "Selected Block Groups") {
+                        if (firstTab[0].textContent === "Selected Block Groups") {
                             tabStrip.remove(0);
                             tabStrip.select(1);
                         }
@@ -721,15 +679,14 @@
 
                     // Summarize the features
                     var sumAttributes = {};
-                    $.each(features, function (index, feature) {
-                        for(var attribute in feature.attributes) {
-                            if(attribute in sumAttributes) {
+                    $.each(features, function(index, feature) {
+                        for (var attribute in feature.attributes) {
+                            if (attribute in sumAttributes) {
                                 var val = sumAttributes[attribute];
                                 sumAttributes[attribute] = val + feature.attributes[attribute];
-                            }
-                            else {
+                            } else {
                                 var newVal = feature.attributes[attribute];
-                                if($.isNumeric(newVal)) {
+                                if ($.isNumeric(newVal)) {
                                     sumAttributes[attribute] = newVal;
                                 }
                             }
@@ -742,11 +699,11 @@
                         var attribute = sumAttributes[field.fieldName];
                         var attrValue = Number(attribute);
 
-                        if(field.canSum === true || featuresCount === 1) {
+                        if (field.canSum === true || featuresCount === 1) {
                             aggValues[field.fieldName] = {
                                 fieldCategory: field.category,
                                 fieldGroup: field.groupID, // added to sort order in data grid. vw
-                                fieldRowSort: field.rowID,  // added to sort row order in data grid. vw
+                                fieldRowSort: field.rowID, // added to sort row order in data grid. vw
                                 fieldName: field.fieldName,
                                 tableHeader: field.tableHeader,
                                 fieldAlias: field.fieldAlias,
@@ -779,13 +736,13 @@
                                 aggValues[field.fieldName].percentValueFormatted = "-";
                             }
 
-                            if(field.percentOfField !== "") {
+                            if (field.percentOfField !== "") {
                                 var percentOf = Number(sumAttributes[field.percentOfField]);
                                 aggValues[field.fieldName].percentValue = (attrValue / percentOf) * 100;
                                 aggValues[field.fieldName].percentValueFormatted = magNumberFormatter.formatValue((attrValue / percentOf) * 100) + "%";
                             }
 
-                            if(field.densityAreaField !== "") {
+                            if (field.densityAreaField !== "") {
                                 var densityArea = Number(sumAttributes[field.densityAreaField]);
                                 aggValues[field.fieldName].densityValue = attrValue / densityArea;
                                 aggValues[field.fieldName].densityValueFormatted = magNumberFormatter.formatValue(attrValue / densityArea);
@@ -802,28 +759,28 @@
                         self.aggValuesArray.push(aggValues[item.fieldName]);
 
                         // Chart Categories
-                        if(item.chartCategory !== "") {
-                            if(item.chartCategory in self.aggValuesGroupedByChartCategory) {
+                        if (item.chartCategory !== "") {
+                            if (item.chartCategory in self.aggValuesGroupedByChartCategory) {
                                 self.aggValuesGroupedByChartCategory[item.chartCategory].push(aggValues[item.fieldName]);
-                            }
-                            else {
-                                self.chartCategories.push({chartCategory: item.chartCategory});
-                                self.aggValuesGroupedByChartCategory[item.chartCategory] = [ aggValues[item.fieldName] ];
+                            } else {
+                                self.chartCategories.push({
+                                    chartCategory: item.chartCategory
+                                });
+                                self.aggValuesGroupedByChartCategory[item.chartCategory] = [aggValues[item.fieldName]];
                             }
                         }
 
                         // Field Categories
-                        if(item.fieldCategory !== "") {
-                            if(item.fieldCategory in self.aggValuesGroupedByFieldCategory) {
+                        if (item.fieldCategory !== "") {
+                            if (item.fieldCategory in self.aggValuesGroupedByFieldCategory) {
                                 self.aggValuesGroupedByFieldCategory[item.fieldCategory].push(aggValues[item.fieldName]);
-                            }
-                            else {
-                                self.aggValuesGroupedByFieldCategory[item.fieldCategory] = [ aggValues[item.fieldName] ];
+                            } else {
+                                self.aggValuesGroupedByFieldCategory[item.fieldCategory] = [aggValues[item.fieldName]];
                             }
                         }
                     });
 
-                    if(self.compareFeature !== null) {
+                    if (self.compareFeature !== null) {
                         self.addCompareValues();
                     }
 
@@ -831,7 +788,7 @@
                     var chartListDivObj = $("#demChartList");
                     var kendoListView = chartListDivObj.data("kendoListView");
 
-                    if(kendoListView === undefined || kendoListView === null) {
+                    if (kendoListView === undefined || kendoListView === null) {
                         chartListDivObj.kendoListView({
                             dataSource: {
                                 data: self.chartCategories
@@ -847,14 +804,14 @@
                     }
 
                     // Reset comparison if community has changed
-                    if(self.commChanged) {
+                    if (self.commChanged) {
                         // Clear the comparison checkbox
                         $("#demUseComp").prop("checked", false);
 
                         // Reload the chart if on the charts tab
                         var tabStrip = $("#demTabStrip").data("kendoTabStrip");
                         var tab = tabStrip.select();
-                        if(tab[0].textContent === "Charts") {
+                        if (tab[0].textContent === "Charts") {
                             self.reloadChart();
                         }
 
@@ -864,16 +821,15 @@
 
                     // Create the summary grid
                     var kendoGrid = $("#demDataGrid").data("kendoGrid");
-                    if(kendoGrid !== null) {
+                    if (kendoGrid !== null) {
                         kendoGrid.destroy();
                         kendoGrid.element.remove();
                     }
 
                     var useCompare = dojo.byId("demUseComp").checked;
-                    if(useCompare) {
+                    if (useCompare) {
                         self.createKendoGridWithCompare();
-                    }
-                    else {
+                    } else {
                         self.createKendoGrid();
                     }
                 };
@@ -883,11 +839,11 @@
                  *
                  * @method reloadCompareComboBox
                  */
-                self.reloadCompareComboBox = function () {
+                self.reloadCompareComboBox = function() {
                     var compareComboBoxInput = $("#demCompareComboBox");
                     var compareComboBoxObj = compareComboBoxInput.data("kendoComboBox");
 
-                    if(compareComboBoxObj !== undefined && compareComboBoxObj !== null) {
+                    if (compareComboBoxObj !== undefined && compareComboBoxObj !== null) {
                         compareComboBoxObj.enable(false);
 
                         // Get the place names
@@ -905,37 +861,35 @@
                  * @event click
                  * @param e - event arguments
                  */
-                self.useCompareClicked = function () {
+                self.useCompareClicked = function() {
                     // Toggle the compare combobox
                     var compareComboBoxInput = $("#demCompareComboBox");
                     var compareComboBoxObj = compareComboBoxInput.data("kendoComboBox");
 
-                    if(compareComboBoxObj === undefined || compareComboBoxObj === null) {
+                    if (compareComboBoxObj === undefined || compareComboBoxObj === null) {
                         // Get the place names
                         var url = self.reportConfigItem.compareUrl;
                         var whereClause = self.reportConfigItem.compareWhereClause;
                         // var outFields = self.reportConfigItem.comparePlaceField;
 
                         layerDelegate.query(url, self.placeListQueryHandler, self.placeListQueryFault, null, whereClause, false);
-                    }
-                    else {
+                    } else {
                         var kendoGrid = $("#demDataGrid").data("kendoGrid");
 
-                        if($(this).is(":checked")) {
+                        if ($(this).is(":checked")) {
                             compareComboBoxObj.enable(true);
 
                             var selectedIndex = compareComboBoxObj.select();
-                            if(selectedIndex > 0) {
+                            if (selectedIndex > 0) {
                                 // Update the Grid
 
-                                if(kendoGrid !== undefined) {
+                                if (kendoGrid !== undefined) {
                                     kendoGrid.destroy();
                                     kendoGrid.element.remove();
                                 }
                                 self.createKendoGridWithCompare();
                             }
-                        }
-                        else {
+                        } else {
                             compareComboBoxObj.enable(false);
                             self.compareFeature = null;
 
@@ -944,7 +898,7 @@
                             // compareComboBoxObj.wrapper.remove();
 
                             // Update the Grid
-                            if(kendoGrid !== undefined) {
+                            if (kendoGrid !== undefined) {
                                 kendoGrid.destroy();
                                 kendoGrid.element.remove();
                             }
@@ -959,7 +913,7 @@
                  * @method placeListQueryFault
                  * @param {Error} error - error object
                  */
-                self.placeListQueryFault = function (error) {
+                self.placeListQueryFault = function(error) {
                     console.log(error.message);
                 };
 
@@ -967,40 +921,45 @@
                  * Callback method for results returned by place query.
                  * @param {FeatureSet} results - feature set returned by query.
                  */
-                self.placeListQueryHandler = function (results) {
+                self.placeListQueryHandler = function(results) {
                     var features = results.features;
 
                     // Create array of names
                     var placeField = self.reportConfigItem.comparePlaceField;
                     var nameArray = [];
-                    nameArray.push({ Name: " Compare with..." });
-                    $.each(features, function (index, feature) {
+                    nameArray.push({
+                        Name: " Compare with..."
+                    });
+                    $.each(features, function(index, feature) {
                         var name = feature.attributes[placeField];
-                        nameArray.push({ Name: name });
+                        nameArray.push({
+                            Name: name
+                        });
                     });
 
                     // used to sort attributes and put into Array. vw
-                        function compare(a,b) {
-                            if (a.Name < b.Name) {
-                                return -1;
-                            }
-                            if (a.Name > b.Name) {
-                                return 1;
-                            }
-                            return 0;
+                    function compare(a, b) {
+                        if (a.Name < b.Name) {
+                            return -1;
                         }
-                        nameArray.sort(compare);
+                        if (a.Name > b.Name) {
+                            return 1;
+                        }
+                        return 0;
+                    }
+                    nameArray.sort(compare);
 
                     var compareComboBoxInput = $("#demCompareComboBox");
                     var compareComboBoxObj = compareComboBoxInput.data("kendoComboBox");
 
-                    if(self.commChanged && compareComboBoxObj !== undefined) {
+                    if (self.commChanged && compareComboBoxObj !== undefined) {
                         var kendoComboBox = $("#demCompareComboBox").data("kendoComboBox");
                         kendoComboBox.setDataSource(nameArray);
                         kendoComboBox.select(0);
-                    }
-                    else {
-                        dc.create("input", {id: "demCompareComboBox"}, "demUseCompLabel", "after");
+                    } else {
+                        dc.create("input", {
+                            id: "demCompareComboBox"
+                        }, "demUseCompLabel", "after");
                         $("#demCompareComboBox").kendoComboBox({
                             index: 0,
                             dataTextField: "Name",
@@ -1020,8 +979,8 @@
                  * @event select
                  * @param e - event arguments
                  */
-                self.compareNameSelected = function (e) {
-                    if(e.item.index() > 0) {
+                self.compareNameSelected = function(e) {
+                    if (e.item.index() > 0) {
                         var selectedName = this.dataItem(e.item.index());
                         self.compareToName = selectedName.Name;
 
@@ -1030,12 +989,11 @@
                         var whereClause = self.reportConfigItem.comparePlaceField + " = '" + self.compareToName + "'";
 
                         layerDelegate.query(url, self.placeQueryHelper, self.placeQueryFault, null, whereClause, true);
-                    }
-                    else {
+                    } else {
                         self.compareFeature = null;
                         // Update the Grid
                         var kendoGrid = $("#demDataGrid").data("kendoGrid");
-                        if(kendoGrid !== undefined) {
+                        if (kendoGrid !== undefined) {
                             kendoGrid.destroy();
                             kendoGrid.element.remove();
                         }
@@ -1049,7 +1007,7 @@
                  * @method placeQueryFault
                  * @param {Error} error - error object
                  */
-                self.placeQueryFault = function (error) {
+                self.placeQueryFault = function(error) {
                     console.log(error.message);
                 };
 
@@ -1059,7 +1017,7 @@
                  * @method placeQueryHelper
                  * @param {FeatureSet} results - feature set returned by query.
                  */
-                self.placeQueryHelper = function (results) {
+                self.placeQueryHelper = function(results) {
                     var features = results.features;
                     self.compareFeature = features[0]; // There should only be one feature returned from query
 
@@ -1067,7 +1025,7 @@
 
                     // Update the Grid
                     var kendoGrid = $("#demDataGrid").data("kendoGrid");
-                    if(kendoGrid !== undefined) {
+                    if (kendoGrid !== undefined) {
                         kendoGrid.destroy();
                         kendoGrid.element.remove();
                     }
@@ -1079,8 +1037,8 @@
                  *
                  * @method addCompareValues
                  */
-                self.addCompareValues = function () {
-                    if(self.compareFeature === null) {
+                self.addCompareValues = function() {
+                    if (self.compareFeature === null) {
                         return;
                     }
 
@@ -1094,29 +1052,29 @@
                         item.compareDensityValue = 0;
                         item.compareDensityValueFormatted = "0";
 
-                        if(item.derivedTargetField !== undefined && item.derivedTargetField !== null && item.derivedTargetField !== "") {
+                        if (item.derivedTargetField !== undefined && item.derivedTargetField !== null && item.derivedTargetField !== "") {
                             var curTarget = self.compareFeature.attributes[item.derivedTargetField];
 
                             // checks for "0" in data to return null. vw added?
                             if (item.derivedPercentOfField === "") {
                                 var percentOf = Number(self.compareFeature.attributes[item.derivedPercentOfField]);
-                                 item.comparePercentValueFormatted = "-";
+                                item.comparePercentValueFormatted = "-";
                             }
 
-                            if(item.derivedPercentOfField !== undefined && item.derivedPercentOfField !== null && self.derivedPercentOfField !== "") {
+                            if (item.derivedPercentOfField !== undefined && item.derivedPercentOfField !== null && self.derivedPercentOfField !== "") {
                                 var percentOf = Number(self.compareFeature.attributes[item.derivedPercentOfField]);
                                 var percentValue = (curTarget / percentOf) * 100;
                                 item.comparePercentValue = percentValue;
-                                if(!isNaN(percentValue)) {
+                                if (!isNaN(percentValue)) {
                                     item.comparePercentValueFormatted = magNumberFormatter.formatValue(percentValue) + "%";
                                 }
                             }
 
-                            if(item.derivedDensityAreaField !== undefined && item.derivedDensityAreaField !== null && item.derivedDensityAreaField !== "") {
+                            if (item.derivedDensityAreaField !== undefined && item.derivedDensityAreaField !== null && item.derivedDensityAreaField !== "") {
                                 var densityArea = Number(self.compareFeature.attributes[item.derivedDensityAreaField]);
                                 var densityValue = (curTarget / densityArea);
                                 item.compareDensityValue = densityValue;
-                                if(!isNaN(densityValue)) {
+                                if (!isNaN(densityValue)) {
                                     item.compareDensityValueFormatted = magNumberFormatter.formatValue(densityValue);
                                 }
                             }
@@ -1130,27 +1088,47 @@
                  *
                  * @method createKendoGrid
                  */
-                self.createKendoGrid = function () {
+                self.createKendoGrid = function() {
                     // Create the div element for the grid
-                    dc.create("div", {id: "demDataGrid", style: "margin: 5px 0 0 0; font-size: small;"}, "demSummaryOptionsRow", "after");
+                    dc.create("div", {
+                        id: "demDataGrid",
+                        style: "margin: 5px 0 0 0; font-size: small;"
+                    }, "demSummaryOptionsRow", "after");
 
                     // Kendo-ize
                     $("#demDataGrid").kendoGrid({
                         dataSource: {
                             data: self.aggValuesArray,
-                            group: { field: "fieldGroup" },
-                            sort: { field: "fieldRowSort", dir: "asc" }
+                            group: {
+                                field: "fieldGroup"
+                            },
+                            sort: {
+                                field: "fieldRowSort",
+                                dir: "asc"
+                            }
                         },
                         selectable: true,
                         scrollable: true,
                         sortable: false,
                         resizable: true,
                         columnMenu: false,
-                        columns: [
-                            {field: "fieldGroup", title: "Category", hidden: true, groupHeaderTemplate: "#=value#"},
-                            {field: "tableHeader", title: " ", width: "150px"},
-                            {field: "fieldValueFormatted", title: "Total", format: "{0:n1}"},
-                            {field: "percentValueFormatted", title: "Percent"},
+                        columns: [{
+                                field: "fieldGroup",
+                                title: "Category",
+                                hidden: true,
+                                groupHeaderTemplate: "#=value#"
+                            }, {
+                                field: "tableHeader",
+                                title: " ",
+                                width: "150px"
+                            }, {
+                                field: "fieldValueFormatted",
+                                title: "Total",
+                                format: "{0:n1}"
+                            }, {
+                                field: "percentValueFormatted",
+                                title: "Percent"
+                            },
                             //{field: "densityValueFormatted", title: "Per Sq Mile", format: "{0:n1}"}
                         ]
                     });
@@ -1165,31 +1143,57 @@
                  *
                  * @method createKendoGrid
                  */
-                self.createKendoGridWithCompare = function () {
+                self.createKendoGridWithCompare = function() {
                     // Create the div element for the grid
-                    dc.create("div", {id: "demDataGrid", style: "margin: 5px 0 0 0; font-size: small;"}, "demSummaryOptionsRow", "after");
+                    dc.create("div", {
+                        id: "demDataGrid",
+                        style: "margin: 5px 0 0 0; font-size: small;"
+                    }, "demSummaryOptionsRow", "after");
                     var gridObj = $("#demDataGrid");
                     // Kendo-ize
 
                     gridObj.kendoGrid({
                         dataSource: {
                             data: self.aggValuesArray,
-                            group: { field: "fieldGroup" },
-                            sort: { field: "fieldRowSort", dir: "asc" }
+                            group: {
+                                field: "fieldGroup"
+                            },
+                            sort: {
+                                field: "fieldRowSort",
+                                dir: "asc"
+                            }
                         },
                         selectable: true,
                         scrollable: true,
                         sortable: false,
                         resizable: true,
                         columnMenu: false,
-                        columns: [
-                            {field: "fieldGroup", title: "Category", hidden: true, groupHeaderTemplate: "#=value#"},
-                            {field: "tableHeader", title: " ", width: "120px"},
-                            {field: "fieldValueFormatted", title: "Total", format: "{0:n1}"},
-                            {field: "percentValueFormatted", title: "Percent"},
+                        columns: [{
+                                field: "fieldGroup",
+                                title: "Category",
+                                hidden: true,
+                                groupHeaderTemplate: "#=value#"
+                            }, {
+                                field: "tableHeader",
+                                title: " ",
+                                width: "120px"
+                            }, {
+                                field: "fieldValueFormatted",
+                                title: "Total",
+                                format: "{0:n1}"
+                            }, {
+                                field: "percentValueFormatted",
+                                title: "Percent"
+                            },
                             //{field: "densityValueFormatted", title: "Per Sq Mile", format: "{0:n1}"},
-                            {field: "compareValueFormatted", title: "Total", format: "{0:n1}"},
-                            {field: "comparePercentValueFormatted", title: "Percent"},
+                            {
+                                field: "compareValueFormatted",
+                                title: "Total",
+                                format: "{0:n1}"
+                            }, {
+                                field: "comparePercentValueFormatted",
+                                title: "Percent"
+                            },
                             //{field: "compareDensityValueFormatted",title: "Per Sq Mile", format: "{0:n1}"}
                         ]
                     });
@@ -1208,13 +1212,13 @@
                  * @event change
                  * @param e - event arguments
                  */
-                self.onChartListSelectionChanged = function () {
+                self.onChartListSelectionChanged = function() {
                     self.selectedCategoryObj = this.select();
                     self.groupedItems = self.aggValuesGroupedByChartCategory[self.selectedCategoryObj[0].childNodes[1].innerHTML];
 
                     // Update the chart
                     var kendoChart = $("#demChartArea").data("kendoChart");
-                    if(kendoChart !== null) {
+                    if (kendoChart !== null) {
                         kendoChart.destroy();
                         kendoChart.element.remove();
                     }
@@ -1226,17 +1230,17 @@
                  *
                  * @method reloadChart
                  */
-                self.reloadChart = function () {
+                self.reloadChart = function() {
                     var chartListDivObj = $("#demChartList");
                     var kendoListView = chartListDivObj.data("kendoListView");
 
-                    if(kendoListView !== undefined && kendoListView !== null) {
+                    if (kendoListView !== undefined && kendoListView !== null) {
                         self.selectedCategoryObj = kendoListView.select();
                         self.groupedItems = self.aggValuesGroupedByChartCategory[self.selectedCategoryObj[0].childNodes[1].innerHTML];
 
                         // Update the chart
                         var kendoChart = $("#demChartArea").data("kendoChart");
-                        if(kendoChart !== null) {
+                        if (kendoChart !== null) {
                             kendoChart.destroy();
                             kendoChart.element.remove();
                         }
@@ -1250,13 +1254,18 @@
                  *
                  * @method createChart
                  */
-                self.createChart = function () {
+                self.createChart = function() {
                     // Create the div element for the chart
-                    dc.create("div", {id: "demChartArea"}, "demChartAreaPane", "first");
+                    dc.create("div", {
+                        id: "demChartArea"
+                    }, "demChartAreaPane", "first");
                     var chartObj = $("#demChartArea");
 
                     // Set the height
-                    chartObj.css({height: 300, overflow: "hidden"});
+                    chartObj.css({
+                        height: 300,
+                        overflow: "hidden"
+                    });
 
                     // Kendo-ize
                     var chart = chartObj.kendoChart({
@@ -1350,21 +1359,21 @@
                  * @method sizeGrid
                  * @param {string} selector - id of the div element representing the grid.
                  */
-                self.sizeGrid = function (selector) {
+                self.sizeGrid = function(selector) {
                     var gridElement = $(selector),
                         newHeight = 270,
                         otherElements = gridElement.children().not(".k-grid-content"),
                         otherElementsHeight = 0;
 
-                    otherElements.each(function () {
+                    otherElements.each(function() {
                         otherElementsHeight += $(this).outerHeight();
                     });
 
-                    if(otherElementsHeight < 28) {
+                    if (otherElementsHeight < 28) {
                         otherElementsHeight = 28;
                     }
 
-                    if(selector === "#demFeatGrid") {
+                    if (selector === "#demFeatGrid") {
                         newHeight = 250;
                     }
 
@@ -1377,30 +1386,34 @@
                  *
                  * @method exportSelectedFeatures
                  */
-                self.exportSelectedFeatures = function () {
+                self.exportSelectedFeatures = function() {
                     var kendoDropDownList = $("#demExportSelectedFeatures").data("kendoDropDownList");
                     var type = kendoDropDownList.value();
 
                     // Create array of ObjectIDs
                     var objectIds = [];
-                    $.each(self.selectedFeatures, function (index, feature) {
+                    $.each(self.selectedFeatures, function(index, feature) {
                         objectIds.push(feature.attributes.OBJECTID);
                     });
 
                     // jQuery Ajax call to web service
                     var jqXHR = $.ajax(demographicConfig.exportSelectedFeaturesUrl, {
-                        type : "POST",
-                        data : JSON.stringify({ passcode: appConfig.webServicePasscode, type: type, objectids: objectIds }),
+                        type: "POST",
+                        data: JSON.stringify({
+                            passcode: appConfig.webServicePasscode,
+                            type: type,
+                            objectids: objectIds,
+                            ViewerType: "STATE_COGS"
+                        }),
                         contentType: "application/json; charset=utf-8",
-                        error : function (jqXHR, status) {
+                        error: function(jqXHR, status) {
                             alert("Export failed with status: " + status);
                         },
-                        success: function (data, status, jqXHR) {
+                        success: function(data, status, jqXHR) {
                             var err = data["Error"];
-                            if(err) {
+                            if (err) {
                                 alert("Export returned an error: " + err);
-                            }
-                            else {
+                            } else {
                                 var link = data["Result"];
                                 //window.open(link, "Summary Export");
                                 self.downloadURL(link);
@@ -1414,30 +1427,35 @@
                  *
                  * @method exportSummary
                  */
-                self.exportSummary = function () {
+                self.exportSummary = function() {
                     var kendoDropDownList = $("#demExportSummary").data("kendoDropDownList");
                     var type = kendoDropDownList.value();
                     var useCompare = dojo.byId("demUseComp").checked;
 
-                    var communities = [ self.communityName ];
-                    if(useCompare) {
+                    var communities = [self.communityName];
+                    if (useCompare) {
                         communities.push(self.compareToName);
                     }
 
                     // Execute call to service
                     var jqXHR = $.ajax(demographicConfig.exportSummaryGridUrl, {
-                        type : "POST",
-                        data : JSON.stringify({ passcode: appConfig.webServicePasscode, type: type, source: self.reportConfigItem.source, communities: communities, aggValues: self.aggValuesArray }),
+                        type: "POST",
+                        data: JSON.stringify({
+                            passcode: appConfig.webServicePasscode,
+                            type: type,
+                            source: self.reportConfigItem.source,
+                            communities: communities,
+                            aggValues: self.aggValuesArray
+                        }),
                         contentType: "application/json; charset=utf-8",
-                        error : function (jqXHR, status) {
+                        error: function(jqXHR, status) {
                             alert("Export failed with status: " + status);
                         },
-                        success: function (data, status, jqXHR) {
+                        success: function(data, status, jqXHR) {
                             var err = data["Error"];
-                            if(err) {
+                            if (err) {
                                 alert("Export returned an error: " + err);
-                            }
-                            else {
+                            } else {
                                 var link = data["Result"];
                                 //window.open(link, "Summary Export");
                                 self.downloadURL(link);
@@ -1452,36 +1470,35 @@
                  *
                  * @method exportReport
                  */
-                self.exportReport = function () {
+                self.exportReport = function() {
                     // added by scott, hide print button and show progress
-					$("#exportReportRequest").hide();
-					self.progressInterval = setInterval(self.showProgressWithDots, 96);
-					self.progressDots = 0;
-					self.progressText = "Generating report";
+                    $("#exportReportRequest").hide();
+                    self.progressInterval = setInterval(self.showProgressWithDots, 96);
+                    self.progressDots = 0;
+                    self.progressText = "Generating report";
 
-					// Print the map first then finish in the handler
+                    // Print the map first then finish in the handler
                     printMapDelegate.printJpgMap(appConfig.exportWebMapUrl, self.printMapHandler, self.printMapError);
                 };
 
-				// added by scott, used to indicate progress
-				self.showProgressWithDots = function(){
-					if (self.progressDots <= 4){
-						self.progressText += ".";
-						self.progressDots++;
-					}
-					else {
-						self.progressText = "Generating report";
-						self.progressDots = 0;
-					}
-					$("#exportReportResponse").html(self.progressText);
-				};
+                // added by scott, used to indicate progress
+                self.showProgressWithDots = function() {
+                    if (self.progressDots <= 4) {
+                        self.progressText += ".";
+                        self.progressDots++;
+                    } else {
+                        self.progressText = "Generating report";
+                        self.progressDots = 0;
+                    }
+                    $("#exportReportResponse").html(self.progressText);
+                };
 
-				// added by scott, used to take export view back to default
-				self.setReportExportBackToDefault = function() {
-					clearInterval(self.progressInterval);
-					$("#exportReportResponse").html("");
-					$("#exportReportRequest").show();
-				};
+                // added by scott, used to take export view back to default
+                self.setReportExportBackToDefault = function() {
+                    clearInterval(self.progressInterval);
+                    $("#exportReportResponse").html("");
+                    $("#exportReportRequest").show();
+                };
 
                 /**
                  * Callback method for errors returned by the print export.
@@ -1489,7 +1506,7 @@
                  * @method printMapError
                  * @param {Error} error - error object
                  */
-                self.printMapError = function (error) {
+                self.printMapError = function(error) {
                     console.log(error.message);
                 };
 
@@ -1499,13 +1516,13 @@
                  * @method printMapHandler
                  * @param {Object} result - result object (url property contains the link to the print output).
                  */
-                self.printMapHandler = function (result) {
+                self.printMapHandler = function(result) {
 
-					var useCompare = dojo.byId("demUseComp").checked;
+                    var useCompare = dojo.byId("demUseComp").checked;
 
                     // Set up the communities
-                    var communities = [ self.communityName ];
-                    if(useCompare) {
+                    var communities = [self.communityName];
+                    if (useCompare) {
                         communities.push(self.compareToName);
                     }
 
@@ -1520,25 +1537,33 @@
 
                     // Execute call to service
                     var jqXHR = $.ajax(demographicConfig.exportReportUrl, {
-                        type : "POST",
-                        data : JSON.stringify({ passcode: appConfig.webServicePasscode, mapImageUrl: result.url, source: self.reportConfigItem.source, communities: communities, aggValues: self.aggValuesArray, chartCategories: chartCategories, charts: svgCharts }),
+                        type: "POST",
+                        data: JSON.stringify({
+                            passcode: appConfig.webServicePasscode,
+                            mapImageUrl: result.url,
+                            source: self.reportConfigItem.source,
+                            communities: communities,
+                            aggValues: self.aggValuesArray,
+                            chartCategories: chartCategories,
+                            charts: svgCharts,
+                            ViewerType: "STATE_COGS"
+                        }),
                         contentType: "application/json; charset=utf-8",
-                        error : function (jqXHR, status) {
+                        error: function(jqXHR, status) {
                             alert("Export failed with status: " + status);
                         },
-                        success: function (data, status, jqXHR) {
+                        success: function(data, status, jqXHR) {
                             var err = data["Error"];
-                            if(err) {
+                            if (err) {
                                 alert("Export returned an error: " + err);
-                            }
-                            else {
+                            } else {
                                 var link = data["Result"];
                                 //window.open(link, "Demographic Report");
                                 //self.downloadURL(link);
-								// updated by scott
-								clearInterval(self.progressInterval);
-								$("#exportReportResponse").html("<a class='link' target='_blank' href='" + link + "'>Report complete, click here to view</a>");
-								$("#exportReportRequest").show();
+                                // updated by scott
+                                clearInterval(self.progressInterval);
+                                $("#exportReportResponse").html("<a class='link' target='_blank' href='" + link + "'>Report complete, click here to view</a>");
+                                $("#exportReportRequest").show();
                             }
                         }
                     });
@@ -1551,12 +1576,14 @@
                  * @method createReportChartsSvgArray
                  * @returns {Array}
                  */
-                self.createReportChartsSvgArray = function () {
+                self.createReportChartsSvgArray = function() {
                     var svgCharts = [];
 
-                    $.each(self.aggValuesGroupedByChartCategory, function (index, groupedItem) {
+                    $.each(self.aggValuesGroupedByChartCategory, function(index, groupedItem) {
                         // Create the div element for the chart
-                        dc.create("div", {id: "demReportChartArea"}, "demChartArea", "after");
+                        dc.create("div", {
+                            id: "demReportChartArea"
+                        }, "demChartArea", "after");
                         var chartObj = $("#demReportChartArea");
 
                         // Kendo-ize
@@ -1566,8 +1593,8 @@
                             },
                             theme: "Default",
 
-                    //add seriescolor here to change charts
-                    seriesColors: appConfig.seriesColors,
+                            //add seriescolor here to change charts
+                            seriesColors: appConfig.seriesColors,
 
                             legend: {
                                 visible: true,
@@ -1636,7 +1663,10 @@
                         }).data("kendoChart");
 
                         // Set the height
-                        chartObj.css({width: 800, height: 600});
+                        chartObj.css({
+                            width: 800,
+                            height: 600
+                        });
                         chart.redraw();
 
                         svgCharts.push(encodeURI(chart.svg()));
@@ -1654,7 +1684,7 @@
                  * @method downloadURL
                  * @param {string} url - url to the document to be downloaded.
                  */
-                self.downloadURL = function (url) {
+                self.downloadURL = function(url) {
                     var hiddenIFrameID = "hiddenDownloader",
                         iframe = document.getElementById(hiddenIFrameID);
                     if (iframe === null) {
@@ -1671,4 +1701,4 @@
             return DemographicVM;
         } // end function
     );
-} ());
+}());

@@ -1,5 +1,7 @@
 <div id="reportLauncher">
     <h1>Choose a report:</h1>
+    <button id="launchStateSummaryWin" type="button" title="State Summary" href="#" data-bind="click: openStateSummaryWindow">State Summary</button>
+        
 
     <button id="launchCountySummaryWin" type="button" title="County Summary" href="#" data-bind="click: displayCountyChoice">County Summary</button>
 	    <div id="countyChoiceDiv">
@@ -7,23 +9,12 @@
             <button id="countyButton" class="getButton" title="Pick a County" type="button" data-bind="click: openCountySummaryWindow">Get Report</button>
 	     </div>
 
-    <button id="launchPlaceSummaryWin" type="button" title="Place Summary" href="#" data-bind="click: displayPlaceChoice">City/Town Summary</button>
+    <button id="launchPlaceSummaryWin" type="button" title="Place Summary" href="#" data-bind="click: displayPlaceChoice">Jurisdiction Summary</button>
         <div id="placeChoiceDiv">
             <input id="placeComboBox">
             <button id="placeButton" class="getButton" title="Pick a City or Town" type="button" data-bind="click: openPlaceSummaryWindow">Get Report</button>
         </div>
 
-    <button id="launchCouncilSummaryWin" type="button" title="Council Summary" href="#" data-bind="click: displayCouncilChoice">Council District Summary</button>
-        <div id="councilChoiceDiv">
-            <input id="councilComboBox">
-            <button id="councilButton" class="getButton" title="Pick a Council District" type="button" data-bind="click: openCouncilSummaryWindow">Get Report</button>
-        </div>
-
-    <button id="launchSupervisorSummaryWin" type="button" title="Supervisor Summary" href="#" data-bind="click: displaySupervisorChoice">Supervisor District Summary</button>
-    <div id="supervisorChoiceDiv">
-        <input id="supervisorComboBox">
-        <button id="supervisorButton" class="getButton" title="Pick a Supervisor District" type="button" data-bind="click: openSupervisorSummaryWindow">Get Report</button>
-    </div>
 
     <button id="launchInteractiveSummaryDiv" title="Custom Summary" href="#" data-bind="click: displayInteractiveDiv">Custom Summary</button>
 
