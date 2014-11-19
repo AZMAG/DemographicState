@@ -453,7 +453,7 @@ li.tb {
 #version {
     text-align: center;
 }
-#copyR {
+.copyR {
     text-align: center;
     padding-top: 15px;
     padding-bottom: 5px;

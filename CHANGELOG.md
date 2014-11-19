@@ -2,7 +2,19 @@ CHANGELOG for State Demographics Map Viewer
 =========================================
 `Major/Minor/Patch 0.0.0`
 
+### Version 1.3.0 (11/19/2014)
+
+* add closing of reports window if interactive summary is null
+* moved selected block group config to the demographic config file
+* change basemap layer from ESRI's Terrain Layer to World Street Layer
+* update Facebook SDK
+* upgrade ArcGIS API for JavaScript update `v3.11`
+* turn on Google Analytics
+* move favicon
+* Kendo UI `Kendo UI Web Q1 2013 SP1 - v2013.1.514` [Site] (http://www.telerik.com/support/whats-new/kendo-ui/release-history)
+
 ### Version 1.2.0 (10/31/2014)
+
 * Added 'Contacts' button
 * created 'contacts-view.html'
 * created 'contact-vm.js'
@@ -26,9 +38,7 @@ CHANGELOG for State Demographics Map Viewer
 
 ### Version 1.0.0 (10/21/2014)
 
-
 * Creation Date 10/21/2014
-
 
 ========================================================================================>
 ### Build Changes prior to State Demographics Viewer Build
