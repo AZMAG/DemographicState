@@ -33,7 +33,7 @@
 
 var appConfig = new function() {
 
-    this.Version = "v1.3.1 | 11/19/2014";
+    this.Version = "v1.4.1 | 01/14/2015";
 
     this.ArcGISInstanceURL = "http://geo.azmag.gov/gismag/rest";
     //this.exportWebMapUrl = "http://geo.azmag.gov/gismag/rest/services/Utilities/PrintingTools/GPServer/Export%20Web%20Map%20Task";  // Generic Print Service
@@ -46,10 +46,10 @@ var appConfig = new function() {
             id: "census tracts",
             title: "Census Tract Labels",
             type: "dynamic",
-            url: "http://geo.azmag.gov/gismag/rest/services/maps/StatewideDemographic_TractBounds/MapServer",
-            queryUrl: "http://geo.azmag.gov/gismag/rest/services/maps/StatewideDemographic_TractBounds/MapServer/0",
+            url: "http://geo.azmag.gov/gismag/rest/services/maps/StateDemographicsCensus2010ACS2013/MapServer",
+            queryUrl: "http://geo.azmag.gov/gismag/rest/services/maps/StateDemographicsCensus2010ACS2013/MapServer/4",
             queryWhere: "1=1",
-            layers: [0, 1],
+            layers: [3, 4],
             opacity: 1,
             visible: false,
             selectable: true,
@@ -59,8 +59,8 @@ var appConfig = new function() {
             id: "county boundaries",
             title: "County Boundaries",
             type: "dynamic",
-            url: "http://geo.azmag.gov/gismag/rest/services/maps/StatewideDemographics/MapServer",
-            queryUrl: "http://geo.azmag.gov/gismag/rest/services/maps/StatewideDemographics/MapServer/2",
+            url: "http://geo.azmag.gov/gismag/rest/services/maps/StateDemographicsCensus2010ACS2013/MapServer",
+            queryUrl: "http://geo.azmag.gov/gismag/rest/services/maps/StateDemographicsCensus2010ACS2013/MapServer/2",
             queryWhere: "1=1",
             layers: [2],
             opacity: 0.8,
@@ -79,7 +79,7 @@ var appConfig = new function() {
             id: "Census2010byBlockGroup",
             title: "Census by Block Group, 2010",
             type: "dynamic",
-            url: "http://geo.azmag.gov/gismag/rest/services/maps/StatewideDemographics/MapServer",
+            url: "http://geo.azmag.gov/gismag/rest/services/maps/StateDemographicsCensus2010ACS2013/MapServer",
             layers: [0],
             opacity: 0.8,
             visible: true,

@@ -625,7 +625,7 @@
                         comparePlaceField: "NAME",
                         summaryField: "NAME",
                         isTimeVaryingData: false,
-                        source: "*Census 2010; ^American Community Survey 2008-2012",
+                        source: "*Census 2010; ^American Community Survey 2009-2013",
                         treeViewMenu: [{
                             topic: "General",
                             category: "General",
@@ -1446,7 +1446,7 @@
                         comparePlaceField: "NAME",
                         summaryField: "NAME",
                         isTimeVaryingData: false,
-                        source: "*Census 2010; ^American Community Survey 2008-2012",
+                        source: "*Census 2010; ^American Community Survey 2009-2013",
                         treeViewMenu: [{
                             topic: "General",
                             category: "General",
@@ -2264,7 +2264,7 @@
                         comparePlaceField: "NAME",
                         summaryField: "NAME",
                         isTimeVaryingData: false,
-                        source: "*Census 2010; ^American Community Survey 2008-2012",
+                        source: "*Census 2010; ^American Community Survey 2009-2013",
                         treeViewMenu: [{
                             topic: "General",
                             category: "General",
@@ -3083,7 +3083,7 @@
                         comparePlaceField: "NAME",
                         summaryField: "NAME",
                         isTimeVaryingData: false,
-                        source: "*Census 2010; ^American Community Survey 2008-2012",
+                        source: "*Census 2010; ^American Community Survey 2009-2013",
                         treeViewMenu: [{
                             topic: "General",
                             category: "General",

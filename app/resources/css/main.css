@@ -498,10 +498,6 @@ p {
     width: 270px;
     font-size: 0.9em;
 }
-
-
-
-
 /* ==========================================
 **** Custom Kendow Window styles ****
 ============================================= */
@@ -538,8 +534,8 @@ p {
 .k-widget.k-combobox.k-header {
     font-size: .85em;
     vertical-align: top;
-    width: 195px;
-    margin: 0 0 0 8px;
+    width: 180px;
+    margin: 0 0 0 5px;
 }
 .interactiveItem:hover {
     background-color: #b3d4fc;
@@ -598,7 +594,7 @@ p {
 .classScheme {
     /*display: none;*/
     width: 130px !important;
-    margin: 2px 0 2px 20px !important;
+    margin: 2px 0 2px 15px !important;
 }
 
 /* ==========================================
@@ -942,7 +938,7 @@ p {
         width: 290px;
     }
     .classScheme {
-        display: none;
+        /*display: none;*/
         width: 130px !important;
         margin: 2px 0 2px 10px !important;
     }
@@ -1016,7 +1012,7 @@ p {
         width: 275px;
     }
     .classScheme {
-        display: none;
+        /*display: none;*/
         width: 130px !important;
         margin: 2px 0 2px 10px !important;
     }
@@ -1096,7 +1092,7 @@ p {
         width: 280px;
     }
     .classScheme {
-        display: none;
+        /*display: none;*/
         width: 130px !important;
         margin: 2px 0 2px 10px !important;
     }
@@ -1189,7 +1185,7 @@ p {
         width: 280px;
     }
     .classScheme {
-        display: none;
+        /*display: none;*/
         width: 130px !important;
         margin: 2px 0 2px 10px !important;
     }
