@@ -581,6 +581,8 @@
 	"file_history":
 	[
 		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/CHANGELOG.md",
+		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/index.html",
+		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/README.md",
 		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/views/panelHelp-view.html",
 		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/views/mainHelp-view.html",
 		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/resources/css/main.css",
@@ -588,9 +590,7 @@
 		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/vm/legend-vm.js",
 		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/models/map-model.js",
 		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/config.js",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/README.md",
 		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/package.json",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/index.html",
 		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/run.js",
 		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/main.js",
 		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/config/cbrConfig.js",
