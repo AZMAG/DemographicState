@@ -347,7 +347,7 @@
                                     DefaultColorRamp: "PuBuGn",
                                     DefaultColorScheme: "Sequential",
                                     Description: "",
-                                    Source: "American Community Survey 2008 - 2012, by Block Group",
+                                    Source: "American Community Survey 2009 - 2013, by Block Group",
                                     FieldName: "TOTAL_HOUSEHOLDS"
                                 }, {
                                     NodeType: "map",
@@ -358,7 +358,7 @@
                                     DefaultColorRamp: "PuBuGn",
                                     DefaultColorScheme: "Sequential",
                                     Description: "",
-                                    Source: "American Community Survey 2008 - 2012, by Block Group",
+                                    Source: "American Community Survey 2009 - 2013, by Block Group",
                                     FieldName: "HOUSEHOLDS_PER_SQMI"
                                 }, {
                                     NodeType: "map",
@@ -369,7 +369,7 @@
                                     DefaultColorRamp: "PuBuGn",
                                     DefaultColorScheme: "Sequential",
                                     Description: "",
-                                    Source: "American Community Survey 2008 - 2012, by Block Group",
+                                    Source: "American Community Survey 2009 - 2013, by Block Group",
                                     FieldName: "MEDIAN_HOUSEHOLD_INCOME"
                                 }, {
                                     NodeType: "map",
@@ -380,7 +380,7 @@
                                     DefaultColorRamp: "PuBuGn",
                                     DefaultColorScheme: "Sequential",
                                     Description: "",
-                                    Source: "American Community Survey 2008 - 2012, by Block Group",
+                                    Source: "American Community Survey 2009 - 2013, by Block Group",
                                     FieldName: "PERCENT_HH_LESS_THAN_25K",
                                     AsPercentages: true
                                 }, {
@@ -392,7 +392,7 @@
                                     DefaultColorRamp: "PuBuGn",
                                     DefaultColorScheme: "Sequential",
                                     Description: "",
-                                    Source: "American Community Survey 2008 - 2012, by Block Group",
+                                    Source: "American Community Survey 2009 - 2013, by Block Group",
                                     FieldName: "PERCENT_HH_25K_TO_49K",
                                     AsPercentages: true
                                 }, {
@@ -404,7 +404,7 @@
                                     DefaultColorRamp: "PuBuGn",
                                     DefaultColorScheme: "Sequential",
                                     Description: "",
-                                    Source: "American Community Survey 2008 - 2012, by Block Group",
+                                    Source: "American Community Survey 2009 - 2013, by Block Group",
                                     FieldName: "PERCENT_HH_50K_TO_99K",
                                     AsPercentages: true
                                 }, {
@@ -416,7 +416,7 @@
                                     DefaultColorRamp: "PuBuGn",
                                     DefaultColorScheme: "Sequential",
                                     Description: "",
-                                    Source: "American Community Survey 2008 - 2012, by Block Group",
+                                    Source: "American Community Survey 2009 - 2013, by Block Group",
                                     FieldName: "PERCENT_HH_100K_OR_MORE",
                                     AsPercentages: true
                                 }]
@@ -437,7 +437,7 @@
                                     DefaultColorRamp: "BuGn",
                                     DefaultColorScheme: "Sequential",
                                     Description: "",
-                                    Source: "American Community Survey 2008 - 2012, by Block Group",
+                                    Source: "American Community Survey 2009 - 2013, by Block Group",
                                     FieldName: "TOTAL_FAMILY"
                                 }, {
                                     NodeType: "map",
@@ -448,7 +448,7 @@
                                     DefaultColorRamp: "BuGn",
                                     DefaultColorScheme: "Sequential",
                                     Description: "",
-                                    Source: "American Community Survey 2008 - 2012, by Block Group",
+                                    Source: "American Community Survey 2009 - 2013, by Block Group",
                                     FieldName: "FAMILIES_PER_SQMI"
                                 }, {
                                     NodeType: "map",
@@ -459,7 +459,7 @@
                                     DefaultColorRamp: "BuGn",
                                     DefaultColorScheme: "Sequential",
                                     Description: "",
-                                    Source: "American Community Survey 2008 - 2012, by Block Group",
+                                    Source: "American Community Survey 2009 - 2013, by Block Group",
                                     FieldName: "PERCENT_POVERTY",
                                     AsPercentages: true
                                 }, ]
@@ -481,7 +481,7 @@
                                     DefaultColorRamp: "PuBu",
                                     DefaultColorScheme: "Sequential",
                                     Description: "",
-                                    Source: "American Community Survey 2008 - 2012, by Block Group",
+                                    Source: "American Community Survey 2009 - 2013, by Block Group",
                                     FieldName: "POPULATION_25_YEARS_AND_OVER"
                                 }, {
                                     NodeType: "map",
@@ -492,7 +492,7 @@
                                     DefaultColorRamp: "PuBu",
                                     DefaultColorScheme: "Sequential",
                                     Description: "",
-                                    Source: "American Community Survey 2008 - 2012, by Block Group",
+                                    Source: "American Community Survey 2009 - 2013, by Block Group",
                                     FieldName: "POP25PLUS_PER_SQMI"
                                 }, {
                                     NodeType: "map",
@@ -503,7 +503,7 @@
                                     DefaultColorRamp: "PuBu",
                                     DefaultColorScheme: "Sequential",
                                     Description: "",
-                                    Source: "American Community Survey 2008 - 2012, by Block Group",
+                                    Source: "American Community Survey 2009 - 2013, by Block Group",
                                     FieldName: "PERCENT_LT9GRADE",
                                     AsPercentages: true
                                 }, {
@@ -515,7 +515,7 @@
                                     DefaultColorRamp: "PuBu",
                                     DefaultColorScheme: "Sequential",
                                     Description: "",
-                                    Source: "American Community Survey 2008 - 2012, by Block Group",
+                                    Source: "American Community Survey 2009 - 2013, by Block Group",
                                     FieldName: "PERCENT_NOHSDIPLOMA",
                                     AsPercentages: true
                                 }, {
@@ -527,7 +527,7 @@
                                     DefaultColorRamp: "PuBu",
                                     DefaultColorScheme: "Sequential",
                                     Description: "",
-                                    Source: "American Community Survey 2008 - 2012, by Block Group",
+                                    Source: "American Community Survey 2009 - 2013, by Block Group",
                                     FieldName: "PERCENT_HSGRAD",
                                     AsPercentages: true
                                 }, {
@@ -539,7 +539,7 @@
                                     DefaultColorRamp: "PuBu",
                                     DefaultColorScheme: "Sequential",
                                     Description: "",
-                                    Source: "American Community Survey 2008 - 2012, by Block Group",
+                                    Source: "American Community Survey 2009 - 2013, by Block Group",
                                     FieldName: "PERCENT_SOMECOLLEGE",
                                     AsPercentages: true
                                 }, {
@@ -551,7 +551,7 @@
                                     DefaultColorRamp: "PuBu",
                                     DefaultColorScheme: "Sequential",
                                     Description: "",
-                                    Source: "American Community Survey 2008 - 2012, by Block Group",
+                                    Source: "American Community Survey 2009 - 2013, by Block Group",
                                     FieldName: "PERCENT_ASSOCIATES",
                                     AsPercentages: true
                                 }, {
@@ -563,7 +563,7 @@
                                     DefaultColorRamp: "PuBu",
                                     DefaultColorScheme: "Sequential",
                                     Description: "",
-                                    Source: "American Community Survey 2008 - 2012, by Block Group",
+                                    Source: "American Community Survey 2009 - 2013, by Block Group",
                                     FieldName: "PERCENT_BACHELORS",
                                     AsPercentages: true
                                 }, {
@@ -575,7 +575,7 @@
                                     DefaultColorRamp: "PuBu",
                                     DefaultColorScheme: "Sequential",
                                     Description: "",
-                                    Source: "American Community Survey 2008 - 2012, by Block Group",
+                                    Source: "American Community Survey 2009 - 2013, by Block Group",
                                     FieldName: "PERCENT_GRADPROF",
                                     AsPercentages: true
                                 }, ]
@@ -656,7 +656,7 @@
                             DefaultColorRamp: "PuRd",
                             DefaultColorScheme: "Sequential",
                             Description: "",
-                            Source: "American Community Survey 2008 - 2012, by Block Group",
+                            Source: "American Community Survey 2009 - 2013, by Block Group",
                             FieldName: "MEDIAN_VALUE"
                         }, {
                             NodeType: "map",
@@ -667,7 +667,7 @@
                             DefaultColorRamp: "PuRd",
                             DefaultColorScheme: "Sequential",
                             Description: "",
-                            Source: "American Community Survey 2008 - 2012, by Block Group",
+                            Source: "American Community Survey 2009 - 2013, by Block Group",
                             FieldName: "MEDIAN_GROSS_RENT"
                         }, {
                             NodeType: "cat",

@@ -4,29 +4,29 @@
  * @class panel-vm
  */
 
-(function () {
+(function() {
 
     "use strict";
 
     define([
-        "dojo",
-        "dojo/dom-construct",
-        "dojo/topic",
-        "dojo/text!app/views/panelHelp-view.html",
-        "app/vm/help-vm",
-        "dojo/text!app/views/panel-view.html",
-        "app/helpers/layer-delegate",
-        "app/vm/demographic-vm",
-        "app/config/demographicConfig",
-        "app/vm/interactiveTools-vm",
-        "app/vm/queryBuilderTwo-vm",
+            "dojo",
+            "dojo/dom-construct",
+            "dojo/topic",
+            "dojo/text!app/views/panelHelp-view.html",
+            "app/vm/help-vm",
+            "dojo/text!app/views/panel-view.html",
+            "app/helpers/layer-delegate",
+            "app/vm/demographic-vm",
+            "app/config/demographicConfig",
+            "app/vm/interactiveTools-vm",
+            "app/vm/queryBuilderTwo-vm",
 
-        "vendor/kendo/web/js/jquery.min",
-        "vendor/kendo/web/js/kendo.web.min"
-    ],
-        function (dj, dc, tp, helpView, helpVM, view, layerDelegate, demographicVM, demographicConfig, interactiveToolsVM, qbVM) {
+            "vendor/kendo/web/js/jquery.min",
+            "vendor/kendo/web/js/kendo.web.min"
+        ],
+        function(dj, dc, tp, helpView, helpVM, view, layerDelegate, demographicVM, demographicConfig, interactiveToolsVM, qbVM) {
 
-            var PanelVM = new function () {
+            var PanelVM = new function() {
 
                 /**
                  * Store reference to module this object.
@@ -43,24 +43,24 @@
                 self.newWindowWidth = self.winWidth;
                 self.winVisible = true;
 
-                    if (self.winWidth <= 668) {
-                        self.newWindowWidth = "210px";
-                        self.winVisible = false;
-                        self.winLocation = 220;
-                    } else if (self.winWidth <= 800) {
-                        self.newWindowWidth = "210px";
-                        self.winVisible = false;
-                        self.winLocation = 220;
-                    } else if (self.winWidth <= 1024) {
-                        self.newWindowWidth = "210px";
-                        self.winLocation = 215;
-                    } else if (self.winWidth <= 1200) {
-                        self.newWindowWidth = "210px";
-                        self.winLocation = 215;
-                    } else {
-                        self.newWindowWidth = "250px";
-                        self.winLocation = 255;
-                    }
+                if (self.winWidth <= 668) {
+                    self.newWindowWidth = "210px";
+                    self.winVisible = false;
+                    self.winLocation = 440;
+                } else if (self.winWidth <= 800) {
+                    self.newWindowWidth = "210px";
+                    self.winVisible = false;
+                    self.winLocation = 440;
+                } else if (self.winWidth <= 1024) {
+                    self.newWindowWidth = "210px";
+                    self.winLocation = 430;
+                } else if (self.winWidth <= 1200) {
+                    self.newWindowWidth = "210px";
+                    self.winLocation = 430;
+                } else {
+                    self.newWindowWidth = "250px";
+                    self.winLocation = 510;
+                }
 
                 /**
                 Title for the module's window
@@ -75,24 +75,28 @@
                  *
                  * @method init
                  */
-                self.init = function () {
+                self.init = function() {
                     dc.place(view, "map", "after");
 
-                    tp.subscribe("panelStateO", function () { self.openWindow(); });
-                    tp.subscribe("panelStateC", function () { self.closeWindow(); });
+                    tp.subscribe("panelStateO", function() {
+                        self.openWindow();
+                    });
+                    tp.subscribe("panelStateC", function() {
+                        self.closeWindow();
+                    });
 
                     var reportsWindow = $("#reportLauncher").kendoWindow({
-                        width: self.newWindowWidth,  //"250px"
+                        width: self.newWindowWidth, //"250px"
                         height: "auto",
                         title: self.windowTitle,
                         actions: ["Help", "Minimize", "Close"],
                         modal: false,
-                        visible: self.winVisible,  //true
+                        visible: self.winVisible, //true
                         resizable: false
                     }).data("kendoWindow");
 
                     var helpButton = reportsWindow.wrapper.find(".k-i-help");
-                    helpButton.click(function () {
+                    helpButton.click(function() {
                         helpVM.openWindow(helpView);
                     });
 
@@ -123,26 +127,26 @@
                     layerDelegate.query(url2, self.placeQueryHandler, self.placeQueryFault, null, whereClause2, false);
                     qbVM.init("display", "after");
 
-                   //  // Load the supervisor names
-                   //  //var url3 = demographicConfig.reports.supervisorSummary.restUrl;
-                   // // var whereClause3 = demographicConfig.reports.supervisorSummary.whereClause;
-                   //  //layerDelegate.query(url3, self.supervisorQueryHandler, self.supervisorQueryFault, null, whereClause3, false);
-                   //  //qbVM.init("display", "after");
+                    //  // Load the supervisor names
+                    //  //var url3 = demographicConfig.reports.supervisorSummary.restUrl;
+                    // // var whereClause3 = demographicConfig.reports.supervisorSummary.whereClause;
+                    //  //layerDelegate.query(url3, self.supervisorQueryHandler, self.supervisorQueryFault, null, whereClause3, false);
+                    //  //qbVM.init("display", "after");
 
-                   //  // Load the council names
-                   //  var url4 = demographicConfig.reports.councilSummary.restUrl;
-                   //  var whereClause4 = demographicConfig.reports.councilSummary.whereClause;
-                   //  layerDelegate.query(url4, self.councilQueryHandler, self.councilQueryFault, null, whereClause4, false);
-                   //  qbVM.init("display", "after");
+                    //  // Load the council names
+                    //  var url4 = demographicConfig.reports.councilSummary.restUrl;
+                    //  var whereClause4 = demographicConfig.reports.councilSummary.whereClause;
+                    //  layerDelegate.query(url4, self.councilQueryHandler, self.councilQueryFault, null, whereClause4, false);
+                    //  qbVM.init("display", "after");
 
-                };//end init
+                }; //end init
 
                 /**
                 Method for opening the window.
 
                 @method openWindow
                 **/
-                self.openWindow = function () {
+                self.openWindow = function() {
                     var win = $("#reportLauncher").data("kendoWindow");
                     win.restore();
                     win.open();
@@ -157,13 +161,13 @@
 
                 @method closeWindow
                 **/
-                self.closeWindow = function () {
+                self.closeWindow = function() {
                     var win = $("#reportLauncher").data("kendoWindow");
                     win.close();
                 };
 
                 // change window location when window resized
-                self.winResize = function () {
+                self.winResize = function() {
                     self.winWidth = document.documentElement.clientWidth;
                     self.winHeight = document.documentElement.clientHeight;
 
@@ -179,13 +183,13 @@
                     resizeTimer = setTimeout(self.winResize, 200);
                 });
 
-                 /**
+                /**
                  * Callback method for errors returned by county query.
                  *
                  * @method countyQueryFault
                  * @param {Error} error - error object
                  */
-                self.stateQueryFault = function (error) {
+                self.stateQueryFault = function(error) {
                     console.log(error.message);
                 };
 
@@ -208,7 +212,7 @@
                  * @method countyQueryFault
                  * @param {Error} error - error object
                  */
-                self.countyQueryFault = function (error) {
+                self.countyQueryFault = function(error) {
                     console.log(error.message);
                 };
 
@@ -218,26 +222,28 @@
                  * @method countyQueryHelper
                  * @param {FeatureSet} results - feature set returned by query.
                  */
-                self.countyQueryHandler = function (results) {
+                self.countyQueryHandler = function(results) {
                     var features = results.features;
                     console.log(features);
                     var nameArray = [];
                     var countyField = demographicConfig.reports.countySummary.summaryField;
-                    $.each(features, function (index, feature) {
+                    $.each(features, function(index, feature) {
                         var name = feature.attributes[countyField];
-                        nameArray.push({ Name: name });
+                        nameArray.push({
+                            Name: name
+                        });
                     });
                     // used to sort attributes and put into Array. vw
-                        function compare(a,b) {
-                            if (a.Name < b.Name) {
-                                return -1;
-                            }
-                            if (a.Name > b.Name) {
-                                return 1;
-                            }
-                            return 0;
+                    function compare(a, b) {
+                        if (a.Name < b.Name) {
+                            return -1;
                         }
-                        nameArray.sort(compare);
+                        if (a.Name > b.Name) {
+                            return 1;
+                        }
+                        return 0;
+                    }
+                    nameArray.sort(compare);
 
                     $("#countyComboBox").kendoComboBox({
                         index: 0,
@@ -257,7 +263,7 @@
                  * @method placeQueryFault
                  * @param {Error} error - error object
                  */
-                self.placeQueryFault = function (error) {
+                self.placeQueryFault = function(error) {
                     console.log(error.message);
                 };
 
@@ -267,26 +273,28 @@
                  * @method placeQueryHelper
                  * @param {FeatureSet} results - feature set returned by query.
                  */
-                self.placeQueryHandler = function (results) {
+                self.placeQueryHandler = function(results) {
                     var features = results.features;
 
                     var nameArray = [];
                     var placeField = demographicConfig.reports.placeSummary.summaryField;
-                    $.each(features, function (index, feature) {
+                    $.each(features, function(index, feature) {
                         var name = feature.attributes[placeField];
-                        nameArray.push({ Name: name });
+                        nameArray.push({
+                            Name: name
+                        });
                     });
-                        // used to sort attributes and put into Array. vw
-                        function compare(a,b) {
-                            if (a.Name < b.Name) {
-                                return -1;
-                            }
-                            if (a.Name > b.Name) {
-                                return 1;
-                            }
-                            return 0;
+                    // used to sort attributes and put into Array. vw
+                    function compare(a, b) {
+                        if (a.Name < b.Name) {
+                            return -1;
                         }
-                        nameArray.sort(compare);
+                        if (a.Name > b.Name) {
+                            return 1;
+                        }
+                        return 0;
+                    }
+                    nameArray.sort(compare);
 
                     $("#placeComboBox").kendoComboBox({
                         index: 0,
@@ -305,7 +313,7 @@
                  * @method supervisorQueryFault
                  * @param {Error} error - error object
                  */
-                self.QueryFault = function (error) {
+                self.QueryFault = function(error) {
                     console.log(error.message);
                 };
 
@@ -385,8 +393,8 @@
                 //     });
                 // };
 
-                self.displayStateChoice = function () {
-                        $("#countyChoiceDiv, #placeChoiceDiv, #demInteractiveDiv").hide();
+                self.displayStateChoice = function() {
+                    $("#countyChoiceDiv, #placeChoiceDiv, #demInteractiveDiv").hide();
                 };
 
                 /**
@@ -394,12 +402,11 @@
                  *
                  * @event click
                  */
-                self.displayCountyChoice = function () {
+                self.displayCountyChoice = function() {
                     if ($("#countyChoiceDiv").is(":hidden")) {
                         $("#countyChoiceDiv").show();
                         $("#placeChoiceDiv, #demInteractiveDiv").hide();
-                    }
-                    else {
+                    } else {
                         $("#countyChoiceDiv").hide();
                     }
                 };
@@ -409,12 +416,11 @@
                  *
                  * @event click
                  */
-                self.displayPlaceChoice = function () {
+                self.displayPlaceChoice = function() {
                     if ($("#placeChoiceDiv").is(":hidden")) {
                         $("#placeChoiceDiv").show();
                         $("#countyChoiceDiv, #demInteractiveDiv").hide();
-                    }
-                    else {
+                    } else {
                         $("#placeChoiceDiv").hide();
                     }
                 };
@@ -454,7 +460,7 @@
                  *
                  * @event click
                  */
-                self.openStateSummaryWindow = function () {
+                self.openStateSummaryWindow = function() {
                     // Get the place name selected
                     var placeName = "Arizona";
 
@@ -468,7 +474,7 @@
                  *
                  * @event click
                  */
-                self.openCountySummaryWindow = function () {
+                self.openCountySummaryWindow = function() {
                     // Get the place name selected
                     var selectedName = $("#countyComboBox").data("kendoComboBox").dataItem();
                     var countyName = selectedName.Name;
@@ -482,7 +488,7 @@
                  *
                  * @event click
                  */
-                self.openPlaceSummaryWindow = function () {
+                self.openPlaceSummaryWindow = function() {
                     // Get the place name selected
                     var selectedName = $("#placeComboBox").data("kendoComboBox").dataItem();
                     var placeName = selectedName.Name;
@@ -524,18 +530,16 @@
                  *
                  * @event click
                  */
-                self.displayInteractiveDiv = function () {
+                self.displayInteractiveDiv = function() {
                     var div = $("#demInteractiveDiv");
 
                     if (div.length === 0) {
                         interactiveToolsVM.insertAfter("demInteractiveDiv", "launchInteractiveSummaryDiv", demographicVM.interactiveSelectionQueryHandler, demographicVM.interactiveSelectionQueryFault, demographicConfig.reports.censusTracts.restUrl);
-                    }
-                    else {
+                    } else {
                         if (div.is(":hidden")) {
                             $("#demInteractiveDiv").show();
                             $("#countyChoiceDiv, #placeChoiceDiv").hide();
-                        }
-                        else {
+                        } else {
                             interactiveToolsVM.clearSelection();
                             $("#demInteractiveDiv").hide();
                         }
@@ -547,14 +551,14 @@
                  *
                  * @event click
                  */
-                self.openQueryBuilder = function () {
+                self.openQueryBuilder = function() {
                     qbVM.buildQuery(demographicVM.interactiveSelectionQueryHandler, demographicVM.interactiveSelectionQueryFault, demographicConfig.reports.censusTracts.restUrl, demographicConfig.queryFields, demographicConfig.CompareOperators);
                     $("#countyChoiceDiv, #placeChoiceDiv, #demInteractiveDiv").hide();
                 };
 
-            };// End of PanelVM
+            }; // End of PanelVM
 
             return PanelVM;
 
         }); // End function
-} ());
+}());

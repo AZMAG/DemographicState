@@ -2,6 +2,14 @@ CHANGELOG for State Demographics Map Viewer
 =========================================
 `Major/Minor/Patch 0.0.0`
 
+### Version 1.4.0 (01/14/2015)
+
+* updates to css files
+* new arrangement of `Reports Window` and `Legend Window`
+* changed lod method
+* updated mxd file - now has all info for viewer
+* updated ACS files
+
 ### Version 1.3.1 (11/19/2014)
 
 * cleaned up some kendo ui code
