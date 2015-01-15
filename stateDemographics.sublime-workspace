@@ -519,6 +519,14 @@
 	},
 	"buffers":
 	[
+		{
+			"file": "config.js",
+			"settings":
+			{
+				"buffer_size": 7092,
+				"line_ending": "Windows"
+			}
+		}
 	],
 	"build_system": "Packages/JSHint/JSHint.sublime-build",
 	"command_palette":
@@ -580,13 +588,13 @@
 	},
 	"file_history":
 	[
+		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/vm/panel-vm.js",
+		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/resources/css/main.css",
 		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/CHANGELOG.md",
 		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/index.html",
 		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/README.md",
 		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/views/panelHelp-view.html",
 		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/views/mainHelp-view.html",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/resources/css/main.css",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/vm/panel-vm.js",
 		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/vm/legend-vm.js",
 		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/models/map-model.js",
 		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/config.js",
@@ -725,6 +733,8 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"pnlP",
+			"console.log",
 			".classScheme",
 			"American Community Survey 2008 - 2012, by Block Group",
 			"layerInfo",
@@ -850,9 +860,7 @@
 			"Census2010byTract",
 			"Legend",
 			"breakCount",
-			"error",
-			"Invalid",
-			"Invalid BreakCount"
+			"error"
 		],
 		"highlight": false,
 		"in_selection": false,
@@ -987,6 +995,34 @@
 		{
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "config.js",
+					"settings":
+					{
+						"buffer_size": 7092,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3073,
+								3073
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Better JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 663.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
 			]
 		}
 	],

@@ -224,7 +224,7 @@
                  */
                 self.countyQueryHandler = function(results) {
                     var features = results.features;
-                    console.log(features);
+                    // console.log(features);
                     var nameArray = [];
                     var countyField = demographicConfig.reports.countySummary.summaryField;
                     $.each(features, function(index, feature) {

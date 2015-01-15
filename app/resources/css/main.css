@@ -393,7 +393,7 @@ li.tb {
     font-size: 1em;
 }
 #countyChoiceDiv,
-#pnlPlaceChoiceDiv {
+#placeChoiceDiv {
     margin-left: 10px !important;
     margin-top: 2px !important;
     /*margin-bottom: 2px !important;*/

@@ -49,11 +49,9 @@ var appConfig = new function() {
             url: "http://geo.azmag.gov/gismag/rest/services/maps/StateDemographicsCensus2010ACS2013/MapServer",
             queryUrl: "http://geo.azmag.gov/gismag/rest/services/maps/StateDemographicsCensus2010ACS2013/MapServer/4",
             queryWhere: "1=1",
-            layers: [3, 4],
+            layers: [3,4],
             opacity: 1,
             visible: false,
-            selectable: true,
-            filters: [],
             showTOC: true
         }, {
             id: "county boundaries",
@@ -65,8 +63,6 @@ var appConfig = new function() {
             layers: [2],
             opacity: 0.8,
             visible: true,
-            selectable: false,
-            filters: [],
             showTOC: true
         }, {
             id: "reference",
