@@ -2,6 +2,12 @@ CHANGELOG for State Demographics Map Viewer
 =========================================
 `Major/Minor/Patch 0.0.0`
 
+### Version 1.5.0 (02/23/2015)
+
+* added legislative Districts
+* added Congressional Districts
+* updated data to ACS 2009-2013
+
 ### Version 1.4.0 (01/14/2015)
 
 * updates to css files

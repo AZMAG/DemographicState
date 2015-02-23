@@ -523,7 +523,31 @@
 			"file": "config.js",
 			"settings":
 			{
-				"buffer_size": 7092,
+				"buffer_size": 7976,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "app/vm/panel-vm.js",
+			"settings":
+			{
+				"buffer_size": 22578,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "app/views/panel-view.html",
+			"settings":
+			{
+				"buffer_size": 2179,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "app/config/demographicConfig.js",
+			"settings":
+			{
+				"buffer_size": 291270,
 				"line_ending": "Windows"
 			}
 		}
@@ -588,134 +612,7 @@
 	},
 	"file_history":
 	[
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/vm/panel-vm.js",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/resources/css/main.css",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/CHANGELOG.md",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/index.html",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/README.md",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/views/panelHelp-view.html",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/views/mainHelp-view.html",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/vm/legend-vm.js",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/models/map-model.js",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/config.js",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/package.json",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/run.js",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/main.js",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/config/cbrConfig.js",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/config/demographicConfig.js",
-		"//MAG1113/ArcGISVirtualRoot/maps/state/config.js",
-		"//MAG1113/ArcGISVirtualRoot/maps/state/index.html",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/views/demographic-view.html",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/views/cbr-view.html",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/views/alert1-view.html",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/views/print-view.html",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/views/printHelp-view.html",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/views/cbrHelp-view.html",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/views/helpLaunchbar-view.html",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/views/help-view.html",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/config/queryBuilderConfig.js",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/views/contacts-view.html",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/views/panel-view.html",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/vm/queryBuilderTwo-vm.js",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/helpers/layer-delegate.js",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/views/queryBuilderTwo-view.html",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/vm/cbr-vm.js",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/views/interactiveTools-view.html",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/views/queryBuilderHelp-view.html",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/vm/cbrlaunchbar-vm.js",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/vm/classificationFactory-vm.js",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/resources/css/main.min.css",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/vm/demographic-vm.js",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/views/social-view.html",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/views/legal-view.html",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/Demographics/demographics_project_new/app/views/mainHelp-view.html",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/views/socialHelp-view.html",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/Demographics/demographics_project - Copy/app/views/help-view.html",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/vm/contact-vm.js",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/views/demographicSummaryHelp-view.html",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/helpers/printMap-delegate.js",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/views/selectedFeaturesTabPage-view.html",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/vm/contactLaunchbar-vm.js",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/helpers/subject-bindingHandler.js",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/helpers/magNumberFormatter.js",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/views/classBreaks-view.html",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/vm/legendLaunchbar-vm.js",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/stateDemographics.sublime-project",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/views/legend-view.html",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/vm/print-vm.js",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/app/views/legendHelp-view.html",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/humans.txt",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/Gruntfile.js",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/Employment/employment_project/app/vm/employment-vm.js",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/Employment/employment_project/app/config/employmentConfig.js",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/Employment/employment_project/config.js",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/Employment/employment_project/app/vm/popup-vm.js",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/Employment/employment_project/app/resources/css/main.css",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/Employment/employment_project/app/views/employment-view.html",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/Employment/employment_project/app/views/employmentTRPMapTab-view.html",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/Employment/employment_project/app/vm/reports-vm.js",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/Employment/employment_project/app/views/employmentWorksLivesMapsTab-view.html",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/Employment/employment_project/app/views/employmentJobCentersTab-view.html",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/Employment/employment_project/app/views/employmentLargestEmployersTab-view.html",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/Employment/employment_project/app/models/map-model.js",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/Employment/employment_project/app/vm/email-vm.js",
-		"/C/Users/vwolfley/AppData/Roaming/Sublime Text 2/Packages/DocBlockr/Base File.sublime-settings",
-		"/C/Users/vwolfley/AppData/Roaming/Sublime Text 2/Packages/User/Preferences.sublime-settings",
-		"/C/Users/vwolfley/AppData/Roaming/Sublime Text 2/Packages/Default/Preferences.sublime-settings",
-		"/C/Users/vwolfley/AppData/Roaming/Sublime Text 2/Packages/User/Base File.sublime-settings",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/Employment/employment_project/app/views/employmentHelp-view.html",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/Employment/employment_project/app/views/reports-view.html",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/Employment/employment_project/app/views/employmentSubSectorSummaryTab-view.html",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/Employment/employment_project/app/views/employmentSectorSummaryTab-view.html",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/Employment/employment_project/app/config/cbrConfig.js",
-		"/C/Users/vwolfley/AppData/Roaming/Sublime Text 2/Packages/Javascript Beautify/Default (Windows).sublime-keymap",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/Employment/employment_project/.git/COMMIT_EDITMSG",
-		"/C/Users/vwolfley/AppData/Roaming/Sublime Text 2/Packages/User/Default (Windows).sublime-keymap",
-		"/C/Users/vwolfley/AppData/Roaming/Sublime Text 2/Packages/User/JavascriptBeautify.sublime-settings",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/Employment/employment_project/app/run.js",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/Employment/employment_project/app/vm/legend-vm.js",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/Employment/employment_project/app/vm/cbr-vm.js",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/Employment/employment_project/app/vm/interactiveTools-vm.js",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/Employment/employment_project/app/helpers/layer-delegate.js",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/Employment/employment_project/app/helpers/printMap-delegate.js",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/Employment/employment_project/index.html",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/Employment/employment_project/app/vm/legal-vm.js",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/Employment/employment_project/app/vm/queryBuilderTwo-vm.js",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/Employment/employment_project/app/vm/reportsLaunchbar-vm.js",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/Employment/employment_project/app/main.js",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/Employment/employment_project/app/vm/panel-vm.js",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/Employment/employment_project/app/views/panel-view.html",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/Employment/employment_project/app/views/demographic-view.html",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/Employment/employment_project/app/views/mainHelp-view.html",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/Employment/employment_project/app/views/panelHelp-view.html",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/Employment/employment_project/app/views/legendHelp-view.html",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/Employment/employment_project/app/views/demographicSelFeaturesHelp-view.html",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/Employment/employment_project/app/views/cbrHelp-view.html",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/Employment/employment_project/app/vm/demographic-vm.js",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/Employment/employment_project/app/vm/print-vm.js",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/Employment/employment_project/app/config/colorRampConfig.js",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/Employment/employment_project/package.json",
-		"/C/Users/vwolfley/AppData/Roaming/Sublime Text 2/Packages/Javascript Beautify/JavascriptBeautify.sublime-settings",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/Employment/employment_project/app/views/report-view.html",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/Employment/employment_project/app/views/legal-view.html",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/Employment/employment_project/app/views/selectedFeaturesTabPage-view.html",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/Employment/employment_project/app/views/demographicSummaryHelp-view.html",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/Employment/employment_project/app/views/demographicChartHelp-view.html",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/Employment/employment_project/app/views/colorRamp-view.html",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/Employment/employment_project/app/views/colorRampHelp-view.html",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/Employment/employment_project/app/views/cbr-view.html",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/Employment/employment_project/app/views/classBreaksHelp-view.html",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/Employment/employment_project/app/views/classBreaks-view.html",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/Employment/employment_project/app/vm/report-vm.js",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/Employment/employment_project/app/vm/reportLaunchBar-vm.js",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/Employment/employment_project/app/views/reportHelp-view.html",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/Employment/employment_project/app/views/reportsHelp-view.html",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/Employment/employment_project/app/vm/legendLaunchbar-vm.js",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/Employment/employment_project/app/vm/colorRamp-vm.js",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/Employment/employment_project/app/vm/cbrlaunchbar-vm.js",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/Employment/employment_project/CHANGELOG.md",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/Employment/employment_project/app/vm/classificationFactory-vm.js",
-		"/I/Projects/ArcGIS Server/10.2/javascript_apps/Employment/employment_project/app/vm/queryBuilder-vm.js"
+		"/I/Projects/ArcGIS Server/10.2/javascript_apps/StateDemographics/statedemo_project/config.js"
 	],
 	"find":
 	{
@@ -733,9 +630,6 @@
 		"case_sensitive": false,
 		"find_history":
 		[
-			"pnlP",
-			"console.log",
-			".classScheme",
 			"American Community Survey 2008 - 2012, by Block Group",
 			"layerInfo",
 			"legal",
@@ -860,7 +754,10 @@
 			"Census2010byTract",
 			"Legend",
 			"breakCount",
-			"error"
+			"error",
+			"Invalid",
+			"Invalid BreakCount",
+			"e."
 		],
 		"highlight": false,
 		"in_selection": false,
@@ -993,6 +890,7 @@
 	"groups":
 	[
 		{
+			"selected": 0,
 			"sheets":
 			[
 				{
@@ -1000,25 +898,301 @@
 					"file": "config.js",
 					"settings":
 					{
-						"buffer_size": 7092,
+						"buffer_size": 7976,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								3073,
-								3073
+								4010,
+								4010
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Better JavaScript/JavaScript.tmLanguage",
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close"
+							],
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
 							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 663.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "app/vm/panel-vm.js",
+					"settings":
+					{
+						"buffer_size": 22578,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								17689,
+								17689
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close"
+							],
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 4820.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "app/views/panel-view.html",
+					"settings":
+					{
+						"buffer_size": 2179,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close"
+							],
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "app/config/demographicConfig.js",
+					"settings":
+					{
+						"buffer_size": 291270,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								517,
+								539
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close"
+							],
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"

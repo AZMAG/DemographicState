@@ -33,7 +33,7 @@
 
 var appConfig = new function() {
 
-    this.Version = "v1.4.1 | 01/14/2015";
+    this.Version = "v1.5.0 | 02/23/2015";
 
     this.ArcGISInstanceURL = "http://geo.azmag.gov/gismag/rest";
     //this.exportWebMapUrl = "http://geo.azmag.gov/gismag/rest/services/Utilities/PrintingTools/GPServer/Export%20Web%20Map%20Task";  // Generic Print Service
@@ -46,10 +46,10 @@ var appConfig = new function() {
             id: "census tracts",
             title: "Census Tract Labels",
             type: "dynamic",
-            url: "http://geo.azmag.gov/gismag/rest/services/maps/StateDemographicsCensus2010ACS2013/MapServer",
-            queryUrl: "http://geo.azmag.gov/gismag/rest/services/maps/StateDemographicsCensus2010ACS2013/MapServer/4",
+            url: "http://geo.azmag.gov/gismag/rest/services/maps/StateDemographicMain/MapServer",
+            queryUrl: "http://geo.azmag.gov/gismag/rest/services/maps/StateDemographicMain/MapServer/6",
             queryWhere: "1=1",
-            layers: [3,4],
+            layers: [5,6],
             opacity: 1,
             visible: false,
             showTOC: true
@@ -57,14 +57,38 @@ var appConfig = new function() {
             id: "county boundaries",
             title: "County Boundaries",
             type: "dynamic",
-            url: "http://geo.azmag.gov/gismag/rest/services/maps/StateDemographicsCensus2010ACS2013/MapServer",
-            queryUrl: "http://geo.azmag.gov/gismag/rest/services/maps/StateDemographicsCensus2010ACS2013/MapServer/2",
+            url: "http://geo.azmag.gov/gismag/rest/services/maps/StateDemographicMain/MapServer",
+            queryUrl: "http://geo.azmag.gov/gismag/rest/services/maps/StateDemographicMain/MapServer/4",
             queryWhere: "1=1",
-            layers: [2],
+            layers: [4],
             opacity: 0.8,
             visible: true,
             showTOC: true
         }, {
+            id: "congressional districts",
+            title: "Congressional Districts",
+            type: "dynamic",
+            url: "http://geo.azmag.gov/gismag/rest/services/maps/StateDemographicMain/MapServer",
+            queryUrl: "http://geo.azmag.gov/gismag/rest/services/maps/StateDemographicMain/MapServer/3",
+            queryWhere: "1=1",
+            layers: [3],
+            opacity: 0.8,
+            visible: false,
+            showTOC: false
+        },
+        {
+            id: "legislative districts",
+            title: "Legislative Districts",
+            type: "dynamic",
+            url: "http://geo.azmag.gov/gismag/rest/services/maps/StateDemographicMain/MapServer",
+            queryUrl: "http://geo.azmag.gov/gismag/rest/services/maps/StateDemographicMain/MapServer/2",
+            queryWhere: "1=1",
+            layers: [2],
+            opacity: 0.8,
+            visible: false,
+            showTOC: false
+        },
+        {
             id: "reference",
             title: "Roads",
             type: "tile",
@@ -75,7 +99,7 @@ var appConfig = new function() {
             id: "Census2010byBlockGroup",
             title: "Census by Block Group, 2010",
             type: "dynamic",
-            url: "http://geo.azmag.gov/gismag/rest/services/maps/StateDemographicsCensus2010ACS2013/MapServer",
+            url: "http://geo.azmag.gov/gismag/rest/services/maps/StateDemographicMain/MapServer",
             layers: [0],
             opacity: 0.8,
             visible: true,

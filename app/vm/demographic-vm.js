@@ -335,6 +335,12 @@
                         case "county":
                             self.reportConfigItem = demographicConfig.reports.countySummary;
                             break;
+                        case "legislative":
+                            self.reportConfigItem = demographicConfig.reports.legislativeSummary;
+                            break;
+                        case "congressional":
+                            self.reportConfigItem = demographicConfig.reports.congressionalSummary;
+                            break;
                         case "place":
                             self.reportConfigItem = demographicConfig.reports.placeSummary;
                             break;
