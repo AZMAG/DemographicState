@@ -2,6 +2,11 @@ CHANGELOG for State Demographics Map Viewer
 =========================================
 `Major/Minor/Patch 0.0.0`
 
+### Version 1.5.1 (02/23/2015)
+
+* fix comparison button for Legislative Summary
+* fix comparison button for Congressional Summary
+
 ### Version 1.5.0 (02/23/2015)
 
 * added legislative Districts
