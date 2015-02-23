@@ -15,6 +15,19 @@
             <button id="placeButton" class="getButton" title="Pick a City or Town" type="button" data-bind="click: openPlaceSummaryWindow">Get Report</button>
         </div>
 
+     <button id="launchLegislativeSummaryWin" type="button" title="Legislative Summary" href="#" data-bind="click: displayLegislativeChoice">Legislative Summary</button>
+        <div id="legislativeChoiceDiv">
+            <input id="legislativeComboBox">
+            <button id="legislativeButton" class="getButton" title="Pick a District" type="button" data-bind="click: openLegislativeSummaryWindow">Get Report</button>
+        </div>
+
+     <button id="launchCongressionalSummaryWin" type="button" title="Congressional Summary" href="#" data-bind="click: displayCongressionalChoice">Congressional Summary</button>
+        <div id="congressionalChoiceDiv">
+            <input id="congressionalComboBox">
+            <button id="congressionalButton" class="getButton" title="Pick a District" type="button" data-bind="click: openCongressionalSummaryWindow">Get Report</button>
+        </div>
+
+
 
     <button id="launchInteractiveSummaryDiv" title="Custom Summary" href="#" data-bind="click: displayInteractiveDiv">Custom Summary</button>
 
