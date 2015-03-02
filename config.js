@@ -43,7 +43,7 @@ var appConfig = new function() {
     this.jasonemail = "https://www.azmag.gov/EmailPages/JasonHoward.asp";
 
     this.layerInfo = [{
-            id: "census tracts",
+            id: "censusTracts",
             title: "Census Tract Labels",
             type: "dynamic",
             url: "http://geo.azmag.gov/gismag/rest/services/maps/StateDemographicMain/MapServer",
@@ -54,7 +54,7 @@ var appConfig = new function() {
             visible: false,
             showTOC: true
         }, {
-            id: "county boundaries",
+            id: "countyBoundaries",
             title: "County Boundaries",
             type: "dynamic",
             url: "http://geo.azmag.gov/gismag/rest/services/maps/StateDemographicMain/MapServer",
@@ -65,7 +65,7 @@ var appConfig = new function() {
             visible: true,
             showTOC: true
         }, {
-            id: "congressional districts",
+            id: "congressionalDistricts",
             title: "Congressional Districts",
             type: "dynamic",
             url: "http://geo.azmag.gov/gismag/rest/services/maps/StateDemographicMain/MapServer",
@@ -74,10 +74,10 @@ var appConfig = new function() {
             layers: [3],
             opacity: 0.8,
             visible: false,
-            showTOC: false
+            showTOC: true
         },
         {
-            id: "legislative districts",
+            id: "legislativeDistricts",
             title: "Legislative Districts",
             type: "dynamic",
             url: "http://geo.azmag.gov/gismag/rest/services/maps/StateDemographicMain/MapServer",
@@ -86,7 +86,7 @@ var appConfig = new function() {
             layers: [2],
             opacity: 0.8,
             visible: false,
-            showTOC: false
+            showTOC: true
         },
         {
             id: "reference",
