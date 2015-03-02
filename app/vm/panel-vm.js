@@ -12,6 +12,8 @@
             "dojo",
             "dojo/dom-construct",
             "dojo/topic",
+            "dojo/dom",
+            "app/models/map-model",
             "dojo/text!app/views/panelHelp-view.html",
             "app/vm/help-vm",
             "dojo/text!app/views/panel-view.html",
@@ -24,7 +26,7 @@
             "vendor/kendo/web/js/jquery.min",
             "vendor/kendo/web/js/kendo.web.min"
         ],
-        function(dj, dc, tp, helpView, helpVM, view, layerDelegate, demographicVM, demographicConfig, interactiveToolsVM, qbVM) {
+        function(dj, dc, tp, dom, mapModel, helpView, helpVM, view, layerDelegate, demographicVM, demographicConfig, interactiveToolsVM, qbVM) {
 
             var PanelVM = new function() {
 
@@ -311,26 +313,28 @@
                  * @method legislativeQueryHelper
                  * @param {FeatureSet} results - feature set returned by query.
                  */
-                self.legislativeQueryHandler = function (results) {
+                self.legislativeQueryHandler = function(results) {
                     var features = results.features;
 
                     var nameArray = [];
                     var legislativeField = demographicConfig.reports.legislativeSummary.summaryField;
-                    $.each(features, function (index, feature) {
+                    $.each(features, function(index, feature) {
                         var name = feature.attributes[legislativeField];
-                        nameArray.push({ Name: name });
+                        nameArray.push({
+                            Name: name
+                        });
                     });
-                        // used to sort attributes and put into Array. vw
-                        function compare(a,b) {
-                            if (a.Name < b.Name) {
-                                return -1;
-                            }
-                            if (a.Name > b.Name) {
-                                return 1;
-                            }
-                            return 0;
+                    // used to sort attributes and put into Array. vw
+                    function compare(a, b) {
+                        if (a.Name < b.Name) {
+                            return -1;
                         }
-                        nameArray.sort(compare);
+                        if (a.Name > b.Name) {
+                            return 1;
+                        }
+                        return 0;
+                    }
+                    nameArray.sort(compare);
 
                     $("#legislativeComboBox").kendoComboBox({
                         index: 0,
@@ -352,26 +356,28 @@
                 //  * @method congressionalQueryHelper
                 //  * @param {FeatureSet} results - feature set returned by query.
 
-                self.congressionalQueryHandler = function (results) {
+                self.congressionalQueryHandler = function(results) {
                     var features = results.features;
 
                     var nameArray = [];
                     var councilField = demographicConfig.reports.congressionalSummary.summaryField;
-                    $.each(features, function (index, feature) {
+                    $.each(features, function(index, feature) {
                         var name = feature.attributes[councilField];
-                        nameArray.push({ Name: name });
+                        nameArray.push({
+                            Name: name
+                        });
                     });
-                        // used to sort attributes and put into Array. vw
-                        function compare(a,b) {
-                            if (a.Name < b.Name) {
-                                return -1;
-                            }
-                            if (a.Name > b.Name) {
-                                return 1;
-                            }
-                            return 0;
+                    // used to sort attributes and put into Array. vw
+                    function compare(a, b) {
+                        if (a.Name < b.Name) {
+                            return -1;
                         }
-                        nameArray.sort(compare);
+                        if (a.Name > b.Name) {
+                            return 1;
+                        }
+                        return 0;
+                    }
+                    nameArray.sort(compare);
 
                     $("#congressionalComboBox").kendoComboBox({
                         index: 0,
@@ -421,13 +427,32 @@
                 //  *
                 //  * @event click
                 //  */
-                self.displayLegislativeChoice = function () {
+                self.displayLegislativeChoice = function() {
+                    var layer = mapModel.mapInstance.getLayer("legislativeDistricts");
+                    var countyLayer = mapModel.mapInstance.getLayer("countyBoundaries");
+                    var boxChecked = dom.byId("clegislativeDistricts").checked;
+
                     if ($("#legislativeChoiceDiv").is(":hidden")) {
                         $("#legislativeChoiceDiv").show();
                         $("#countyChoiceDiv, #placeChoiceDiv, #congressionalChoiceDiv, #demInteractiveDiv").hide();
-                    }
-                    else {
+
+                        // used to turn on and off layer in the layer options.
+                        // turns on the Legislative Districts and turns off County Boundaries
+                        if (layer.visible === false && boxChecked === false) {
+                            layer.show();
+                            countyLayer.hide();
+                            dom.byId("clegislativeDistricts").checked = true;
+                            dom.byId("ccountyBoundaries").checked = false;
+                        }
+                    } else {
                         $("#legislativeChoiceDiv").hide();
+
+                        if (layer.visible === true && boxChecked === true) {
+                            layer.hide();
+                            countyLayer.show();
+                            dom.byId("clegislativeDistricts").checked = false;
+                            dom.byId("ccountyBoundaries").checked = true;
+                        }
                     }
                 };
 
@@ -436,13 +461,32 @@
                 //  *
                 //  * @event click
                 //  */
-                self.displayCongressionalChoice = function () {
+                self.displayCongressionalChoice = function() {
+                    var layer = mapModel.mapInstance.getLayer("congressionalDistricts");
+                    var countyLayer = mapModel.mapInstance.getLayer("countyBoundaries");
+                    var boxChecked = dom.byId("ccongressionalDistricts").checked;
+
                     if ($("#congressionalChoiceDiv").is(":hidden")) {
                         $("#congressionalChoiceDiv").show();
                         $("#countyChoiceDiv, #placeChoiceDiv, #legislativeChoiceDiv, #demInteractiveDiv").hide();
-                    }
-                    else {
+
+                        // used to turn on and off layer in the layer options.
+                        // turns on the Congressional Districts and turns off County Boundaries
+                        if (layer.visible === false && boxChecked === false) {
+                            layer.show();
+                            countyLayer.hide();
+                            dom.byId("ccongressionalDistricts").checked = true;
+                            dom.byId("ccountyBoundaries").checked = false;
+                        }
+                    } else {
                         $("#congressionalChoiceDiv").hide();
+
+                        if (layer.visible === true && boxChecked === true) {
+                            layer.hide();
+                            countyLayer.show();
+                            dom.byId("ccongressionalDistricts").checked = false;
+                            dom.byId("ccountyBoundaries").checked = true;
+                        }
                     }
                 };
 
@@ -458,7 +502,6 @@
                     // Open the window
                     demographicVM.openWindow(placeName, "state");
                 };
-
 
                 /**
                  * Get the selected county name and call open method on demographicVM.
@@ -493,7 +536,7 @@
                 //  *
                 //  * @event click
                 //  */
-                self.openLegislativeSummaryWindow = function () {
+                self.openLegislativeSummaryWindow = function() {
                     // Get the place name selected
                     var selectedName = $("#legislativeComboBox").data("kendoComboBox").dataItem();
                     var legislativeName = selectedName.Name;
@@ -507,7 +550,7 @@
                 //  *
                 //  * @event click
                 //  */
-                self.openCongressionalSummaryWindow = function () {
+                self.openCongressionalSummaryWindow = function() {
                     // Get the place name selected
                     var selectedName = $("#congressionalComboBox").data("kendoComboBox").dataItem();
                     var congressionalName = selectedName.Name;
@@ -529,7 +572,7 @@
                     } else {
                         if (div.is(":hidden")) {
                             $("#demInteractiveDiv").show();
-                            $("#countyChoiceDiv, #placeChoiceDiv, #legislativeChoiceDiv, #demInteractiveDiv").hide();
+                            $("#countyChoiceDiv, #placeChoiceDiv, #legislativeChoiceDiv, #congressionalChoiceDiv").hide();
                         } else {
                             interactiveToolsVM.clearSelection();
                             $("#demInteractiveDiv").hide();

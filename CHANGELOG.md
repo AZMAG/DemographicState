@@ -2,6 +2,13 @@ CHANGELOG for State Demographics Map Viewer
 =========================================
 `Major/Minor/Patch 0.0.0`
 
+### Version 1.6.0 (03/02/2015)
+
+* when Legislative summary button is selected it turns on the Legislative boundaries and turns off the county boundaries
+* when Congressional summary button is selected it turns on the Congressional boundaries and turns off the county boundaries
+* add check-box option for Congressional Districts
+* add check-box option for Legislative Districts
+
 ### Version 1.5.1 (02/23/2015)
 
 * fix comparison button for Legislative Summary
