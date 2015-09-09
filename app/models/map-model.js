@@ -16,15 +16,34 @@
         "dojo/dom",
         "dojo/on",
         "dojo/topic",
+
+        "dojo/query",
+        "esri/map",
+        "esri/layers/WMSLayer",
+        "esri/layers/ArcGISDynamicMapServiceLayer",
+        "esri/layers/ArcGISTiledMapServiceLayer",
+        "esri/layers/FeatureLayer",
+        "esri/geometry/Point",
+        "esri/SpatialReference",
+
+        "esri/geometry/Extent",
+        "esri/dijit/Scalebar",
         "esri/dijit/HomeButton",
         "esri/dijit/LocateButton",
-        "esri/dijit/Geocoder",
-        "esri/layers/wms",
-        "esri/layers/agsdynamic",
-        "esri/map",
+        "esri/dijit/Search",
+
+        "esri/Color",
+        "esri/symbols/SimpleMarkerSymbol",
+        "esri/symbols/SimpleLineSymbol",
+        "esri/symbols/SimpleFillSymbol",
+
+        "esri/dijit/Popup",
+        "esri/dijit/PopupTemplate",
+        "esri/InfoTemplate",
+
         "vendor/kendo/web/js/jquery.min",
         "vendor/kendo/web/js/kendo.web.min"
-    ], function (dc, dom, on, tp, HomeButton, LocateButton, Geocoder) {
+    ], function (dc, dom, on, tp, query, Map, WMSLayer, wms, ArcGISDynamicMapServiceLayer, ArcGISTiledMapServiceLayer, FeatureLayer, Point, SpatialReference, Extent, Scalebar, HomeButton, LocateButton, Search, Color, SimpleMarkerSymbol, SimpleLineSymbol, SimpleFillSymbol, Popup, PopupTemplate, InfoTemplate, Geocoder) {
 
             /**
              * Holds reference to the map.
@@ -450,17 +469,20 @@
                     this.mapInstance.centerAndZoom(pt, 14);
                 },
 
-                /**
+                 /**
                  * Add a graphic to the map graphics layer.
                  *
                  * @method addGraphic
                  * @param {Graphic} graphic - feature to be added.
                  * @param {string} color - name of the color to use as a fill color.
                  */
-                addGraphic: function (graphic, color) {
-                    var symbol = this.getSymbol(graphic.geometry, color);
-                    graphic.symbol = symbol;
-                    this.mapInstance.graphics.add(graphic);
+                addGraphic: function(graphic, color, hasSymbol) {
+                    if (!hasSymbol) {
+                        var symbol = this.getSymbol(graphic.geometry, color);
+                        graphic.symbol = symbol;
+                    } else {
+                        this.mapInstance.graphics.add(graphic);
+                    }
                 },
 
                 /**
@@ -469,13 +491,13 @@
                  * @method addGraphics
                  * @param {Graphics[]} graphics - array of features to be added.
                  */
-                addGraphics: function (graphics) {
-                    if(graphics.length === 0) {
+                addGraphics: function(graphics, color) {
+                    if (graphics.length === 0) {
                         return;
                     }
                     var geometry = graphics[0].geometry;
-                    var symbol = this.getSymbol(geometry);
-                    for(var x = 0; x < graphics.length; x++) {
+                    var symbol = this.getSymbol(geometry, color);
+                    for (var x = 0; x < graphics.length; x++) {
                         var g = graphics[x];
                         g.symbol = symbol;
                         this.mapInstance.graphics.add(g);

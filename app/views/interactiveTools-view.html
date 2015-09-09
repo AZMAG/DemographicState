@@ -1,9 +1,25 @@
 <div class="smallWhiteFont">Identify a:</div>
 <div id="interactiveSelectVerticalList"></div>
-<button id="interactiveClearSelectionBtn" class="clearButton" type="button">Clear Selection</button>
+<div class="smallWhiteFont">
+    <div>
+        <input type="checkbox" id="bufferSelection" name="bufferSelection" />
+        <label for="bufferSelection" style="vertical-align: top;">Buffer Selection</label>
+    </div>
+    <div id="bufferOptions" style="margin-top: 5px">
+        <div>
+            <span style="width: 47px; display: inline-block;">Distance</span>
+            <input type="number" id="bufferDistance" style="width: 150px;" value="1" />
+        </div>
+        <div style="margin-top: 5px">
+            <span style="width: 47px; display: inline-block;">Unit</span>
+            <select id="bufferUnit" style="width: 150px;"></select>
+        </div>
+    </div>
+</div>
+<button id="interactiveClearSelectionBtn" class="k-button clearButton" type="button">Clear Selection</button>
 
 <script type="text/x-kendo-tmpl" id="interactiveListTemplate">
-    <div class="interactiveItem" style="cursor: pointer;">
+    <div class="interactiveItem" type="button" style="cursor: pointer;">
         <img src="#:image#" alt="#:title#" height="20px" width="20px"> <span class="smallFont">#:title#</span>
     </div>
 </script>

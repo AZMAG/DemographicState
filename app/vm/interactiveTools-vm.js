@@ -15,12 +15,17 @@
         "dojo/text!app/views/interactiveTools-view.html",
         "app/helpers/layer-delegate",
         "app/models/map-model",
+        "dijit/form/CheckBox",
+        "app/config/interactiveToolConfig",
         "esri/toolbars/draw",
+        "esri/symbols/SimpleMarkerSymbol",
+        "esri/symbols/SimpleFillSymbol",
+        "esri/graphic",
 
         "vendor/kendo/web/js/jquery.min",
         "vendor/kendo/web/js/kendo.web.min",
     ],
-        function (dc, dom, on, view, layerDelegate, mapModel) {
+        function (dc, dom, on, view, layerDelegate, mapModel, CheckBox, interactiveToolConfig, Draw, SimpleMarkerSymbol, SimpleFillSymbol, Graphic) {
 
             var InteractiveToolsVM = new function () {
 
@@ -50,6 +55,7 @@
                  * @type {Toolbar}
                  */
                 self.tb;
+                self.toolbars = [];
 
                 /**
                  * Selection actions available to the user in the list view.
@@ -123,6 +129,41 @@
                             template: kendo.template($("#interactiveListTemplate").html())
                         });
                     }
+
+                    // Make sure the buffer options panel is not displayed on startup
+                    $('#bufferOptions').css("display", "none");
+
+                    // Wire up the buffer checkbox change event
+                    $("input#bufferSelection").change(self.bufferChange);
+
+                    // Create the buffer units drop down list
+                    $("#bufferUnit").kendoDropDownList({
+                        dataTextField: "text",
+                        dataValueField: "value",
+                        dataSource: interactiveToolConfig.bufferUnits
+                    });
+                    $("#bufferUnit").getKendoDropDownList().select(interactiveToolConfig.selectedBufferUnitIndex ? interactiveToolConfig.selectedBufferUnitIndex : 0);
+
+                    // Create the buffer distance text box
+                    $("#bufferDistance").kendoNumericTextBox({
+                        min: 0,
+                        format: "#.#",
+                        value: interactiveToolConfig.defaultBufferValue ? interactiveToolConfig.defaultBufferValue : 1
+                    });
+                };
+
+                /**
+                 * Fired when user toggle the buffer checkbox - Toggle the display of the buffer options panel
+                 *
+                 * @method bufferChange
+                 *
+                 */
+                self.bufferChange = function() {
+                    if (dojo.byId("bufferSelection").checked) {
+                        $('#bufferOptions').css("display", "block");
+                    } else {
+                        $('#bufferOptions').css("display", "none");
+                    }
                 };
 
                 /**
@@ -158,18 +199,65 @@
                     $("#interactiveSelectVerticalList").data("kendoListView").clearSelection();
                 };
 
-                /**
+                 /**
                  * Finish drawing and execute the spatial query.
                  *
                  * @event onDrawEnd
                  * @param {Geometry} geometry - geometry drawn by user.
                  */
-                self.onDrawEnd = function(geometry) {
+                    self.onDrawEnd = function(geometry) {
                     self.clearSelection();
                     // adding loading icon. vw
                     esri.show(dojo.byId("loading"));
 
-                    layerDelegate.query(self.queryUrl, qryCallback, qryErrback, geometry, undefined, true);
+                    var bufferGeometry = dojo.byId("bufferSelection").checked;
+
+                    if (bufferGeometry) {
+                        var unit = dojo.byId("bufferUnit").value;
+                        var distance = dojo.byId("bufferDistance").value;
+
+                        //buffer the geometry
+                        layerDelegate.bufferQuery(distance, unit, geometry).then(function(geometries) {
+
+                            var displayFeatures = function(results) {
+                                //add originally selected feature to the map
+                                mapModel.addGraphics(results.features, "blue", true);
+
+                                var selectionSymbol = null;
+                                var selectionGraphic = null;
+
+                                //add original selection to map
+                                if (geometry.type == "point") {
+                                    selectionSymbol = new SimpleMarkerSymbol(interactiveToolConfig.selectionPointSymbol);
+                                } else {
+                                    selectionSymbol = new SimpleFillSymbol(interactiveToolConfig.selectionSymbol);
+                                }
+                                selectionGraphic = new Graphic(geometry, selectionSymbol);
+                                mapModel.addGraphic(selectionGraphic, undefined, true, true);
+
+                                //add buffer geometry to map
+                                var bufferSymbol = new SimpleFillSymbol(interactiveToolConfig.bufferSymbol);
+
+                                var graphic = new Graphic(geometries[0], bufferSymbol);
+                                mapModel.addGraphic(graphic, undefined, true, true);
+                            }
+
+                            var queryOrigFeature = function(results) {
+                                //call original callback
+                                qryCallback(results);
+                                //perform query with original geometry
+                                layerDelegate.query(self.queryUrl, displayFeatures, null, geometry, undefined, true);
+                            };
+
+                            //perform query with buffered geometry
+                            layerDelegate.query(self.queryUrl, queryOrigFeature, qryErrback, geometries[0], undefined, true);
+                        }, function(error) {
+                            //error buffering - query without buffering
+                            layerDelegate.query(self.queryUrl, qryCallback, qryErrback, geometry, undefined, true);
+                        });
+                    } else {
+                        layerDelegate.query(self.queryUrl, qryCallback, qryErrback, geometry, undefined, true);
+                    }
                 };
             };
 

@@ -213,6 +213,14 @@ pip-log.txt
 
 #Mr Developer
 .mr.developer.cfg
+
+############################
+## Project Specific Ignores
+############################
+
+# workspace files are user-specific don't track
+*.sublime-workspace
+
 vendor/
 vendor/require.js
 vendor/kendo/web/styles/textures/stripe3.png

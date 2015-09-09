@@ -14,12 +14,21 @@ var queryCountGlobal;
         "app/helpers/magNumberFormatter",
         "esri/tasks/query",
         "esri/tasks/QueryTask",
-        "esri/tasks/identify"
+        "esri/tasks/identify",
+        "esri/tasks/IdentifyParameters",
+
+        "esri/graphic",
+        "esri/tasks/GeometryService",
+        "esri/tasks/BufferParameters",
+        "app/config/interactiveToolConfig"
+
         ],
 
-        function (mapModel, magNumberFormatter) {
+        function (mapModel, magNumberFormatter, Query, QueryTask, IdentifyTask, IdentifyParameters, Graphic, GeometryService, BufferParameters, interactiveToolConfig) {
 
             var LayerDelegate = {
+
+                geosvc: new GeometryService(interactiveToolConfig.geometryServiceURL),
 
                 /**
                 * Submit request to REST endpoint for layer and send the response back to the callback defined in the parameters.
@@ -167,6 +176,34 @@ var queryCountGlobal;
                     identifyParams.mapExtent = mapModel.getMapExtent();
 
                     identifyTask.execute(identifyParams, callback, errback);
+                },
+
+                                  /**
+                * Submit query to REST endpoint and send the response back to the callback defined in the parameters.
+                *
+                * @method query
+                * @param {string} distance - buffer distance.
+                * @param {string} unit - buffer units.
+                * @param {string} url - map service REST URL.
+                * @param {string} callback - callback method for results.
+                * @param {string} errback - callback method for errors.
+                * @param {string} geometry - [OPTIONAL] geometry used for spatial query.
+                * @param {string} where - [OPTIONAL] where clause applied to query.
+                * @param {boolean} returnGeometry - [OPTIONAL] whether or not to return the geometry of the results.
+                * @param {string[]} outFields - [OPTIONAL] array of fields to return.
+                * @param {string[]} orderByFields - [OPTIONAL] array of fields to order the results by.
+                **/
+                bufferQuery: function (distance, unit, geometry) {
+                    var params = new BufferParameters();
+                    params.outSpatialReference = mapModel.mapInstance.spatialReference;
+                    params.distances = [distance];
+                    params.unit = unit;
+                    params.geometries = [geometry];
+                    if (interactiveToolConfig.bufferSpatialReference) {
+                        params.bufferSpatialReference = new esri.SpatialReference(interactiveToolConfig.bufferSpatialReference);
+                    }
+
+                    return this.geosvc.buffer(params);
                 }
             };
 
