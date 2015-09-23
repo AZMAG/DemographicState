@@ -8,19 +8,16 @@
     "use strict";
 
     define([
-        "dojo",
-        "dojo/dom-construct",
-        "dojo/topic",
-        "app/config/colorRampConfig",
-        "dojo/text!app/views/colorRampHelp-view.html",
-        "app/vm/help-vm",
-        "dojo/text!app/views/colorRamp-view.html",
-
-        "vendor/kendo/web/js/jquery.min",
-        "vendor/kendo/web/js/kendo.web.min",
-        "vendor/kendo/dataviz/js/kendo.dataviz.min"
+        'dojo',
+        'dojo/dom-construct',
+        'dojo/topic',
+        'app/config/colorRampConfig',
+        'dojo/text!app/views/colorRampHelp-view.html',
+        'app/vm/help-vm',
+        'app/models/map-model',
+        'dojo/text!app/views/colorRamp-view.html'
     ],
-        function (dj, dc, tp, conf, helpView, helpVM, view) {
+        function (dj, dc, tp, conf, helpView, helpVM, mapModel, view) {
 
             var ColorRampVM = new function () {
 
@@ -34,14 +31,12 @@
                     } else if (self.winWidth <= 800) {
                         self.newWindowHeight = 400;
                     } else if (self.winWidth <= 1024) {
-                        self.newWindowHeight = 400;
+                      self.newWindowHeight = 400
                     } else if (self.winWidth <= 1200) {
                         self.newWindowHeight = 400;
                     } else {
                         self.newWindowHeight = 400;
                     }
-                    // console.log(self.newWindowHeight);
-
                 /**
                 Title for the module's window
 
@@ -49,6 +44,8 @@
                 @type String
                 **/
                 self.windowTitle = "Color Schemes";
+
+                self.bookmarkDelegate = null;
 
                 /**
                 Initilization function for the module window.
@@ -61,9 +58,9 @@
                 @param {string} initRamp - the color ramp to use when initializing the color ramp selection.
                 @param {string} initBreaks - the number of breaks to use when initializing the window.
                 **/
-                self.init = function (relatedElement, relation, initScheme, initRamp, initBreaks) {
+                self.init = function (relatedElement, relation, initScheme, initRamp, initBreaks, bmDelegate) {
                     dc.place(view, relatedElement, relation);
-
+                    self.bookmarkDelegate = bmDelegate;
                     var colRampWindow = $("#colRampWindow").kendoWindow({
                         width: "auto",//310px
                         height: self.newWindowHeight,
@@ -75,7 +72,7 @@
                     }).data("kendoWindow");
 
                     var helpButton = colRampWindow.wrapper.find(".k-i-help");
-                    helpButton.click(function () {
+                    helpButton.click(function (e) {
                         helpVM.openWindow(helpView);
                     });
 
@@ -83,19 +80,20 @@
                         dataTextField: "Name",
                         dataValueField: "Name",
                         dataSource: conf.ColorSchemes,
-                        change: self.schemeTypeSelected,
-                        value: initScheme
+                        change: self.schemeTypeSelected
                     }).data("kendoDropDownList");
+                    self.schemeTypeSelector.value(initScheme);
 
-                    tp.subscribe("SelectColorRamp", function () { self.openWindow(); });
+                    tp.subscribe("SelectColorRamp", function (event) { self.openWindow(); });
                     tp.subscribe("SetNumBreaks", self.setNumBreaks);
-                    tp.subscribe("NewMapSelected", self.setMapDefaults);
+                    tp.subscribe("NewMapThemeSelected", self.setMapDefaults);
+                    tp.subscribe("AdditionalMapInitialized", self.loadInitializedMap);
 
                     self.Current = { Ramp: initRamp, Breaks: initBreaks };
                     self.showRamps();
                     self.broadcastCurrentRamp();
                     self.broadcastRampBreakOptions();
-                }; // end init
+                } // end init
 
                 /**
                 Method for opening the window.
@@ -107,7 +105,7 @@
                     win.restore();
                     win.center();
                     win.open();
-                };
+                }
 
                 /**
                 Method for closing the window.
@@ -117,7 +115,7 @@
                 self.closeWindow = function () {
                     var win = $("#colRampWindow").data("kendoWindow");
                     win.close();
-                };
+                }
 
                 /**
                 Method to render the color ramps in the window based on the current selected scheme and number of breaks.
@@ -127,7 +125,7 @@
                 self.showRamps = function () {
                     dc.empty("colRampsList");
                     var schemeElements = [];
-                    var curr = self.schemeTypeSelector.dataItem();
+                    var curr = self.schemeTypeSelector.dataItem(1);
                     for (var num in curr.ClassBreakSets) {
                         if (num == parseInt(num)) {
                             schemeElements = curr.ClassBreakSets[num];
@@ -139,7 +137,7 @@
                     self.Current.Breaks = schemeElements.length;
                     for (var i = 0; i < curr.ColorRamps.length; i++) {
                         var schemeRamp = curr.ColorRamps[i].Colors; //color id
-                        // var rampColorsName = curr.ColorRamps[i].Name;   //color Name
+                        var rampColorsName = curr.ColorRamps[i].Name;   //color Name
                         var rampColors = [];
                         for (var j = 0; j < schemeElements.length; j++) {
                             var currCol = schemeRamp[schemeElements[j]];
@@ -159,7 +157,14 @@
                             change: self.colorPickerClicked
                         }).data("kendoColorPalette");
                     }
-                };
+                }
+
+                self.loadInitializedMap = function(ramp, numBreaks){
+                    self.Current = { Ramp: ramp, Breaks: numBreaks };
+                    self.showRamps();
+                    self.broadcastCurrentRamp();
+                    self.broadcastRampBreakOptions();
+                }
 
                 /**
                 Method to handle user selecting a color ramp.
@@ -172,12 +177,12 @@
                     var colorRamp = $("#" + element).data("kendoColorPalette");
                     colorRamp.value(null);
                     var rampIndex = parseInt(element.substring(7));
-                    var curr = self.schemeTypeSelector.dataItem();
+                    var curr = self.schemeTypeSelector.dataItem(0);
                     self.Current.Ramp = curr.ColorRamps[rampIndex].Name;
                     self.broadcastCurrentRamp();
                     self.broadcastRampBreakOptions();
                     self.closeWindow();
-                };
+                }
 
                 /**
                 Method for handling selection the the schemes dropdown.
@@ -185,9 +190,9 @@
                 @method schemeTypeSelected
                 @param {event} e - select event data
                 **/
-                self.schemeTypeSelected = function () {
+                self.schemeTypeSelected = function (e) {
                     self.showRamps();
-                };
+                }
 
                 /**
                 Method to set the number of breaks.
@@ -199,7 +204,7 @@
                     self.Current.Breaks = newNumBreaks;
                     self.showRamps();
                     self.broadcastCurrentRamp();
-                };
+                }
 
                 /**
                 Method to set default color ramp settings based on a newly selected map.
@@ -208,39 +213,41 @@
                 @param {thematicMap} newMap - an object containing configuration information for the selected map
                 **/
                 self.setMapDefaults = function (newMap) {
-                    self.schemeTypeSelector.select(function (dataItem) {
-                        return dataItem.Name === newMap.DefaultColorScheme;
-                    });
-                    self.schemeTypeSelected(null);
-                    self.Current.Ramp = newMap.DefaultColorRamp;
-                    self.broadcastCurrentRamp();
-                    self.broadcastRampBreakOptions();
-                };
+                    if (newMap && !mapModel.initializing) {
+                        self.schemeTypeSelector.select(function (dataItem) {
+                            return dataItem.Name === newMap.DefaultColorScheme;
+                        });
+                        self.schemeTypeSelected(null);
+                        self.Current.Ramp = newMap.DefaultColorRamp;
+                        self.broadcastCurrentRamp();
+                        self.broadcastRampBreakOptions();
+                    }
+                }
 
                 /**
                 Method for distributing the list of options for number of breaks for the current color scheme.
-
+				
                 @method broadcastRampBreaksOptions
                 **/
                 self.broadcastRampBreakOptions = function () {
                     var rampBreakOptions = [];
-                    var curr = self.schemeTypeSelector.dataItem();
+                    var curr = self.schemeTypeSelector.dataItem(0);
                     for (var num in curr.ClassBreakSets) {
                         if (num == parseInt(num)) {
                             rampBreakOptions.push(num);
                         }
                     }
                     tp.publish("ClassBreakOptions", rampBreakOptions);
-                };
+                }
 
                 /**
                 Method for broadcasting the currently selected color ramp.
-
+				
                 @method broadcastCurrentRamp
                 **/
                 self.broadcastCurrentRamp = function () {
                     var schemeElements = [];
-                    var curr = self.schemeTypeSelector.dataItem();
+                    var curr = self.schemeTypeSelector.dataItem(0);
                     for (var num in curr.ClassBreakSets) {
                         if (num == self.Current.Breaks) {
                             schemeElements = curr.ClassBreakSets[num];
@@ -268,11 +275,11 @@
                         var kenCol = "rgb(" + currCol.join() + ")";
                         rampColors.push(kenCol);
                     }
-                    tp.publish("NewColorRamp", rampColors);
-                };
+                    tp.publish("NewColorRamp", rampColors, self.Current);
+                }
             };
 
             return ColorRampVM;
         }
-    );
+    )
 } ());

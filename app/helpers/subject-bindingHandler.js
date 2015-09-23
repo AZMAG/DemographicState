@@ -16,6 +16,6 @@
                 },
                 counter: 0,
                 prefix: "querySubject"
-            };
+            }
         });
 } ());

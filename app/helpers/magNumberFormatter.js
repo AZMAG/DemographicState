@@ -8,7 +8,7 @@
     "use strict";
 
     define([
-        "dojo/number"
+        'dojo/number'
     ],
 
         function (number) {
@@ -35,7 +35,7 @@
                         return valueToFormat;
                     }
                     else {
-                        if(valueToFormat === 0) {
+                        if(valueToFormat == 0) {
                             return "0";
                         }
 
@@ -43,16 +43,16 @@
                         var decIndx = strNum.indexOf(".");
                         var fixedStrNum = valueToFormat.toFixed(1).toString();
 
-                        if(decIndx === -1) {
+                        if(decIndx == -1) {
                             return number.format(valueToFormat).toString();
                         }
-                        else if(decIndx === 0) {
+                        else if(decIndx == 0) {
                             return number.format(valueToFormat, {places: 1});
                         }
                         else {
                             var parts = fixedStrNum.split(".");
                             if(valueToFormat < 1 && valueToFormat > -1) {
-                                if(parts[1] === "0") {
+                                if(parts[1] == "0") {
                                     return "0";
                                 }
                                 else {
@@ -61,7 +61,7 @@
                             }
                             else {
                                 var wholeWithCommas = number.format(parts[0]);
-                                if(wholeWithCommas === 0) {
+                                if(wholeWithCommas == 0) {
                                     return "0";
                                 }
                                 else {
@@ -70,7 +70,7 @@
                             }
                         }
                     }
-                };
+                }
 
                 /**
                  * Add thousands commas to a number.
@@ -86,13 +86,13 @@
                         n = strNum.length % 3 || 3;
 
                     for(var i = 0; i < j; i += n) {
-                        if(i !== 0) {n = 3;}
+                        if(i != 0) {n = 3;}
                         parr.push(strNum.substr(i, n));
                         m -= 1;
                     }
 
-                    return parr.join(",");
-                };
+                    return parr.join(',');
+                }
             };
 
             return MagNumberFormatter;

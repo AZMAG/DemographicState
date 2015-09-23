@@ -6,37 +6,43 @@
  */
 
 define([
-    "app/models/map-model",
-    "app/vm/panel-vm",
-    "app/vm/help-vm",
-    "app/vm/helpLaunchbar-vm",
-    "app/vm/printLaunchbar-vm",
-    "app/vm/print-vm",
-    "app/vm/contactLaunchbar-vm",
-    "app/vm/contact-vm",
-    "app/vm/demographic-vm",
-    "app/vm/cbr-vm",
-    "app/vm/cbrlaunchbar-vm",
-    "app/vm/panelLaunchbar-vm",
-    "app/vm/interactiveTools-vm",
-    "app/vm/legendLaunchbar-vm",
-    "app/vm/legend-vm",
-    "app/vm/socialLaunchbar-vm",
-    "app/vm/social-vm",
-    "app/vm/alert1-vm",
-    "app/vm/alert2-vm",
-    "app/vm/legal-vm"
+    'app/models/map-model',
+    'app/vm/mapContainer-vm',
+    'app/vm/panel-vm',
+    'app/vm/help-vm',
+    'app/vm/helpLaunchbar-vm',
+    'app/vm/printLaunchbar-vm',
+    'app/vm/print-vm',
+	'app/vm/contactLaunchbar-vm',
+    'app/vm/contact-vm',
+    'app/vm/window-vm',
+    'app/vm/demographic-vm',
+    'app/vm/cbr-vm',
+    'app/vm/cbrlaunchbar-vm',
+    'app/vm/panelLaunchbar-vm',
+    'app/vm/interactiveTools-vm',
+    'app/vm/legendLaunchbar-vm',
+    'app/vm/legend-vm',
+    'app/vm/socialLaunchbar-vm',
+    'app/vm/social-vm',
+    'app/vm/alert1-vm',
+    'app/vm/alert2-vm',
+	'app/vm/legal-vm',
+	'app/vm/search-vm',
+	'app/vm/subscribe-vm'
 ],
 
     function (
         mapModel,
+        mapContainerVM,
         panelVM,
         helpVM,
         helpLaunchVM,
         printLaunchVM,
         printVM,
-        contactLaunchVM,
+		contactLaunchVM,
         contactVM,
+        windowVM,
         demographicVM,
         cbrVM,
         cbrlBarVM,
@@ -48,13 +54,25 @@ define([
         socialVM,
         alert1VM,
         alert2VM,
-        legalVM
+		legalVM,
+		searchVM,
+		subscribeVM
     ) {
+        mapModel.initialize();
+
+        mapContainerVM.init();
+
         panelVM.init();
         kendo.bind($("#reportLauncher"), panelVM);
 
         helpVM.init();
         kendo.bind($("#helpWindow"), helpVM);
+		
+		subscribeVM.init();
+        kendo.bind($("#subscribeWindow"), subscribeVM);
+
+        windowVM.init();
+        kendo.bind($("#tempWindow"), windowVM);
 
         demographicVM.init();
         kendo.bind($("#demographicView"), demographicVM);
@@ -73,14 +91,17 @@ define([
 
         alert2VM.init();
         kendo.bind($("#alert2Window"), alert2VM);
-
-        legalVM.init();
+		
+		legalVM.init();
         kendo.bind($("legalWindow"), legalVM);
-
-        contactVM.init();
+		
+		contactVM.init();
         kendo.bind($("contactsWindowDiv"), contactVM);
 
-        cbrVM.init("display", "after", mapModel.mapInstance);
+        cbrVM.init("display", "after");
+		
+		searchVM.init("titlebar", "after");
+        kendo.bind($("#searchView"), searchVM);
 
         cbrlBarVM.init("titlebar", "after");
         kendo.bind($("#cbrlaunchbar"), cbrlBarVM);
@@ -99,11 +120,12 @@ define([
 
         helpLaunchVM.init("titlebar", "after");
         kendo.bind($("#helplaunchbar"), helpLaunchVM);
-
-        contactLaunchVM.init("titlebar", "after");
+		
+		contactLaunchVM.init("titlebar", "after");
         kendo.bind($("#contactLaunchbar"), contactLaunchVM);
 
         interactiveToolsVM.init();
         kendo.bind($("#pnlInteractiveDiv"), interactiveToolsVM);
+
     }
     );

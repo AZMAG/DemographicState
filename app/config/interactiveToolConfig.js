@@ -1,4 +1,4 @@
-(function () {
+﻿(function () {
 
     "use strict";
 
@@ -42,7 +42,7 @@
                     color: [0, 0, 0, 0],
                     outline: {
                         type: "esriSLS",
-                        style: "esriSLSSolid",
+                        style: "esriSLSDash",
                         color: [255, 0, 255, 191],
                         width: 3
                     }

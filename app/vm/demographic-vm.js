@@ -33,10 +33,9 @@
             "esri/symbols/SimpleLineSymbol",
             "esri/symbols/SimpleFillSymbol",
             "dojo/_base/Color",
-
-            "vendor/kendo/web/js/jquery.min",
-            "vendor/kendo/web/js/kendo.web.min",
-            "vendor/kendo/dataviz/js/kendo.dataviz.min"
+			
+			"https://code.jquery.com/jquery-1.9.1.min.js",
+            "http://kendo.cdn.telerik.com/2015.2.624/js/kendo.all.min.js"
         ],
         function(dc, dom, tp, da, on, view, selFeatsView, chartHelpView, summaryHelpView,
             selFeatHelpView, helpVM, alertView1, alertView2, alert1VM, alert2VM, layerDelegate, printMapDelegate,
@@ -231,7 +230,7 @@
                  */
                 self.init = function() {
                     // Place the HTML from the view into the main application after the map div.
-                    dc.place(view, "map", "after");
+                    dc.place(view, "mapContainer", "after");
 
                     // Create the Kendo Window
                     var chartWindow = $("#demographicView").kendoWindow({
@@ -243,7 +242,13 @@
                         visible: false,
                         resizable: false,
                         close: self.windowClosed
-                    }).data("kendoWindow").center();
+                    }).data("kendoWindow");
+
+                    // Initial window placement
+                    $("#demographicView").closest(".k-window").css({
+                        top: 70,
+                        left: (self.winWidth / 2) - 300
+                    });
 
                     // Display legend checkbox click event
                     $("#displayLegend").bind("click", function() {
@@ -313,6 +318,16 @@
                             }
                         }
                     }
+					
+					//remove combobox on closing.
+					var compareComboBoxInput = $("#demCompareComboBox");
+                    var compareComboBoxObj = compareComboBoxInput.data("kendoComboBox");
+					
+					if(compareComboBoxObj)
+					{
+						compareComboBoxObj.destroy();
+						compareComboBoxObj.wrapper.remove();
+					}					
                 };
 
                 /**
@@ -346,19 +361,24 @@
                             break;
                     }
 
-                    // console.log(sumName);
                     // Get the window and open it.
                     var win = $("#demographicView").data("kendoWindow");
                     win.title(self.windowTitle + communityName);
                     if (!windowIsOpen) {
                         win.restore();
-                        win.center();
+                        // win.center();
                         redrawChart = true;
                     }
                     win.restore();
-                    win.center();
+                    // win.center();
                     win.open();
                     windowIsOpen = true;
+
+                    // Initial window placement
+                    $("#demographicView").closest(".k-window").css({
+                        top: 70,
+                        left: (self.winWidth / 2) - 300
+                    });
 
                     // Set the source
                     $("#demSource").text("Source: " + self.reportConfigItem.source);
@@ -423,12 +443,9 @@
 
                     // test for results. vw
                     if (num === 0) {
-                        // close reports window
-                        $("#demographicView").data("kendoWindow").close();
                         // Get the alert window and open it. vw
                         alert2VM.openWindow(alertView2);
-                        // hide loading gif when window opens. vw
-                        esri.hide(dojo.byId("loading"));
+                        esri.hide(dom.byId("loading"));
                         return;
                     }
 
@@ -449,7 +466,7 @@
                     self.hasSelectedFeatures = true;
 
                     // Add the graphics
-                    mapModel.addGraphics(self.selectedFeatures);
+                    mapModel.addGraphics(self.selectedFeatures, undefined, true);
 
                     // Perform actions similar to the openWindow method
                     var communityName = "Selected Block Groups";
@@ -471,7 +488,10 @@
                     windowIsOpen = true;
 
                     // hide loading gif when window opens. vw
-                    esri.hide(dojo.byId("loading"));
+                    esri.hide(dom.byId("loading"));
+
+                    // enables the infoWindow after interactive summary selection is done.
+                    mapModel.showInfoWindow();
 
                     // Set the source
                     $("#demSource").text("Source: " + self.reportConfigItem.source);
@@ -598,13 +618,18 @@
                             // Highlight the graphic
                             var objectId = thisObj[0].childNodes[0].innerHTML;
                             var objID = Number(objectId);
+                            // console.log(mapModel.getGraphics().graphics);
                             $.each(mapModel.getGraphics().graphics, function(index, graphic) {
-                                if (graphic.attributes.OBJECTID === objID) {
-                                    var color = "cyan";
-                                    if (thisObj.hasClass("k-state-hover")) {
-                                        color = "yellow";
+                                if (graphic.attributes === undefined) {
+                                    // do nothing!!
+                                } else {
+                                    if (graphic.attributes.OBJECTID === objID) {
+                                        var color = "cyan";
+                                        if (thisObj.hasClass("k-state-hover")) {
+                                            color = "yellow";
+                                        }
+                                        mapModel.setSymbol(graphic, color);
                                     }
-                                    mapModel.setSymbol(graphic, color);
                                 }
                             });
                         }
@@ -635,6 +660,7 @@
                  * @method getData
                  */
                 self.getData = function() {
+				
                     var url = self.reportConfigItem.restUrl;
                     var whereClause = self.reportConfigItem.summaryField + " = '" + self.communityName + "'";
 
@@ -665,10 +691,10 @@
 
                     // Clear the current graphics
                     mapModel.clearGraphics();
-
+					
                     // Add the new graphics. vw
                     if (features[0].geometry !== null) {
-                        mapModel.addGraphics(features);
+                        mapModel.addGraphics(features, undefined, true);
 
                         // Zoom to selected graphics. vw
                         var zoomExtent = graphicsUtils.graphicsExtent(features);
@@ -739,7 +765,7 @@
 
                             // checks for "0" in data to return null. vw added?
                             if (field.percentOfField === "") {
-                                var percentOf = Number(sumAttributes[field.percentOfField]);
+                                // var percentOf = Number(sumAttributes[field.percentOfField]);
                                 aggValues[field.fieldName].percentValueFormatted = "-";
                             }
 
@@ -829,11 +855,11 @@
                     // Create the summary grid
                     var kendoGrid = $("#demDataGrid").data("kendoGrid");
                     if (kendoGrid !== null) {
-                        kendoGrid.destroy();
                         kendoGrid.element.remove();
+						kendoGrid.destroy();
                     }
 
-                    var useCompare = dojo.byId("demUseComp").checked;
+                    var useCompare = dom.byId("demUseComp").checked;
                     if (useCompare) {
                         self.createKendoGridWithCompare();
                     } else {
@@ -884,30 +910,30 @@
                         var kendoGrid = $("#demDataGrid").data("kendoGrid");
 
                         if ($(this).is(":checked")) {
-                            compareComboBoxObj.enable(true);
+                            //compareComboBoxObj.enable(true);
 
                             var selectedIndex = compareComboBoxObj.select();
                             if (selectedIndex > 0) {
                                 // Update the Grid
 
                                 if (kendoGrid !== undefined) {
-                                    kendoGrid.destroy();
-                                    kendoGrid.element.remove();
+									kendoGrid.element.remove();
+                                    kendoGrid.destroy();                                    
                                 }
                                 self.createKendoGridWithCompare();
                             }
                         } else {
-                            compareComboBoxObj.enable(false);
+                            //compareComboBoxObj.enable(false);
                             self.compareFeature = null;
 
                             // this block removes from the dom vw
-                            // compareComboBoxObj.destroy();
-                            // compareComboBoxObj.wrapper.remove();
+                             compareComboBoxObj.destroy();
+                             compareComboBoxObj.wrapper.remove();
 
                             // Update the Grid
                             if (kendoGrid !== undefined) {
+								kendoGrid.element.remove();
                                 kendoGrid.destroy();
-                                kendoGrid.element.remove();
                             }
                             self.createKendoGrid();
                         }
@@ -958,12 +984,12 @@
 
                     var compareComboBoxInput = $("#demCompareComboBox");
                     var compareComboBoxObj = compareComboBoxInput.data("kendoComboBox");
-
-                    if (self.commChanged && compareComboBoxObj !== undefined) {
-                        var kendoComboBox = $("#demCompareComboBox").data("kendoComboBox");
-                        kendoComboBox.setDataSource(nameArray);
-                        kendoComboBox.select(0);
-                    } else {
+					
+					if(compareComboBoxObj)
+					{
+						compareComboBoxObj.destroy();
+						compareComboBoxObj.wrapper.remove();
+					}
                         dc.create("input", {
                             id: "demCompareComboBox"
                         }, "demUseCompLabel", "after");
@@ -977,7 +1003,7 @@
                             },
                             select: self.compareNameSelected
                         });
-                    }
+                    //}
                 };
 
                 /**
@@ -987,6 +1013,8 @@
                  * @param e - event arguments
                  */
                 self.compareNameSelected = function(e) {
+				if (e.item.text() !== ' Compare with...')
+				{
                     if (e.item.index() > 0) {
                         var selectedName = this.dataItem(e.item.index());
                         self.compareToName = selectedName.Name;
@@ -1006,6 +1034,7 @@
                         }
                         self.createKendoGrid();
                     }
+				}
                 };
 
                 /**
@@ -1033,8 +1062,8 @@
                     // Update the Grid
                     var kendoGrid = $("#demDataGrid").data("kendoGrid");
                     if (kendoGrid !== undefined) {
+						kendoGrid.element.remove();
                         kendoGrid.destroy();
-                        kendoGrid.element.remove();
                     }
                     self.createKendoGridWithCompare();
                 };
@@ -1064,7 +1093,7 @@
 
                             // checks for "0" in data to return null. vw added?
                             if (item.derivedPercentOfField === "") {
-                                var percentOf = Number(self.compareFeature.attributes[item.derivedPercentOfField]);
+                                // var percentOf = Number(self.compareFeature.attributes[item.derivedPercentOfField]);
                                 item.comparePercentValueFormatted = "-";
                             }
 
@@ -1227,6 +1256,7 @@
                     var kendoChart = $("#demChartArea").data("kendoChart");
                     if (kendoChart !== null) {
                         kendoChart.destroy();
+						
                         kendoChart.element.remove();
                     }
                     self.createChart();
@@ -1249,6 +1279,7 @@
                         var kendoChart = $("#demChartArea").data("kendoChart");
                         if (kendoChart !== null) {
                             kendoChart.destroy();
+							
                             kendoChart.element.remove();
                         }
                         self.createChart();
@@ -1290,6 +1321,7 @@
                             // offsetY: -80,
                             margin: {
                                 left: 0,
+								right:10
                             },
                             labels: {
                                 color: "white"
@@ -1325,13 +1357,17 @@
                             }
                         },
                         plotArea: {
-                            margin: 5
+                            margin: {
+                                right: 30,
+                                
+                            }
                         },
                         chartArea: {
                             background: "#4D4D4D",
                             margin: {
                                 left: 15,
-                                top: 10
+                                top: 5,
+								right: 15
                             }
                         },
                         categoryAxis: {
@@ -1409,8 +1445,7 @@
                         data: JSON.stringify({
                             passcode: appConfig.webServicePasscode,
                             type: type,
-                            objectids: objectIds,
-                            ViewerType: "STATE_COGS"
+                            objectids: objectIds
                         }),
                         contentType: "application/json; charset=utf-8",
                         error: function(jqXHR, status) {
@@ -1437,19 +1472,24 @@
                 self.exportSummary = function() {
                     var kendoDropDownList = $("#demExportSummary").data("kendoDropDownList");
                     var type = kendoDropDownList.value();
-                    var useCompare = dojo.byId("demUseComp").checked;
+                    var useCompare = dom.byId("demUseComp").checked;
 
                     var communities = [self.communityName];
                     if (useCompare) {
                         communities.push(self.compareToName);
                     }
-
+					console.log("test");
                     // Execute call to service
                     var jqXHR = $.ajax(demographicConfig.exportSummaryGridUrl, {
+						
                         type: "POST",
+						//datatype: "jsonp",
+						//crossDomain:true,
+						//headers: {"Access-Control-Allow-Origin": "*"},
+						//beforeSend: function(xhr){xhr.setRequestHeader('Access-Control-Allow-Origin', 'http:\\geo.azmag.gov');},
+						
                         data: JSON.stringify({
                             passcode: appConfig.webServicePasscode,
-                            type: type,
                             source: self.reportConfigItem.source,
                             communities: communities,
                             aggValues: self.aggValuesArray
@@ -1470,7 +1510,91 @@
                         }
                     });
                 };
+				
+				self.exportPDFReport = function() {
+					
+					var testString = "";
+					var parameterString = "";
+					if(self.compareFeature)
+					{
+						if(self.communityName === "Selected Block Groups")
+						{
+							var tractIdArray = "";
+							
+							for(var i = 0; i < self.selectedFeatures.length; i++) {
+									tractIdArray += self.selectedFeatures[i].attributes.OBJECTID + ",";
+								}
+							parameterString = "Interactive";
+							localStorage.city1 = tractIdArray.substring(0, tractIdArray.length - 1);
+						}	
+						else{
+							parameterString = self.communityName;
+						}
 
+						//document.domain = 'mag1113';
+						
+						self.reportURL = encodeURI(demographicConfig.exportPDFCompareReportUrl + "?city1=" + parameterString + "&?city2=" + self.compareToName);
+						newWindow = window.open(self.reportURL, "_new");						
+					}
+					else{
+						if ( self.communityName.indexOf("County") > -1)
+						{
+							self.reportURL = encodeURI(demographicConfig.exportPDFReportUrl + "?county=" + self.communityName);
+							newWindow = window.open(self.reportURL, "_new");
+						}
+						else if ( self.communityName.indexOf("Legislative") > -1)
+						{
+							self.reportURL = encodeURI(demographicConfig.exportPDFReportUrl + "?legislative=" + self.communityName.slice(-2));
+							newWindow = window.open(self.reportURL, "_new");
+						}
+						else if ( self.communityName.indexOf("Congressional") > -1)
+						{
+							self.reportURL = encodeURI(demographicConfig.exportPDFReportUrl + "?congressional=" + self.communityName.slice(-2));
+							newWindow = window.open(self.reportURL, "_new");
+						}
+						else if ( self.communityName.indexOf("Supervisor") > -1)
+						{
+							self.reportURL = encodeURI(demographicConfig.exportPDFReportUrl + "?supervisor=" + self.communityName.slice(-2));
+							newWindow = window.open(self.reportURL, "_new");
+						}
+						else if ( self.communityName.indexOf("District") > -1)
+						{
+							self.reportURL = encodeURI(demographicConfig.exportPDFReportUrl + "?council=" + self.communityName);
+							newWindow = window.open(self.reportURL, "_new");
+						}
+						else if ( self.communityName === "Selected Block Groups")
+						{
+							var tractIdArray = "";
+							
+							for(var i = 0; i < self.selectedFeatures.length; i++) {
+								if (i != self.selectedFeatures.length & self.selectedFeatures.length != 1)
+								{
+									tractIdArray += self.selectedFeatures[i].attributes.OBJECTID + ",";
+								}
+								else
+								{
+									tractIdArray += self.selectedFeatures[i].attributes.OBJECTID;
+								}
+							}
+							
+							//document.domain = 'mag1113';
+							localStorage.TractID = tractIdArray;
+							self.reportURL = encodeURI(demographicConfig.exportPDFReportUrl + "?interactive");
+							newWindow = window.open(self.reportURL, "_new");
+						}
+						else
+						{
+							self.reportURL = encodeURI(demographicConfig.exportPDFReportUrl + "?city=" + self.communityName);
+							newWindow = window.open(self.reportURL, "_new");
+						}
+					}
+
+                    var newWindow = "";
+                    
+                    var newWindow = window.open(self.reportURL, "_new");
+
+                };
+				
                 /**
                  * Initiate report export by printing the existing map.
                  * The rest of the export will be handled in the callback.
@@ -1525,7 +1649,7 @@
                  */
                 self.printMapHandler = function(result) {
 
-                    var useCompare = dojo.byId("demUseComp").checked;
+                    var useCompare = dom.byId("demUseComp").checked;
 
                     // Set up the communities
                     var communities = [self.communityName];
@@ -1552,8 +1676,7 @@
                             communities: communities,
                             aggValues: self.aggValuesArray,
                             chartCategories: chartCategories,
-                            charts: svgCharts,
-                            ViewerType: "STATE_COGS"
+                            charts: svgCharts
                         }),
                         contentType: "application/json; charset=utf-8",
                         error: function(jqXHR, status) {

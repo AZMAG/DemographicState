@@ -27,7 +27,7 @@
 				<span class="reportExportSpan">
 					<div id="exportReportRequest">
 						<span>Export Report to PDF:</span>
-						<button id="printSummary" type="button" data-bind="click: exportReport">
+						<button id="printSummary" type="button" data-bind="click: exportPDFReport">
 							<img src="app/resources/img/i_pdf.png" class="exportButtonImage">
 						</button>
 					</div>
@@ -53,7 +53,7 @@
 
     <script type="text/x-kendo-tmpl" id="demChartListTemplate">
         <div class="demChartCategoryItem">
-            <button>#:chartCategory#</button>
+            <div class="k-button button">#:chartCategory#</div>
         </div>
     </script>
 </div>

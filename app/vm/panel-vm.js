@@ -23,8 +23,8 @@
             "app/vm/interactiveTools-vm",
             "app/vm/queryBuilderTwo-vm",
 
-            "vendor/kendo/web/js/jquery.min",
-            "vendor/kendo/web/js/kendo.web.min"
+            "https://code.jquery.com/jquery-1.9.1.min.js",
+			"http://kendo.cdn.telerik.com/2015.2.624/js/kendo.all.min.js"
         ],
         function(dj, dc, tp, dom, mapModel, helpView, helpVM, view, layerDelegate, demographicVM, demographicConfig, interactiveToolsVM, qbVM) {
 
@@ -78,7 +78,7 @@
                  * @method init
                  */
                 self.init = function() {
-                    dc.place(view, "map", "after");
+                    dc.place(view, "mapContainer", "after");
 
                     tp.subscribe("panelStateO", function() {
                         self.openWindow();

@@ -49,7 +49,7 @@
                     params.template = template;
 
                     var pt = new esri.tasks.PrintTask(url);
-                    pt.async = true; // added by scott
+		              pt.async = true; // added by scott
                     var result = pt.execute(params, callback, errback);
                 }
             };

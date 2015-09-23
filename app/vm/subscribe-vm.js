@@ -1,7 +1,7 @@
 /**
- * Generic help window for launching content-specific help.
+ * Generic subscribe window for launching content-specific subscribe.
  *
- * @class help-vm
+ * @class subscribe-vm
  */
 
 (function() {
@@ -11,15 +11,11 @@
     define([
             "dojo/dom-construct",
             "dojo/dom",
-            "dojo/text!app/views/help-view.html",
-            "dojo/text!app/views/legal-view.html",
-            "app/vm/legal-vm",
-			"dojo/text!app/views/subscribe-view.html",
-			"app/vm/subscribe-vm"
+            "dojo/text!app/views/subscribe-view.html",
         ],
-        function(dc, dom, view, legalView, legalVM, subscribeView, subscribeVM) {
+        function(dc, dom, view) {
 
-            var HelpVM = new function() {
+            var SubscribeVM = new function() {
 
                 /**
                  * Store reference to module this object.
@@ -35,26 +31,25 @@
                  * @property windowTitle
                  * @type {string}
                  */
-                self.windowTitle = "Help";
+                self.windowTitle = "Subscribe";
 
                 self.winWidth = document.documentElement.clientWidth;
                 self.winHeight = document.documentElement.clientHeight;
-                //console.log("Height: " + self.winHeight + " & " + "Width: " + self.winWidth);
 
                 self.newWindowWidth = self.winWidth;
 
                 if (self.winWidth <= 668) {
-                    self.newWindowWidth = "480px";
-                    self.newWindowHeight = "325px";
+                    self.newWindowWidth = "280px";
+                    self.newWindowHeight = "125px";
                 } else if (self.winWidth <= 800) {
-                    self.newWindowWidth = "500px";
-                    self.newWindowHeight = "400px";
+                    self.newWindowWidth = "300px";
+                    self.newWindowHeight = "200px";
                 } else if (self.winWidth <= 992) {
-                    self.newWindowWidth = "550px";
-                    self.newWindowHeight = "400px";
+                    self.newWindowWidth = "350px";
+                    self.newWindowHeight = "200px";
                 } else {
-                    self.newWindowWidth = "550px";
-                    self.newWindowHeight = "400px";
+                    self.newWindowWidth = "350px";
+                    self.newWindowHeight = "200px";
                 }
 
                 /**
@@ -65,16 +60,17 @@
                 self.init = function() {
                     // Place the HTML from the view into the main application after the map div.
                     dc.place(view, "mapContainer", "after");
-
-                    $("#helpWindow").kendoWindow({
+					
+					$("#subscribeWindow").kendoWindow({
                         width: self.newWindowWidth,
                         height: self.newWindowHeight,
-                        title: "",
+                        title: self.windowTitle,
                         actions: ["Close"],
                         modal: true,
-                        visible: false
-                    });
-
+                        visible: false,
+                        resizable: false
+                    }).data("kendoWindow");
+					
                 }; //end init
                 //****************************************************************
                 /**
@@ -84,37 +80,21 @@
                  * @param {string} content - the content to display in the window.
                  */
                 self.openWindow = function(content) {
-                    var win = $("#helpWindow").data("kendoWindow");
+                    var win = $("#subscribeWindow").data("kendoWindow");
                     win.content(content);
                     win.center();
                     win.open();
-
-                    // added for tabs in main window help. vw
-                    $("#tabstrip").kendoTabStrip({
-                        animation: {
-                            open: {
-                                effects: "fadeIn"
-                            }
-                        }
-                    });
-
-                    // adds version number and date to main help menu
-                    // configured in main config file
-                    $("#version").html(appConfig.Version);
 					
-					$("#EmailList").bind("click", function() {
-                        subscribeVM.openWindow(subscribeView);
+					$("#btnSubscribe").bind("click", function() {
+						win.close();
                     });
-
-                    $("#legal").bind("click", function() {
-                        legalVM.openLegalwin(legalView);
-                    });
-
                 };
+				
+				
 
-            }; // end HelpVM
+            }; // end SubscribeVM
 
-            return HelpVM;
+            return SubscribeVM;
         } // end function
     );
 

@@ -8,8 +8,8 @@
     "use strict";
 
     define([
-        "dojo/dom-construct",
-        "dojo/topic"
+        'dojo/dom-construct',
+        'dojo/topic'
     ],
         function (dc, tp) {
 
@@ -24,14 +24,15 @@
                 };//end init
 
                 self.openPrint = function () {
-                    if ($("#printWindow").is(":hidden")) {
-                        tp.publish("printStateO", { name: "Open" });
+                    if ($("#printWindow").is(':hidden')) {
+                        tp.publish('printStateO', { name: 'Open' });
                     } else {
-                        tp.publish("printStateC", { name: "Close"});
+                        tp.publish('printStateC', { name: 'Close' });
                     }
+                    return false;
                 };// end openPrint
 
-        };//end
+            };//end
 
             return launchPrint;
         }

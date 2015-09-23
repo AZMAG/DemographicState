@@ -9,8 +9,8 @@
     "use strict";
 
     define([
-        "dojo/dom-construct",
-        "dojo/topic"
+        'dojo/dom-construct',
+        'dojo/topic'
     ],
         function (dc, tp) {
 
@@ -25,16 +25,17 @@
                 };//end init
 
                 self.openLegend = function () {
-                    if ($("#legendWindowDiv").is(":hidden")) {
-                        tp.publish("legendStateO", { name: "Open" });
+                    if ($("#legendWindowDiv").is(':hidden')) {
+                        tp.publish('legendStateO', { name: 'Open' });
                     } else {
-                        tp.publish("legendStateC", { name: "Close"});
+                        tp.publish('legendStateC', { name: 'Close'});
                     }
+                    return false;
                 };//end openLegend
 
             };//end
 
             return launchBar;
         }
-    );
+    )
 } ());

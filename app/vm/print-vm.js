@@ -8,21 +8,21 @@
     "use strict";
 
     define([
-        "dojo",
-        "dojo/dom-construct",
-        "dojo/topic",
-        "esri/tasks/PrintTask",
-        "esri/tasks/PrintTemplate",
-        "esri/tasks/PrintParameters",
-        "esri/request",
-        "esri/config",
-        "dojo/_base/array",
-        "dojo/text!app/views/printHelp-view.html",
-        "app/vm/help-vm",
-        "dojo/text!app/views/print-view.html",
-        "app/vm/legend-vm",
-        "app/models/map-model",
-        "app/vm/cbr-vm"
+        'dojo',
+        'dojo/dom-construct',
+        'dojo/topic',
+        'esri/tasks/PrintTask',
+        'esri/tasks/PrintTemplate',
+        'esri/tasks/PrintParameters',
+        'esri/request',
+        'esri/config',
+        'dojo/_base/array',
+        'dojo/text!app/views/printHelp-view.html',
+        'app/vm/help-vm',
+        'dojo/text!app/views/print-view.html',
+        'app/vm/legend-vm',
+        'app/models/map-model',
+        'app/vm/cbr-vm'
     ],
 
         function (dj, dc, tp, PrintTask, PrintTemplate, PrintParameters, esriRequest, esriConfig, arrayUtils, helpView, helpVM, view, legendVM, mapModel, cbrVm) {
@@ -34,18 +34,19 @@
 
                 self.windowTitle = "Print Map";
                 self.printUrl = appConfig.exportWebMapUrl;
-                esriConfig.defaults.io.proxyUrl = "../proxy.ashx";
+                //esriConfig.defaults.io.proxyUrl = "../proxy.ashx";
 
                 // used for reporting export progress
-                self.progressInterval = null;
-                self.progressDots = null;
-                self.progressText = null;
+                self.progressInterval;
+                self.progressDots;
+                self.progressText;
 
                 self.init = function (relatedElement, relation, map) {
-                    dc.place(view, "map", "after");
+                    //dc.place(view, "map", "after");
+                    dc.place(view, "mapContainer", "after");
 
-                    tp.subscribe("printStateO", function () { self.openWindow(); });
-                    tp.subscribe("printStateC", function () { self.closeWindow(); });
+                    tp.subscribe("printStateO", function (event) { self.openWindow(); });
+                    tp.subscribe("printStateC", function (event) { self.closeWindow(); });
 
                     var printWindow = $("#printWindow").kendoWindow({
                         width: "400px",
@@ -58,7 +59,7 @@
                     }).data("kendoWindow");
 
                     var helpButton = printWindow.wrapper.find(".k-i-help");
-                    helpButton.click(function () {
+                    helpButton.click(function (e) {
                         helpVM.openWindow(helpView);
                     });
 
@@ -86,8 +87,8 @@
                 self.openWindow = function () {
                     // set the title to the currently selected map
                     var thematicMap = cbrVm.toc.dataItem(cbrVm.toc.select());
-                    $("#mapTitle").val(thematicMap.Name);
-
+					$("#mapTitle").val(thematicMap.Name);
+					
                     // show the window
                     var win = $("#printWindow").data("kendoWindow");
                     win.restore();
@@ -117,13 +118,13 @@
                     mapOnlyIndex = arrayUtils.indexOf(templateNames, "MAP_ONLY");
                     templateNames.splice(mapOnlyIndex, 1);
                     $("#scottMapLayouts").kendoDropDownList({ dataSource: templateNames }).data("kendoDropDownList");
-                };
+                }
 
                 // i guess this is a generic error handler?
                 self.handleError = function (err) {
-                    // console.log("Something broke: ", err);
-                    var hi = 1;
-                };
+                  // console.log("Something broke: ", err);
+				  var hi = 1;
+                }
 
 				// handles the print execution
 				self.executePrintTask = function(){
@@ -177,7 +178,7 @@
 					$("#executeMapPrint").hide();
 
 					//$("#mapPrintProgress").html("<br><br><p>Printing...</p>");
-				};
+				}
 
 				// handler when print task executes successively
 				self.printComplete = function(result){
@@ -185,14 +186,14 @@
 					$("#mapPrintProgress").html("<br><a class='link' target='_blank' href='" + result.url + "'>Map export complete, click here to view</a>");
 					$("#executeMapPrint").show();
 
-				};
+				}
 
 				// handler when print task returns an error
 				self.printFailed = function(e){
 					clearInterval(self.progressInterval);
 					$("#executeMapPrint").show();
 					$("#mapPrintProgress").html("<br><p>problem with print!, code:" + e.code + " message: " + e.message+ "</p>");
-				};
+				}
 
 				// used to indicate progress
 				self.showProgressWithDots = function(){
@@ -206,7 +207,7 @@
 						self.progressDots = 0;
 					}
 					$("#mapPrintProgress").html("<br><p>" + self.progressText + "</p>");
-				};
+				}
 
 
 			};//end printVM
@@ -214,7 +215,7 @@
 		return printVM;
 
       }//end function
-    );
+    )
 } ());
 
 

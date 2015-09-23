@@ -25,7 +25,7 @@
                  self.winWidth = document.documentElement.clientWidth;
 
                 self.init = function () {
-                    dc.place(view, "map", "after");
+                    dc.place(view, "mapContainer", "after");
 
                     tp.subscribe("contStateO", function () { self.openWindow(); });
                     tp.subscribe("contStateC", function () { self.closeWindow(); });

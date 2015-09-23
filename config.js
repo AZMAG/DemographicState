@@ -197,5 +197,10 @@ var appConfig = new function() {
     //from colorbrewer 2.0 qualitative HEX Set3
     //this.seriesColors = ["#8DD3C7", "#FFFFB3", "#BEBADA", "#FB8072", "#80B1D3", "#FDB462", "#B3DE69", "#FCCDE5", "#D9D9D9", "#BC80BD", "#CCEBC5", "#FFED6F"];
 
+	this.URLMinimizer = {
+	
+		login: "gisikreiter",
+		apiKey: "R_72ee4cf61d0983a005349f69d707c328"
+	};
 
 }; //End Config

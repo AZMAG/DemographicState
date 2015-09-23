@@ -11,20 +11,17 @@ var queryCountGlobal;
 
     define([
         "app/models/map-model",
-        "app/helpers/magNumberFormatter",
+        'app/helpers/magNumberFormatter',
+        'esri/tasks/GeometryService',
+        'esri/tasks/BufferParameters',
+        'app/config/interactiveToolConfig',
+        'esri/graphic',
         "esri/tasks/query",
         "esri/tasks/QueryTask",
-        "esri/tasks/identify",
-        "esri/tasks/IdentifyParameters",
+        "esri/tasks/identify"
+    ],
 
-        "esri/graphic",
-        "esri/tasks/GeometryService",
-        "esri/tasks/BufferParameters",
-        "app/config/interactiveToolConfig"
-
-        ],
-
-        function (mapModel, magNumberFormatter, Query, QueryTask, IdentifyTask, IdentifyParameters, Graphic, GeometryService, BufferParameters, interactiveToolConfig) {
+        function (mapModel, magNumberFormatter, GeometryService, BufferParameters, interactiveToolConfig, Graphic) {
 
             var LayerDelegate = {
 
@@ -50,21 +47,20 @@ var queryCountGlobal;
                     });
                     request.then(callback, errback);
                 },
-                 /**
-                 * Submit query to REST endpoint and send the response back to the callback defined in the parameters.
-                 *
-                 * @method query
-                 * @param {string} url - map service REST URL.
-                 * @param {string} callback - callback method for results.
-                 * @param {string} errback - callback method for errors.
-                 * @param {string} geometry - [OPTIONAL] geometry used for spatial query.
-                 * @param {string} where - [OPTIONAL] where clause applied to query.
-                 * @param {boolean} returnGeometry - [OPTIONAL] whether or not to return the geometry of the results.
-                 * @param {string[]} outFields - [OPTIONAL] array of fields to return.
-                 * @param {string[]} orderByFields - [OPTIONAL] array of fields to order the results by.
-                 **/
+                /**
+                * Submit query to REST endpoint and send the response back to the callback defined in the parameters.
+                *
+                * @method query
+                * @param {string} url - map service REST URL.
+                * @param {string} callback - callback method for results.
+                * @param {string} errback - callback method for errors.
+                * @param {string} geometry - [OPTIONAL] geometry used for spatial query.
+                * @param {string} where - [OPTIONAL] where clause applied to query.
+                * @param {boolean} returnGeometry - [OPTIONAL] whether or not to return the geometry of the results.
+                * @param {string[]} outFields - [OPTIONAL] array of fields to return.
+                * @param {string[]} orderByFields - [OPTIONAL] array of fields to order the results by.
+                **/
                 query: function (url, callback, errback, geometry, where, returnGeometry, outFields, orderByFields) {
-
                     //Setup default values
                     outFields = (typeof outFields === "undefined") ? ["*"] : outFields;
                     where = (typeof where === "undefined") ? "1=1" : where;
@@ -73,13 +69,10 @@ var queryCountGlobal;
                     orderByFields = (typeof orderByFields === "undefined") ? [] : orderByFields;
 
                     //Create new query
-                    if (url.indexOf("?") === -1) {
+                    if (url.indexOf("?") == -1)
                         url += "?r=" + Math.random();
-                    }
                     else
-                    {
                         url += "&r=" + Math.random();
-                    }
 
                     var qt = new esri.tasks.QueryTask(url);
                     var query = new esri.tasks.Query();
@@ -90,16 +83,15 @@ var queryCountGlobal;
                     query.orderByFields = orderByFields;
                     query.returnCountOnly = false;
                     query.returnIdsOnly = false;
-                    query.maxAllowableOffset = 0.1;
+                    query.maxAllowableOffset = .1;
 
                     // added to count features. vw
-                    qt.executeForCount(query, function(count){
+                    qt.executeForCount(query, function (count) {
                         queryCountGlobal = count;
                     });
 
                     //Execute query and return results to callback function
                     qt.execute(query, callback, errback);
-
                 },
 
                 // added to verify query without running vw
@@ -126,12 +118,10 @@ var queryCountGlobal;
                     orderByFields = (typeof orderByFields === "undefined") ? [] : orderByFields;
 
                     //Create new query
-                    if (url.indexOf("?") === -1) {
-                         url += "?r=" + Math.random();
-                    }
-                    else {
+                    if (url.indexOf("?") == -1)
+                        url += "?r=" + Math.random();
+                    else
                         url += "&r=" + Math.random();
-                    }
 
                     var qt = new esri.tasks.QueryTask(url);
                     var query = new esri.tasks.Query();
@@ -142,10 +132,10 @@ var queryCountGlobal;
                     query.orderByFields = orderByFields;
                     query.returnCountOnly = false;
                     query.returnIdsOnly = false;
-                    query.maxAllowableOffset = 0.1;
+                    query.maxAllowableOffset = .1;
 
                     // added to count features. vw
-                    qt.executeForCount(query, function(count){
+                    qt.executeForCount(query, function (count) {
                         queryCountGlobal = count;
                         var numCount = magNumberFormatter.formatValue(count);
                         document.getElementById("fCount1").innerHTML = numCount;
@@ -162,7 +152,7 @@ var queryCountGlobal;
                  * @param {string} callback - callback method for results.
                  * @param {string} errback - callback method for errors.
                  */
-                identify: function(url, geometry, layerIds, callback, errback) {
+                identify: function (url, geometry, layerIds, callback, errback) {
                     var identifyTask = new esri.tasks.IdentifyTask(url);
 
                     var identifyParams = new esri.tasks.IdentifyParameters();
@@ -178,7 +168,7 @@ var queryCountGlobal;
                     identifyTask.execute(identifyParams, callback, errback);
                 },
 
-                                  /**
+                /**
                 * Submit query to REST endpoint and send the response back to the callback defined in the parameters.
                 *
                 * @method query
@@ -210,4 +200,4 @@ var queryCountGlobal;
             return LayerDelegate;
 
         });
-} ());
+}());

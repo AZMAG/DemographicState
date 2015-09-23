@@ -1,11 +1,10 @@
 {
-  "name": "State-Demographics-Project",
-  "version": "1.6.0",
-  "date": "03/02/2015",
-  "creation": "10/21/2014",
-  "author": "Vern Wolfley & Amanda Stanko",
-  "email": "vwolfley@azmag.gov, astanko@azmag.gov",
-  "url": "http://geo.azmag.gov/maps/azdemographic/",
+  "name": "Demographics-Project",
+  "version": "2.6.0",
+  "date": "06/24/2015",
+  "author": "Vern Wolfley",
+  "email": "vwolfley@azmag.gov",
+  "url": "http://geo.azmag.gov/maps/demographic/",
   "private": true,
   "devDependencies": {
     "grunt":                    "*",

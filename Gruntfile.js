@@ -10,7 +10,7 @@ module.exports = function(grunt){
 
         bannercss: '/*!\n' +
                     '*@concat.min.css\n' +
-                    '*@CSS document for State Demographics Website @ MAG\n' +
+                    '*@CSS document for Demographics Website @ MAG\n' +
                     '*@For Production\n' +
                     '*@<%= pkg.name %> - v<%= pkg.version %> | <%= grunt.template.today("mm-dd-yyyy") %>\n' +
                     '*@author <%= pkg.author %>\n' +

@@ -8,18 +8,14 @@
     "use strict";
 
     define([
-        "dojo",
-        "dojo/dom-construct",
-        "dojo/topic",
-        "app/config/cbrConfig",
-        "app/helpers/magNumberFormatter",
-        "dojo/text!app/views/classBreaksHelp-view.html",
-        "app/vm/help-vm",
-        "dojo/text!app/views/classBreaks-view.html",
-
-        "vendor/kendo/web/js/jquery.min",
-        "vendor/kendo/web/js/kendo.web.min",
-        "vendor/kendo/dataviz/js/kendo.dataviz.min"
+        'dojo',
+        'dojo/dom-construct',
+        'dojo/topic',
+        'app/config/cbrConfig',
+        'app/helpers/magNumberFormatter',
+        'dojo/text!app/views/classBreaksHelp-view.html',
+        'app/vm/help-vm',
+        'dojo/text!app/views/classBreaks-view.html'
     ],
         function (dj, dc, tp, conf, magNum, helpView, helpVM, view) {
 
@@ -58,7 +54,7 @@
                 @param {string} relatedElement - name of the element to attach the module window to.
                 @param {string} relation - relationship of the window to the relatedElement.
                 **/
-                self.init = function (relatedElement, relation) {
+                self.init = function (relatedElement, relation, loadInitCustomBreaks) {
                     dc.place(view, relatedElement, relation);
 
                     var colRampWindow = $("#classDefWindow").kendoWindow({
@@ -73,7 +69,7 @@
                     }).data("kendoWindow");
 
                     var helpButton = colRampWindow.wrapper.find(".k-i-help");
-                    helpButton.click(function () {
+                    helpButton.click(function (e) {
                         helpVM.openWindow(helpView);
                     });
 
@@ -87,7 +83,9 @@
                         autoHide: false
                     });
                     tp.subscribe("ClassificationMethodChanged", self.ClassificationMethodChanged);
-                };
+
+                    self.loadInitialCustomBreaks = loadInitCustomBreaks;
+                }
 
                 /**
                 Method for handling "OK" button click.
@@ -96,10 +94,10 @@
                 @method applyBreaks
                 @param {event} e - click event data.
                 **/
-                self.applyBreaks = function () {
+                self.applyBreaks = function (e) {
                     tp.publish("CustomBreaksUpdated", null);
                     self.closeWindow();
-                };
+                }
 
                 /**
                 Method for opening the window.
@@ -112,7 +110,7 @@
                     win.center();
                     win.open();
                     self.RedrawSliders();
-                };
+                }
 
                 /**
                 Method for closing the window.
@@ -122,7 +120,7 @@
                 self.closeWindow = function () {
                     var win = $("#classDefWindow").data("kendoWindow");
                     win.close();
-                };
+                }
 
                 /**
                 Method for handling a new set of renderer breaks set from outside this module.
@@ -132,16 +130,20 @@
                 **/
                 self.ClassificationMethodChanged = function (renderer) {
                     self.Renderer = renderer;
-                    self.openWindow();
-                };
+                    if (!self.loadInitialCustomBreaks) {
+                        self.openWindow();
+                    } else {
+                        self.applyBreaks();
+                    }
+                }
 
                 self.drawClassBreakTooltip = function (e) {
                     var me = this;
                     var breakIdx = e.target[0].previousSibling.id.substring(6);
                     return "<input id=\"ttip" + breakIdx + "\" ></input>";
-                };
+                }
 
-                self.populateClassBreakTooltip = function () {
+                self.populateClassBreakTooltip = function (e) {
                     var me = this.content[0].firstChild.id;
                     var myIndex = parseInt(me.substring(4));
                     var numSettings = {
@@ -160,7 +162,7 @@
                     $("#" + me).kendoNumericTextBox(
                         numSettings
                     );
-                };
+                }
 
                 self.spinnerChange = function (e) {
                     var numIndex = parseInt(e.sender.element[0].id.substring(4));
@@ -170,7 +172,7 @@
                     self.Renderer.infos[numIndex + 1].minValue = actualValue;
                     self.Renderer.infos[numIndex].classMaxValue = actualValue;
                     self.RedrawSliders();
-                };
+                }
 
                 /**
                 Method for redrawing the slider bars after some properties have changed.
@@ -202,7 +204,7 @@
                         resize: self.updateRangeSliders
                     });
                     self.redrawingSliders = false;
-                };
+                }
 
                 /**
                 Method to handle slider updates from user interaction with the custom controls.
@@ -251,9 +253,9 @@
                             dc.empty(panelName);
                         }
                     }
-                };
+                }
             };
             return ClassificationFactoryVM;
         }
-    );
+    )
 } ());

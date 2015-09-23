@@ -9,8 +9,8 @@
     "use strict";
 
     define([
-        "dojo/dom-construct",
-        "dojo/topic",
+        'dojo/dom-construct',
+        'dojo/topic'
     ],
         function (dc, tp) {
 
@@ -25,16 +25,17 @@
                 };//end init
 
                 self.openReports = function () {
-                    if ($("#reportLauncher").is(":hidden")) {
-                        tp.publish("panelStateO", { name: "Open" });
+                    if ($("#reportLauncher").is(':hidden')) {
+                        tp.publish('panelStateO', { name: 'Open' });
                     } else {
-                        tp.publish("panelStateC", { name: "Close" });
+                        tp.publish('panelStateC', { name: 'Close' });
                     }
+                    return false;
                 };//end openReports
 
             };//end
 
             return launchBar;
         }
-    );
+    )
 } ());

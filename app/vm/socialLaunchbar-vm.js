@@ -9,8 +9,8 @@
     "use strict";
 
     define([
-        "dojo/dom-construct",
-        "dojo/topic",
+        'dojo/dom-construct',
+        'dojo/topic'
     ],
         function (dc, tp) {
 
@@ -25,11 +25,12 @@
                 };// end init
 
                 self.openShare = function () {
-                    if ($("#shareWindowDiv").is(":hidden")) {
-                        tp.publish("shareStateO", { name: "Open" });
+                    if ($("#shareWindowDiv").is(':hidden')) {
+                        tp.publish('shareStateO', { name: 'Open' });
                     } else {
-                        tp.publish("shareStateC", { name: "Close"});
+                        tp.publish('shareStateC', { name: 'Close' });
                     }
+                    return false;
                 };// end openShare
 
             };//end

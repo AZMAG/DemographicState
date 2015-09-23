@@ -9,9 +9,9 @@
     "use strict";
 
     define([
-        "dojo/dom-construct",
-        "dojo/topic",
-        "dojo/text!app/views/alert2-view.html"
+        'dojo/dom-construct',
+        'dojo/topic',
+        'dojo/text!app/views/alert2-view.html'
     ],
 
         function (dc, tp, view) {
@@ -33,7 +33,8 @@
                  */
                 self.init = function () {
                    // Place the HTML from the view into the main application after the map div.
-                    dc.place(view, "map", "after");
+                    //dc.place(view, "map", "after");
+                    dc.place(view, "mapContainer", "after");
 
                     $("#alert2Window").kendoWindow({
                         width: "300px",
@@ -45,7 +46,7 @@
                         resizable: false
                     }).data("kendoWindow");
 
-                }; // end init
+                } // end init
 //****************************************************************
                 /**
                 Method for opening the window.
@@ -63,5 +64,5 @@
             return alert2VM;
 
       } // end function
-    );
+    )
 } ());

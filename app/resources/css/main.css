@@ -2,7 +2,7 @@
 
 /**
 *@main.css
-*@CSS Document for State Demograpic Website @ MAG
+*@CSS Document for Demograpic Website @ MAG
 *@author Wolfley
 **/
 /*
@@ -33,8 +33,9 @@ textarea {
     font-size: 100%;
     font-family: Tahoma, Geneva, sans-serif;
     overflow: hidden;
-    color: #E8E8E8;
+    color: #FFFFFF;
 }
+
 /*
  * Remove text-shadow in selection highlight: h5bp.com/i
  * These selection rule sets have to be separate.
@@ -59,7 +60,7 @@ hr {
     display: block;
     height: 1px;
     border: 0;
-    border-top: 1px solid #ccc;
+    border-top: 1px solid #cccccc;
     padding: 0;
 }
 
@@ -99,8 +100,8 @@ textarea {
    ========================================================================== */
 .browsehappy {
     margin: 0.2em 0;
-    background: #ccc;
-    color: #000;
+    background-color: #cccccc;
+    color: #000000;
     padding: 0.2em 0;
 }
 /* ==========================================================================
@@ -116,8 +117,8 @@ textarea {
 button {
     display:inline-block;
     text-decoration: none;
-    background-color: #222222;
-    color: #E8E8E8;
+    background-color: #000000;
+    color: #FFFFFF;
     border-color: #383838;
     font-size: .85em;
     -moz-border-radius: 8px;
@@ -125,7 +126,7 @@ button {
     border-radius: 8px;
 }
 button:hover {
-    background-color: #4E4E4E;
+    background-color: #646464;
     border-color: #646464;
 }
 .buttonimg {
@@ -141,7 +142,7 @@ button:hover {
     margin: 0px;
     overflow: hidden;
 }
-#map {
+#mapContainer {
     position: absolute;
     width: 100%;
     height: 100%;
@@ -150,6 +151,96 @@ button:hover {
     right: 0px;
     bottom: 0px
 }
+.map{
+    overflow: hidden;
+    position: absolute;
+    position: absolute;
+    width: 100%;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    background-color: white;
+	border-color: black;
+	border-width: .2%;
+    border-style: solid;
+}
+.map #map_root{
+    height: 100%;
+    width: 100%
+}
+#mapContainer .k-splitter
+{
+    width: 100%;
+    height: 100%;
+}
+.mapFrameTitlePanel
+{
+    position: absolute;
+    top: 20px;
+    padding: .4em !important;
+    border-radius: 4px;
+    border-color: rgba(0,0,0,0.3);
+    -webkit-box-shadow: 1px 1px 7px 1px rgba(128,128,128,0.3);
+    box-shadow: 1px 1px 7px 1px rgba(128,128,128,0.3);
+    background-color: #4d4d4d;
+    border-style: solid;
+    border-width: 1px;
+    cursor: pointer;
+}
+.mapFrameTitlePanel.selected
+{
+    background-color: #06c;
+}
+.mapFrameTitlePanel h2
+{
+    font-size: 1.2em;
+    display: inline-block;
+}
+.mapFrameLegendPanel
+{
+    position: absolute;
+    bottom: 20px;
+    min-width: 100px;
+    max-width: 250px;
+    font-size: .85em;
+}
+.mapFrameLegendPanel .k-panelbar .k-content
+{
+    padding: .58em;
+}
+
+.k-list>.k-state-selected
+{
+	background-color: transparent !important;
+	border-color: transparent !important;
+}
+
+.k-panelbar>li>.k-state-selected
+{
+	background-color:transparent !important;
+}
+
+.mapFrameLegendPanel .legendSliderDiv
+{
+    text-align: center;
+    margin: 0 auto;
+}
+.mapFrameElementRight
+{
+    right: 20px;
+}
+.mapFrameElementLeft
+{
+    left: 20px;
+}
+
+.k-widget .k-colorpalette{
+
+	width: 150px !important;
+
+}
+
 /* for interactive tool tooltips*/
 .map .tooltip {
     background-color: #000000 !important;
@@ -157,28 +248,25 @@ button:hover {
     border-color: transparent !important;
     text-align: center;
 }
-#search {
-    display: block;
+.HomeButton {
     position: absolute;
-    z-index: 2;
-    top: 20px;
-    left: 74px;
+    bottom: 118px;
+    left: 20px;
 }
-#loading {
-    position: relative;
-    margin: auto;
-    top: 35%;
+.HomeButton .home{
+    background-color: #5b5b5b;
+    padding: 0 0 0 0;
 }
-#loadimag{
-    display: block;
-    margin-right: auto;
-    margin-left: auto;
+.HomeButton .home:hover {
+    background-color: #484848;
 }
-li {
-    margin: 0 0 5px 0;
+.HomeButton .home:active {
+    background-color:#ddd;
 }
-li.k-item {
-    margin: 0 0 0 0;
+#LocateButton {
+    position: absolute;
+    bottom: 160px;
+    left: 20px;
 }
 /* ==========================================
 **** Custom Controls Styles ****
@@ -186,14 +274,13 @@ li.k-item {
 .esriSimpleSlider {
     bottom: 55px !important;
     left: 20px !important;
-
     border: none;
-    background-color: #5b5b5b;
-    color: #fff;
+    background-color: #383838;
+    color: #ffffff;
 }
 .esriSimpleSliderDecrementButton:hover,
 .esriSimpleSliderIncrementButton:hover {
-  background-color: #484848;
+  background-color: #646464;
 }
 .esriSimpleSliderVertical .esriSimpleSliderIncrementButton,
 .esriSimpleSliderVertical .esriSimpleSliderDecrementButton{
@@ -208,8 +295,8 @@ li.k-item {
 .esriSimpleSliderDisabledButton:active,
 .esriSimpleSliderDisabledButton:hover {
 cursor: default;
-background-color: #cdcdcd;
-color: #fff;
+background-color: #cccccc;
+color: #ffffff;
 }
 .HomeButton {
     position: absolute;
@@ -217,16 +304,46 @@ color: #fff;
     left: 20px;
 }
 .HomeButton .home {
-    background-color: #5b5b5b;
+    background-color: #383838;
     padding: 0 0 0 0;
 }
 .HomeButton .home:hover {
-    background-color: #484848;
+    background-color: #646464;
 }
 #LocateButton {
     position: absolute;
     bottom: 160px;
     left: 20px;
+}
+/* Search Widget */
+#search {
+    display: inline-block;
+    float: right;
+    margin: 8px 0 0 0;
+    overflow: visible;
+}
+div.searchBtn.searchSubmit {
+    background-color: #5cb85c;
+    color: #ffffff;
+}
+div.searchBtn.searchSubmit:hover {
+    background-color: #449d44;
+}
+span.searchIcon.esriIconZoom {
+    display: none;
+}
+.arcgisSearch .searchButtonText {
+  display: inline-block;
+}
+.arcgisSearch .searchBtn {
+    font-size: .85em;
+    padding: 6px 8px;
+}
+.dijitBorderContainerPane, .dijitBorderContainerNoGutterPane {
+   z-index: auto;
+}
+.search.suggestionsMenu {
+
 }
 
 /* ==========================================
@@ -235,9 +352,9 @@ color: #fff;
 #header {
     border: none;
     height: 50px;
-    background: #000000; /* Old browsers */
+    background-color: #000000; /* Old browsers */
     padding: 0px;
-    overflow: hidden;
+    overflow: visible;
 }
 #titlebar {
     position: absolute;
@@ -257,6 +374,9 @@ color: #fff;
     font-size: 1.2em;
     padding-top: 13.25px;
     padding-bottom: 13.25px;
+}
+.bar {
+    font-size: 35px;
 }
 #magLogo {
     display: inline-block;
@@ -292,24 +412,25 @@ li.tb {
   padding-bottom: 18px;
   padding-left: 10px;
   padding-right: 10px;
-  font-weight: normal;
-  font-size: .85em;
-  color: #E8E8E8;
+  font-weight: bold;
+  font-size: .95em;
+  color: #FFFFFF;
   text-decoration: none;
   cursor: pointer;
 }
-.nav:hover {
-    color: #8C8C8C;
-    font-weight: bold;
-    font-size: .95em;
+.nav:hover{
+
+	color: #8C8C8C;
+
 }
+
 #cbrlaunchbar,
 #leglaunchbar,
 #rplaunchbar,
 #printlaunchbar,
 #sharelaunchbar,
-#helplaunchbar,
-#contactLaunchbar {
+#contactLaunchbar,
+#helplaunchbar {
     height: inherit;
     float: right;
 }
@@ -356,7 +477,7 @@ li.tb {
 }
 .queryButtons {
     margin-left: 10px;
-    padding: 6px 8px;
+    padding: 3px 8px;
 }
 .queryPic {
     display: block;
@@ -384,7 +505,7 @@ li.tb {
 }
 #reportLauncher a {
     text-decoration: none;
-    color: #E8E8E8;
+    color: #FFFFFF;
 }
 #reportLauncher button {
     width: 100%;
@@ -393,7 +514,7 @@ li.tb {
     font-size: 1em;
 }
 #countyChoiceDiv,
-#placeChoiceDiv {
+#pnlPlaceChoiceDiv {
     margin-left: 10px !important;
     margin-top: 2px !important;
     /*margin-bottom: 2px !important;*/
@@ -453,7 +574,7 @@ li.tb {
 #version {
     text-align: center;
 }
-.copyR {
+#copyR {
     text-align: center;
     padding-top: 15px;
     padding-bottom: 5px;
@@ -473,7 +594,6 @@ input.mapTitle {
 .mapNotes, .mapTitle {
     color: #000000;
 }
-
 /* ==========================================
 **** contacts-view.html Window styles ****
 ============================================= */
@@ -502,7 +622,7 @@ p {
 **** Custom Kendow Window styles ****
 ============================================= */
 .k-window-content.k-content {
-    color: #E8E8E8;
+    color: #FFFFFF;
 }
 .k-window-content {
     font-size: .85em;
@@ -552,11 +672,72 @@ p {
 .k-window-title {
     position: relative !important;
 }
+.cb {
+    background-color: #000000;
+}
 /* ==========================================
 **** cbr-view.html styles ****
 ============================================= */
 #mapHeader {
     margin-bottom: 8px;
+}
+#mapFramesOptionsControl
+{
+    padding: 5px;
+}
+.mapFramesButtons
+{
+    padding-left: 60px;
+}
+.mapFramesButtons button
+{
+    font-weight: bold;
+    width: 16px;
+    height: 16px;
+}
+.mapFrameGridControl
+{
+    background-color: rgb(29, 29, 29);
+    margin: 0 auto;
+    width: 220px;
+}
+.mapFrameGridRow
+{
+    margin: 0;
+    padding: 0;
+}
+.mapFrameGridRow.bottom .mapFrameGridCell
+{
+    margin-top: 0;
+}
+.mapFrameGridCell
+{
+    display: inline-block;
+    width: 100px;
+    height: 50px;
+    margin: 5px;
+    background-color: rgb(77, 77, 77);
+    cursor: pointer;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 50px;
+    font-weight: bold;
+}
+.mapFrameGridCell.left
+{
+    margin-right: 0;
+}
+.mapFrameGridCell:hover
+{
+    background-color: gray;
+}
+.mapFrameGridCell.selected
+{
+    background-color: #06c;
+}
+.mapFrameGridCell.selected:hover
+{
+    background-color: #06c;
 }
 #thematicTOC {
     overflow-x: hidden !important;
@@ -574,7 +755,7 @@ p {
 }
 #editCustom {
     margin-left: 10px;
-    padding: 6px 8px;
+    padding: 3px 8px;
 }
 #rampPad {
     cursor: pointer;
@@ -624,6 +805,25 @@ p {
 .legal {
     font-size: .8em;
 }
+.subscribe {
+    padding:10px;
+}
+
+#subscribeWindow .long{
+margin-left:15px;
+border-radius:5px;
+color:black;
+}
+
+#subscribeWindow .form_button{
+    margin-left: 40%;
+    margin-top: 10px;
+    border-radius: 6px;
+    padding: 4px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
 .info {
     font-size: .9em;
     padding: 2px;
@@ -638,23 +838,32 @@ p {
 **** demographic-view.html styles ****
 ============================================= */
 #demChartListPane {
-    width: 120px !important;
-    left: 455px !important;
+	
+    width: 95px !important;
+    left: 480px !important;
 }
 .k-splitter .k-ghost-splitbar-horizontal, .k-splitter .k-splitbar-horizontal {
-    left: 455px;
+    left: 480px;
+	border-color: transparent;
 }
-#demTabStrip-2 .reportTabPageOptionRow {
-    height: 18px;
+/*#demTabStrip-3 .reportTabPageOptionRow, #demTabStrip-2 .reportTabPageOptionRow {
+    height: 15px;
+}*/
+.reportTabPageOptionRowEX {
+    height: 15px;
 }
 #demChartAreaPane {
-    width: 455px !important;
+    width: 480px !important;
+}
+#demChartList {
+margin-top:5px;
+    font-size: 80%;
+    border: none;
 }
 .demChartCategoryItem {
     cursor: pointer;
     padding-top: 3px;
     padding-bottom: 3px;
-    font-size: 1.1em;
 }
 .demChartCategoryItem  button {
     width: 100%;
@@ -679,7 +888,10 @@ p {
 }
 .colT {
     border-style: outset;
-    border-color: #42403C;
+    border-color: #383838;
+}
+.exStyle {
+    width: 80px;
 }
 /* ==========================================
 **** selectedFeaturesTabPage-view.html styles ****
@@ -773,6 +985,18 @@ p {
     text-align: center;
 }
 /* ==========================================
+**** Popup styles ****
+============================================= */
+.esriPopup .titleButton.maximize {
+    display: none;
+}
+.esriPopup .titleButton.next {
+  right: 25px;
+}
+.esriPopup .titleButton.prev {
+  right: 50px;
+}
+/* ==========================================
 **** Custom scrollbar CSS styles ****
 ============================================= */
  ::-webkit-scrollbar {
@@ -784,7 +1008,7 @@ p {
 }
 ::-webkit-scrollbar-thumb {
     border-radius: 10px;
-    background: rgba(120,120,120,0.8);
+    background-color: rgba(120,120,120,0.8);
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
 }
 /* ==========================================================================
@@ -913,8 +1137,8 @@ p {
         padding-bottom: 15.5px;
     }
     #magLogo {
-        width: 144px;
-        padding: 15px 5px 15px 10px;
+        width: 140px;
+        padding: 14.5px 5px 14.5px 10px;
     }
     .magLogo {
         max-width: 95%;
@@ -962,17 +1186,17 @@ p {
 /* Style adjustments for viewports that meet the condition */
     #title1 {
         font-size: .95em;
-        padding: 3px 0 3px 0;
+        padding: 16px 0 16px 0;
     }
     #title2 {
         font-size: .85em;
         padding: 5px 0 2px 0;
     }
-    li.ti1 {
+    /*li.ti1 {
         display: list-item;
-        width: 230px;
+        width: 175px;
         position: absolute;
-        left: 150px;
+        left: 180px;
         top: 0px;
         margin: 0;
         padding: 0;
@@ -985,13 +1209,13 @@ p {
         top: 20px;
         margin: 0;
         padding: 0;
-    }
+    }*/
     #magLogo {
-        width: 144px;
-        padding: 15px 5px 15px 10px;
+        width: 130px;
+        padding: 15.5px 5px 15.5px 10px;
     }
     .magLogo {
-        max-width: 90%;
+        max-width: 95%;
         height: auto;
     }
 /***** help-view.html styles *** */
@@ -1042,13 +1266,13 @@ p {
 /* Style adjustments for viewports that meet the condition */
     #title1 {
         font-size: .8em;
-        padding: 3px 0 2px 0px;
+        padding: 17px 0 17px 0;
     }
     #title2 {
         font-size: .75em;
         padding: 5px 0 2px 0px;
     }
-    li.ti1 {
+    /*li.ti1 {
         display: list-item;
         width: 210px;
         position: absolute;
@@ -1065,13 +1289,17 @@ p {
         top: 20px;
         margin: 0;
         padding: 0;
+    }*/
+    li.tb:first-child,
+    li.bar {
+        display: none;
     }
     #magLogo {
-        width: 144px;
-        padding: 15px 5px 15px 10px;
+        width: 120px;
+        padding: 16px 5px 16px 10px;
     }
     .magLogo {
-        max-width: 80%;
+        max-width: 95%;
         height: auto;
     }
 /* **** help-view.html styles *** */
@@ -1138,10 +1366,11 @@ p {
         font-size: .70em;
         padding: 5px 0 2px 0px;
     }
-    li.tb:first-child {
+    li.tb:first-child,
+    li.bar {
         display: none;
     }
-    li.ti1 {
+    /*li.ti1 {
         display: list-item;
         width: 190px;
         position: absolute;
@@ -1158,13 +1387,13 @@ p {
         top: 20px;
         margin: 0;
         padding: 0;
-    }
-    #magLogo {
+    }*/
+    /*#magLogo {
         width: 144px;
         padding: 15px 5px 15px 10px;
-    }
+    }*/
     .magLogo {
-        max-width: 80%;
+        max-width: 90%;
         height: auto;
     }
 /* **** help-view.html styles *** */
@@ -1224,8 +1453,8 @@ p {
 
 @media print {
     * {
-        background: transparent !important;
-        color: #000 !important; /* Black prints faster: h5bp.com/s */
+        background-color: transparent !important;
+        color: #000000 !important; /* Black prints faster: h5bp.com/s */
         box-shadow: none !important;
         text-shadow: none !important;
     }
