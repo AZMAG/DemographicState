@@ -1,40 +1,43 @@
 /**
-* Launches the Contacts Window.
-*
-*
-*/
-(function () {
+ * Launches the Contacts Window.
+ *
+ *
+ */
+(function() {
 
     "use strict";
 
     define([
-        "dojo/dom-construct",
-        "dojo/topic"
-    ],
-        function (dc, tp) {
+            "dojo/dom-construct",
+            "dojo/topic"
+        ],
+        function(dc, tp) {
 
-            var launchContactBar = new function () {
+            var launchContactBar = new function() {
 
                 var self = this;
 
                 self.windowTitle = "Contacts";
 
-                self.init = function (relatedElement, relation) {
+                self.init = function(relatedElement, relation) {
                     dc.place("<span id=\"contactLaunchbar\" title=\"Contacts\"><a id=\"launchContacts\" class=\"nav\" role=\"button\" href=\"#\" data-bind=\"click: openContacts\">Contacts</a></span>", relatedElement, relation);
-                };//end init
+                }; //end init
 
-                self.openContacts = function () {
+                self.openContacts = function() {
                     if ($("#contactsWindowDiv").is(":hidden")) {
-                        tp.publish("contStateO", { name: "Open"});
+                        tp.publish("contStateO", {
+                            name: "Open"
+                        });
                     } else {
-                        tp.publish("contStateC", { name: "Close"});
+                        tp.publish("contStateC", {
+                            name: "Close"
+                        });
                     }
-                };// end openContacts
+                }; // end openContacts
 
-        };//end
+            }; //end
 
             return launchContactBar;
         }
     );
 }());
-

@@ -7,26 +7,37 @@
  * @class map-model
  **/
 
-(function () {
+(function() {
 
     "use strict";
 
     define([
-        'dojo/dom-construct',
-        'dojo/dom',
-        'dojo/on',
-        'dojo/topic',
+        "dojo/dom-construct",
+        "dojo/dom",
+        "dojo/on",
+        "dojo/topic",
 
-        'dojo/_base/lang',
-        'esri/graphic',
-        'app/helpers/bookmark-delegate',
-		'esri/layers/FeatureLayer',
-        'esri/layers/wms',
-        'esri/layers/agsdynamic'
-		
-		
-		
-    ], function (dc, dom, on, tp, lang, Graphic, bookmarkDelegate, FeatureLayer) {
+        "dojo/_base/lang",
+        "esri/graphic",
+        "app/helpers/bookmark-delegate",
+
+        "esri/geometry/Extent",
+        "esri/geometry/Point",
+        "esri/SpatialReference",
+
+        "esri/layers/WMSLayer",
+        "esri/layers/ArcGISDynamicMapServiceLayer",
+        "esri/layers/ArcGISTiledMapServiceLayer",
+        "esri/layers/FeatureLayer",
+        "esri/Color",
+        "esri/symbols/SimpleMarkerSymbol",
+        "esri/symbols/SimpleLineSymbol",
+        "esri/symbols/SimpleFillSymbol",
+
+        "esri/InfoTemplate",
+
+        "dojo/domReady!"
+    ], function(dc, dom, on, tp, lang, Graphic, bookmarkDelegate, Extent, Point, SpatialReference, WMSLayer, ArcGISDynamicMapServiceLayer, ArcGISTiledMapServiceLayer, FeatureLayer, Color, SimpleMarkerSymbol, SimpleLineSymbol, SimpleFillSymbol, InfoTemplate) {
 
         /**
          * Holds reference to the map.
@@ -34,7 +45,7 @@
          * @property instance
          * @type {map}
          */
-        var instance = null;  //no globals!
+        var instance = null; //no globals!
 
         /**
          * Contains properties and methods to manage the ESRI map.
@@ -54,7 +65,9 @@
             this.allowedMapLayers = [];
             this.basemapLayers = [];
             this.layerCategories = [];
-            this.selectableLayers = [{ "title": "Custom Shape" }];
+            this.selectableLayers = [{
+                "title": "Custom Shape"
+            }];
             this.layersToAdd = [];
             this.resizeTimer;
             this.initializationData = undefined;
@@ -70,12 +83,17 @@
              *
              * @method initialize
              */
-            initialize: function () {
-                
-				// create div for loading gif. vw
-                var loading = dc.create("div", { id: "loading" }, "display", "first"); //dc.create("div", { id: "loading" }, "map", "first");
-                var img = dc.create("img", { id: "loadimag", src: "app/resources/img/loading.gif" }, "loading", "first");
-				
+            initialize: function() {
+
+                // create div for loading gif. vw
+                var loading = dc.create("div", {
+                    id: "loading"
+                }, "display", "first"); //dc.create("div", { id: "loading" }, "map", "first");
+                var img = dc.create("img", {
+                    id: "loadimag",
+                    src: "app/resources/img/loading.gif"
+                }, "loading", "first");
+
                 // hide div till called. vw
                 esri.hide(dojo.byId("loading"));
 
@@ -86,25 +104,25 @@
             },
 
 
-            loadInitialMap: function (map) {
+            loadInitialMap: function(map) {
                 this.baseMapInstance = map;
                 this.mapInstance = map;
                 this.mapInstances.push(map);
 
                 on(map, "LayerAddResult", this.mapOnLayerAddResult);
-                on(map, "Load", lang.hitch(this, function () {
+                on(map, "Load", lang.hitch(this, function() {
                     this.mapLoaded(map);
                 }));
             },
 
-            loadNewMap: function (map, mapInitData) {
-			
+            loadNewMap: function(map, mapInitData) {
+
                 this.mapInstance = map;
                 this.mapInstances.push(map);
 
                 on(map, "LayerAddResult", this.mapOnLayerAddResult);
-                on(map, "Load", lang.hitch(this, function () {
-					this.mapLoaded(this.mapInstance);
+                on(map, "Load", lang.hitch(this, function() {
+                    this.mapLoaded(this.mapInstance);
                 }));
 
                 this.createLayers(map);
@@ -113,10 +131,10 @@
                 } else {
                     tp.publish("SelectedMapChanged", this.mapInstance);
                 }
-                
+
             },
 
-            removeMap: function (map) {
+            removeMap: function(map) {
                 this.mapInstances.pop();
                 if (this.mapInstance.id === map.id) {
                     this.mapInstance = this.baseMapInstance;
@@ -124,23 +142,23 @@
                 }
             },
 
-            recenterMaps: function (centerPnt) {
+            recenterMaps: function(centerPnt) {
                 for (var i = 0; i < this.mapInstances.length; i++) {
                     this.mapInstances[i].resize(true);
                     this.mapInstances[i].reposition();
                     this.mapInstances[i].centerAt(centerPnt);
                 }
             },
-			
-            syncMapExtents: function (extent, mapID) {
+
+            syncMapExtents: function(extent, mapID) {
                 for (var i = 0; i < this.mapInstances.length; i++) {
                     if (this.mapInstances[i].id !== mapID) {
                         this.mapInstances[i].setExtent(extent);
                     }
                 }
             },
-			
-			/**
+
+            /**
              * Used to coordinate popups with interactive tools
              * found in the demographic-vm.js
              * @return {[type]} [description]
@@ -157,14 +175,14 @@
              * @param {Layer} layer - the layer added to the map.
              * @param {Error} error - any errors that occurred loading the layer.
              */
-            mapOnLayerAddResult: function (layer, error) {
+            mapOnLayerAddResult: function(layer, error) {
                 if (error) {
                     alert(error);
                 }
                 tp.publish("mapLayerAdded");
             },
 
-            mapLoaded: function (map) {
+            mapLoaded: function(map) {
                 tp.publish("MapLoaded", map);
             },
 
@@ -173,13 +191,13 @@
              *
              * @method createLayers
              */
-            createLayers: function (currentMap) {
+            createLayers: function(currentMap) {
                 //for (var h = 0; h < this.mapInstances.length; h++) {
                 var layersTOC = []; // add only certin layers to TOC
                 var layersToAdd = [];
-				
+
                 for (var i = 0; i < appConfig.layerInfo.length; i++) {
-				
+
                     // add all layers to TOC
                     var info = appConfig.layerInfo[i];
                     var layer;
@@ -211,7 +229,7 @@
                                 var li = info.layers[x];
                                 vlayers.push(li.name);
                             }
-                            layer = new esri.layers.WMSLayer(info.url, {
+                            layer = new WMSLayer(info.url, {
                                 id: info.id,
                                 visible: visible,
                                 resourceInfo: resourceInfo,
@@ -221,7 +239,7 @@
                             layer.setImageFormat("png");
                             break;
                         case "dynamic":
-                            layer = new esri.layers.ArcGISDynamicMapServiceLayer(info.url + token, {
+                            layer = new ArcGISDynamicMapServiceLayer(info.url + token, {
                                 id: info.id,
                                 visible: visible,
                                 opacity: opacity
@@ -229,13 +247,13 @@
                             layer.setVisibleLayers(info.layers);
                             break;
                         case "tile":
-                            layer = new esri.layers.ArcGISTiledMapServiceLayer(info.url + token, {
+                            layer = new ArcGISTiledMapServiceLayer(info.url + token, {
                                 id: info.id,
                                 visible: visible,
                                 opacity: opacity
                             });
                             break;
-						case "feature":
+                        case "feature":
                             var featureTemplate;
                             if (info.id === "mcSupervisorDistricts") {
                                 featureTemplate = self.superInfoTemplate;
@@ -266,7 +284,7 @@
                     //http://forums.arcgis.com/threads/65481-Legend-problems-with-secured-services-when-migrating-to-3.0-3.1
                     if (typeof info.token !== "undefined") {
                         layer.url = layer.originalUrl;
-                        layer.queryUrl = layer.queryUrl + "?token=" + layer.token
+                        layer.queryUrl = layer.queryUrl + "?token=" + layer.token;
                     }
                 }
 
@@ -276,7 +294,7 @@
 
                 if (currentMap.id === this.baseMapInstance.id) {
                     // publish for base map instance and default legend
-					console.log(layersTOC);
+                    // console.log(layersTOC);
                     tp.publish("addTOCLayers", layersTOC);
                 } else {
                     // publish for new map legends
@@ -290,7 +308,7 @@
              * @param {Layer} layer - the layer to apply properties to.
              * @param {Object} info - the layer info object from the config.js file.
              */
-            applyLayerProperties: function (layer, info) {
+            applyLayerProperties: function(layer, info) {
                 layer.layerType = info.type;
                 layer.layers = info.layers;
                 layer.title = info.title;
@@ -306,14 +324,15 @@
                 layer.layerDefField = info.layerDefField;
                 layer.isBasemap = (info.isBasemap) ? true : false;
 
-                if (typeof layer.queryWhere === "undefined" || layer.queryWhere == "")
+                if (typeof layer.queryWhere === "undefined" || layer.queryWhere === "") {
                     layer.queryWhere = "1=1";
-
-                if (typeof info.layerDefField === "undefined")
+                }
+                if (typeof info.layerDefField === "undefined") {
                     layer.layerDefField = "";
-
-                if (typeof info.historical === "undefined")
+                }
+                if (typeof info.historical === "undefined") {
                     layer.historical = false;
+                }
 
                 //Apply a definition expression on the layer if
                 //it is a historical layer
@@ -333,18 +352,19 @@
                 layer.isVisible = kendo.observable(layer.visible);
                 layer.optionsVisible = kendo.observable(false);
 
-                layer.refreshOpacity = function () {
+                layer.refreshOpacity = function() {
                     this.opacityLevel((this.opacity * 100) + "%");
                 };
 
                 //Categorize layer
                 if (layer.isBasemap) {
-                    this.basemapLayers.push(layer)
+                    this.basemapLayers.push(layer);
                 } else {
                     this.mapLayers.push(layer);
                     //this.categorizeLayer(layer);
-                    if (layer.selectable)
-                        this.selectableLayers.push(layer)
+                    if (layer.selectable) {
+                        this.selectableLayers.push(layer);
+                    }
                 }
             },
 
@@ -354,7 +374,7 @@
              * @method categorizeLayer
              * @param {Layer} layer - the layer to be categorized.
              */
-            categorizeLayer: function (layer) {
+            categorizeLayer: function(layer) {
                 var l = this.layerCategories.length;
                 var exists = false;
                 var obj;
@@ -362,11 +382,13 @@
                 //Categorize the layer
                 for (var x = 0; x < l; x++) {
                     obj = this.layerCategories[x];
-                    if (obj.category == layer.category) {
+                    if (obj.category === layer.category) {
                         obj.layers.push(layer);
-                        if (layer.historical) obj.historical = true;
-                        exists = true;
-                        break;
+                        if (layer.historical) {
+                            obj.historical = true;
+                            exists = true;
+                            break;
+                        }
                     }
                 }
 
@@ -397,13 +419,18 @@
                     var filter = layer.filters[x];
                     for (var y = 0; y < filterCategories.length; y++) {
                         obj = filterCategories[y];
-                        if (obj.category == filter.category) {
+                        if (obj.category === filter.category) {
                             obj.filters.push(filter);
                             exists = true;
                             break;
                         }
                     }
-                    if (!exists) filterCategories.push({ category: filter.category, filters: [filter] });
+                    if (!exists) {
+                        filterCategories.push({
+                            category: filter.category,
+                            filters: [filter]
+                        });
+                    }
                 }
                 layer.filters = kendo.observable(filterCategories);
             },
@@ -414,7 +441,7 @@
              * @method getMap
              * @returns {Map}
              */
-            getMap: function () {
+            getMap: function() {
                 return this.mapInstance;
             },
 
@@ -424,8 +451,8 @@
              * @method getGraphics
              * @returns {GraphicsLayer}
              */
-            getGraphics: function (map) {
-                var graphics
+            getGraphics: function(map) {
+                var graphics;
                 if (map) {
                     graphics = map.graphics;
                 } else {
@@ -441,7 +468,7 @@
              * @method getSpatialReference
              * @returns {SpatialReference}
              */
-            getSpatialReference: function () {
+            getSpatialReference: function() {
                 return this.mapInstance.spatialReference;
             },
 
@@ -450,7 +477,7 @@
              *
              * @method resizeMap
              */
-            resizeMap: function () {
+            resizeMap: function() {
                 if (this.mapInstance) {
                     this.mapInstance.reposition();
                     this.mapInstance.resize();
@@ -463,7 +490,7 @@
              * @method getMapExtent
              * @returns {Extent}
              */
-            getMapExtent: function () {
+            getMapExtent: function() {
                 return this.mapInstance.extent;
             },
 
@@ -473,11 +500,15 @@
              * @method setMapExtent
              * @param {Geometry} geometry - source geometry for new extent.
              */
-            setMapExtent: function (geometry) {
-                var extent = new esri.geometry.Extent();
+            setMapExtent: function(geometry) {
+                var extent = new Extent();
                 switch (geometry.type) {
-                    case "extent": extent = geometry; break;
-                    case "polygon": extent = geometry.getExtent(); break;
+                    case "extent":
+                        extent = geometry;
+                        break;
+                    case "polygon":
+                        extent = geometry.getExtent();
+                        break;
                     case "point":
                         var tol = 5000;
                         extent.update(geometry.x - tol, geometry.y - tol, geometry.x + tol, geometry.y + tol);
@@ -493,7 +524,7 @@
              * @method centerMap
              * @param {Point} pt - pont to center map on.
              */
-            centerMap: function (pt) {
+            centerMap: function(pt) {
                 this.mapInstance.centerAt(pt);
             },
 
@@ -504,8 +535,10 @@
              * @param {number} lat - latitude uses for center point.
              * @param {number} lon - longitude used for center point.
              */
-            centerMapAtLatLon: function (lat, lon) {
-                var geoPt = new esri.geometry.Point(lon, lat, new esri.SpatialReference({ wkid: 102100 }));
+            centerMapAtLatLon: function(lat, lon) {
+                var geoPt = new Point(lon, lat, new SpatialReference({
+                    wkid: 102100
+                }));
                 var convertedPt = esri.geometry.geographicToWebMercator(geoPt);
                 this.mapInstance.centerAt(convertedPt);
             },
@@ -516,7 +549,7 @@
              * @method zoomToPoint
              * @param {Point} pt - point to center and zoom to.
              */
-            zoomToPoint: function (pt) {
+            zoomToPoint: function(pt) {
                 this.mapInstance.centerAndZoom(pt, 14);
             },
 
@@ -527,7 +560,7 @@
              * @param {Graphic} graphic - feature to be added.
              * @param {string} color - name of the color to use as a fill color.
              */
-            addGraphic: function (graphic, color, hasSymbol, allMapInstances) {
+            addGraphic: function(graphic, color, hasSymbol, allMapInstances) {
                 if (!hasSymbol) {
                     var symbol = this.getSymbol(graphic.geometry, color);
                     graphic.symbol = symbol;
@@ -550,8 +583,10 @@
              * @param {Graphics[]} graphics - array of features to be added.
              * @param {string} color - name of color for the graphix to be added.
              */
-            addGraphics: function (graphics, color, allMapInstances) {
-                if (graphics.length == 0) return;
+            addGraphics: function(graphics, color, allMapInstances) {
+                if (graphics.length === 0) {
+                    return;
+                }
                 var geometry = graphics[0].geometry;
                 var symbol = this.getSymbol(geometry, color);
                 for (var x = 0; x < graphics.length; x++) {
@@ -578,7 +613,7 @@
              * @param {Graphic} graphic - the graphic whose symbol is to be set.
              * @param {string} color - name of the color to use as a fill color.
              */
-            setSymbol: function (graphic, color) {
+            setSymbol: function(graphic, color) {
                 var symbol = this.getSymbol(graphic.geometry, color);
                 graphic.setSymbol(symbol);
             },
@@ -591,46 +626,67 @@
              * @param {string} color - name of the color to use as a fill color.
              * @returns {Symbol}
              */
-            getSymbol: function (geometry, color) {
+            getSymbol: function(geometry, color) {
                 var symbol, dojoColor;
                 color = (typeof color === "undefined") ? "cyan" : color;
 
                 switch (color) {
-                    case "cyan": dojoColor = new dojo.Color([0, 255, 255, 0.50]); break;
-                    case "yellow": dojoColor = new dojo.Color([255, 255, 0, 0.50]); break;
-                    case "red": dojoColor = new dojo.Color([255, 0, 0, 0.25]); break;
-                    case "green": dojoColor = new dojo.Color([0, 255, 0, 0.25]); break;
-                    case "blue": dojoColor = new dojo.Color([0, 0, 255, 0.25]); break;
-                    case "grey": dojoColor = new dojo.Color([117, 117, 117, 0.50]); break;
+                    case "cyan":
+                        dojoColor = new Color([0, 255, 255, 0.50]);
+                        break;
+                    case "yellow":
+                        dojoColor = new Color([255, 255, 0, 0.50]);
+                        break;
+                    case "red":
+                        dojoColor = new Color([255, 0, 0, 0.25]);
+                        break;
+                    case "green":
+                        dojoColor = new Color([0, 255, 0, 0.25]);
+                        break;
+                    case "blue":
+                        dojoColor = new Color([0, 0, 255, 0.25]);
+                        break;
+                    case "grey":
+                        dojoColor = new Color([117, 117, 117, 0.50]);
+                        break;
 
                 }
 
                 switch (geometry.type) {
                     case "point":
-                        symbol = new esri.symbol.SimpleMarkerSymbol(esri.symbol.SimpleMarkerSymbol.STYLE_SQUARE, 10, new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID, new dojo.Color([255, 0, 0]), 1), dojoColor);
+                        symbol = new SimpleMarkerSymbol(SimpleMarkerSymbol.STYLE_SQUARE, 10,
+                            new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID,
+                                new Color([255, 0, 0]), 1), dojoColor);
                         break;
                     case "polyline":
-                        symbol = new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID, new dojo.Color([255, 0, 0]), 2);
+                        symbol = new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID,
+                            new Color([255, 0, 0]), 2);
                         break;
                     case "polygon":
-                        symbol = new esri.symbol.SimpleFillSymbol(esri.symbol.SimpleFillSymbol.STYLE_SOLID, new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID, new dojo.Color([0, 255, 255]), 3), dojoColor);
+                        symbol = new SimpleFillSymbol(SimpleFillSymbol.STYLE_SOLID,
+                            new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID,
+                                new Color([0, 255, 255]), 3), dojoColor);
                         break;
                     case "extent":
-                        symbol = new esri.symbol.SimpleFillSymbol(esri.symbol.SimpleFillSymbol.STYLE_SOLID, new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID, new dojo.Color([50, 50, 50]), 2), dojoColor);
+                        symbol = new SimpleFillSymbol(SimpleFillSymbol.STYLE_SOLID,
+                            new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID,
+                                new Color([50, 50, 50]), 2), dojoColor);
                         break;
                     case "multipoint":
-                        symbol = new esri.symbol.SimpleMarkerSymbol(esri.symbol.SimpleMarkerSymbol.STYLE_SQUARE, 10, new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID, new dojo.Color([255, 0, 0]), 1), dojoColor);
+                        symbol = new SimpleMarkerSymbol(SimpleMarkerSymbol.STYLE_SQUARE, 10,
+                            new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID,
+                                new Color([255, 0, 0]), 1), dojoColor);
                         break;
                 }
-                return symbol
+                return symbol;
             },
 
             /**
-            * Remove graphic from map graphics layer
-            *
-            * @method removeGraphic
-            */
-            removeGraphic: function (graphic, map) {
+             * Remove graphic from map graphics layer
+             *
+             * @method removeGraphic
+             */
+            removeGraphic: function(graphic, map) {
                 if (map === undefined) {
                     if (this.mapInstance !== null) {
                         if (this.mapInstance.graphics !== null && graphic !== null) {
@@ -651,7 +707,7 @@
              *
              * @method clearGraphics
              */
-            clearGraphics: function () {
+            clearGraphics: function() {
                 if (this.mapInstances !== null) {
                     for (var i = 0; i < this.mapInstances.length; i += 1) {
                         if (this.mapInstances[i].graphics !== null) {
@@ -668,7 +724,7 @@
             @method Name
             @param {string} name - description.
             **/
-            GetMapInitDataByID: function (mapID) {
+            GetMapInitDataByID: function(mapID) {
                 for (var i = 0; i < this.initializationData.maps.length; i++) {
                     if (this.initializationData.maps[i].mapID === mapID) {
                         return this.initializationData.maps[i];
@@ -678,7 +734,8 @@
             }
 
 
-        }  // End prototype
+        };
+        // End prototype
 
         /**
          * Get the singleton instance of the map.
@@ -686,7 +743,7 @@
          * @method getInstance
          * @returns {Map}
          */
-        MapModel.getInstance = function () {
+        MapModel.getInstance = function() {
             // summary:
             //      Gets an instance of the singleton
             if (instance === null) {

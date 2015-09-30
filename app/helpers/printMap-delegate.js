@@ -4,15 +4,15 @@
  * @class printMap-delegate
  */
 
-(function () {
+(function() {
     "use strict";
 
     define([
-        "app/models/map-model",
-        "esri/tasks/PrintTask"
-    ],
+            "app/models/map-model",
+            "esri/tasks/PrintTask"
+        ],
 
-        function (mapModel) {
+        function(mapModel) {
 
             var PrintMapDelegate = {
 
@@ -27,7 +27,7 @@
                  * @param {number} height - desired output height.
                  * @param {number} dpi - desired output DPI.
                  */
-                printJpgMap: function (url, callback, errback, width, height, dpi) {
+                printJpgMap: function(url, callback, errback, width, height, dpi) {
 
                     //Setup default values
                     width = (typeof width === "undefined") ? mapModel.mapInstance.width : width;
@@ -49,7 +49,7 @@
                     params.template = template;
 
                     var pt = new esri.tasks.PrintTask(url);
-		              pt.async = true; // added by scott
+                    pt.async = true; // added by scott
                     var result = pt.execute(params, callback, errback);
                 }
             };
@@ -57,4 +57,4 @@
             return PrintMapDelegate;
 
         });
-} ());
+}());

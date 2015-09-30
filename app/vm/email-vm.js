@@ -1,19 +1,19 @@
 /**
-* Launches the email Window.
-*
-*/
+ * Launches the email Window.
+ *
+ */
 
-(function () {
+(function() {
 
     "use strict";
 
     define([
 
-    ],
+        ],
 
-        function () {
+        function() {
 
-            var emailWin = new function () {
+            var emailWin = new function() {
                 /**
                  * Store reference to module this object.
                  *
@@ -23,13 +23,13 @@
 
                 var self = this;
 
-                self.init = function () {
+                self.init = function() {
 
-                };//end init
+                }; //end init
 
-                self.openEmailwin = function () {
+                self.openEmailwin = function() {
                     var emailURL = appConfig.jasonemail;
-                    window.open(emailURL, '', 'resizable=no,location=no,menubar=no,scrollbars=no,status=no,toolbar=no,fullscreen=no,dependent=no,width=600px,height=660px');
+                    window.open(emailURL, "", "resizable=no,location=no,menubar=no,scrollbars=no,status=no,toolbar=no,fullscreen=no,dependent=no,width=600px,height=660px");
                 };
 
             }; //end emailWin
@@ -38,7 +38,6 @@
 
         } //end function
 
-    )
+    );
 
-} ());
-
+}());

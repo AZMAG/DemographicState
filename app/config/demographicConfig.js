@@ -7,11 +7,11 @@
         function() {
             var demographicConfig = new function() {
                 var self = this;
-				
+
 
                 self.exportPDFCompareReportUrl = "http://geo.azmag.gov/services/Demographics/CompareReport.html";
-				self.exportPDFReportUrl = "http://geo.azmag.gov/services/Demographics/reports.html";
-				
+                self.exportPDFReportUrl = "http://geo.azmag.gov/services/Demographics/reports.html";
+
                 self.exportSummaryGridUrl = "http://geo.azmag.gov/services/AzMagService/api/ExportGrid";
                 self.exportReportUrl = "http://geo.azmag.gov/services/AzMagService/api/ExportDemographicCharts";
                 self.exportSelectedFeaturesUrl = "http://geo.azmag.gov/services/AzMagService/api/ExportSelectedFeatures";

@@ -1,33 +1,33 @@
 /**
-* Launches the Main Map Help Window.
-*
-*
-*/
+ * Launches the Main Map Help Window.
+ *
+ *
+ */
 
-(function () {
+(function() {
 
     "use strict";
 
     define([
-        'dojo/dom-construct',
-        'dojo/text!app/views/mainHelp-view.html',
-        'app/vm/email-vm',
-        'dojo/text!app/views/helplaunchbar-view.html',
-        'app/vm/help-vm'
-    ],
-        function (dc, helpView, emailVM, view, helpVM) {
+            "dojo/dom-construct",
+            "dojo/text!app/views/mainHelp-view.html",
+            "app/vm/email-vm",
+            "dojo/text!app/views/helplaunchbar-view.html",
+            "app/vm/help-vm"
+        ],
+        function(dc, helpView, emailVM, view, helpVM) {
 
-            var launchBar = new function () {
+            var launchBar = new function() {
 
                 var self = this;
 
                 self.windowTitle = "MAG Demographic Viewer Help";
 
-                self.init = function (relatedElement, relation) {
+                self.init = function(relatedElement, relation) {
                     dc.place(view, relatedElement, relation);
-                };//end init
+                }; //end init
 
-                self.openHelp = function () {
+                self.openHelp = function() {
                     helpVM.openWindow(helpView);
 
                     emailVM.init();
@@ -35,11 +35,11 @@
                     return false;
                 };
 
-            };//end launchBar
+            }; //end launchBar
 
             return launchBar;
 
         } // end function
-    )
+    );
 
-} ());
+}());

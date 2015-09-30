@@ -14,8 +14,8 @@
             "dojo/text!app/views/help-view.html",
             "dojo/text!app/views/legal-view.html",
             "app/vm/legal-vm",
-			"dojo/text!app/views/subscribe-view.html",
-			"app/vm/subscribe-vm"
+            "dojo/text!app/views/subscribe-view.html",
+            "app/vm/subscribe-vm"
         ],
         function(dc, dom, view, legalView, legalVM, subscribeView, subscribeVM) {
 
@@ -101,8 +101,8 @@
                     // adds version number and date to main help menu
                     // configured in main config file
                     $("#version").html(appConfig.Version);
-					
-					$("#EmailList").bind("click", function() {
+
+                    $("#EmailList").bind("click", function() {
                         subscribeVM.openWindow(subscribeView);
                     });
 

@@ -1,39 +1,43 @@
 /**
-* Launches the Share/Social Window.
-*
-* @class Panel
-*/
+ * Launches the Share/Social Window.
+ *
+ * @class Panel
+ */
 
-(function () {
+(function() {
 
     "use strict";
 
     define([
-        'dojo/dom-construct',
-        'dojo/topic'
-    ],
-        function (dc, tp) {
+            "dojo/dom-construct",
+            "dojo/topic"
+        ],
+        function(dc, tp) {
 
-            var launchBar = new function () {
+            var launchBar = new function() {
 
                 var self = this;
 
                 self.windowTitle = "Share";
 
-                self.init = function (relatedElement, relation) {
+                self.init = function(relatedElement, relation) {
                     dc.place("<span id=\"sharelaunchbar\" title=\"Share\"><a id=\"launchShare\" class=\"nav\" role=\"button\" href=\"#\" data-bind=\"click: openShare\">Share</a></span>", relatedElement, relation);
-                };// end init
+                }; // end init
 
-                self.openShare = function () {
-                    if ($("#shareWindowDiv").is(':hidden')) {
-                        tp.publish('shareStateO', { name: 'Open' });
+                self.openShare = function() {
+                    if ($("#shareWindowDiv").is(":hidden")) {
+                        tp.publish("shareStateO", {
+                            name: "Open"
+                        });
                     } else {
-                        tp.publish('shareStateC', { name: 'Close' });
+                        tp.publish("shareStateC", {
+                            name: "Close"
+                        });
                     }
                     return false;
-                };// end openShare
+                }; // end openShare
 
-            };//end
+            }; //end
 
             return launchBar;
         }

@@ -3,32 +3,35 @@
  *
  * @class print-vm
  */
-(function () {
+(function() {
 
     "use strict";
 
     define([
-        "dojo",
-        "dojo/dom-construct",
-        "dojo/topic",
-        "dojo/text!app/views/contacts-view.html",
-    ],
+            "dojo",
+            "dojo/dom-construct",
+            "dojo/topic",
+            "dojo/text!app/views/contacts-view.html"
+        ],
+        function(dj, dc, tp, view) {
 
-        function (dj, dc, tp, view) {
 
-
-            var contactVM = new function () {
+            var contactVM = new function() {
 
                 var self = this;
-                 self.windowTitle = "Contacts";
+                self.windowTitle = "Contacts";
 
-                 self.winWidth = document.documentElement.clientWidth;
+                self.winWidth = document.documentElement.clientWidth;
 
-                self.init = function () {
+                self.init = function() {
                     dc.place(view, "mapContainer", "after");
 
-                    tp.subscribe("contStateO", function () { self.openWindow(); });
-                    tp.subscribe("contStateC", function () { self.closeWindow(); });
+                    tp.subscribe("contStateO", function() {
+                        self.openWindow();
+                    });
+                    tp.subscribe("contStateC", function() {
+                        self.closeWindow();
+                    });
 
                     var contWindow = $("#contactsWindowDiv").kendoWindow({
                         width: "650px",
@@ -40,14 +43,14 @@
                         resizable: false
                     }).data("kendoWindow").center();
 
-                };//end init
+                }; //end init
 
                 /**
                 Method for opening the window.
 
                 @method openWindow
                 **/
-                self.openWindow = function () {
+                self.openWindow = function() {
                     // show the window
                     var win = $("#contactsWindowDiv").data("kendoWindow");
                     win.restore();
@@ -55,18 +58,15 @@
                     win.open();
                 };
 
-                self.closeWindow = function () {
+                self.closeWindow = function() {
                     var win = $("#contactsWindowDiv").data("kendoWindow");
                     win.close();
                 };
 
-			};//end contactsVM
+            }; //end contactsVM
 
-		return contactVM;
+            return contactVM;
 
-      }//end function
+        } //end function
     );
-} ());
-
-
-
+}());

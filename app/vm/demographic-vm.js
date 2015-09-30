@@ -32,10 +32,7 @@
             "esri/graphicsUtils",
             "esri/symbols/SimpleLineSymbol",
             "esri/symbols/SimpleFillSymbol",
-            "dojo/_base/Color",
-			
-			"https://code.jquery.com/jquery-1.9.1.min.js",
-            "http://kendo.cdn.telerik.com/2015.2.624/js/kendo.all.min.js"
+            "dojo/_base/Color"
         ],
         function(dc, dom, tp, da, on, view, selFeatsView, chartHelpView, summaryHelpView,
             selFeatHelpView, helpVM, alertView1, alertView2, alert1VM, alert2VM, layerDelegate, printMapDelegate,
@@ -318,16 +315,15 @@
                             }
                         }
                     }
-					
-					//remove combobox on closing.
-					var compareComboBoxInput = $("#demCompareComboBox");
+
+                    //remove combobox on closing.
+                    var compareComboBoxInput = $("#demCompareComboBox");
                     var compareComboBoxObj = compareComboBoxInput.data("kendoComboBox");
-					
-					if(compareComboBoxObj)
-					{
-						compareComboBoxObj.destroy();
-						compareComboBoxObj.wrapper.remove();
-					}					
+
+                    if (compareComboBoxObj) {
+                        compareComboBoxObj.destroy();
+                        compareComboBoxObj.wrapper.remove();
+                    }
                 };
 
                 /**
@@ -660,7 +656,7 @@
                  * @method getData
                  */
                 self.getData = function() {
-				
+
                     var url = self.reportConfigItem.restUrl;
                     var whereClause = self.reportConfigItem.summaryField + " = '" + self.communityName + "'";
 
@@ -691,7 +687,7 @@
 
                     // Clear the current graphics
                     mapModel.clearGraphics();
-					
+
                     // Add the new graphics. vw
                     if (features[0].geometry !== null) {
                         mapModel.addGraphics(features, undefined, true);
@@ -856,7 +852,7 @@
                     var kendoGrid = $("#demDataGrid").data("kendoGrid");
                     if (kendoGrid !== null) {
                         kendoGrid.element.remove();
-						kendoGrid.destroy();
+                        kendoGrid.destroy();
                     }
 
                     var useCompare = dom.byId("demUseComp").checked;
@@ -917,8 +913,8 @@
                                 // Update the Grid
 
                                 if (kendoGrid !== undefined) {
-									kendoGrid.element.remove();
-                                    kendoGrid.destroy();                                    
+                                    kendoGrid.element.remove();
+                                    kendoGrid.destroy();
                                 }
                                 self.createKendoGridWithCompare();
                             }
@@ -927,12 +923,12 @@
                             self.compareFeature = null;
 
                             // this block removes from the dom vw
-                             compareComboBoxObj.destroy();
-                             compareComboBoxObj.wrapper.remove();
+                            compareComboBoxObj.destroy();
+                            compareComboBoxObj.wrapper.remove();
 
                             // Update the Grid
                             if (kendoGrid !== undefined) {
-								kendoGrid.element.remove();
+                                kendoGrid.element.remove();
                                 kendoGrid.destroy();
                             }
                             self.createKendoGrid();
@@ -984,25 +980,24 @@
 
                     var compareComboBoxInput = $("#demCompareComboBox");
                     var compareComboBoxObj = compareComboBoxInput.data("kendoComboBox");
-					
-					if(compareComboBoxObj)
-					{
-						compareComboBoxObj.destroy();
-						compareComboBoxObj.wrapper.remove();
-					}
-                        dc.create("input", {
-                            id: "demCompareComboBox"
-                        }, "demUseCompLabel", "after");
-                        $("#demCompareComboBox").kendoComboBox({
-                            index: 0,
-                            dataTextField: "Name",
-                            dataValueField: "Name",
-                            filter: "contains",
-                            dataSource: {
-                                data: nameArray
-                            },
-                            select: self.compareNameSelected
-                        });
+
+                    if (compareComboBoxObj) {
+                        compareComboBoxObj.destroy();
+                        compareComboBoxObj.wrapper.remove();
+                    }
+                    dc.create("input", {
+                        id: "demCompareComboBox"
+                    }, "demUseCompLabel", "after");
+                    $("#demCompareComboBox").kendoComboBox({
+                        index: 0,
+                        dataTextField: "Name",
+                        dataValueField: "Name",
+                        filter: "contains",
+                        dataSource: {
+                            data: nameArray
+                        },
+                        select: self.compareNameSelected
+                    });
                     //}
                 };
 
@@ -1013,28 +1008,27 @@
                  * @param e - event arguments
                  */
                 self.compareNameSelected = function(e) {
-				if (e.item.text() !== ' Compare with...')
-				{
-                    if (e.item.index() > 0) {
-                        var selectedName = this.dataItem(e.item.index());
-                        self.compareToName = selectedName.Name;
+                    if (e.item.text() !== " Compare with...") {
+                        if (e.item.index() > 0) {
+                            var selectedName = this.dataItem(e.item.index());
+                            self.compareToName = selectedName.Name;
 
-                        // Query for the place record
-                        var url = self.reportConfigItem.compareUrl;
-                        var whereClause = self.reportConfigItem.comparePlaceField + " = '" + self.compareToName + "'";
+                            // Query for the place record
+                            var url = self.reportConfigItem.compareUrl;
+                            var whereClause = self.reportConfigItem.comparePlaceField + " = '" + self.compareToName + "'";
 
-                        layerDelegate.query(url, self.placeQueryHelper, self.placeQueryFault, null, whereClause, true);
-                    } else {
-                        self.compareFeature = null;
-                        // Update the Grid
-                        var kendoGrid = $("#demDataGrid").data("kendoGrid");
-                        if (kendoGrid !== undefined) {
-                            kendoGrid.destroy();
-                            kendoGrid.element.remove();
+                            layerDelegate.query(url, self.placeQueryHelper, self.placeQueryFault, null, whereClause, true);
+                        } else {
+                            self.compareFeature = null;
+                            // Update the Grid
+                            var kendoGrid = $("#demDataGrid").data("kendoGrid");
+                            if (kendoGrid !== undefined) {
+                                kendoGrid.destroy();
+                                kendoGrid.element.remove();
+                            }
+                            self.createKendoGrid();
                         }
-                        self.createKendoGrid();
                     }
-				}
                 };
 
                 /**
@@ -1062,7 +1056,7 @@
                     // Update the Grid
                     var kendoGrid = $("#demDataGrid").data("kendoGrid");
                     if (kendoGrid !== undefined) {
-						kendoGrid.element.remove();
+                        kendoGrid.element.remove();
                         kendoGrid.destroy();
                     }
                     self.createKendoGridWithCompare();
@@ -1256,7 +1250,7 @@
                     var kendoChart = $("#demChartArea").data("kendoChart");
                     if (kendoChart !== null) {
                         kendoChart.destroy();
-						
+
                         kendoChart.element.remove();
                     }
                     self.createChart();
@@ -1279,7 +1273,7 @@
                         var kendoChart = $("#demChartArea").data("kendoChart");
                         if (kendoChart !== null) {
                             kendoChart.destroy();
-							
+
                             kendoChart.element.remove();
                         }
                         self.createChart();
@@ -1321,7 +1315,7 @@
                             // offsetY: -80,
                             margin: {
                                 left: 0,
-								right:10
+                                right: 10
                             },
                             labels: {
                                 color: "white"
@@ -1359,7 +1353,7 @@
                         plotArea: {
                             margin: {
                                 right: 30,
-                                
+
                             }
                         },
                         chartArea: {
@@ -1367,7 +1361,7 @@
                             margin: {
                                 left: 15,
                                 top: 5,
-								right: 15
+                                right: 15
                             }
                         },
                         categoryAxis: {
@@ -1478,16 +1472,16 @@
                     if (useCompare) {
                         communities.push(self.compareToName);
                     }
-					console.log("test");
+                    console.log("test");
                     // Execute call to service
                     var jqXHR = $.ajax(demographicConfig.exportSummaryGridUrl, {
-						
+
                         type: "POST",
-						//datatype: "jsonp",
-						//crossDomain:true,
-						//headers: {"Access-Control-Allow-Origin": "*"},
-						//beforeSend: function(xhr){xhr.setRequestHeader('Access-Control-Allow-Origin', 'http:\\geo.azmag.gov');},
-						
+                        //datatype: "jsonp",
+                        //crossDomain:true,
+                        //headers: {"Access-Control-Allow-Origin": "*"},
+                        //beforeSend: function(xhr){xhr.setRequestHeader('Access-Control-Allow-Origin', 'http:\\geo.azmag.gov');},
+
                         data: JSON.stringify({
                             passcode: appConfig.webServicePasscode,
                             source: self.reportConfigItem.source,
@@ -1510,91 +1504,69 @@
                         }
                     });
                 };
-				
-				self.exportPDFReport = function() {
-					
-					var testString = "";
-					var parameterString = "";
-					if(self.compareFeature)
-					{
-						if(self.communityName === "Selected Block Groups")
-						{
-							var tractIdArray = "";
-							
-							for(var i = 0; i < self.selectedFeatures.length; i++) {
-									tractIdArray += self.selectedFeatures[i].attributes.OBJECTID + ",";
-								}
-							parameterString = "Interactive";
-							localStorage.city1 = tractIdArray.substring(0, tractIdArray.length - 1);
-						}	
-						else{
-							parameterString = self.communityName;
-						}
 
-						//document.domain = 'mag1113';
-						
-						self.reportURL = encodeURI(demographicConfig.exportPDFCompareReportUrl + "?city1=" + parameterString + "&?city2=" + self.compareToName);
-						newWindow = window.open(self.reportURL, "_new");						
-					}
-					else{
-						if ( self.communityName.indexOf("County") > -1)
-						{
-							self.reportURL = encodeURI(demographicConfig.exportPDFReportUrl + "?county=" + self.communityName);
-							newWindow = window.open(self.reportURL, "_new");
-						}
-						else if ( self.communityName.indexOf("Legislative") > -1)
-						{
-							self.reportURL = encodeURI(demographicConfig.exportPDFReportUrl + "?legislative=" + self.communityName.slice(-2));
-							newWindow = window.open(self.reportURL, "_new");
-						}
-						else if ( self.communityName.indexOf("Congressional") > -1)
-						{
-							self.reportURL = encodeURI(demographicConfig.exportPDFReportUrl + "?congressional=" + self.communityName.slice(-2));
-							newWindow = window.open(self.reportURL, "_new");
-						}
-						else if ( self.communityName.indexOf("Supervisor") > -1)
-						{
-							self.reportURL = encodeURI(demographicConfig.exportPDFReportUrl + "?supervisor=" + self.communityName.slice(-2));
-							newWindow = window.open(self.reportURL, "_new");
-						}
-						else if ( self.communityName.indexOf("District") > -1)
-						{
-							self.reportURL = encodeURI(demographicConfig.exportPDFReportUrl + "?council=" + self.communityName);
-							newWindow = window.open(self.reportURL, "_new");
-						}
-						else if ( self.communityName === "Selected Block Groups")
-						{
-							var tractIdArray = "";
-							
-							for(var i = 0; i < self.selectedFeatures.length; i++) {
-								if (i != self.selectedFeatures.length & self.selectedFeatures.length != 1)
-								{
-									tractIdArray += self.selectedFeatures[i].attributes.OBJECTID + ",";
-								}
-								else
-								{
-									tractIdArray += self.selectedFeatures[i].attributes.OBJECTID;
-								}
-							}
-							
-							//document.domain = 'mag1113';
-							localStorage.TractID = tractIdArray;
-							self.reportURL = encodeURI(demographicConfig.exportPDFReportUrl + "?interactive");
-							newWindow = window.open(self.reportURL, "_new");
-						}
-						else
-						{
-							self.reportURL = encodeURI(demographicConfig.exportPDFReportUrl + "?city=" + self.communityName);
-							newWindow = window.open(self.reportURL, "_new");
-						}
-					}
+                self.exportPDFReport = function() {
+                    var parameterString = "";
+                    if (self.compareFeature) {
+                        if (self.communityName === "Selected Block Groups") {
+                            var tractIdArray = "";
+
+                            for (var i = 0; i < self.selectedFeatures.length; i++) {
+                                tractIdArray += self.selectedFeatures[i].attributes.OBJECTID + ",";
+                            }
+                            parameterString = "Interactive";
+                            localStorage.city1 = tractIdArray.substring(0, tractIdArray.length - 1);
+                        } else {
+                            parameterString = self.communityName;
+                        }
+
+                        //document.domain = 'mag1113';
+
+                        self.reportURL = encodeURI(demographicConfig.exportPDFCompareReportUrl + "?city1=" + parameterString + "&?city2=" + self.compareToName);
+                        newWindow = window.open(self.reportURL, "_new");
+                    } else {
+                        if (self.communityName.indexOf("County") > -1) {
+                            self.reportURL = encodeURI(demographicConfig.exportPDFReportUrl + "?county=" + self.communityName);
+                            newWindow = window.open(self.reportURL, "_new");
+                        } else if (self.communityName.indexOf("Legislative") > -1) {
+                            self.reportURL = encodeURI(demographicConfig.exportPDFReportUrl + "?legislative=" + self.communityName.slice(-2));
+                            newWindow = window.open(self.reportURL, "_new");
+                        } else if (self.communityName.indexOf("Congressional") > -1) {
+                            self.reportURL = encodeURI(demographicConfig.exportPDFReportUrl + "?congressional=" + self.communityName.slice(-2));
+                            newWindow = window.open(self.reportURL, "_new");
+                        } else if (self.communityName.indexOf("Supervisor") > -1) {
+                            self.reportURL = encodeURI(demographicConfig.exportPDFReportUrl + "?supervisor=" + self.communityName.slice(-2));
+                            newWindow = window.open(self.reportURL, "_new");
+                        } else if (self.communityName.indexOf("District") > -1) {
+                            self.reportURL = encodeURI(demographicConfig.exportPDFReportUrl + "?council=" + self.communityName);
+                            newWindow = window.open(self.reportURL, "_new");
+                        } else if (self.communityName === "Selected Block Groups") {
+                            var tractIdArray = "";
+
+                            for (var i = 0; i < self.selectedFeatures.length; i++) {
+                                if (i !== self.selectedFeatures.length & self.selectedFeatures.length !== 1) {
+                                    tractIdArray += self.selectedFeatures[i].attributes.OBJECTID + ",";
+                                } else {
+                                    tractIdArray += self.selectedFeatures[i].attributes.OBJECTID;
+                                }
+                            }
+
+                            //document.domain = 'mag1113';
+                            localStorage.TractID = tractIdArray;
+                            self.reportURL = encodeURI(demographicConfig.exportPDFReportUrl + "?interactive");
+                            newWindow = window.open(self.reportURL, "_new");
+                        } else {
+                            self.reportURL = encodeURI(demographicConfig.exportPDFReportUrl + "?city=" + self.communityName);
+                            newWindow = window.open(self.reportURL, "_new");
+                        }
+                    }
 
                     var newWindow = "";
-                    
+
                     var newWindow = window.open(self.reportURL, "_new");
 
                 };
-				
+
                 /**
                  * Initiate report export by printing the existing map.
                  * The rest of the export will be handled in the callback.

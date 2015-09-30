@@ -40,6 +40,10 @@ var appConfig = new function() {
     this.exportWebMapUrl = "http://geo.azmag.gov/gismag/rest/services/gp/stateDemo/GPServer/Export%20Web%20Map"; // Custom Print Service
     this.webServicePasscode = "sun sand dry heat grand canyon";
 
+    this.geoCoderService = "//geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer";
+    this.placeService = "http://geo.azmag.gov/gismag/rest/services/maps/StateDemographicMain/MapServer/1";
+    this.censusTracts = "http://geo.azmag.gov/gismag/rest/services/maps/StateDemographicMain/MapServer/5";
+
     this.jasonemail = "https://www.azmag.gov/EmailPages/JasonHoward.asp";
 
     this.layerInfo = [{

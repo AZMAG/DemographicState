@@ -4,28 +4,28 @@
  * @class interactiveTools-vm
  */
 
-(function () {
+(function() {
 
     "use strict";
 
     define([
-        'dojo/dom-construct',
-        'dojo/dom',
-        'dojo/on',
-        'dojo/topic',
-        'dojo/text!app/views/interactiveTools-view.html',
-        'app/helpers/layer-delegate',
-        'app/models/map-model',
-        'dijit/form/CheckBox',
-        'app/config/interactiveToolConfig',
-        'esri/toolbars/draw',
-		
-		'https://code.jquery.com/jquery-1.9.1.min.js',
-		'http://kendo.cdn.telerik.com/2015.2.624/js/kendo.all.min.js'
-    ],
-        function (dc, dom, on, topic, view, layerDelegate, mapModel, CheckBox, interactiveToolConfig) {
+            "dojo/dom-construct",
+            "dojo/dom",
+            "dojo/on",
+            "dojo/topic",
+            "dojo/text!app/views/interactiveTools-view.html",
+            "app/helpers/layer-delegate",
+            "app/models/map-model",
+            "dijit/form/CheckBox",
+            "app/config/interactiveToolConfig",
+            "esri/toolbars/draw",
+            "esri/symbols/SimpleMarkerSymbol",
+            "esri/symbols/SimpleFillSymbol",
+            "esri/graphic"
+        ],
+        function(dc, dom, on, topic, view, layerDelegate, mapModel, CheckBox, interactiveToolConfig, Draw, SimpleMarkerSymbol, SimpleFillSymbol, Graphic) {
 
-            var InteractiveToolsVM = new function () {
+            var InteractiveToolsVM = new function() {
 
                 /**
                  * Store reference to module this object.
@@ -44,7 +44,8 @@
                  * @property qryErrback
                  * @type {*}
                  */
-                var qryCallback = null, qryErrback = null;
+                var qryCallback = null,
+                    qryErrback = null;
 
                 /**
                  * Esri toolbar.
@@ -74,9 +75,9 @@
                  * Initialize the class
                  *
                  * @method init
-                 * 
+                 *
                  */
-                self.init = function () {
+                self.init = function() {
 
                 };
 
@@ -90,19 +91,21 @@
                  * @param {*} errback - callback method for errors returned by spatial query.
                  * @param {string} queryUrl - map service URL to query.
                  */
-                self.insertAfter = function (newElementName, elementName, callback, errback, queryUrl) {
+                self.insertAfter = function(newElementName, elementName, callback, errback, queryUrl) {
                     // Save the callback methods for later
                     qryCallback = callback;
                     qryErrback = errback;
                     self.queryUrl = queryUrl;
 
                     // Place the controls
-                    dc.create("div", { id: newElementName }, elementName, "after");
+                    dc.create("div", {
+                        id: newElementName
+                    }, elementName, "after");
                     dc.place(view, newElementName, "first");
 
                     // Create a new instance of the draw toolbar and wire up the onDrawEnd event
                     for (var i = 0; i < mapModel.mapInstances.length; i += 1) {
-                        self.toolbars.push(new esri.toolbars.Draw(mapModel.mapInstances[i]));
+                        self.toolbars.push(new Draw(mapModel.mapInstances[i]));
                         self.toolbars[i].on("draw-end", self.onDrawEnd);
                     }
 
@@ -116,12 +119,28 @@
                     var kendoListView = listDivObj.data("kendoListView");
 
                     // Create the list view containing the tools.
-                    if (kendoListView == undefined || kendoListView == null) {
+                    if (kendoListView === undefined || kendoListView === null) {
                         self.selActions = [];
-                        self.selActions.push({ image: "app/resources/img/i_draw_point.png", title: "Point of Interest", tool: esri.toolbars.Draw.POINT });
-                        self.selActions.push({ image: "app/resources/img/i_draw_rect.png", title: "Area of Interest", tool: esri.toolbars.Draw.EXTENT });
-                        self.selActions.push({ image: "app/resources/img/i_draw_poly.png", title: "Region of Interest", tool: esri.toolbars.Draw.POLYGON });
-                        self.selActions.push({ image: "app/resources/img/i_draw_line.png", title: "Corridor of Interest", tool: esri.toolbars.Draw.POLYLINE });
+                        self.selActions.push({
+                            image: "app/resources/img/i_draw_point.png",
+                            title: "Point of Interest",
+                            tool: esri.toolbars.Draw.POINT
+                        });
+                        self.selActions.push({
+                            image: "app/resources/img/i_draw_rect.png",
+                            title: "Area of Interest",
+                            tool: esri.toolbars.Draw.EXTENT
+                        });
+                        self.selActions.push({
+                            image: "app/resources/img/i_draw_poly.png",
+                            title: "Region of Interest",
+                            tool: esri.toolbars.Draw.POLYGON
+                        });
+                        self.selActions.push({
+                            image: "app/resources/img/i_draw_line.png",
+                            title: "Corridor of Interest",
+                            tool: esri.toolbars.Draw.POLYLINE
+                        });
 
                         listDivObj.kendoListView({
                             dataSource: {
@@ -134,7 +153,7 @@
                     }
 
                     // Make sure the buffer options panel is not displayed on startup
-                    $('#bufferOptions').css("display", "none");
+                    $("#bufferOptions").css("display", "none");
 
                     // Wire up the buffer checkbox change event
                     $("input#bufferSelection").change(self.bufferChange);
@@ -155,14 +174,14 @@
                     });
                 };
 
-                self.mapFrameLoaded = function (map) {
+                self.mapFrameLoaded = function(map) {
                     if (mapModel.mapInstances.length !== self.toolbars.length) {
-                        self.toolbars.push(new esri.toolbars.Draw(mapModel.mapInstance));
+                        self.toolbars.push(new Draw(mapModel.mapInstance));
                         self.toolbars[self.toolbars.length - 1].on("draw-end", self.onDrawEnd);
                     }
                 };
 
-                self.mapFrameRemoved = function () {
+                self.mapFrameRemoved = function() {
                     self.toolbars.pop();
                 };
 
@@ -170,13 +189,13 @@
                  * Fired when user toggle the buffer checkbox - Toggle the display of the buffer options panel
                  *
                  * @method bufferChange
-                 * 
+                 *
                  */
-                self.bufferChange = function () {
+                self.bufferChange = function() {
                     if (dojo.byId("bufferSelection").checked) {
-                        $('#bufferOptions').css("display", "block");
+                        $("#bufferOptions").css("display", "block");
                     } else {
-                        $('#bufferOptions').css("display", "none");
+                        $("#bufferOptions").css("display", "none");
                     }
                 };
 
@@ -186,9 +205,9 @@
                  * @event change
                  * @param e - event arguments
                  */
-                self.onListSelectionChanged = function (e) {
+                self.onListSelectionChanged = function(e) {
                     var selectedObj = this.select();
-                    if (selectedObj == undefined || selectedObj == null) {
+                    if (selectedObj === undefined || selectedObj === null) {
                         return;
                     }
 
@@ -209,7 +228,7 @@
                  *
                  * @method clearSelection
                  */
-                self.clearSelection = function () {
+                self.clearSelection = function() {
                     for (var i = 0; i < self.toolbars.length; i += 1) {
                         self.toolbars[i].deactivate();
                     }
@@ -223,7 +242,7 @@
                  * @event onDrawEnd
                  * @param {Geometry} geometry - geometry drawn by user.
                  */
-                self.onDrawEnd = function (evt) {
+                self.onDrawEnd = function(evt) {
                     self.clearSelection();
                     // adding loading icon. vw
                     esri.show(dojo.byId("loading"));
@@ -235,9 +254,9 @@
                         var distance = dojo.byId("bufferDistance").value;
 
                         //buffer the geometry
-                        layerDelegate.bufferQuery(distance, unit, evt.geometry).then(function (geometries) {
+                        layerDelegate.bufferQuery(distance, unit, evt.geometry).then(function(geometries) {
 
-                            var displayFeatures = function (results) {
+                            var displayFeatures = function(results) {
                                 //add originally selected feature to the map
                                 mapModel.addGraphics(results.features, "yellow", true);
 
@@ -245,21 +264,21 @@
                                 var selectionGraphic = null;
 
                                 //add original selection to map
-                                if (evt.geometry.type == "point") {
-                                    selectionSymbol = new esri.symbol.SimpleMarkerSymbol(interactiveToolConfig.selectionPointSymbol);
+                                if (evt.geometry.type === "point") {
+                                    selectionSymbol = new SimpleMarkerSymbol(interactiveToolConfig.selectionPointSymbol);
                                 } else {
-                                    selectionSymbol = new esri.symbol.SimpleFillSymbol(interactiveToolConfig.selectionSymbol);
+                                    selectionSymbol = new SimpleFillSymbol(interactiveToolConfig.selectionSymbol);
                                 }
-                                selectionGraphic = new esri.Graphic(evt.geometry, selectionSymbol);
+                                selectionGraphic = new Graphic(evt.geometry, selectionSymbol);
                                 mapModel.addGraphic(selectionGraphic, undefined, true, true);
 
                                 //add buffer geometry to map
-                                var bufferSymbol = new esri.symbol.SimpleFillSymbol(interactiveToolConfig.bufferSymbol);
-                                var graphic = new esri.Graphic(geometries[0], bufferSymbol);
+                                var bufferSymbol = new SimpleFillSymbol(interactiveToolConfig.bufferSymbol);
+                                var graphic = new Graphic(geometries[0], bufferSymbol);
                                 mapModel.addGraphic(graphic, undefined, true, true);
-                            }
+                            };
 
-                            var queryOrigFeature = function (results) {
+                            var queryOrigFeature = function(results) {
                                 //call original callback
                                 qryCallback(results);
                                 //perform query with original geometry
@@ -268,7 +287,7 @@
 
                             //perform query with buffered geometry
                             layerDelegate.query(self.queryUrl, queryOrigFeature, qryErrback, geometries[0], undefined, true);
-                        }, function (error) {
+                        }, function(error) {
                             //error buffering - query without buffering
                             layerDelegate.query(self.queryUrl, qryCallback, qryErrback, evt.geometry, undefined, true);
                         });
@@ -279,5 +298,5 @@
             };
 
             return InteractiveToolsVM;
-        })
+        });
 }());

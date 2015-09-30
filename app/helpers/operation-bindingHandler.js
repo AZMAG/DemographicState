@@ -1,15 +1,15 @@
-(function () {
+(function() {
     "use strict";
 
     define([
 
-    ],
+        ],
 
-        function () {
+        function() {
 
             ko.bindingHandlers.operationUniqueId = {
 
-                init: function (element, valueAccessor) {
+                init: function(element, valueAccessor) {
                     var value = valueAccessor();
                     value.id = value.id || ko.bindingHandlers.operationUniqueId.prefix + (++ko.bindingHandlers.operationUniqueId.counter);
                     element.id = value.id;
@@ -18,4 +18,4 @@
                 prefix: "queryOperation"
             };
         });
-} ());
+}());
