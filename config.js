@@ -33,7 +33,7 @@
 
 var appConfig = new function() {
 
-    this.Version = "v1.6.0 | 03/02/2015";
+    this.Version = "v2.0.0 | 10/01/2015";
 
     this.ArcGISInstanceURL = "http://geo.azmag.gov/gismag/rest";
     //this.exportWebMapUrl = "http://geo.azmag.gov/gismag/rest/services/Utilities/PrintingTools/GPServer/Export%20Web%20Map%20Task";  // Generic Print Service
@@ -43,17 +43,19 @@ var appConfig = new function() {
     this.jasonemail = "https://www.azmag.gov/EmailPages/JasonHoward.asp";
 
     this.layerInfo = [{
+            layerNum: 0,
             id: "censusTracts",
             title: "Census Tract Labels",
             type: "dynamic",
             url: "http://geo.azmag.gov/gismag/rest/services/maps/StateDemographicMain/MapServer",
             queryUrl: "http://geo.azmag.gov/gismag/rest/services/maps/StateDemographicMain/MapServer/6",
             queryWhere: "1=1",
-            layers: [5,6],
+            layers: [5, 6],
             opacity: 1,
             visible: false,
             showTOC: true
         }, {
+            layerNum: 1,
             id: "countyBoundaries",
             title: "County Boundaries",
             type: "dynamic",
@@ -65,6 +67,7 @@ var appConfig = new function() {
             visible: true,
             showTOC: true
         }, {
+            layerNum: 2,
             id: "congressionalDistricts",
             title: "Congressional Districts",
             type: "dynamic",
@@ -75,8 +78,8 @@ var appConfig = new function() {
             opacity: 0.8,
             visible: false,
             showTOC: true
-        },
-        {
+        }, {
+            layerNum: 3,
             id: "legislativeDistricts",
             title: "Legislative Districts",
             type: "dynamic",
@@ -87,15 +90,16 @@ var appConfig = new function() {
             opacity: 0.8,
             visible: false,
             showTOC: true
-        },
-        {
-            id: "reference",
-            title: "Roads",
+        }, {
+            layerNum: 4,
+            id: "esriReference",
+            title: "Streets",
             type: "tile",
             url: "http://server.arcgisonline.com/arcgis/rest/services/Reference/World_Transportation/MapServer",
             visible: true,
             showTOC: true
         }, {
+            layerNum: 5,
             id: "Census2010byBlockGroup",
             title: "Census by Block Group, 2010",
             type: "dynamic",
@@ -105,14 +109,16 @@ var appConfig = new function() {
             visible: true,
             showTOC: false
         }, {
+            layerNum: 6,
             id: "esriImagery",
-            title: "Aerial",
+            title: "Imagery",
             type: "tile",
             url: "http://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer",
             visible: false,
             showTOC: true
         }, {
-            id: "MagBasemapUnder_3",
+            layerNum: 7,
+            id: "esriBasemap",
             title: "Terrain",
             // url: "http://server.arcgisonline.com/ArcGIS/rest/services/World_Terrain_Base/MapServer",
             url: "http://server.arcgisonline.com/arcgis/rest/services/World_Street_Map/MapServer",
@@ -197,10 +203,10 @@ var appConfig = new function() {
     //from colorbrewer 2.0 qualitative HEX Set3
     //this.seriesColors = ["#8DD3C7", "#FFFFB3", "#BEBADA", "#FB8072", "#80B1D3", "#FDB462", "#B3DE69", "#FCCDE5", "#D9D9D9", "#BC80BD", "#CCEBC5", "#FFED6F"];
 
-	this.URLMinimizer = {
-	
-		login: "gisikreiter",
-		apiKey: "R_72ee4cf61d0983a005349f69d707c328"
-	};
+    this.URLMinimizer = {
+
+        login: "vwolfley",
+        apiKey: "R_8dbab4a2f0664e8f8b4f88fe0d9d7f80"
+    };
 
 }; //End Config

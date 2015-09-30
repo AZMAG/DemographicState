@@ -10,6 +10,12 @@
     	Twitter: @vernwolfley
     	From: Litchfield Park, AZ
 
+        Name:  Jack Fairfield
+        Role: Decision Support Analyst I
+        Contact:
+        Twitter:
+        From: Tempe, AZ
+
     	Name:  Scott Bridwell
     	Role: GIS Modeler/Developer
     	Contact:
