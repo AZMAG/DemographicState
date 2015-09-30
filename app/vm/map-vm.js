@@ -20,9 +20,10 @@
             "esri/map",
             "esri/dijit/HomeButton",
             "esri/dijit/Scalebar",
-            "esri/geometry/Extent"
+            "esri/geometry/Extent",
+            "esri/dijit/Legend",
         ],
-        function(dc, da, lang, on, ds, topic, view, mapModel, Map, HomeButton, Scalebar, Extent) {
+        function(dc, da, lang, on, ds, topic, view, mapModel, Map, HomeButton, Scalebar, Extent, Legend) {
 
             //var MapVM = new function () {
             var MapVM = function() {
@@ -193,7 +194,7 @@
                     $("#legendPanelBar_{value}".replace(/{value}/gi, self.mapID)).kendoPanelBar();
 
                     //create esri legend
-                    self.legend = new esri.dijit.Legend({
+                    self.legend = new Legend({
                         map: params.map,
                         layerInfos: [{
                             layer: self.mapTheme().Service ? params.map.getLayer(self.mapTheme().Service) : params.map.getLayer("Census2010byTract"),
@@ -236,7 +237,7 @@
 
                 @method mapRendererUpdated
                 **/
-                self.mapRendererUpdated = function() {
+                self.mapRendererUpdated = function(e) {
                     //check to see if this map is the current selected map
                     if (mapModel.mapInstance.id === self.mapID && self.mapTheme().Service) {
                         try {
@@ -374,7 +375,7 @@
                             //self.map.getLayer(self.mapTheme().Service).on("opacity-change", self.layerOpacityChanged);
 
                         } else {
-                            console.log("map-vm: updateMapInfo");
+                            // console.log("map-vm: updateMapInfo");
                         }
                     }
                 }; //end updateMapInfo

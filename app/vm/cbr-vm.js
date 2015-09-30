@@ -713,7 +713,7 @@
                         change: self.colorPickerClicked
                     }).data("kendoColorPalette");
                     self.breaksCountList.select(function(dataItem) {
-                        return dataItem === newRamp.length;
+                        return dataItem == newRamp.length;
                     });
                     if (colorChangeOnly) {
                         for (var i = 0; i < self.CurrentRamp.length; i++) {
