@@ -98,11 +98,34 @@
                 esri.hide(dojo.byId("loading"));
 
                 this.initializationData = bookmarkDelegate.getQueryStringMapDataObj();
-                //if (!this.initializationData) {
-                //    this.initializing = false;
-                //}
-            },
 
+                /**
+                 * infoTemplate for Congressional Districts
+                 * @type {InfoTemplate}
+                 */
+                self.congressInfoTemplate = new InfoTemplate();
+                self.congressInfoTemplate.setTitle("Congressional Districts");
+                self.congressInfoTemplate.setContent("<strong>${DistrictName}</strong><br>" +
+                    "Representative: ${Representative} - (${Rep_Party})");
+
+                /**
+                 * infoTemplate for Legislative Districts
+                 * @type {InfoTemplate}
+                 */
+                self.legislatureInfoTemplate = new InfoTemplate();
+                self.legislatureInfoTemplate.setTitle("Legislative Districts");
+                self.legislatureInfoTemplate.setContent("<strong>${DistrictName}</strong><br>" +
+                    "Representative: ${HouseRep1} - (${HRep1_Party})<br>" +
+                    "Representative: ${HouseRep2} - (${HRep2_Party})<br>" +
+                    "Senator: ${Senator} - (${S_Party})<br>");
+
+                self.featureFillSymbol = new SimpleFillSymbol(SimpleFillSymbol.STYLE_BACKWARD_DIAGONAL,
+                    new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID,
+                        new Color([0, 255, 255]), 2), new Color([0, 255, 255, 0.25]));
+
+            },
+            // =====================================================================================================================================>
+            // end initialize
 
             loadInitialMap: function(map) {
                 this.baseMapInstance = map;
@@ -255,11 +278,11 @@
                             break;
                         case "feature":
                             var featureTemplate;
-                            if (info.id === "mcSupervisorDistricts") {
-                                featureTemplate = self.superInfoTemplate;
+                            if (info.id === "congressionalDistricts") {
+                                featureTemplate = self.congressInfoTemplate;
                             }
-                            if (info.id === "mcCouncilDistricts") {
-                                featureTemplate = self.councilInfoTemplate;
+                            if (info.id === "legislativeDistricts") {
+                                featureTemplate = self.legislatureInfoTemplate;
                             }
                             layer = new FeatureLayer(info.url + token, {
                                 id: info.id,

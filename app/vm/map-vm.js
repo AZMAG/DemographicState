@@ -22,8 +22,17 @@
             "esri/dijit/Scalebar",
             "esri/geometry/Extent",
             "esri/dijit/Legend",
+
+            "esri/Color",
+            "esri/symbols/SimpleMarkerSymbol",
+            "esri/symbols/SimpleLineSymbol",
+            "esri/symbols/SimpleFillSymbol",
+
+            "esri/dijit/Popup",
+            "esri/dijit/PopupTemplate",
+            "esri/InfoTemplate",
         ],
-        function(dc, da, lang, on, ds, topic, view, mapModel, Map, HomeButton, Scalebar, Extent, Legend) {
+        function(dc, da, lang, on, ds, topic, view, mapModel, Map, HomeButton, Scalebar, Extent, Legend, Color, SimpleMarkerSymbol, SimpleLineSymbol, SimpleFillSymbol, Popup, PopupTemplate, InfoTemplate) {
 
             //var MapVM = new function () {
             var MapVM = function() {
@@ -85,7 +94,7 @@
                  * @param {boolean} showSlider - Used to tell the map initialization to include a slider or not.
                  * @param {string} sliderPosition - Position of the zoom slider within the map control. Valid values are: "top-left", "top-right", "bottom-left", "bottom-right". The default value is "top-left".
                  * @param {boolean} showScalebar - Used to tell the map to show the scale bar or not.
-                 * @param {boolean} showMapElements - used to toggle showing infivifual map items.
+                 * @param {boolean} showMapElements - used to toggle showing individual map items.
                  * @param {object} initData - This is an object built from the URL used to navigate to this page. It is the bookmarking data in the URL if there was any.
                  */
                 self.init = function(mapID, homeButtonID, showSlider, sliderPosition, showScalebar, showMapElements, mapElementsClass, initData) {
@@ -100,6 +109,22 @@
                     topic.subscribe("MapFrameInitialized", self.mapFrameInitialized);
                     topic.subscribe("CustomeMapBreaks", self.customMapBreaksChanged);
                 }; //end init
+
+                // create a popup to replace the map's info window
+                self.fillSymbol = new SimpleFillSymbol(SimpleFillSymbol.STYLE_BACKWARD_DIAGONAL,
+                    new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID,
+                        new Color([0, 255, 255]), 2), new Color([0, 255, 255, 0.25]));
+
+                self.pointSymbol = new SimpleMarkerSymbol("circle", 26, null,
+                    new Color([0, 0, 0, 0.25]));
+
+                self.popup = new Popup({
+                    fillSymbol: self.fillSymbol,
+                    markerSymbol: self.pointSymbol,
+                    titleInBody: false,
+                    visibleWhenEmpty: false,
+                    hideDelay: -1
+                }, dc.create("div"));
 
                 /**
                  *Creates a map.
@@ -118,8 +143,9 @@
                     this.mapID = mapID;
                     this.map = new Map(mapID, {
                         extent: new Extent(extentData),
-                        // fitExent: true,
-                        lods: appConfig.lods,
+                        infoWindow: self.popup,
+                        minZoom: 7,
+                        maxZoom: 19,
                         slider: showSlider,
                         sliderPosition: sliderPosition,
                         showAttribution: false,

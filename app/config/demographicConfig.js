@@ -19,6 +19,7 @@
                 self.viewReportUrl = "http://localhost/MAG/MAGDemographicsReports/DemographicChartsReport.html";
 
                 self.Census2010byBlockGroup = appConfig.layerInfo[5].url;
+                console.log(self.Census2010byBlockGroup);
 
                 self.CompareOperators = {
                     string: [{
@@ -1440,8 +1441,6 @@
                             }
                         ]
                     },
-
-
 
                     countySummary: {
                         name: "Demographic Summary",

@@ -74,25 +74,31 @@ var appConfig = new function() {
             layerNum: 2,
             id: "congressionalDistricts",
             title: "Congressional Districts",
-            type: "dynamic",
-            url: "http://geo.azmag.gov/gismag/rest/services/maps/StateDemographicMain/MapServer",
-            queryUrl: "http://geo.azmag.gov/gismag/rest/services/maps/StateDemographicMain/MapServer/3",
+            type: "feature",
+            url: "http://geo.azmag.gov/gismag/rest/services/maps/StateDemographicSup/MapServer/1",
+            queryUrl: "http://geo.azmag.gov/gismag/rest/services/maps/StateDemographicSup/MapServer/1",
             queryWhere: "1=1",
-            layers: [3],
-            opacity: 0.8,
+            layers: [1],
+            opacity: 1,
             visible: false,
+            selectable: true,
+            outFields: ["*"],
+            filters: [],
             showTOC: true
         }, {
             layerNum: 3,
             id: "legislativeDistricts",
             title: "Legislative Districts",
-            type: "dynamic",
-            url: "http://geo.azmag.gov/gismag/rest/services/maps/StateDemographicMain/MapServer",
-            queryUrl: "http://geo.azmag.gov/gismag/rest/services/maps/StateDemographicMain/MapServer/2",
+            type: "feature",
+            url: "http://geo.azmag.gov/gismag/rest/services/maps/StateDemographicSup/MapServer/0",
+            queryUrl: "http://geo.azmag.gov/gismag/rest/services/maps/StateDemographicSup/MapServer/0",
             queryWhere: "1=1",
-            layers: [2],
-            opacity: 0.8,
+            layers: [0],
+            opacity: 1,
             visible: false,
+            selectable: true,
+            outFields: ["*"],
+            filters: [],
             showTOC: true
         }, {
             layerNum: 4,
@@ -125,72 +131,16 @@ var appConfig = new function() {
             id: "esriBasemap",
             title: "Terrain",
             // url: "http://server.arcgisonline.com/ArcGIS/rest/services/World_Terrain_Base/MapServer",
-            url: "http://server.arcgisonline.com/arcgis/rest/services/World_Street_Map/MapServer",
+            // url: "http://server.arcgisonline.com/arcgis/rest/services/World_Street_Map/MapServer",
+            // url: "http://server.arcgisonline.com/arcgis/rest/services/Canvas/World_Dark_Gray_Base/MapServer",
+            url: "http://server.arcgisonline.com/arcgis/rest/services/Canvas/World_Light_Gray_Base/MapServer",
             type: "tile",
             visible: true,
             isBasemap: true,
-            showTOC: true
+            showTOC: false
         }
 
     ]; // End layerInfo
-
-    //levels of detail
-    this.lods = [
-
-        {
-            "level": 7,
-            "resolution": 1222.99245256249,
-            "scale": 4622324.434309
-        }, {
-            "level": 8,
-            "resolution": 611.49622628138,
-            "scale": 2311162.217155
-        }, {
-            "level": 9,
-            "resolution": 305.748113140558,
-            "scale": 1155581.108577
-        }, {
-            "level": 10,
-            "resolution": 152.874056570411,
-            "scale": 577790.554289
-        }, {
-            "level": 11,
-            "resolution": 76.4370282850732,
-            "scale": 288895.277144
-        }, {
-            "level": 12,
-            "resolution": 38.2185141425366,
-            "scale": 144447.638572
-        }, {
-            "level": 13,
-            "resolution": 19.1092570712683,
-            "scale": 72223.819286
-        }, {
-            "level": 14,
-            "resolution": 9.55462853563415,
-            "scale": 36111.909643
-        }, {
-            "level": 15,
-            "resolution": 4.77731426794937,
-            "scale": 18055.954822
-        }, {
-            "level": 16,
-            "resolution": 2.38865713397468,
-            "scale": 9027.977411
-        }, {
-            "level": 17,
-            "resolution": 1.19432856685505,
-            "scale": 4513.988705
-        }, {
-            "level": 18,
-            "resolution": 0.597164283559817,
-            "scale": 2256.994353
-        }, {
-            "level": 19,
-            "resolution": 0.298582141647617,
-            "scale": 1128.497176
-        }
-    ];
 
     this.initExtent = {
         "xmin": -13271172.93,
