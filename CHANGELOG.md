@@ -6,6 +6,10 @@ CHANGELOG for State Demographics Map Viewer
 
 ### Version 2.0.0 (10/01/2015)
 
+* added esri light gray basemap for maps basemap
+* popups for both Congressional and Legislative Districts show representatives names and party
+* added popups to the Legislative Districts layer
+* added popups to the Congressional Districts layer
 * updated to ArcGIS API for JavaScript `v3.14` - [v3.14] (https://developers.arcgis.com/javascript/)
 * updated Kendo UI v2015.2.902 `Q2 2015 SP2` [Q2 2015 SP2] ()
 * updated knockout to 2.2.0 via CDN - [knockout] (http://cdnjs.com/libraries/knockout/2.2.0)

@@ -7,7 +7,7 @@
         "esri/geometry/Extent",
         "esri/layers/FeatureLayer"
     ], function(Locator, Extent, FeatureLayer) {
-        // console.log(appConfig.layerInfo[5]);
+        // console.log(appConfig.layerInfo[3].queryUrl);
 
         var searchConfig = new function() {
             var self = this;
@@ -29,7 +29,7 @@
                 }),
                 placeholder: "302 N 1st Ave, Phoenix, Arizona"
             }, {
-                featureLayer: new FeatureLayer(appConfig.layerInfo[1].queryUrl),
+                featureLayer: new FeatureLayer(appConfig.countyService),
                 searchFields: ["NAME"],
                 displayField: "NAME",
                 name: "Counties",
@@ -41,19 +41,19 @@
                 name: "Jurisdiction",
                 placeholder: "Scottsdale"
             }, {
-                featureLayer: new FeatureLayer(appConfig.layerInfo[3].queryUrl),
-                searchFields: ["ID"],
-                displayField: "ID",
+                featureLayer: new FeatureLayer(appConfig.legislativeService),
+                searchFields: ["DISTRICT_NUM"],
+                displayField: "DISTRICT_NUM",
                 name: "Legislative Districts",
-                placeholder: "Legislative District 3"
+                placeholder: "Legislative District 03"
             }, {
-                featureLayer: new FeatureLayer(appConfig.layerInfo[2].queryUrl),
-                searchFields: ["ID"],
-                displayField: "ID",
+                featureLayer: new FeatureLayer(appConfig.congressionalService),
+                searchFields: ["DISTRICT_NUM"],
+                displayField: "DISTRICT_NUM",
                 name: "Congressional Districts",
                 placeholder: "Congressional District 1"
             }, {
-                featureLayer: new FeatureLayer(appConfig.censusTracts),
+                featureLayer: new FeatureLayer(appConfig.tractService),
                 searchFields: ["NAMELSAD"],
                 displayField: "NAMELSAD",
                 autoNavigate: true,

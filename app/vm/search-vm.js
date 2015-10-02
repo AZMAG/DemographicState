@@ -18,15 +18,16 @@
             "esri/layers/FeatureLayer",
             "esri/tasks/locator",
             "esri/geometry/Extent",
+            "esri/graphic",
             "esri/symbols/PictureMarkerSymbol",
             "esri/symbols/SimpleFillSymbol",
+
             "dojo/text!app/views/search-view.html",
             "app/models/map-model",
             "app/config/searchConfig",
-            "app/vm/demographic-vm",
-            "esri/graphic"
+            "app/vm/demographic-vm"
         ],
-        function(dc, da, lang, on, ds, Search, FeatureLayer, Locator, Extent, PictureMarkerSymbol, SimpleFillSymbol, view, mapModel, searchConfig, demographicVM, Graphic) {
+        function(dc, da, lang, on, ds, Search, FeatureLayer, Locator, Extent, Graphic, PictureMarkerSymbol, SimpleFillSymbol, view, mapModel, searchConfig, demographicVM) {
 
             var SearchVM = new function() {
 
@@ -66,10 +67,15 @@
                         //self.UpdateMap(e);
                     });
 
+
                 }; //end init
 
                 self.UpdateMap = function(e) {
-                    var communityName = e.result.name;
+                    console.log(e);
+                    if (e.result) {
+                        var communityName = e.result.name;
+                        console.log(communityName);
+                    }
                     var searchType = "";
 
                     switch (e.sourceIndex) {

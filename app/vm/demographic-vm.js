@@ -679,6 +679,7 @@
                  */
                 self.dataQueryHandler = function(results) {
                     var features = results.features;
+                    console.log(features);
                     var featuresCount = features.length;
                     //var feature = features[0];  // There should only be one feature returned from query
 
