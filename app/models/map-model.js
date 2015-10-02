@@ -192,6 +192,17 @@
             },
 
             /**
+             * Used to coordinate popups with interactive tools
+             * found in the interactiveTools-vm.js
+             * @return {[type]} [description]
+             */
+            hideInfoWindow: function() {
+                // this.mapInstance.infoWindow = false;
+                this.mapInstance.infoWindow.hide();
+                this.mapInstance.setInfoWindowOnClick(false);
+            },
+
+            /**
              * Fired when a layer is added to the map.
              *
              * @event onLayerAddResult

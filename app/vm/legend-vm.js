@@ -224,12 +224,19 @@
                     var layerId = e.currentTarget.id.substr(1);
                     for (var i = 0; i < mapModel.mapInstances.length; i++) {
                         var layer = mapModel.mapInstances[i].getLayer(layerId);
+                        // console.log(layer);
                         if (layer.visible) {
                             layer.hide();
                             bookmarkDelegate.legendLayerOptions.remove("c" + layerId);
                         } else {
                             layer.show();
                             bookmarkDelegate.legendLayerOptions.push("c" + layerId);
+                        }
+                        var baseLayer = mapModel.mapInstance.getLayer("esriBasemap");
+                        if (layer.id === "esriImagery" && layer.visible === true) {
+                            baseLayer.hide();
+                        } else {
+                            baseLayer.show();
                         }
                     }
                     tp.publish("BaseLayersUpdated");

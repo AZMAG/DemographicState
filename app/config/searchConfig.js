@@ -7,6 +7,7 @@
         "esri/geometry/Extent",
         "esri/layers/FeatureLayer"
     ], function(Locator, Extent, FeatureLayer) {
+        // console.log(appConfig.layerInfo[5]);
 
         var searchConfig = new function() {
             var self = this;
@@ -41,14 +42,14 @@
                 placeholder: "Scottsdale"
             }, {
                 featureLayer: new FeatureLayer(appConfig.layerInfo[3].queryUrl),
-                searchFields: ["DISTRICT_NUM"],
-                displayField: "DISTRICT_NUM",
+                searchFields: ["ID"],
+                displayField: "ID",
                 name: "Legislative Districts",
-                placeholder: "Legislative District 03"
+                placeholder: "Legislative District 3"
             }, {
                 featureLayer: new FeatureLayer(appConfig.layerInfo[2].queryUrl),
-                searchFields: ["DISTRICT_NUM"],
-                displayField: "DISTRICT_NUM",
+                searchFields: ["ID"],
+                displayField: "ID",
                 name: "Congressional Districts",
                 placeholder: "Congressional District 1"
             }, {

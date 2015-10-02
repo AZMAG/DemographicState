@@ -221,6 +221,9 @@
                     for (var i = 0; i < self.toolbars.length; i += 1) {
                         self.toolbars[i].activate(item.tool);
                     }
+
+                    // disables/hides popup window when interactive summary tools are selected
+                    mapModel.hideInfoWindow();
                 };
 
                 /**

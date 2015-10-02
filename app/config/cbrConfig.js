@@ -10,6 +10,7 @@
                 self.mapServices = {
                     Census2010byBlockGroup: appConfig.layerInfo[5].url
                 };
+                // console.log(self.mapServices);
 
                 self.thematicMaps = [
                     // population related maps

@@ -1472,7 +1472,7 @@
                     if (useCompare) {
                         communities.push(self.compareToName);
                     }
-                    console.log("test");
+                    // console.log("test");
                     // Execute call to service
                     var jqXHR = $.ajax(demographicConfig.exportSummaryGridUrl, {
 
@@ -1520,8 +1520,6 @@
                             parameterString = self.communityName;
                         }
 
-                        //document.domain = 'mag1113';
-
                         self.reportURL = encodeURI(demographicConfig.exportPDFCompareReportUrl + "?city1=" + parameterString + "&?city2=" + self.compareToName);
                         newWindow = window.open(self.reportURL, "_new");
                     } else {
@@ -1551,7 +1549,6 @@
                                 }
                             }
 
-                            //document.domain = 'mag1113';
                             localStorage.TractID = tractIdArray;
                             self.reportURL = encodeURI(demographicConfig.exportPDFReportUrl + "?interactive");
                             newWindow = window.open(self.reportURL, "_new");

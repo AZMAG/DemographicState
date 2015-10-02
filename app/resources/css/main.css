@@ -235,11 +235,9 @@ button:hover {
     left: 20px;
 }
 
-.k-widget .k-colorpalette{
-
+/*.k-widget .k-colorpalette{
 	width: 150px !important;
-
-}
+}*/
 
 /* for interactive tool tooltips*/
 .map .tooltip {
@@ -838,7 +836,7 @@ color:black;
 **** demographic-view.html styles ****
 ============================================= */
 #demChartListPane {
-	
+
     width: 95px !important;
     left: 480px !important;
 }
