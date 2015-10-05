@@ -4,7 +4,7 @@ CHANGELOG for State Demographics Map Viewer
 
 ### Version x.x.x (xx/xx/2015)
 
-### Version 2.0.0 (10/01/2015)
+### Version 2.0.0 (10/05/2015)
 
 * added esri light gray basemap for maps basemap
 * popups for both Congressional and Legislative Districts show representatives names and party
