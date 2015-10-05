@@ -1,46 +1,42 @@
 ﻿/**
-* Provides view-model implementation of the Custom Class Breaks window.
-*
-* @class ClassificationFactory
-*/
-(function () {
+ * Provides view-model implementation of the Custom Class Breaks window.
+ *
+ * @class ClassificationFactory
+ */
+(function() {
 
     "use strict";
 
     define([
-        "dojo",
-        "dojo/dom-construct",
-        "dojo/topic",
-        "app/config/cbrConfig",
-        "app/helpers/magNumberFormatter",
-        "dojo/text!app/views/classBreaksHelp-view.html",
-        "app/vm/help-vm",
-        "dojo/text!app/views/classBreaks-view.html",
+            "dojo",
+            "dojo/dom-construct",
+            "dojo/topic",
+            "app/config/cbrConfig",
+            "app/helpers/magNumberFormatter",
+            "dojo/text!app/views/classBreaksHelp-view.html",
+            "app/vm/help-vm",
+            "dojo/text!app/views/classBreaks-view.html"
+        ],
+        function(dj, dc, tp, conf, magNum, helpView, helpVM, view) {
 
-        "vendor/kendo/web/js/jquery.min",
-        "vendor/kendo/web/js/kendo.web.min",
-        "vendor/kendo/dataviz/js/kendo.dataviz.min"
-    ],
-        function (dj, dc, tp, conf, magNum, helpView, helpVM, view) {
-
-            var ClassificationFactoryVM = new function () {
+            var ClassificationFactoryVM = new function() {
 
                 var self = this;
 
                 self.winWidth = document.documentElement.clientWidth;
                 self.newWindowWidth = self.winWidth;
 
-                    if (self.winWidth <= 668) {
-                        self.newWindowWidth = "600px";
-                    } else if (self.winWidth <= 800) {
-                        self.newWindowWidth = "600px";
-                    } else if (self.winWidth <= 1024) {
-                        self.newWindowWidth = "800px";
-                    } else if (self.winWidth <= 1200) {
-                        self.newWindowWidth = "1000px";
-                    } else {
-                        self.newWindowWidth = "1000px";
-                    }
+                if (self.winWidth <= 668) {
+                    self.newWindowWidth = "600px";
+                } else if (self.winWidth <= 800) {
+                    self.newWindowWidth = "600px";
+                } else if (self.winWidth <= 1024) {
+                    self.newWindowWidth = "800px";
+                } else if (self.winWidth <= 1200) {
+                    self.newWindowWidth = "1000px";
+                } else {
+                    self.newWindowWidth = "1000px";
+                }
 
                 /**
                 Title for the module's window
@@ -58,7 +54,7 @@
                 @param {string} relatedElement - name of the element to attach the module window to.
                 @param {string} relation - relationship of the window to the relatedElement.
                 **/
-                self.init = function (relatedElement, relation) {
+                self.init = function(relatedElement, relation, loadInitCustomBreaks) {
                     dc.place(view, relatedElement, relation);
 
                     var colRampWindow = $("#classDefWindow").kendoWindow({
@@ -73,7 +69,7 @@
                     }).data("kendoWindow");
 
                     var helpButton = colRampWindow.wrapper.find(".k-i-help");
-                    helpButton.click(function () {
+                    helpButton.click(function() {
                         helpVM.openWindow(helpView);
                     });
 
@@ -87,6 +83,8 @@
                         autoHide: false
                     });
                     tp.subscribe("ClassificationMethodChanged", self.ClassificationMethodChanged);
+
+                    self.loadInitialCustomBreaks = loadInitCustomBreaks;
                 };
 
                 /**
@@ -96,7 +94,7 @@
                 @method applyBreaks
                 @param {event} e - click event data.
                 **/
-                self.applyBreaks = function () {
+                self.applyBreaks = function() {
                     tp.publish("CustomBreaksUpdated", null);
                     self.closeWindow();
                 };
@@ -106,7 +104,7 @@
 
                 @method openWindow
                 **/
-                self.openWindow = function () {
+                self.openWindow = function() {
                     var win = $("#classDefWindow").data("kendoWindow");
                     win.restore();
                     win.center();
@@ -119,7 +117,7 @@
 
                 @method closeWindow
                 **/
-                self.closeWindow = function () {
+                self.closeWindow = function() {
                     var win = $("#classDefWindow").data("kendoWindow");
                     win.close();
                 };
@@ -130,18 +128,21 @@
                 @method ClassificationMethodChanged
                 @param {ClassBreaksRenderer} renderer - The new updated renderer
                 **/
-                self.ClassificationMethodChanged = function (renderer) {
+                self.ClassificationMethodChanged = function(renderer) {
                     self.Renderer = renderer;
-                    self.openWindow();
+                    if (!self.loadInitialCustomBreaks) {
+                        self.openWindow();
+                    } else {
+                        self.applyBreaks();
+                    }
                 };
 
-                self.drawClassBreakTooltip = function (e) {
-                    var me = this;
+                self.drawClassBreakTooltip = function(e) {
                     var breakIdx = e.target[0].previousSibling.id.substring(6);
                     return "<input id=\"ttip" + breakIdx + "\" ></input>";
                 };
 
-                self.populateClassBreakTooltip = function () {
+                self.populateClassBreakTooltip = function() {
                     var me = this.content[0].firstChild.id;
                     var myIndex = parseInt(me.substring(4));
                     var numSettings = {
@@ -153,8 +154,7 @@
                     if (self.Renderer.asPercent) {
                         numSettings.format = "p0";
                         numSettings.step = 0.01;
-                    }
-                    else {
+                    } else {
                         numSettings.format = "n0";
                     }
                     $("#" + me).kendoNumericTextBox(
@@ -162,7 +162,7 @@
                     );
                 };
 
-                self.spinnerChange = function (e) {
+                self.spinnerChange = function(e) {
                     var numIndex = parseInt(e.sender.element[0].id.substring(4));
                     var boxObject = $("#" + e.sender.element[0].id).data("kendoNumericTextBox");
                     var actualValue = boxObject.value();
@@ -177,7 +177,7 @@
 
                 @method RedrawSliders
                 **/
-                self.RedrawSliders = function () {
+                self.RedrawSliders = function() {
                     self.redrawingSliders = true;
                     dc.empty("classBreakSliders");
                     var windowWidth = $("#classBreakSliders")[0].clientWidth - (self.Renderer.infos.length - 1) * 7;
@@ -189,11 +189,16 @@
                         var currDiv = "cbPane" + j;
                         dc.place("<div id=\"" + currDiv + "\" style=\"text-align:center; line-height:58px; white-space: nowrap\" ></div>", "classBreakSliders", "last");
                         $("#" + currDiv).kendoTooltip({
-                            content: function (e) {
+                            content: function(e) {
                                 return e.target[0].textLabel;
                             }
                         });
-                        var newPane = { size: paneSize + "px", resizable: true, idx: j, scrollable: false };
+                        var newPane = {
+                            size: paneSize + "px",
+                            resizable: true,
+                            idx: j,
+                            scrollable: false
+                        };
                         panes.push(newPane);
                     }
                     $("#classBreakSliders").kendoSplitter({
@@ -210,15 +215,15 @@
                 @method updateRangeSliders
                 @param {event} e - event data
                 **/
-                self.updateRangeSliders = function (e) {
+                self.updateRangeSliders = function(e) {
                     var panes = e.sender.options.panes;
-                    if(!self.redrawingSliders){
+                    if (!self.redrawingSliders) {
                         for (var i = 1; i < self.Renderer.infos.length; i++) {
                             var sizeUnitIndex = panes[i - 1].size.indexOf("px");
                             var paneSize = parseInt(panes[i - 1].size.substring(0, sizeUnitIndex));
                             self.Renderer.infos[i - 1].maxValue = parseFloat((paneSize / self.ScaleFactor + self.Renderer.infos[i - 1].minValue.valueOf()));
-                            if(!self.Renderer.asPercent){
-                                self.Renderer.infos[i-1].maxValue=Math.round(self.Renderer.infos[i-1].maxValue);
+                            if (!self.Renderer.asPercent) {
+                                self.Renderer.infos[i - 1].maxValue = Math.round(self.Renderer.infos[i - 1].maxValue);
                             }
                             self.Renderer.infos[i].minValue = self.Renderer.infos[i - 1].maxValue;
                             self.Renderer.infos[i - 1].classMaxValue = self.Renderer.infos[i - 1].maxValue;
@@ -230,8 +235,7 @@
                         if (self.Renderer.asPercent) {
                             start = Math.round(self.Renderer.infos[j].minValue * 100);
                             end = Math.round(self.Renderer.infos[j].maxValue * 100) + "%";
-                        }
-                        else {
+                        } else {
                             start = magNum.formatValue(Math.round(self.Renderer.infos[j].minValue));
                             end = magNum.formatValue(Math.round(self.Renderer.infos[j].maxValue));
                         }
@@ -256,4 +260,4 @@
             return ClassificationFactoryVM;
         }
     );
-} ());
+}());

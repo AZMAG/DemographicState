@@ -3,30 +3,28 @@
  *
  * @class QueryBulder
  */
-(function () {
+(function() {
 
     "use strict";
 
     define([
-        "dojo",
-        "dojo/dom-construct",
-        "dojo/topic",
-        "esri/tasks/QueryTask",
-        "dojo/text!app/views/queryBuilderTwo-view.html",
-        "app/helpers/layer-delegate",
-        "dojo/text!app/views/queryBuilderHelp-view.html",
-        "app/vm/help-vm",
-        "app/helpers/join-bindingHandler",
-        "app/helpers/operation-bindingHandler",
-        "app/helpers/subject-bindingHandler",
-        "app/helpers/value-bindingHandler",
+            "dojo",
+            "dojo/dom-construct",
+            "dojo/dom",
+            "dojo/topic",
+            "esri/tasks/QueryTask",
+            "dojo/text!app/views/queryBuilderTwo-view.html",
+            "app/helpers/layer-delegate",
+            "dojo/text!app/views/queryBuilderHelp-view.html",
+            "app/vm/help-vm",
+            "app/helpers/join-bindingHandler",
+            "app/helpers/operation-bindingHandler",
+            "app/helpers/subject-bindingHandler",
+            "app/helpers/value-bindingHandler"
+        ],
+        function(dj, dc, dom, tp, QueryTask, view, layerDelegate, helpView, helpVM) {
 
-        "vendor/kendo/web/js/jquery.min",
-        "vendor/kendo/web/js/kendo.web.min"
-    ],
-        function (dj, dc, tp, QueryTask, view, layerDelegate, helpView, helpVM) {
-
-            var QBVM = new function () {
+            var QBVM = new function() {
 
                 var self = this;
 
@@ -55,7 +53,7 @@
                  * Store join types.
                  * @type {*}
                  */
-                self.joins = ko.observableArray([ "NONE", "AND", "OR" ]);
+                self.joins = ko.observableArray(["NONE", "AND", "OR"]);
 
                 /**
                  * Store criteria rows created by user.
@@ -84,22 +82,22 @@
                 self.winWidth = document.documentElement.clientWidth;
                 self.winHeight = document.documentElement.clientHeight;
 
-                    if (self.winWidth <= 668) {
-                        self.newWindowWidth = "600px";
-                        self.newWindowHeight = "225px";
-                    } else if (self.winWidth <= 800) {
-                        self.newWindowWidth = "620px";
-                        self.newWindowHeight = "300px";
-                    } else if (self.winWidth <= 1024) {
-                      self.newWindowWidth = "620px";
-                        self.newWindowHeight = "320px";
-                    } else if (self.winWidth <= 1200) {
-                        self.newWindowWidth = "620px";
-                        self.newWindowHeight = "320px";
-                    } else {
-                        self.newWindowWidth = "620px";
-                        self.newWindowHeight = "320px";
-                    }
+                if (self.winWidth <= 668) {
+                    self.newWindowWidth = "600px";
+                    self.newWindowHeight = "225px";
+                } else if (self.winWidth <= 800) {
+                    self.newWindowWidth = "620px";
+                    self.newWindowHeight = "300px";
+                } else if (self.winWidth <= 1024) {
+                    self.newWindowWidth = "620px";
+                    self.newWindowHeight = "320px";
+                } else if (self.winWidth <= 1200) {
+                    self.newWindowWidth = "620px";
+                    self.newWindowHeight = "320px";
+                } else {
+                    self.newWindowWidth = "620px";
+                    self.newWindowHeight = "320px";
+                }
 
                 /**
                  Initilization function for the module window.
@@ -109,12 +107,12 @@
                  @param {string} relatedElement - name of the element to attach the module window to.
                  @param {string} relation - relationship of the window to the relatedElement.
                  **/
-                self.init = function (relatedElement, relation) {
+                self.init = function(relatedElement, relation) {
                     var node = dc.place(view, relatedElement, relation);
                     ko.applyBindings(self, node);
 
                     var qbWindow2 = $("#qbWindow2").kendoWindow({
-                        width: self.newWindowWidth,  // "620px"
+                        width: self.newWindowWidth, // "620px"
                         height: self.newWindowHeight, // "320px"
                         title: self.windowTitle,
                         actions: ["Help", "Minimize", "Close"],
@@ -124,11 +122,13 @@
                     }).data("kendoWindow");
 
                     var helpButton = qbWindow2.wrapper.find(".k-i-help");
-                    helpButton.click(function () {
+                    helpButton.click(function() {
                         helpVM.openWindow(helpView);
                     });
 
-                    tp.subscribe("QBState", function (event) { self.openWindow(); });
+                    tp.subscribe("QBState", function(event) {
+                        self.openWindow();
+                    });
 
                     // If using Q3 2013 (version 2013.3.1119) of Kendo UI you can uncomment the 6 lines below and remove
                     // the two click events below to turn the buttons into Kendo buttons.
@@ -143,13 +143,13 @@
                     $("#verifyQuery").click(self.verifyQuery);
 
                 }; // end init
-//****************************************************************
+                //****************************************************************
                 /**
                  Method for opening the window.
 
                  @method openWindow
                  **/
-                self.openWindow = function () {
+                self.openWindow = function() {
                     if (self.queryRows().length === 0) {
                         self.addCriteria();
                     }
@@ -165,7 +165,7 @@
 
                  @method closeWindow
                  **/
-                self.closeWindow = function () {
+                self.closeWindow = function() {
                     var win = $("#qbWindow2").data("kendoWindow");
                     win.close();
 
@@ -176,7 +176,7 @@
                  *
                  * @method rowMouseover
                  */
-                self.rowMouseover = function () {
+                self.rowMouseover = function() {
                     self.currentQueryRow = this;
                 };
 
@@ -185,7 +185,7 @@
                  *
                  * @method fieldChanged
                  */
-                self.fieldChanged = function () {
+                self.fieldChanged = function() {
                     if (this.selectedIndex > -1) {
                         self.currentQueryRow.field(self.fields()[this.selectedIndex]);
                         self.setOperators(this.selectedIndex);
@@ -198,7 +198,7 @@
                  * @method setOperators
                  * @param fieldIndex
                  */
-                self.setOperators = function (fieldIndex) {
+                self.setOperators = function(fieldIndex) {
                     var fldObj = self.fields()[fieldIndex];
 
                     if (!self.currentQueryRow) {
@@ -226,7 +226,7 @@
                  *
                  * @method operatorChanged
                  */
-                self.operatorChanged = function () {
+                self.operatorChanged = function() {
                     self.currentQueryRow.operator(self.currentQueryRow.operators()[this.selectedIndex]);
                 };
 
@@ -235,7 +235,7 @@
                  *
                  * @method joinChanged
                  */
-                self.joinChanged = function () {
+                self.joinChanged = function() {
                     self.currentQueryRow.join(self.joins()[this.selectedIndex]);
                     if (this.selectedIndex > 0) {
                         self.addCriteria();
@@ -250,7 +250,7 @@
                  *
                  * @method addCriteria
                  */
-                self.addCriteria = function () {
+                self.addCriteria = function() {
                     var id = ++self.currentId;
                     self.currentQueryRow = {
                         id: id,
@@ -298,7 +298,7 @@
                  *
                  * @method removeCriteria
                  */
-                self.removeCriteria = function () {
+                self.removeCriteria = function() {
                     if (self.queryRows().length > 1) {
                         // Destroy Kendo controls first
                         var joinId = "#queryJoin" + this.id;
@@ -328,11 +328,11 @@
 
                  @method runQuery
                  **/
-                self.runQuery = function () {
+                self.runQuery = function() {
                     // added loading icon. vw
-                    esri.show(dojo.byId("loading"));
+                    esri.show(dom.byId("loading"));
                     var queryString = "";
-                    $.each(self.queryRows(), function (index, queryRow) {
+                    $.each(self.queryRows(), function(index, queryRow) {
                         var whereClause = queryRow.field().Name + " ";
 
                         var type = queryRow.type();
@@ -379,9 +379,9 @@
 
                  @method verifyQuery
                  **/
-                self.verifyQuery = function () {
+                self.verifyQuery = function() {
                     var queryString = "";
-                    $.each(self.queryRows(), function (index, queryRow) {
+                    $.each(self.queryRows(), function(index, queryRow) {
                         var whereClause = queryRow.field().Name + " ";
                         var type = queryRow.type();
                         var operator = queryRow.operator();
@@ -432,7 +432,7 @@
                  @param {Array} fields - array of field definitions to build the query from
                  @param {Array} compareOperators - array of comparison operators based on field type
                  **/
-                self.buildQuery = function (callBack, errBack, url, fields, compareOperators) {
+                self.buildQuery = function(callBack, errBack, url, fields, compareOperators) {
                     self.callBack = callBack;
                     self.errBack = errBack;
                     self.layerUrl = url;
@@ -454,7 +454,7 @@
                  @method aliasCallback
                  @param {object} result - the result JSON object
                  **/
-                self.aliasCallback = function (result) {
+                self.aliasCallback = function(result) {
                     for (var i = 0; i < result.fields.length; i++) {
                         if (self.fieldConfigByName(result.fields[i].name)) {
                             var currField = self.fieldConfigByName(result.fields[i].name);
@@ -472,7 +472,7 @@
                  @param {string} fieldName - the name of the field to find
                  @return {object} - the configuration object for the field
                  **/
-                self.fieldConfigByName = function (fieldName) {
+                self.fieldConfigByName = function(fieldName) {
                     for (var i = 0; i < tempFields.length; i++) {
                         if (tempFields[i].Name === fieldName) {
                             return tempFields[i];
@@ -487,7 +487,7 @@
                  @param {string} alias - the alias of the field to find
                  @return {object} - the configuration object for the field
                  **/
-                self.fieldConfigByAlias = function (alias) {
+                self.fieldConfigByAlias = function(alias) {
                     for (var i = 0; i < tempFields.length; i++) {
                         if (tempFields[i].Alias === alias) {
                             return tempFields[i];
@@ -499,4 +499,4 @@
             return QBVM;
         }
     );
-} ());
+}());

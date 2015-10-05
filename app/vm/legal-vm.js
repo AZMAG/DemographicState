@@ -1,22 +1,22 @@
 /**
-* Launches the Legal Window.
-*
-*
-*/
+ * Launches the Legal Window.
+ *
+ *
+ */
 
-(function () {
+(function() {
 
     "use strict";
 
     define([
-        "dojo/dom-construct",
-        "dojo/topic",
-        "dojo/text!app/views/legal-view.html",
-        "app/vm/email-vm",
-    ],
-        function (dc, tp, legalView, emailVM) {
+            "dojo/dom-construct",
+            "dojo/topic",
+            "dojo/text!app/views/legal-view.html",
+            "app/vm/email-vm"
+        ],
+        function(dc, tp, legalView, emailVM) {
 
-            var legal = new function () {
+            var legal = new function() {
 
                 var self = this;
 
@@ -28,24 +28,24 @@
 
                 self.newWindowWidth = self.winWidth;
 
-                    if (self.winWidth <= 668) {
-                        self.newWindowWidth = "480px";
-                        self.newWindowHeight = "325px";
-                    } else if (self.winWidth <= 800) {
-                        self.newWindowWidth = "500px";
-                        self.newWindowHeight = "400px";
-                    } else if (self.winWidth <= 992) {
-                        self.newWindowWidth = "550px";
-                        self.newWindowHeight = "400px";
-                    } else {
-                        self.newWindowWidth = "550px";
-                        self.newWindowHeight = "400px";
-                    }
+                if (self.winWidth <= 668) {
+                    self.newWindowWidth = "480px";
+                    self.newWindowHeight = "325px";
+                } else if (self.winWidth <= 800) {
+                    self.newWindowWidth = "500px";
+                    self.newWindowHeight = "400px";
+                } else if (self.winWidth <= 992) {
+                    self.newWindowWidth = "550px";
+                    self.newWindowHeight = "400px";
+                } else {
+                    self.newWindowWidth = "550px";
+                    self.newWindowHeight = "400px";
+                }
 
-                self.init = function () {
+                self.init = function() {
 
                     // Place the HTML from the view into the main application after the map div.
-                    dc.place(legalView, "map", "after");
+                    dc.place(legalView, "mapContainer", "after");
 
                     $("#legalWindow").kendoWindow({
                         width: self.newWindowWidth,
@@ -63,17 +63,17 @@
 
 
                 }; //end init
-//****************************************************************
+                //****************************************************************
                 /**
                  * Open the window and initialize the contents.
                  *
                  * @method openWindow
                  * @param {string} content - the content to display in the window.
                  */
-                self.openLegalwin = function () {
+                self.openLegalwin = function() {
                     var win = $("#legalWindow").data("kendoWindow");
-                        win.center();
-                        win.open();
+                    win.center();
+                    win.open();
                 };
 
             }; //end legalWindow
@@ -83,4 +83,4 @@
         } // end function
     );
 
-} ());
+}());

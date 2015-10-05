@@ -1,130 +1,141 @@
-<!doctype html>
+<!DOCTYPE html>
 <html class="no-js">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=9, IE=10">
-        <!-- <meta http-equiv="X-UA-Compatible" content="IE=edge"> -->
-        <title>Arizona Demographics</title>
-        <meta name="description" content="A map viewer showing demographic data for State of Arizona. #MAGmaps">
-        <meta name="subject" content="Demographic data for State of Arizona">
-        <meta name="author" content="Maricopa Association of Governments">
-        <link type="text/plain" rel="author" href="http://geo.azmag.gov/maps/azdemographics/humans.txt">
-        <meta name="contact" content="www.azmag.gov">
-        <meta name="url" content="http://geo.azmag.gov/maps/azdemographics/">
-        <meta name="creation-date" content="10/21/2014">
-        <meta name="revision-date" content="03/02/2015">
-        <meta name="version" content="1.6.0">
-        <!-- Apple-Specific Meta Tags -->
-        <meta name="apple-mobile-web-app-capable" content="yes">
-        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-        <!-- OpenGraph Meta Tags fb-->
-        <meta property="og:title" content="Arizona Demographic Maps Viewer">
-        <meta property="og:site_name" content="Arizona Demographics">
-        <meta property="og:image" content="http://geo.azmag.gov/maps/azdemographics/stateFavicon.png">
-        <meta property="og:url" content="http://geo.azmag.gov/maps/azdemographics/">
-        <meta property="og:type" contant="website">
-        <meta property="og:description" content="A map viewer showing demographic data for State of Arizona. #MAGmaps">
-        <meta property="fb:app_id" content="1509296789333308">
-        <meta property="place:location:latitude" content="33.451741">
-        <meta property="place:location:longitude" content="-112.075375">
-        <meta property="place:location:region" content="AZ">
-        <!-- Twitter Cards -->
-        <meta name="twitter:card" contant="summary">
-        <meta name="twitter:url" content="http://geo.azmag.gov/maps/azdemographics/">
-        <meta name="twitter:title" content="Arizona Demographic Maps Viewer">
-        <meta name="twitter:description" content="A map viewer showing demographic data for State of Arizona. #MAGmaps">
-        <meta name="twitter:image" content="http://geo.azmag.gov/maps/azdemographics/stateFavicon.png">
-        <meta name="twitter:creator" content="@MAGregion">
-        <!-- Google+ -->
-        <meta itemprop="name" content="Arizona Demographic Maps Viewer">
-        <meta itemprop="description" contant="A map viewer showing demographic data for State of Arizona. #MAGmaps">
-        <meta itemprop="image" content="http://geo.azmag.gov/maps/azdemographics/stateFavicon.png">
-        <!-- Fav and touch icons -->
-        <link rel="apple-touch-icon" type="image/png" sizes="144x144" href="app/resources/img/magicon_144.png">
-        <link rel="apple-touch-icon" type="image/png" sizes="114x114" href="app/resources/img/magicon_114.png">
-        <link rel="apple-touch-icon" type="image/png" sizes="72x72" href="app/resources/img/magicon_72.png">
-        <link rel="apple-touch-icon" type="image/png" sizes="57x57" href="app/resources/img/magicon_57.png">
-        <link rel="shortcut icon" type="image-favorites-icon" href="app/resources/img/stateFavicon.png">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=9, IE=10">
+    <!-- <meta http-equiv="X-UA-Compatible" content="IE=edge"> -->
+    <title>Arizona Demographics</title>
+    <meta name="description" content="A map viewer showing demographic data State of Arizona.  #MAGmaps">
+    <meta name="subject" content="Demographic data for State of Arizona">
+    <meta name="author" content="Maricopa Association of Governments">
+    <link type="text/plain" rel="author" href="http://geo.azmag.gov/maps/azdemographics/humans.txt">
+    <meta name="contact" content="www.azmag.gov">
+    <meta name="url" content="http://geo.azmag.gov/maps/azdemographics/">
+    <meta name="creation-date" content="10/21/2014">
+    <meta name="revision-date" content="10/05/2015">
+    <meta name="version" content="2.0.0">
+    <!-- Apple-Specific Meta Tags -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <!-- OpenGraph Meta Tags fb-->
+    <meta property="og:title" content="Arizona Demographic Maps Viewer">
+    <meta property="og:site_name" content="Arizona Demographics">
+    <meta property="og:image" content="http://geo.azmag.gov/maps/azdemographics/magicon_144.png">
+    <meta property="og:url" content="http://geo.azmag.gov/maps/azdemographics/">
+    <meta property="og:type" contant="website">
+    <meta property="og:description" content="A map viewer showing demographic data for State of Arizona.  #MAGmaps">
+    <meta property="fb:app_id" content="1509296789333308">
+    <meta property="place:location:latitude" content="33.451741">
+    <meta property="place:location:longitude" content="-112.075375">
+    <meta property="place:location:region" content="AZ">
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" contant="summary">
+    <meta name="twitter:url" content="http://geo.azmag.gov/maps/azdemographics/">
+    <meta name="twitter:title" content="Arizona Demographic Maps Viewer">
+    <meta name="twitter:description" content="A map viewer showing demographic data for State of Arizona.  #MAGmaps">
+    <meta name="twitter:image" content="http://geo.azmag.gov/maps/azdemographics/magicon_144.png">
+    <meta name="twitter:creator" content="@MAGregion">
+    <!-- Google+ -->
+    <meta itemprop="name" content="MAG Demographic Maps Viewer">
+    <meta itemprop="description" contant="A map viewer showing demographic data for State of Arizona.  #MAGmaps">
+    <meta itemprop="image" content="http://geo.azmag.gov/maps/azdemographics/magicon_144.png">
+    <!-- Fav and touch icons -->
+    <link rel="apple-touch-icon" type="image/png" sizes="144x144" href="app/resources/img/magicon_144.png">
+    <link rel="apple-touch-icon" type="image/png" sizes="114x114" href="app/resources/img/magicon_114.png">
+    <link rel="apple-touch-icon" type="image/png" sizes="72x72" href="app/resources/img/magicon_72.png">
+    <link rel="apple-touch-icon" type="image/png" sizes="57x57" href="app/resources/img/magicon_57.png">
+    <link rel="shortcut icon" type="image-favorites-icon" href="app/resources/img/stateFavicon.png">
 
-        <!-- Application CSS -->
-        <link rel="stylesheet" href="http://js.arcgis.com/3.11/dijit/themes/claro/claro.css">
-        <link rel="stylesheet" href="http://js.arcgis.com/3.11/esri/css/esri.css">
-        <link rel="stylesheet" href="vendor/kendo/web/styles/kendo.common.min.css">
-        <!-- Changing the Kendo style here will change the theme for the entire app. -->
-        <link rel="stylesheet" href="vendor/kendo/web/styles/kendo.black.min.css">
-        <!-- Load CSS -->
-        <!-- <link rel="stylesheet" href="app/resources/css/normalize.css">
-        <link rel="stylesheet" href="app/resources/css/main.css"> -->
-        <link rel="stylesheet" type="text/css" href="app/resources/css/concat.min.css">
+    <!-- ESRI javaScript API CSS -->
+    <link rel="stylesheet" href="http://js.arcgis.com/3.14/dijit/themes/claro/claro.css">
+    <link rel="stylesheet" href="http://js.arcgis.com/3.14/esri/css/esri.css">
+    <!-- Kendo UI CSS-->
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2015.2.902/styles/kendo.common.min.css" />
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2015.2.902/styles/kendo.black.min.css" />
+    <!-- Application CSS -->
+    <!-- <link rel="stylesheet" href="app/resources/css/normalize.css">
+    <link rel="stylesheet" href="app/resources/css/main.css"> -->
+    <link rel="stylesheet" type="text/css" href="app/resources/css/concat.min.css">
 
-        <!-- prevent cache -->
-        <!--  removed once App goes into production -->
-        <!-- <meta http-equiv='cache-control' content='no-cache'>
-        <meta http-equiv='expires' content='0'>
-        <meta http-equiv='pragma' content='no-cache'> -->
+    <!-- prevent cache -->
+    <!--  removed once App goes into production -->
+    <!-- <meta http-equiv="cache-control" content="no-cache">
+    <meta http-equiv="expires" content="0">
+    <meta http-equiv="pragma" content="no-cache"> -->
 
-        <script src="vendor/knockout2.2.0.js"></script>
-        <script src="vendor/modernizr-2.8.0.min.js"></script>
-        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-        <!--[if lt IE 9]>
-        <script src="https://cdn.jsdelivr.net/html5shiv/3.7.2/html5shiv-printshiv.min.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-        <![endif]-->
-<!-- ========================================================================================================================== -->
-    </head>
-    <body class="claro">
-       <!--[if lt IE 7]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/2.2.0/knockout-min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <!-- ========================================================================================================================== -->
+</head>
+<body class="claro">
+    <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-        <div id="borderContainer" data-dojo-type="dijit.layout.BorderContainer" data-dojo-props="design:'headline', gutters:false">
-
-            <header id="header" data-dojo-type="dijit.layout.ContentPane" data-dojo-props="region:'top', gutters:false">
-                <div id="titlebar">
-                    <ul class="tb">
-                        <li class="tb">
-                            <a role="navigation" title="Arizona Councils of Governments" href="http://www.azmag.gov/archive/AZ-COGs/index.asp" target="_blank">
+    <div id="borderContainer" data-dojo-type="dijit.layout.BorderContainer" data-dojo-props="design:"headline", gutters:false">
+        <header id="header" data-dojo-type="dijit.layout.ContentPane" data-dojo-props="region:"top", gutters:false">
+            <div id="titlebar">
+                <ul class="tb">
+                    <li class="tb">
+                        <a role="navigation" title="Arizona Councils of Governments" href="http://www.azmag.gov/archive/AZ-COGs/index.asp" target="_blank">
                                 <img id="magLogo" class="magLogo" alt="MAG Homepage" src="app/resources/img/AZ-COG-MPO-logo.jpg">
-                            </a>
-                        </li>
-                        <li class="tb ti1"><h1 id="title1">State Demographic Viewer&nbsp;&nbsp;-&nbsp;</h1></li>
-                        <li class="tb ti2"><h2 id="title2"></h2></li>
-                    </ul>
-                </div>
-            </header>
+                        </a>
+                    </li>
+                     <li class="tb bar">|</li>
+                    <li class="tb ti1">
+                        <h1 id="title1">State Demographic Viewer</h1>
+                    </li>
+                    <!-- <li class="tb ti2">
+                        <h2 id="title2"></h2>
+                    </li> -->
+                </ul>
+            </div>
+        </header>
 
-            <!-- All dynamic content gets added either into or after this div. -->
-            <div id="display" data-dojo-type="dijit.layout.ContentPane" data-dojo-props="region:'center'"></div>
+        <!-- All dynamic content gets added either into or after this div. -->
+        <div id="display" data-dojo-type="dijit.layout.ContentPane" data-dojo-props="region:'center'">
+        </div>
 
-        </div><!-- /borderContainer -->
+    </div>
+    <!-- /borderContainer -->
 
-<!-- *** JavaScript *** -->
-<!-- =================================================================================================== -->
-        <!-- Make sure Dojo can find our code, app folder and vendor code. -->
-        <script>
-            var dojoConfig = {
-                packages: [
-                    { name: "app", location: location.pathname.replace(/\/[^/]+$/, "/") + "app"},
-                    { name: "vendor", location: location.pathname.replace(/\/[^/]+$/, "/") + "vendor"}
-                ]
-            }
-        </script>
-        <!-- Global script definitions. -->
-        <script src="http://js.arcgis.com/3.11/"></script>
-        <script src="config.js"></script>
-        <script src="app/run.js"></script>
-        <!-- Call the init method on run.js, which, in turn, will load main.js. -->
-        <script>
-            require(["dojo/domReady!", "esri/map"],init)
-        </script>
-        <!-- Google Analytics -->
-        <script>
-            (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
-            function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
-            e=o.createElement(i);r=o.getElementsByTagName(i)[0];
-            e.src="//www.google-analytics.com/analytics.js";
-            r.parentNode.insertBefore(e,r)}(window,document,"script","ga"));
-            ga("create","UA-29422512-1");ga("send","pageview");
-        </script>
-    </body>
+    <!-- *** JavaScript *** -->
+    <!-- =================================================================================================== -->
+    <!-- Kendo UI -->
+    <script src="https://kendo.cdn.telerik.com/2015.2.902/js/jquery.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2015.2.902/js/kendo.all.min.js"></script>
+    <!-- Make sure Dojo can find our code, app folder and vendor code. -->
+    <script>
+        var dojoConfig = {
+            packages: [
+                { name: "app", location: location.pathname.replace(/\/[^/]+$/, "/") + "app" }
+            ]
+        }
+    </script>
+    <!-- Global script definitions. -->
+    <script src="http://js.arcgis.com/3.14/"></script>
+    <script src="config.js"></script>
+    <script src="app/run.js"></script>
+    <!-- Call the init method on run.js, which, in turn, will load main.js. -->
+    <script>
+        require(["esri/map", "dojo/domReady!"], init)
+    </script>
+    <!-- Google Analytics -->
+    <script>
+        (function (b, o, i, l, e, r) {
+            b.GoogleAnalyticsObject = l; b[l] || (b[l] =
+            function () { (b[l].q = b[l].q || []).push(arguments) }); b[l].l = +new Date;
+            e = o.createElement(i); r = o.getElementsByTagName(i)[0];
+            e.src = "//www.google-analytics.com/analytics.js";
+            r.parentNode.insertBefore(e, r)
+        }(window, document, "script", "ga"));
+        ga("create", "UA-29422512-1"); ga("send", "pageview");
+    </script>
+</body>
 </html>

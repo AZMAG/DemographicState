@@ -33,154 +33,118 @@
 
 var appConfig = new function() {
 
-    this.Version = "v1.6.0 | 03/02/2015";
+    this.Version = "v2.0.0 | 10/05/2015";
 
     this.ArcGISInstanceURL = "http://geo.azmag.gov/gismag/rest";
     //this.exportWebMapUrl = "http://geo.azmag.gov/gismag/rest/services/Utilities/PrintingTools/GPServer/Export%20Web%20Map%20Task";  // Generic Print Service
     this.exportWebMapUrl = "http://geo.azmag.gov/gismag/rest/services/gp/stateDemo/GPServer/Export%20Web%20Map"; // Custom Print Service
     this.webServicePasscode = "sun sand dry heat grand canyon";
 
+    // Search Service URLs
+    this.geoCoderService = "//geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer";
+    this.countyService = "http://geo.azmag.gov/gismag/rest/services/maps/StateDemographicMain2/MapServer/4";
+    this.placeService = "http://geo.azmag.gov/gismag/rest/services/maps/StateDemographicMain2/MapServer/1";
+    this.legislativeService = "http://geo.azmag.gov/gismag/rest/services/maps/StateDemographicMain2/MapServer/2";
+    this.congressionalService = "http://geo.azmag.gov/gismag/rest/services/maps/StateDemographicMain2/MapServer/3";
+    this.tractService = "http://geo.azmag.gov/gismag/rest/services/maps/StateDemographicMain2/MapServer/7";
+
     this.jasonemail = "https://www.azmag.gov/EmailPages/JasonHoward.asp";
 
     this.layerInfo = [{
-            id: "censusTracts",
-            title: "Census Tract Labels",
-            type: "dynamic",
-            url: "http://geo.azmag.gov/gismag/rest/services/maps/StateDemographicMain/MapServer",
-            queryUrl: "http://geo.azmag.gov/gismag/rest/services/maps/StateDemographicMain/MapServer/6",
-            queryWhere: "1=1",
-            layers: [5,6],
-            opacity: 1,
-            visible: false,
-            showTOC: true
-        }, {
-            id: "countyBoundaries",
-            title: "County Boundaries",
-            type: "dynamic",
-            url: "http://geo.azmag.gov/gismag/rest/services/maps/StateDemographicMain/MapServer",
-            queryUrl: "http://geo.azmag.gov/gismag/rest/services/maps/StateDemographicMain/MapServer/4",
-            queryWhere: "1=1",
-            layers: [4],
-            opacity: 0.8,
-            visible: true,
-            showTOC: true
-        }, {
-            id: "congressionalDistricts",
-            title: "Congressional Districts",
-            type: "dynamic",
-            url: "http://geo.azmag.gov/gismag/rest/services/maps/StateDemographicMain/MapServer",
-            queryUrl: "http://geo.azmag.gov/gismag/rest/services/maps/StateDemographicMain/MapServer/3",
-            queryWhere: "1=1",
-            layers: [3],
-            opacity: 0.8,
-            visible: false,
-            showTOC: true
-        },
-        {
-            id: "legislativeDistricts",
-            title: "Legislative Districts",
-            type: "dynamic",
-            url: "http://geo.azmag.gov/gismag/rest/services/maps/StateDemographicMain/MapServer",
-            queryUrl: "http://geo.azmag.gov/gismag/rest/services/maps/StateDemographicMain/MapServer/2",
-            queryWhere: "1=1",
-            layers: [2],
-            opacity: 0.8,
-            visible: false,
-            showTOC: true
-        },
-        {
-            id: "reference",
-            title: "Roads",
-            type: "tile",
-            url: "http://server.arcgisonline.com/arcgis/rest/services/Reference/World_Transportation/MapServer",
-            visible: true,
-            showTOC: true
-        }, {
-            id: "Census2010byBlockGroup",
-            title: "Census by Block Group, 2010",
-            type: "dynamic",
-            url: "http://geo.azmag.gov/gismag/rest/services/maps/StateDemographicMain/MapServer",
-            layers: [0],
-            opacity: 0.8,
-            visible: true,
-            showTOC: false
-        }, {
-            id: "esriImagery",
-            title: "Aerial",
-            type: "tile",
-            url: "http://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer",
-            visible: false,
-            showTOC: true
-        }, {
-            id: "MagBasemapUnder_3",
-            title: "Terrain",
-            // url: "http://server.arcgisonline.com/ArcGIS/rest/services/World_Terrain_Base/MapServer",
-            url: "http://server.arcgisonline.com/arcgis/rest/services/World_Street_Map/MapServer",
-            type: "tile",
-            visible: true,
-            isBasemap: true,
-            showTOC: true
-        }
-
-    ]; // End layerInfo
-
-    //levels of detail
-    this.lods = [
-
-        {
-            "level": 7,
-            "resolution": 1222.99245256249,
-            "scale": 4622324.434309
-        }, {
-            "level": 8,
-            "resolution": 611.49622628138,
-            "scale": 2311162.217155
-        }, {
-            "level": 9,
-            "resolution": 305.748113140558,
-            "scale": 1155581.108577
-        }, {
-            "level": 10,
-            "resolution": 152.874056570411,
-            "scale": 577790.554289
-        }, {
-            "level": 11,
-            "resolution": 76.4370282850732,
-            "scale": 288895.277144
-        }, {
-            "level": 12,
-            "resolution": 38.2185141425366,
-            "scale": 144447.638572
-        }, {
-            "level": 13,
-            "resolution": 19.1092570712683,
-            "scale": 72223.819286
-        }, {
-            "level": 14,
-            "resolution": 9.55462853563415,
-            "scale": 36111.909643
-        }, {
-            "level": 15,
-            "resolution": 4.77731426794937,
-            "scale": 18055.954822
-        }, {
-            "level": 16,
-            "resolution": 2.38865713397468,
-            "scale": 9027.977411
-        }, {
-            "level": 17,
-            "resolution": 1.19432856685505,
-            "scale": 4513.988705
-        }, {
-            "level": 18,
-            "resolution": 0.597164283559817,
-            "scale": 2256.994353
-        }, {
-            "level": 19,
-            "resolution": 0.298582141647617,
-            "scale": 1128.497176
-        }
-    ];
+        layerNum: 0,
+        id: "censusTracts",
+        title: "Census Tract Labels",
+        type: "dynamic",
+        url: "http://geo.azmag.gov/gismag/rest/services/maps/StateDemographicMain2/MapServer",
+        queryUrl: "http://geo.azmag.gov/gismag/rest/services/maps/StateDemographicMain2/MapServer/8",
+        queryWhere: "1=1",
+        layers: [7, 8],
+        opacity: 1,
+        visible: false,
+        showTOC: true
+    }, {
+        layerNum: 1,
+        id: "countyBoundaries",
+        title: "County Boundaries",
+        type: "dynamic",
+        url: "http://geo.azmag.gov/gismag/rest/services/maps/StateDemographicMain2/MapServer",
+        queryUrl: "http://geo.azmag.gov/gismag/rest/services/maps/StateDemographicMain2/MapServer/4",
+        queryWhere: "1=1",
+        layers: [4],
+        opacity: 0.8,
+        visible: true,
+        showTOC: true
+    }, {
+        layerNum: 2,
+        id: "congressionalDistricts",
+        title: "Congressional Districts",
+        type: "feature",
+        url: "http://geo.azmag.gov/gismag/rest/services/maps/StateDemographicMain2/MapServer/6",
+        queryUrl: "http://geo.azmag.gov/gismag/rest/services/maps/StateDemographicMain2/MapServer/6",
+        queryWhere: "1=1",
+        layers: [6],
+        opacity: 1,
+        visible: false,
+        selectable: true,
+        outFields: ["*"],
+        filters: [],
+        showTOC: true
+    }, {
+        layerNum: 3,
+        id: "legislativeDistricts",
+        title: "Legislative Districts",
+        type: "feature",
+        url: "http://geo.azmag.gov/gismag/rest/services/maps/StateDemographicMain2/MapServer/5",
+        queryUrl: "http://geo.azmag.gov/gismag/rest/services/maps/StateDemographicMain2/MapServer/5",
+        queryWhere: "1=1",
+        layers: [5],
+        opacity: 1,
+        visible: false,
+        selectable: true,
+        outFields: ["*"],
+        filters: [],
+        showTOC: true
+    }, {
+        layerNum: 4,
+        id: "esriReference",
+        title: "Streets",
+        type: "tile",
+        url: "http://server.arcgisonline.com/arcgis/rest/services/Reference/World_Transportation/MapServer",
+        visible: true,
+        showTOC: true
+    }, {
+        layerNum: 5,
+        id: "Census2010byBlockGroup",
+        title: "Census by Block Group, 2010",
+        type: "dynamic",
+        url: "http://geo.azmag.gov/gismag/rest/services/maps/StateDemographicMain2/MapServer",
+        layers: [0],
+        opacity: 0.8,
+        visible: true,
+        showTOC: false
+    }, {
+        layerNum: 7,
+        id: "esriBasemap",
+        title: "Terrain",
+        type: "tile",
+        // url: "http://server.arcgisonline.com/ArcGIS/rest/services/World_Terrain_Base/MapServer",
+        // url: "http://server.arcgisonline.com/arcgis/rest/services/World_Street_Map/MapServer",
+        // url: "http://server.arcgisonline.com/arcgis/rest/services/Canvas/World_Dark_Gray_Base/MapServer",
+        url: "http://server.arcgisonline.com/arcgis/rest/services/Canvas/World_Light_Gray_Base/MapServer",
+        visible: true,
+        isBasemap: false,
+        showTOC: false
+    }, {
+        layerNum: 6,
+        id: "esriImagery",
+        title: "Imagery",
+        type: "tile",
+        url: "http://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer",
+        isBasemap: true,
+        visible: false,
+        showTOC: true
+    }];
+    // End layerInfo
 
     this.initExtent = {
         "xmin": -13271172.93,
@@ -197,5 +161,10 @@ var appConfig = new function() {
     //from colorbrewer 2.0 qualitative HEX Set3
     //this.seriesColors = ["#8DD3C7", "#FFFFB3", "#BEBADA", "#FB8072", "#80B1D3", "#FDB462", "#B3DE69", "#FCCDE5", "#D9D9D9", "#BC80BD", "#CCEBC5", "#FFED6F"];
 
+    this.URLMinimizer = {
+
+        login: "vwolfley",
+        apiKey: "R_8dbab4a2f0664e8f8b4f88fe0d9d7f80"
+    };
 
 }; //End Config

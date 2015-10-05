@@ -13,9 +13,6 @@ function init() {
             "dojo/parser",
             "dijit/layout/BorderContainer",
             "dijit/layout/ContentPane",
-            "esri/dijit/Scalebar",
-            "esri/dijit/Legend",
-            "esri/toolbars/draw",
             "app"
         ],
 
@@ -23,4 +20,4 @@ function init() {
             parser.parse();
         }
     );
-};
+}
