@@ -246,33 +246,13 @@ button:hover {
     border-color: transparent !important;
     text-align: center;
 }
-.HomeButton {
-    position: absolute;
-    bottom: 118px;
-    left: 20px;
-}
-.HomeButton .home{
-    background-color: #5b5b5b;
-    padding: 0 0 0 0;
-}
-.HomeButton .home:hover {
-    background-color: #484848;
-}
-.HomeButton .home:active {
-    background-color:#ddd;
-}
-#LocateButton {
-    position: absolute;
-    bottom: 160px;
-    left: 20px;
-}
 /* ==========================================
 **** Custom Controls Styles ****
 ============================================= */
 .esriSimpleSlider {
     bottom: 55px !important;
     left: 20px !important;
-    border: none;
+    /*border: none;*/
     background-color: #383838;
     color: #ffffff;
 }
@@ -298,8 +278,8 @@ color: #ffffff;
 }
 .HomeButton {
     position: absolute;
-    bottom: 118px;
-    left: 20px;
+    bottom: 120px;
+    left: 21px;
 }
 .HomeButton .home {
     background-color: #383838;
@@ -307,6 +287,9 @@ color: #ffffff;
 }
 .HomeButton .home:hover {
     background-color: #646464;
+}
+.HomeButton .home:active {
+    background-color:#ddd;
 }
 #LocateButton {
     position: absolute;
@@ -360,8 +343,8 @@ span.searchIcon.esriIconZoom {
 }
 #titlebar h1, h2 {
     margin: 0px;
-    padding-left: 3px;
-    padding-right: 3px;
+    /*padding-left: 3px;
+    padding-right: 3px;*/
 }
 #title1 {
     font-size: 1.4em;
@@ -377,10 +360,8 @@ span.searchIcon.esriIconZoom {
     font-size: 35px;
 }
 #magLogo {
-    display: inline-block;
-    border-color: transparent;
     width: 144px;
-    padding: 15px 5px 15px 10px;
+    padding: 15px 2px 15px 2px;
 }
 .magLogo {
     max-width: 100%;
@@ -685,13 +666,13 @@ p {
 }
 .mapFramesButtons
 {
-    padding-left: 60px;
+    padding-left: 40px;
 }
 .mapFramesButtons button
 {
     font-weight: bold;
-    width: 16px;
-    height: 16px;
+    width: 20px;
+    height: 20px;
 }
 .mapFrameGridControl
 {
@@ -843,6 +824,7 @@ color:black;
 .k-splitter .k-ghost-splitbar-horizontal, .k-splitter .k-splitbar-horizontal {
     left: 480px;
 	border-color: transparent;
+    background-color: transparent;
 }
 /*#demTabStrip-3 .reportTabPageOptionRow, #demTabStrip-2 .reportTabPageOptionRow {
     height: 15px;
@@ -1166,7 +1148,7 @@ margin-top:5px;
     }
 /* **** legend-view.html styles *** */
     #organizer2 {
-        width: 190px
+        width: auto;
     }
     #sliderDiv {
         margin: 0 5px 0 10px;
@@ -1240,7 +1222,7 @@ margin-top:5px;
     }
 /***** legend-view.html styles *** */
     #organizer2 {
-        width: 190px
+        width: auto;
     }
     #sliderDiv {
         margin: 0 5px 0 8px;

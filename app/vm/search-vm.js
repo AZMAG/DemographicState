@@ -25,7 +25,8 @@
             "dojo/text!app/views/search-view.html",
             "app/models/map-model",
             "app/config/searchConfig",
-            "app/vm/demographic-vm"
+            "app/vm/demographic-vm",
+            "dojo/domReady!"
         ],
         function(dc, da, lang, on, ds, Search, FeatureLayer, Locator, Extent, Graphic, PictureMarkerSymbol, SimpleFillSymbol, view, mapModel, searchConfig, demographicVM) {
 
@@ -51,6 +52,8 @@
                         enableLabel: false,
                         autoNavigate: false,
                         maxSuggestions: 4,
+                        enableInfoWindow: true,
+                        showInfoWindowOnSelect: false,
                         sources: [],
                         map: mapModel.getMap()
                     }, "search");
@@ -71,10 +74,10 @@
                 }; //end init
 
                 self.UpdateMap = function(e) {
-                    console.log(e);
+                    // console.log(e);
                     if (e.result) {
                         var communityName = e.result.name;
-                        console.log(communityName);
+                        // console.log(communityName);
                     }
                     var searchType = "";
 

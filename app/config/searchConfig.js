@@ -33,6 +33,7 @@
                 searchFields: ["NAME"],
                 displayField: "NAME",
                 name: "Counties",
+                outFields: ["*"],
                 placeholder: "Pinal County"
             }, {
                 featureLayer: new FeatureLayer(appConfig.placeService),
@@ -45,12 +46,14 @@
                 searchFields: ["DISTRICT_NUM"],
                 displayField: "DISTRICT_NUM",
                 name: "Legislative Districts",
+                outFields: ["*"],
                 placeholder: "Legislative District 03"
             }, {
                 featureLayer: new FeatureLayer(appConfig.congressionalService),
                 searchFields: ["DISTRICT_NUM"],
                 displayField: "DISTRICT_NUM",
                 name: "Congressional Districts",
+                outFields: ["*"],
                 placeholder: "Congressional District 1"
             }, {
                 featureLayer: new FeatureLayer(appConfig.tractService),
@@ -58,6 +61,7 @@
                 displayField: "NAMELSAD",
                 autoNavigate: true,
                 name: "Census Tracts",
+                outFields: ["*"],
                 placeholder: "Census Tract 8.03"
             }];
         };
