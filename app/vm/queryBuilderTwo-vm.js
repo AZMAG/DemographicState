@@ -20,7 +20,7 @@
             "app/helpers/join-bindingHandler",
             "app/helpers/operation-bindingHandler",
             "app/helpers/subject-bindingHandler",
-            "app/helpers/value-bindingHandler",
+            "app/helpers/value-bindingHandler"
         ],
         function(dj, dc, dom, tp, QueryTask, view, layerDelegate, helpView, helpVM) {
 

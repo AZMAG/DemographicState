@@ -30,7 +30,7 @@
 
             "esri/dijit/Popup",
             "esri/dijit/PopupTemplate",
-            "esri/InfoTemplate",
+            "esri/InfoTemplate"
         ],
         function(dc, da, lang, on, ds, topic, view, mapModel, Map, HomeButton, Scalebar, Extent, Legend, Color, SimpleMarkerSymbol, SimpleLineSymbol, SimpleFillSymbol, Popup, PopupTemplate, InfoTemplate) {
 
