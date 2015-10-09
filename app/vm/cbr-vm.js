@@ -1,32 +1,41 @@
 ﻿/**
-* Provides view-model implementation of the Thematic Maps module.
-*
-* @class ClassBreakRenderer
-*/
-(function () {
+ * Provides view-model implementation of the Thematic Maps module.
+ *
+ * @class ClassBreakRenderer
+ */
+(function() {
 
     "use strict";
 
     define([
-        'dojo',
-        'dojo/dom-construct',
-        'dojo/topic',
-        'app/config/cbrConfig',
-        'app/vm/colorRamp-vm',
-        'app/helpers/magNumberFormatter',
-        'app/vm/classificationFactory-vm',
-        'dojo/text!app/views/cbrHelp-view.html',
-        'app/vm/help-vm',
-        'dojo/text!app/views/cbr-view.html',
-        'app/vm/legend-vm',
-        'app/helpers/bookmark-delegate',
-        'app/models/map-model',
-        'esri/tasks/GenerateRendererTask',
-        'esri/layers/agsdynamic'
-    ],
-        function (dj, dc, tp, conf, cRamp, magNum, custBreak, helpView, helpVM, view, legend, bookmarkDelegate, mapModel) {
+            "dojo",
+            "dojo/dom-construct",
+            "dojo/topic",
+            "app/config/cbrConfig",
+            "app/vm/colorRamp-vm",
+            "app/helpers/magNumberFormatter",
+            "app/vm/classificationFactory-vm",
+            "dojo/text!app/views/cbrHelp-view.html",
+            "app/vm/help-vm",
+            "dojo/text!app/views/cbr-view.html",
+            "app/vm/legend-vm",
+            "app/helpers/bookmark-delegate",
+            "app/models/map-model",
 
-            var CBRVM = new function () {
+            "esri/Color",
+            "esri/symbols/SimpleMarkerSymbol",
+            "esri/symbols/SimpleFillSymbol",
+            "esri/symbols/SimpleLineSymbol",
+
+            "esri/renderers/ClassBreaksRenderer",
+            "esri/tasks/ClassBreaksDefinition",
+            "esri/tasks/GenerateRendererParameters",
+            "esri/tasks/GenerateRendererTask",
+            "esri/layers/LayerDrawingOptions"
+        ],
+        function(dj, dc, tp, conf, cRamp, magNum, custBreak, helpView, helpVM, view, legend, bookmarkDelegate, mapModel, Color, SimpleMarkerSymbol, SimpleFillSymbol, SimpleLineSymbol, ClassBreaksRenderer, ClassBreaksDefinition, GenerateRendererParameters, GenerateRendererTask, LayerDrawingOptions) {
+
+            var CBRVM = new function() {
 
                 var self = this;
 
@@ -71,19 +80,28 @@
                 @param {string} relation - relationship of the window to the relatedElement.
                 @param {object} initializationData - the initialization data for the map.
                 **/
-                self.init = function (relatedElement, relation, initializationData) {
+                self.init = function(relatedElement, relation, initializationData) {
                     dc.place(view, relatedElement, relation);
 
-                    if (mapModel.initializationData !== undefined && mapModel.initializationData.maps[0].classificationMethod == "custom") {
+                    if (mapModel.initializationData !== undefined && mapModel.initializationData.maps[0].classificationMethod === "custom") {
                         self.initCustomBreaks = mapModel.initializationData.maps[0].breaks;
                     }
 
-                    tp.subscribe("CBRStateO", function (event) { self.openWindow(); });
-                    tp.subscribe("CBRStateC", function (event) { self.closeWindow(); });
-                    tp.subscribe("NewColorRamp", function (event) { self.updateColorRamp(event); });
+                    tp.subscribe("CBRStateO", function() {
+                        self.openWindow();
+                    });
+                    tp.subscribe("CBRStateC", function() {
+                        self.closeWindow();
+                    });
+                    tp.subscribe("NewColorRamp", function(event) {
+                        self.updateColorRamp(event);
+                    });
                     tp.subscribe("ClassBreakOptions", self.setBreaksList);
-                    tp.subscribe("CustomBreaksUpdated", function () {
-                        tp.publish("CustomeMapBreaks", { customSet: true, breaks: self.currentRenderer.infos });
+                    tp.subscribe("CustomBreaksUpdated", function() {
+                        tp.publish("CustomeMapBreaks", {
+                            customSet: true,
+                            breaks: self.currentRenderer.infos
+                        });
                         self.redrawThematicLayer();
                     });
                     tp.subscribe("SelectedMapChanged", self.selectedMapChangedNew);
@@ -92,7 +110,7 @@
 
                     var cbrWindow = $("#cbrWindow").kendoWindow({
                         width: self.newWindowWidth,
-                        height: "auto",//425px
+                        height: "auto", //425px
                         title: self.windowTitle,
                         actions: ["Help", "Minimize", "Close"],
                         modal: false,
@@ -101,7 +119,7 @@
                     }).data("kendoWindow");
 
                     var helpButton = cbrWindow.wrapper.find(".k-i-help");
-                    helpButton.click(function (e) {
+                    helpButton.click(function() {
                         helpVM.openWindow(helpView);
                     });
 
@@ -146,19 +164,26 @@
                             5
                         ],
                         change: self.breaksCountSelected, //NOT fired when changed in code
-                        cascade: function (e) { } // fired when changed in code and user interaction
+                        cascade: function(e) {} // fired when changed in code and user interaction
                     }).data("kendoDropDownList");
                     if (mapModel.initializationData !== undefined) {
                         self.breaksCountList.value(mapModel.initializationData.maps[0].colorPalet.numBreaks);
                     }
 
                     self.classMethodList = $("#classScheme").kendoDropDownList({
-                        dataSource: [
-                            { Name: "Natural Breaks", Value: "natural-breaks" },
-                            { Name: "Equal Interval", Value: "equal-interval" },
-                            { Name: "Quantile", Value: "quantile" },
-                            { Name: "Custom", Value: "custom" }
-                        ],
+                        dataSource: [{
+                            Name: "Natural Breaks",
+                            Value: "natural-breaks"
+                        }, {
+                            Name: "Equal Interval",
+                            Value: "equal-interval"
+                        }, {
+                            Name: "Quantile",
+                            Value: "quantile"
+                        }, {
+                            Name: "Custom",
+                            Value: "custom"
+                        }],
                         dataTextField: "Name",
                         dataValueField: "Value",
                         change: self.classMethodChange
@@ -167,21 +192,23 @@
                         self.classMethodList.value(mapModel.initializationData.maps[0].classificationMethod);
                     }
 
-                    $("#editCustom").click(function () {
+                    $("#editCustom").click(function() {
                         custBreak.loadInitialCustomBreaks = false;
-                        self.classMethodList.select(function (item) { return item.Value === "custom"; });
+                        self.classMethodList.select(function(item) {
+                            return item.Value === "custom";
+                        });
                         tp.publish("ClassificationMethodChanged", self.currentRenderer);
                     });
 
-                    $("#btnNewMap").click(function () {
+                    $("#btnNewMap").click(function() {
                         tp.publish("AddNewMap");
                     });
 
-                    $("#btnRemoveMap").click(function () {
+                    $("#btnRemoveMap").click(function() {
                         tp.publish("RemoveAMap");
                     });
 
-                    tp.subscribe("UpdateRemoveAMapButton", function (obj) {
+                    tp.subscribe("UpdateRemoveAMapButton", function(obj) {
                         if (obj.display) {
                             $("#btnRemoveMap").removeClass("hidden");
                             $("#selectMapFrameControl").removeClass("hidden");
@@ -190,14 +217,14 @@
                             $("#selectMapFrameControl").addClass("hidden");
                         }
                     });
-                    tp.subscribe("UpdateAddAMapButton", function (obj) {
+                    tp.subscribe("UpdateAddAMapButton", function(obj) {
                         if (obj.display) {
                             $("#btnNewMap").removeClass("hidden");
                         } else {
                             $("#btnNewMap").addClass("hidden");
                         }
                     });
-                    tp.subscribe("UpdateMapFrameGridRows", function (numOfCells) {
+                    tp.subscribe("UpdateMapFrameGridRows", function(numOfCells) {
                         switch (numOfCells) {
                             case 2:
                                 $("#mapFrameGridRow2").addClass("hidden");
@@ -216,32 +243,28 @@
                     var colorSchema = (mapModel.initializationData !== undefined && mapModel.initializationData.maps[0].classMethod !== undefined) ? mapModel.initializationData.maps[0].classMethod : "Sequential";
                     var colorPalet = (mapModel.initializationData !== undefined && mapModel.initializationData.maps[0].colorPalet !== undefined) ? mapModel.initializationData.maps[0].colorPalet.ramp : "OrRd";
                     var dataClass = (mapModel.initializationData !== undefined && mapModel.initializationData.maps[0].colorPalet.numBreaks !== undefined) ? mapModel.initializationData.maps[0].colorPalet.numBreaks : "5";
-                    cRamp.init(relatedElement, relation, colorSchema, colorPalet, dataClass, bookmarkDelegate);//"Sequential", "YlGn", "5");
+                    cRamp.init(relatedElement, relation, colorSchema, colorPalet, dataClass, bookmarkDelegate); //"Sequential", "YlGn", "5");
                     custBreak.init(relatedElement, relation, self.initCustomBreaks !== undefined);
-                    if (mapModel.initializationData == undefined) {
+                    if (mapModel.initializationData === undefined) {
                         self.loadMap();
                     }
                     self.ReadyToRender = true;
                     self.updateRenderer();
 
-                    self.simpleFillSymbol = new esri.symbol.SimpleFillSymbol(
-                        esri.symbol.SimpleFillSymbol.STYLE_SOLID,
-                        new esri.symbol.SimpleLineSymbol(
-                            esri.symbol.SimpleLineSymbol.STYLE_SOLID,
-                            new dojo.Color([0, 0, 0]),
-                            0.5
-                        ),
-                        new dojo.Color([175, 175, 175])
+                    self.simpleFillSymbol = new SimpleFillSymbol(SimpleFillSymbol.STYLE_SOLID,
+                        new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID,
+                            new Color([0, 0, 0]), 0.5),
+                        new Color([175, 175, 175])
                     );
-                }//end int
-                //****************************************************************
+                }; // end int
+                // =================================================================================================================>
 
                 /**
                 Method for opening the window.
 
                 @method openWindow
                 **/
-                self.openWindow = function () {
+                self.openWindow = function() {
                     var win = $("#cbrWindow").data("kendoWindow");
                     win.restore();
                     win.open();
@@ -252,13 +275,13 @@
                     });
                 };
 
-                self.closeWindow = function () {
+                self.closeWindow = function() {
                     var win = $("#cbrWindow").data("kendoWindow");
                     win.close();
                 };
 
                 // change window location when window resized
-                self.winResize = function () {
+                self.winResize = function() {
                     $("#cbrWindow").closest(".k-window").css({
                         top: 55,
                         left: 5
@@ -266,20 +289,20 @@
                 };
 
                 var resizeTimer;
-                $(window).resize(function () {
+                $(window).resize(function() {
                     clearTimeout(resizeTimer);
                     resizeTimer = setTimeout(self.winResize, 200);
                 });
 
                 //removes selected state from Advanced Map Options Panel vw
-                self.onCollapse = function (e) {
-                    $(e.item).children().removeClass('k-state-selected');
+                self.onCollapse = function(e) {
+                    $(e.item).children().removeClass("k-state-selected");
                 };
-                self.onExpand = function (e) {
-                    $(e.item).children().removeClass('k-state-selected');
+                self.onExpand = function(e) {
+                    $(e.item).children().removeClass("k-state-selected");
                 };
 
-                self.loadMap = function (initializedMapText) {
+                self.loadMap = function(initializedMapText) {
                     //load in map from query string or by default load the first map
                     var dataItem = null;
                     if (initializedMapText !== undefined) {
@@ -301,22 +324,22 @@
                         self.toc.expand(currNode);
                     } else {
                         //expand all parent nodes
-                        $(currNode).parentsUntil('.k-treeview').filter('.k-item').each(
-                            function (index, element) {
+                        $(currNode).parentsUntil(".k-treeview").filter(".k-item").each(
+                            function(index, element) {
                                 self.toc.expand($(this));
                             }
                         );
                     }
                 };
 
-                self.loadInitializedMap = function (map, initData) {
+                self.loadInitializedMap = function(map, initData) {
                     //remove selected map frame
                     $("#mapFrameGridCell1").removeClass("selected");
                     $("#mapFrameGridCell2").removeClass("selected");
                     $("#mapFrameGridCell3").removeClass("selected");
                     $("#mapFrameGridCell4").removeClass("selected");
                     //select frame
-                    $("#mapFrameGridCell" + initData.mapID.replace("map", '')).addClass("selected");
+                    $("#mapFrameGridCell" + initData.mapID.replace("map", "")).addClass("selected");
 
                     // it's an existing map - need to load the options
                     self.renderer = null;
@@ -331,18 +354,20 @@
                         custBreak.loadInitialCustomBreaks = false;
                         self.customSet = false;
                     }
-                    self.classMethodList.select(function (item) { return item.Value === initData.classMethod });
+                    self.classMethodList.select(function(item) {
+                        return item.Value === initData.classMethod;
+                    });
                     var oldBreakValue = self.breaksCountList.value();
                     self.breaksCountList.value(initData.breaks.length);
                     if (oldBreakValue !== initData.breaks.length.toString()) {
                         tp.publish("SetNumBreaks", self.breaksCountList.dataItem());
                     }
-					//console.log(initData);
+                    //console.log(initData);
                     tp.publish("AdditionalMapInitialized", initData.colorPalet.ramp, initData.colorPalet.numBreaks);
                     //self.updateColorRamp(initData.colorRamp);
                 };
 
-                self.selectedMapChangedNew = function (newMap) {
+                self.selectedMapChangedNew = function(newMap) {
                     if (newMap === undefined || (newMap && !newMap.loaded)) {
                         if (newMap) {
                             //remove selected map frame
@@ -351,7 +376,7 @@
                             $("#mapFrameGridCell3").removeClass("selected");
                             $("#mapFrameGridCell4").removeClass("selected");
                             //select frame
-                            $("#mapFrameGridCell" + newMap.id.replace("map", '')).addClass("selected");
+                            $("#mapFrameGridCell" + newMap.id.replace("map", "")).addClass("selected");
                         }
                         // if the map isn't loaded yet - it's a new map and need to clear/reset the options
                         self.toc.select(null);
@@ -373,7 +398,7 @@
                     }
                 };
 
-                self.selectedMapChangedUpdate = function (params) {
+                self.selectedMapChangedUpdate = function(params) {
                     //remove selected map frame
                     $("#mapFrameGridCell1").removeClass("selected");
                     $("#mapFrameGridCell2").removeClass("selected");
@@ -383,18 +408,22 @@
                     $("#mapFrameGridCell" + params.mapIndex).addClass("selected");
                     if (params.renderer) {
                         // it's an existing map - need to load the options
-                        self.ReadyToRender = true;//false;
+                        self.ReadyToRender = true; //false;
                         if (params.customBreaks && params.customBreaks.breaks) {
                             self.customSet = true;
                             self.initCustomBreaks = params.customBreaks.breaks;
                             custBreak.loadInitialCustomBreaks = true;
-                            self.classMethodList.select(function (item) { return item.Value === "custom" });
+                            self.classMethodList.select(function(item) {
+                                return item.Value === "custom";
+                            });
                             self.breaksCountList.value(params.customBreaks.breaks.length);
                         } else {
                             self.customSet = false;
                             self.initCustomBreaks = undefined;
                             custBreak.loadInitialCustomBreaks = false;
-                            self.classMethodList.select(function (item) { return item.Value === params.renderer.classificationMethod });
+                            self.classMethodList.select(function(item) {
+                                return item.Value === params.renderer.classificationMethod;
+                            });
                             self.breaksCountList.value(params.renderer.breaks.length);
                             self.currentRenderer = params.renderer;
                         }
@@ -415,20 +444,20 @@
                     }
                 };
 
-                self.updateTOCSelection = function () {
+                self.updateTOCSelection = function() {
                     var dataItem = self.toc.dataItem(self.toc.select());
                     var currNode = self.toc.select()[0];
 
                     // collapse all items
                     self.toc.collapse(".k-item");
 
-                    setTimeout(function () {
+                    setTimeout(function() {
                         //expand all parent nodes
-                        $(currNode).parentsUntil('.k-treeview').filter('.k-item').each(
-                            function (index, element) {
+                        $(currNode).parentsUntil(".k-treeview").filter(".k-item").each(
+                            function(index, element) {
                                 self.toc.expand($(this));
                             }
-                        )
+                        );
                     }, 500);
                 };
 
@@ -438,12 +467,12 @@
 
                 @method updateRenderer
                 **/
-                self.updateRenderer = function () {
+                self.updateRenderer = function() {
                     if (self.ReadyToRender !== true || self.customSet) {
                         return;
                     }
                     var thematicMap = self.toc.dataItem(self.toc.select());
-                    var classDef = new esri.tasks.ClassBreaksDefinition();
+                    var classDef = new ClassBreaksDefinition();
                     if (thematicMap) {
                         classDef.classificationField = thematicMap.FieldName;
                         if (thematicMap.hasOwnProperty("NormalizeField")) {
@@ -452,22 +481,21 @@
                         }
                         if (self.classMethodList.dataItem() && self.classMethodList.dataItem().Value === "custom") {
                             classDef.classificationMethod = "natural-breaks";
-                        }
-                        else if (self.classMethodList.dataItem()) {
+                        } else if (self.classMethodList.dataItem()) {
                             classDef.classificationMethod = self.classMethodList.dataItem().Value;
                         } else {
                             self.classMethodList.select(0);
                             classDef.classificationMethod = self.classMethodList.dataItem().Value;
                         }
                         classDef.breakCount = self.breaksCountList.dataItem();
-                        var params = new esri.tasks.GenerateRendererParameters();
+                        var params = new GenerateRendererParameters();
                         params.classificationDefinition = classDef;
 
                         var mapServiceUrl = conf.mapServices[thematicMap.Service] + "/" + thematicMap.LayerId;
-                        var generateRenderer = new esri.tasks.GenerateRendererTask(mapServiceUrl);
+                        var generateRenderer = new GenerateRendererTask(mapServiceUrl);
                         generateRenderer.execute(params, self.applyRenderer, self.rendererGenError);
                     }
-                }
+                };
 
                 /**
                 Method to apply the class break renderer to the thematic layer.
@@ -475,7 +503,7 @@
 
                 @method applyRenderer
                 **/
-                self.applyRenderer = function (renderer) {
+                self.applyRenderer = function(renderer) {
                     for (var i = 0; i < self.CurrentRamp.length; i++) {
                         renderer.infos[i].symbol.color = dojo.colorFromRgb(self.CurrentRamp[i]);
                     }
@@ -499,19 +527,18 @@
                     self.currentRenderer = renderer;
                     if (self.classMethodList.dataItem().Value === "custom") {
                         tp.publish("ClassificationMethodChanged", self.currentRenderer);
-                    }
-                    else {
+                    } else {
                         self.redrawThematicLayer();
                     }
-                }
+                };
 
                 /**
                 Method to refresh the thematic layer after the renderer has been applied.
 
                 @method redrawThematicLayer
                 **/
-                self.redrawThematicLayer = function () {
-                    var layerOption = new esri.layers.LayerDrawingOptions();
+                self.redrawThematicLayer = function() {
+                    var layerOption = new LayerDrawingOptions();
                     layerOption.renderer = self.currentRenderer;
                     for (var j = 0; j < layerOption.renderer.infos.length; j++) {
                         var start;
@@ -519,8 +546,7 @@
                         if (layerOption.renderer.asPercent) {
                             start = Math.round(layerOption.renderer.infos[j].minValue * 100);
                             end = Math.round(layerOption.renderer.infos[j].maxValue * 100) + "%";
-                        }
-                        else {
+                        } else {
                             start = magNum.formatValue(Math.round(layerOption.renderer.infos[j].minValue));
                             end = magNum.formatValue(Math.round(layerOption.renderer.infos[j].maxValue));
                         }
@@ -541,23 +567,23 @@
                         thematicLayer.refresh();
                         tp.publish("MapRenderUpdated");
                     }
-                }
+                };
+
                 /**
                 Method for handling a change in the classification method dropdown.
 
                 @method classMethodChange
                 @param {event} e - window event data, not used within this method.
                 **/
-                self.classMethodChange = function (e) {
+                self.classMethodChange = function() {
                     var classMethod = self.classMethodList.dataItem().Value;
                     if (classMethod === "custom") {
                         tp.publish("ClassificationMethodChanged", self.currentRenderer);
-                    }
-                    else {
+                    } else {
                         tp.publish("CustomeMapBreaks", {});
                         self.updateRenderer();
                     }
-                }
+                };
 
                 /**
                 Method for handling a change in the thematic maps list selection when the selected item is a group node.
@@ -565,25 +591,25 @@
                 @method mapSelected
                 @param {event} e - window event data, including "node" property used for determining the selected data item.
                 **/
-                self.mapSelected = function (e) {
+                self.mapSelected = function(e) {
                     var dataItem = self.toc.dataItem(e.node);
                     if (dataItem.NodeType === "cat") {
                         self.toc.select(e.node.children[1].firstChild);
                         self.toc.expand(e.node);
                         e.preventDefault();
                     }
-                }
+                };
 
                 /**
                 Method for handling a change in the thematic maps list selection.
 
                 @method mapSelectionChanged
                 **/
-                self.mapSelectionChanged = function (e) {
-                    var dataItem = null
-                    //if (mapInitializationData != undefined) {
-                    //    self.toc.select(self.toc.findByText(mapInitializationData.selectedMap.ShortName));
-                    //} 
+                self.mapSelectionChanged = function() {
+                    var dataItem = null;
+                        //if (mapInitializationData != undefined) {
+                        //    self.toc.select(self.toc.findByText(mapInitializationData.selectedMap.ShortName));
+                        //}
                     dataItem = self.toc.dataItem(self.toc.select());
                     if (dataItem) {
                         //bookmarkDelegate.currentMap(dataItem);
@@ -596,9 +622,11 @@
 
                         if (dataItem.hasOwnProperty("DefaultBreaks")) {
                             self.ReadyToRender = false;
-                            self.breaksCountList.select(function (item) { return item == dataItem.DefaultBreaks.length; });
+                            self.breaksCountList.select(function(item) {
+                                return item === dataItem.DefaultBreaks.length;
+                            });
                             tp.publish("SetNumBreaks", dataItem.DefaultBreaks.length);
-                            var newRenderer = new esri.renderer.ClassBreaksRenderer(null, dataItem.FieldName);
+                            var newRenderer = new ClassBreaksRenderer(null, dataItem.FieldName);
                             if (dataItem.hasOwnProperty("NormalizeField")) {
                                 newRenderer.normalizationField = dataItem.NormalizeField;
                                 newRenderer.normalizationType = "field";
@@ -606,25 +634,22 @@
                             newRenderer.infos = dataItem.DefaultBreaks;
                             for (var i = 0; i < newRenderer.infos.length; i++) {
                                 newRenderer.infos[i].classMaxValue = newRenderer.infos[i].maxValue;
-                                newRenderer.infos[i].symbol = new esri.symbol.SimpleFillSymbol(
-                                  esri.symbol.SimpleFillSymbol.STYLE_SOLID,
-                                  new esri.symbol.SimpleLineSymbol(
-                                    esri.symbol.SimpleLineSymbol.STYLE_SOLID,
-                                    new dojo.Color([0, 0, 0]),
-                                    0.5
-                                  ),
-                                  new dojo.Color([175, 175, 175])
+                                newRenderer.infos[i].symbol = new SimpleFillSymbol(SimpleFillSymbol.STYLE_SOLID,
+                                    new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID,
+                                        new Color([0, 0, 0]), 0.5),
+                                    new Color([175, 175, 175])
                                 );
                             }
-                            self.classMethodList.select(function (item) { return item.Value == "custom"; });
+                            self.classMethodList.select(function(item) {
+                                return item.Value === "custom";
+                            });
                             self.ReadyToRender = true;
                             self.applyRenderer(newRenderer);
-                        }
-                        else {
+                        } else {
                             self.updateRenderer();
                         }
                     }
-                }
+                };
 
                 /**
                 Method for handling a click event on the color ramp control.
@@ -632,10 +657,10 @@
                 @method colorPickerClicked
                 @param {event} e - Event data for the click event.
                 **/
-                self.colorPickerClicked = function (e) {
+                self.colorPickerClicked = function() {
                     self.colorRamp.value(null);
                     tp.publish("SelectColorRamp", null);
-                }
+                };
 
                 /**
                 Method for handling a selection in the breaks count dropdown control.
@@ -643,10 +668,10 @@
                 @method breaksCountSelected
                 @param {event} e - Event data for the click event.
                 **/
-                self.breaksCountSelected = function (e) {
+                self.breaksCountSelected = function(e) {
                     var dataItem = self.breaksCountList.dataItem(e.node);
                     tp.publish("SetNumBreaks", dataItem);
-                }
+                };
 
 
                 /**
@@ -655,16 +680,17 @@
                 @method setBreaksList
                 @param {array} breaksList - List of numbers representing the options for "number of breaks"
                 **/
-                self.setBreaksList = function (breaksList) {
+                self.setBreaksList = function(breaksList) {
                     var currentSelection = self.breaksCountList.dataItem();
                     self.breaksCountList.setDataSource(breaksList);
-                    if (breaksList.indexOf(currentSelection) != -1) {
-                        self.breaksCountList.select(function (dataItem) { return dataItem == currentSelection; });
-                    }
-                    else {
+                    if (breaksList.indexOf(currentSelection) !== -1) {
+                        self.breaksCountList.select(function(dataItem) {
+                            return dataItem === currentSelection;
+                        });
+                    } else {
                         tp.publish("SetNumBreaks", self.breaksCountList.dataItem());
                     }
-                }
+                };
 
                 /**
                 Method for updating the color ramp.
@@ -672,7 +698,7 @@
                 @method updateColorRamp
                 @param {array} newRamp - Array of colors representing the new color ramp
                 **/
-                self.updateColorRamp = function (newRamp) {
+                self.updateColorRamp = function(newRamp) {
                     self.CurrentRamp = newRamp;
                     var colorChangeOnly = self.currentRenderer && self.CurrentRamp && (self.CurrentRamp.length === self.currentRenderer.infos.length);
                     dc.destroy("rampPad");
@@ -686,20 +712,21 @@
                         value: null,
                         change: self.colorPickerClicked
                     }).data("kendoColorPalette");
-                    self.breaksCountList.select(function (dataItem) { return dataItem == newRamp.length; });
+                    self.breaksCountList.select(function(dataItem) {
+                        return dataItem == newRamp.length;
+                    });
                     if (colorChangeOnly) {
                         for (var i = 0; i < self.CurrentRamp.length; i++) {
                             self.currentRenderer.infos[i].symbol.color = dojo.colorFromRgb(self.CurrentRamp[i]);
                         }
                         self.redrawThematicLayer();
-                    }
-                    else {
+                    } else {
                         self.updateRenderer();
                     }
                 };
 
-            };//end CBRVM
+            }; //end CBRVM
             return CBRVM;
-        }//end function
-    )
+        } //end function
+    );
 }());

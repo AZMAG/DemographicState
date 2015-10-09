@@ -4,21 +4,21 @@
  * @class social-vm
  */
 
-(function () {
+(function() {
 
     "use strict";
 
     define([
-        'dojo/dom-construct',
-        'dojo/topic',
-        'app/vm/help-vm',
-        'app/helpers/bookmark-delegate',
-        'dojo/text!app/views/socialHelp-view.html',
-        'dojo/text!app/views/social-view.html'
-    ],
-        function (dc, tp, helpVM, bookmarkDelegate, helpView, socialView) {
+            "dojo/dom-construct",
+            "dojo/topic",
+            "app/vm/help-vm",
+            "app/helpers/bookmark-delegate",
+            "dojo/text!app/views/socialHelp-view.html",
+            "dojo/text!app/views/social-view.html"
+        ],
+        function(dc, tp, helpVM, bookmarkDelegate, helpView, socialView) {
 
-            var SocialVM = new function () {
+            var SocialVM = new function() {
 
                 /**
                  * Store reference to module this object.
@@ -38,21 +38,25 @@
                  *
                  * @method init
                  */
-                self.init = function () {
+                self.init = function() {
                     dc.place(socialView, "mapContainer", "after");
 
-                    tp.subscribe("shareStateO", function (event) { self.openWindow(); });
-                    tp.subscribe("shareStateC", function (event) { self.closeWindow(); });
-                    
-                    bookmarkDelegate.mapInfoList.subscribe(function (value) {
+                    tp.subscribe("shareStateO", function() {
+                        self.openWindow();
+                    });
+                    tp.subscribe("shareStateC", function() {
+                        self.closeWindow();
+                    });
+
+                    bookmarkDelegate.mapInfoList.subscribe(function(value) {
                         if (value && value.length > 0) {
-                            console.log("bookmark info updated");
+                            // console.log("bookmark info updated");
                         }
                     });
 
                     var shareWindow = $("#shareWindowDiv").kendoWindow({
                         width: "475", //465px
-                        height: "215",//255px
+                        height: "215", //255px
                         title: self.Title,
                         actions: ["Help", "Minimize", "Close"],
                         modal: false,
@@ -66,13 +70,13 @@
                     });
 
                     var helpButton = shareWindow.wrapper.find(".k-i-help");
-                    helpButton.click(function (e) {
+                    helpButton.click(function() {
                         helpVM.openWindow(helpView);
                     });
 
-                    self.initFacebook(document, 'script', 'facebook-jssdk');
+                    self.initFacebook(document, "script", "facebook-jssdk");
 
-                };// end init
+                }; // end init
 
                 /**
                  * Open the window and initialize the contents.
@@ -80,21 +84,21 @@
                  * @method openWindow
                  * @param {string} content - the content to display in the window.
                  */
-                self.openWindow = function () {
+                self.openWindow = function() {
                     var shareURL = window.location.origin + window.location.pathname + bookmarkDelegate.buildMapQueryString();
                     bookmarkDelegate.minifyURL(shareURL, self.changeShareLinks);
-					self.changeShareLinks(shareURL);
+                    self.changeShareLinks(shareURL);
                     var win = $("#shareWindowDiv").data("kendoWindow");
                     win.restore();
                     win.open();
                 };
 
-                self.closeWindow = function () {
+                self.closeWindow = function() {
                     var win = $("#shareWindowDiv").data("kendoWindow");
                     win.close();
                 };
 
-                self.rebuildShareDom = function () {
+                self.rebuildShareDom = function() {
                     $("div#shareWindowDiv").remove();
                     self.init();
                 };
@@ -104,19 +108,19 @@
                  *
                  * @method initializeShareFunctionality
                  */
-                self.initializeShareFunctionality = function () {
+                self.initializeShareFunctionality = function() {
                     // Facebook
-                    self.initFacebook(document, 'script', 'facebook-jssdk');
+                    self.initFacebook(document, "script", "facebook-jssdk");
 
                     // Twitter
-                    self.initTwitter(document, 'script', 'twitter-wjs');
+                    self.initTwitter(document, "script", "twitter-wjs");
 
                     // Google +
                     self.initGooglePlus();
 
                     // Linked-in
                     self.initLinkedin();
-					
+
                 };
 
                 /**
@@ -128,10 +132,13 @@
                  * @param {string} s - tag type
                  * @param {string} id - id of the element created
                  */
-                self.initFacebook = function (d, s, id) {
+                self.initFacebook = function(d, s, id) {
                     var js, fjs = d.getElementsByTagName(s)[0];
-                    if (d.getElementById(id)) return;
-                    js = d.createElement(s); js.id = id;
+                    if (d.getElementById(id)) {
+                        return;
+                    }
+                    js = d.createElement(s);
+                    js.id = id;
                     js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=1409314459302648";
                     fjs.parentNode.insertBefore(js, fjs);
                 };
@@ -145,12 +152,13 @@
                  * @param {string} s - tag type
                  * @param {string} id - id of the element created
                  */
-                self.initTwitter = function (d, s, id) {
-                    var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https';
+                self.initTwitter = function(d, s, id) {
+                    var js, fjs = d.getElementsByTagName(s)[0],
+                        p = /^http:/.test(d.location) ? "http" : "https";
                     if (!d.getElementById(id)) {
                         js = d.createElement(s);
                         js.id = id;
-                        js.src = p + '://platform.twitter.com/widgets.js';
+                        js.src = p + "://platform.twitter.com/widgets.js";
                         fjs.parentNode.insertBefore(js, fjs);
                     }
                 };
@@ -160,10 +168,13 @@
                  *
                  * @method initGooglePlus
                  */
-                self.initGooglePlus = function () {
-                    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-                    po.src = 'https://apis.google.com/js/plusone.js';
-                    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+                self.initGooglePlus = function() {
+                    var po = document.createElement("script");
+                    po.type = "text/javascript";
+                    po.async = true;
+                    po.src = "https://apis.google.com/js/plusone.js";
+                    var s = document.getElementsByTagName("script")[0];
+                    s.parentNode.insertBefore(po, s);
                 };
 
                 /**
@@ -171,13 +182,13 @@
                  *
                  * @method initLinkedin
                  */
-                self.initLinkedin = function () {
-                    if (typeof (IN) != 'undefined') {
+                self.initLinkedin = function() {
+                    if (typeof(IN) !== "undefined") {
                         IN.parse();
                     } else {
                         $.getScript("http://platform.linkedin.com/in.js");
                     }
-                }
+                };
 
                 /**
                  * Reinitializes all of the share functionality with the new minimized url.
@@ -186,16 +197,16 @@
                  *
                  * @param {string} minimizedURL - minimized bookmarking URL
                  */
-                self.changeShareLinks = function (minimizedURL) {
-				
+                self.changeShareLinks = function(minimizedURL) {
+
                     var replaceToken = "[REPLACE_THIS]";
                     var newShareURL = self.baseURL + bookmarkDelegate.buildMapQueryString();
                     //Facebook
                     var facebookDiv = $("div#facebook");
                     var facebookIframe = $("div#facebook div span iframe");
-                    var facebookIframeSrc = $(facebookIframe).attr("src")
-                    var indexOfHref = facebookIframeSrc.indexOf("href=")
-                    var urlToReplace = facebookIframeSrc.substr(indexOfHref + 5, facebookIframeSrc.indexOf("&", indexOfHref) - indexOfHref - 5)
+                    var facebookIframeSrc = $(facebookIframe).attr("src");
+                    var indexOfHref = facebookIframeSrc.indexOf("href=");
+                    var urlToReplace = facebookIframeSrc.substr(indexOfHref + 5, facebookIframeSrc.indexOf("&", indexOfHref) - indexOfHref - 5);
                     $(facebookIframe).attr("src", facebookIframeSrc.replace(urlToReplace, encodeURIComponent(minimizedURL)));
                     //Twitter
                     $("script#twitter-wjs").remove();
@@ -217,19 +228,19 @@
                     var emailDiv = $("div#email");
                     $(emailDiv).empty();
                     var emailStructure = '<a href="mailto:?subject=MAG Demographics Map Viewer&body=%0A%0ACheck out this website.%0A%0AMAG Demographics Map Viewer - #MAGmaps%0A' + replaceToken + '" title="MAG|Demographics"><img id="mailicon" src="app/resources/img/mail-icon.png"></a>';
-                    $(emailDiv).html(emailStructure.replace(replaceToken, minimizedURL));					
-					
-                    self.initTwitter(document, 'script', 'twitter-wjs');					
+                    $(emailDiv).html(emailStructure.replace(replaceToken, minimizedURL));
+
+                    self.initTwitter(document, "script", "twitter-wjs");
 
                     self.initGooglePlus();
 
                     self.initLinkedin();
-                }
+                };
 
-            };//end socialVM
+            }; //end socialVM
 
             return SocialVM;
 
-        }//end function
-    )
+        } //end function
+    );
 }());

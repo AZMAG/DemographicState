@@ -21,10 +21,7 @@
             "app/vm/demographic-vm",
             "app/config/demographicConfig",
             "app/vm/interactiveTools-vm",
-            "app/vm/queryBuilderTwo-vm",
-
-            "https://code.jquery.com/jquery-1.9.1.min.js",
-			"http://kendo.cdn.telerik.com/2015.2.624/js/kendo.all.min.js"
+            "app/vm/queryBuilderTwo-vm"
         ],
         function(dj, dc, tp, dom, mapModel, helpView, helpVM, view, layerDelegate, demographicVM, demographicConfig, interactiveToolsVM, qbVM) {
 

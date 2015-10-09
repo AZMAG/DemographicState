@@ -60,8 +60,8 @@
                 self.init = function() {
                     // Place the HTML from the view into the main application after the map div.
                     dc.place(view, "mapContainer", "after");
-					
-					$("#subscribeWindow").kendoWindow({
+
+                    $("#subscribeWindow").kendoWindow({
                         width: self.newWindowWidth,
                         height: self.newWindowHeight,
                         title: self.windowTitle,
@@ -70,7 +70,7 @@
                         visible: false,
                         resizable: false
                     }).data("kendoWindow");
-					
+
                 }; //end init
                 //****************************************************************
                 /**
@@ -84,13 +84,13 @@
                     win.content(content);
                     win.center();
                     win.open();
-					
-					$("#btnSubscribe").bind("click", function() {
-						win.close();
+
+                    $("#btnSubscribe").bind("click", function() {
+                        win.close();
                     });
                 };
-				
-				
+
+
 
             }; // end SubscribeVM
 

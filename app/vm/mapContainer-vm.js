@@ -4,25 +4,23 @@
  * @class mapContainer-vm
  */
 
-(function () {
+(function() {
 
     "use strict";
 
     define([
-        'dojo/dom-construct',
-        'dojo/_base/array',
-        'dojo/_base/lang',
-        'dojo/dom-style',
-        'dojo/topic',
-        'dojo/text!app/views/mapContainer-view.html',
-        'app/models/map-model',
-        'app/vm/map-vm',
-        'app/helpers/bookmark-delegate',
-        'https://code.jquery.com/jquery-1.9.1.min.js',
-		'http://kendo.cdn.telerik.com/2015.2.624/js/kendo.all.min.js'
-    ],
-        function (dc, da, lang, ds, topic, view, mapModel, mapVM, bookmarkDelegate) {
-            var MapContainerVM = new function () {
+            "dojo/dom-construct",
+            "dojo/_base/array",
+            "dojo/_base/lang",
+            "dojo/dom-style",
+            "dojo/topic",
+            "dojo/text!app/views/mapContainer-view.html",
+            "app/models/map-model",
+            "app/vm/map-vm",
+            "app/helpers/bookmark-delegate"
+        ],
+        function(dc, da, lang, ds, topic, view, mapModel, mapVM, bookmarkDelegate) {
+            var MapContainerVM = new function() {
 
                 /**
                  * Store reference to module this object.
@@ -41,7 +39,7 @@
                  *
                  * @method init
                  */
-                self.init = function () {
+                self.init = function() {
                     dc.place(view, "display", "first");
 
                     topic.subscribe("AddNewMap", self.addNewMap);
@@ -78,7 +76,7 @@
                         mapModel.initializing = false;
                     }
 
-                };//end init
+                }; //end init
 
                 /**
                 this method adds a new map to the map container.
@@ -86,75 +84,79 @@
                 @method addNewMap
                 @param {object} mapInitData - initialization data from the URL querystring if provided.
                 **/
-                self.addNewMap = function (mapInitData) {
+                self.addNewMap = function(mapInitData) {
                     if (self.mapVMs.length < 4) {
                         var centerPnt = mapModel.baseMapInstance.extent.getCenter();
                         var newMapVM;
 
                         switch (self.mapVMs.length) {
                             case 1:
-								//Update grid rows
+                                //Update grid rows
                                 topic.publish("UpdateMapFrameGridRows", 2);
-                                
+
                                 //apply css to arrange maps
                                 $("#map2").removeClass("hidden");
-								$("#map1").width("49.8%");
-								$("#map2").width("49.8%");
-								$("#map2").css("left","50%");
+                                $("#map1").width("49.8%");
+                                $("#map2").width("49.8%");
+                                $("#map2").css("left", "50%");
 
-								//recenter maps
-								mapModel.recenterMaps(centerPnt);
-								
-								newMapVM = new mapVM();
+                                //recenter maps
+                                mapModel.recenterMaps(centerPnt);
+
+                                newMapVM = new mapVM();
                                 newMapVM.init("map2", null, false, "", false, true, "mapFrameElementLeft", mapInitData);
-								
+
                                 //show map elements for first map
                                 self.mapVMs[0].toggleMapElements(true);
-								
+
                                 //close legend and report windows
-                                topic.publish('legendStateC', { name: 'Close' });
-                                topic.publish('panelStateC', { name: 'Close' });
+                                topic.publish("legendStateC", {
+                                    name: "Close"
+                                });
+                                topic.publish("panelStateC", {
+                                    name: "Close"
+                                });
                                 break;
-								
+
                             case 2:
                                 //Update grid rows
                                 topic.publish("UpdateMapFrameGridRows", 3);
-								
-								//apply css to arrange maps
-								$('#map3').removeClass('hidden');								
-								$('#map1').height('49.8%');
-								$('#map2').height('49.8%');
-								$('#map3').height('49.8%');
-								$('#map3').css('top','50.2%');
-								$('#map3').width('49.8%');
-                                
-								//recenter maps
+
+                                //apply css to arrange maps
+                                $("#map3").removeClass("hidden");
+                                $("#map1").height("49.8%");
+                                $("#map2").height("49.8%");
+                                $("#map3").height("49.8%");
+                                $("#map3").css("top", "50.2%");
+                                $("#map3").width("49.8%");
+
+                                //recenter maps
                                 mapModel.recenterMaps(centerPnt);
-								
+
                                 //create new map
-								newMapVM = new mapVM();
+                                newMapVM = new mapVM();
                                 newMapVM.init("map3", null, false, "", false, true, "mapFrameElementRight", mapInitData);
-                               
+
                                 break;
-								
+
                             case 3:
                                 //update UI
                                 topic.publish("UpdateMapFrameGridRows", 4);
-								
-                                //apply css to arrange maps
-                                $('#map4').removeClass('hidden');
-								$('#map4').height('49.8%');
-								$('#map4').css('left','50%');
-								$('#map4').css('top','50.2%');
-								$('#map4').width('49.8%');
 
-								//recenter maps
-								mapModel.recenterMaps(centerPnt);
-								
-								//create new map
+                                //apply css to arrange maps
+                                $("#map4").removeClass("hidden");
+                                $("#map4").height("49.8%");
+                                $("#map4").css("left", "50%");
+                                $("#map4").css("top", "50.2%");
+                                $("#map4").width("49.8%");
+
+                                //recenter maps
+                                mapModel.recenterMaps(centerPnt);
+
+                                //create new map
                                 newMapVM = new mapVM();
                                 newMapVM.init("map4", null, false, "", false, true, "mapFrameElementLeft", mapInitData);
-								
+
                                 break;
                         }
 
@@ -173,38 +175,38 @@
 
                 @method mapLoaded
                 **/
-                self.mapLoaded = function () {
+                self.mapLoaded = function() {
                     if (mapModel.initializing && self.initializationData && self.mapVMs.length < self.initializationData.maps.length) {
-                        setTimeout(function () {
+                        setTimeout(function() {
                             var mapInitData = self.initializationData.maps[self.mapVMs.length];
                             mapInitData.extent = self.initializationData.E;
                             self.addNewMap(mapInitData);
                         }, 2000);
-                    }else{
+                    } else {
                         mapModel.initializing = false;
                     }
-                }
+                };
 
                 /**
                 this method removes a map from the map container.
 
                 @method removeMap
                 **/
-                self.removeMap = function () {
+                self.removeMap = function() {
                     if (self.mapVMs.length > 1) {
-                          switch (self.mapVMs.length) {
+                        switch (self.mapVMs.length) {
                             case 2:
-								$('#map2').addClass('hidden');
-                                $('#map1').css('width', '100%');
-								//var toc = $("#thematicTOC").data("kendoTreeView");
-								//var item = toc.findByText("Total Population");
-								//toc.select(item);
+                                $("#map2").addClass("hidden");
+                                $("#map1").css("width", "100%");
+                                //var toc = $("#thematicTOC").data("kendoTreeView");
+                                //var item = toc.findByText("Total Population");
+                                //toc.select(item);
                                 self.mapVMs[0].toggleMapElements(false);
                                 break;
                             case 3:
-                                $('#map3').addClass('hidden');
-								$('#map1').height('100%');
-								$('#map2').height('100%');
+                                $("#map3").addClass("hidden");
+                                $("#map1").height("100%");
+                                $("#map2").height("100%");
                                 topic.publish("UpdateMapFrameGridRows", 2);
                                 break;
                             case 4:
@@ -227,37 +229,45 @@
                  *
                  * @method updateAddRemoveButtons
                  */
-                self.updateAddRemoveButtons = function () {
+                self.updateAddRemoveButtons = function() {
                     // update displaying the button to remove a map
                     if (self.mapVMs.length > 1) {
-                        topic.publish("UpdateRemoveAMapButton", { display: true });
+                        topic.publish("UpdateRemoveAMapButton", {
+                            display: true
+                        });
                         //hide header title
                         $("#title2").addClass("hidden");
                     } else {
-                        topic.publish("UpdateRemoveAMapButton", { display: false });
+                        topic.publish("UpdateRemoveAMapButton", {
+                            display: false
+                        });
                         //show header title
                         $("#title2").removeClass("hidden");
                     }
                     // update displaying the button to add a map
                     if (self.mapVMs.length < 4) {
-                        topic.publish("UpdateAddAMapButton", { display: true });
+                        topic.publish("UpdateAddAMapButton", {
+                            display: true
+                        });
                     } else {
-                        topic.publish("UpdateAddAMapButton", { display: false });
+                        topic.publish("UpdateAddAMapButton", {
+                            display: false
+                        });
                     }
-                };//end updateAddRemoveButtons
+                }; //end updateAddRemoveButtons
 
-                self.handleMapInfoUpdated = function (value) {
+                self.handleMapInfoUpdated = function(value) {
                     var mapInfoList = [];
                     for (var i = 0; i < self.mapVMs.length; i++) {
                         var mapInfo = self.mapVMs[i].getMapBookmarkInfo();
                         mapInfoList.push(mapInfo);
                     }
                     bookmarkDelegate.mapInfoUpdated(mapInfoList);
-                };//end handleMapInfoUpdated
+                }; //end handleMapInfoUpdated
 
-            };//end
+            }; //end
 
             return MapContainerVM;
         }
-    )
+    );
 }());

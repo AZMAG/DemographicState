@@ -4,19 +4,19 @@
  * @class warning-vm
  */
 
-(function () {
+(function() {
 
     "use strict";
 
     define([
-        'dojo/dom-construct',
-        'dojo/topic',
-        'dojo/text!app/views/alert2-view.html'
-    ],
+            "dojo/dom-construct",
+            "dojo/topic",
+            "dojo/text!app/views/alert2-view.html"
+        ],
 
-        function (dc, tp, view) {
+        function(dc, tp, view) {
 
-            var alert2VM = new function () {
+            var alert2VM = new function() {
 
                 /**
                  * Store reference to module this object.
@@ -31,8 +31,8 @@
                  *
                  * @method init
                  */
-                self.init = function () {
-                   // Place the HTML from the view into the main application after the map div.
+                self.init = function() {
+                    // Place the HTML from the view into the main application after the map div.
                     //dc.place(view, "map", "after");
                     dc.place(view, "mapContainer", "after");
 
@@ -46,23 +46,23 @@
                         resizable: false
                     }).data("kendoWindow");
 
-                } // end init
-//****************************************************************
+                }; // end init
+                //****************************************************************
                 /**
                 Method for opening the window.
 
                 @method openWindow
                 **/
-                self.openWindow = function () {
+                self.openWindow = function() {
                     var win = $("#alert2Window").data("kendoWindow");
                     win.center();
                     win.open();
                 };
 
-              }; // end AlertVM
+            }; // end AlertVM
 
             return alert2VM;
 
-      } // end function
-    )
-} ());
+        } // end function
+    );
+}());
