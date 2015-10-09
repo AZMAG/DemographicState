@@ -1522,7 +1522,7 @@
                         }
 
                         self.reportURL = encodeURI(demographicConfig.exportPDFCompareReportUrl + "?city1=" + parameterString + "&?city2=" + self.compareToName);
-                        newWindow = window.open(self.reportURL, "_new");
+                        var newWindow = window.open(self.reportURL, "_new");
                     } else {
                         if (self.communityName.indexOf("County") > -1) {
                             self.reportURL = encodeURI(demographicConfig.exportPDFReportUrl + "?county=" + self.communityName);
@@ -1552,10 +1552,10 @@
 
                             localStorage.TractID = tractIdArray;
                             self.reportURL = encodeURI(demographicConfig.exportPDFReportUrl + "?interactive");
-                            newWindow = window.open(self.reportURL, "_self");
+                            var newWindow = window.open(self.reportURL, "_self");
                         } else {
                             self.reportURL = encodeURI(demographicConfig.exportPDFReportUrl + "?city=" + self.communityName);
-                            newWindow = window.open(self.reportURL, "_new");
+                            var newWindow = window.open(self.reportURL, "_new");
                         }
                     }
                 };

@@ -55,7 +55,7 @@
                     });
 
                     var shareWindow = $("#shareWindowDiv").kendoWindow({
-                        width: "475", //465px
+                        width: "175", //465px
                         height: "215", //255px
                         title: self.Title,
                         actions: ["Help", "Minimize", "Close"],

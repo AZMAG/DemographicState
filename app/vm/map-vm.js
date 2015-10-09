@@ -354,6 +354,7 @@
                             //publish opacity changed to update legend in legend window
                             topic.publish("BaseMapOpacityChanged", e.value);
                         }
+                        self.legend.refresh();
                     }
                 }; //end updateMapOpacity
 
