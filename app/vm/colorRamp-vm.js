@@ -15,9 +15,10 @@
             "dojo/text!app/views/colorRampHelp-view.html",
             "app/vm/help-vm",
             "app/models/map-model",
-            "dojo/text!app/views/colorRamp-view.html"
+            "dojo/text!app/views/colorRamp-view.html",
+            "app/vm/map-vm"
         ],
-        function(dj, dc, tp, conf, helpView, helpVM, mapModel, view) {
+        function(dj, dc, tp, conf, helpView, helpVM, mapModel, view, mapVM) {
 
             var ColorRampVM = new function() {
 
@@ -131,9 +132,6 @@
                     dc.empty("colRampsList");
                     var schemeElements = [];
                     var curr = self.schemeTypeSelector.dataItem();
-                    if (!curr) {
-                        var curr = self.schemeTypeSelector.dataItem(0);
-                    }
                     for (var num in curr.ClassBreakSets) {
                         if (num == parseInt(num)) {
                             schemeElements = curr.ClassBreakSets[num];
@@ -168,6 +166,7 @@
                 };
 
                 self.loadInitializedMap = function(ramp, numBreaks) {
+                    console.log(ramp,numBreaks)
                     self.Current = {
                         Ramp: ramp,
                         Breaks: numBreaks
@@ -189,9 +188,6 @@
                     colorRamp.value(null);
                     var rampIndex = parseInt(element.substring(7));
                     var curr = self.schemeTypeSelector.dataItem();
-                    if (!curr) {
-                        var curr = self.schemeTypeSelector.dataItem(0);
-                    }
                     self.Current.Ramp = curr.ColorRamps[rampIndex].Name;
                     self.broadcastCurrentRamp();
                     self.broadcastRampBreakOptions();
@@ -205,6 +201,7 @@
                 @param {event} e - select event data
                 **/
                 self.schemeTypeSelected = function(e) {
+
                     self.showRamps();
                 };
 
@@ -245,10 +242,8 @@
                 **/
                 self.broadcastRampBreakOptions = function() {
                     var rampBreakOptions = [];
-                    var curr = self.schemeTypeSelector.dataItem();
-                    if (!curr) {
-                        var curr = self.schemeTypeSelector.dataItem(0);
-                    }
+                    var index = self.schemeTypeSelector.selectedIndex;
+                    var curr = self.schemeTypeSelector.dataItem(index);
                     for (var num in curr.ClassBreakSets) {
                         if (num == parseInt(num)) {
                             rampBreakOptions.push(num);
@@ -265,9 +260,6 @@
                 self.broadcastCurrentRamp = function() {
                     var schemeElements = [];
                     var curr = self.schemeTypeSelector.dataItem();
-                    if (!curr) {
-                        var curr = self.schemeTypeSelector.dataItem(0);
-                    }
                     for (var num in curr.ClassBreakSets) {
                         if (num == self.Current.Breaks) {
                             schemeElements = curr.ClassBreakSets[num];
