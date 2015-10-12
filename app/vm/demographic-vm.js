@@ -693,9 +693,12 @@
                     if (features[0].geometry !== null) {
                         mapModel.addGraphics(features, undefined, true);
 
+
+                        if (($('#demInteractiveDiv').is(":visible") == false) || $('#zoomSelection').prop('checked')) {
                         // Zoom to selected graphics. vw
                         var zoomExtent = graphicsUtils.graphicsExtent(features);
                         mapModel.setMapExtent(zoomExtent);
+                        };
                     }
 
                     var tabStrip = $("#demTabStrip").data("kendoTabStrip");
@@ -1505,6 +1508,7 @@
                         }
                     });
                 };
+<<<<<<< HEAD
 
                 self.exportPDFReport = function() {
                     var parameterString = "";
@@ -1562,7 +1566,61 @@
                     var newWindow = "";
 
                     var newWindow = window.open(self.reportURL, "_new");
+=======
+>>>>>>> feature/newFeatures
 
+                self.exportPDFReport = function() {
+                    var parameterString = "";
+                    if (self.compareFeature) {
+                        if (self.communityName === "Selected Block Groups") {
+                            var tractIdArray = "";
+
+                            for (var i = 0; i < self.selectedFeatures.length; i++) {
+                                tractIdArray += self.selectedFeatures[i].attributes.OBJECTID + ",";
+                            }
+                            parameterString = "Interactive";
+                            localStorage.city1 = tractIdArray.substring(0, tractIdArray.length - 1);
+                        } else {
+                            parameterString = self.communityName;
+                        }
+
+                        self.reportURL = encodeURI(demographicConfig.exportPDFCompareReportUrl + "?city1=" + parameterString + "&?city2=" + self.compareToName);
+                        var newWindow = window.open(self.reportURL, "_new");
+                    } else {
+                        if (self.communityName.indexOf("County") > -1) {
+                            self.reportURL = encodeURI(demographicConfig.exportPDFReportUrl + "?county=" + self.communityName);
+                            newWindow = window.open(self.reportURL, "_new");
+                        } else if (self.communityName.indexOf("Legislative") > -1) {
+                            self.reportURL = encodeURI(demographicConfig.exportPDFReportUrl + "?legislative=" + self.communityName.slice(-2));
+                            newWindow = window.open(self.reportURL, "_new");
+                        } else if (self.communityName.indexOf("Congressional") > -1) {
+                            self.reportURL = encodeURI(demographicConfig.exportPDFReportUrl + "?congressional=" + self.communityName.slice(-2));
+                            newWindow = window.open(self.reportURL, "_new");
+                        } else if (self.communityName.indexOf("Supervisor") > -1) {
+                            self.reportURL = encodeURI(demographicConfig.exportPDFReportUrl + "?supervisor=" + self.communityName.slice(-2));
+                            newWindow = window.open(self.reportURL, "_new");
+                        } else if (self.communityName.indexOf("District") > -1) {
+                            self.reportURL = encodeURI(demographicConfig.exportPDFReportUrl + "?council=" + self.communityName);
+                            newWindow = window.open(self.reportURL, "_new");
+                        } else if (self.communityName === "Selected Block Groups") {
+                            var tractIdArray = "";
+
+                            for (var i = 0; i < self.selectedFeatures.length; i++) {
+                                if (i !== self.selectedFeatures.length & self.selectedFeatures.length !== 1) {
+                                    tractIdArray += self.selectedFeatures[i].attributes.OBJECTID + ",";
+                                } else {
+                                    tractIdArray += self.selectedFeatures[i].attributes.OBJECTID;
+                                }
+                            }
+
+                            localStorage.TractID = tractIdArray;
+                            self.reportURL = encodeURI(demographicConfig.exportPDFReportUrl + "?interactive");
+                            var newWindow = window.open(self.reportURL, "_self");
+                        } else {
+                            self.reportURL = encodeURI(demographicConfig.exportPDFReportUrl + "?city=" + self.communityName);
+                            var newWindow = window.open(self.reportURL, "_new");
+                        }
+                    }
                 };
 
                 /**

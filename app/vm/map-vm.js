@@ -30,7 +30,11 @@
 
             "esri/dijit/Popup",
             "esri/dijit/PopupTemplate",
+<<<<<<< HEAD
             "esri/InfoTemplate"
+=======
+            "esri/InfoTemplate",
+>>>>>>> feature/newFeatures
         ],
         function(dc, da, lang, on, ds, topic, view, mapModel, Map, HomeButton, Scalebar, Extent, Legend, Color, SimpleMarkerSymbol, SimpleLineSymbol, SimpleFillSymbol, Popup, PopupTemplate, InfoTemplate) {
 
@@ -354,6 +358,7 @@
                             //publish opacity changed to update legend in legend window
                             topic.publish("BaseMapOpacityChanged", e.value);
                         }
+                        self.legend.refresh();
                     }
                 }; //end updateMapOpacity
 
