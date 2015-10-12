@@ -693,9 +693,12 @@
                     if (features[0].geometry !== null) {
                         mapModel.addGraphics(features, undefined, true);
 
+
+                        if (($('#demInteractiveDiv').is(":visible") == false) || $('#zoomSelection').prop('checked')) {
                         // Zoom to selected graphics. vw
                         var zoomExtent = graphicsUtils.graphicsExtent(features);
                         mapModel.setMapExtent(zoomExtent);
+                        };
                     }
 
                     var tabStrip = $("#demTabStrip").data("kendoTabStrip");

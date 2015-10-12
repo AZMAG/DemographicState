@@ -84,8 +84,6 @@
 
                 }; //end init
 
-
-
                 // get print templates from the export web map task
                 self.handlePrintInfo = function(resp) {
                     var layoutTemplate, templateNames, mapOnlyIndex, templates;
@@ -122,9 +120,6 @@
 
                     // get info about the current thematic layer
                     var thematicMap = cbrVm.toc.dataItem(cbrVm.toc.select());
-                    //alert(thematicMap.Name);
-                    //alert(cbrVm.Hello);
-                    //var dataItem = self.toc.dataItem(self.toc.select());
 
                     // set up the print template
                     var printTemplate = new PrintTemplate();
