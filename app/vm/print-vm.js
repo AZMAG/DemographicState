@@ -197,6 +197,13 @@
                     var thematicMap = cbrVm.toc.dataItem(cbrVm.toc.select());
                     $("#mapTitle").val(thematicMap.Name);
 
+                    if ($('#map2').is(":visible")) {
+                        $("#printLabel").show();
+                    }
+                    else {
+                        $("#printLabel").hide();
+                    }
+
                     // show the window
                     var win = $("#printWindow").data("kendoWindow");
                     win.restore();
