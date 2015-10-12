@@ -243,11 +243,7 @@
                     var colorSchema = (mapModel.initializationData !== undefined && mapModel.initializationData.maps[0].classMethod !== undefined) ? mapModel.initializationData.maps[0].classMethod : "Sequential";
                     var colorPalet = (mapModel.initializationData !== undefined && mapModel.initializationData.maps[0].colorPalet !== undefined) ? mapModel.initializationData.maps[0].colorPalet.ramp : "OrRd";
                     var dataClass = (mapModel.initializationData !== undefined && mapModel.initializationData.maps[0].colorPalet.numBreaks !== undefined) ? mapModel.initializationData.maps[0].colorPalet.numBreaks : "5";
-<<<<<<< HEAD
-                    cRamp.init(relatedElement, relation, colorSchema, colorPalet, dataClass, bookmarkDelegate); //"Sequential", "YlGn", "5");
-=======
                     cRamp.init(relatedElement, relation, "Sequential", colorPalet, dataClass, bookmarkDelegate); //"Sequential", "YlGn", "5");
->>>>>>> feature/newFeatures
                     custBreak.init(relatedElement, relation, self.initCustomBreaks !== undefined);
                     if (mapModel.initializationData === undefined) {
                         self.loadMap();
@@ -361,21 +357,12 @@
                     }
                     self.classMethodList.select(function(item) {
                         return item.Value === initData.classMethod;
-<<<<<<< HEAD
-=======
-                        console.log(initData.classMethod)
->>>>>>> feature/newFeatures
                     });
                     var oldBreakValue = self.breaksCountList.value();
                     self.breaksCountList.value(initData.breaks.length);
                     if (oldBreakValue !== initData.colorPalet.numBreaks.toString()) {
                         tp.publish("SetNumBreaks", self.breaksCountList.dataItem());
                     }
-<<<<<<< HEAD
-                    //console.log(initData);
-=======
-                    console.log(initData);
->>>>>>> feature/newFeatures
                     tp.publish("AdditionalMapInitialized", initData.colorPalet.ramp, initData.colorPalet.numBreaks);
                     //self.updateColorRamp(initData.colorRamp);
                 };

@@ -15,16 +15,9 @@
             "dojo/text!app/views/colorRampHelp-view.html",
             "app/vm/help-vm",
             "app/models/map-model",
-<<<<<<< HEAD
             "dojo/text!app/views/colorRamp-view.html"
         ],
         function(dj, dc, tp, conf, helpView, helpVM, mapModel, view) {
-=======
-            "dojo/text!app/views/colorRamp-view.html",
-            "app/vm/map-vm"
-        ],
-        function(dj, dc, tp, conf, helpView, helpVM, mapModel, view, mapVM) {
->>>>>>> feature/newFeatures
 
             var ColorRampVM = new function() {
 
@@ -138,12 +131,6 @@
                     dc.empty("colRampsList");
                     var schemeElements = [];
                     var curr = self.schemeTypeSelector.dataItem();
-<<<<<<< HEAD
-                    if (!curr) {
-                        var curr = self.schemeTypeSelector.dataItem(0);
-                    }
-=======
->>>>>>> feature/newFeatures
                     for (var num in curr.ClassBreakSets) {
                         if (num == parseInt(num)) {
                             schemeElements = curr.ClassBreakSets[num];
@@ -178,10 +165,6 @@
                 };
 
                 self.loadInitializedMap = function(ramp, numBreaks) {
-<<<<<<< HEAD
-=======
-                    console.log(ramp,numBreaks)
->>>>>>> feature/newFeatures
                     self.Current = {
                         Ramp: ramp,
                         Breaks: numBreaks
@@ -203,12 +186,6 @@
                     colorRamp.value(null);
                     var rampIndex = parseInt(element.substring(7));
                     var curr = self.schemeTypeSelector.dataItem();
-<<<<<<< HEAD
-                    if (!curr) {
-                        var curr = self.schemeTypeSelector.dataItem();
-                    }
-=======
->>>>>>> feature/newFeatures
                     self.Current.Ramp = curr.ColorRamps[rampIndex].Name;
                     self.broadcastCurrentRamp();
                     self.broadcastRampBreakOptions();
@@ -222,10 +199,6 @@
                 @param {event} e - select event data
                 **/
                 self.schemeTypeSelected = function(e) {
-<<<<<<< HEAD
-=======
-
->>>>>>> feature/newFeatures
                     self.showRamps();
                 };
 
@@ -266,15 +239,7 @@
                 **/
                 self.broadcastRampBreakOptions = function() {
                     var rampBreakOptions = [];
-<<<<<<< HEAD
                     var curr = self.schemeTypeSelector.dataItem();
-                    if (!curr) {
-                        var curr = self.schemeTypeSelector.dataItem();
-                    }
-=======
-                    var index = self.schemeTypeSelector.selectedIndex;
-                    var curr = self.schemeTypeSelector.dataItem(index);
->>>>>>> feature/newFeatures
                     for (var num in curr.ClassBreakSets) {
                         if (num == parseInt(num)) {
                             rampBreakOptions.push(num);
@@ -291,12 +256,6 @@
                 self.broadcastCurrentRamp = function() {
                     var schemeElements = [];
                     var curr = self.schemeTypeSelector.dataItem();
-<<<<<<< HEAD
-                    if (!curr) {
-                        var curr = self.schemeTypeSelector.dataItem();
-                    }
-=======
->>>>>>> feature/newFeatures
                     for (var num in curr.ClassBreakSets) {
                         if (num == self.Current.Breaks) {
                             schemeElements = curr.ClassBreakSets[num];

@@ -27,14 +27,9 @@
             "esri/symbols/SimpleMarkerSymbol",
             "esri/symbols/SimpleLineSymbol",
             "esri/symbols/SimpleFillSymbol",
-
             "esri/dijit/Popup",
             "esri/dijit/PopupTemplate",
-<<<<<<< HEAD
             "esri/InfoTemplate"
-=======
-            "esri/InfoTemplate",
->>>>>>> feature/newFeatures
         ],
         function(dc, da, lang, on, ds, topic, view, mapModel, Map, HomeButton, Scalebar, Extent, Legend, Color, SimpleMarkerSymbol, SimpleLineSymbol, SimpleFillSymbol, Popup, PopupTemplate, InfoTemplate) {
 
