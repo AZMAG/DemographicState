@@ -23,11 +23,9 @@
             "app/vm/legend-vm",
             "app/models/map-model",
             "app/vm/cbr-vm",
-            "esri/tasks/LegendLayer"
+			"esri/tasks/LegendLayer"
         ],
         function(dj, dc, tp, PrintTask, PrintTemplate, PrintParameters, esriRequest, esriConfig, arrayUtils, helpView, helpVM, view, legendVM, mapModel, cbrVm, LegendLayer) {
-
-
             var printVM = new function() {
 
                 var self = this;
@@ -83,7 +81,29 @@
                     printInfo.then(self.handlePrintInfo, self.handleError);
 
                 }; //end init
+				
+                /**
+                Method for opening the window.
 
+                @method openWindow
+                **/
+                self.openWindow = function() {
+                    // set the title to the currently selected map
+                    var thematicMap = cbrVm.toc.dataItem(cbrVm.toc.select());
+                    $("#mapTitle").val(thematicMap.Name);
+
+                    // show the window
+                    var win = $("#printWindow").data("kendoWindow");
+                    win.restore();
+                    win.center();
+                    win.open();
+                };
+
+                self.closeWindow = function() {
+                    var win = $("#printWindow").data("kendoWindow");
+                    win.close();
+                };
+				
                 // get print templates from the export web map task
                 self.handlePrintInfo = function(resp) {
                     var layoutTemplate, templateNames, mapOnlyIndex, templates;

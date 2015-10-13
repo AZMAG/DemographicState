@@ -357,14 +357,12 @@
                     }
                     self.classMethodList.select(function(item) {
                         return item.Value === initData.classMethod;
-                        console.log(initData.classMethod)
                     });
                     var oldBreakValue = self.breaksCountList.value();
                     self.breaksCountList.value(initData.breaks.length);
                     if (oldBreakValue !== initData.colorPalet.numBreaks.toString()) {
                         tp.publish("SetNumBreaks", self.breaksCountList.dataItem());
                     }
-                    console.log(initData);
                     tp.publish("AdditionalMapInitialized", initData.colorPalet.ramp, initData.colorPalet.numBreaks);
                     //self.updateColorRamp(initData.colorRamp);
                 };
