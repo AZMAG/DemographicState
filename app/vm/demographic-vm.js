@@ -693,12 +693,11 @@
                     if (features[0].geometry !== null) {
                         mapModel.addGraphics(features, undefined, true);
 
-
-                        if (($('#demInteractiveDiv').is(":visible") == false) || $('#zoomSelection').prop('checked')) {
-                        // Zoom to selected graphics. vw
-                        var zoomExtent = graphicsUtils.graphicsExtent(features);
-                        mapModel.setMapExtent(zoomExtent);
-                        };
+                        if (($("#demInteractiveDiv").is(":visible") == false) || $("#zoomSelection").prop("checked")) {
+                            // Zoom to selected graphics. vw
+                            var zoomExtent = graphicsUtils.graphicsExtent(features);
+                            mapModel.setMapExtent(zoomExtent);
+                        }
                     }
 
                     var tabStrip = $("#demTabStrip").data("kendoTabStrip");
@@ -1511,6 +1510,7 @@
 
                 self.exportPDFReport = function() {
                     var parameterString = "";
+                    var newWindow;
                     if (self.compareFeature) {
                         if (self.communityName === "Selected Block Groups") {
                             var tractIdArray = "";
@@ -1525,7 +1525,7 @@
                         }
 
                         self.reportURL = encodeURI(demographicConfig.exportPDFCompareReportUrl + "?city1=" + parameterString + "&?city2=" + self.compareToName);
-                        var newWindow = window.open(self.reportURL, "_new");
+                        newWindow = window.open(self.reportURL, "_new");
                     } else {
                         if (self.communityName.indexOf("County") > -1) {
                             self.reportURL = encodeURI(demographicConfig.exportPDFReportUrl + "?county=" + self.communityName);
@@ -1555,10 +1555,10 @@
 
                             localStorage.TractID = tractIdArray;
                             self.reportURL = encodeURI(demographicConfig.exportPDFReportUrl + "?interactive");
-                            var newWindow = window.open(self.reportURL, "_self");
+                            newWindow = window.open(self.reportURL, "_self");
                         } else {
                             self.reportURL = encodeURI(demographicConfig.exportPDFReportUrl + "?city=" + self.communityName);
-                            var newWindow = window.open(self.reportURL, "_new");
+                            newWindow = window.open(self.reportURL, "_new");
                         }
                     }
                 };

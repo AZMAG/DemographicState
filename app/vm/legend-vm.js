@@ -18,9 +18,10 @@
             "app/vm/help-vm",
             "dojo/text!app/views/legend-view.html",
             "app/helpers/magNumberFormatter",
-            "app/helpers/bookmark-delegate"
+            "app/helpers/bookmark-delegate",
+            "esri/dijit/Legend"
         ],
-        function(dom, dc, tp, mapModel, conf, helpView, helpVM, legendview, magNumberFormatter, bookmarkDelegate) {
+        function(dom, dc, tp, mapModel, conf, helpView, helpVM, legendview, magNumberFormatter, bookmarkDelegate, Legend) {
 
             var LegendVM = new function() {
 
@@ -32,7 +33,6 @@
                  */
                 var self = this;
 
-                self.legend;
                 self.legendTitle = "Legend";
                 self.legendInitialized = false;
 
@@ -204,12 +204,12 @@
                             change: function(e) {
                                 var sLayer = mapModel.baseMapInstance.getLayer("Census2010byBlockGroup");
                                 sLayer.setOpacity(e.value);
-                                self.legend.refresh(); 
+                                self.legend.refresh();
                             },
                             slide: function(e) {
                                 var sLayer = mapModel.baseMapInstance.getLayer("Census2010byBlockGroup");
                                 sLayer.setOpacity(e.value);
-                                self.legend.refresh(); 
+                                self.legend.refresh();
                             },
                             increaseButtonTitle: "Decrease",
                             decreaseButtonTitle: "Increase",
@@ -248,7 +248,7 @@
                 self.mapLoaded = function(map) {
                     if (map.id === mapModel.baseMapInstance.id) {
                         if (!self.legendInitialized) {
-                            self.legend = new esri.dijit.Legend({
+                            self.legend = new Legend({
                                 map: map,
                                 layerInfos: [{
                                     layer: map.getLayer("Census2010byBlockGroup"),
