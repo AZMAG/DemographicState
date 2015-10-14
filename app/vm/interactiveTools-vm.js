@@ -155,6 +155,9 @@
                     // Make sure the buffer options panel is not displayed on startup
                     $("#bufferOptions").css("display", "none");
 
+                    //Set default checked state 
+                    $('#zoomSelection').prop('checked', true);
+
                     // Wire up the buffer checkbox change event
                     $("input#bufferSelection").change(self.bufferChange);
 

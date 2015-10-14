@@ -27,7 +27,6 @@
             "esri/symbols/SimpleMarkerSymbol",
             "esri/symbols/SimpleLineSymbol",
             "esri/symbols/SimpleFillSymbol",
-
             "esri/dijit/Popup",
             "esri/dijit/PopupTemplate",
             "esri/InfoTemplate"
@@ -354,6 +353,7 @@
                             //publish opacity changed to update legend in legend window
                             topic.publish("BaseMapOpacityChanged", e.value);
                         }
+                        self.legend.refresh();
                     }
                 }; //end updateMapOpacity
 

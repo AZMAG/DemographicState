@@ -22,18 +22,17 @@
             "dojo/text!app/views/print-view.html",
             "app/vm/legend-vm",
             "app/models/map-model",
-            "app/vm/cbr-vm"
+            "app/vm/cbr-vm",
+			"esri/tasks/LegendLayer"
         ],
-        function(dj, dc, tp, PrintTask, PrintTemplate, PrintParameters, esriRequest, esriConfig, arrayUtils, helpView, helpVM, view, legendVM, mapModel, cbrVm) {
-
-
+        function(dj, dc, tp, PrintTask, PrintTemplate, PrintParameters, esriRequest, esriConfig, arrayUtils, helpView, helpVM, view, legendVM, mapModel, cbrVm, LegendLayer) {
             var printVM = new function() {
 
                 var self = this;
 
                 self.windowTitle = "Print Map";
+                esriRequest.setRequestPreCallback(myCallbackFunction);
                 self.printUrl = appConfig.exportWebMapUrl;
-                //esriConfig.defaults.io.proxyUrl = "../proxy.ashx";
 
                 // used for reporting export progress
                 self.progressInterval = null;
@@ -41,7 +40,6 @@
                 self.progressText = null;
 
                 self.init = function(relatedElement, relation, map) {
-                    //dc.place(view, "map", "after");
                     dc.place(view, "mapContainer", "after");
 
                     tp.subscribe("printStateO", function() {
@@ -83,7 +81,7 @@
                     printInfo.then(self.handlePrintInfo, self.handleError);
 
                 }; //end init
-
+				
                 /**
                 Method for opening the window.
 
@@ -105,7 +103,7 @@
                     var win = $("#printWindow").data("kendoWindow");
                     win.close();
                 };
-
+				
                 // get print templates from the export web map task
                 self.handlePrintInfo = function(resp) {
                     var layoutTemplate, templateNames, mapOnlyIndex, templates;
@@ -142,9 +140,6 @@
 
                     // get info about the current thematic layer
                     var thematicMap = cbrVm.toc.dataItem(cbrVm.toc.select());
-                    //alert(thematicMap.Name);
-                    //alert(cbrVm.Hello);
-                    //var dataItem = self.toc.dataItem(self.toc.select());
 
                     // set up the print template
                     var printTemplate = new PrintTemplate();
@@ -158,13 +153,16 @@
                         "txtComments": notesText
                     }];
 
-
+                    var legendLayer = new LegendLayer();
+                    legendLayer.layerId = "Census2010byBlockGroup";
+                    legendLayer.subLayerIds = [0];
 
                     printTemplate.layoutOptions = {
                         "titleText": titleText,
                         "authorText": "Made by:  MAG GIS Group",
                         "copyrightText": "<copyright info here>",
                         "scalebarUnit": "Miles",
+                        "legendLayers": [legendLayer],
                         "customTextElements": customLayoutElements
                     };
                     printTemplate.exportOptions = {
@@ -192,6 +190,8 @@
                     //$("#mapPrintProgress").html("<br><br><p>Printing...</p>");
                 };
 
+
+
                 // handler when print task executes successively
                 self.printComplete = function(result) {
                     clearInterval(self.progressInterval);
@@ -207,6 +207,35 @@
                     $("#mapPrintProgress").html("<br><p>problem with print!, code:" + e.code + " message: " + e.message + "</p>");
                 };
 
+                /**
+                Method for opening the window.
+
+                @method openWindow
+                **/
+                self.openWindow = function() {
+                    // set the title to the currently selected map
+                    var thematicMap = cbrVm.toc.dataItem(cbrVm.toc.select());
+                    $("#mapTitle").val(thematicMap.Name);
+
+                    if ($('#map2').is(":visible")) {
+                        $("#printLabel").show();
+                    }
+                    else {
+                        $("#printLabel").hide();
+                    }
+
+                    // show the window
+                    var win = $("#printWindow").data("kendoWindow");
+                    win.restore();
+                    win.center();
+                    win.open();
+                };
+
+                self.closeWindow = function() {
+                    var win = $("#printWindow").data("kendoWindow");
+                    win.close();
+                };
+
                 // used to indicate progress
                 self.showProgressWithDots = function() {
 
@@ -220,11 +249,40 @@
                     $("#mapPrintProgress").html("<br><p>" + self.progressText + "</p>");
                 };
 
-
             }; //end printVM
 
             return printVM;
 
         } //end function
+
+
     );
+
+            function myCallbackFunction(ioArgs) {
+
+                if (ioArgs.url.indexOf("submit") > -1) {
+
+                    //Store webmapAsJson request in the variable                   
+                    var jsontxt = ioArgs.content.Web_Map_as_JSON;
+
+                    //Create a Json object          
+                    var tempObj = JSON.parse(jsontxt);
+
+                    tempObj.operationalLayers[1].layers[0].name = "";
+
+                    //Convert Json object to string
+                    var modjson = JSON.stringify(tempObj);
+
+                    //assign the string back to WebMapAsJson
+                    ioArgs.content.Web_Map_as_JSON = modjson;
+
+                    // don't forget to return ioArgs.
+                    return ioArgs;
+
+                    //console.log(tempObj.operationalLayers[1].layers[0].name);
+                }
+                else {
+                    return ioArgs;
+                }
+            }
 }());

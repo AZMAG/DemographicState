@@ -204,10 +204,12 @@
                             change: function(e) {
                                 var sLayer = mapModel.baseMapInstance.getLayer("Census2010byBlockGroup");
                                 sLayer.setOpacity(e.value);
+                                self.legend.refresh(); 
                             },
                             slide: function(e) {
                                 var sLayer = mapModel.baseMapInstance.getLayer("Census2010byBlockGroup");
                                 sLayer.setOpacity(e.value);
+                                self.legend.refresh(); 
                             },
                             increaseButtonTitle: "Decrease",
                             decreaseButtonTitle: "Increase",

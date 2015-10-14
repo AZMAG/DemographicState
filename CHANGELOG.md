@@ -4,6 +4,14 @@ CHANGELOG for State Demographics Map Viewer
 
 ### Version x.x.x (xx/xx/2015)
 
+### Version 2.0.1 (10/14/2015)
+
+* added print label to notify user only selected map will be printed
+* added checkbox to interactive tools section
+* fixed print map legend
+* made changes to share functionality
+* made changes to interactive reporting
+
 ### Version 2.0.0 (10/05/2015)
 
 * added esri light gray basemap for maps basemap

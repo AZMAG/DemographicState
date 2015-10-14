@@ -131,9 +131,6 @@
                     dc.empty("colRampsList");
                     var schemeElements = [];
                     var curr = self.schemeTypeSelector.dataItem();
-                    if (!curr) {
-                        var curr = self.schemeTypeSelector.dataItem(0);
-                    }
                     for (var num in curr.ClassBreakSets) {
                         if (num == parseInt(num)) {
                             schemeElements = curr.ClassBreakSets[num];
@@ -189,9 +186,6 @@
                     colorRamp.value(null);
                     var rampIndex = parseInt(element.substring(7));
                     var curr = self.schemeTypeSelector.dataItem();
-                    if (!curr) {
-                        var curr = self.schemeTypeSelector.dataItem();
-                    }
                     self.Current.Ramp = curr.ColorRamps[rampIndex].Name;
                     self.broadcastCurrentRamp();
                     self.broadcastRampBreakOptions();
@@ -246,9 +240,6 @@
                 self.broadcastRampBreakOptions = function() {
                     var rampBreakOptions = [];
                     var curr = self.schemeTypeSelector.dataItem();
-                    if (!curr) {
-                        var curr = self.schemeTypeSelector.dataItem();
-                    }
                     for (var num in curr.ClassBreakSets) {
                         if (num == parseInt(num)) {
                             rampBreakOptions.push(num);
@@ -265,9 +256,6 @@
                 self.broadcastCurrentRamp = function() {
                     var schemeElements = [];
                     var curr = self.schemeTypeSelector.dataItem();
-                    if (!curr) {
-                        var curr = self.schemeTypeSelector.dataItem();
-                    }
                     for (var num in curr.ClassBreakSets) {
                         if (num == self.Current.Breaks) {
                             schemeElements = curr.ClassBreakSets[num];
