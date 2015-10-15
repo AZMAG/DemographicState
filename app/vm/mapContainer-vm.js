@@ -19,7 +19,7 @@
             "app/vm/map-vm",
             "app/helpers/bookmark-delegate"
         ],
-        function(dc, da, lang, ds, topic, view, mapModel, mapVM, bookmarkDelegate) {
+        function(dc, da, lang, ds, topic, view, mapModel, MapVM, bookmarkDelegate) {
             var MapContainerVM = new function() {
 
                 /**
@@ -48,14 +48,14 @@
                     topic.subscribe("MapLoaded", self.mapLoaded);
 
                     self.initializationData = bookmarkDelegate.getQueryStringMapDataObj();
-
+                    var initialMapVM;
                     if (self.initializationData) {
                         for (var i = 0; i < self.initializationData.maps.length; i++) {
                             var mapInitData = self.initializationData.maps[i];
                             mapInitData.extent = self.initializationData.E;
                             if (i === 0) {
                                 // initialize first map
-                                var initialMapVM = new mapVM();
+                                initialMapVM = new MapVM();
                                 initialMapVM.init("map1", "HomeButton1", true, "bottom-left", true, false, "mapFrameElementRight", mapInitData);
                                 mapModel.loadInitialMap(initialMapVM.map);
                                 self.mapVMs.push(initialMapVM);
@@ -67,7 +67,7 @@
                         }
                     } else {
                         // initialize first map
-                        var initialMapVM = new mapVM();
+                        initialMapVM = new MapVM();
                         initialMapVM.init("map1", "HomeButton1", true, "bottom-left", true, false, "mapFrameElementRight", undefined);
                         mapModel.loadInitialMap(initialMapVM.map);
                         self.mapVMs.push(initialMapVM);
@@ -103,7 +103,7 @@
                                 //recenter maps
                                 mapModel.recenterMaps(centerPnt);
 
-                                newMapVM = new mapVM();
+                                newMapVM = new MapVM();
                                 newMapVM.init("map2", null, false, "", false, true, "mapFrameElementLeft", mapInitData);
 
                                 //show map elements for first map
@@ -134,7 +134,7 @@
                                 mapModel.recenterMaps(centerPnt);
 
                                 //create new map
-                                newMapVM = new mapVM();
+                                newMapVM = new MapVM();
                                 newMapVM.init("map3", null, false, "", false, true, "mapFrameElementRight", mapInitData);
 
                                 break;
@@ -154,7 +154,7 @@
                                 mapModel.recenterMaps(centerPnt);
 
                                 //create new map
-                                newMapVM = new mapVM();
+                                newMapVM = new MapVM();
                                 newMapVM.init("map4", null, false, "", false, true, "mapFrameElementLeft", mapInitData);
 
                                 break;

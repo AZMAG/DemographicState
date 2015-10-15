@@ -1,6 +1,30 @@
 CHANGELOG for State Demographics Map Viewer
-=========================================
+===========================================
 `Major/Minor/Patch 0.0.0`
+
+### Version x.x.x (xx/xx/2015)
+
+### Version 2.0.1 (10/14/2015)
+
+* added print label to notify user only selected map will be printed
+* added checkbox to interactive tools section
+* fixed print map legend
+* made changes to share functionality
+* made changes to interactive reporting
+
+### Version 2.0.0 (10/05/2015)
+
+* added esri light gray basemap for maps basemap
+* popups for both Congressional and Legislative Districts show representatives names and party
+* added popups to the Legislative Districts layer
+* added popups to the Congressional Districts layer
+* updated to ArcGIS API for JavaScript `v3.14` - [v3.14] (https://developers.arcgis.com/javascript/)
+* updated Kendo UI v2015.2.902 `Q2 2015 SP2` [Q2 2015 SP2] ()
+* updated knockout to 2.2.0 via CDN - [knockout] (http://cdnjs.com/libraries/knockout/2.2.0)
+* updated modernizr to `v2.8.3` via CDN - [modernizr] (http://cdnjs.com/libraries/modernizr)
+* updated html5shiv to `v3.7.3` via CDN - [html5shiv] (https://cdnjs.com/libraries/html5shiv)
+* updated respond.js to `v1.4.2` via CDN - [respond.js] (https://cdnjs.com/libraries/respond.js)
+* updated normalize.css to `v3.0.3` - [normalize.css] (https://necolas.github.io/normalize.css/)
 
 ### Version 1.6.0 (03/02/2015)
 

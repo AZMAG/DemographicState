@@ -1,0 +1,10 @@
+diff a/app/vm/legend-vm.js b/app/vm/legend-vm.js	(rejected hunks)
+@@ -247,7 +247,7 @@
+                 self.mapLoaded = function(map) {
+                     if (map.id === mapModel.baseMapInstance.id) {
+                         if (!self.legendInitialized) {
+-                            self.legend = new esri.dijit.Legend({
++                            self.legend = new Legend({
+                                 map: map,
+                                 layerInfos: [{
+                                     layer: map.getLayer("Census2010byBlockGroup"),

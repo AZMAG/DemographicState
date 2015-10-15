@@ -504,12 +504,13 @@
                 @method applyRenderer
                 **/
                 self.applyRenderer = function(renderer) {
-                    for (var i = 0; i < self.CurrentRamp.length; i++) {
+                    var i;
+                    for (i = 0; i < self.CurrentRamp.length; i++) {
                         renderer.infos[i].symbol.color = dojo.colorFromRgb(self.CurrentRamp[i]);
                     }
 
                     if (self.initCustomBreaks) {
-                        for (var i = 0; i < self.initCustomBreaks.length; i++) {
+                        for (i = 0; i < self.initCustomBreaks.length; i++) {
                             renderer.infos[i].minValue = self.initCustomBreaks[i][0];
                             renderer.infos[i].maxValue = self.initCustomBreaks[i][1];
                             renderer.infos[i].classMaxValue = self.initCustomBreaks[i][1];

@@ -1,21 +1,22 @@
 {
   "name": "Demographics-Project",
-  "version": "2.6.0",
-  "date": "06/24/2015",
+  "version": "2.0.1",
+  "date": "10/14/2015",
   "author": "Vern Wolfley",
   "email": "vwolfley@azmag.gov",
   "url": "http://geo.azmag.gov/maps/demographic/",
   "private": true,
   "devDependencies": {
     "grunt":                    "*",
-    "grunt-contrib-cssmin":     "*",
+    "grunt-contrib-concat":     "*",
     "grunt-contrib-csslint":    "*",
+    "grunt-contrib-cssmin":     "*",
     "grunt-contrib-jshint":     "*",
     "grunt-contrib-uglify":     "*",
     "grunt-contrib-watch":      "*",
     "grunt-htmlhint":           "*",
     "matchdep":                 "*",
     "jshint-stylish-ex":        "*",
-    "grunt-contrib-concat":     "*"
+    "normalize.css":            "*"
   }
 }
