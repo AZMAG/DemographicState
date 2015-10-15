@@ -1520,6 +1520,8 @@
                             }
                             parameterString = "Interactive";
                             localStorage.city1 = tractIdArray.substring(0, tractIdArray.length - 1);
+							localStorage.setItem('city1', tractIdArray.substring(0, tractIdArray.length - 1));
+                            localStorage.getItem('city1');
                         } else {
                             parameterString = self.communityName;
                         }
@@ -1554,6 +1556,8 @@
                             }
 
                             localStorage.TractID = tractIdArray;
+                            localStorage.setItem('TractID', tractIdArray)
+                            localStorage.getItem('TractID');
                             self.reportURL = encodeURI(demographicConfig.exportPDFReportUrl + "?interactive");
                             var newWindow = window.open(self.reportURL, "_self");
                         } else {
