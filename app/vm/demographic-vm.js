@@ -1519,8 +1519,8 @@
                                 tractIdArray += self.selectedFeatures[i].attributes.OBJECTID + ",";
                             }
                             parameterString = "Interactive";
-                            localStorage.city1 = tractIdArray.substring(0, tractIdArray.length - 1);
-							localStorage.setItem('city1', tractIdArray.substring(0, tractIdArray.length - 1));
+                            localStorage.city1 = tractIdArray;
+							localStorage.setItem('city1', tractIdArray);
                             localStorage.getItem('city1');
                         } else {
                             parameterString = self.communityName;
@@ -1548,18 +1548,14 @@
                             var tractIdArray = "";
 
                             for (var i = 0; i < self.selectedFeatures.length; i++) {
-                                if (i !== self.selectedFeatures.length & self.selectedFeatures.length !== 1) {
-                                    tractIdArray += self.selectedFeatures[i].attributes.OBJECTID + ",";
-                                } else {
-                                    tractIdArray += self.selectedFeatures[i].attributes.OBJECTID;
-                                }
+                                tractIdArray += self.selectedFeatures[i].attributes.OBJECTID + ",";
                             }
 
                             localStorage.TractID = tractIdArray;
                             localStorage.setItem('TractID', tractIdArray)
                             localStorage.getItem('TractID');
-                            self.reportURL = encodeURI(demographicConfig.exportPDFReportUrl + "?interactive");
-                            newWindow = window.open(self.reportURL, "_self");
+                            self.reportURL = encodeURI(demographicConfig.exportPDFReportUrl + "?stateInteractive");
+                            newWindow = window.open(self.reportURL, "_new");
                         } else {
                             self.reportURL = encodeURI(demographicConfig.exportPDFReportUrl + "?city=" + self.communityName);
                             newWindow = window.open(self.reportURL, "_new");
