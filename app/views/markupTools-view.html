@@ -1,0 +1,36 @@
+<div id="markupToolsLauncher">
+	<div class="editMarkupBtns">
+                <button type="button" data-bind="click: editGraphics, css: { active: isEditingActive }" title="Edit Markup Graphics" class="">
+        			<img src="app/resources/img/EditMarkup.png" alt="Edit Markup Graphics" height="20px" width="20px">
+        		</button>
+                <button type="button" data-bind="click: deleteGraphics, css: { active: isDeleteGraphicActive }" title="Delete Markup Graphics" class="">
+        			<img src="app/resources/img/DeleteMarkup.png" alt="Delete Markup Graphics" height="20px" width="20px">
+        		</button>
+        		<button type="button" data-bind="click: undoLastMarkupGraphic" title="Undo Last Markup Graphic">
+        			<img src="app/resources/img/UndoMarkup.png" alt="Undo Last Markup Graphic" height="20px" width="20px">
+        		</button>
+    </div>
+    <hr>
+	<div id="markupToolsHeader">Choose a Markup Tool:</div>
+	<div id="markupToolsKendoTree"></div>
+    <hr>
+	<div id="fillColorPickerContainer" title="Fill Color Picker" style="cursor: pointer">
+        <div style="margin-bottom: 5px;">Click to change the fill color:</div>
+        <div id="fillKendoColorPalette"></div>
+        <div id="mtSliderDiv">
+            <p class="sliderInfo">Transparency Slider</p>
+            <input id="mtSlider" class="balSlider" />
+        </div>
+	</div>
+
+	<div id="outlineColorPickerContainer" title="Outline Color Picker" style="cursor: pointer" data-bind="visible: activeMarkupTool() != 'Text'">
+        <div style="margin-bottom: 5px; margin-top: 5px;">Click to change the outline color:</div>
+        <div id="outlineKendoColorPalette"></div>
+    </div>	
+
+    <div id="textSettings" title="Text Settings" data-bind="visible: activeMarkupTool() == 'Text' " style="display: none;">
+    	<div style="padding-top: 5px">Font Size&nbsp;&nbsp;&nbsp;Text Input</div>
+    	<input id="markupToolFontSize" class="markupToolTextDropDown" title="Font Size" style="width: 50px; display: none;" data-role="dropdownlist">
+    	<input type="text" id="markupToolTextInput" style="width:150px;margin-left:10px;color:black" title="Text Input" data-bind="value: textInput, valueUpdate: 'afterkeydown'">
+    </div>
+</div>

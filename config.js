@@ -166,5 +166,29 @@ var appConfig = new function() {
         login: "vwolfley",
         apiKey: "R_8dbab4a2f0664e8f8b4f88fe0d9d7f80"
     };
+	
+	    // ------------------------------
+        // MARKUP TOOL SETTINGS
+        // ------------------------------
+
+        // Specify the Markup / drawing tools.
+        this.markupToolTreeNodes = [{ id: 1, text: "Polygon", DisplayText: "Polygon", Type: "POLYGON"},
+                                { id: 2, text: "Circle", DisplayText: "Circle", Type: "CIRCLE" },
+                                { id: 3, text: "Arrow", DisplayText: "Arrow", Type: "ARROW" },
+                                { id: 4, text: "Freehand", DisplayText: "Freehand Polygon", Type: "FREEHAND_POLYGON" },
+                                { id: 5, text: "Text", DisplayText: "Text", Type: "POINT" }];
+    
+        // Specify the Markup Tool's Fill and Outline Kendo Color Pallettes.
+        this.fillColorPalette = ["rgba(163, 73, 164, .50)", "rgba(63, 72, 204, .5)", "rgba(0, 162, 232, 0.50)",
+                                "rgba(34, 177, 76, 0.50)", "rgba(255, 242, 0, 0.50)", "rgba(255, 127, 39, 0.50)",
+                                "rgba(237, 28, 36, 0.50)", "rgba(136, 0, 21, 0.50)", "rgba(127, 127, 127, 0.50)", "rgba(0, 0, 0, 0.50)"];
+        this.fillColorOpacity = 0.75;
+
+        this.outlineColorPalette = ["rgba(163, 73, 164, 1.0)", "rgba(63, 72, 204, 1.0)", "rgba(0, 162, 232, 1.0)",
+                                "rgba(34, 177, 76, 1.0)", "rgba(255, 242, 0, 1.0)", "rgba(255 ,127, 39, 1.0)",
+                                "rgba(237, 28, 36, 1.0)", "rgba(136, 0, 21, 1.0)", "rgba(127, 127, 127, 1.0)", "rgba(0, 0, 0, 1.0)"];
+        this.outlineColorOpacity = 1.0;
+
+        this.textSymbolFontSizes = [8, 9, 10, 11, 12, 14, 16, 18, 20, 24, 30, 50];
 
 }; //End Config

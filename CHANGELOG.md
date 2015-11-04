@@ -4,6 +4,10 @@ CHANGELOG for State Demographics Map Viewer
 
 ### Version x.x.x (xx/xx/2015)
 
+### Version 2.0.2 (10/14/2015)
+
+* added Markup Tools
+
 ### Version 2.0.1 (10/14/2015)
 
 * added print label to notify user only selected map will be printed
