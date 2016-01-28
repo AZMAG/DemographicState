@@ -13,6 +13,7 @@
             "dojo/_base/array",
             "dojo/_base/lang",
             "dojo/on",
+            "dojo/dom",
             "dojo/dom-style",
             "dojo/topic",
             "dojo/text!app/views/mapContainer-view.html",
@@ -20,18 +21,21 @@
             "esri/map",
             "esri/dijit/HomeButton",
             "esri/dijit/Scalebar",
-            "esri/geometry/Extent",
             "esri/dijit/Legend",
+            "esri/geometry/Extent",
 
             "esri/Color",
             "esri/symbols/SimpleMarkerSymbol",
             "esri/symbols/SimpleLineSymbol",
             "esri/symbols/SimpleFillSymbol",
+
             "esri/dijit/Popup",
             "esri/dijit/PopupTemplate",
-            "esri/InfoTemplate"
+            "esri/InfoTemplate",
+            "app/vm/legend-vm",
+            "app/vm/markupTools-vm"
         ],
-        function(dc, da, lang, on, ds, topic, view, mapModel, Map, HomeButton, Scalebar, Extent, Legend, Color, SimpleMarkerSymbol, SimpleLineSymbol, SimpleFillSymbol, Popup, PopupTemplate, InfoTemplate) {
+        function(dc, da, lang, on, dom, ds, topic, view, mapModel, Map, HomeButton, Scalebar, Legend, Extent, Color, SimpleMarkerSymbol, SimpleLineSymbol, SimpleFillSymbol, Popup, PopupTemplate, InfoTemplate, legendVM, markupToolsVM) {
 
             //var MapVM = new function () {
             var MapVM = function() {
@@ -197,12 +201,12 @@
                 self.mapLoaded = function(params) {
 
                     //add title panel
-                    var titleHTML = "<div id='mapFrameTitlePanel_{value}' class='mapFrameTitlePanel selected {mapElementsClass}'><h2 id='mapFrameTitle_{value}'></h2></div>";
+                    var titleHTML = "<div id='mapFrameTitlePanel_{value}' title='Click here to select this map.' class='mapFrameTitlePanel selected {mapElementsClass}'><h2 id='mapFrameTitle_{value}'></h2></div>";
                     titleHTML = titleHTML.replace(/{value}/gi, self.mapID).replace(/{mapElementsClass}/gi, self.mapElementsClass);
 
                     dc.place(titleHTML, self.mapID, "last");
 
-                    document.getElementById("mapFrameTitle_{value}".replace(/{value}/gi, self.mapID)).innerHTML = self.mapTheme().ShortName;
+                    dom.byId("mapFrameTitle_{value}".replace(/{value}/gi, self.mapID)).innerHTML = self.mapTheme().ShortName;
                     if (!self.showMapElements) {
                         $("#" + "mapFrameTitlePanel_{value}".replace(/{value}/gi, self.mapID)).addClass("hidden");
                     }
@@ -210,25 +214,60 @@
                         self.mapClicked(null);
                     });
 
+                    var layersTOC = [];
+                    
+                    for (var i = 0; i < appConfig.layerInfo.length; i++) {
+                        var info = appConfig.layerInfo[i];
+                        if (info.showTOC !== false) {
+                            layersTOC.push(appConfig.layerInfo[i]);
+                        }
+                    }
+
                     //add legend panel
-                    var legendHTML = "<div id='legendPanel_{value}' class='mapFrameLegendPanel {mapElementsClass}'><ul id='legendPanelBar_{value}'><li>Legend<div id='censusDiv_{value}'><div id='legendTitle_{value}' class='legendTitle'></div><p class='sliderInfo'>Transparency Slider</p><div id='sliderDiv_{value}' class='legendSliderDiv'><input id='slider_{value}' class='balSlider'/></div><div id='legendDiv_{value}'></div><div class='legal'>Data Source:&nbsp;<span id='dataSource_{value}'></span></div></div></li></ul></div>";
+                    var legendHTML =
+                    "<div id='legendPanel_{value}' class='mapFrameLegendPanel {mapElementsClass}'>" +
+                    "<ul id='legendPanelBar_{value}'><li>Legend<div id='censusDiv_{value}'>" +
+                    "<div id='legendTitle_{value}' class='legendTitle'></div><p class='sliderInfo'>Transparency Slider</p>" +
+                    "<div id='sliderDiv_{value}' class='legendSliderDiv'><input id='slider_{value}' class='balSlider'/></div>" +
+                    "<div id='legendDiv_{value}'></div>" +
+                    "<div class='legal'>Data Source:&nbsp;<span id='dataSource_{value}'></span></div></div></li>" +
+                    "<li>Map Layers" +
+                    "<ul id='layerOptionPanelBar_{value}'>" +
+                    "<li class='panelBarLi'><input class='layerOptionCbx' value=" +layersTOC[0].id +" id='" + self.mapID + "chk1' type='checkbox'><label class='mapLayerLabel' for='" + self.mapID + "chk1'>" + layersTOC[0].title + "</label></li>" +
+                    "<li class='panelBarLi'><input checked='checked' class='layerOptionCbx' value=" +layersTOC[1].id +" id='" + self.mapID + "chk2' type='checkbox'><label class='mapLayerLabel' for='" + self.mapID + "chk2'>" + layersTOC[1].title + "</label></li>" +
+                    "<li class='panelBarLi'><input class='layerOptionCbx' value=" +layersTOC[2].id +" id='" + self.mapID + "chk3' type='checkbox'><label class='mapLayerLabel' for='" + self.mapID + "chk3'>" + layersTOC[2].title + "</label></li>" +
+                    "<li class='panelBarLi'><input class='layerOptionCbx' value=" +layersTOC[3].id +" id='" + self.mapID + "chk4' type='checkbox'><label class='mapLayerLabel' for='" + self.mapID + "chk4'>" + layersTOC[3].title + "</label></li>" +
+                    "<li class='panelBarLi'><input checked='checked' class='layerOptionCbx' value=" +layersTOC[4].id +" id='" + self.mapID + "chk5' type='checkbox'><label class='mapLayerLabel' for='" + self.mapID + "chk5'>" + layersTOC[4].title + "</label></li>" +
+                    "<li class='panelBarLi'><input class='layerOptionCbx' value=" +layersTOC[5].id +" id='" + self.mapID + "chk6' type='checkbox'><label class='mapLayerLabel' for='" + self.mapID + "chk6'>" + layersTOC[5].title + "</label></li>" +
+                    "</ul>" +
+                    "</li></ul></div>";
+
+
+                    //$(".layerOptionCbx").click(self.onCheckBoxClick);
+
+                    $( "#dataTable tbody tr" ).on( "click", function() {
+                      console.log( $( this ).text() );
+                    });
+
                     legendHTML = legendHTML.replace(/{value}/gi, self.mapID).replace(/{mapElementsClass}/gi, self.mapElementsClass);
 
                     dc.place(legendHTML, self.mapID, "last");
 
-                    $("#legendPanelBar_{value}".replace(/{value}/gi, self.mapID)).kendoPanelBar();
+                    var pbar = $("#legendPanelBar_{value}".replace(/{value}/gi, self.mapID)).kendoPanelBar();
 
                     //create esri legend
                     self.legend = new Legend({
                         map: params.map,
                         layerInfos: [{
-                            layer: self.mapTheme().Service ? params.map.getLayer(self.mapTheme().Service) : params.map.getLayer("Census2010byTract"),
+                            layer: self.mapTheme().Service ? params.map.getLayer(self.mapTheme().Service) : params.map.getLayer("Census2010byBlockGroup"),
                             title: self.mapTheme().ShortName
                         }]
                     }, "legendDiv_{value}".replace(/{value}/gi, self.mapID));
+
                     self.legend.startup();
-                    document.getElementById("legendTitle_{value}".replace(/{value}/gi, self.mapID)).innerHTML = self.mapTheme().ShortName;
-                    document.getElementById("dataSource_{value}".replace(/{value}/gi, self.mapID)).innerHTML = self.mapTheme().Source;
+
+                    dom.byId("legendTitle_{value}".replace(/{value}/gi, self.mapID)).innerHTML = self.mapTheme().ShortName;
+                    dom.byId("dataSource_{value}".replace(/{value}/gi, self.mapID)).innerHTML = self.mapTheme().Source;
 
                     //create transparency slider
                     $("#slider_{value}".replace(/{value}/gi, self.mapID)).kendoSlider({
@@ -255,6 +294,14 @@
                     $("#mapFrameGridCell" + self.mapID.replace("map", "")).click(function() {
                         self.mapClicked(null);
                     });
+
+                    $(".layerOptionCbx").on( "click", self.onCBoxClick);
+
+                    $(".layerOptionCbx").unbind("click").click(self.onCBoxClick);
+
+                    markupToolsVM.initializeGraphics(self.mapID);
+                    
+
                 }; //end mapLoaded
 
                 /**
@@ -351,7 +398,8 @@
                         sLayer.setOpacity(e.value);
                         if (self.mapID === mapModel.baseMapInstance.id) {
                             //publish opacity changed to update legend in legend window
-                            topic.publish("BaseMapOpacityChanged", e.value);
+                            //topic.publish("BaseMapOpacityChanged", e.value);
+                            legendVM.updateSliderOpacity(e.value);
                         }
                         self.legend.refresh();
                     }
@@ -367,7 +415,7 @@
                 self.layerOpacityChanged = function(params) {
                     if (params.opacity !== self.legendOpacity()) {
                         $("#slider_{value}".replace(/{value}/gi, self.mapID)).getKendoSlider().value(params.opacity);
-                        self.legendOpacity(params.opacity);
+                        legendVM.updateSliderOpacity(params.opacity);
                     }
                 }; //end layerOpacityChanged
 
@@ -384,9 +432,9 @@
 
                         //update legend elements and labels
                         if (self.legend !== null) {
-                            document.getElementById("mapFrameTitle_{value}".replace(/{value}/gi, self.mapID)).innerHTML = self.mapTheme().ShortName;
-                            document.getElementById("legendTitle_{value}".replace(/{value}/gi, self.mapID)).innerHTML = self.mapTheme().ShortName;
-                            document.getElementById("dataSource_{value}".replace(/{value}/gi, self.mapID)).innerHTML = self.mapTheme().Source;
+                            dom.byId("mapFrameTitle_{value}".replace(/{value}/gi, self.mapID)).innerHTML = self.mapTheme().ShortName;
+                            dom.byId("legendTitle_{value}".replace(/{value}/gi, self.mapID)).innerHTML = self.mapTheme().ShortName;
+                            dom.byId("dataSource_{value}".replace(/{value}/gi, self.mapID)).innerHTML = self.mapTheme().Source;
                         }
                         //if map loaded - enable slider, update legend, add opacity changed event
                         if (self.map.loaded) {
@@ -446,6 +494,24 @@
                     }
                 }; //end selectedMapChanged
 
+
+                self.onCBoxClick = function(e) {
+                    var layerName = e.currentTarget.value;
+                    var mapId = e.currentTarget.id.substring(3, 4) - 1;
+                    var layer = mapModel.mapInstances[mapId].getLayer(layerName);
+                        if (layer.visible) {
+                            layer.hide();
+                        } else {
+                            layer.show();
+                        }
+                    var baseLayer = mapModel.mapInstances[mapId].getLayer("esriBasemap");
+                        if (layer.id === "esriImagery" && layer.visible === true) {
+                            baseLayer.hide();
+                        } else {
+                            baseLayer.show();
+                        }
+                };
+
                 /**
                 Called when the selected map is changed to set the new selected map toc and legend
 
@@ -492,6 +558,7 @@
                     //destroy map and legend
                     if (this.map) {
                         this.map.destroy();
+                        markupToolsVM.clearGraphicsLayer(this.map.id);
                     }
                     if (this.legend) {
                         this.legend.destroy();

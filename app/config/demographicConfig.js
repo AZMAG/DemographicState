@@ -22,7 +22,8 @@
                 // console.log(self.Census2010byBlockGroup);
 
                 self.CompareOperators = {
-                    string: [{
+                    string: [
+                    {
                         Name: "Equals",
                         Sign: "="
                     }, {
@@ -35,7 +36,12 @@
                         Name: "Ends With",
                         Sign: "[value]%"
                     }],
-                    number: [{
+                    number: [
+                    {
+                        Name: "Between",
+                        Sign: "between"
+                    },
+                    {
                         Name: "Equals",
                         Sign: "="
                     }, {
@@ -69,298 +75,35 @@
                     }]
                 };
 
-                self.queryFields = [{
-                        Name: "COUNTY_NAME",
-                        Field: "County",
-                        Type: "string",
-                        Placeholder: "(50 Max)"
-                    }, //pinal fips code is 021
-                    {
-                        Name: "TRACTCE10",
-                        Field: "Tract",
-                        Type: "string",
-                        Placeholder: "(00021 to 980700)"
-                    }, {
-                        Name: "BLKGRPCE10",
-                        Field: "Block Group",
-                        Type: "string",
-                        Placeholder: "(7 Max)"
-                    }, {
-                        Name: "SQ_MI",
-                        Field: "Square Miles",
-                        Type: "number",
-                        Placeholder: "(1124.57 Max)"
-                    }, {
-                        Name: "TOT_POP",
-                        Field: "Total Population",
-                        Type: "number",
-                        Placeholder: "(7293 Max)"
-                    }, {
-                        Name: "MEDIAN_AGE",
-                        Field: "Pop Median Age",
-                        Type: "number",
-                        Placeholder: "(82.6 Max)"
-                    }, {
-                        Name: "Under5",
-                        Field: "Pop Under 5",
-                        Type: "number",
-                        Placeholder: "(801 Max)"
-                    }, {
-                        Name: "Age5to17",
-                        Field: "Pop Age 5 to 17",
-                        Type: "number",
-                        Placeholder: "(1688 Max)"
-                    }, {
-                        Name: "Age18to34",
-                        Field: "Pop Age 18 to 34",
-                        Type: "number",
-                        Placeholder: "(4782 Max)"
-                    }, {
-                        Name: "Age35to49",
-                        Field: "Pop Age 35 to 49",
-                        Type: "number",
-                        Placeholder: "(2519 Max)"
-                    }, {
-                        Name: "Age50to64",
-                        Field: "Pop Age 50 to 64",
-                        Type: "number",
-                        Placeholder: "(1143 Max)"
-                    }, {
-                        Name: "Age65to84",
-                        Field: "Pop Age 65 to 84",
-                        Type: "number",
-                        Placeholder: "(2327 Max)"
-                    }, {
-                        Name: "Age85Plus",
-                        Field: "Pop Age 85+",
-                        Type: "number",
-                        Placeholder: "(761 Max)"
-                    }, {
-                        Name: "Age50Plus",
-                        Field: "Pop Age 50+",
-                        Type: "number",
-                        Placeholder: "(761 Max)"
-                    }, {
-                        Name: "Age60Plus",
-                        Field: "Pop Age 60+",
-                        Type: "number",
-                        Placeholder: "(761 Max)"
-                    }, {
-                        Name: "Age65Plus",
-                        Field: "Pop Age 65+",
-                        Type: "number",
-                        Placeholder: "(761 Max)"
-                    }, {
-                        Name: "Age70Plus",
-                        Field: "Pop Age 70+",
-                        Type: "number",
-                        Placeholder: "(761 Max)"
-                    }, {
-                        Name: "Age75Plus",
-                        Field: "Pop Age 75+",
-                        Type: "number",
-                        Placeholder: "(761 Max)"
-                    }, {
-                        Name: "WHITE",
-                        Field: "White",
-                        Type: "number",
-                        Placeholder: "(5158 Max)"
-                    }, {
-                        Name: "BLACK",
-                        Field: "Black",
-                        Type: "number",
-                        Placeholder: "(1198 Max)"
-                    }, {
-                        Name: "NATIVE",
-                        Field: "Native",
-                        Type: "number",
-                        Placeholder: "(2560 Max)"
-                    }, {
-                        Name: "ASIAN",
-                        Field: "Asian",
-                        Type: "number",
-                        Placeholder: "(1026 Max)"
-                    }, {
-                        Name: "PACIFIC",
-                        Field: "Pacific",
-                        Type: "number",
-                        Placeholder: "(945 Max)"
-                    }, {
-                        Name: "OTHER",
-                        Field: "Other",
-                        Type: "number",
-                        Placeholder: "(2664 Max)"
-                    }, {
-                        Name: "TWO_OR_MORE",
-                        Field: "Two or More",
-                        Type: "number",
-                        Placeholder: "(251 Max)"
-                    }, {
-                        Name: "HISPANIC",
-                        Field: "Hispanic",
-                        Type: "number",
-                        Placeholder: "(3255 Max)"
-                    }, {
-                        Name: "NOT_HISPANIC",
-                        Field: "Not Hispanic",
-                        Type: "number",
-                        Placeholder: "(5121 Max)"
-                    }, {
-                        Name: "MINORITY_POP",
-                        Field: "Minority Population",
-                        Type: "number",
-                        Placeholder: "(6211 Max)"
-                    }, {
-                        Name: "TOTAL_HU",
-                        Field: "Total Housing",
-                        Type: "number",
-                        Placeholder: "(3063 Max)"
-                    }, {
-                        Name: "OCCUPIED_HU",
-                        Field: "Occupied Housing",
-                        Type: "number",
-                        Placeholder: "(2025 Max)"
-                    }, {
-                        Name: "VACANT_HU",
-                        Field: "Vacant Housing",
-                        Type: "number",
-                        Placeholder: "(1990 Max)"
-                    }, {
-                        Name: "SEASONAL_HU",
-                        Field: "Seasonal Housing",
-                        Type: "number",
-                        Placeholder: "(1905 Max)"
-                    }, {
-                        Name: "NON_SEASONAL_HU",
-                        Field: "Non Seasonal Housing",
-                        Type: "number",
-                        Placeholder: "(2119 Max)"
-                    }, {
-                        Name: "NON_SEASONAL_VAC_HU",
-                        Field: "Non Seasonal Vacant Housing",
-                        Type: "number",
-                        Placeholder: "(980 Max)"
-                    }, {
-                        Name: "OWNER_OCC_HU",
-                        Field: "Owner Occupied Housing",
-                        Type: "number",
-                        Placeholder: "(1837 Max)"
-                    }, {
-                        Name: "RENTER_OCC_HU",
-                        Field: "Renter Occupied Housing",
-                        Type: "number",
-                        Placeholder: "(1534 Max)"
-                    }, {
-                        Name: "AVG_HH_SIZE",
-                        Field: "Avg Household Size",
-                        Type: "number",
-                        Placeholder: "(8.4 Max)"
-                    }, {
-                        Name: "AVG_HH_SIZE_OWNER_HU",
-                        Field: "Avg Household Size Owner Housing",
-                        Type: "number",
-                        Placeholder: "(8.4 Max)"
-                    }, {
-                        Name: "AVG_HH_SIZE_RENTER_HU",
-                        Field: "Avg Household Size Renter Housing",
-                        Type: "number",
-                        Placeholder: "(5.63 Max)"
-                    }, {
-                        Name: "TOTAL_HOUSEHOLDS",
-                        Field: "Total Households",
-                        Type: "number",
-                        Placeholder: "(1994 Max)"
-                    }, {
-                        Name: "HOUSEHOLDS_LESS_THAN_25000",
-                        Field: "Households Less than $25,000",
-                        Type: "number",
-                        Placeholder: "(799 Max)"
-                    }, {
-                        Name: "HOUSEHOLDS_25000_TO_49999",
-                        Field: "Households $25,000 to $49,999",
-                        Type: "number",
-                        Placeholder: "(646 Max)"
-                    }, {
-                        Name: "HOUSEHOLDS_50000_TO_99999",
-                        Field: "Households $50,000 to $99,999",
-                        Type: "number",
-                        Placeholder: "(902 Max)"
-                    }, {
-                        Name: "HOUSEHOLDS_100000_OR_MORE",
-                        Field: "Households $100,000 or More",
-                        Type: "number",
-                        Placeholder: "(841 Max)"
-                    }, {
-                        Name: "MEDIAN_HOUSEHOLD_INCOME",
-                        Field: "Median Household Income",
-                        Type: "number",
-                        Placeholder: "(250001 Max)"
-                    }, {
-                        Name: "POPULATION_25_YEARS_AND_OVER",
-                        Field: "Pop 25 Years and Over",
-                        Type: "number",
-                        Placeholder: "(6785 Max)"
-                    }, {
-                        Name: "LT9GRADE",
-                        Field: "9th Grade",
-                        Type: "number",
-                        Placeholder: "(1218 Max)"
-                    }, {
-                        Name: "NOHSDIPLOMA",
-                        Field: "No High School Diploma",
-                        Type: "number",
-                        Placeholder: "(1248 Max)"
-                    }, {
-                        Name: "HSGRAD",
-                        Field: "High School Diploma",
-                        Type: "number",
-                        Placeholder: "(2032 Max)"
-                    }, {
-                        Name: "SOMECOLLEGE",
-                        Field: "Some College",
-                        Type: "number",
-                        Placeholder: "(2032 Max)"
-                    }, {
-                        Name: "ASSOCIATES",
-                        Field: "Associates Degree",
-                        Type: "number",
-                        Placeholder: "(562 Max)"
-                    }, {
-                        Name: "BACHELORS",
-                        Field: "Bachelors Degree",
-                        Type: "number",
-                        Placeholder: "(1205 Max)"
-                    }, {
-                        Name: "GRADPROF",
-                        Field: "Graduate Degree",
-                        Type: "number",
-                        Placeholder: "(1085 Max)"
-                    }, {
-                        Name: "TOTAL_FAMILY",
-                        Field: "Total Family",
-                        Type: "number",
-                        Placeholder: "(1632 Max)"
-                    }, {
-                        Name: "INCOME_BELOW_POVERTY_LEVEL",
-                        Field: "Income Below Poverty Level",
-                        Type: "number",
-                        Placeholder: "(397 Max)"
-                    }, {
-                        Name: "NOT_INCOME_BELOW_POVERTY_LEVEL",
-                        Field: "Not Income Below Poverty Level",
-                        Type: "number",
-                        Placeholder: "(1529 Max)"
-                    }, {
-                        Name: "MEDIAN_VALUE",
-                        Field: "Median Value",
-                        Type: "number",
-                        Placeholder: "(1000001 Max)"
-                    }, {
-                        Name: "MEDIAN_GROSS_RENT",
-                        Field: "Median Gross Rent",
-                        Type: "number",
-                        Placeholder: "(2001 Max)"
-                    }
+                self.queryFields =
+                [
+                        {
+                          Name: "Area",
+                          ShortName: "Area",
+                          items: [
+                            {
+                                FieldName: "COUNTY_NAME",
+                                Name: "County",
+                                ShortName: "County",
+                                Type: "string"
+                            },{
+                                FieldName: "TRACTCE10",
+                                Name: "Tract",
+                                ShortName: "Tract",
+                                Type: "string"
+                            }, {
+                                FieldName: "BLKGRPCE10",
+                                Name: "Block Group",
+                                ShortName: "Block Group",
+                                Type: "string"
+                            },{
+                                FieldName: "SQ_MI",
+                                Name: "Square Miles",
+                                ShortName: "Square Miles",
+                                Type: "number"
+                            }
+                          ]
+                        }
                 ];
 
                 // config for selected block groups tab
@@ -2264,7 +2007,7 @@
                         name: "Demographic Summary",
                         restUrl: self.Census2010byBlockGroup + "/1",
                         whereClause: "OBJECTID > -1",
-                        compareUrl: self.Census2010byBlockGroup + "/4",
+                        compareUrl: self.Census2010byBlockGroup + "/1",
                         compareWhereClause: "OBJECTID > -1",
                         comparePlaceField: "NAME",
                         summaryField: "NAME",

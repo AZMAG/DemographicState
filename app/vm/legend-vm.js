@@ -9,19 +9,20 @@
     "use strict";
 
     define([
-            "dojo/dom",
             "dojo/dom-construct",
+            "dojo/dom",
             "dojo/topic",
+            "esri/dijit/Legend",
             "app/models/map-model",
             "app/config/cbrConfig",
             "dojo/text!app/views/legendHelp-view.html",
             "app/vm/help-vm",
             "dojo/text!app/views/legend-view.html",
             "app/helpers/magNumberFormatter",
-            "app/helpers/bookmark-delegate",
-            "esri/dijit/Legend"
+            "app/helpers/bookmark-delegate"
         ],
-        function(dom, dc, tp, mapModel, conf, helpView, helpVM, legendview, magNumberFormatter, bookmarkDelegate, Legend) {
+
+        function(dc, dom, tp, Legend, mapModel, conf, helpView, helpVM, legendview, magNumberFormatter, bookmarkDelegate) {
 
             var LegendVM = new function() {
 
@@ -33,6 +34,7 @@
                  */
                 var self = this;
 
+                self.legend;
                 self.legendTitle = "Legend";
                 self.legendInitialized = false;
 
@@ -53,14 +55,14 @@
                     self.winVisible = false;
                     self.winLocation = 220;
                 } else if (self.winWidth <= 1024) {
-                    self.newWindowHeight = (self.winHeight / 2) - 148;
+                    // self.newWindowHeight = (self.winHeight / 2) - 148;
                     self.newWindowWidth = "210px";
                     self.winLocation = 215;
                 } else if (self.winWidth <= 1200) {
                     self.newWindowWidth = "210px";
                     self.winLocation = 215;
                 } else {
-                    self.newWindowHeight = (self.winHeight / 2) - 50;
+                    // self.newWindowHeight = (self.winHeight / 2) - 50;
                     self.newWindowWidth = "250px";
                     self.winLocation = 255;
                 }
@@ -71,6 +73,7 @@
                  * @method init
                  */
                 self.init = function(initializationData) {
+                    //dc.place(legendview, "map", "after");
                     dc.place(legendview, "mapContainer", "after");
 
                     tp.subscribe("MapLoaded", self.mapLoaded);
@@ -97,7 +100,7 @@
 
                     // Initial window placement
                     $("#legendWindowDiv").closest(".k-window").css({
-                        top: "55px", //self.newWindowHeight,
+                        top: "55px",
                         left: self.winWidth - self.winLocation
                     });
 
@@ -116,7 +119,7 @@
                     mapModel.createLayers(mapModel.mapInstance, initializationData);
 
                 }; //end init
-                //===============================================================================================>
+                //****************************************************************
                 /**
                 Method for opening the window.
 
@@ -128,7 +131,7 @@
                     win.open();
 
                     $("#legendWindowDiv").closest(".k-window").css({
-                        top: "55px", //self.newWindowHeight,
+                        top: "55px",
                         left: self.winWidth - self.winLocation
                     });
                 };
@@ -152,7 +155,7 @@
                     self.winHeight = document.documentElement.clientHeight;
 
                     $("#legendWindowDiv").closest(".k-window").css({
-                        top: "55px", //self.newWindowHeight,
+                        top: self.newWindowHeight,
                         left: self.winWidth - self.winLocation
                     });
                 };
@@ -204,12 +207,10 @@
                             change: function(e) {
                                 var sLayer = mapModel.baseMapInstance.getLayer("Census2010byBlockGroup");
                                 sLayer.setOpacity(e.value);
-                                self.legend.refresh();
                             },
                             slide: function(e) {
                                 var sLayer = mapModel.baseMapInstance.getLayer("Census2010byBlockGroup");
                                 sLayer.setOpacity(e.value);
-                                self.legend.refresh();
                             },
                             increaseButtonTitle: "Decrease",
                             decreaseButtonTitle: "Increase",
@@ -224,24 +225,92 @@
 
                 self.onCheckBoxClick = function(e) {
                     var layerId = e.currentTarget.id.substr(1);
-                    for (var i = 0; i < mapModel.mapInstances.length; i++) {
-                        var layer = mapModel.mapInstances[i].getLayer(layerId);
-                        // console.log(layer);
-                        if (layer.visible) {
-                            layer.hide();
+                    var layer = mapModel.mapInstance.getLayer(layerId);
+                    var baseLayer = mapModel.mapInstance.getLayer("esriBasemap");
+                    (layer.visible) ? layer.hide() : layer.show();
+
+                    if (layer.id === "esriImagery" && layer.visible === true) {
+                        baseLayer.hide();
+                    } else {
+                        baseLayer.show();
+                    }
+
+                    if (layer.id === "countyBoundaries") {
+                        if (layer.visible === true) {
+                            self.CountyLegend();
                             bookmarkDelegate.legendLayerOptions.remove("c" + layerId);
                         } else {
-                            layer.show();
                             bookmarkDelegate.legendLayerOptions.push("c" + layerId);
-                        }
-                        var baseLayer = mapModel.mapInstance.getLayer("esriBasemap");
-                        if (layer.id === "esriImagery" && layer.visible === true) {
-                            baseLayer.hide();
-                        } else {
-                            baseLayer.show();
+                            self.countyLegend.destroy();
                         }
                     }
-                    tp.publish("BaseLayersUpdated");
+                    else if (layer.id === "congressionalDistricts") {
+                        if (layer.visible === true) {
+                            self.CongressionalLegend();
+                            bookmarkDelegate.legendLayerOptions.remove("c" + layerId);
+                        } else {
+                            bookmarkDelegate.legendLayerOptions.push("c" + layerId);
+                            self.congressionalLegend.destroy();
+                        }
+                    }
+                    else if (layer.id === "legislativeDistricts") {
+                        if (layer.visible === true) {
+                            self.LegislativeLegend();
+                            bookmarkDelegate.legendLayerOptions.remove("c" + layerId);
+                        } else {
+                            bookmarkDelegate.legendLayerOptions.push("c" + layerId);
+                            self.legislativeLegend.destroy();
+                        }
+                    }
+                     tp.publish("BaseLayersUpdated");
+                };
+
+                //Supervisor Legend
+                self.CountyLegend = function() {
+                    var insertElement = "legendDiv";
+                    self.countyLegend = new Legend({
+                        map: mapModel.mapInstance,
+                        layerInfos: [{
+                            layer: mapModel.mapInstance.getLayer("countyBoundaries"),
+                            title: "County Boundaries"
+                        }],
+                        autoUpdate: true
+                    }, dc.create("div", {
+                        id: "legendDiv3"
+                    }, insertElement, "after"));
+                    self.countyLegend.startup();
+                };
+
+                //Council Legend
+                self.CongressionalLegend = function() {
+                    var insertElement = "legendDiv";
+                    self.congressionalLegend = new Legend({
+                        map: mapModel.mapInstance,
+                        layerInfos: [{
+                            layer: mapModel.mapInstance.getLayer("congressionalDistricts"),
+                            title: "Congressional Districts"
+                        }],
+                        autoUpdate: true
+                    }, dc.create("div", {
+                        id: "legendDiv4"
+                    }, insertElement, "after"));
+                    self.congressionalLegend.startup();
+                };
+
+                //Place Legend
+                self.LegislativeLegend = function() {
+                    var insertElement = "legendDiv";
+                    self.legislativeLegend = new Legend({
+                        map: mapModel.mapInstance,
+                        layerInfos: [{
+                            layer: mapModel.mapInstance.getLayer("legislativeDistricts"),
+                            title: "Legislative Districts"
+                        }],
+                        autoUpdate: true
+                    }, dc.create("div", {
+                        id: "legendDiv5"
+                    }, insertElement, "after"));
+                    self.legislativeLegend.startup();
                 };
 
                 //Thematic Legend
@@ -290,7 +359,7 @@
                 @param {double} opacity - value of layer transparency to update slider to match.
                 **/
                 self.updateSliderOpacity = function(opacity) {
-                    $("#slider").getKendoSlider().value(opacity);
+                    this.legend.refresh();
                 }; //end updateSliderOpacity
 
             }; //end LegendVM

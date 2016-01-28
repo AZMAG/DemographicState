@@ -10,7 +10,6 @@
                 self.mapServices = {
                     Census2010byBlockGroup: appConfig.layerInfo[5].url
                 };
-                // console.log(self.mapServices);
 
                 self.thematicMaps = [
                     // population related maps
@@ -29,7 +28,9 @@
                                 DefaultColorScheme: "Sequential",
                                 Description: "",
                                 Source: "Census 2010, by Block Group",
-                                FieldName: "TOT_POP"
+                                FieldName: "TOT_POP",
+                                Type: "number",
+                                Placeholder: "7293"
                             }, {
                                 NodeType: "map",
                                 LayerId: 0,
@@ -40,7 +41,9 @@
                                 DefaultColorScheme: "Sequential",
                                 Description: "",
                                 Source: "Census 2010, by Block Group",
-                                FieldName: "POP_PER_SQMI"
+                                FieldName: "POP_PER_SQMI",
+                                Type: "number",
+                                Placeholder: "39292.78"
                             }, {
                                 NodeType: "map",
                                 LayerId: 0,
@@ -52,7 +55,8 @@
                                 Description: "",
                                 Source: "Census 2010, by Block Group",
                                 FieldName: "PERCENT_MINORITY",
-                                AsPercentages: true
+                                AsPercentages: true,
+                                Type: "percent"
                             },
 
                             // age cohort maps
@@ -71,7 +75,9 @@
                                     DefaultColorScheme: "Sequential",
                                     Description: "",
                                     Source: "Census 2010, by Block Group",
-                                    FieldName: "MEDIAN_AGE"
+                                    FieldName: "MEDIAN_AGE",
+                                    Type: "number",
+                                    Placeholder: "82.7"
                                 }, {
                                     NodeType: "map",
                                     LayerId: 0,
@@ -83,7 +89,8 @@
                                     Description: "",
                                     Source: "Census 2010, by Block Group",
                                     FieldName: "PERCENT_AGE_UNDER5",
-                                    AsPercentages: true
+                                    AsPercentages: true,
+                                    Type: "percent"
                                 }, {
                                     NodeType: "map",
                                     LayerId: 0,
@@ -95,7 +102,8 @@
                                     Description: "",
                                     Source: "Census 2010, by Block Group",
                                     FieldName: "PERCENT_AGE_5TO17",
-                                    AsPercentages: true
+                                    AsPercentages: true,
+                                    Type: "percent"
                                 }, {
                                     NodeType: "map",
                                     LayerId: 0,
@@ -107,7 +115,8 @@
                                     Description: "",
                                     Source: "Census 2010, by Block Group",
                                     FieldName: "PERCENT_AGE_18TO34",
-                                    AsPercentages: true
+                                    AsPercentages: true,
+                                    Type: "percent"
                                 }, {
                                     NodeType: "map",
                                     LayerId: 0,
@@ -119,7 +128,8 @@
                                     Description: "",
                                     Source: "Census 2010, by Block Group",
                                     FieldName: "PERCENT_AGE_35TO49",
-                                    AsPercentages: true
+                                    AsPercentages: true,
+                                    Type: "percent"
                                 }, {
                                     NodeType: "map",
                                     LayerId: 0,
@@ -131,7 +141,8 @@
                                     Description: "",
                                     Source: "Census 2010, by Block Group",
                                     FieldName: "PERCENT_AGE_50TO64",
-                                    AsPercentages: true
+                                    AsPercentages: true,
+                                    Type: "percent"
                                 }, {
                                     NodeType: "map",
                                     LayerId: 0,
@@ -143,7 +154,8 @@
                                     Description: "",
                                     Source: "Census 2010, by Block Group",
                                     FieldName: "PERCENT_AGE_65TO84",
-                                    AsPercentages: true
+                                    AsPercentages: true,
+                                    Type: "percent"
                                 }, {
                                     NodeType: "map",
                                     LayerId: 0,
@@ -155,7 +167,8 @@
                                     Description: "",
                                     Source: "Census 2010, by Block Group",
                                     FieldName: "PERCENT_AGE_85PLUS",
-                                    AsPercentages: true
+                                    AsPercentages: true,
+                                    Type: "percent"
                                 }]
                             },
 
@@ -176,7 +189,8 @@
                                     Description: "",
                                     Source: "Census 2010, by Block Group",
                                     FieldName: "PERCENT_WHITE",
-                                    AsPercentages: true
+                                    AsPercentages: true,
+                                    Type: "percent"
                                 }, {
                                     NodeType: "map",
                                     LayerId: 0,
@@ -188,7 +202,8 @@
                                     Description: "",
                                     Source: "Census 2010, by Block Group",
                                     FieldName: "PERCENT_BLACK",
-                                    AsPercentages: true
+                                    AsPercentages: true,
+                                    Type: "percent"
                                 }, {
                                     NodeType: "map",
                                     LayerId: 0,
@@ -200,7 +215,8 @@
                                     Description: "",
                                     Source: "Census 2010, by Block Group",
                                     FieldName: "PERCENT_ASIAN",
-                                    AsPercentages: true
+                                    AsPercentages: true,
+                                    Type: "percent"
                                 }, {
                                     NodeType: "map",
                                     LayerId: 0,
@@ -212,7 +228,8 @@
                                     Description: "",
                                     Source: "Census 2010, by Block Group",
                                     FieldName: "PERCENT_NATIVE",
-                                    AsPercentages: true
+                                    AsPercentages: true,
+                                    Type: "percent"
                                 }, {
                                     NodeType: "map",
                                     LayerId: 0,
@@ -224,7 +241,8 @@
                                     Description: "",
                                     Source: "Census 2010, by Block Group",
                                     FieldName: "PERCENT_PACIFIC",
-                                    AsPercentages: true
+                                    AsPercentages: true,
+                                    Type: "percent"
                                 }, {
                                     NodeType: "map",
                                     LayerId: 0,
@@ -236,7 +254,8 @@
                                     Description: "",
                                     Source: "Census 2010, by Block Group",
                                     FieldName: "PERCENT_TWO_OR_MORE",
-                                    AsPercentages: true
+                                    AsPercentages: true,
+                                    Type: "percent"
                                 }, {
                                     NodeType: "map",
                                     LayerId: 0,
@@ -248,7 +267,8 @@
                                     Description: "",
                                     Source: "Census 2010, by Block Group",
                                     FieldName: "PERCENT_OTHER",
-                                    AsPercentages: true
+                                    AsPercentages: true,
+                                    Type: "percent"
                                 }]
                             },
 
@@ -269,7 +289,8 @@
                                     Description: "",
                                     Source: "Census 2010, by Block Group",
                                     FieldName: "PERCENT_HISPANIC",
-                                    AsPercentages: true
+                                    AsPercentages: true,
+                                    Type: "percent"
                                 }]
                             },
 
@@ -289,7 +310,10 @@
                                     DefaultColorScheme: "Sequential",
                                     Description: "",
                                     Source: "American Community Survey 2008 - 2012, by Block Group",
-                                    FieldName: "TOTAL_HOUSEHOLDS"
+                                    FieldName: "TOTAL_HOUSEHOLDS",
+                                    Type: "number",
+                                    Placeholder: "1831"
+
                                 }, {
                                     NodeType: "map",
                                     LayerId: 0,
@@ -300,7 +324,9 @@
                                     DefaultColorScheme: "Sequential",
                                     Description: "",
                                     Source: "American Community Survey 2008 - 2012, by Block Group",
-                                    FieldName: "HOUSEHOLDS_PER_SQMI"
+                                    FieldName: "HOUSEHOLDS_PER_SQMI",
+                                    Type: "number",
+                                    Placeholder: "18641.23"
                                 }, {
                                     NodeType: "map",
                                     LayerId: 0,
@@ -311,7 +337,9 @@
                                     DefaultColorScheme: "Sequential",
                                     Description: "",
                                     Source: "American Community Survey 2008 - 2012, by Block Group",
-                                    FieldName: "MEDIAN_HOUSEHOLD_INCOME"
+                                    FieldName: "MEDIAN_HOUSEHOLD_INCOME",
+                                    Type: "number",
+                                    Placeholder: "250002"
                                 }, {
                                     NodeType: "map",
                                     LayerId: 0,
@@ -323,7 +351,8 @@
                                     Description: "",
                                     Source: "American Community Survey 2008 - 2012, by Block Group",
                                     FieldName: "PERCENT_HH_LESS_THAN_25K",
-                                    AsPercentages: true
+                                    AsPercentages: true,
+                                    Type: "percent"
                                 }, {
                                     NodeType: "map",
                                     LayerId: 0,
@@ -335,7 +364,8 @@
                                     Description: "",
                                     Source: "American Community Survey 2008 - 2012, by Block Group",
                                     FieldName: "PERCENT_HH_25K_TO_49K",
-                                    AsPercentages: true
+                                    AsPercentages: true,
+                                    Type: "percent"
                                 }, {
                                     NodeType: "map",
                                     LayerId: 0,
@@ -347,7 +377,8 @@
                                     Description: "",
                                     Source: "American Community Survey 2008 - 2012, by Block Group",
                                     FieldName: "PERCENT_HH_50K_TO_99K",
-                                    AsPercentages: true
+                                    AsPercentages: true,
+                                    Type: "percent"
                                 }, {
                                     NodeType: "map",
                                     LayerId: 0,
@@ -359,7 +390,8 @@
                                     Description: "",
                                     Source: "American Community Survey 2008 - 2012, by Block Group",
                                     FieldName: "PERCENT_HH_100K_OR_MORE",
-                                    AsPercentages: true
+                                    AsPercentages: true,
+                                    Type: "percent"
                                 }]
                             },
 
@@ -379,7 +411,9 @@
                                     DefaultColorScheme: "Sequential",
                                     Description: "",
                                     Source: "American Community Survey 2008 - 2012, by Block Group",
-                                    FieldName: "TOTAL_FAMILY"
+                                    FieldName: "TOTAL_FAMILY",
+                                    Type: "number",
+                                    Placeholder: "1480"
                                 }, {
                                     NodeType: "map",
                                     LayerId: 0,
@@ -390,7 +424,9 @@
                                     DefaultColorScheme: "Sequential",
                                     Description: "",
                                     Source: "American Community Survey 2008 - 2012, by Block Group",
-                                    FieldName: "FAMILIES_PER_SQMI"
+                                    FieldName: "FAMILIES_PER_SQMI",
+                                    Type: "number",
+                                    Placeholder: "9527"
                                 }, {
                                     NodeType: "map",
                                     LayerId: 0,
@@ -402,7 +438,8 @@
                                     Description: "",
                                     Source: "American Community Survey 2008 - 2012, by Block Group",
                                     FieldName: "PERCENT_POVERTY",
-                                    AsPercentages: true
+                                    AsPercentages: true,
+                                    Type: "percent"
                                 }]
                             },
 
@@ -423,7 +460,9 @@
                                     DefaultColorScheme: "Sequential",
                                     Description: "",
                                     Source: "American Community Survey 2008 - 2012, by Block Group",
-                                    FieldName: "POPULATION_25_YEARS_AND_OVER"
+                                    FieldName: "POPULATION_25_YEARS_AND_OVER",
+                                    Type: "number",
+                                    Placeholder: "6409"
                                 }, {
                                     NodeType: "map",
                                     LayerId: 0,
@@ -434,7 +473,9 @@
                                     DefaultColorScheme: "Sequential",
                                     Description: "",
                                     Source: "American Community Survey 2008 - 2012, by Block Group",
-                                    FieldName: "POP25PLUS_PER_SQMI"
+                                    FieldName: "POP25PLUS_PER_SQMI",
+                                    Type: "number",
+                                    Placeholder: "20708"
                                 }, {
                                     NodeType: "map",
                                     LayerId: 0,
@@ -446,7 +487,8 @@
                                     Description: "",
                                     Source: "American Community Survey 2008 - 2012, by Block Group",
                                     FieldName: "PERCENT_LT9GRADE",
-                                    AsPercentages: true
+                                    AsPercentages: true,
+                                    Type: "percent"
                                 }, {
                                     NodeType: "map",
                                     LayerId: 0,
@@ -458,7 +500,8 @@
                                     Description: "",
                                     Source: "American Community Survey 2008 - 2012, by Block Group",
                                     FieldName: "PERCENT_NOHSDIPLOMA",
-                                    AsPercentages: true
+                                    AsPercentages: true,
+                                    Type: "percent"
                                 }, {
                                     NodeType: "map",
                                     LayerId: 0,
@@ -470,7 +513,8 @@
                                     Description: "",
                                     Source: "American Community Survey 2008 - 2012, by Block Group",
                                     FieldName: "PERCENT_HSGRAD",
-                                    AsPercentages: true
+                                    AsPercentages: true,
+                                    Type: "percent"
                                 }, {
                                     NodeType: "map",
                                     LayerId: 0,
@@ -482,7 +526,8 @@
                                     Description: "",
                                     Source: "American Community Survey 2008 - 2012, by Block Group",
                                     FieldName: "PERCENT_SOMECOLLEGE",
-                                    AsPercentages: true
+                                    AsPercentages: true,
+                                    Type: "percent"
                                 }, {
                                     NodeType: "map",
                                     LayerId: 0,
@@ -494,7 +539,8 @@
                                     Description: "",
                                     Source: "American Community Survey 2008 - 2012, by Block Group",
                                     FieldName: "PERCENT_ASSOCIATES",
-                                    AsPercentages: true
+                                    AsPercentages: true,
+                                    Type: "percent"
                                 }, {
                                     NodeType: "map",
                                     LayerId: 0,
@@ -506,7 +552,8 @@
                                     Description: "",
                                     Source: "American Community Survey 2008 - 2012, by Block Group",
                                     FieldName: "PERCENT_BACHELORS",
-                                    AsPercentages: true
+                                    AsPercentages: true,
+                                    Type: "percent"
                                 }, {
                                     NodeType: "map",
                                     LayerId: 0,
@@ -518,7 +565,8 @@
                                     Description: "",
                                     Source: "American Community Survey 2008 - 2012, by Block Group",
                                     FieldName: "PERCENT_GRADPROF",
-                                    AsPercentages: true
+                                    AsPercentages: true,
+                                    Type: "percent"
                                 }]
                             }
                         ]
@@ -540,7 +588,9 @@
                             DefaultColorScheme: "Sequential",
                             Description: "",
                             Source: "Census 2010, by Block Group",
-                            FieldName: "TOTAL_HU"
+                            FieldName: "TOTAL_HU",
+                            Type: "number",
+                            Placeholder: "3063"
                         }, {
                             NodeType: "map",
                             LayerId: 0,
@@ -551,7 +601,9 @@
                             DefaultColorScheme: "Sequential",
                             Description: "",
                             Source: "Census 2010, by Block Group",
-                            FieldName: "HU_PER_SQMI "
+                            FieldName: "HU_PER_SQMI ",
+                            Type: "number",
+                            Placeholder: "23096"
                         }, {
                             NodeType: "map",
                             LayerId: 0,
@@ -563,7 +615,8 @@
                             Description: "",
                             Source: "Census 2010, by Block Group",
                             FieldName: "VACANCY_RATE",
-                            AsPercentages: true
+                            AsPercentages: true,
+                            Type: "percent"
                         }, {
                             NodeType: "map",
                             LayerId: 0,
@@ -575,7 +628,8 @@
                             Description: "",
                             Source: "Census 2010, by Block Group",
                             FieldName: "PERCENT_SEASONAL",
-                            AsPercentages: true
+                            AsPercentages: true,
+                            Type: "percent"
                         }, {
                             NodeType: "map",
                             LayerId: 0,
@@ -587,7 +641,8 @@
                             Description: "",
                             Source: "Census 2010, by Block Group",
                             FieldName: "NON_SEASONAL_VACANCY_RATE",
-                            AsPercentages: true
+                            AsPercentages: true,
+                            Type: "percent"
                         }, {
                             NodeType: "map",
                             LayerId: 0,
@@ -598,7 +653,9 @@
                             DefaultColorScheme: "Sequential",
                             Description: "",
                             Source: "American Community Survey 2008 - 2012, by Block Group",
-                            FieldName: "MEDIAN_VALUE"
+                            FieldName: "MEDIAN_VALUE",
+                            Type: "number",
+                            Placeholder: "1000002"
                         }, {
                             NodeType: "map",
                             LayerId: 0,
@@ -609,7 +666,9 @@
                             DefaultColorScheme: "Sequential",
                             Description: "",
                             Source: "American Community Survey 2008 - 2012, by Block Group",
-                            FieldName: "MEDIAN_GROSS_RENT"
+                            FieldName: "MEDIAN_GROSS_RENT",
+                            Type: "number",
+                            Placeholder: "2002"
                         }, {
                             NodeType: "cat",
                             Name: "Tenure",
@@ -626,7 +685,8 @@
                                 Description: "",
                                 Source: "Census 2010, by Block Group",
                                 FieldName: "PERCENT_OWNER_OCCUPIED",
-                                AsPercentages: true
+                                AsPercentages: true,
+                                Type: "percent"
                             }, {
                                 NodeType: "map",
                                 LayerId: 0,
@@ -638,7 +698,8 @@
                                 Description: "",
                                 Source: "Census 2010, by Block Group",
                                 FieldName: "PERCENT_RENTER_OCCUPIED",
-                                AsPercentages: true
+                                AsPercentages: true,
+                                Type: "percent"
                             }]
                         }]
                     }

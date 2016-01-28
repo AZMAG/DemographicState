@@ -11,7 +11,7 @@
     define([
             "dojo/dom-construct",
             "dojo/dom",
-            "dojo/text!app/views/subscribe-view.html"
+            "dojo/text!app/views/subscribe-view.html",
         ],
         function(dc, dom, view) {
 

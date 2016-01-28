@@ -9,9 +9,12 @@
     "use strict";
 
     define([
-
+            "dojo/_base/lang",
+            "dojo/topic",
+            "app/models/map-model"
         ],
-        function() {
+
+        function(lang, topic, MapModel) {
 
             var BookmarkDelegate = {
 

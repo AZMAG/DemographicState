@@ -21,7 +21,7 @@
             "app/vm/demographic-vm",
             "app/config/demographicConfig",
             "app/vm/interactiveTools-vm",
-            "app/vm/queryBuilderTwo-vm"
+            "app/vm/queryBuilder-vm"
         ],
         function(dj, dc, tp, dom, mapModel, helpView, helpVM, view, layerDelegate, demographicVM, demographicConfig, interactiveToolsVM, qbVM) {
 
@@ -124,19 +124,15 @@
                     var url2 = demographicConfig.reports.placeSummary.restUrl;
                     var whereClause2 = demographicConfig.reports.placeSummary.whereClause;
                     layerDelegate.query(url2, self.placeQueryHandler, self.placeQueryFault, null, whereClause2, false);
-                    qbVM.init("display", "after");
-
                     //  // Load the legislative names
                     var url3 = demographicConfig.reports.legislativeSummary.restUrl;
                     var whereClause3 = demographicConfig.reports.legislativeSummary.whereClause;
                     layerDelegate.query(url3, self.legislativeQueryHandler, self.legislativeQueryFault, null, whereClause3, false);
-                    qbVM.init("display", "after");
 
                     //  // Load the congressional names
                     var url4 = demographicConfig.reports.congressionalSummary.restUrl;
                     var whereClause4 = demographicConfig.reports.congressionalSummary.whereClause;
                     layerDelegate.query(url4, self.congressionalQueryHandler, self.congressionalQueryFault, null, whereClause4, false);
-                    qbVM.init("display", "after");
 
                 }; //end init
 
@@ -583,8 +579,8 @@
                  * @event click
                  */
                 self.openQueryBuilder = function() {
-                    qbVM.buildQuery(demographicVM.interactiveSelectionQueryHandler, demographicVM.interactiveSelectionQueryFault, demographicConfig.reports.censusTracts.restUrl, demographicConfig.queryFields, demographicConfig.CompareOperators);
-                    $("#countyChoiceDiv, #placeChoiceDiv, #legislativeChoiceDiv, #demInteractiveDiv, #demInteractiveDiv").hide();
+                    $("#countyChoiceDiv, #placeChoiceDiv, #legislativeChoiceDiv, #demInteractiveDiv").hide();
+                    qbVM.openWindow();
                 };
 
             }; // End of PanelVM

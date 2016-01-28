@@ -19,7 +19,7 @@
             "app/vm/map-vm",
             "app/helpers/bookmark-delegate"
         ],
-        function(dc, da, lang, ds, topic, view, mapModel, MapVM, bookmarkDelegate) {
+        function(dc, da, lang, ds, topic, view, mapModel, mapVM, bookmarkDelegate) {
             var MapContainerVM = new function() {
 
                 /**
@@ -48,14 +48,14 @@
                     topic.subscribe("MapLoaded", self.mapLoaded);
 
                     self.initializationData = bookmarkDelegate.getQueryStringMapDataObj();
-                    var initialMapVM;
+
                     if (self.initializationData) {
                         for (var i = 0; i < self.initializationData.maps.length; i++) {
                             var mapInitData = self.initializationData.maps[i];
                             mapInitData.extent = self.initializationData.E;
                             if (i === 0) {
                                 // initialize first map
-                                initialMapVM = new MapVM();
+                                var initialMapVM = new mapVM();
                                 initialMapVM.init("map1", "HomeButton1", true, "bottom-left", true, false, "mapFrameElementRight", mapInitData);
                                 mapModel.loadInitialMap(initialMapVM.map);
                                 self.mapVMs.push(initialMapVM);
@@ -67,7 +67,7 @@
                         }
                     } else {
                         // initialize first map
-                        initialMapVM = new MapVM();
+                        var initialMapVM = new mapVM();
                         initialMapVM.init("map1", "HomeButton1", true, "bottom-left", true, false, "mapFrameElementRight", undefined);
                         mapModel.loadInitialMap(initialMapVM.map);
                         self.mapVMs.push(initialMapVM);
@@ -89,6 +89,8 @@
                         var centerPnt = mapModel.baseMapInstance.extent.getCenter();
                         var newMapVM;
 
+                        $("#launchLegend").addClass("aDisabled");
+
                         switch (self.mapVMs.length) {
                             case 1:
                                 //Update grid rows
@@ -103,7 +105,7 @@
                                 //recenter maps
                                 mapModel.recenterMaps(centerPnt);
 
-                                newMapVM = new MapVM();
+                                newMapVM = new mapVM();
                                 newMapVM.init("map2", null, false, "", false, true, "mapFrameElementLeft", mapInitData);
 
                                 //show map elements for first map
@@ -134,7 +136,7 @@
                                 mapModel.recenterMaps(centerPnt);
 
                                 //create new map
-                                newMapVM = new MapVM();
+                                newMapVM = new mapVM();
                                 newMapVM.init("map3", null, false, "", false, true, "mapFrameElementRight", mapInitData);
 
                                 break;
@@ -154,7 +156,7 @@
                                 mapModel.recenterMaps(centerPnt);
 
                                 //create new map
-                                newMapVM = new MapVM();
+                                newMapVM = new mapVM();
                                 newMapVM.init("map4", null, false, "", false, true, "mapFrameElementLeft", mapInitData);
 
                                 break;
@@ -201,6 +203,7 @@
                                 //var toc = $("#thematicTOC").data("kendoTreeView");
                                 //var item = toc.findByText("Total Population");
                                 //toc.select(item);
+                                $("#launchLegend").removeClass("aDisabled");
                                 self.mapVMs[0].toggleMapElements(false);
                                 break;
                             case 3:

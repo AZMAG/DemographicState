@@ -357,12 +357,14 @@
                     }
                     self.classMethodList.select(function(item) {
                         return item.Value === initData.classMethod;
+                        console.log(initData.classMethod)
                     });
                     var oldBreakValue = self.breaksCountList.value();
                     self.breaksCountList.value(initData.breaks.length);
                     if (oldBreakValue !== initData.colorPalet.numBreaks.toString()) {
                         tp.publish("SetNumBreaks", self.breaksCountList.dataItem());
                     }
+                    console.log(initData);
                     tp.publish("AdditionalMapInitialized", initData.colorPalet.ramp, initData.colorPalet.numBreaks);
                     //self.updateColorRamp(initData.colorRamp);
                 };
@@ -504,13 +506,12 @@
                 @method applyRenderer
                 **/
                 self.applyRenderer = function(renderer) {
-                    var i;
-                    for (i = 0; i < self.CurrentRamp.length; i++) {
+                    for (var i = 0; i < self.CurrentRamp.length; i++) {
                         renderer.infos[i].symbol.color = dojo.colorFromRgb(self.CurrentRamp[i]);
                     }
 
                     if (self.initCustomBreaks) {
-                        for (i = 0; i < self.initCustomBreaks.length; i++) {
+                        for (var i = 0; i < self.initCustomBreaks.length; i++) {
                             renderer.infos[i].minValue = self.initCustomBreaks[i][0];
                             renderer.infos[i].maxValue = self.initCustomBreaks[i][1];
                             renderer.infos[i].classMaxValue = self.initCustomBreaks[i][1];

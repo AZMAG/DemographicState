@@ -33,7 +33,7 @@
 
 var appConfig = new function() {
 
-    this.Version = "v2.0.1 | 10/14/2015";
+    this.Version = "v2.0.0 | 10/05/2015";
 
     this.ArcGISInstanceURL = "http://geo.azmag.gov/gismag/rest";
     //this.exportWebMapUrl = "http://geo.azmag.gov/gismag/rest/services/Utilities/PrintingTools/GPServer/Export%20Web%20Map%20Task";  // Generic Print Service
@@ -166,17 +166,17 @@ var appConfig = new function() {
         login: "vwolfley",
         apiKey: "R_8dbab4a2f0664e8f8b4f88fe0d9d7f80"
     };
-	
-	    // ------------------------------
+
+            // ------------------------------
         // MARKUP TOOL SETTINGS
         // ------------------------------
 
         // Specify the Markup / drawing tools.
-        this.markupToolTreeNodes = [{ id: 1, text: "Polygon", DisplayText: "Polygon", Type: "POLYGON"},
-                                { id: 2, text: "Circle", DisplayText: "Circle", Type: "CIRCLE" },
-                                { id: 3, text: "Arrow", DisplayText: "Arrow", Type: "ARROW" },
-                                { id: 4, text: "Freehand", DisplayText: "Freehand Polygon", Type: "FREEHAND_POLYGON" },
-                                { id: 5, text: "Text", DisplayText: "Text", Type: "POINT" }];
+        this.markupToolTreeNodes = [{ id: 1, text: "Polygon", DisplayText: "Polygon", Type: "POLYGON", imageUrl: "app/resources/img/i_draw_poly.png"},
+                                    { id: 2, text: "Circle", DisplayText: "Circle", Type: "CIRCLE", imageUrl: "app/resources/img/i_draw_circle.png"},
+                                    { id: 3, text: "Arrow", DisplayText: "Arrow", Type: "ARROW", imageUrl: "app/resources/img/i_draw_arrow.png"},
+                                    { id: 4, text: "Freehand", DisplayText: "Freehand", Type: "FREEHAND_POLYGON", imageUrl: "app/resources/img/i_draw_freepoly.png"},
+                                    { id: 5, text: "Text", DisplayText: "Text Box", Type: "POINT", imageUrl: "app/resources/img/i_draw_text.png"}];
     
         // Specify the Markup Tool's Fill and Outline Kendo Color Pallettes.
         this.fillColorPalette = ["rgba(163, 73, 164, .50)", "rgba(63, 72, 204, .5)", "rgba(0, 162, 232, 0.50)",
