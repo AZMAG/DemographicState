@@ -4,6 +4,17 @@ CHANGELOG for State Demographics Map Viewer
 
 ### Version x.x.x (xx/xx/2015)
 
+### Version 3.0.0 (1/28/2016)
+
+* added legend items for each layer
+* fixed issue with chart labels being cut off in reports.  Simply made radius of pie charts smaller.
+* fixed a bug when trying to print map with multiple map frames.
+* added print map format choice.  Now allows jpg
+* replaced advanced query with new ui.
+* added info window links to open summary windows.
+* fixed layer options to include place layer.
+* made changes to markup tools.  Now updates properties of shapes on edit.
+
 ### Version 2.0.2 (10/14/2015)
 
 * added Markup Tools
