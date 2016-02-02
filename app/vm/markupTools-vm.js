@@ -15,7 +15,12 @@
             "dojo/text!app/views/markupToolsHelp-view.html",
             "app/vm/help-vm",
             "dojo/text!app/views/markupTools-view.html",
-            "app/models/map-model"
+            "app/models/map-model",
+            "esri/Color",
+            "esri/symbols/SimpleFillSymbol",
+            "esri/symbols/SimpleLineSymbol",
+            "esri/symbols/TextSymbol",
+            "esri/symbols/Font"
         ], function(
             dj,
             dc,
@@ -29,7 +34,12 @@
             helpView,
             helpVM,
             view,
-            mapModel) {
+            mapModel,
+            Color,
+            SimpleFillSymbol,
+            SimpleLineSymbol,
+            TextSymbol,
+            Font) {
 
             var markupToolsVM = new function() {
 
@@ -72,7 +82,7 @@
                 self.fillColorSelection = null;
                 self.outlineColorSelection = null;
                 self.fontSize = 12; // Default the font size to 12
-                self.textInput = ko.observable('');
+                self.textInput = ko.observable("");
                 self.allMaps = false;
 
                 // Kendo Window dimensions and location
@@ -141,7 +151,7 @@
                         self.closeWindow();
                     });
 
-                    // Initialize Kendo Window Object 
+                    // Initialize Kendo Window Object
                     var markupToolsWindow = $("#markupToolsLauncher").kendoWindow({
                         width: self.newWindowWidth,
                         height: "auto", //425px
@@ -184,12 +194,12 @@
                         dataSource: appConfig.markupToolTreeNodes,
                         dataTextField: "DisplayText",
                         dataBound: function(e) {
-                            e.sender.element.find("span.k-in").css('cursor', 'pointer');
-                            e.sender.element.find("img.k-image").css('height', '23px');
+                            e.sender.element.find("span.k-in").css("cursor", "pointer");
+                            e.sender.element.find("img.k-image").css("height", "23px");
                         }
                     }).data("kendoTreeView");
-                    // IMPORTANT: Over-ride the Kendo Treeview click event in order to be able to deactivate it. 
-                    $('#markupToolsKendoTree').on('click', '.k-item', function(e) {
+                    // IMPORTANT: Over-ride the Kendo Treeview click event in order to be able to deactivate it.
+                    $("#markupToolsKendoTree").on("click", ".k-item", function(e) {
                         self.onMarkupToolSelection();
                     });
 
@@ -248,8 +258,7 @@
                     });
 
                     $("#markupToolTextInput").change(function() {
-                        if (self.isEditingActive())
-                        {
+                        if (self.isEditingActive()) {
                             if (self.markupToolEdit._graphic !== null) {
                                 self.updateGraphicSymbol();
                             }
@@ -262,12 +271,11 @@
                 @method sliderChange
                 **/
                 self.sliderChange = function(evt) {
-                    if (self.isEditingActive())
-                        {
-                            if (self.markupToolEdit._graphic !== null) {
-                                self.updateGraphicSymbol();
-                            }
+                    if (self.isEditingActive()) {
+                        if (self.markupToolEdit._graphic !== null) {
+                            self.updateGraphicSymbol();
                         }
+                    }
                 };
 
                 /**
@@ -394,12 +402,10 @@
                 self.onFillColorPaletteSelection = function(e) {
                     if (e) {
                         self.fillColorSelection = kendo.parseColor(e.value);
-                        if (self.isEditingActive())
-                        {
+                        if (self.isEditingActive()) {
                             if (!self.markupToolEdit._isTextPoint) {
                                 self.updateGraphicSymbol();
-                            }
-                            else {
+                            } else {
                                 self.updateTextSymbol();
                             }
                         }
@@ -413,8 +419,7 @@
                 self.onOutlineColorPaletteSelection = function(e) {
                     if (e) {
                         self.outlineColorSelection = kendo.parseColor(e.value);
-                        if (self.isEditingActive())
-                        {
+                        if (self.isEditingActive()) {
                             if (self.markupToolEdit._graphic !== null) {
                                 self.updateGraphicSymbol();
                             }
@@ -429,8 +434,7 @@
                 self.onFontSizeSelection = function(e) {
                     if (e) {
                         self.fontSize = self.fontSizeList.dataItem(e.node);
-                        if (self.isEditingActive())
-                        {
+                        if (self.isEditingActive()) {
                             if (self.markupToolEdit._graphic !== null) {
                                 self.updateTextSymbol();
                             }
@@ -438,26 +442,26 @@
                     }
                 };
 
-                self.updateGraphicSymbol = function (){
+                self.updateGraphicSymbol = function() {
                     var fill = self.fillColorSelection;
                     var outline = self.outlineColorSelection;
                     var slider = $("#mtSlider").getKendoSlider();
                     var fillColorOpacity = slider.value();
 
-                     var symbol = new esri.symbol.SimpleFillSymbol( esri.symbol.SimpleFillSymbol.STYLE_SOLID,
-                                  new esri.symbol.SimpleLineSymbol( esri.symbol.SimpleLineSymbol.STYLE_SOLID,
-                                  new esri.Color([outline.r,outline.g,outline.b]), 3), new esri.Color([fill.r,fill.g,fill.b, fillColorOpacity]));
+                    var symbol = new SimpleFillSymbol(SimpleFillSymbol.STYLE_SOLID,
+                        new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID,
+                            new Color([outline.r, outline.g, outline.b]), 3), new Color([fill.r, fill.g, fill.b, fillColorOpacity]));
 
                     self.markupToolEdit._graphic.setSymbol(symbol);
                 };
 
-                self.updateTextSymbol = function (){
+                self.updateTextSymbol = function() {
                     var fill = self.fillColorSelection;
 
-                    var textSymbol = new esri.symbol.TextSymbol(self.textInput()).setColor(new esri.Color([fill.r,fill.g,fill.b, 1]));
-                        var font = new esri.symbol.Font();
-                        font.setSize(self.fontSize.toString() + "pt");
-                        textSymbol.setFont(font);
+                    var textSymbol = new TextSymbol(self.textInput()).setColor(new Color([fill.r, fill.g, fill.b, 1]));
+                    var font = new Font();
+                    font.setSize(self.fontSize.toString() + "pt");
+                    textSymbol.setFont(font);
 
                     self.markupToolEdit._graphic.setSymbol(textSymbol);
                 };
@@ -559,37 +563,37 @@
 
                     // Check if a fill and/or outline Kendo Color Palette selection was made
                     if (self.fillColorSelection) {
-                        // Set the the fill opacity value to half (0.50), so layers behind the markup tool can be visible 
-                        fillColor = new dojo.Color([self.fillColorSelection.r, self.fillColorSelection.g, self.fillColorSelection.b,
+                        // Set the the fill opacity value to half (0.50), so layers behind the markup tool can be visible
+                        fillColor = new Color([self.fillColorSelection.r, self.fillColorSelection.g, self.fillColorSelection.b,
                             fillColorOpacity
                         ]);
-                        textColor = new dojo.Color([self.fillColorSelection.r, self.fillColorSelection.g, self.fillColorSelection.b,
+                        textColor = new Color([self.fillColorSelection.r, self.fillColorSelection.g, self.fillColorSelection.b,
                             appConfig.outlineColorOpacity
                         ]);
                     } else { // Default color is Cyan
-                        fillColor = new dojo.Color([0, 255, 255, fillColorOpacity]);
-                        textColor = new dojo.Color([0, 255, 255, appConfig.outlineColorOpacity]);
+                        fillColor = new Color([0, 255, 255, fillColorOpacity]);
+                        textColor = new Color([0, 255, 255, appConfig.outlineColorOpacity]);
                     }
                     if (self.outlineColorSelection) {
-                        // Set the the fill opacity value to half (0.50), so layers behind the markup tool can be visible 
-                        outlineColor = new dojo.Color([self.outlineColorSelection.r, self.outlineColorSelection.g, self.outlineColorSelection.b,
+                        // Set the the fill opacity value to half (0.50), so layers behind the markup tool can be visible
+                        outlineColor = new Color([self.outlineColorSelection.r, self.outlineColorSelection.g, self.outlineColorSelection.b,
                             appConfig.outlineColorOpacity
                         ]);
                     } else { // Default color is Cyan
-                        outlineColor = new dojo.Color([0, 255, 255, appConfig.outlineColorOpacity]);
+                        outlineColor = new Color([0, 255, 255, appConfig.outlineColorOpacity]);
                     }
 
                     // Define the Markup Tool's symbology
                     if (["polygon", "freehandpolygon", "circle", "arrow"].indexOf(geometryType) > -1) {
-                        markupSymbology = new esri.symbol.SimpleFillSymbol(esri.symbol.SimpleFillSymbol.STYLE_SOLID,
-                            new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID, outlineColor, 3), fillColor);
+                        markupSymbology = new SimpleFillSymbol(SimpleFillSymbol.STYLE_SOLID,
+                            new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID, outlineColor, 3), fillColor);
                     } else if (["line", "polyline"].indexOf(geometryType) > -1) {
-                        markupSymbology = new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID, outlineColor, 2);
+                        markupSymbology = new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID, outlineColor, 2);
                     } else if (["point"].indexOf(geometryType) > -1) {
 
                         // Create a TextSymbol to place when a map point is created
-                        var textSymbol = new esri.symbol.TextSymbol(self.textInput()).setColor(textColor);
-                        var font = new esri.symbol.Font();
+                        var textSymbol = new TextSymbol(self.textInput()).setColor(textColor);
+                        var font = new Font();
                         font.setSize(self.fontSize.toString() + "pt");
                         textSymbol.setFont(font);
                         markupSymbology = textSymbol;
@@ -686,7 +690,7 @@
                  * @method deleteGraphics
                  * @param  {string}
                  * @return {object}
-                 * 
+                 *
                  */
                 self.getMapConfigById = function(mapid) {
                     var returnValue;
@@ -704,7 +708,7 @@
                  *
                  * @method clearGraphicsLayer
                  * @param  {string}
-                 * 
+                 *
                  */
                 self.clearGraphicsLayer = function(mapid) {
                     if (mapid !== "map1") {
@@ -720,7 +724,7 @@
                  *
                  * @method initializeGraphics
                  * @param  {string}
-                 * 
+                 *
                  */
                 self.initializeGraphics = function(mapid) {
                     if (mapid !== "map1") {
@@ -740,11 +744,11 @@
                 };
 
                 /*
-                 * Method fired after user clicks edit button and clicks a graphic.  
+                 * Method fired after user clicks edit button and clicks a graphic.
                  *
                  * @method initializeGraphics
                  * @param  {string}
-                 * 
+                 *
                  */
                 self.editGraphicClicked = function(evt) {
                     if (evt.graphic) {
@@ -796,10 +800,10 @@
 
 
                 /*
-                 * Method for handling event fired when delete button has been clicked and a graphic is selected.  
-                 * 
+                 * Method for handling event fired when delete button has been clicked and a graphic is selected.
+                 *
                  * @method deleteGraphicClicked
-                 * 
+                 *
                  */
                 self.deleteGraphicClicked = function(evt) {
                     var deletedGraphic = evt.graphic;

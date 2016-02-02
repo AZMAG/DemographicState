@@ -213,7 +213,7 @@
                             $("#dropPrompt").hide();
                         }
                     });
-                  
+
                     $("#target").kendoDropTarget({
                         dragenter: function(e) {
                             if (self.dataItemSelected.Type !== undefined) {
@@ -230,9 +230,9 @@
                         drop: self.onDrop
                     });
 
-                    $("body").on('click', '.removeRowBtn', function() {
+                    $("body").on("click", ".removeRowBtn", function() {
                         var str = $(this).parents("div:first")[0].innerText.toString();
-                        var fieldName = str.substring(0, str.indexOf(':'));
+                        var fieldName = str.substring(0, str.indexOf(":"));
                         var previousDropdown = $(this).parent().parent().prevAll(".joinDDLClass:first");
 
                         if (previousDropdown.length > 0) {
@@ -256,7 +256,7 @@
                         self.verifyQuery();
                         return false;
                     });
-                    $("body").on('click', '.clearRowBtn', function() {
+                    $("body").on("click", ".clearRowBtn", function() {
                         var selector = $(this).parents("div:first")[0].id;
                         var textBoxes = $("#" + selector + " .style1");
                         $.each(textBoxes, function( index, textBox ) {
@@ -330,7 +330,7 @@
                             var maxValue = dataItem.Placeholder;
 
                             if (dataItem.Type === "percent") {
-                                $('#' + selector + " .style1").kendoNumericTextBox({
+                                $("#" + selector + " .style1").kendoNumericTextBox({
                                     spinners: false,
                                     min: 0,
                                     max: 100,
@@ -340,7 +340,7 @@
                                 maxValue = 1;
                             }
                             else{
-                                $('#' + selector + " .style1").kendoNumericTextBox({
+                                $("#" + selector + " .style1").kendoNumericTextBox({
                                     spinners: false,
                                     min: 0,
                                     max: maxValue,
@@ -382,13 +382,13 @@
                 };
 
                 self.onChange = function(e){
-                    var item = $('#' + e.sender.element[0].id).parent();
+                    var item = $("#" + e.sender.element[0].id).parent();
                     var selector = item.parent().parent()[0].id.toString();
-                    var hiddenData = $('#' + selector + ' .hiddenFld')[0];
+                    var hiddenData = $("#" + selector + " .hiddenFld")[0];
                     var type = hiddenData.value;
                     var maxValue = hiddenData.placeholder;
                     var dataItem = this.dataItem(e.item);
-                    
+
                     $(item).siblings(".style1").remove();
                     if (dataItem.Sign !== "between") {
                         $( '<input class="style1" placeholder="value"></input>').insertAfter(item);
@@ -398,7 +398,7 @@
                     }
 
                     if (type === "percent") {
-                                $('#' + selector + " .style1").kendoNumericTextBox({
+                                $("#" + selector + " .style1").kendoNumericTextBox({
                                     spinners: false,
                                     min: 0,
                                     max: 100,
@@ -408,7 +408,7 @@
                                 maxValue = 1;
                             }
                             else{
-                                $('#' + selector + " .style1").kendoNumericTextBox({
+                                $("#" + selector + " .style1").kendoNumericTextBox({
                                     spinners: false,
                                     min: 0,
                                     max: maxValue,
@@ -462,14 +462,14 @@
                             if (inputBoxes.length > 1) {
 
                                 if (inputBoxes[0].value) {
-                                    min = inputBoxes[0].value.replace(/,/g,'');
+                                    min = inputBoxes[0].value.replace(/,/g,"");
                                     if (self.queryItems[i].type === "percent") {
                                         min = min.replace("%", "");
                                         min = (min/100);
                                     }
                                 }
                                 if (inputBoxes[1].value) {
-                                    max = inputBoxes[1].value.replace(/,/g,'');
+                                    max = inputBoxes[1].value.replace(/,/g,"");
                                     if (self.queryItems[i].type === "percent") {
                                         max = max.replace("%", "");
                                         max = (max/100);
@@ -484,7 +484,7 @@
                             }
                             else{
                                 if (inputBoxes[0].value) {
-                                    inputValue = inputBoxes[0].value.replace(/,/g,'');
+                                    inputValue = inputBoxes[0].value.replace(/,/g,"");
                                     if (self.queryItems[i].type === "percent") {
                                         inputValue = inputValue.replace("%", "");
                                         inputValue = (inputValue/100);

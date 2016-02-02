@@ -166,7 +166,7 @@
                 };
 
                 self.loadInitializedMap = function(ramp, numBreaks) {
-                    console.log(ramp,numBreaks)
+                    // console.log(ramp,numBreaks);
                     self.Current = {
                         Ramp: ramp,
                         Breaks: numBreaks

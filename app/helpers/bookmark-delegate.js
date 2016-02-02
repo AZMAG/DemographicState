@@ -117,7 +117,7 @@
                 @param {function} callback - This function is executed when the AJAX call is completed.
                 **/
                 minifyURL: function(bigurl, callback) {
-                    console.log(bigurl);
+                    // console.log(bigurl);
                     $.getJSON("http://api.bitly.com/v3/shorten?callback=?", {
                             format: "json",
                             apiKey: appConfig.URLMinimizer.apiKey,
