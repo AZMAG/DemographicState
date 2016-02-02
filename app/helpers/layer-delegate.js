@@ -60,13 +60,15 @@ var queryCountGlobal;
                  * @param {boolean} returnGeometry - [OPTIONAL] whether or not to return the geometry of the results.
                  * @param {string[]} outFields - [OPTIONAL] array of fields to return.
                  * @param {string[]} orderByFields - [OPTIONAL] array of fields to order the results by.
+                 * @param {boolean} distinct - [OPTIONAL] whether or not to return only distinct values.
                  **/
-                query: function(url, callback, errback, geometry, where, returnGeometry, outFields, orderByFields) {
+                query: function(url, callback, errback, geometry, where, returnGeometry, outFields, orderByFields, distinct) {
                     //Setup default values
                     outFields = (typeof outFields === "undefined") ? ["*"] : outFields;
                     where = (typeof where === "undefined") ? "1=1" : where;
                     geometry = (typeof geometry === "undefined") ? null : geometry;
                     returnGeometry = (typeof returnGeometry === "undefined") ? false : returnGeometry;
+                    distinct = (typeof distinct === "undefined") ? false : distinct;
                     orderByFields = (typeof orderByFields === "undefined") ? [] : orderByFields;
 
                     //Create new query
@@ -86,11 +88,12 @@ var queryCountGlobal;
                     query.returnCountOnly = false;
                     query.returnIdsOnly = false;
                     query.maxAllowableOffset = 0.1;
+                    query.returnDistinctValues = distinct;
 
                     // added to count features. vw
-                    qt.executeForCount(query, function(count) {
-                        queryCountGlobal = count;
-                    });
+                    // qt.executeForCount(query, function(count) {
+                    //     queryCountGlobal = count;
+                    // });
 
                     //Execute query and return results to callback function
                     qt.execute(query, callback, errback);
@@ -142,6 +145,7 @@ var queryCountGlobal;
                         queryCountGlobal = count;
                         var numCount = magNumberFormatter.formatValue(count);
                         dom.byId("fCount1").innerHTML = numCount;
+                        callback(count);
                     });
                 },
 

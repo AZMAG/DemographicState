@@ -201,7 +201,7 @@ button:hover {
 {
     position: absolute;
     bottom: 20px;
-    min-width: 100px;
+    min-width: 180px;
     max-width: 250px;
     font-size: .85em;
 }
@@ -327,6 +327,9 @@ span.searchIcon.esriIconZoom {
 
 }
 
+
+
+
 /* ==========================================
 **** Header Customs Styles ****
 ============================================= */
@@ -403,6 +406,11 @@ li.tb {
 
 }
 
+.aDisabled {
+    pointer-events: none;
+    color:gray;
+}
+
 #cbrlaunchbar,
 #leglaunchbar,
 #rplaunchbar,
@@ -442,10 +450,10 @@ li.tb {
 **** Query Window styles ****
 ============================================= */
 .queryContainer {
-    height: 240px;
     margin: 5px;
     overflow-y: auto;
 }
+
 .queryHeader {
     font-weight: bold;
     font-size: 16px;
@@ -455,8 +463,7 @@ li.tb {
     line-height: 30px;
 }
 .queryButtons {
-    margin-left: 10px;
-    padding: 3px 8px;
+    padding: 4px 12px;
 }
 .queryPic {
     display: block;
@@ -465,9 +472,80 @@ li.tb {
     height: 225px;
     width: 446.25px;
 }
+
+.queryItem{
+    margin-left: 3%;
+    line-height: 50px;
+}
+
+.inputBoxes{
+    float:right;
+    margin-right: 1%;
+    margin-top: 14px;
+    margin-bottom: 10px;
+    color:black;
+}
+
+.joinDDLClass{
+    width: 80px;
+    margin-left: 40%;
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+
+.operatorDDL{
+    margin-right: 10px;
+    width: 130px;
+}
+
+.removeRowBtn{
+    margin-left: 10px;
+}
+
+.strMultiselect{
+    width: 90px;
+}
+
+#dropPrompt{
+    color:black;
+    margin-left: 40%;
+    margin-right: 35%;
+    margin-top: 21%;
+    /*border: 1px solid black;*/
+    padding:10px;
+    font-size: 18px;
+}
+
 #value {
     text-align: center;
     font-size: .95em;
+}
+
+#runQuery{
+    background-color: #137721;
+}
+
+#treeView {
+    max-height: 350px;
+}
+#target {
+  float:left;
+  width:  660px;
+  height: 312px;
+  border: 3px solid black;
+  border-radius: 3px;
+  max-height: 312px;
+  overflow: auto;
+}
+.style1{
+    width: 60px;
+    margin-left:5px;
+    color:black;
+}
+
+#treeViewContainer{
+    width: 300px;
+    float:left;
 }
 /* ==========================================
 **** panel-view.html Window styles ****
@@ -923,7 +1001,7 @@ margin-top:5px;
     width: 300px;
     display: none;
 }
-.esriLegendServiceLabel {
+#legendDiv .esriLegendServiceLabel {
     display: none;
 }
 .esriLegendLayerLabel {
@@ -1497,4 +1575,54 @@ margin-top:5px;
     h3 {
         page-break-after: avoid;
     }
+
+
+}
+
+
+/*Markup Tools Styling*/
+.k-colorpalette .k-item.k-state-selected {
+    -webkit-box-shadow: 2px 2px 2px 2px #000,1px 1px 1px 4px #fff;
+    -moz-box-shadow: 2px 2px 2px 2px #000,1px 1px 1px 4px #fff;
+    box-shadow: 2px 2px 2px 2px #000,1px 1px 1px 4px #fff;
+}
+#mtSliderDiv{
+    margin: 0px 5px 5px 5px ;
+}
+.editMarkupBtns button.active {
+    background-color: #06c;
+}
+.editMarkupBtns{
+    margin-left: 20%;
+}
+.queryResultCount{
+    height: 22px;
+    padding: 5px 15px 5px 15px;
+    margin-top: 8px;
+    display: none;
+    width: 300px;
+    border-radius: 3px;
+}
+.k-treeview .k-sprite, .k-treeview .k-image {
+            vertical-align: middle;
+        }
+
+.mapLayerLabel{
+    margin-left: 10px;
+}
+.mapLayerLabel:hover{
+    cursor: pointer;
+}
+
+.resultBanner {
+    background: White; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(White, LightGray); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(White, LightGray); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(White, LightGray); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(White, LightGray); /* Standard syntax (must be last) */
+    color: black;
+}
+
+.panelBarLi .k-state-selected{
+    background-color: transparent;
 }

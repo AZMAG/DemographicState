@@ -89,6 +89,8 @@
                         var centerPnt = mapModel.baseMapInstance.extent.getCenter();
                         var newMapVM;
 
+                        $("#launchLegend").addClass("aDisabled");
+
                         switch (self.mapVMs.length) {
                             case 1:
                                 //Update grid rows
@@ -201,6 +203,7 @@
                                 //var toc = $("#thematicTOC").data("kendoTreeView");
                                 //var item = toc.findByText("Total Population");
                                 //toc.select(item);
+                                $("#launchLegend").removeClass("aDisabled");
                                 self.mapVMs[0].toggleMapElements(false);
                                 break;
                             case 3:

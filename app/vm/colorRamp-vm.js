@@ -15,9 +15,10 @@
             "dojo/text!app/views/colorRampHelp-view.html",
             "app/vm/help-vm",
             "app/models/map-model",
-            "dojo/text!app/views/colorRamp-view.html"
+            "dojo/text!app/views/colorRamp-view.html",
+            "app/vm/map-vm"
         ],
-        function(dj, dc, tp, conf, helpView, helpVM, mapModel, view) {
+        function(dj, dc, tp, conf, helpView, helpVM, mapModel, view, mapVM) {
 
             var ColorRampVM = new function() {
 
@@ -165,6 +166,7 @@
                 };
 
                 self.loadInitializedMap = function(ramp, numBreaks) {
+                    // console.log(ramp,numBreaks);
                     self.Current = {
                         Ramp: ramp,
                         Breaks: numBreaks
@@ -199,6 +201,7 @@
                 @param {event} e - select event data
                 **/
                 self.schemeTypeSelected = function(e) {
+
                     self.showRamps();
                 };
 
@@ -239,7 +242,8 @@
                 **/
                 self.broadcastRampBreakOptions = function() {
                     var rampBreakOptions = [];
-                    var curr = self.schemeTypeSelector.dataItem();
+                    var index = self.schemeTypeSelector.selectedIndex;
+                    var curr = self.schemeTypeSelector.dataItem(index);
                     for (var num in curr.ClassBreakSets) {
                         if (num == parseInt(num)) {
                             rampBreakOptions.push(num);

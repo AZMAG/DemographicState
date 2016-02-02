@@ -23,9 +23,10 @@
             "app/vm/legend-vm",
             "app/models/map-model",
             "app/vm/cbr-vm",
-			"esri/tasks/LegendLayer"
+            "esri/tasks/LegendLayer"
         ],
         function(dj, dc, tp, PrintTask, PrintTemplate, PrintParameters, esriRequest, esriConfig, arrayUtils, helpView, helpVM, view, legendVM, mapModel, cbrVm, LegendLayer) {
+
             var printVM = new function() {
 
                 var self = this;
@@ -78,35 +79,15 @@
                             "f": "json"
                         }
                     });
+
                     printInfo.then(self.handlePrintInfo, self.handleError);
 
                 }; //end init
-				
-                /**
-                Method for opening the window.
 
-                @method openWindow
-                **/
-                self.openWindow = function() {
-                    // set the title to the currently selected map
-                    var thematicMap = cbrVm.toc.dataItem(cbrVm.toc.select());
-                    $("#mapTitle").val(thematicMap.Name);
-
-                    // show the window
-                    var win = $("#printWindow").data("kendoWindow");
-                    win.restore();
-                    win.center();
-                    win.open();
-                };
-
-                self.closeWindow = function() {
-                    var win = $("#printWindow").data("kendoWindow");
-                    win.close();
-                };
-				
                 // get print templates from the export web map task
                 self.handlePrintInfo = function(resp) {
-                    var layoutTemplate, templateNames, mapOnlyIndex, templates;
+
+                    var layoutTemplate, templateNames, mapOnlyIndex, templates, formatChoices;
 
                     // get the list templates, remove the MAP_ONLY template, and populate the drop-down
                     layoutTemplate = arrayUtils.filter(resp.parameters, function(param, idx) {
@@ -117,11 +98,16 @@
                         console.log("print service parameters name for templates must be \"Layout_Template\"");
                         return;
                     }
+
                     templateNames = layoutTemplate[0].choiceList;
                     mapOnlyIndex = arrayUtils.indexOf(templateNames, "MAP_ONLY");
                     templateNames.splice(mapOnlyIndex, 1);
                     $("#scottMapLayouts").kendoDropDownList({
                         dataSource: templateNames
+                    }).data("kendoDropDownList");
+
+                    $("#mapFormat").kendoDropDownList({
+                        dataSource: ["PDF", "JPG"]
                     }).data("kendoDropDownList");
                 };
 
@@ -137,14 +123,18 @@
                     var titleText = $("#mapTitle").val();
                     var notesText = $("#mapNotes").val();
                     var selectedLayout = $("#scottMapLayouts").val();
+                    var selectedFormat = $("#mapFormat").val();
 
                     // get info about the current thematic layer
                     var thematicMap = cbrVm.toc.dataItem(cbrVm.toc.select());
+                    //alert(thematicMap.Name);
+                    //alert(cbrVm.Hello);
+                    //var dataItem = self.toc.dataItem(self.toc.select());
 
                     // set up the print template
                     var printTemplate = new PrintTemplate();
                     printTemplate.layout = selectedLayout;
-                    printTemplate.format = "PDF";
+                    printTemplate.format = selectedFormat;
 
                     // these refer to named text elements in the mxd, sb
                     var customLayoutElements = [{
@@ -217,12 +207,13 @@
                     var thematicMap = cbrVm.toc.dataItem(cbrVm.toc.select());
                     $("#mapTitle").val(thematicMap.Name);
 
-                    if ($('#map2').is(":visible")) {
+                    if ($("#map2").is(":visible")) {
                         $("#printLabel").show();
                     }
                     else {
                         $("#printLabel").hide();
                     }
+
 
                     // show the window
                     var win = $("#printWindow").data("kendoWindow");
@@ -262,10 +253,10 @@
 
                 if (ioArgs.url.indexOf("submit") > -1) {
 
-                    //Store webmapAsJson request in the variable                   
+                    //Store webmapAsJson request in the variable
                     var jsontxt = ioArgs.content.Web_Map_as_JSON;
 
-                    //Create a Json object          
+                    //Create a Json object
                     var tempObj = JSON.parse(jsontxt);
 
                     tempObj.operationalLayers[1].layers[0].name = "";

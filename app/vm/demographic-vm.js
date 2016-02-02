@@ -694,11 +694,11 @@
                         mapModel.addGraphics(features, undefined, true);
 
 
-                        if (($('#demInteractiveDiv').is(":visible") == false) || $('#zoomSelection').prop('checked')) {
-                        // Zoom to selected graphics. vw
-                        var zoomExtent = graphicsUtils.graphicsExtent(features);
-                        mapModel.setMapExtent(zoomExtent);
-                        };
+                        if (($("#demInteractiveDiv").is(":visible") == false) || $("#zoomSelection").prop("checked")) {
+                            // Zoom to selected graphics. vw
+                            var zoomExtent = graphicsUtils.graphicsExtent(features);
+                            mapModel.setMapExtent(zoomExtent);
+                        }
                     }
 
                     var tabStrip = $("#demTabStrip").data("kendoTabStrip");
@@ -1329,7 +1329,8 @@
                             name: self.groupedItems[0].chartName,
                             type: self.groupedItems[0].chartType,
                             field: "fieldValue",
-                            categoryField: "fieldAlias"
+                            categoryField: "fieldAlias",
+                            padding: 75
                         }],
                         seriesDefaults: {
                             labels: {

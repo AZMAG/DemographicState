@@ -9,10 +9,12 @@
 
     define([
             "app/models/map-model",
-            "esri/tasks/PrintTask"
+            "esri/tasks/PrintTask",
+            "esri/tasks/PrintTemplate",
+            "esri/tasks/PrintParameters"
         ],
 
-        function(mapModel) {
+        function(mapModel, PrintTask, PrintTemplate, PrintParameters) {
 
             var PrintMapDelegate = {
 
@@ -34,7 +36,7 @@
                     height = (typeof height === "undefined") ? mapModel.mapInstance.height : height;
                     dpi = (typeof dpi === "undefined") ? 96 : dpi;
 
-                    var template = new esri.tasks.PrintTemplate();
+                    var template = new PrintTemplate();
                     template.exportOptions = {
                         width: width,
                         height: height,
@@ -44,11 +46,11 @@
                     template.layout = "MAP_ONLY";
                     template.preserveScale = true;
 
-                    var params = new esri.tasks.PrintParameters();
+                    var params = new PrintParameters();
                     params.map = mapModel.getMap();
                     params.template = template;
 
-                    var pt = new esri.tasks.PrintTask(url);
+                    var pt = new PrintTask(url);
                     pt.async = true; // added by scott
                     var result = pt.execute(params, callback, errback);
                 }
