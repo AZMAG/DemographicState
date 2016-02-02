@@ -10,7 +10,7 @@ define([
         "app/vm/mapContainer-vm",
         "app/vm/panel-vm",
         "app/vm/help-vm",
-		"app/vm/markupTools-vm",
+        "app/vm/markupTools-vm",
         "app/vm/markupToolsLaunchbar-vm",
         "app/vm/helpLaunchbar-vm",
         "app/vm/printLaunchbar-vm",
@@ -38,7 +38,7 @@ define([
         mapContainerVM,
         panelVM,
         helpVM,
-		markupToolsVM,
+        markupToolsVM,
         markupToolsBarVM,
         helpLaunchVM,
         printLaunchVM,
@@ -78,8 +78,8 @@ define([
 
         legendVM.init();
         kendo.bind($("#legendDiv"), legendVM);
-		
-		markupToolsVM.init("display", "after");
+
+        markupToolsVM.init("display", "after");
 
         printVM.init();
         kendo.bind($("#printWindow"), printVM);
@@ -112,8 +112,8 @@ define([
 
         panelBarVM.init("titlebar", "after");
         kendo.bind($("#rplaunchbar"), panelBarVM);
-		
-		markupToolsBarVM.init("titlebar", "after");
+
+        markupToolsBarVM.init("titlebar", "after");
         kendo.bind($("#mtlaunchbar"), markupToolsBarVM);
 
         printLaunchVM.init("titlebar", "after");

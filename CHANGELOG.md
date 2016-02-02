@@ -4,7 +4,13 @@ CHANGELOG for State Demographics Map Viewer
 
 ### Version x.x.x (xx/xx/2015)
 
-### Version 3.0.0 (1/28/2016)
+### Version 2.1.1 (02/02/2016)
+
+* updates to node_modules
+* linted js files
+* updated grunt files
+
+### Version 2.1.0 (01/28/2016)
 
 * added legend items for each layer
 * fixed issue with chart labels being cut off in reports.  Simply made radius of pie charts smaller.

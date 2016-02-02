@@ -215,7 +215,7 @@
                     });
 
                     var layersTOC = [];
-                    
+
                     for (var i = 0; i < appConfig.layerInfo.length; i++) {
                         var info = appConfig.layerInfo[i];
                         if (info.showTOC !== false) {
@@ -246,7 +246,7 @@
                     //$(".layerOptionCbx").click(self.onCheckBoxClick);
 
                     $( "#dataTable tbody tr" ).on( "click", function() {
-                      console.log( $( this ).text() );
+                      // console.log( $( this ).text() );
                     });
 
                     legendHTML = legendHTML.replace(/{value}/gi, self.mapID).replace(/{mapElementsClass}/gi, self.mapElementsClass);
@@ -300,7 +300,7 @@
                     $(".layerOptionCbx").unbind("click").click(self.onCBoxClick);
 
                     markupToolsVM.initializeGraphics(self.mapID);
-                    
+
 
                 }; //end mapLoaded
 
@@ -318,7 +318,7 @@
                                 title: self.mapTheme().ShortName
                             }]);
                         } catch (e) {
-                            console.log(e);
+                            // console.log(e);
                         }
                         var lyr = self.map.getLayer(self.mapTheme().Service);
                         if (lyr) {
