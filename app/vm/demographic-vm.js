@@ -1555,8 +1555,8 @@
                             }
 
                             localStorage.TractID = tractIdArray;
-                            self.reportURL = encodeURI(demographicConfig.exportPDFReportUrl + "?interactive");
-                            var newWindow = window.open(self.reportURL, "_self");
+                            self.reportURL = encodeURI(demographicConfig.exportPDFReportUrl + "?stateInteractive");
+                            var newWindow = window.open(self.reportURL, "_new");
                         } else {
                             self.reportURL = encodeURI(demographicConfig.exportPDFReportUrl + "?state=" + self.communityName);
                             var newWindow = window.open(self.reportURL, "_new");
