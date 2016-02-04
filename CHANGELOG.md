@@ -2,7 +2,14 @@ CHANGELOG for State Demographics Map Viewer
 ===========================================
 `Major/Minor/Patch 0.0.0`
 
+### Version x.x.x (xx/xx/2016)
+
 ### Version x.x.x (xx/xx/2015)
+
+* fixed bug to ensure multiple map frame layers stay in sync
+* ensure Reports open in new tab
+* fix bug in search that was preventing jurisdiction search to work
+* fixed count of selected block groups
 
 ### Version 2.1.1 (02/02/2016)
 

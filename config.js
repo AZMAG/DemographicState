@@ -42,11 +42,11 @@ var appConfig = new function() {
 
     // Search Service URLs
     this.geoCoderService = "//geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer";
-    this.countyService = "http://geo.azmag.gov/gismag/rest/services/maps/StateDemographicMain2/MapServer/4";
-    this.placeService = "http://geo.azmag.gov/gismag/rest/services/maps/StateDemographicMain2/MapServer/1";
-    this.legislativeService = "http://geo.azmag.gov/gismag/rest/services/maps/StateDemographicMain2/MapServer/2";
-    this.congressionalService = "http://geo.azmag.gov/gismag/rest/services/maps/StateDemographicMain2/MapServer/3";
-    this.tractService = "http://geo.azmag.gov/gismag/rest/services/maps/StateDemographicMain2/MapServer/7";
+    this.countyService = "http://geo.azmag.gov/gismag/rest/services/maps/StateDemographicMain/MapServer/4";
+    this.placeService = "http://geo.azmag.gov/gismag/rest/services/maps/StateDemographicMain/MapServer/1";
+    this.legislativeService = "http://geo.azmag.gov/gismag/rest/services/maps/StateDemographicMain/MapServer/2";
+    this.congressionalService = "http://geo.azmag.gov/gismag/rest/services/maps/StateDemographicMain/MapServer/3";
+    this.tractService = "http://geo.azmag.gov/gismag/rest/services/maps/StateDemographicMain/MapServer/8";
 
     this.jasonemail = "https://www.azmag.gov/EmailPages/JasonHoward.asp";
 
@@ -55,8 +55,8 @@ var appConfig = new function() {
         id: "censusTracts",
         title: "Census Tract Labels",
         type: "dynamic",
-        url: "http://geo.azmag.gov/gismag/rest/services/maps/StateDemographicMain2/MapServer",
-        queryUrl: "http://geo.azmag.gov/gismag/rest/services/maps/StateDemographicMain2/MapServer/8",
+        url: "http://geo.azmag.gov/gismag/rest/services/maps/StateDemographicMain/MapServer",
+        queryUrl: "http://geo.azmag.gov/gismag/rest/services/maps/StateDemographicMain/MapServer/8",
         queryWhere: "1=1",
         layers: [7, 8],
         opacity: 1,
@@ -67,8 +67,8 @@ var appConfig = new function() {
         id: "countyBoundaries",
         title: "County Boundaries",
         type: "dynamic",
-        url: "http://geo.azmag.gov/gismag/rest/services/maps/StateDemographicMain2/MapServer",
-        queryUrl: "http://geo.azmag.gov/gismag/rest/services/maps/StateDemographicMain2/MapServer/4",
+        url: "http://geo.azmag.gov/gismag/rest/services/maps/StateDemographicMain/MapServer",
+        queryUrl: "http://geo.azmag.gov/gismag/rest/services/maps/StateDemographicMain/MapServer/4",
         queryWhere: "1=1",
         layers: [4],
         opacity: 0.8,
@@ -79,8 +79,8 @@ var appConfig = new function() {
         id: "congressionalDistricts",
         title: "Congressional Districts",
         type: "feature",
-        url: "http://geo.azmag.gov/gismag/rest/services/maps/StateDemographicMain2/MapServer/6",
-        queryUrl: "http://geo.azmag.gov/gismag/rest/services/maps/StateDemographicMain2/MapServer/6",
+        url: "http://geo.azmag.gov/gismag/rest/services/maps/StateDemographicMain/MapServer/6",
+        queryUrl: "http://geo.azmag.gov/gismag/rest/services/maps/StateDemographicMain/MapServer/3",
         queryWhere: "1=1",
         layers: [6],
         opacity: 1,
@@ -94,8 +94,8 @@ var appConfig = new function() {
         id: "legislativeDistricts",
         title: "Legislative Districts",
         type: "feature",
-        url: "http://geo.azmag.gov/gismag/rest/services/maps/StateDemographicMain2/MapServer/5",
-        queryUrl: "http://geo.azmag.gov/gismag/rest/services/maps/StateDemographicMain2/MapServer/5",
+        url: "http://geo.azmag.gov/gismag/rest/services/maps/StateDemographicMain/MapServer/5",
+        queryUrl: "http://geo.azmag.gov/gismag/rest/services/maps/StateDemographicMain/MapServer/2",
         queryWhere: "1=1",
         layers: [5],
         opacity: 1,
@@ -117,7 +117,7 @@ var appConfig = new function() {
         id: "Census2010byBlockGroup",
         title: "Census by Block Group, 2010",
         type: "dynamic",
-        url: "http://geo.azmag.gov/gismag/rest/services/maps/StateDemographicMain2/MapServer",
+        url: "http://geo.azmag.gov/gismag/rest/services/maps/StateDemographicMain/MapServer",
         layers: [0],
         opacity: 0.8,
         visible: true,
