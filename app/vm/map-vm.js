@@ -223,30 +223,57 @@
                         }
                     }
 
+                    for (var value = 0; value < 6; value++) {
+                        if (mapModel.baseMapInstance._layers[layersTOC[value].id].visible) {
+                            layersTOC[value].checked = "checked";
+                            self.map.getLayer(layersTOC[value].id).show();
+                        } else {
+                            layersTOC[value].checked = "";
+                            self.map.getLayer(layersTOC[value].id).hide();
+                        }
+                    }
+
+                    var mapOptionCboxes = $(".layerOptionCbx");
+                    $.each(mapOptionCboxes, function(index, cbox) {
+                        var mapName = $(cbox).attr("map");
+                        if (mapName === "map1") {
+                            for (var i = 0; i < layersTOC.length; i++) {
+                                var layer = layersTOC[i];
+                                if (layer.id === cbox.value) {
+                                    if (layer.checked === "checked") {
+                                        $(cbox).attr("checked", true);
+                                    } else {
+                                        $(cbox).attr("checked", false);
+                                    }
+                                }
+                            }
+                        }
+                    });
+
                     //add legend panel
                     var legendHTML =
-                    "<div id='legendPanel_{value}' class='mapFrameLegendPanel {mapElementsClass}'>" +
-                    "<ul id='legendPanelBar_{value}'><li>Legend<div id='censusDiv_{value}'>" +
-                    "<div id='legendTitle_{value}' class='legendTitle'></div><p class='sliderInfo'>Transparency Slider</p>" +
-                    "<div id='sliderDiv_{value}' class='legendSliderDiv'><input id='slider_{value}' class='balSlider'/></div>" +
-                    "<div id='legendDiv_{value}'></div>" +
-                    "<div class='legal'>Data Source:&nbsp;<span id='dataSource_{value}'></span></div></div></li>" +
-                    "<li>Map Layers" +
-                    "<ul id='layerOptionPanelBar_{value}'>" +
-                    "<li class='panelBarLi'><input class='layerOptionCbx' value=" +layersTOC[0].id +" id='" + self.mapID + "chk1' type='checkbox'><label class='mapLayerLabel' for='" + self.mapID + "chk1'>" + layersTOC[0].title + "</label></li>" +
-                    "<li class='panelBarLi'><input checked='checked' class='layerOptionCbx' value=" +layersTOC[1].id +" id='" + self.mapID + "chk2' type='checkbox'><label class='mapLayerLabel' for='" + self.mapID + "chk2'>" + layersTOC[1].title + "</label></li>" +
-                    "<li class='panelBarLi'><input class='layerOptionCbx' value=" +layersTOC[2].id +" id='" + self.mapID + "chk3' type='checkbox'><label class='mapLayerLabel' for='" + self.mapID + "chk3'>" + layersTOC[2].title + "</label></li>" +
-                    "<li class='panelBarLi'><input class='layerOptionCbx' value=" +layersTOC[3].id +" id='" + self.mapID + "chk4' type='checkbox'><label class='mapLayerLabel' for='" + self.mapID + "chk4'>" + layersTOC[3].title + "</label></li>" +
-                    "<li class='panelBarLi'><input checked='checked' class='layerOptionCbx' value=" +layersTOC[4].id +" id='" + self.mapID + "chk5' type='checkbox'><label class='mapLayerLabel' for='" + self.mapID + "chk5'>" + layersTOC[4].title + "</label></li>" +
-                    "<li class='panelBarLi'><input class='layerOptionCbx' value=" +layersTOC[5].id +" id='" + self.mapID + "chk6' type='checkbox'><label class='mapLayerLabel' for='" + self.mapID + "chk6'>" + layersTOC[5].title + "</label></li>" +
-                    "</ul>" +
-                    "</li></ul></div>";
+                        "<div id='legendPanel_{value}' class='mapFrameLegendPanel {mapElementsClass}'>" +
+                        "<ul id='legendPanelBar_{value}'><li>Legend<div id='censusDiv_{value}'>" +
+                        "<div id='legendTitle_{value}' class='legendTitle'></div><p class='sliderInfo'>Transparency Slider</p>" +
+                        "<div id='sliderDiv_{value}' class='legendSliderDiv'><input id='slider_{value}' class='balSlider'/></div>" +
+                        "<div id='legendDiv_{value}'></div>" +
+                        "<div class='legal'>Data Source:&nbsp;<span id='dataSource_{value}'></span></div></div></li>" +
+                        "<li>Map Layers" +
+                        "<ul id='layerOptionPanelBar_{value}'>" +
+                        "<li class='panelBarLi'><input " + layersTOC[0].checked + " class='layerOptionCbx' map='" + self.mapID + "' value=" + layersTOC[0].id + " id='" + self.mapID + "chk1' type='checkbox'><label class='mapLayerLabel' for='" + self.mapID + "chk1'>" + layersTOC[0].title + "</label></li>" +
+                        "<li class='panelBarLi'><input " + layersTOC[1].checked + " class='layerOptionCbx' map='" + self.mapID + "' value=" + layersTOC[1].id + " id='" + self.mapID + "chk2' type='checkbox'><label class='mapLayerLabel' for='" + self.mapID + "chk2'>" + layersTOC[1].title + "</label></li>" +
+                        "<li class='panelBarLi'><input " + layersTOC[2].checked + " class='layerOptionCbx' map='" + self.mapID + "' value=" + layersTOC[2].id + " id='" + self.mapID + "chk3' type='checkbox'><label class='mapLayerLabel' for='" + self.mapID + "chk3'>" + layersTOC[2].title + "</label></li>" +
+                        "<li class='panelBarLi'><input " + layersTOC[3].checked + " class='layerOptionCbx' map='" + self.mapID + "' value=" + layersTOC[3].id + " id='" + self.mapID + "chk4' type='checkbox'><label class='mapLayerLabel' for='" + self.mapID + "chk4'>" + layersTOC[3].title + "</label></li>" +
+                        "<li class='panelBarLi'><input " + layersTOC[4].checked + " class='layerOptionCbx' map='" + self.mapID + "' value=" + layersTOC[4].id + " id='" + self.mapID + "chk5' type='checkbox'><label class='mapLayerLabel' for='" + self.mapID + "chk5'>" + layersTOC[4].title + "</label></li>" +
+                        "<li class='panelBarLi'><input " + layersTOC[5].checked + " class='layerOptionCbx' map='" + self.mapID + "' value=" + layersTOC[5].id + " id='" + self.mapID + "chk6' type='checkbox'><label class='mapLayerLabel' for='" + self.mapID + "chk6'>" + layersTOC[5].title + "</label></li>" +
+                        "</ul>" +
+                        "</li></ul></div>";
 
 
                     //$(".layerOptionCbx").click(self.onCheckBoxClick);
 
-                    $( "#dataTable tbody tr" ).on( "click", function() {
-                      // console.log( $( this ).text() );
+                    $("#dataTable tbody tr").on("click", function() {
+                        console.log($(this).text());
                     });
 
                     legendHTML = legendHTML.replace(/{value}/gi, self.mapID).replace(/{mapElementsClass}/gi, self.mapElementsClass);
@@ -295,12 +322,11 @@
                         self.mapClicked(null);
                     });
 
-                    $(".layerOptionCbx").on( "click", self.onCBoxClick);
+                    $(".layerOptionCbx").on("click", self.onCBoxClick);
 
                     $(".layerOptionCbx").unbind("click").click(self.onCBoxClick);
 
                     markupToolsVM.initializeGraphics(self.mapID);
-
 
                 }; //end mapLoaded
 
@@ -499,17 +525,17 @@
                     var layerName = e.currentTarget.value;
                     var mapId = e.currentTarget.id.substring(3, 4) - 1;
                     var layer = mapModel.mapInstances[mapId].getLayer(layerName);
-                        if (layer.visible) {
-                            layer.hide();
-                        } else {
-                            layer.show();
-                        }
+                    if (layer.visible) {
+                        layer.hide();
+                    } else {
+                        layer.show();
+                    }
                     var baseLayer = mapModel.mapInstances[mapId].getLayer("esriBasemap");
-                        if (layer.id === "esriImagery" && layer.visible === true) {
-                            baseLayer.hide();
-                        } else {
-                            baseLayer.show();
-                        }
+                    if (layer.id === "esriImagery" && layer.visible === true) {
+                        baseLayer.hide();
+                    } else {
+                        baseLayer.show();
+                    }
                 };
 
                 /**

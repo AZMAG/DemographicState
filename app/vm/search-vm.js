@@ -75,9 +75,8 @@
 
                 self.UpdateMap = function(e) {
                     // console.log(e);
-                    if (e.result) {
+                    if (e.result.name) {
                         var communityName = e.result.name;
-                        // console.log(communityName);
                     }
                     var searchType = "";
 
@@ -86,10 +85,10 @@
                             searchType = "county";
                             break;
                         case 2:
-                            searchType = "place";
+                            searchType = "legislative";
                             break;
                         case 3:
-                            searchType = "legislative";
+                            searchType = "place";
                             break;
                         case 4:
                             searchType = "congressional";

@@ -121,8 +121,7 @@
 
                 self.featureFillSymbol = new SimpleFillSymbol(SimpleFillSymbol.STYLE_BACKWARD_DIAGONAL,
                     new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID,
-                        new Color([0, 255, 255]), 2), new Color([0, 255, 255, 0.25]));
-
+                    new Color([0, 255, 255]), 2), new Color([0, 255, 255, 0.25]));
             },
             // =====================================================================================================================================>
             // end initialize

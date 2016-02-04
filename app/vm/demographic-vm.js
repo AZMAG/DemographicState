@@ -1558,7 +1558,7 @@
                             self.reportURL = encodeURI(demographicConfig.exportPDFReportUrl + "?interactive");
                             var newWindow = window.open(self.reportURL, "_self");
                         } else {
-                            self.reportURL = encodeURI(demographicConfig.exportPDFReportUrl + "?city=" + self.communityName);
+                            self.reportURL = encodeURI(demographicConfig.exportPDFReportUrl + "?state=" + self.communityName);
                             var newWindow = window.open(self.reportURL, "_new");
                         }
                     }

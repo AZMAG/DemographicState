@@ -91,9 +91,9 @@ var queryCountGlobal;
                     query.returnDistinctValues = distinct;
 
                     // added to count features. vw
-                    // qt.executeForCount(query, function(count) {
-                    //     queryCountGlobal = count;
-                    // });
+                    qt.executeForCount(query, function(count) {
+                        queryCountGlobal = count;
+                    });
 
                     //Execute query and return results to callback function
                     qt.execute(query, callback, errback);
