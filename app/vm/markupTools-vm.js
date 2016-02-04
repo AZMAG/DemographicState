@@ -1,3 +1,9 @@
+/**
+ * Markup Tools Window
+ *
+ * @class markupTools-vm
+ */
+
 (function() {
 
     "use strict";
