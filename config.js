@@ -33,30 +33,34 @@
 
 var appConfig = new function() {
 
-    this.Version = "v2.1.3 | 02/04/2016";
+    this.Version = "v2.1.4 | 02/10/2016";
+
+    this.jasonemail = "https://www.azmag.gov/EmailPages/JasonHoward.asp";
 
     this.ArcGISInstanceURL = "http://geo.azmag.gov/gismag/rest";
     //this.exportWebMapUrl = "http://geo.azmag.gov/gismag/rest/services/Utilities/PrintingTools/GPServer/Export%20Web%20Map%20Task";  // Generic Print Service
     this.exportWebMapUrl = "http://geo.azmag.gov/gismag/rest/services/gp/stateDemo/GPServer/Export%20Web%20Map"; // Custom Print Service
     this.webServicePasscode = "sun sand dry heat grand canyon";
 
+    this.mainURL = "http://geo.azmag.gov/gismag/rest/services/maps/DemographicState2013/MapServer";
+
     // Search Service URLs
     this.geoCoderService = "//geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer";
-    this.countyService = "http://geo.azmag.gov/gismag/rest/services/maps/StateDemographicMain/MapServer/4";
-    this.placeService = "http://geo.azmag.gov/gismag/rest/services/maps/StateDemographicMain/MapServer/1";
-    this.legislativeService = "http://geo.azmag.gov/gismag/rest/services/maps/StateDemographicMain/MapServer/2";
-    this.congressionalService = "http://geo.azmag.gov/gismag/rest/services/maps/StateDemographicMain/MapServer/3";
-    this.tractService = "http://geo.azmag.gov/gismag/rest/services/maps/StateDemographicMain/MapServer/8";
+    this.countyService = this.mainURL + "/4";
+    this.placeService = this.mainURL + "/1";
+    this.legislativeService = this.mainURL + "/2";
+    this.congressionalService = this.mainURL + "/3";
+    this.tractService = this.mainURL + "/8";
 
-    this.jasonemail = "https://www.azmag.gov/EmailPages/JasonHoward.asp";
+
 
     this.layerInfo = [{
         layerNum: 0,
         id: "censusTracts",
         title: "Census Tract Labels",
         type: "dynamic",
-        url: "http://geo.azmag.gov/gismag/rest/services/maps/StateDemographicMain/MapServer",
-        queryUrl: "http://geo.azmag.gov/gismag/rest/services/maps/StateDemographicMain/MapServer/8",
+        url: this.mainURL,
+        queryUrl: this.mainURL + "/8",
         queryWhere: "1=1",
         layers: [7, 8],
         opacity: 1,
@@ -67,8 +71,8 @@ var appConfig = new function() {
         id: "countyBoundaries",
         title: "County Boundaries",
         type: "dynamic",
-        url: "http://geo.azmag.gov/gismag/rest/services/maps/StateDemographicMain/MapServer",
-        queryUrl: "http://geo.azmag.gov/gismag/rest/services/maps/StateDemographicMain/MapServer/4",
+        url: this.mainURL,
+        queryUrl: this.mainURL + "/4",
         queryWhere: "1=1",
         layers: [4],
         opacity: 0.8,
@@ -79,8 +83,8 @@ var appConfig = new function() {
         id: "congressionalDistricts",
         title: "Congressional Districts",
         type: "feature",
-        url: "http://geo.azmag.gov/gismag/rest/services/maps/StateDemographicMain/MapServer/6",
-        queryUrl: "http://geo.azmag.gov/gismag/rest/services/maps/StateDemographicMain/MapServer/3",
+        url: this.mainURL + "/6",
+        queryUrl: this.mainURL + "/3",
         queryWhere: "1=1",
         layers: [6],
         opacity: 1,
@@ -94,8 +98,8 @@ var appConfig = new function() {
         id: "legislativeDistricts",
         title: "Legislative Districts",
         type: "feature",
-        url: "http://geo.azmag.gov/gismag/rest/services/maps/StateDemographicMain/MapServer/5",
-        queryUrl: "http://geo.azmag.gov/gismag/rest/services/maps/StateDemographicMain/MapServer/2",
+        url: this.mainURL + "/5",
+        queryUrl: this.mainURL + "/2",
         queryWhere: "1=1",
         layers: [5],
         opacity: 1,
@@ -117,7 +121,7 @@ var appConfig = new function() {
         id: "Census2010byBlockGroup",
         title: "Census by Block Group, 2010",
         type: "dynamic",
-        url: "http://geo.azmag.gov/gismag/rest/services/maps/StateDemographicMain/MapServer",
+        url: this.mainURL,
         layers: [0],
         opacity: 0.8,
         visible: true,
@@ -177,7 +181,7 @@ var appConfig = new function() {
                                     { id: 3, text: "Arrow", DisplayText: "Arrow", Type: "ARROW", imageUrl: "app/resources/img/i_draw_arrow.png"},
                                     { id: 4, text: "Freehand", DisplayText: "Freehand", Type: "FREEHAND_POLYGON", imageUrl: "app/resources/img/i_draw_freepoly.png"},
                                     { id: 5, text: "Text", DisplayText: "Text Box", Type: "POINT", imageUrl: "app/resources/img/i_draw_text.png"}];
-    
+
         // Specify the Markup Tool's Fill and Outline Kendo Color Pallettes.
         this.fillColorPalette = ["rgba(163, 73, 164, .50)", "rgba(63, 72, 204, .5)", "rgba(0, 162, 232, 0.50)",
                                 "rgba(34, 177, 76, 0.50)", "rgba(255, 242, 0, 0.50)", "rgba(255, 127, 39, 0.50)",

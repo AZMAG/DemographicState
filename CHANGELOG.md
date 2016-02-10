@@ -4,6 +4,12 @@ CHANGELOG for State Demographics Map Viewer
 
 ### Version x.x.x (xx/xx/2016)
 
+
+
+### Version 2.1.4 (02/10/2016)
+
+* updated service URL
+
 ### Version 2.1.3 (02/04/2016)
 
 * fixed bug in PDF reports

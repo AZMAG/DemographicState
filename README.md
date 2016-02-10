@@ -12,7 +12,7 @@ This web app viewer was developed by MAG staff for MAG member agencies and the p
 
 #### Version
 
-#### `v2.1.3 - 02/04/2016`
+#### `v2.1.4 - 02/10/2016`
 
 ### Credits
 
