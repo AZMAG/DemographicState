@@ -4,15 +4,17 @@ MAG State Demographics Map Viewer
 [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
 [![Semver](http://img.shields.io/SemVer/2.0.0.png)](http://semver.org/spec/v2.0.0.html)
 
-The State Demographic Map Viewer is one of the Maricopa Association of Governments interactive mapping and analysis sites, showing selected population and housing data.  The viewer allows you to graphically view selected population and housing data for all Census block groups for the State of Arizona.  The viewer provides interactive mapping and reporting tools to allow exploration of data from Census 2010 and the American Community Survey (ACS) 2008-2012.
+The State Demographic Map Viewer is one of the Maricopa Association of Governments interactive mapping and analysis sites, showing selected population and housing data.  The viewer allows you to graphically view selected population and housing data for all Census block groups for the State of Arizona.  The viewer provides interactive mapping and reporting tools to allow exploration of data from Census 2010 and the American Community Survey (ACS) 2009-2013.
 
-Use this site to explore Explore data from Census 2010 and American Community Survey (ACS) 2008-2012.
+Use this site to explore Explore data from Census 2010 and American Community Survey (ACS) 2009-2013.
 
 This web app viewer was developed by MAG staff for MAG member agencies and the public using ESRI's JavaScript API.
 
 #### Version
 
-#### `v2.1.4 - 02/10/2016`
+`Major/Minor/Patch 0.0.0`
+
+#### `v2.1.5 - 03/01/2016`
 
 ### Credits
 
