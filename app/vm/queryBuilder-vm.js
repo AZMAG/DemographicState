@@ -75,7 +75,7 @@
 
                 self.dataItemSelected = null;
 
-                self.layerUrl = "http://geo.azmag.gov/gismag/rest/services/maps/StateDemographicMain/MapServer/" + 0;
+                self.layerUrl = appConfig.mainURL + "/0"
 
                 /**
                  * This id value should match up with the unique id binding handlers.

@@ -4,7 +4,9 @@ CHANGELOG for State Demographics Map Viewer
 
 ### Version x.x.x (xx/xx/2016)
 
+### Version 2.1.5 (03/1/2016)
 
+* fixed service url for advanced query
 
 ### Version 2.1.4 (02/10/2016)
 
