@@ -4,6 +4,10 @@ CHANGELOG for State Demographics Map Viewer
 
 ### Version x.x.x (xx/xx/2016)
 
+### Version 2.1.6 (03/28/2016)
+
+* Converted Excel reports to client side kendo exporting.
+
 ### Version 2.1.5 (03/1/2016)
 
 * fixed service url for advanced query

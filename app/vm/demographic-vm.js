@@ -194,11 +194,6 @@
                  */
                 self.compareFeature = null;
 
-                // used for reporting export progress. scott
-                self.progressInterval = null;
-                self.progressDots = null;
-                self.progressText = null;
-
                 // used to size window for mobile. vw
                 self.winWidth = document.documentElement.clientWidth;
                 self.winHeight = document.documentElement.clientHeight;
@@ -579,7 +574,7 @@
                     });
 
                     // Bind the export button
-                    $("#demExportSelFeatResults").bind("click", self.exportSelectedFeatures);
+                    $("#demExportSelFeatResults").bind("click", self.exportToExcel);
 
                     // Reload the chart to update to current data
                     var tab = tabStrip.select();
@@ -682,9 +677,6 @@
                     // console.log(features);
                     var featuresCount = features.length;
                     //var feature = features[0];  // There should only be one feature returned from query
-
-                    // scott change set report output back to default and remove selected features if necessary
-                    self.setReportExportBackToDefault();
 
                     // Clear the current graphics
                     mapModel.clearGraphics();
@@ -1424,90 +1416,108 @@
                 };
 
                 /**
-                 * Get the ObjectIDs of the Selected Block Groups and send the Ajax export request to the web service.
+                 * Exports the kendo grid to excel.  See (http://demos.telerik.com/kendo-ui/grid/excel-export) for more info
                  *
-                 * @method exportSelectedFeatures
+                 * @method exportToExcel
                  */
-                self.exportSelectedFeatures = function() {
-                    var kendoDropDownList = $("#demExportSelectedFeatures").data("kendoDropDownList");
-                    var type = kendoDropDownList.value();
+                self.exportToExcel = function(sender) {
+                    var exportButtonId = sender.currentTarget.id;
+                    var grid;
+                    var fileName;
+                    var headerValue = self.communityName;
+                    var colSpan;
+                    var rowSpan;
 
-                    // Create array of ObjectIDs
-                    var objectIds = [];
-                    $.each(self.selectedFeatures, function(index, feature) {
-                        objectIds.push(feature.attributes.OBJECTID);
-                    });
-
-                    // jQuery Ajax call to web service
-                    var jqXHR = $.ajax(demographicConfig.exportSelectedFeaturesUrl, {
-                        type: "POST",
-                        data: JSON.stringify({
-                            passcode: appConfig.webServicePasscode,
-                            type: type,
-                            objectids: objectIds
-                        }),
-                        contentType: "application/json; charset=utf-8",
-                        error: function(jqXHR, status) {
-                            alert("Export failed with status: " + status);
-                        },
-                        success: function(data, status, jqXHR) {
-                            var err = data["Error"];
-                            if (err) {
-                                alert("Export returned an error: " + err);
-                            } else {
-                                var link = data["Result"];
-                                //window.open(link, "Summary Export");
-                                self.downloadURL(link);
-                            }
+                    if (exportButtonId === "demExportResults")
+                    {
+                        //Summary report export button clicked
+                        grid = $("#demDataGrid").data("kendoGrid");
+                        headerValue = self.communityName + " Demographics";
+                        fileName = self.communityName + ".xlsx";
+                        if(self.compareFeature === null){
+                            colSpan = 4;
+                            rowSpan = 25; 
                         }
-                    });
-                };
-
-                /**
-                 * Send Ajax export request to the web service for Summary Report.
-                 *
-                 * @method exportSummary
-                 */
-                self.exportSummary = function() {
-                    var kendoDropDownList = $("#demExportSummary").data("kendoDropDownList");
-                    var type = kendoDropDownList.value();
-                    var useCompare = dom.byId("demUseComp").checked;
-
-                    var communities = [self.communityName];
-                    if (useCompare) {
-                        communities.push(self.compareToName);
+                        else{
+                            colSpan = 6;
+                            rowSpan = 20;
+                        }
                     }
-                    // console.log("test");
-                    // Execute call to service
-                    var jqXHR = $.ajax(demographicConfig.exportSummaryGridUrl, {
+                    else if (exportButtonId === "demExportSelFeatResults")
+                    {
+                        //Block group export clicked
+                        grid = $("#demFeatGrid").data("kendoGrid");
+                        headerValue = "Selected Block Groups";
+                        fileName = self.communityName + ".xlsx";
+                        colSpan = 51;
+                        rowSpan = 4;
+                    }
+                    grid.bind("excelExport", function(e) {
+                            var rows = e.workbook.sheets[0].rows;
+                            var columns = e.workbook.sheets[0].columns;
+                            columns[1].width = 290;
+                            console.log(columns);
 
-                        type: "POST",
-                        //datatype: "jsonp",
-                        //crossDomain:true,
-                        //headers: {"Access-Control-Allow-Origin": "*"},
-                        //beforeSend: function(xhr){xhr.setRequestHeader('Access-Control-Allow-Origin', 'http:\\geo.azmag.gov');},
+                            $.each(rows, function(index, row) {
+                                if(row.type === "group-header")
+                                {
+                                    row.cells[0].value = row.cells[0].value.substring(37);
+                                }
+                            });
 
-                        data: JSON.stringify({
-                            passcode: appConfig.webServicePasscode,
-                            source: self.reportConfigItem.source,
-                            communities: communities,
-                            aggValues: self.aggValuesArray
-                        }),
-                        contentType: "application/json; charset=utf-8",
-                        error: function(jqXHR, status) {
-                            alert("Export failed with status: " + status);
-                        },
-                        success: function(data, status, jqXHR) {
-                            var err = data["Error"];
-                            if (err) {
-                                alert("Export returned an error: " + err);
-                            } else {
-                                var link = data["Result"];
-                                //window.open(link, "Summary Export");
-                                self.downloadURL(link);
+                            e.workbook.sheets[0]["name"] = "Demographic Data";
+                            e.workbook.sheets[0]["frozenRows"] = 2;
+
+                            var headerRow = {
+                                cells: [{
+                                    background: "#000",
+                                    colSpan: colSpan,
+                                    color: "#fff",
+                                    rowSpan: 1,
+                                    fontSize: 14,
+                                    value: headerValue,
+                                    hAlign: "center"
+                                }],
+                                height: 30,
+                                headerRow: "added"
+                            };
+
+                            var sourceRow = {
+                                cells: [{
+                                    background: "#000",
+                                    colSpan: colSpan,
+                                    color: "#fff",
+                                    rowSpan: 1,
+                                    fontSize: 11,
+                                    value: appConfig.sourceLabel,
+                                    hAlign: "left",
+                                    wrap: true
+                                }]
+                            };
+
+                            var footerRow = {
+                                cells: [{
+                                    background: "#d3d3d3",
+                                    colSpan: colSpan,
+                                    color: "#000",
+                                    rowSpan: rowSpan,
+                                    fontSize: 8,
+                                    value: appConfig.legalDisclaimer,
+                                    hAlign: "center",
+                                    wrap: true
+                                }]
+                            };
+
+                            if (rows[0].headerRow !== "added") {
+                                //Add custom header row
+                                rows.unshift(headerRow);
+                                rows.push(sourceRow);
+                                rows.push(footerRow);
                             }
-                        }
-                    });
+
+                            e.workbook.fileName = fileName;
+                        });
+                        grid.saveAsExcel();
                 };
 
                 self.exportPDFReport = function() {
@@ -1565,42 +1575,6 @@
                 };
 
                 /**
-                 * Initiate report export by printing the existing map.
-                 * The rest of the export will be handled in the callback.
-                 *
-                 * @method exportReport
-                 */
-                self.exportReport = function() {
-                    // added by scott, hide print button and show progress
-                    $("#exportReportRequest").hide();
-                    self.progressInterval = setInterval(self.showProgressWithDots, 96);
-                    self.progressDots = 0;
-                    self.progressText = "Generating report";
-
-                    // Print the map first then finish in the handler
-                    printMapDelegate.printJpgMap(appConfig.exportWebMapUrl, self.printMapHandler, self.printMapError);
-                };
-
-                // added by scott, used to indicate progress
-                self.showProgressWithDots = function() {
-                    if (self.progressDots <= 4) {
-                        self.progressText += ".";
-                        self.progressDots++;
-                    } else {
-                        self.progressText = "Generating report";
-                        self.progressDots = 0;
-                    }
-                    $("#exportReportResponse").html(self.progressText);
-                };
-
-                // added by scott, used to take export view back to default
-                self.setReportExportBackToDefault = function() {
-                    clearInterval(self.progressInterval);
-                    $("#exportReportResponse").html("");
-                    $("#exportReportRequest").show();
-                };
-
-                /**
                  * Callback method for errors returned by the print export.
                  *
                  * @method printMapError
@@ -1610,172 +1584,6 @@
                     console.log(error.message);
                 };
 
-                /**
-                 * Callback method for results returned by the print export.
-                 *
-                 * @method printMapHandler
-                 * @param {Object} result - result object (url property contains the link to the print output).
-                 */
-                self.printMapHandler = function(result) {
-
-                    var useCompare = dom.byId("demUseComp").checked;
-
-                    // Set up the communities
-                    var communities = [self.communityName];
-                    if (useCompare) {
-                        communities.push(self.compareToName);
-                    }
-
-                    // Set up chart categories
-                    var chartCategories = [];
-                    $.each(self.chartCategories, function(index, item) {
-                        chartCategories.push(item.chartCategory);
-                    });
-
-                    // Get the charts
-                    var svgCharts = self.createReportChartsSvgArray();
-
-                    // Execute call to service
-                    var jqXHR = $.ajax(demographicConfig.exportReportUrl, {
-                        type: "POST",
-                        data: JSON.stringify({
-                            passcode: appConfig.webServicePasscode,
-                            mapImageUrl: result.url,
-                            source: self.reportConfigItem.source,
-                            communities: communities,
-                            aggValues: self.aggValuesArray,
-                            chartCategories: chartCategories,
-                            charts: svgCharts
-                        }),
-                        contentType: "application/json; charset=utf-8",
-                        error: function(jqXHR, status) {
-                            alert("Export failed with status: " + status);
-                        },
-                        success: function(data, status, jqXHR) {
-                            var err = data["Error"];
-                            if (err) {
-                                alert("Export returned an error: " + err);
-                            } else {
-                                var link = data["Result"];
-                                //window.open(link, "Demographic Report");
-                                //self.downloadURL(link);
-                                // updated by scott
-                                clearInterval(self.progressInterval);
-                                $("#exportReportResponse").html("<a class='link' target='_blank' href='" + link + "'>Report complete, click here to view</a>");
-                                $("#exportReportRequest").show();
-                            }
-                        }
-                    });
-                };
-
-                /**
-                 * Loop through chart categories rendering a chart for each category using the default theme.
-                 * Store the resulting SVG string for the chart in an array to pass to the web service.
-                 *
-                 * @method createReportChartsSvgArray
-                 * @returns {Array}
-                 */
-                self.createReportChartsSvgArray = function() {
-                    var svgCharts = [];
-
-                    $.each(self.aggValuesGroupedByChartCategory, function(index, groupedItem) {
-                        // Create the div element for the chart
-                        dc.create("div", {
-                            id: "demReportChartArea"
-                        }, "demChartArea", "after");
-                        var chartObj = $("#demReportChartArea");
-
-                        // Kendo-ize
-                        var chart = chartObj.kendoChart({
-                            dataSource: {
-                                data: groupedItem
-                            },
-                            theme: "Default",
-
-                            //add seriescolor here to change charts
-                            seriesColors: appConfig.seriesColors,
-
-                            legend: {
-                                visible: true,
-                                labels: {
-                                    color: "black"
-                                }
-                            },
-                            series: [{
-                                name: groupedItem[0].chartName,
-                                type: groupedItem[0].chartType,
-                                field: "fieldValue",
-                                categoryField: "fieldAlias"
-                            }],
-                            seriesDefaults: {
-                                labels: {
-                                    visible: true,
-                                    position: "outsideEnd",
-                                    background: "#FFFFFF",
-                                    format: "{0:n}",
-                                    color: "black",
-                                    //template: "#= category #"
-                                    template: "#= category # - #= kendo.format('{0:n0}', value) #"
-                                },
-                                tooltip: {
-                                    visible: false,
-                                    background: "#FFFFFF",
-                                    color: "black",
-                                    format: "{0:n0}"
-                                }
-                            },
-                            plotArea: {
-                                margin: {
-                                    right: 0,
-                                    left: 0,
-                                    top: 20
-                                }
-                            },
-                            chartArea: {
-                                background: "#FFFFFF",
-                                margin: {
-                                    right: 0,
-                                    top: 20
-                                }
-                            },
-                            categoryAxis: {
-                                field: "fieldAlias",
-                                color: "black",
-                                labels: {
-                                    visible: false,
-                                    rotation: 45
-
-                                },
-                                majorGridLines: {
-                                    visible: false
-                                },
-                                line: {
-                                    visible: false
-                                }
-                            },
-                            valueAxis: {
-                                color: "black",
-                                labels: {
-                                    template: "#= kendo.format('{0} K', value / 1000) #"
-                                }
-                            }
-                        }).data("kendoChart");
-
-                        // Set the height
-                        chartObj.css({
-                            width: 800,
-                            height: 600
-                        });
-                        chart.redraw();
-
-                        svgCharts.push(encodeURI(chart.svg()));
-
-                        chart.destroy();
-                        dc.destroy("demReportChartArea");
-                    });
-
-                    return svgCharts;
-                };
 
                 /**
                  * Create an iFrame, if it does not already exist, for downloading files.
