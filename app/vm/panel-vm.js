@@ -115,22 +115,22 @@
                     $("#congressionalChoiceDiv").hide();
 
                     // Load the county names
-                    var url1 = demographicConfig.reports.countySummary.restUrl;
+                    var url1 = demographicConfig.reports.countySummary.ACSRestUrl;
                     var whereClause1 = demographicConfig.reports.countySummary.whereClause;
                     layerDelegate.query(url1, self.countyQueryHandler, self.countyQueryFault, null, whereClause1, false);
                     qbVM.init("display", "after");
 
                     // Load the place names
-                    var url2 = demographicConfig.reports.placeSummary.restUrl;
+                    var url2 = demographicConfig.reports.placeSummary.ACSRestUrl;
                     var whereClause2 = demographicConfig.reports.placeSummary.whereClause;
                     layerDelegate.query(url2, self.placeQueryHandler, self.placeQueryFault, null, whereClause2, false);
                     //  // Load the legislative names
-                    var url3 = demographicConfig.reports.legislativeSummary.restUrl;
+                    var url3 = demographicConfig.reports.legislativeSummary.ACSRestUrl;
                     var whereClause3 = demographicConfig.reports.legislativeSummary.whereClause;
                     layerDelegate.query(url3, self.legislativeQueryHandler, self.legislativeQueryFault, null, whereClause3, false);
 
                     //  // Load the congressional names
-                    var url4 = demographicConfig.reports.congressionalSummary.restUrl;
+                    var url4 = demographicConfig.reports.congressionalSummary.ACSRestUrl;
                     var whereClause4 = demographicConfig.reports.congressionalSummary.whereClause;
                     layerDelegate.query(url4, self.congressionalQueryHandler, self.congressionalQueryFault, null, whereClause4, false);
 
@@ -490,7 +490,7 @@
                  */
                 self.openStateSummaryWindow = function() {
                     // Get the place name selected
-                    var placeName = "Arizona";
+                    var placeName = "Arizona State";
 
                     // Open the window
                     demographicVM.openWindow(placeName, "state");
@@ -561,7 +561,7 @@
                     var div = $("#demInteractiveDiv");
 
                     if (div.length === 0) {
-                        interactiveToolsVM.insertAfter("demInteractiveDiv", "launchInteractiveSummaryDiv", demographicVM.interactiveSelectionQueryHandler, demographicVM.interactiveSelectionQueryFault, demographicConfig.reports.censusTracts.restUrl);
+                        interactiveToolsVM.insertAfter("demInteractiveDiv", "launchInteractiveSummaryDiv", demographicVM.interactiveSelectionQueryHandler, demographicVM.interactiveSelectionQueryFault, demographicConfig.reports.censusTracts.ACSRestUrl);
                     } else {
                         if (div.is(":hidden")) {
                             $("#demInteractiveDiv").show();

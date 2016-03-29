@@ -4,6 +4,11 @@ CHANGELOG for State Demographics Map Viewer
 
 ### Version x.x.x (xx/xx/2016)
 
+### Version 2.1.7 (03/29/2016)
+
+* Added second tab to demographic view to separate acs and census data
+* Updated config files to new service and to correct layer 
+
 ### Version 2.1.6 (03/28/2016)
 
 * Converted Excel reports to client side kendo exporting.

@@ -800,6 +800,7 @@ p {
     overflow-x: hidden !important;
     padding-right: 20px;
     height: 265px;
+    white-space: normal;
 }
 #organizer {
     width: 292px;
@@ -925,6 +926,9 @@ margin-top:5px;
 }
 .demChartCategoryItem  button {
     width: 100%;
+}
+.demChartCategoryItem .k-button{
+    width: 100% !important;
 }
 #demExportSummary {
     width: 80px;

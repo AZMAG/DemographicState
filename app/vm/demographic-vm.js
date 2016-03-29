@@ -29,6 +29,8 @@
             "app/helpers/magNumberFormatter",
             "app/models/map-model",
             "app/config/demographicConfig",
+            "app/config/acsFieldsConfig",
+            "app/config/censusFieldsConfig",
             "esri/graphicsUtils",
             "esri/symbols/SimpleLineSymbol",
             "esri/symbols/SimpleFillSymbol",
@@ -36,7 +38,7 @@
         ],
         function(dc, dom, tp, da, on, view, selFeatsView, chartHelpView, summaryHelpView,
             selFeatHelpView, helpVM, alertView1, alertView2, alert1VM, alert2VM, layerDelegate, printMapDelegate,
-            magNumberFormatter, mapModel, demographicConfig, graphicsUtils) {
+            magNumberFormatter, mapModel, demographicConfig, acsFieldsConfig, censusFieldsConfig, graphicsUtils) {
 
             var DemographicVM = new function() {
 
@@ -651,11 +653,11 @@
                  * @method getData
                  */
                 self.getData = function() {
-
-                    var url = self.reportConfigItem.restUrl;
+                    var url = self.reportConfigItem.censusRestUrl;
+                    var url2 = self.reportConfigItem.ACSRestUrl;
                     var whereClause = self.reportConfigItem.summaryField + " = '" + self.communityName + "'";
-
                     layerDelegate.query(url, self.dataQueryHandler, self.dataQueryFault, null, whereClause, true);
+                    layerDelegate.query(url2, self.dataQueryHandler, self.dataQueryFault, null, whereClause, true);
                 };
 
                 /**
@@ -674,22 +676,31 @@
                  */
                 self.dataQueryHandler = function(results) {
                     var features = results.features;
-                    // console.log(features);
+                    var isACS = false;
+                    var fieldCount = Object.keys(features[0].attributes).length;
+                    //console.log(features);
+
+                    if( fieldCount > 150)
+                    {
+                        isACS = true;
+                    }
+
+
                     var featuresCount = features.length;
-                    //var feature = features[0];  // There should only be one feature returned from query
 
                     // Clear the current graphics
                     mapModel.clearGraphics();
 
                     // Add the new graphics. vw
-                    if (features[0].geometry !== null) {
-                        mapModel.addGraphics(features, undefined, true);
-
-
-                        if (($("#demInteractiveDiv").is(":visible") == false) || $("#zoomSelection").prop("checked")) {
-                            // Zoom to selected graphics. vw
-                            var zoomExtent = graphicsUtils.graphicsExtent(features);
-                            mapModel.setMapExtent(zoomExtent);
+                    if(isACS)
+                    {
+                        if (features[0].geometry !== null) {
+                            mapModel.addGraphics(features, undefined, true);
+                            if (($("#demInteractiveDiv").is(":visible") == false) || $("#zoomSelection").prop("checked")) {
+                                // Zoom to selected graphics. vw
+                                var zoomExtent = graphicsUtils.graphicsExtent(features);
+                                mapModel.setMapExtent(zoomExtent);
+                            }
                         }
                     }
 
@@ -718,9 +729,16 @@
                         }
                     });
 
+                    var fields = censusFieldsConfig.fields;
+
+                    if(isACS)
+                    {
+                        fields = acsFieldsConfig.fields;
+                    }
+
                     // Get the configuration
                     var aggValues = {};
-                    $.each(self.reportConfigItem.fields, function(index, field) {
+                    $.each(fields, function(index, field) {
                         var attribute = sumAttributes[field.fieldName];
                         var attrValue = Number(attribute);
 
@@ -737,7 +755,7 @@
                                 fieldValueFormatted: magNumberFormatter.formatValue(attrValue),
                                 chartCategory: field.chartCategory,
                                 chartType: field.chartType,
-                                chartName: field.chartName, // added to give name to series for legend. vw
+                                chartName: field, // added to give name to series for legend. vw
                                 timePeriod: field.timePeriod,
                                 derivedTargetField: field.fieldName,
                                 derivedPercentOfField: field.percentOfField,
@@ -754,17 +772,28 @@
                                 aggValues[field.fieldName].fieldValue = "-";
                                 aggValues[field.fieldName].fieldValueFormatted = "-";
                             }
+                            if(isACS === false)
+                            {
+                                // checks for "0" in data to return null. vw added?
+                                if (field.percentField === "") {
+                                    // var percentOf = Number(sumAttributes[field.percentField]);
+                                    aggValues[field.fieldName].percentValueFormatted = "-";
+                                }
 
-                            // checks for "0" in data to return null. vw added?
-                            if (field.percentOfField === "") {
-                                // var percentOf = Number(sumAttributes[field.percentOfField]);
-                                aggValues[field.fieldName].percentValueFormatted = "-";
+                                if (field.percentField !== "") {
+                                    var percentOf = Number(sumAttributes[field.percentField]);
+                                    aggValues[field.fieldName].percentValue = sumAttributes[field.percentField] * 100;
+                                    aggValues[field.fieldName].percentValueFormatted = magNumberFormatter.formatValue(sumAttributes[field.percentField] * 100) + "%";
+                                }
                             }
-
-                            if (field.percentOfField !== "") {
-                                var percentOf = Number(sumAttributes[field.percentOfField]);
-                                aggValues[field.fieldName].percentValue = (attrValue / percentOf) * 100;
-                                aggValues[field.fieldName].percentValueFormatted = magNumberFormatter.formatValue((attrValue / percentOf) * 100) + "%";
+                            else{
+                                if (field.percentField !== "") {
+                                    aggValues[field.fieldName].percentValue = sumAttributes[field.percentField];
+                                    aggValues[field.fieldName].percentValueFormatted = magNumberFormatter.formatValue(sumAttributes[field.percentField]) + "%";
+                                }
+                                else{
+                                    aggValues[field.fieldName].percentValueFormatted = "-";
+                                }
                             }
 
                             if (field.densityAreaField !== "") {
@@ -774,44 +803,48 @@
                             }
                         }
                     });
-
-                    // Filter and group for chart categories
-                    self.chartCategories = [];
-                    self.aggValuesArray = [];
-                    self.aggValuesGroupedByChartCategory = {};
-                    self.aggValuesGroupedByFieldCategory = {};
-                    $.each(aggValues, function(index, item) {
-                        self.aggValuesArray.push(aggValues[item.fieldName]);
-
-                        // Chart Categories
-                        if (item.chartCategory !== "") {
-                            if (item.chartCategory in self.aggValuesGroupedByChartCategory) {
-                                self.aggValuesGroupedByChartCategory[item.chartCategory].push(aggValues[item.fieldName]);
-                            } else {
-                                self.chartCategories.push({
-                                    chartCategory: item.chartCategory
-                                });
-                                self.aggValuesGroupedByChartCategory[item.chartCategory] = [aggValues[item.fieldName]];
+                    // 
+                        // Filter and group for chart categories
+                        self.chartCategories = [];
+                        self.aggValuesArray = [];
+                        self.aggValuesGroupedByChartCategory = {};
+                        self.aggValuesGroupedByFieldCategory = {};
+                        $.each(aggValues, function(index, item) {
+                            self.aggValuesArray.push(aggValues[item.fieldName]);
+                                // Chart Categories
+                                if (item.chartCategory !== "") {
+                                    if (item.chartCategory in self.aggValuesGroupedByChartCategory) {
+                                        self.aggValuesGroupedByChartCategory[item.chartCategory].push(aggValues[item.fieldName]);
+                                    } else {
+                                        self.chartCategories.push({
+                                            chartCategory: item.chartCategory
+                                        });
+                                        self.aggValuesGroupedByChartCategory[item.chartCategory] = [aggValues[item.fieldName]];
+                                    }
+                                }
+                            
+                            // Field Categories
+                            if (item.fieldCategory !== "") {
+                                if (item.fieldCategory in self.aggValuesGroupedByFieldCategory) {
+                                    self.aggValuesGroupedByFieldCategory[item.fieldCategory].push(aggValues[item.fieldName]);
+                                } else {
+                                    self.aggValuesGroupedByFieldCategory[item.fieldCategory] = [aggValues[item.fieldName]];
+                                }
                             }
-                        }
-
-                        // Field Categories
-                        if (item.fieldCategory !== "") {
-                            if (item.fieldCategory in self.aggValuesGroupedByFieldCategory) {
-                                self.aggValuesGroupedByFieldCategory[item.fieldCategory].push(aggValues[item.fieldName]);
-                            } else {
-                                self.aggValuesGroupedByFieldCategory[item.fieldCategory] = [aggValues[item.fieldName]];
-                            }
-                        }
-                    });
+                        });
 
                     if (self.compareFeature !== null) {
                         self.addCompareValues();
                     }
 
+
+                    //console.log(self.chartCategories);
+
                     // Create the Kendo list view
                     var chartListDivObj = $("#demChartList");
                     var kendoListView = chartListDivObj.data("kendoListView");
+
+                    console.log(self.chartCategories);
 
                     if (kendoListView === undefined || kendoListView === null) {
                         chartListDivObj.kendoListView({
@@ -831,7 +864,7 @@
                     // Reset comparison if community has changed
                     if (self.commChanged) {
                         // Clear the comparison checkbox
-                        $("#demUseComp").prop("checked", false);
+                        $("#demACSUseComp").prop("checked", false);
 
                         // Reload the chart if on the charts tab
                         var tabStrip = $("#demTabStrip").data("kendoTabStrip");
@@ -843,19 +876,28 @@
                         // Reload the comparison places
                         self.reloadCompareComboBox();
                     }
+                    var gridName = "#demCensusDataGrid";
+                    var compareName = "demCensusUseComp";
+                    var gridType = "census";
+                    if(isACS)
+                    {
+                        gridName = "#demACSDataGrid";
+                        compareName = "demACSUseComp";
+                        gridType = "ACS";
+                    }
 
                     // Create the summary grid
-                    var kendoGrid = $("#demDataGrid").data("kendoGrid");
+                    var kendoGrid = $(gridName).data("kendoGrid");
                     if (kendoGrid !== null) {
                         kendoGrid.element.remove();
                         kendoGrid.destroy();
                     }
 
-                    var useCompare = dom.byId("demUseComp").checked;
+                    var useCompare = dom.byId(compareName).checked;
                     if (useCompare) {
-                        self.createKendoGridWithCompare();
+                        self.createKendoGridWithCompare(gridType);
                     } else {
-                        self.createKendoGrid();
+                        self.createKendoGrid(gridType);
                     }
                 };
 
@@ -864,7 +906,7 @@
                  *
                  * @method reloadCompareComboBox
                  */
-                self.reloadCompareComboBox = function() {
+                self.reloadCompareComboBox = function(type) {
                     var compareComboBoxInput = $("#demCompareComboBox");
                     var compareComboBoxObj = compareComboBoxInput.data("kendoComboBox");
 
@@ -1114,15 +1156,26 @@
                  *
                  * @method createKendoGrid
                  */
-                self.createKendoGrid = function() {
+                self.createKendoGrid = function(type) {
+
+                    var dataGridName = "demACSDataGrid";
+                    var demoOptionsRowName = "demACSSummaryOptionsRow";
+
+                    if(type === "census")
+                    {
+                        dataGridName = "demCensusDataGrid";
+                        demoOptionsRowName = "demCensusSummaryOptionsRow";
+                    }
+
+
                     // Create the div element for the grid
                     dc.create("div", {
-                        id: "demDataGrid",
+                        id: dataGridName,
                         style: "margin: 5px 0 0 0; font-size: small;"
-                    }, "demSummaryOptionsRow", "after");
+                    }, demoOptionsRowName, "after");
 
                     // Kendo-ize
-                    $("#demDataGrid").kendoGrid({
+                    $("#" + dataGridName).kendoGrid({
                         dataSource: {
                             data: self.aggValuesArray,
                             group: {
@@ -1159,7 +1212,7 @@
                         ]
                     });
 
-                    self.sizeGrid("#demDataGrid");
+                    self.sizeGrid("#" + dataGridName);
                     // console.log(self.aggValuesArray);
                 };
 
@@ -1169,13 +1222,24 @@
                  *
                  * @method createKendoGrid
                  */
-                self.createKendoGridWithCompare = function() {
+                self.createKendoGridWithCompare = function(type) {
+
+                    var dataGridName = "demACSDataGrid";
+                    var demoOptionsRowName = "demACSSummaryOptionsRow";
+
+                    if(type === "census")
+                    {
+                        dataGridName = "demCensusDataGrid";
+                        demoOptionsRowName = "demCensusSummaryOptionsRow";
+                    }
+
+
                     // Create the div element for the grid
                     dc.create("div", {
-                        id: "demDataGrid",
+                        id: dataGridName,
                         style: "margin: 5px 0 0 0; font-size: small;"
-                    }, "demSummaryOptionsRow", "after");
-                    var gridObj = $("#demDataGrid");
+                    }, demoOptionsRowName, "after");
+                    var gridObj = $("#" + dataGridName);
                     // Kendo-ize
 
                     gridObj.kendoGrid({
@@ -1229,7 +1293,7 @@
                     //http://brianseekford.com/index.php/2013/05/14/how-to-add-complex-headers-to-a-kendo-grid-using-simple-jquery-javascript/
                     gridObj.find("thead").first().prepend("<tr><th></th><th></th><th class='colT' scope='colgroup' colspan='2'>" + self.communityName + "</th><th class='colT' scope='colgroup' colspan='2'>" + self.compareToName + "</th></tr>");
 
-                    self.sizeGrid("#demDataGrid");
+                    self.sizeGrid("#" + dataGridName);
                 };
 
                 /**
@@ -1240,6 +1304,7 @@
                  */
                 self.onChartListSelectionChanged = function() {
                     self.selectedCategoryObj = this.select();
+                    console.log(self.aggValuesGroupedByChartCategory);
                     self.groupedItems = self.aggValuesGroupedByChartCategory[self.selectedCategoryObj[0].childNodes[1].innerHTML];
 
                     // Update the chart
@@ -1284,6 +1349,9 @@
                  */
                 self.createChart = function() {
                     // Create the div element for the chart
+
+                    //console.log(self.groupedItems);
+
                     dc.create("div", {
                         id: "demChartArea"
                     }, "demChartAreaPane", "first");

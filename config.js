@@ -42,17 +42,15 @@ var appConfig = new function() {
     this.exportWebMapUrl = "http://geo.azmag.gov/gismag/rest/services/gp/stateDemo/GPServer/Export%20Web%20Map"; // Custom Print Service
     this.webServicePasscode = "sun sand dry heat grand canyon";
 
-    this.mainURL = "http://geo.azmag.gov/gismag/rest/services/maps/DemographicState2013/MapServer";
+    this.mainURL = "http://geo.azmag.gov/gismag/rest/services/maps/DemographicState2014/MapServer";
 
     // Search Service URLs
     this.geoCoderService = "//geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer";
-    this.countyService = this.mainURL + "/4";
-    this.placeService = this.mainURL + "/1";
-    this.legislativeService = this.mainURL + "/2";
-    this.congressionalService = this.mainURL + "/3";
-    this.tractService = this.mainURL + "/8";
-
-
+    this.countyService = this.mainURL + "/2";
+    this.placeService = this.mainURL + "/4";
+    this.legislativeService = this.mainURL + "/3";
+    this.congressionalService = this.mainURL + "/1";
+    this.tractService = this.mainURL + "/15";
 
     this.layerInfo = [{
         layerNum: 0,
@@ -60,9 +58,9 @@ var appConfig = new function() {
         title: "Census Tract Labels",
         type: "dynamic",
         url: this.mainURL,
-        queryUrl: this.mainURL + "/8",
+        queryUrl: this.mainURL + "/16",
         queryWhere: "1=1",
-        layers: [7, 8],
+        layers: [15, 16],
         opacity: 1,
         visible: false,
         showTOC: true
@@ -72,9 +70,9 @@ var appConfig = new function() {
         title: "County Boundaries",
         type: "dynamic",
         url: this.mainURL,
-        queryUrl: this.mainURL + "/4",
+        queryUrl: this.mainURL + "/14",
         queryWhere: "1=1",
-        layers: [4],
+        layers: [14],
         opacity: 0.8,
         visible: true,
         showTOC: true
@@ -83,10 +81,10 @@ var appConfig = new function() {
         id: "congressionalDistricts",
         title: "Congressional Districts",
         type: "feature",
-        url: this.mainURL + "/6",
-        queryUrl: this.mainURL + "/3",
+        url: this.mainURL + "/12",
+        queryUrl: this.mainURL + "/12",
         queryWhere: "1=1",
-        layers: [6],
+        layers: [12],
         opacity: 1,
         visible: false,
         selectable: true,
@@ -98,10 +96,10 @@ var appConfig = new function() {
         id: "legislativeDistricts",
         title: "Legislative Districts",
         type: "feature",
-        url: this.mainURL + "/5",
-        queryUrl: this.mainURL + "/2",
+        url: this.mainURL + "/13",
+        queryUrl: this.mainURL + "/13",
         queryWhere: "1=1",
-        layers: [5],
+        layers: [13],
         opacity: 1,
         visible: false,
         selectable: true,
@@ -118,7 +116,7 @@ var appConfig = new function() {
         showTOC: true
     }, {
         layerNum: 5,
-        id: "Census2010byBlockGroup",
+        id: "ACS2014byBlockGroup",
         title: "American Community Survey by Block Group, 2014",
         type: "dynamic",
         url: this.mainURL,
