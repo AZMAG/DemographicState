@@ -31,7 +31,7 @@
                  * @returns {string} formatted string.
                  */
                 self.formatValue = function(valueToFormat) {
-                    if (isNaN(valueToFormat)) {
+                    if (isNaN(valueToFormat) || valueToFormat === null) {
                         return valueToFormat;
                     } else {
                         if (valueToFormat === 0) {

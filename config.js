@@ -33,7 +33,7 @@
 
 var appConfig = new function() {
 
-    this.Version = "v2.1.6 | 04/06/2016";
+    this.Version = "v2.1.5 | 03/01/2016";
 
     this.jasonemail = "https://www.azmag.gov/EmailPages/JasonHoward.asp";
 
@@ -47,9 +47,9 @@ var appConfig = new function() {
     // Search Service URLs
     this.geoCoderService = "//geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer";
     this.countyService = this.mainURL + "/2";
-    this.placeService = this.mainURL + "/4";
+    this.placeService = this.mainURL + "/1";
     this.legislativeService = this.mainURL + "/3";
-    this.congressionalService = this.mainURL + "/1";
+    this.congressionalService = this.mainURL + "/4";
     this.tractService = this.mainURL + "/15";
 
     this.layerInfo = [{

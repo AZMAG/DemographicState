@@ -75,7 +75,10 @@
 
                 self.dataItemSelected = null;
 
-                self.layerUrl = appConfig.mainURL + "/0"
+                self.layerACSUrl = appConfig.mainURL + "/0";
+
+                self.layerCensusUrl = appConfig.mainURL + "/6";
+
 
                 /**
                  * This id value should match up with the unique id binding handlers.
@@ -337,7 +340,7 @@
                                     format: "# \\%",
                                     change: self.verifyQuery
                                 }).data("kendoNumericTextBox");
-                                maxValue = 1;
+                                maxValue = 100;
                             }
                             else{
                                 $("#" + selector + " .style1").kendoNumericTextBox({
@@ -374,7 +377,7 @@
                                 "strDDL": "#strMS"+ count
                             };
 
-                            layerDelegate.query(self.layerUrl, self.populateStringDropdowns, self.errBack, undefined, "1=1", false, [dataItem.FieldName], [dataItem.FieldName], true);
+                            layerDelegate.query(self.layerACSUrl, self.populateStringDropdowns, self.errBack, undefined, "1=1", false, [dataItem.FieldName], [dataItem.FieldName], true);
                         }
                         self.queryItems.push(queryItem);
                         self.verifyQuery();
@@ -405,7 +408,7 @@
                                     format: "# \\%",
                                     change: self.verifyQuery
                                 });
-                                maxValue = 1;
+                                maxValue = 100;
                             }
                             else{
                                 $("#" + selector + " .style1").kendoNumericTextBox({
@@ -425,7 +428,8 @@
                  **/
                 self.runQuery = function() {
                     var queryString = self.buildQueryString();
-                    layerDelegate.query(self.layerUrl, demographicVM.interactiveSelectionQueryHandler, demographicVM.interactiveSelectionQueryFault, undefined, queryString, true);
+                    layerDelegate.query(self.layerACSUrl, demographicVM.interactiveSelectionQueryHandler, demographicVM.interactiveSelectionQueryFault, undefined, queryString, true);
+                    layerDelegate.query(self.layerCensusUrl, demographicVM.interactiveSelectionQueryHandler, demographicVM.interactiveSelectionQueryFault, undefined, queryString, true);
                     esri.show(dojo.byId("loadingImg"));
                     self.closeWindow();
                 };
@@ -457,6 +461,7 @@
                             var operator = $(self.queryItems[i].operator).val();
                             var inputBoxes = $(self.queryItems[i].id + " input.style1.k-formatted-value.k-input");
                             var min = 0;
+                            console.log(self.queryItems[i]);
                             var max = self.queryItems[i].maxVal;
                             var inputValue = 0;
                             if (inputBoxes.length > 1) {
@@ -465,14 +470,14 @@
                                     min = inputBoxes[0].value.replace(/,/g,"");
                                     if (self.queryItems[i].type === "percent") {
                                         min = min.replace("%", "");
-                                        min = (min/100);
+                                        //min = (min/100);
                                     }
                                 }
                                 if (inputBoxes[1].value) {
                                     max = inputBoxes[1].value.replace(/,/g,"");
                                     if (self.queryItems[i].type === "percent") {
                                         max = max.replace("%", "");
-                                        max = (max/100);
+                                        //max = (max/100);
                                     }
                                 }
                                 if (i !== (self.queryItems.length - 1)) {
@@ -487,7 +492,7 @@
                                     inputValue = inputBoxes[0].value.replace(/,/g,"");
                                     if (self.queryItems[i].type === "percent") {
                                         inputValue = inputValue.replace("%", "");
-                                        inputValue = (inputValue/100);
+                                        //inputValue = (inputValue/100);
                                     }
                                 }
                                 if (i !== (self.queryItems.length - 1)) {
@@ -518,7 +523,7 @@
                  **/
                 self.verifyQuery = function() {
                     var queryString = self.buildQueryString();
-                    layerDelegate.verify(self.layerUrl, self.verifyCallback, self.errBack, undefined, queryString, true);
+                    layerDelegate.verify(self.layerACSUrl, self.verifyCallback, self.errBack, undefined, queryString, true);
                 };
 
                 self.verifyCallback = function(count){

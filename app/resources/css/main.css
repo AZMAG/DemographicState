@@ -1,17 +1,10 @@
-/* ========================================================================
- * Maricopa Association of Governments
- * MAG main.css | HTML5 Boilerplate v4.3.0 | MIT License | http://h5bp.com/
- * State Demographic Viewer
- * http://ims.azmag.gov/
- * ========================================================================
- * Copyright 2016 MAG
- * Licensed under MIT
- * ======================================================================== */
+/*! main.css | using - HTML5 Boilerplate v4.3.0 | MIT License | http://h5bp.com/ */
 
-/*! ===============================================================================
- *  MAG main.css v2.1.6 | HTML5 Boilerplate v4.3.0 | MIT License | http://h5bp.com/
- *  =============================================================================== */
-
+/**
+*@main.css
+*@CSS Document for Demograpic Website @ MAG
+*@author Wolfley
+**/
 /*
  * HTML5 Boilerplate
  *
@@ -902,10 +895,13 @@ color:black;
 /* ==========================================
 **** demographic-view.html styles ****
 ============================================= */
-#demChartListPane {
+#demCensusChartListPane, #demACSChartListPane {
 
     width: 95px !important;
     left: 480px !important;
+    float:right;
+    max-height: 300px;
+    overflow-y: scroll;
 }
 .k-splitter .k-ghost-splitbar-horizontal, .k-splitter .k-splitbar-horizontal {
     left: 480px;
@@ -918,13 +914,17 @@ color:black;
 .reportTabPageOptionRowEX {
     height: 15px;
 }
-#demChartAreaPane {
+#demCensusChartAreaPane, #demACSChartAreaPane {
     width: 480px !important;
+    float: left;
 }
-#demChartList {
-margin-top:5px;
+#demCensusChartList, #demACSChartList {
+    margin-top:5px;
     font-size: 80%;
     border: none;
+}
+.k-treemap{
+    font-size: 10px;
 }
 .demChartCategoryItem {
     cursor: pointer;
@@ -944,7 +944,7 @@ margin-top:5px;
     position: absolute;
     left: 390px;
 }
-#demSplitContainer {
+#demCensusSplitContainer, #demACSSplitContainer {
     margin: 0px 0 0 0;
 }
 .reportTabPageOptionRow {
@@ -1636,4 +1636,10 @@ margin-top:5px;
 
 .panelBarLi .k-state-selected{
     background-color: transparent;
+}
+
+circle:hover{
+    stroke: black;
+    stroke-width: 2;
+    cursor: pointer;
 }

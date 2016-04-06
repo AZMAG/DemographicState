@@ -4,6 +4,19 @@ CHANGELOG for State Demographics Map Viewer
 
 ### Version x.x.x (xx/xx/2016)
 
+### Version 2.1.8 (04/06/2016)
+
+* Fixed custom summary.  Now makes 2 requests to census and acs layers.
+* Added new charts in the acs charts tab in reports.  This includes age pyramid charts and occupation charts.
+* Fixed compare feature to account for new data tabs.
+* Fixed search to relfect new data layers.
+* Updated advanced query to get data from both census and ACS layers.
+* Added new fields to cbr treeview
+* Toggle source label info when user clicks different tabs
+* Added new dependency (d3.js) to project.
+* Fixed excel export to work with our new tabs.
+* Fixed display legend checkbox
+
 ### Version 2.1.7 (03/29/2016)
 
 * Added second tab to demographic view to separate acs and census data

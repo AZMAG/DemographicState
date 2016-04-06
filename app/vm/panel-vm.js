@@ -561,7 +561,7 @@
                     var div = $("#demInteractiveDiv");
 
                     if (div.length === 0) {
-                        interactiveToolsVM.insertAfter("demInteractiveDiv", "launchInteractiveSummaryDiv", demographicVM.interactiveSelectionQueryHandler, demographicVM.interactiveSelectionQueryFault, demographicConfig.reports.censusTracts.ACSRestUrl);
+                        interactiveToolsVM.insertAfter("demInteractiveDiv", "launchInteractiveSummaryDiv", demographicVM.interactiveCensusSelectionQueryHandler, demographicVM.interactiveSelectionQueryFault, demographicConfig.reports.censusTracts.ACSRestUrl);
                     } else {
                         if (div.is(":hidden")) {
                             $("#demInteractiveDiv").show();

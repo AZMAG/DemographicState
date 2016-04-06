@@ -1,9 +1,10 @@
 <div id="demographicView">
     <div id="demTabStrip">
         <ul>
-            <li>American Community Survey 2014</li>
-            <li>Census 2010</li>
-            <li class="k-state-active">Charts</li>
+            <li class="k-state-active">ACS 2014 Data</li>
+            <li>ACS 2014 Charts</li>
+            <li>Census 2010 Data</li>
+            <li>Census 2010 Charts</li>
         </ul>
         <div id="demACSSummaryReportTab">
             <div id="demACSSummaryOptionsRow" class="reportTabPageOptionRow">
@@ -17,6 +18,28 @@
                         <img src="app/resources/img/i_excel.png" class="exportButtonImage">
                     </button>
                 </span>
+            </div>
+        </div>
+        <div id="demACSChartsTab">
+            <div class="reportTabPageOptionRow">
+                <input id="displayACSLegend" type="checkbox" data-bind="checked: isChecked">
+                <label for="displayACSLegend" class="smallFont">Display chart legend</label>
+                <span class="reportExportSpan">
+                    <div id="exportACSReportRequest">
+                        <span>Export Report to PDF:</span>
+                        <button id="printACSSummary" type="button" data-bind="click: exportPDFReport">
+                            <img src="app/resources/img/i_pdf.png" class="exportButtonImage">
+                        </button>
+                    </div>
+                </span>
+            </div>
+            <br>     
+            <div id="demACSSplitContainer">
+                <div id="demACSChartAreaPane">
+                </div>
+                <div id="demACSChartListPane">
+                    <div id="demACSChartList"></div>
+                </div>
             </div>
         </div>
         <div id="demCensusSummaryReportTab">
@@ -33,56 +56,30 @@
                 </span>
             </div>
         </div>
-        <div id="demChartsTab">
+        <div id="demCensusChartsTab">
             <div class="reportTabPageOptionRow">
-                <input id="displayLegend" type="checkbox" data-bind="checked: isChecked">
-                <label for="displayLegend" class="smallFont">Display chart legend</label>
+                <input id="displayCensusLegend" type="checkbox" data-bind="checked: isChecked">
+                <label for="displayCensusLegend" class="smallFont">Display chart legend</label>
 				<span class="reportExportSpan">
-					<div id="exportReportRequest">
+					<div id="exportCensusReportRequest">
 						<span>Export Report to PDF:</span>
-						<button id="printSummary" type="button" data-bind="click: exportPDFReport">
+						<button id="printCensusSummary" type="button" data-bind="click: exportPDFReport">
 							<img src="app/resources/img/i_pdf.png" class="exportButtonImage">
 						</button>
 					</div>
 				</span>
             </div>
-			<div class="reportTabPageOptionRow">
-				<div id="exportReportResponse"> </div>
-            </div>			
-            <div id="demSplitContainer">
-                <div id="demChartAreaPane">
+            <br>		
+            <div id="demCensusSplitContainer">
+                <div id="demCensusChartAreaPane">
                 </div>
-                <div id="demChartListPane">
-                    <div id="demChartList"></div>
-                </div>
-            </div>
-        </div>
-        <div id="demChartsTab">
-            <div class="reportTabPageOptionRow">
-                <input id="displayLegend" type="checkbox" data-bind="checked: isChecked">
-                <label for="displayLegend" class="smallFont">Display chart legend</label>
-                <span class="reportExportSpan">
-                    <div id="exportReportRequest">
-                        <span>Export Report to PDF:</span>
-                        <button id="printSummary" type="button" data-bind="click: exportPDFReport">
-                            <img src="app/resources/img/i_pdf.png" class="exportButtonImage">
-                        </button>
-                    </div>
-                </span>
-            </div>
-            <div class="reportTabPageOptionRow">
-                <div id="exportReportResponse"> </div>
-            </div>          
-            <div id="demSplitContainer">
-                <div id="demChartAreaPane">
-                </div>
-                <div id="demChartListPane">
-                    <div id="demChartList"></div>
+                <div id="demCensusChartListPane">
+                    <div id="demCensusChartList"></div>
                 </div>
             </div>
         </div>
     </div>
-    <p id="demSource" class="legal"></p>
+    <p id="demSource" class="legal">Source: American Comunity Survey 2014</p>
 
     <script type="text/x-kendo-tmpl" id="demChartListTemplate">
         <div class="demChartCategoryItem">

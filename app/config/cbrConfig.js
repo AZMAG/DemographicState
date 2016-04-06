@@ -413,7 +413,7 @@
                                     DefaultColorScheme: "Sequential",
                                     Description: "",
                                     Source: "American Community Survey 2014",
-                                    FieldName: "TOTAL_FAMILY",
+                                    FieldName: "TOTAL_FAMILIES",
                                     Type: "number",
                                     Placeholder: "1480"
                                 }, {
@@ -585,115 +585,6 @@
                             {"NodeType":"map","LayerId":0,"Name":null,"Service":"ACS2014byBlockGroup","ShortName":"Civilian Population Age 18+","DefaultColorRamp":"OrRd","DefaultColorScheme":"Sequential","Description":null,"Source":"American Community Survey 2016","FieldName":"CivPop18plus","Type":"number","AsPercentages":false,"Placeholder":3063},
                             {
                                 NodeType: "cat",
-                                Name: "Education",
-                                ShortName: "Education",
-                                Description: "...",
-                                items: [
-                                
-                                    {
-                                        NodeType: "map",
-                                        LayerId: 0,
-                                        Name: "",
-                                        Service: "ACS2014byBlockGroup",
-                                        ShortName: "% Less than 9th Grade",
-                                        DefaultColorRamp: "PuRd",
-                                        DefaultColorScheme: "Sequential",
-                                        Description: "",
-                                        Source: "American Community Survey 2014",
-                                        FieldName: "PCT_LT9GRADE",
-                                        Type: "percent",
-                                        AsPercentages: true,
-                                        Placeholder: "3063"
-                                    },{
-                                        NodeType: "map",
-                                        LayerId: 0,
-                                        Name: "",
-                                        Service: "ACS2014byBlockGroup",
-                                        ShortName: "% Without High School Diploma",
-                                        DefaultColorRamp: "PuRd",
-                                        DefaultColorScheme: "Sequential",
-                                        Description: "",
-                                        Source: "American Community Survey 2014",
-                                        FieldName: "PCT_NOHSDIPLOMA",
-                                        Type: "percent",
-                                        AsPercentages: true,
-                                        Placeholder: "3063"
-                                    },{
-                                        NodeType: "map",
-                                        LayerId: 0,
-                                        Name: "",
-                                        Service: "ACS2014byBlockGroup",
-                                        ShortName: "% High School Graduates",
-                                        DefaultColorRamp: "PuRd",
-                                        DefaultColorScheme: "Sequential",
-                                        Description: "",
-                                        Source: "American Community Survey 2014",
-                                        FieldName: "PCT_HSGRAD",
-                                        Type: "percent",
-                                        AsPercentages: true,
-                                        Placeholder: "3063"
-                                    },{
-                                        NodeType: "map",
-                                        LayerId: 0,
-                                        Name: "",
-                                        Service: "ACS2014byBlockGroup",
-                                        ShortName: "% Some College",
-                                        DefaultColorRamp: "PuRd",
-                                        DefaultColorScheme: "Sequential",
-                                        Description: "",
-                                        Source: "American Community Survey 2014",
-                                        FieldName: "PCT_SOMECOLLEGE",
-                                        Type: "percent",
-                                        AsPercentages: true,
-                                        Placeholder: "3063"
-                                    },{
-                                        NodeType: "map",
-                                        LayerId: 0,
-                                        Name: "",
-                                        Service: "ACS2014byBlockGroup",
-                                        ShortName: "% Associates Degree",
-                                        DefaultColorRamp: "PuRd",
-                                        DefaultColorScheme: "Sequential",
-                                        Description: "",
-                                        Source: "American Community Survey 2014",
-                                        FieldName: "PCT_ASSOCIATES",
-                                        Type: "percent",
-                                        AsPercentages: true,
-                                        Placeholder: "3063"
-                                    },{
-                                        NodeType: "map",
-                                        LayerId: 0,
-                                        Name: "",
-                                        Service: "ACS2014byBlockGroup",
-                                        ShortName: "% Bachelors Degree",
-                                        DefaultColorRamp: "PuRd",
-                                        DefaultColorScheme: "Sequential",
-                                        Description: "",
-                                        Source: "American Community Survey 2014",
-                                        FieldName: "PCT_BACHELORS",
-                                        Type: "percent",
-                                        AsPercentages: true,
-                                        Placeholder: "3063"
-                                    },{
-                                        NodeType: "map",
-                                        LayerId: 0,
-                                        Name: "",
-                                        Service: "ACS2014byBlockGroup",
-                                        ShortName: "% Graduate or Professional",
-                                        DefaultColorRamp: "PuRd",
-                                        DefaultColorScheme: "Sequential",
-                                        Description: "",
-                                        Source: "American Community Survey 2014",
-                                        FieldName: "PCT_GRADPROF",
-                                        Type: "percent",
-                                        AsPercentages: true,
-                                        Placeholder: "3063"
-                                    }
-                                
-                                ]
-                            },
-                            {
-                                NodeType: "cat",
                                 Name: "Occupation",
                                 ShortName: "Occupation",
                                 Description: "...",
@@ -811,7 +702,7 @@
                             DefaultColorScheme: "Sequential",
                             Description: "",
                             Source: "American Community Survey 2014",
-                            FieldName: "HU_PER_SQMI ",
+                            FieldName: "HU_PER_SQMI",
                             Type: "number",
                             Placeholder: "23096"
                         }, {
