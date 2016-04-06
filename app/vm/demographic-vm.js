@@ -1635,8 +1635,12 @@
                             localStorage.TractID = tractIdArray;
                             self.reportURL = encodeURI(demographicConfig.exportPDFReportUrl + "?stateInteractive");
                             var newWindow = window.open(self.reportURL, "_new");
-                        } else {
+                        } else if(self.communityName === "Arizona") {
                             self.reportURL = encodeURI(demographicConfig.exportPDFReportUrl + "?state=" + self.communityName);
+                            var newWindow = window.open(self.reportURL, "_new");
+                        }
+                        else{
+                            self.reportURL = encodeURI(demographicConfig.exportPDFReportUrl + "?city=" + self.communityName);
                             var newWindow = window.open(self.reportURL, "_new");
                         }
                     }
