@@ -1,12 +1,23 @@
 {
   "name": "Demographics-Project",
-  "version": "2.1.5",
-  "date": "03/01/2016",
-  "author": "Vern Wolfley & Jack Fairfield",
-  "email1": "vwolfley@azmag.gov",
-  "email2": "jfairfield@azmag.gov",
-  "url": "http://geo.azmag.gov/maps/demographic/",
+  "version": "2.1.6",
+  "date": "04/06/2016",
+  "description": "MAG State Demographic Viewer",
+  "keywords": ["MAG", "maps", "state", "Arizona", "census", "American Community Survey", "ACS", "2009-2013", "ESRI", "#MAGmaps"],
+  "main": "index.js",
+  "homepage": "http://geo.azmag.gov/maps/azdemographics/",
+  "author": "Vern Wolfley <vwolfley@azmag.gov>",
+  "contributors": [{
+    "name": "Vern Wolfley",
+    "email": "vwolfley@azmag.gov"
+  }, {
+    "name": "Jack Fairfield",
+    "email": "jfairfield@azmag.gov"
+  }],
   "private": true,
+  "dependencies": {
+
+  },
   "devDependencies": {
     "grunt": "*",
     "grunt-contrib-concat": "*",
@@ -21,5 +32,6 @@
     "lodash": "*",
     "matchdep": "*",
     "normalize.css": "*"
-  }
+  },
+  "license": "MIT"
 }

@@ -14,7 +14,7 @@ This web app viewer was developed by MAG staff for MAG member agencies and the p
 
 `Major/Minor/Patch 0.0.0`
 
-#### `v2.1.5 - 03/01/2016`
+#### `v2.1.6 - 04/06/2016`
 
 ### Credits
 
