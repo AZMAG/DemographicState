@@ -4,6 +4,10 @@ CHANGELOG for State Demographics Map Viewer
 
 ### Version x.x.x (xx/xx/2016)
 
+### Version 2.1.9 (04/11/2016)
+
+* Changed age pyramid to combine 18-19, 20 and 21 to one group.  Reversed layout.
+
 ### Version 2.1.8 (04/06/2016)
 
 * Fixed custom summary.  Now makes 2 requests to census and acs layers.

@@ -461,7 +461,6 @@
                             var operator = $(self.queryItems[i].operator).val();
                             var inputBoxes = $(self.queryItems[i].id + " input.style1.k-formatted-value.k-input");
                             var min = 0;
-                            console.log(self.queryItems[i]);
                             var max = self.queryItems[i].maxVal;
                             var inputValue = 0;
                             if (inputBoxes.length > 1) {
@@ -470,14 +469,12 @@
                                     min = inputBoxes[0].value.replace(/,/g,"");
                                     if (self.queryItems[i].type === "percent") {
                                         min = min.replace("%", "");
-                                        //min = (min/100);
                                     }
                                 }
                                 if (inputBoxes[1].value) {
                                     max = inputBoxes[1].value.replace(/,/g,"");
                                     if (self.queryItems[i].type === "percent") {
                                         max = max.replace("%", "");
-                                        //max = (max/100);
                                     }
                                 }
                                 if (i !== (self.queryItems.length - 1)) {

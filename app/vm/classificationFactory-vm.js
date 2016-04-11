@@ -233,8 +233,8 @@
                         var start;
                         var end;
                         if (self.Renderer.asPercent) {
-                            start = Math.round(self.Renderer.infos[j].minValue * 100);
-                            end = Math.round(self.Renderer.infos[j].maxValue * 100) + "%";
+                            start = Math.round(self.Renderer.infos[j].minValue );
+                            end = Math.round(self.Renderer.infos[j].maxValue) + "%";
                         } else {
                             start = magNum.formatValue(Math.round(self.Renderer.infos[j].minValue));
                             end = magNum.formatValue(Math.round(self.Renderer.infos[j].maxValue));

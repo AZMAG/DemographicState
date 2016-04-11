@@ -165,6 +165,8 @@
                  */
                 self.groupedItems = undefined;
 
+                self.pyramidData = undefined;
+
                 /**
                  * Keep track of chart legend visibility
                  *
@@ -213,6 +215,9 @@
                  * @type {Array}
                  */
                 self.featureAttributeArray = [];
+
+                self.totalFemale = 0; 
+                self.totalMale = 0;
 
                 /**
                  * Feature used for comparison values.
@@ -417,6 +422,10 @@
                     win.open();
                     windowIsOpen = true;
 
+                    //reset compare combo boxes
+                    //Get instance of each dropdown to see if they are there
+                    self.resetComparisonDropdowns();
+
                     // Initial window placement
                     $("#demographicView").closest(".k-window").css({
                         top: 70,
@@ -523,6 +532,8 @@
                     win.center();
                     win.open();
                     windowIsOpen = true;
+
+                    self.resetComparisonDropdowns();
 
                     // hide loading gif when window opens. vw
                     esri.hide(dom.byId("loadingImg"));
@@ -1459,11 +1470,9 @@
                     }
 
                     var dataSource = self.aggACSValuesArray;
-                    var normalizePercent = false;
 
                     if(type === "census"){
                         dataSource = self.aggCensusValuesArray;
-                        normalizePercent = true;
                     }
 
                     // Iterate through existing values to add the comparison properties
@@ -1486,10 +1495,6 @@
                             }
 
                             if (item.percentField !== undefined) {
-
-                                if(normalizePercent){
-                                    self.compareFeature.attributes[item.percentField] = self.compareFeature.attributes[item.percentField] * 100;
-                                }
 
                                 var percentValue = Number(self.compareFeature.attributes[item.percentField]);
                                 item.comparePercentValue = percentValue;
@@ -1964,26 +1969,37 @@
                           .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
 
                         node.append("circle")
-                          .attr("r", 1)
-                          .attr("fill", "white")
+                          .attr("r", function(d) { return d.r; })
+                          .attr("fill", "transparent")
                           .on("mouseover", function(sender){
                             d3.select(this).attr("stroke", "black").attr("stroke-width", "2");
-                            var html = "<strong>Occupation: </strong>" + sender.className + "<br><strong> Category: </strong>" + sender.packageName + "<br> <strong>Employee Count: </strong>" + sender.value;
+                            var html = "<strong>Occupation: </strong>" + sender.className + "<br><strong> Category: </strong>" + sender.packageName + "<br> <strong>Employee Count: </strong>" + sender.value.toLocaleString();
                             tooltip.html(html);
                             return   tooltip.style("visibility", "visible")
                            })
-                          .on("mousemove", function(){return tooltip.style("top", (event.pageY-10)+"px").style("left",(event.pageX+10)+"px");})
-                          .on("mouseout", function(){
+                          .on("mousemove", function(){
+                            return tooltip.style("top", (d3.event.screenY - 100)+"px").style("left",(d3.event.screenX +10)+"px");
+                        })
+                          .on("mouseout", function(event){
                             d3.select(this).attr("stroke", "black").attr("stroke-width", "0");
                             return tooltip.style("visibility", "hidden");})
-                          .transition().duration(2000)
-                          .attr("r", function(d) { return d.r; })
                           .style("fill", function(d) { return color(d.packageName); })
 
                           node.append("text")
                                 .attr("dy", ".3em")
                                 .style("text-anchor", "middle")
-                                .text(function(d) { return d.value})
+                                .text(function(d) { 
+                                    var radius = d3.select(this.previousSibling).attr("r");
+                                    var stringLength = d.value.toLocaleString().length;
+                                    var stringToRadiusRatio = radius / stringLength;
+                                    if (stringToRadiusRatio > 3.5) {
+                                      return d.value.toLocaleString();
+                                    }
+                                    else{
+                                      return '';
+                                    }    
+                                    })
+
                                 .on("mouseover", function(sender){
                                     d3.select(this).style("cursor", "pointer");
                                     d3.select(this.previousSibling).attr("stroke", "black").attr("stroke-width", "2");
@@ -1991,7 +2007,7 @@
                                       tooltip.html(html);
                                       return   tooltip.style("visibility", "visible")
                                  })
-                                .on("mousemove", function(){return tooltip.style("top", (event.pageY-10)+"px").style("left",(event.pageX+10)+"px");})
+                                .on("mousemove", function(event){return tooltip.style("top", (d3.event.screenY-100)+"px").style("left",(d3.event.screenX+10)+"px");})
                                 .on("mouseout", function(){
                                   d3.select(this).style("cursor", "default");
                                   d3.select(this.previousSibling).attr("stroke-width", "0");
@@ -2022,22 +2038,98 @@
                  * @method createAgePyramid
                  */
                 self.createAgePyramid = function(){
-
-                    var series1 = [];
-                    var series2 = [];
+                    //console.error("called createAgePyramid")
+                    var stateLineMale = [];
+                    var stateLineFemale = [];
+                    self.pyramidData = [];
+                    self.pyramidData.length = 0;
+                    var combinedMaleValue = 0;
+                    var combinedFemaleValue = 0;
 
                     $.each( self.groupedItems, function( key, item ) {
+                        if(item !== undefined){
+                            if(item.fieldName === "TOTAL_MALE"){
+                                self.totalMale = item.fieldValue;
+                            }
+                            else if(item.fieldName === "TOTAL_FEMALE"){
+                                self.totalFemale = item.fieldValue;
+                            }
+                            else if (item.fieldName === "M_Y18TO19" || item.fieldName === "M_Y20")
+                            {
+                                combinedMaleValue += item.fieldValue;
+                            }
+                            else if (item.fieldName === "M_Y21")
+                            {
+                                combinedMaleValue += item.fieldValue;
+                                var object = jQuery.extend({}, item);
+                                object.fieldValue = combinedMaleValue;
+                                self.pyramidData.push(object);
+                            }
+                            else if (item.fieldName === "F_Y18TO19" || item.fieldName === "F_Y20")
+                            {
+                                combinedFemaleValue += item.fieldValue;
+                            }
+                            else if (item.fieldName === "F_Y21")
+                            {
+                                combinedFemaleValue += item.fieldValue;
+                                var object = jQuery.extend({}, item);
+                                object.fieldValue = combinedFemaleValue;
+                                self.pyramidData.push(object);
+                            }
+                            else{
+                                var object = item;
+
+                                self.pyramidData.push(object);
+                            }
+                        }
+                    });
+                    self.pyramidData.reverse();
+
+                    var url = demographicConfig.reports.stateSummary.ACSRestUrl;
+                    var whereClause = "NAME = 'Arizona State'";
+                    layerDelegate.query(url, self.populationPyramidComparison, self.dataQueryFault, null, whereClause, false, demographicConfig.agePyramidFields);
+
+                    self.populationPyramidComparison = function(results){
+                        var feature = results.features[0];
+                        $.each( self.pyramidData, function( key, item ) {
+                            var baseLineValue = feature.attributes[item.fieldName];
+                            if( item.tableHeader === "Females age 21")
+                            {
+                                var value = feature.attributes["F_Y18TO19"] + feature.attributes["F_Y21"] + feature.attributes["F_Y20"];
+                                var percentage = value / feature.attributes["TOTAL_FEMALE"];
+                                stateLineFemale.push((percentage * self.totalFemale)* -1);
+                            }
+                            else if (item.tableHeader.indexOf("Females") > -1) {
+                                var percentage = baseLineValue / feature.attributes["TOTAL_FEMALE"];
+                                stateLineFemale.push((percentage * self.totalFemale) * -1);
+                            }
+                            else if( item.tableHeader === "Males age 21")
+                            {
+                                var value = feature.attributes["M_Y18TO19"] + feature.attributes["M_Y21"] + feature.attributes["M_Y20"];
+                                var percentage = value / feature.attributes["TOTAL_MALE"];
+                                stateLineMale.push((percentage * self.totalMale));
+                            }
+                            else{
+                                var percentage = baseLineValue / feature.attributes["TOTAL_MALE"];
+                                stateLineMale.push((percentage * self.totalMale));
+                            }
+                        });                    
+
+                    var maleSeries = [];
+                    var femaleSeries = [];
+
+                    $.each( self.pyramidData, function( key, item ) {
                         if (item.tableHeader.indexOf("Females") > -1) {
-                            series1.push(item.fieldValue);
+                            var negativeValue = item.fieldValue * -1;
+                            femaleSeries.push(negativeValue);
                         }
                         else{
-                            var negativeValue = item.fieldValue * -1;
-                            series2.push(negativeValue);
+                            maleSeries.push(item.fieldValue);
                         }
                     });
 
                     var chartObj = $("#demACSChartArea");
-                    var largestValue = Math.max.apply(Math, series1);
+                    var largestValue = Math.max.apply(Math, maleSeries);
                     var valueAxisTemplate = "#= kendo.format(\'{0:N0}\', Math.abs(value))#"
                     if(largestValue > 2000)
                     {
@@ -2057,14 +2149,34 @@
                         {
                             name: "Male",
                             type: "bar",
-                            data: series1,
+                            data: maleSeries,
                             color: "#00BFFF",
                         },
                         {
                             name: "Female",
                             type: "bar",
-                            data: series2,
+                            data: femaleSeries,
                             color: "#FF69B4",
+                        },
+                        {
+                            name: "State Male",
+                            type: "line",
+                            data: stateLineMale,
+                            color: "#000",
+                            stack: false,
+                            tooltip: {
+                                visible: false
+                            }
+                        },
+                        {
+                            name: "State Female",
+                            type: "line",
+                            data: stateLineFemale,
+                            color: "#000",
+                            stack: false,
+                            tooltip: {
+                                visible: false
+                            }
                         }
                         ],
                         seriesDefaults: {
@@ -2090,7 +2202,7 @@
                                 }
                             },
                              categoryAxis: [{
-                                categories: ["Less than 5","5 to 9","10 to 14","15 to 17","18 to 19","Age 20","Age 21","22 to 24","25 to 29","30 to 34","35 to 39","40 to 44","45 to 49","50 to 54","55 to 59","60 to 61","62 to 64","65 to 66","67 to 69","70 to 74","75 to 79","80 to 84","85 and up"],
+                                categories: ["85 and up", "80 to 84", "75 to 79", "70 to 74", "67 to 69", "65 to 66", "62 to 64", "60 to 61", "55 to 59", "50 to 54", "45 to 49", "40 to 44", "35 to 39", "30 to 34", "25 to 29", "22 to 24", "18 to 21", "15 to 17", "10 to 14", "5 to 9", "Less than 5"],
                                 border: "black",
                                 majorGridLines: {
                                     visible: false
@@ -2113,6 +2225,7 @@
                                 }
                             }
                     }).data("kendoChart");
+                };
                 };
 
                 /**
@@ -2410,6 +2523,56 @@
                     }
                     iframe.src = url;
                 };
+
+                 /**
+                 * Simply resets comparison combo boxes
+                 *
+                 * @method resetComparisonDropdowns
+                 */
+                self.resetComparisonDropdowns = function(){
+                    var ACSComboBox = $("#demACSCompareComboBox").data("kendoComboBox");
+                                    var ACSCheckbox = $("#demACSUseComp");
+                                    var ACSKendoGrid = $("#demACSDataGrid").data("kendoGrid");
+
+                                    var censusComboBox = $("#demCensusCompareComboBox").data("kendoComboBox");
+                                    var censusKendoGrid = $("#demCensusDataGrid").data("kendoGrid");
+
+                                    if (ACSComboBox !== null){
+
+                                        ACSComboBox.enable(false);
+                                        self.compareFeature = null;
+
+                                        // this block removes from the dom vw
+                                        ACSComboBox.destroy();
+                                        ACSComboBox.wrapper.remove();
+
+                                        // Update the Grid
+                                        if (ACSKendoGrid !== undefined) {
+                                            ACSKendoGrid.element.remove();
+                                            ACSKendoGrid.destroy();
+                                        }
+                                        self.createKendoGrid("ACS");
+
+                                    }
+                                    if (censusComboBox !== null)
+                                    {
+                                        censusComboBox.enable(false);
+                                        self.compareFeature = null;
+
+                                        // this block removes from the dom vw
+                                        censusComboBox.destroy();
+                                        censusComboBox.wrapper.remove();
+
+                                        // Update the Grid
+                                        if (censusKendoGrid !== undefined) {
+                                            censusKendoGrid.element.remove();
+                                            censusKendoGrid.destroy();
+                                        }
+                                        self.createKendoGrid("census");
+                                    }
+                }
+
+
 
             }; //end DemographicVM
 
