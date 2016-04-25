@@ -8,12 +8,15 @@
             var demographicConfig = new function() {
                 var self = this;
 
+                // self.exportPDFCompareReportUrl = "http://geo.azmag.gov/services/Demographics/CompareReport.html";
+                // self.exportPDFReportUrl = "http://geo.azmag.gov/services/Demographics/reports.html";
 
-                self.exportPDFCompareReportUrl = "http://geo.azmag.gov/services/Demographics/CompareReport.html";
-                self.exportPDFReportUrl = "http://geo.azmag.gov/services/Demographics/reports.html";
+                self.exportPDFCompareReportUrl = "http://geo.azmag.gov/services/test/Demographic/CompareReport.html";
+                self.exportPDFReportUrl = "http://geo.azmag.gov/services/test/Demographic/Reports.html";
+
+
                 self.viewReportUrl = "http://localhost/MAG/MAGDemographicsReports/DemographicChartsReport.html";
-                self.ACS2014byBlockGroup = appConfig.layerInfo[5].url;
-                // console.log(self.ACS2014byBlockGroup);
+                self.ACS2014byBlockGroup = appConfig.layerInfo[6].url;
 
                 self.CompareOperators = {
                     string: [
@@ -168,7 +171,8 @@
                         comparePlaceField: "NAME",
                         summaryField: "NAME",
                         isTimeVaryingData: false,
-                        source: "American Community Survey 2014"
+                        source: "American Community Survey 2014",
+                        populateDropDown: false
                     },
 
                     countySummary: {
@@ -182,7 +186,8 @@
                         comparePlaceField: "NAME",
                         summaryField: "NAME",
                         isTimeVaryingData: false,
-                        source: "American Community Survey 2014"
+                        source: "American Community Survey 2014",
+                        dropdown: "#countyComboBox"
                     },
                     placeSummary: {
                         name: "Demographic Summary",
@@ -195,7 +200,8 @@
                         comparePlaceField: "NAME",
                         summaryField: "NAME",
                         isTimeVaryingData: false,
-                        source: "American Community Survey 2014"
+                        source: "American Community Survey 2014",
+                        dropdown: "#placeComboBox"
                     },
                     legislativeSummary: {
                         name: "Demographic Summary",
@@ -208,7 +214,8 @@
                         comparePlaceField: "SLDIST_NAME",
                         summaryField: "SLDIST_NAME",
                         isTimeVaryingData: false,
-                        source: "American Community Survey 2014"
+                        source: "American Community Survey 2014",
+                        dropdown: "#legislativeComboBox"
                     },
                     congressionalSummary: {
                         name: "Demographic Summary",
@@ -221,7 +228,22 @@
                         comparePlaceField: "CDIST_NAME",
                         summaryField: "CDIST_NAME",
                         isTimeVaryingData: false,
-                        source: "American Community Survey 2014"
+                        source: "American Community Survey 2014",
+                        dropdown: "#congressionalComboBox"
+                    },
+                    zipCodeSummary: {
+                        name: "Demographic Summary",
+                        censusRestUrl: self.ACS2014byBlockGroup + "/11",
+                        ACSRestUrl: self.ACS2014byBlockGroup + "/5",
+                        whereClause: "OBJECTID > -1",
+                        compareCensusUrl: self.ACS2014byBlockGroup + "/11",
+                        compareACSUrl: self.ACS2014byBlockGroup + "/5",
+                        compareWhereClause: "OBJECTID > -1",
+                        comparePlaceField: "ZIPCODE",
+                        summaryField: "ZIPCODE",
+                        isTimeVaryingData: false,
+                        source: "American Community Survey 2014",
+                        dropdown: "#zipCodeComboBox"
                     },
                     censusTracts: {
                         name: "Demographic Summary",
@@ -234,7 +256,8 @@
                         comparePlaceField: "NAME",
                         summaryField: "OBJECTID",
                         isTimeVaryingData: false,
-                        source: "American Community Survey 2014"
+                        source: "American Community Survey 2014",
+                        populateDropDown: false
                     }
                 };
             };

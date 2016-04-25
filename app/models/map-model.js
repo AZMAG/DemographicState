@@ -119,6 +119,12 @@
                     "Representative: ${HouseRep2} - (${Party_HRep2})<br>" +
                     "Senator: ${Senator} - (${Party_Sen})<br>");
 
+                self.zipCodesInfoTemplate = new InfoTemplate();
+                self.zipCodesInfoTemplate.setTitle("Zip Code");
+                self.zipCodesInfoTemplate.setContent("<strong>${ZIPCODE}</strong><br>" +
+                    "<strong>Jurisdiction:</strong> ${NAME}"
+                    );
+
                 self.featureFillSymbol = new SimpleFillSymbol(SimpleFillSymbol.STYLE_BACKWARD_DIAGONAL,
                     new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID,
                     new Color([0, 255, 255]), 2), new Color([0, 255, 255, 0.25]));
@@ -293,6 +299,9 @@
                             }
                             if (info.id === "legislativeDistricts") {
                                 featureTemplate = self.legislatureInfoTemplate;
+                            }
+                            if (info.id === "zipCodes") {
+                                featureTemplate = self.zipCodesInfoTemplate;
                             }
                             layer = new FeatureLayer(info.url + token, {
                                 id: info.id,

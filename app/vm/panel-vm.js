@@ -105,34 +105,17 @@
                         left: self.winWidth - self.winLocation
                     });
 
-                    // Hide the county div for now
-                    $("#countyChoiceDiv").hide();
-                    // Hide the places div for now
-                    $("#placeChoiceDiv").hide();
-                    // Hide the supervisor div for now
-                    $("#legislativeChoiceDiv").hide();
-                    // Hide the council div for now
-                    $("#congressionalChoiceDiv").hide();
+                    self.hideChoices();
 
-                    // Load the county names
-                    var url1 = demographicConfig.reports.countySummary.ACSRestUrl;
-                    var whereClause1 = demographicConfig.reports.countySummary.whereClause;
-                    layerDelegate.query(url1, self.countyQueryHandler, self.countyQueryFault, null, whereClause1, false);
                     qbVM.init("display", "after");
 
-                    // Load the place names
-                    var url2 = demographicConfig.reports.placeSummary.ACSRestUrl;
-                    var whereClause2 = demographicConfig.reports.placeSummary.whereClause;
-                    layerDelegate.query(url2, self.placeQueryHandler, self.placeQueryFault, null, whereClause2, false);
-                    //  // Load the legislative names
-                    var url3 = demographicConfig.reports.legislativeSummary.ACSRestUrl;
-                    var whereClause3 = demographicConfig.reports.legislativeSummary.whereClause;
-                    layerDelegate.query(url3, self.legislativeQueryHandler, self.legislativeQueryFault, null, whereClause3, false);
-
-                    //  // Load the congressional names
-                    var url4 = demographicConfig.reports.congressionalSummary.ACSRestUrl;
-                    var whereClause4 = demographicConfig.reports.congressionalSummary.whereClause;
-                    layerDelegate.query(url4, self.congressionalQueryHandler, self.congressionalQueryFault, null, whereClause4, false);
+                    $.each(demographicConfig.reports, function(i, configItem){
+                        if(configItem.populateDropDown !== false){
+                            var url = configItem.ACSRestUrl;
+                            var whereClause = configItem.whereClause;
+                            layerDelegate.query(url, self.dropDownQueryHandler, self.queryFault, null, whereClause, false);
+                        }
+                    });
 
                 }; //end init
 
@@ -179,38 +162,47 @@
                 });
 
                 /**
-                 * Callback method for errors returned by county query.
+                 * Callback method for errors returned by the query.
                  *
-                 * @method countyQueryFault
+                 * @method queryFault
                  * @param {Error} error - error object
                  */
-                self.stateQueryFault = function(error) {
+                self.queryFault = function(error) {
                     console.log(error.message);
                 };
 
                 /**
-                 * Callback method for errors returned by county query.
+                 * Callback method for results returned by dropdown query.
                  *
-                 * @method countyQueryFault
-                 * @param {Error} error - error object
-                 */
-                self.countyQueryFault = function(error) {
-                    console.log(error.message);
-                };
-
-                /**
-                 * Callback method for results returned by county query.
-                 *
-                 * @method countyQueryHelper
+                 * @method dropDownQueryHandler
                  * @param {FeatureSet} results - feature set returned by query.
                  */
-                self.countyQueryHandler = function(results) {
+                self.dropDownQueryHandler = function(results) {
+                    var configItem;
+                    var attributes = results.features[0].attributes;
+                    if(attributes["PLACENAME14"]){
+                        configItem = demographicConfig.reports.placeSummary;
+                    }
+                    else if(attributes["ZIPCODE"]){
+                        configItem = demographicConfig.reports.zipCodeSummary;
+                    }
+                    else if(attributes["SLDIST_NAME"]){
+                        configItem = demographicConfig.reports.legislativeSummary;
+                    }
+                    else if(attributes["CDIST_NAME"]){
+                        configItem = demographicConfig.reports.congressionalSummary;
+                    }
+                    else if(attributes["COUNTY"]){
+                        configItem = demographicConfig.reports.countySummary;
+                    }
+
                     var features = results.features;
-                    // console.log(features);
                     var nameArray = [];
-                    var countyField = demographicConfig.reports.countySummary.summaryField;
+                    var fieldName = configItem.summaryField;
+                    var dropdownSelector = configItem.dropdown;
+
                     $.each(features, function(index, feature) {
-                        var name = feature.attributes[countyField];
+                        var name = feature.attributes[fieldName];
                         nameArray.push({
                             Name: name
                         });
@@ -227,58 +219,7 @@
                     }
                     nameArray.sort(compare);
 
-                    $("#countyComboBox").kendoComboBox({
-                        index: 0,
-                        dataTextField: "Name",
-                        dataValueField: "Name",
-                        filter: "contains",
-                        dataSource: {
-                            data: nameArray
-                        }
-                    });
-
-                };
-
-                /**
-                 * Callback method for errors returned by place query.
-                 *
-                 * @method placeQueryFault
-                 * @param {Error} error - error object
-                 */
-                self.placeQueryFault = function(error) {
-                    console.log(error.message);
-                };
-
-                /**
-                 * Callback method for results returned by place query.
-                 *
-                 * @method placeQueryHelper
-                 * @param {FeatureSet} results - feature set returned by query.
-                 */
-                self.placeQueryHandler = function(results) {
-                    var features = results.features;
-
-                    var nameArray = [];
-                    var placeField = demographicConfig.reports.placeSummary.summaryField;
-                    $.each(features, function(index, feature) {
-                        var name = feature.attributes[placeField];
-                        nameArray.push({
-                            Name: name
-                        });
-                    });
-                    // used to sort attributes and put into Array. vw
-                    function compare(a, b) {
-                        if (a.Name < b.Name) {
-                            return -1;
-                        }
-                        if (a.Name > b.Name) {
-                            return 1;
-                        }
-                        return 0;
-                    }
-                    nameArray.sort(compare);
-
-                    $("#placeComboBox").kendoComboBox({
+                    $(dropdownSelector).kendoComboBox({
                         index: 0,
                         dataTextField: "Name",
                         dataValueField: "Name",
@@ -289,198 +230,94 @@
                     });
                 };
 
+                self.displayChoice = function(e){
 
-                /**
-                 * Callback method for errors returned by legislative query.
-                 *
-                 * @method legislativeQueryFault
-                 * @param {Error} error - error object
-                 */
-                self.legislativeQueryFault = function(error) {
-                    console.log(error.message);
-                };
+                    var sender = e.target.id;
+                    var type;
+                    var layerID;
 
-                /**
-                 * Callback method for results returned by legislative query.
-                 *
-                 * @method legislativeQueryHelper
-                 * @param {FeatureSet} results - feature set returned by query.
-                 */
-                self.legislativeQueryHandler = function(results) {
-                    var features = results.features;
-
-                    var nameArray = [];
-                    var legislativeField = demographicConfig.reports.legislativeSummary.summaryField;
-                    $.each(features, function(index, feature) {
-                        var name = feature.attributes[legislativeField];
-                        nameArray.push({
-                            Name: name
-                        });
-                    });
-                    // used to sort attributes and put into Array. vw
-                    function compare(a, b) {
-                        if (a.Name < b.Name) {
-                            return -1;
-                        }
-                        if (a.Name > b.Name) {
-                            return 1;
-                        }
-                        return 0;
+                    switch (sender) {
+                      case "launchStateSummaryWin":
+                        type = "state";
+                        layerID = ""
+                        break;
+                      case "launchCountySummaryWin":
+                        type = "county";
+                        layerID = "countyBoundaries"
+                        break;
+                      case "launchPlaceSummaryWin":
+                        type = "place";
+                        layerID = ""
+                        break;
+                      case "launchLegislativeSummaryWin":
+                        type = "legislative";
+                        layerID = "legislativeDistricts"
+                        break;
+                      case "launchCongressionalSummaryWin":
+                        type = "congressional";
+                        layerID = "congressionalDistricts"
+                        break;
+                      case "launchZipCodeEmpSummaryWin":
+                        type = "zipCode";
+                        layerID = "zipCodes"
+                        break;
+                      case "launchInteractiveSummaryDiv":
+                        type = "demInteractive";
+                        layerID = ""
+                        break;
                     }
-                    nameArray.sort(compare);
+                    var layer = null;
+                    var boxChecked = null;
 
-                    $("#legislativeComboBox").kendoComboBox({
-                        index: 0,
-                        dataTextField: "Name",
-                        dataValueField: "Name",
-                        filter: "contains",
-                        dataSource: {
-                            data: nameArray
-                        }
-                    });
-                };
-
-                // *
-                //  * Callback method for results returned by congressional query.
-                //  *
-                self.congressionalQueryFault = function(error) {
-                    console.log(error.message);
-                };
-                //  * @method congressionalQueryHelper
-                //  * @param {FeatureSet} results - feature set returned by query.
-
-                self.congressionalQueryHandler = function(results) {
-                    var features = results.features;
-
-                    var nameArray = [];
-                    var councilField = demographicConfig.reports.congressionalSummary.summaryField;
-                    $.each(features, function(index, feature) {
-                        var name = feature.attributes[councilField];
-                        nameArray.push({
-                            Name: name
-                        });
-                    });
-                    // used to sort attributes and put into Array. vw
-                    function compare(a, b) {
-                        if (a.Name < b.Name) {
-                            return -1;
-                        }
-                        if (a.Name > b.Name) {
-                            return 1;
-                        }
-                        return 0;
+                    if(layerID !== ""){
+                        layer = mapModel.mapInstance.getLayer(layerID);
+                        boxChecked = dom.byId("c" + layerID).checked;
                     }
-                    nameArray.sort(compare);
+                    var selector = "#" + type + "ChoiceDiv";
+                    var $choiceDiv = $(selector);
 
-                    $("#congressionalComboBox").kendoComboBox({
-                        index: 0,
-                        dataTextField: "Name",
-                        dataValueField: "Name",
-                        filter: "contains",
-                        dataSource: {
-                            data: nameArray
-                        }
-                    });
-                };
-
-                self.displayStateChoice = function() {
-                    $("#countyChoiceDiv, #placeChoiceDiv, #legislativeChoiceDiv, #congressionalChoiceDiv, #demInteractiveDiv").hide();
-                };
-
-                /**
-                 * Show/Hide div containing county combo box.
-                 *
-                 * @event click
-                 */
-                self.displayCountyChoice = function() {
-                    if ($("#countyChoiceDiv").is(":hidden")) {
-                        $("#countyChoiceDiv").show();
-                        $("#placeChoiceDiv, #legislativeChoiceDiv, #congressionalChoiceDiv, #demInteractiveDiv").hide();
-                    } else {
-                        $("#countyChoiceDiv").hide();
-                    }
-                };
-
-                /**
-                 * Show/Hide div containing place combo box.
-                 *
-                 * @event click
-                 */
-                self.displayPlaceChoice = function() {
-                    if ($("#placeChoiceDiv").is(":hidden")) {
-                        $("#placeChoiceDiv").show();
-                        $("#countyChoiceDiv, #legislativeChoiceDiv, #congressionalChoiceDiv, #demInteractiveDiv").hide();
-                    } else {
-                        $("#placeChoiceDiv").hide();
-                    }
-                };
-
-                // /**
-                //  * Show/Hide div containing legislative combo box.
-                //  *
-                //  * @event click
-                //  */
-                self.displayLegislativeChoice = function() {
-                    var layer = mapModel.mapInstance.getLayer("legislativeDistricts");
-                    var countyLayer = mapModel.mapInstance.getLayer("countyBoundaries");
-                    var boxChecked = dom.byId("clegislativeDistricts").checked;
-
-                    if ($("#legislativeChoiceDiv").is(":hidden")) {
-                        $("#legislativeChoiceDiv").show();
-                        $("#countyChoiceDiv, #placeChoiceDiv, #congressionalChoiceDiv, #demInteractiveDiv").hide();
-
-                        // used to turn on and off layer in the layer options.
-                        // turns on the Legislative Districts and turns off County Boundaries
-                        if (layer.visible === false && boxChecked === false) {
+                    if ($choiceDiv.is(":hidden")) {
+                        $choiceDiv.show();
+                        self.hideChoices(selector);
+                        if (layer !== null && layer.visible === false && boxChecked === false) {
+                            self.hideLayers(layerID);
                             layer.show();
-                            countyLayer.hide();
-                            dom.byId("clegislativeDistricts").checked = true;
-                            dom.byId("ccountyBoundaries").checked = false;
+                            dom.byId("c" + layerID).checked = true;
                         }
                     } else {
-                        $("#legislativeChoiceDiv").hide();
-
-                        if (layer.visible === true && boxChecked === true) {
+                        $choiceDiv.hide();
+                        if (layer !== null && layer.visible === true && boxChecked === true) {
                             layer.hide();
-                            countyLayer.show();
-                            dom.byId("clegislativeDistricts").checked = false;
-                            dom.byId("ccountyBoundaries").checked = true;
+                            dom.byId("c" + layerID).checked = false;
                         }
                     }
                 };
 
-                // /**
-                //  * Show/Hide div containing congressional combo box.
-                //  *
-                //  * @event click
-                //  */
-                self.displayCongressionalChoice = function() {
-                    var layer = mapModel.mapInstance.getLayer("congressionalDistricts");
-                    var countyLayer = mapModel.mapInstance.getLayer("countyBoundaries");
-                    var boxChecked = dom.byId("ccongressionalDistricts").checked;
-
-                    if ($("#congressionalChoiceDiv").is(":hidden")) {
-                        $("#congressionalChoiceDiv").show();
-                        $("#countyChoiceDiv, #placeChoiceDiv, #legislativeChoiceDiv, #demInteractiveDiv").hide();
-
-                        // used to turn on and off layer in the layer options.
-                        // turns on the Congressional Districts and turns off County Boundaries
-                        if (layer.visible === false && boxChecked === false) {
-                            layer.show();
-                            countyLayer.hide();
-                            dom.byId("ccongressionalDistricts").checked = true;
-                            dom.byId("ccountyBoundaries").checked = false;
+                /**
+                 * Hide all choice divs except for div id passed in parameter
+                 *
+                 * @parameter choice
+                 */
+                self.hideChoices = function(choice){
+                    var choiceDivs = ["#countyChoiceDiv", "#placeChoiceDiv", "#legislativeChoiceDiv", "#congressionalChoiceDiv", "#zipCodeChoiceDiv"];
+                    $.each(choiceDivs, function(i, divID){
+                        if(divID !== choice){
+                            $(divID).hide();
                         }
-                    } else {
-                        $("#congressionalChoiceDiv").hide();
+                    });
+                };
 
-                        if (layer.visible === true && boxChecked === true) {
-                            layer.hide();
-                            countyLayer.show();
-                            dom.byId("ccongressionalDistricts").checked = false;
-                            dom.byId("ccountyBoundaries").checked = true;
+                self.hideLayers = function(layerID){
+                    var layerIds = ["countyBoundaries", "congressionalDistricts", "legislativeDistricts", "zipCodes"];
+                    $.each(layerIds, function(i, item){
+                        if(layerID !== item){
+                            var layer =  mapModel.mapInstance.getLayer(item);
+                            if(layer){
+                                layer.hide();
+                                dom.byId("c" + item).checked = false; 
+                            }
                         }
-                    }
+                    });
                 };
 
                 /**
@@ -488,12 +325,17 @@
                  *
                  * @event click
                  */
-                self.openStateSummaryWindow = function() {
-                    // Get the place name selected
-                    var placeName = "Arizona State";
+                self.openSummaryWindow = function(e) {
+                    var parent = e.target.parentNode;
+                    var comboBox = $("#" + parent.id + " input")[1].id;
+                    var type = comboBox.replace('ComboBox','');
+
+                    // Get the selected name
+                    var selectedName = $("#" + comboBox).data("kendoComboBox").dataItem();
+                    var param = selectedName.Name;
 
                     // Open the window
-                    demographicVM.openWindow(placeName, "state");
+                    demographicVM.openWindow(param, type);
                 };
 
                 /**
@@ -501,55 +343,9 @@
                  *
                  * @event click
                  */
-                self.openCountySummaryWindow = function() {
-                    // Get the place name selected
-                    var selectedName = $("#countyComboBox").data("kendoComboBox").dataItem();
-                    var countyName = selectedName.Name;
-
+                self.openStateSummaryWindow = function(e) {
                     // Open the window
-                    demographicVM.openWindow(countyName, "county");
-                };
-
-                /**
-                 * Get the selected place name and call open method on demographicVM.
-                 *
-                 * @event click
-                 */
-                self.openPlaceSummaryWindow = function() {
-                    // Get the place name selected
-                    var selectedName = $("#placeComboBox").data("kendoComboBox").dataItem();
-                    var placeName = selectedName.Name;
-
-                    // Open the window
-                    demographicVM.openWindow(placeName, "place");
-                };
-
-                // /**
-                //  * Get the selected place name and call open method on demographicVM.
-                //  *
-                //  * @event click
-                //  */
-                self.openLegislativeSummaryWindow = function() {
-                    // Get the place name selected
-                    var selectedName = $("#legislativeComboBox").data("kendoComboBox").dataItem();
-                    var legislativeName = selectedName.Name;
-
-                    // Open the window
-                    demographicVM.openWindow(legislativeName, "legislative");
-                };
-
-                // /**
-                //  * Get the selected place name and call open method on demographicVM.
-                //  *
-                //  * @event click
-                //  */
-                self.openCongressionalSummaryWindow = function() {
-                    // Get the place name selected
-                    var selectedName = $("#congressionalComboBox").data("kendoComboBox").dataItem();
-                    var congressionalName = selectedName.Name;
-
-                    // Open the window
-                    demographicVM.openWindow(congressionalName, "congressional");
+                    demographicVM.openWindow("Arizona State","state");
                 };
 
                 /**
@@ -559,13 +355,13 @@
                  */
                 self.displayInteractiveDiv = function() {
                     var div = $("#demInteractiveDiv");
-
                     if (div.length === 0) {
                         interactiveToolsVM.insertAfter("demInteractiveDiv", "launchInteractiveSummaryDiv", demographicVM.interactiveCensusSelectionQueryHandler, demographicVM.interactiveSelectionQueryFault, demographicConfig.reports.censusTracts.ACSRestUrl);
+                        self.hideChoices("#demInteractiveDiv")
                     } else {
                         if (div.is(":hidden")) {
+                            self.hideChoices("#demInteractiveDiv")
                             $("#demInteractiveDiv").show();
-                            $("#countyChoiceDiv, #placeChoiceDiv, #legislativeChoiceDiv, #congressionalChoiceDiv").hide();
                         } else {
                             interactiveToolsVM.clearSelection();
                             $("#demInteractiveDiv").hide();
@@ -579,10 +375,10 @@
                  * @event click
                  */
                 self.openQueryBuilder = function() {
-                    $("#countyChoiceDiv, #placeChoiceDiv, #legislativeChoiceDiv, #demInteractiveDiv").hide();
+                    self.hideChoices();
                     qbVM.openWindow();
                 };
-
+                
             }; // End of PanelVM
 
             return PanelVM;

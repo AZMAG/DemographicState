@@ -57,6 +57,14 @@
                 outFields: ["*"],
                 placeholder: "Congressional District 1"
             }, {
+                featureLayer: new FeatureLayer(appConfig.zipCodeService),
+                searchFields: ["ZIPCODE"],
+                displayField: "ZIPCODE",
+                autoNavigate: true,
+                name: "Zip Codes",
+                outFields: ["*"],
+                placeholder: "85254"
+            }, {
                 featureLayer: new FeatureLayer(appConfig.tractService),
                 searchFields: ["NAMELSAD"],
                 displayField: "NAMELSAD",

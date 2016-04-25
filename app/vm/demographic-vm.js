@@ -289,6 +289,7 @@
                                 $("#demACSChartArea").remove();
                             }
                             self.createChart("ACS");
+                            self.reloadChart();
                         }
                         
                     });
@@ -307,6 +308,7 @@
                                 $("#demACSChartArea").remove();
                             }
                             self.createChart("census");
+                            self.reloadChart();
                         }
                     });
 
@@ -406,6 +408,9 @@
                             break;
                         case "place":
                             self.reportConfigItem = demographicConfig.reports.placeSummary;
+                            break;
+                        case "zipCode":
+                            self.reportConfigItem = demographicConfig.reports.zipCodeSummary;
                             break;
                     }
 
@@ -796,6 +801,7 @@
                             tabStrip.select(0);
                         }
                     }
+                    self.resetComparisonDropdowns();
 
                     // Summarize the features
                     var sumAttributes = self.summarizeAttributes(features);
@@ -823,7 +829,6 @@
                                 timePeriod: field.timePeriod,
                                 derivedTargetField: field.fieldName,
                                 derivedPercentOfField: field.percentOfField,
-                                percentField: field.percentField,
                                 percentValue: 0,
                                 percentValueFormatted: "0",
                                 derivedDensityAreaField: field.densityAreaField,
@@ -836,29 +841,13 @@
                                 aggValues[field.fieldName].fieldValue = "-";
                                 aggValues[field.fieldName].fieldValueFormatted = "-";
                             }
-                            if(featuresCount > 1){
-                                // checks for "0" in data to return null. vw added?
-                                if (field.percentOfField === "" || field.percentOfField === undefined) {
-                                    aggValues[field.fieldName].percentValueFormatted = "-";
-                                }
-                                else if (field.percentOfField !== undefined) {
-                                    var percentOf = Number(sumAttributes[field.percentOfField]);
-                                    aggValues[field.fieldName].percentValue = (attrValue / percentOf) * 100;
-                                    aggValues[field.fieldName].percentValueFormatted = magNumberFormatter.formatValue((attrValue / percentOf) * 100) + "%";
-                                }
-
+                            if (field.percentOfField === "" || field.percentOfField === undefined) {
+                                aggValues[field.fieldName].percentValueFormatted = "-";
                             }
-                            else{
-                                // checks for "0" in data to return null. vw added?
-                                if (field.percentField === "") {
-                                    // var percentOf = Number(sumAttributes[field.percentField]);
-                                    aggValues[field.fieldName].percentValueFormatted = "-";
-                                }
-                                if (field.percentField !== "") {
-                                    var percentOf = Number(sumAttributes[field.percentField]);
-                                    aggValues[field.fieldName].percentValue = sumAttributes[field.percentField];
-                                    aggValues[field.fieldName].percentValueFormatted = magNumberFormatter.formatValue(sumAttributes[field.percentField]) + "%";
-                                }
+                            else if (field.percentOfField !== undefined) {
+                                var percentOf = Number(sumAttributes[field.percentOfField]);
+                                aggValues[field.fieldName].percentValue = (attrValue / percentOf) * 100;
+                                aggValues[field.fieldName].percentValueFormatted = magNumberFormatter.formatValue((attrValue / percentOf) * 100) + "%";
                             }
                             if (field.densityAreaField !== "") {
                                 var densityArea = Number(sumAttributes[field.densityAreaField]);
@@ -976,6 +965,7 @@
                             mapModel.setMapExtent(zoomExtent);
                         }
                     }
+                    self.resetComparisonDropdowns();
 
                     // Summarize the features
                     var sumAttributes = self.summarizeAttributes(features);
@@ -1002,7 +992,7 @@
                                 chartName: field.chartCategory, // added to give name to series for legend. vw
                                 parentField: field.parentField,
                                 timePeriod: field.timePeriod,
-                                percentField: field.percentField,
+                                percentOfField: field.percentOfField,
                                 derivedTargetField: field.fieldName,
                                 derivedPercentOfField: field.percentOfField,
                                 percentValue: 0,
@@ -1017,29 +1007,13 @@
                                 aggValues[field.fieldName].fieldValue = "-";
                                 aggValues[field.fieldName].fieldValueFormatted = "-";
                             }
-                            if(featuresCount > 1){
-                                // checks for "0" in data to return null. vw added?
-                                if (field.percentOfField === "" || field.percentOfField === undefined) {
-                                    aggValues[field.fieldName].percentValueFormatted = "-";
-                                }
-                                else if (field.percentOfField !== undefined) {
-                                    var percentOf = Number(sumAttributes[field.percentOfField]);
-                                    aggValues[field.fieldName].percentValue = (attrValue / percentOf) * 100;
-                                    aggValues[field.fieldName].percentValueFormatted = magNumberFormatter.formatValue((attrValue / percentOf) * 100) + "%";
-                                }
-
+                            if (field.percentOfField === "" || field.percentOfField === undefined) {
+                                aggValues[field.fieldName].percentValueFormatted = "-";
                             }
-                            else{
-                                // checks for "0" in data to return null. vw added?
-                                if (field.percentField === "") {
-                                    // var percentOf = Number(sumAttributes[field.percentField]);
-                                    aggValues[field.fieldName].percentValueFormatted = "-";
-                                }
-                                if (field.percentField !== "") {
-                                    var percentOf = Number(sumAttributes[field.percentField]);
-                                    aggValues[field.fieldName].percentValue = sumAttributes[field.percentField];
-                                    aggValues[field.fieldName].percentValueFormatted = magNumberFormatter.formatValue(sumAttributes[field.percentField]) + "%";
-                                }
+                            else if (field.percentOfField !== undefined) {
+                                var percentOf = Number(sumAttributes[field.percentOfField]);
+                                aggValues[field.fieldName].percentValue = (attrValue / percentOf) * 100;
+                                aggValues[field.fieldName].percentValueFormatted = magNumberFormatter.formatValue((attrValue / percentOf) * 100) + "%";
                             }
                             if (field.densityAreaField !== "") {
                                 var densityArea = Number(sumAttributes[field.densityAreaField]);
@@ -1490,16 +1464,19 @@
                             var curTarget = self.compareFeature.attributes[item.derivedTargetField];
 
                             // checks for "0" in data to return null. vw added?
-                            if (item.derivedPercentOfField === undefined) {
+                            if (item.derivedPercentOfField === "" || item.derivedPercentOfField === undefined) {
                                 item.comparePercentValueFormatted = "-";
                             }
-
-                            if (item.percentField !== undefined) {
-
-                                var percentValue = Number(self.compareFeature.attributes[item.percentField]);
-                                item.comparePercentValue = percentValue;
-                                if (!isNaN(percentValue)) {
-                                    item.comparePercentValueFormatted = magNumberFormatter.formatValue(percentValue) + "%";
+                            if(item.derivedPercentOfField !== "" && item.derivedPercentOfField !== undefined)
+                            {
+                                var percentOf = Number(self.compareFeature.attributes[item.derivedPercentOfField]);
+                                var value = item.compareValue;
+                                item.comparePercentValue = (value / percentOf) * 100;
+                                if(item.comparePercentValue !== null && !Number.isNaN(item.comparePercentValue) && item.comparePercentValue !== Infinity){
+                                    item.comparePercentValueFormatted = magNumberFormatter.formatValue(item.comparePercentValue) + "%";
+                                }
+                                else{
+                                    item.comparePercentValueFormatted = "-";
                                 }
                             }
 
@@ -1883,73 +1860,242 @@
                                 title: "Percent"
                             },
                             //{field: "densityValueFormatted", title: "Per Sq Mile", format: "{0:n1}"}
-                        ]
+                        ],
+                        dataBound: function(e) {
+                            if(this.wrapper[0].id !== "demCensusDataGrid")
+                            {
+                                // get the index of the UnitsInStock cell
+                                var rowCollection = e.sender.tbody[0].children;
+                                var data = e.sender._data;
+                                var realRows = [];
+
+                                $.each(rowCollection, function(i, row){
+                                    if(row.className !== "k-grouping-row")
+                                    {
+                                        realRows.push(row);
+                                    }
+                                });
+                                 $.each(realRows, function(i, row){
+                                    if(data[i]){
+                                        if(data[i]["fieldCategory"] === "Occupation"){
+                                            if(data[i].parentField === "" || data[i].fieldName === "ProtectiveServ")
+                                            {
+                                                var jRow = $(row);
+                                                jRow.addClass('k-header');
+                                                jRow.removeClass('k-alt');
+                                            }
+                                        }
+                                    }
+                                });
+                            }
+                        }
                     });
 
                     self.sizeGrid("#" + dataGridName);
                 };
 
                 self.createTreeMap = function(){
-
                     var data = [];
                     var parents = [];
-
+                    var items = [];
+                    $("#demACSChartArea").addClass("bubbleChart");
                     $.each(self.groupedItems, function(i, item){
 
                         var parentObj = {};
 
-                        if(item.parentField === "")
+                        if(item.parentField !== "" && item.fieldAlias !== "Protective service occupations" && item.fieldValue !== 0)
                         {
-                            parentObj = {
-                                name: item.fieldAlias,
-                                size: item.fieldValue,
-                                parentField: item.fieldName,
-                                children: []
-                            }
-                            parents.push(parentObj);
-                        }
-                        else{
-                            var childObj = {
-                                name: item.fieldAlias,
-                                size: item.fieldValue
-                            }
-                            $.each(parents, function (j, parentItem){
-                                if(parentItem.parentField === item.parentField)
-                                {
-                                    if(item.fieldValue > 0)
-                                    {
-                                        parents[j].children.push(childObj);
-                                    }
+                            var strArray = item.fieldAlias.split(" ");
+                            var text1 = "";
+                            var text2 = "";
+                            var text3 = "";
+
+                            if(strArray.length < 4){
+
+                                for (var i = 0; i < strArray.length; i++) {
+                                    text1 += strArray[i] + " ";
                                 }
-                            });
+                            }
+                            else if(strArray.length > 3 && strArray.length < 6){
+                                for (var i = 0; i < 3; i++) {
+                                    text1 += strArray[i] + " ";
+                                }
+                                for (var i = 3; i < strArray.length; i++) {
+                                    text2 += strArray[i] + " ";
+                                }
+                            }
+                            else {
+                                for (var i = 0; i < 3; i++) {
+                                    text1 += strArray[i] + " ";
+                                }
+                                for (var i = 3; i < 6; i++) {
+                                    text2 += strArray[i] + " ";
+                                }
+                                text3 = "...";
+                            }
+
+                            var childObj = {
+                                text: text1,
+                                text2: text2,
+                                text3: text3,
+                                fullText: item.fieldAlias,
+                                count: item.fieldValue.toString(),
+                                label: item.fieldValue.toLocaleString(),
+                                percent: item.percentValueFormatted,
+                                category: item.parentField
+                            }
+
+                            items.push(childObj);
                         }
                     });
 
-                    data = {
-                        name: "Occupation",
-                        children: parents
+                    var bubbleChart = new d3.svg.BubbleChart({
+                    supportResponsive: true,
+                    //container: => use @default
+                    size: 500,
+                    viewBoxSize: 500,
+                    innerRadius: 120,
+                    //outerRadius: => use @default
+                    radiusMin: 10,
+                    radiusMax: 20,
+                    //intersectDelta: 100,
+                    intersectInc: 20,
+                    circleColor: "category",//use @default
+                    data: {
+                      items: items,
+                      eval: function (item) {return item.count;},
+                      color: function (item){
+                        var color = "";
+                        $.each(appConfig.bubbleColors, function(i, value){
+                            //console.log(value.category);
+                            if(value.category === item.category)
+                            {
+                                color = value.color;
+                                return;
+                            }
+                        });
+
+                        //console.log(item.category)
+
+                        return color;
+                      },
+                      classed: function (item) {return item.text.split(" ").join("");
                     }
+                    },
+                    plugins: [
+                      {
+                        name: "lines",
+                        options: {
+                          format: [
+                            {// Line #0
+                              textField: "label",
+                              classed: {label: true},
+                              style: {
+                                "font-family": "Source Sans Pro, sans-serif",
+                                "text-anchor": "middle",
+                                "font-weight": 500,
+                                fill: "black",
+                                opacity: "hidden"
+                              },
+                              attr: {
+                                "font-size": "1px",
+                                dy: "-30px",
+                                x: function (d) {return d.cx;},
+                                y: function (d) {return d.cy;}
+                              }
+                            },
+                            {// Line #0
+                              textField: "percent",
+                              classed: {label: true},
+                              style: {
+                                "font-family": "Source Sans Pro, sans-serif",
+                                "text-anchor": "middle",
+                                fill: "black",
+                                opacity: "0"
+                              },
+                              attr: {
+                                "font-size": "1px",
+                                dy: "-4px",
+                                x: function (d) {return d.cx;},
+                                y: function (d) {return d.cy;}
+                              }
+                            },
+                            {// Line #1
+                              textField: "text",
+                              classed: {text: true},
+                              style: {
+                                "font-family": "Source Sans Pro, sans-serif",
+                                "text-anchor": "middle",
+                                fill: "black",
+                                opacity: "0"
+                              },
+                              attr: {
+                                "font-size": "1px",
+                                dy: "20px",
+                                x: function (d) {return d.cx;},
+                                y: function (d) {return d.cy;}
+                              }
+                            },
+                            {// Line #2
+                              textField: "text2",
+                              classed: {text2: true},
+                              style: {
+                                "font-family": "Source Sans Pro, sans-serif",
+                                "text-anchor": "middle",
+                                fill: "black",
+                                opacity: "0"
+                              },
+                              attr: {
+                                "font-size": "1px",
+                                dy: "40px",
+                                x: function (d) {return d.cx;},
+                                y: function (d) {return d.cy;}
+                              }
+                            },
+                            {// Line #3
+                              textField: "text3",
+                              classed: {text3: true},
+                              style: {
+                                "font-family": "Source Sans Pro, sans-serif",
+                                "text-anchor": "middle",
+                                fill: "black",
+                                opacity: "0"
+                              },
+                              attr: {
+                                "font-size": "1px",
+                                dy: "60px",
+                                x: function (d) {return d.cx;},
+                                y: function (d) {return d.cy;}
+                              }
+                            }
+                          ],
+                          centralFormat: [
+                            {// Line #0
+                              attr: {"font-size": "28px"},
+                              style: {"opacity": "1"}
+                            },
+                            {// Line #1
+                              attr: {"font-size": "20px"},
+                              style: {"opacity": "1"}
+                            },
+                            {// Line #2
+                              attr: {"font-size": "18px"},
+                              style: {"opacity": "1"}
+                            },
+                            {// Line #3
+                              attr: {"font-size": "18px"},
+                              style: {"opacity": "1"}
+                            },
+                            {// Line #4
+                              attr: {"font-size": "48px"},
+                              style: {"opacity": "1"}
+                            },
+                          ]
+                        }
+                      }]
+                  });
 
-                    var root = data;
-
-
-
-                    var diameter = 300,
-                        format = d3.format(",d"),
-                        color = d3.scale.category20c();
-
-                    var bubble = d3.layout.pack()
-                        .sort(null)
-                        .size([diameter, diameter])
-                        .padding(1.5);
-
-                    var svg = d3.select("#demACSChartArea").append("svg")
-                        .attr("width", diameter)
-                        .attr("height", diameter)
-                        .style("margin-left", "65px")
-                        .attr("class", "bubble");
-
-                      var tooltip = d3.select("body")
+                    var tooltip = d3.select("body")
                         .append("div")
                         .style("position", "absolute")
                         .style("z-index", "10000000")
@@ -1959,76 +2105,22 @@
                         .style("border-radius","3px")
                         .style("padding", "3px")
                         .style("color", "black")
+                        .style("max-width", "140px")
+                        .style("padding", "10px")
                         .style("font-size", "12px");
 
-                      var node = svg.selectAll(".node")
-                          .data(bubble.nodes(classes(root))
-                          .filter(function(d) { return !d.children; }))
-                          .enter().append("g")
-                          .attr("class", "node")
-                          .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
-
-                        node.append("circle")
-                          .attr("r", function(d) { return d.r; })
-                          .attr("fill", "transparent")
-                          .on("mouseover", function(sender){
-                            d3.select(this).attr("stroke", "black").attr("stroke-width", "2");
-                            var html = "<strong>Occupation: </strong>" + sender.className + "<br><strong> Category: </strong>" + sender.packageName + "<br> <strong>Employee Count: </strong>" + sender.value.toLocaleString();
-                            tooltip.html(html);
+                    var node = d3.selectAll(".node")
+                    .on("mouseover", function(sender){
+                        var html = "<strong>Occupation: </strong>" + sender.item.fullText + "<br><strong> Category: </strong>" + sender.item.category + "<br> <strong>Employee Count: </strong>" + sender.item.label + "<br> <strong>Percentage: </strong>" + sender.item.percent;
+                        tooltip.html(html);
                             return   tooltip.style("visibility", "visible")
-                           })
-                          .on("mousemove", function(){
+                        })
+                        .on("mousemove", function(){
                             return tooltip.style("top", (d3.event.screenY - 100)+"px").style("left",(d3.event.screenX +10)+"px");
                         })
-                          .on("mouseout", function(event){
+                        .on("mouseout", function(event){
                             d3.select(this).attr("stroke", "black").attr("stroke-width", "0");
                             return tooltip.style("visibility", "hidden");})
-                          .style("fill", function(d) { return color(d.packageName); })
-
-                          node.append("text")
-                                .attr("dy", ".3em")
-                                .style("text-anchor", "middle")
-                                .text(function(d) { 
-                                    var radius = d3.select(this.previousSibling).attr("r");
-                                    var stringLength = d.value.toLocaleString().length;
-                                    var stringToRadiusRatio = radius / stringLength;
-                                    if (stringToRadiusRatio > 3.5) {
-                                      return d.value.toLocaleString();
-                                    }
-                                    else{
-                                      return '';
-                                    }    
-                                    })
-
-                                .on("mouseover", function(sender){
-                                    d3.select(this).style("cursor", "pointer");
-                                    d3.select(this.previousSibling).attr("stroke", "black").attr("stroke-width", "2");
-                                      var html = "<strong>Occupation: </strong>" + sender.className + "<br><strong> Category: </strong>" + sender.packageName + "<br> <strong>Employee Count: </strong>" + sender.value;
-                                      tooltip.html(html);
-                                      return   tooltip.style("visibility", "visible")
-                                 })
-                                .on("mousemove", function(event){return tooltip.style("top", (d3.event.screenY-100)+"px").style("left",(d3.event.screenX+10)+"px");})
-                                .on("mouseout", function(){
-                                  d3.select(this).style("cursor", "default");
-                                  d3.select(this.previousSibling).attr("stroke-width", "0");
-                                  return tooltip.style("visibility", "hidden");
-                                });
-
-                    // Returns a flattened hierarchy containing all leaf nodes under the root.
-                    function classes(root) {
-                      var classes = [];
-
-                      function recurse(name, node) {
-                        if (node.children) node.children.forEach(function(child) { recurse(node.name, child); });
-                        else classes.push({packageName: name, className: node.name, value: node.size});
-                      }
-
-                      recurse(null, root);
-                      return {children: classes};
-                    }
-
-                    d3.select(self.frameElement).style("height", diameter + "px");
-
                 };
 
 
@@ -2038,7 +2130,6 @@
                  * @method createAgePyramid
                  */
                 self.createAgePyramid = function(){
-                    //console.error("called createAgePyramid")
                     var stateLineMale = [];
                     var stateLineFemale = [];
                     self.pyramidData = [];
@@ -2113,8 +2204,8 @@
                                 var percentage = baseLineValue / feature.attributes["TOTAL_MALE"];
                                 stateLineMale.push((percentage * self.totalMale));
                             }
-                        });                    
-
+                        });
+  
                     var maleSeries = [];
                     var femaleSeries = [];
 
@@ -2165,7 +2256,10 @@
                             color: "#000",
                             stack: false,
                             tooltip: {
-                                visible: false
+                                color: "white",
+                                visible: true,
+                                format: "{0:N0}",
+                                template: "#=series.name # #= kendo.format(\'{0:P1}\', (value / " + self.totalMale + "))#"
                             }
                         },
                         {
@@ -2175,7 +2269,10 @@
                             color: "#000",
                             stack: false,
                             tooltip: {
-                                visible: false
+                                color: "white",
+                                visible: true,
+                                format: "{0:N0}",
+                                template: "#=series.name # #= kendo.format(\'{0:P1}\', (Math.abs(value) / " + self.totalFemale + "))#"
                             }
                         }
                         ],
@@ -2299,7 +2396,35 @@
                                 title: "Percent"
                             },
                             //{field: "compareDensityValueFormatted",title: "Per Sq Mile", format: "{0:n1}"}
-                        ]
+                        ],
+                        dataBound: function(e) {
+                            if(this.wrapper[0].id !== "demCensusDataGrid")
+                            {
+                                // get the index of the UnitsInStock cell
+                                var rowCollection = e.sender.tbody[0].children;
+                                var data = e.sender._data;
+                                var realRows = [];
+
+                                $.each(rowCollection, function(i, row){
+                                    if(row.className !== "k-grouping-row")
+                                    {
+                                        realRows.push(row);
+                                    }
+                                });
+                                 $.each(realRows, function(i, row){
+                                    if(data[i]){
+                                        if(data[i]["fieldCategory"] === "Occupation"){
+                                            if(data[i].parentField === "" || data[i].fieldName === "ProtectiveServ")
+                                            {
+                                                var jRow = $(row);
+                                                jRow.addClass('k-header');
+                                                jRow.removeClass('k-alt');
+                                            }
+                                        }
+                                    }
+                                });
+                            }
+                        }
                     });
 
                     // Add the categories
@@ -2446,12 +2571,11 @@
                             for (var i = 0; i < self.selectedFeatures.length; i++) {
                                 tractIdArray += self.selectedFeatures[i].attributes.OBJECTID + ",";
                             }
-                            parameterString = "Interactive";
-                            localStorage.city1 = tractIdArray.substring(0, tractIdArray.length - 1);
+                            parameterString = "stateInteractive";
+                            localStorage.OBJECTID = tractIdArray.substring(0, tractIdArray.length - 1);
                         } else {
                             parameterString = self.communityName;
                         }
-
                         self.reportURL = encodeURI(demographicConfig.exportPDFCompareReportUrl + "?city1=" + parameterString + "&?city2=" + self.compareToName);
                         var newWindow = window.open(self.reportURL, "_new");
                     } else {
@@ -2459,13 +2583,13 @@
                             self.reportURL = encodeURI(demographicConfig.exportPDFReportUrl + "?county=" + self.communityName);
                             newWindow = window.open(self.reportURL, "_new");
                         } else if (self.communityName.indexOf("Legislative") > -1) {
-                            self.reportURL = encodeURI(demographicConfig.exportPDFReportUrl + "?legislative=" + self.communityName.slice(-2));
+                            self.reportURL = encodeURI(demographicConfig.exportPDFReportUrl + "?legislative=" + self.communityName);
                             newWindow = window.open(self.reportURL, "_new");
                         } else if (self.communityName.indexOf("Congressional") > -1) {
-                            self.reportURL = encodeURI(demographicConfig.exportPDFReportUrl + "?congressional=" + self.communityName.slice(-2));
+                            self.reportURL = encodeURI(demographicConfig.exportPDFReportUrl + "?congressional=" + self.communityName);
                             newWindow = window.open(self.reportURL, "_new");
                         } else if (self.communityName.indexOf("Supervisor") > -1) {
-                            self.reportURL = encodeURI(demographicConfig.exportPDFReportUrl + "?supervisor=" + self.communityName.slice(-2));
+                            self.reportURL = encodeURI(demographicConfig.exportPDFReportUrl + "?supervisor=" + self.communityName);
                             newWindow = window.open(self.reportURL, "_new");
                         } else if (self.communityName.indexOf("District") > -1) {
                             self.reportURL = encodeURI(demographicConfig.exportPDFReportUrl + "?council=" + self.communityName);
@@ -2480,12 +2604,15 @@
                                     tractIdArray += self.selectedFeatures[i].attributes.OBJECTID;
                                 }
                             }
-
                             localStorage.TractID = tractIdArray;
                             self.reportURL = encodeURI(demographicConfig.exportPDFReportUrl + "?stateInteractive");
                             var newWindow = window.open(self.reportURL, "_new");
                         } else if(self.communityName === "Arizona State") {
                             self.reportURL = encodeURI(demographicConfig.exportPDFReportUrl + "?state=" + self.communityName);
+                            var newWindow = window.open(self.reportURL, "_new");
+                        }
+                        else if(self.communityName.length === 5 && !isNaN(parseInt(self.communityName))) {
+                            self.reportURL = encodeURI(demographicConfig.exportPDFReportUrl + "?zipCode=" + self.communityName);
                             var newWindow = window.open(self.reportURL, "_new");
                         }
                         else{
@@ -2530,46 +2657,43 @@
                  * @method resetComparisonDropdowns
                  */
                 self.resetComparisonDropdowns = function(){
-                    var ACSComboBox = $("#demACSCompareComboBox").data("kendoComboBox");
-                                    var ACSCheckbox = $("#demACSUseComp");
-                                    var ACSKendoGrid = $("#demACSDataGrid").data("kendoGrid");
+                    var resetObject = [{
+                        combobox: "#demCensusCompareComboBox",
+                        grid: "#demCensusDataGrid",
+                        checkbox: "#demCensusUseComp",
+                        type: "census"
+                    },{
+                        comboBox: "#demACSCompareComboBox",
+                        grid: "#demACSDataGrid",
+                        checkBox: "#demACSUseComp",
+                        type: "acs"
+                    }]
 
-                                    var censusComboBox = $("#demCensusCompareComboBox").data("kendoComboBox");
-                                    var censusKendoGrid = $("#demCensusDataGrid").data("kendoGrid");
 
-                                    if (ACSComboBox !== null){
+                    var test = $("#demACSCompareComboBox").data("kendoComboBox");
+                        if(test !== null){
+                        test.destroy();
+                        test.wrapper.remove();
+                    }
 
-                                        ACSComboBox.enable(false);
-                                        self.compareFeature = null;
 
-                                        // this block removes from the dom vw
-                                        ACSComboBox.destroy();
-                                        ACSComboBox.wrapper.remove();
-
-                                        // Update the Grid
-                                        if (ACSKendoGrid !== undefined) {
-                                            ACSKendoGrid.element.remove();
-                                            ACSKendoGrid.destroy();
-                                        }
-                                        self.createKendoGrid("ACS");
-
-                                    }
-                                    if (censusComboBox !== null)
-                                    {
-                                        censusComboBox.enable(false);
-                                        self.compareFeature = null;
-
-                                        // this block removes from the dom vw
-                                        censusComboBox.destroy();
-                                        censusComboBox.wrapper.remove();
-
-                                        // Update the Grid
-                                        if (censusKendoGrid !== undefined) {
-                                            censusKendoGrid.element.remove();
-                                            censusKendoGrid.destroy();
-                                        }
-                                        self.createKendoGrid("census");
-                                    }
+                    $.each(resetObject, function(i, value){
+                        $(value.checkbox).prop("checked", false);
+                        var compareComboBoxInput = $(value.comboBox);
+                        var compareComboBoxObj = compareComboBoxInput.data("kendoComboBox");
+                        if (compareComboBoxObj !== null) {
+                            compareComboBoxObj.destroy();
+                            compareComboBoxObj.wrapper.remove();
+                        }
+                        else {
+                        }
+                        var kendoGrid = $(value.grid).data("kendoGrid");
+                        if (kendoGrid !== undefined && kendoGrid !== null) {
+                            kendoGrid.element.remove();
+                            kendoGrid.destroy();
+                        }
+                        self.createKendoGrid(value.type);
+                    });    
                 }
 
 

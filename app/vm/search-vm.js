@@ -93,8 +93,11 @@
                         case 4:
                             searchType = "congressional";
                             break;
+                        case 5:
+                            searchType = "zipCode";
+                            break;
                     }
-                    if (e.sourceIndex === 5) {
+                    if (e.sourceIndex === 6) {
                         var symbol = mapModel.getSymbol(e.result.feature.geometry, "cyan");
                         var graphic = new Graphic(e.result.feature.geometry, symbol);
                         mapModel.addGraphic(graphic, undefined, true, true);
