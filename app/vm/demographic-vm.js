@@ -819,6 +819,7 @@
                                 fieldRowSort: field.rowID, // added to sort row order in data grid. vw
                                 fieldName: field.fieldName,
                                 tableHeader: field.tableHeader,
+                                fieldType: field.fieldType,
                                 fieldAlias: field.fieldAlias,
                                 fieldClass: field.class,
                                 fieldValue: attrValue,
@@ -984,6 +985,7 @@
                                 fieldName: field.fieldName,
                                 tableHeader: field.tableHeader,
                                 fieldAlias: field.fieldAlias,
+                                fieldType: field.fieldType,
                                 fieldClass: field.class,
                                 fieldValue: attrValue,
                                 fieldValueFormatted: magNumberFormatter.formatValue(attrValue),
@@ -1002,7 +1004,7 @@
                                 densityValueFormatted: "0"
                             };
 
-                             // checks for NaN in the data and blanks out field. vw
+                            // checks for NaN in the data and blanks out field. vw
                             if (isNaN(attrValue)) {
                                 aggValues[field.fieldName].fieldValue = "-";
                                 aggValues[field.fieldName].fieldValueFormatted = "-";
@@ -1022,7 +1024,7 @@
                             }
                         }
                     });
-                    // 
+                        // 
                         // Filter and group for chart categories
                         self.chartCategories = [];
                         self.aggACSValuesArray = [];
@@ -1510,10 +1512,7 @@
                     }
 
                     // Update the chart
-
-
                     var censusChartAreaSelector = $("#demCensusChartArea");
-
 
                     var kendoChart1 = censusChartAreaSelector.data("kendoChart");
                     if (kendoChart1 !== null && kendoChart1 !== undefined) {
@@ -1818,6 +1817,14 @@
                         dataSource = self.aggCensusValuesArray
                     }
 
+                    $.each(dataSource,function(i,value){
+                        if(value["fieldType"] === "Currency")
+                        {
+                            value["fieldValueFormatted"] = "$ " + magNumberFormatter.formatValue(value["fieldValue"]);
+
+                        }
+                    });
+
 
                     // Create the div element for the grid
                     dc.create("div", {
@@ -1850,7 +1857,7 @@
                             }, {
                                 field: "tableHeader",
                                 title: " ",
-                                width: "150px"
+                                width: "350px"
                             }, {
                                 field: "fieldValueFormatted",
                                 title: "Total",
@@ -2344,6 +2351,12 @@
                         dataSource = self.aggCensusValuesArray;
                     }
 
+                    $.each(dataSource,function(i,value){
+                        if(value["fieldType"] === "Currency")
+                        {
+                            value["compareValueFormatted"] = "$ " + magNumberFormatter.formatValue(value["compareValue"]);
+                        }
+                    });
 
                     // Create the div element for the grid
                     dc.create("div", {
@@ -2492,7 +2505,7 @@
                         grid = $("#demACSFeatGrid").data("kendoGrid");
                         headerValue = "Selected Block Groups";
                         fileName = self.communityName + ".xlsx";
-                        colSpan = 51;
+                        colSpan = 22;
                         rowSpan = 4;
                     }
                     grid.bind("excelExport", function(e) {
@@ -2504,6 +2517,25 @@
                                 if(row.type === "group-header")
                                 {
                                     row.cells[0].value = row.cells[0].value.substring(37);
+                                }
+                                else
+                                {
+
+                                    if(row.cells[1].value.indexOf("Male Population") > -1 || row.cells[1].value.indexOf("Female Population") > -1){
+                                        row.cells[1].value = row.cells[1].value.replace("Male Population", "Male Population:");
+                                        row.cells[1].value = row.cells[1].value.replace("Female Population", "Female Population:");
+                                        $.each(row.cells, function(i, value){
+                                            if(i>0){
+                                                value.background = "#333";
+                                                value.color = "#fff";
+                                            }
+                                        });
+                                    }
+                                    
+                                    row.cells[1].value = row.cells[1].value.replace("Males age", "Age");
+                                    row.cells[1].value = row.cells[1].value.replace("Males less", "Less");
+                                    row.cells[1].value = row.cells[1].value.replace("Females age", "Age");
+                                    row.cells[1].value = row.cells[1].value.replace("Females less", "Less");
                                 }
                             });
 
@@ -2566,13 +2598,13 @@
                     var parameterString = "";
                     if (self.compareFeature) {
                         if (self.communityName === "Selected Block Groups") {
-                            var tractIdArray = "";
+                            var ObjectIdArray = "";
 
                             for (var i = 0; i < self.selectedFeatures.length; i++) {
-                                tractIdArray += self.selectedFeatures[i].attributes.OBJECTID + ",";
+                                ObjectIdArray += self.selectedFeatures[i].attributes.OBJECTID + ",";
                             }
                             parameterString = "stateInteractive";
-                            localStorage.OBJECTID = tractIdArray.substring(0, tractIdArray.length - 1);
+                            localStorage.OBJECTID = ObjectIdArray.substring(0, ObjectIdArray.length - 1);
                         } else {
                             parameterString = self.communityName;
                         }
@@ -2595,16 +2627,16 @@
                             self.reportURL = encodeURI(demographicConfig.exportPDFReportUrl + "?council=" + self.communityName);
                             newWindow = window.open(self.reportURL, "_new");
                         } else if (self.communityName === "Selected Block Groups") {
-                            var tractIdArray = "";
+                            var ObjectIdArray = "";
 
                             for (var i = 0; i < self.selectedFeatures.length; i++) {
                                 if (i !== self.selectedFeatures.length & self.selectedFeatures.length !== 1) {
-                                    tractIdArray += self.selectedFeatures[i].attributes.OBJECTID + ",";
+                                    ObjectIdArray += self.selectedFeatures[i].attributes.OBJECTID + ",";
                                 } else {
-                                    tractIdArray += self.selectedFeatures[i].attributes.OBJECTID;
+                                    ObjectIdArray += self.selectedFeatures[i].attributes.OBJECTID;
                                 }
                             }
-                            localStorage.TractID = tractIdArray;
+                            localStorage.OBJECTID = ObjectIdArray;
                             self.reportURL = encodeURI(demographicConfig.exportPDFReportUrl + "?stateInteractive");
                             var newWindow = window.open(self.reportURL, "_new");
                         } else if(self.communityName === "Arizona State") {
@@ -2670,7 +2702,7 @@
                     }]
 
 
-                    var test = $("#demACSCompareComboBox").data("kendoComboBox");
+                    var test = $("#demCensusCompareComboBox").data("kendoComboBox");
                         if(test !== null){
                         test.destroy();
                         test.wrapper.remove();
@@ -2695,11 +2727,7 @@
                         self.createKendoGrid(value.type);
                     });    
                 }
-
-
-
             }; //end DemographicVM
-
             return DemographicVM;
         } // end function
     );

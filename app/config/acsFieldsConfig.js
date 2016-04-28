@@ -1603,12 +1603,29 @@
 			      "percentOfField": "TOTAL_POP"
 			   },
 			   {
+			      "fieldName":"AGE25PLUS",
+			      "fieldAlias":"25 and over",
+			      "fieldType":"Number",
+			      "tableHeader":"25 and over",
+			      "category":"Age",
+			      "rowID":12,
+			      "groupID":"<span class='myHiddenClass'>02</span>Age",
+			      "chartCategory":"",
+			      "chartType":"",
+			      "canSum":true,
+			      "dataSource":"ACS 2014",
+			      "class":null,
+			      "timePeriod":null,
+			      "parentField": "",
+			      "percentOfField": "TOTAL_POP"
+			   },
+			   {
 			      "fieldName":"AGE50PLUS",
 			      "fieldAlias":"50 and over",
 			      "fieldType":"Number",
 			      "tableHeader":"50 and over",
 			      "category":"Age",
-			      "rowID":12,
+			      "rowID":13,
 			      "groupID":"<span class='myHiddenClass'>02</span>Age",
 			      "chartCategory":"",
 			      "chartType":"",
@@ -1625,7 +1642,7 @@
 			      "fieldType":"Number",
 			      "tableHeader":"60 and over",
 			      "category":"Age",
-			      "rowID":13,
+			      "rowID":14,
 			      "groupID":"<span class='myHiddenClass'>02</span>Age",
 			      "chartCategory":"",
 			      "chartType":"",
@@ -1642,7 +1659,7 @@
 			      "fieldType":"Number",
 			      "tableHeader":"65 and over",
 			      "category":"Age",
-			      "rowID":14,
+			      "rowID":15,
 			      "groupID":"<span class='myHiddenClass'>02</span>Age",
 			      "chartCategory":"",
 			      "chartType":"",
@@ -1659,7 +1676,7 @@
 			      "fieldType":"Number",
 			      "tableHeader":"70 and over",
 			      "category":"Age",
-			      "rowID":15,
+			      "rowID":16,
 			      "groupID":"<span class='myHiddenClass'>02</span>Age",
 			      "chartCategory":"",
 			      "chartType":"",
@@ -1676,7 +1693,7 @@
 			      "fieldType":"Number",
 			      "tableHeader":"75 and over",
 			      "category":"Age",
-			      "rowID":16,
+			      "rowID":17,
 			      "groupID":"<span class='myHiddenClass'>02</span>Age",
 			      "chartCategory":"",
 			      "chartType":"",
@@ -1688,26 +1705,10 @@
 			      "percentOfField": "TOTAL_POP"
 			   },
 			   {
-			      "fieldName":"AGE25PLUS",
-			      "fieldAlias":"25 and over",
-			      "fieldType":"Number",
-			      "tableHeader":"25 and over",
-			      "category":"Age",
-			      "rowID":17,
-			      "groupID":"<span class='myHiddenClass'>02</span>Age",
-			      "chartCategory":"",
-			      "chartType":"",
-			      "canSum":true,
-			      "dataSource":"ACS 2014",
-			      "class":null,
-			      "timePeriod":null,
-			      "parentField": ""
-			   },
-			   {
 			      "fieldName":"WHITE",
 			      "fieldAlias":"White",
 			      "fieldType":"Number",
-			      "tableHeader":"White",
+			      "tableHeader":"White, NH",
 			      "category":"Race",
 			      "rowID":66,
 			      "groupID":"<span class='myHiddenClass'>04</span>Population by Race",
@@ -1724,7 +1725,7 @@
 			      "fieldName":"BLACK",
 			      "fieldAlias":"Black",
 			      "fieldType":"Number",
-			      "tableHeader":"Black",
+			      "tableHeader":"Black, NH",
 			      "category":"Race",
 			      "rowID":67,
 			      "groupID":"<span class='myHiddenClass'>04</span>Population by Race",
@@ -1741,7 +1742,7 @@
 			      "fieldName":"NATIVE",
 			      "fieldAlias":"Native American",
 			      "fieldType":"Number",
-			      "tableHeader":"Native American",
+			      "tableHeader":"Native American, NH",
 			      "category":"Race",
 			      "rowID":68,
 			      "groupID":"<span class='myHiddenClass'>04</span>Population by Race",
@@ -1758,7 +1759,7 @@
 			      "fieldName":"ASIAN",
 			      "fieldAlias":"Asian",
 			      "fieldType":"Number",
-			      "tableHeader":"Asian",
+			      "tableHeader":"Asian, NH",
 			      "category":"Race",
 			      "rowID":69,
 			      "groupID":"<span class='myHiddenClass'>04</span>Population by Race",
@@ -1775,7 +1776,7 @@
 			      "fieldName":"PACIFIC",
 			      "fieldAlias":"Pacific Islander",
 			      "fieldType":"Number",
-			      "tableHeader":"Pacific Islander",
+			      "tableHeader":"Pacific Islander, NH",
 			      "category":"Race",
 			      "rowID":70,
 			      "groupID":"<span class='myHiddenClass'>04</span>Population by Race",
@@ -1792,7 +1793,7 @@
 			      "fieldName":"OTHER",
 			      "fieldAlias":"Other",
 			      "fieldType":"Number",
-			      "tableHeader":"Other",
+			      "tableHeader":"Other, NH",
 			      "category":"Race",
 			      "rowID":71,
 			      "groupID":"<span class='myHiddenClass'>04</span>Population by Race",
@@ -1809,7 +1810,7 @@
 			      "fieldName":"TWO_OR_MORE",
 			      "fieldAlias":"Two or More",
 			      "fieldType":"Number",
-			      "tableHeader":"Two or More",
+			      "tableHeader":"Two or More, NH",
 			      "category":"Race",
 			      "rowID":72,
 			      "groupID":"<span class='myHiddenClass'>04</span>Population by Race",
@@ -1941,7 +1942,7 @@
 			   {
 			      "fieldName":"MEDIAN_HOUSEHOLD_INCOME",
 			      "fieldAlias":"Median Household Income",
-			      "fieldType":"Number",
+			      "fieldType":"Currency",
 			      "tableHeader":"Median Household Income",
 			      "category":"Houshold Income",
 			      "rowID":80,
@@ -1957,7 +1958,7 @@
 			   {
 			      "fieldName":"PER_CAPITA_INCOME",
 			      "fieldAlias":"Per Capita Income",
-			      "fieldType":"Number",
+			      "fieldType":"Currency",
 			      "tableHeader":"Per Capita Income",
 			      "category":"Houshold Income",
 			      "rowID":81,
@@ -2089,7 +2090,7 @@
 			      "parentField": ""
 			   },
 			   {
-			      "fieldName":"TOTAL_OCCUPIED_HU",
+			      "fieldName":"OCCUPIED_HU",
 			      "fieldAlias":"Total Occupied Housing Units",
 			      "fieldType":"Number",
 			      "tableHeader":"Total Occupied Housing Units",
@@ -2173,10 +2174,10 @@
 			      "percentOfField": "TOTAL_HU"
 			   },
 			   {
-			      "fieldName":"NON_SEASONAL_VAC_HU",
-			      "fieldAlias":"Non Seasonal Vac Housing Units",
+			      "fieldName":"NON_SEASONAL_VACANT_HU",
+			      "fieldAlias":"Non-Seasonal Vacant Housing Units",
 			      "fieldType":"Number",
-			      "tableHeader":"Non Seasonal Vac Housing Units",
+			      "tableHeader":"Non-Seasonal Vacant Housing Units",
 			      "category":"Housing Units",
 			      "rowID":94,
 			      "groupID":"<span class='myHiddenClass'>08</span>Housing Units",
@@ -2305,7 +2306,7 @@
 			   {
 			      "fieldName":"MEDIAN_VALUE",
 			      "fieldAlias":"Median Value",
-			      "fieldType":"Number",
+			      "fieldType":"Currency",
 			      "tableHeader":"Median Value",
 			      "category":"Housing Units",
 			      "rowID":102,
@@ -2321,7 +2322,7 @@
 			   {
 			      "fieldName":"MEDIAN_GROSS_RENT",
 			      "fieldAlias":"Median Gross Rent",
-			      "fieldType":"Number",
+			      "fieldType":"Currency",
 			      "tableHeader":"Median Gross Rent",
 			      "category":"Housing Units",
 			      "rowID":103,
@@ -2458,16 +2459,16 @@
 			      "fieldAlias":"Total Workers 16 Plus",
 			      "fieldType":"Number",
 			      "tableHeader":"Total Workers 16 Plus",
-			      "category":"Modes of Transportation",
+			      "category":"Occupation",
 			      "rowID":111,
-			      "groupID":"<span class='myHiddenClass'>10</span>Modes of Transportation",
+			      "groupID":"<span class='myHiddenClass'>11</span>Occupation",
 			      "chartCategory":"",
 			      "chartType":"",
 			      "canSum":true,
 			      "dataSource":"",
 			      "class":null,
 			      "timePeriod":null,
-			      "parentField": ""
+			      "parentField": "false"
 			   },
 			   {
 			      "fieldName":"CIVPOP16PLUS",
@@ -2505,7 +2506,7 @@
 			      "fieldName":"VETERAN",
 			      "fieldAlias":"Veteran",
 			      "fieldType":"Number",
-			      "tableHeader":"Veteran",
+			      "tableHeader":"Veterans",
 			      "category":"General",
 			      "rowID":114,
 			      "groupID":"<span class='myHiddenClass'>01</span>General",
@@ -2719,7 +2720,7 @@
 			      "class":null,
 			      "timePeriod":null,
 			      "parentField": "",
-			      "percentOfField": "TOTAL_WORKERS_16PLUS"
+			      "percentOfField": "OCCUPIED_HU"
 			   },
 			   {
 			      "fieldName":"ONE_VEHICLE",
@@ -2736,7 +2737,7 @@
 			      "class":null,
 			      "timePeriod":null,
 			      "parentField": "",
-			      "percentOfField": "TOTAL_WORKERS_16PLUS"
+			      "percentOfField": "OCCUPIED_HU"
 			   },
 			   {
 			      "fieldName":"TWO_VEHICLES",
@@ -2753,7 +2754,7 @@
 			      "class":null,
 			      "timePeriod":null,
 			      "parentField": "",
-			      "percentOfField": "TOTAL_WORKERS_16PLUS"
+			      "percentOfField": "OCCUPIED_HU"
 			   },
 			   {
 			      "fieldName":"THREE_VEHICLES",
@@ -2770,7 +2771,7 @@
 			      "class":null,
 			      "timePeriod":null,
 			      "parentField": "",
-			      "percentOfField": "TOTAL_WORKERS_16PLUS"
+			      "percentOfField": "OCCUPIED_HU"
 			   },
 			   {
 			      "fieldName":"FOUR_VEHICLES",
@@ -2787,7 +2788,7 @@
 			      "class":null,
 			      "timePeriod":null,
 			      "parentField": "",
-			      "percentOfField": "TOTAL_WORKERS_16PLUS"
+			      "percentOfField": "OCCUPIED_HU"
 			   },
 			   {
 			      "fieldName":"FIVE_PLUS_VEHICLES",
@@ -2804,7 +2805,7 @@
 			      "class":null,
 			      "timePeriod":null,
 			      "parentField": "",
-			      "percentOfField": "TOTAL_WORKERS_16PLUS"
+			      "percentOfField": "OCCUPIED_HU"
 			   }
 			]
 			   

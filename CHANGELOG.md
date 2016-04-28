@@ -4,6 +4,10 @@ CHANGELOG for State Demographics Map Viewer
 
 ### Version x.x.x (xx/xx/2016)
 
+### Version 2.2.1 (04/28/2016)
+
+* Fixed some typos and minor issues pointed out by Amanda
+
 ### Version 2.2.0 (04/25/2016)
 
 * Updated percent field to calculate instead of relying on service percentage values

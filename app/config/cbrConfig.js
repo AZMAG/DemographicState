@@ -283,8 +283,8 @@
                     }]
                 }, {
                     "NodeType": "cat",
-                    "Name": "Household Income",
-                    "ShortName": "Household Income",
+                    "Name": "Median Household Income",
+                    "ShortName": "Median Household Income",
                     "Description": "...",
                     "items": [{
                         "NodeType": "map",
@@ -431,7 +431,7 @@
                     "items": [{
                         "NodeType": "map",
                         "LayerId": 0,
-                        "Name": "Population 25 or Older",
+                        "Name": "Population 25+",
                         "Service": "ACS2014byBlockGroup",
                         "ShortName": "Population 25 or Older",
                         "DefaultColorRamp": "PuBu",
@@ -599,7 +599,8 @@
                     "Name": "Occupation",
                     "ShortName": "Occupation",
                     "Description": "...",
-                    "items": [{
+                    "items": [
+                    {
                         "NodeType": "map",
                         "LayerId": 0,
                         "Name": null,
@@ -1096,21 +1097,7 @@
                 "Name": "Transportation",
                 "ShortName": "Transportation",
                 "Description": "...",
-                "items": [{
-                    "NodeType": "map",
-                    "LayerId": 0,
-                    "Name": null,
-                    "Service": "ACS2014byBlockGroup",
-                    "ShortName": "Population Age 16+",
-                    "DefaultColorRamp": "OrRd",
-                    "DefaultColorScheme": "Sequential",
-                    "Description": null,
-                    "Source": "American Community Survey 2014",
-                    "FieldName": "CivPop16plus",
-                    "Type": "number",
-                    "AsPercentages": false,
-                    "Placeholder": 3063
-                }, {
+                "items": [ {
                     "NodeType": "cat",
                     "Name": "Vehicle Count",
                     "ShortName": "Vehicle Count",
@@ -1210,7 +1197,7 @@
                         "LayerId": 0,
                         "Name": null,
                         "Service": "ACS2014byBlockGroup",
-                        "ShortName": "% CAR TRUCK VAN",
+                        "ShortName": "% Car Truck Van",
                         "DefaultColorRamp": "OrRd",
                         "DefaultColorScheme": "Sequential",
                         "Description": null,
