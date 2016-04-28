@@ -733,7 +733,7 @@
                     var chartListDivObj = $("#demCensusChartList");
 
                     //Sets the correct source label at bottom of report
-                    if (tab[0].textContent === "Census 2010 Charts" || tab[0].textContent === "Census 2010")
+                    if (tab[0].textContent === "Census 2010 Charts" || tab[0].textContent === "Census 2010 Data")
                     {   
                         $("#demSource").html(appConfig.sourceLabel2);
                     }

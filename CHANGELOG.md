@@ -4,6 +4,10 @@ CHANGELOG for State Demographics Map Viewer
 
 ### Version x.x.x (xx/xx/2016)
 
+### Version 2.2.2 (04/28/2016)
+
+* Fixed souce label on tab switch
+
 ### Version 2.2.1 (04/28/2016)
 
 * Fixed some typos and minor issues pointed out by Amanda
