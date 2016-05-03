@@ -3,10 +3,11 @@ MAG State Demographics Map Viewer
 
 [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
 [![Semver](http://img.shields.io/SemVer/2.0.0.png)](http://semver.org/spec/v2.0.0.html)
+[![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
 The State Demographic Map Viewer is one of the Maricopa Association of Governments interactive mapping and analysis sites, showing selected population and housing data.  The viewer allows you to graphically view selected population and housing data for all Census block groups for the State of Arizona.  The viewer provides interactive mapping and reporting tools to allow exploration of data from Census 2010 and the American Community Survey (ACS) 2009-2013.
 
-Use this site to explore Explore data from Census 2010 and American Community Survey (ACS) 2009-2013.
+Use this site to explore Explore data from Census 2010 and American Community Survey (ACS) 2010-2014.
 
 This web app viewer was developed by MAG staff for MAG member agencies and the public using ESRI's JavaScript API.
 
@@ -14,7 +15,13 @@ This web app viewer was developed by MAG staff for MAG member agencies and the p
 
 `Major/Minor/Patch 0.0.0`
 
-#### `v2.1.6 - 04/06/2016`
+#### `v2.2.2 - 04/28/2016`
+
+#### `Created: 10/21/2014`
+
+1. MAJOR version when you make incompatible API changes.
+2. MINOR version when you add functionality in a backwards-compatible manner.
+3. PATCH version when you make backwards-compatible bug fixes.
 
 ### Credits
 
@@ -22,7 +29,7 @@ This web app viewer was developed by MAG staff for MAG member agencies and the p
 
 ### Keywords
 
-`Demographics` `Census` `2010` `American Community Survey` `2009-2013` `State of Arizona` `Maps` `MAG` `ESRI` `#MAGmaps`
+`Demographics` `Census` `2010` `American Community Survey` `ACS` `2010-2014` `State of Arizona` `Maps` `MAG` `ESRI` `#MAGmaps`
 
 ### Site URL's
 * [Site] (http://geo.azmag.gov/maps/azdemographics/)
@@ -49,3 +56,15 @@ THE FOREGOING WARRANTY IS EXCLUSIVE AND IN LIEU OF ALL OTHER WARRANTIES OF MERCH
 To assist the Maricopa Association of Governments in the maintenance and/or correction of the data, users should provide the Maricopa Association of Governments GIS Departments with information concerning errors or discrepancies found in using the data. Please use the e-mail contact address at the bottom of the affected web page.
 
 Please acknowledge the Maricopa Association of Governments (MAG) GIS as the source when Map Server data is used in the preparation of reports, papers, publications, maps, or other products.
+
+### Copyright and Licensing
+
+Code released under the MIT license.
+
+Copyright (c) 2016 Maricopa Association of Governments
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
