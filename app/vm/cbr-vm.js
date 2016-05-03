@@ -546,8 +546,8 @@
                         var start;
                         var end;
                         if (layerOption.renderer.asPercent) {
-                            start = Math.round(layerOption.renderer.infos[j].minValue * 100);
-                            end = Math.round(layerOption.renderer.infos[j].maxValue * 100) + "%";
+                            start = Math.round(layerOption.renderer.infos[j].minValue);
+                            end = Math.round(layerOption.renderer.infos[j].maxValue) + "%";
                         } else {
                             start = magNum.formatValue(Math.round(layerOption.renderer.infos[j].minValue));
                             end = magNum.formatValue(Math.round(layerOption.renderer.infos[j].maxValue));

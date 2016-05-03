@@ -4,11 +4,44 @@ CHANGELOG for State Demographics Map Viewer
 
 ### Version x.x.x (xx/xx/2016)
 
-### Version 2.1.6 (04/06/2016)
+### Version 2.2.2 (04/28/2016)
 
-* added LICENSE.txt
-* updated package.json
-* fixed bug enabling users to access city reports correctly
+* Fixed souce label on tab switch
+
+### Version 2.2.1 (04/28/2016)
+
+* Fixed some typos and minor issues pointed out by Amanda
+
+### Version 2.2.0 (04/25/2016)
+
+* Updated percent field to calculate instead of relying on service percentage values
+* Fixed comparison dropdown bug
+* Attached new PDF reports
+
+### Version 2.1.9 (04/11/2016)
+
+* Changed age pyramid to combine 18-19, 20 and 21 to one group.  Reversed layout.
+
+### Version 2.1.8 (04/06/2016)
+
+* Fixed custom summary.  Now makes 2 requests to census and acs layers.
+* Added new charts in the acs charts tab in reports.  This includes age pyramid charts and occupation charts.
+* Fixed compare feature to account for new data tabs.
+* Fixed search to relfect new data layers.
+* Updated advanced query to get data from both census and ACS layers.
+* Added new fields to cbr treeview
+* Toggle source label info when user clicks different tabs
+* Added new dependency (d3.js) to project.
+* Fixed excel export to work with our new tabs.
+* Fixed display legend checkbox
+
+### Version 2.1.7 (03/29/2016)
+
+* Added second tab to demographic view to separate acs and census data
+* Updated config files to new service and to correct layer 
+
+### Version 2.1.6 (03/28/2016)
+
 * Converted Excel reports to client side kendo exporting.
 
 ### Version 2.1.5 (03/1/2016)

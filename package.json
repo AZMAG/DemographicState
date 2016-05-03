@@ -1,23 +1,37 @@
 {
   "name": "Demographics-Project",
-  "version": "2.1.6",
-  "date": "04/06/2016",
+  "version": "2.2.2",
+  "date": "04/28/2016",
   "description": "MAG State Demographic Viewer",
-  "keywords": ["MAG", "maps", "state", "Arizona", "census", "American Community Survey", "ACS", "2009-2013", "ESRI", "#MAGmaps"],
+  "keywords": [
+    "Demographics",
+    "MAG",
+    "maps",
+    "state",
+    "Arizona",
+    "census",
+    "2010",
+    "American Community Survey",
+    "ACS",
+    "2010-2014",
+    "ESRI",
+    "#MAGmaps"
+  ],
   "main": "index.js",
   "homepage": "http://geo.azmag.gov/maps/azdemographics/",
   "author": "Vern Wolfley <vwolfley@azmag.gov>",
-  "contributors": [{
-    "name": "Vern Wolfley",
-    "email": "vwolfley@azmag.gov"
-  }, {
-    "name": "Jack Fairfield",
-    "email": "jfairfield@azmag.gov"
-  }],
+  "contributors": [
+    {
+      "name": "Vern Wolfley",
+      "email": "vwolfley@azmag.gov"
+    },
+    {
+      "name": "Jack Fairfield",
+      "email": "jfairfield@azmag.gov"
+    }
+  ],
   "private": true,
-  "dependencies": {
-
-  },
+  "dependencies": {},
   "devDependencies": {
     "grunt": "*",
     "grunt-contrib-concat": "*",
@@ -28,6 +42,7 @@
     "grunt-contrib-watch": "*",
     "grunt-htmlhint": "*",
     "grunt-text-replace": "*",
+    "grunt-version-check": "*",
     "jshint-stylish-ex": "*",
     "lodash": "*",
     "matchdep": "*",

@@ -10,9 +10,11 @@ module.exports = function(grunt) {
 
         bannercss:  '/*! ========================================================================\n' +
                     ' * Maricopa Association of Governments\n' +
-                    ' * MAG: concat.min.css | v<%= pkg.version %> | State Demographic Viewer\n' +
-                    ' * Production | <%= grunt.template.today("mm/dd/yyyy") %>\n' +
+                    ' * CSS files for MAG State Demographic Viewer\n' +
+                    ' * concat.min.css | version | <%= pkg.version %>\n' +
+                    ' * Production | <%= pkg.date %> | http://ims.azmag.gov/\n' +
                     ' * http://ims.azmag.gov/\n' +
+                    ' * State Demographic Viewer\n' +
                     ' * ==========================================================================\n' +
                     ' * Copyright 2016 MAG\n' +
                     ' * Licensed under MIT\n' +
@@ -151,6 +153,13 @@ module.exports = function(grunt) {
             }
         },
 
+        versioncheck: {
+            options: {
+                skip: ["semver", "npm", "lodash"],
+                hideUpToDate: false
+            }
+        },
+
         replace: {
             update_Meta: {
                 src: ["index.html", "config.js", "humans.txt", "README.md", "app/resources/css/main.css"], // source files array
@@ -182,8 +191,8 @@ module.exports = function(grunt) {
                     to: "#### `v" + '<%= pkg.version %>' + ' - ' + '<%= pkg.date %>' + '`',
                 }, {
                     // main.css
-                    from: /(MAG main.css v)([0-9]+)(?:\.([0-9]+))(?:\.([0-9]+))/g,
-                    to: "MAG main.css v" + '<%= pkg.version %>'
+                    from: /(main.css)( \| )(version)( \| )([0-9]+)(?:\.([0-9]+))(?:\.([0-9]+))/g,
+                    to: "main.css | version |" +' <%= pkg.version %>',
                 }]
             }
         }
@@ -195,6 +204,8 @@ module.exports = function(grunt) {
     // grunt.registerTask("test", ["uglify", "cssmin", "concat"]);
 
     grunt.registerTask("test", ["cssmin", "concat", "uglify"]);
+
+     grunt.registerTask("check", ["versioncheck"]);
 
     grunt.registerTask("buildcss", ["cssmin", "concat"]);
 

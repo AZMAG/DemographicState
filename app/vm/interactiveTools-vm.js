@@ -18,12 +18,14 @@
             "app/models/map-model",
             "dijit/form/CheckBox",
             "app/config/interactiveToolConfig",
+            "app/config/demographicConfig",
+            "app/vm/demographic-vm",
             "esri/toolbars/draw",
             "esri/symbols/SimpleMarkerSymbol",
             "esri/symbols/SimpleFillSymbol",
             "esri/graphic"
         ],
-        function(dc, dom, on, topic, view, layerDelegate, mapModel, CheckBox, interactiveToolConfig, Draw, SimpleMarkerSymbol, SimpleFillSymbol, Graphic) {
+        function(dc, dom, on, topic, view, layerDelegate, mapModel, CheckBox, interactiveToolConfig, demographicConfig, demographicVM, Draw, SimpleMarkerSymbol, SimpleFillSymbol, Graphic) {
 
             var InteractiveToolsVM = new function() {
 
@@ -253,6 +255,10 @@
                     // adding loading icon. vw
                     esri.show(dojo.byId("loading"));
 
+                    var censusUrl = demographicConfig.reports.censusTracts.censusRestUrl;
+                    var censusCallback = demographicVM.interactiveSelectionQueryHandler;
+                    var acsUrl = demographicConfig.reports.censusTracts.ACSRestUrl;
+                    var acsCallback = demographicVM.interactiveSelectionQueryHandler;
                     var bufferGeometry = dojo.byId("bufferSelection").checked;
 
                     if (bufferGeometry) {
@@ -286,19 +292,36 @@
 
                             var queryOrigFeature = function(results) {
                                 //call original callback
-                                qryCallback(results);
+
+                                var type = "census";
+                                if (Object.keys(results.features[0].attributes).length > 120)
+                                {
+                                    type = "acs";
+                                }
+
+                                if(type === "acs"){
+                                    acsCallback(results);
+                                }
+                                else{
+                                    censusCallback(results);
+                                }
+
                                 //perform query with original geometry
-                                layerDelegate.query(self.queryUrl, displayFeatures, null, evt.geometry, undefined, true);
+                                layerDelegate.query(censusUrl, displayFeatures, null, evt.geometry, undefined, true);
+                                layerDelegate.query(acsUrl, displayFeatures, null, evt.geometry, undefined, true);
                             };
 
                             //perform query with buffered geometry
-                            layerDelegate.query(self.queryUrl, queryOrigFeature, qryErrback, geometries[0], undefined, true);
+                            layerDelegate.query(censusUrl, queryOrigFeature, qryErrback, geometries[0], undefined, true);
+                            layerDelegate.query(acsUrl, queryOrigFeature, qryErrback, geometries[0], undefined, true);
                         }, function(error) {
                             //error buffering - query without buffering
-                            layerDelegate.query(self.queryUrl, qryCallback, qryErrback, evt.geometry, undefined, true);
+                            layerDelegate.query(censusUrl, censusCallback, qryErrback, evt.geometry, undefined, true);
+                            layerDelegate.query(acsUrl, acsCallback, qryErrback, evt.geometry, undefined, true);
                         });
                     } else {
-                        layerDelegate.query(self.queryUrl, qryCallback, qryErrback, evt.geometry, undefined, true);
+                        layerDelegate.query(censusUrl, censusCallback, qryErrback, evt.geometry, undefined, true);
+                        layerDelegate.query(acsUrl, acsCallback, qryErrback, evt.geometry, undefined, true);
                     }
                 };
             };

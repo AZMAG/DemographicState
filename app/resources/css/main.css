@@ -1,16 +1,19 @@
 /* ========================================================================
  * Maricopa Association of Governments
- * MAG main.css | HTML5 Boilerplate v4.3.0 | MIT License | http://h5bp.com/
- * State Demographic Viewer
- * http://ims.azmag.gov/
+ * CSS document for MAG State Demographic Viewer
+ * @main.css | http://ims.azmag.gov/
+ * MAG State Demographic Viewer
  * ========================================================================
  * Copyright 2016 MAG
  * Licensed under MIT
  * ======================================================================== */
+/*! ==========================================
+ *  main.css | version | 2.2.2 | MIT License
+ *  ========================================== */
 
-/*! ===============================================================================
- *  MAG main.css v2.1.6 | HTML5 Boilerplate v4.3.0 | MIT License | http://h5bp.com/
- *  =============================================================================== */
+
+/*
+ * HTML5 Boilerplate | version | 4.3.0 | MIT License | http://h5bp.com/
 
 /*
  * HTML5 Boilerplate
@@ -807,6 +810,7 @@ p {
     overflow-x: hidden !important;
     padding-right: 20px;
     height: 265px;
+    white-space: normal;
 }
 #organizer {
     width: 292px;
@@ -901,10 +905,13 @@ color:black;
 /* ==========================================
 **** demographic-view.html styles ****
 ============================================= */
-#demChartListPane {
+#demCensusChartListPane, #demACSChartListPane {
 
     width: 95px !important;
     left: 480px !important;
+    float:right;
+    max-height: 300px;
+    overflow-y: scroll;
 }
 .k-splitter .k-ghost-splitbar-horizontal, .k-splitter .k-splitbar-horizontal {
     left: 480px;
@@ -917,13 +924,17 @@ color:black;
 .reportTabPageOptionRowEX {
     height: 15px;
 }
-#demChartAreaPane {
+#demCensusChartAreaPane, #demACSChartAreaPane {
     width: 480px !important;
+    float: left;
 }
-#demChartList {
-margin-top:5px;
+#demCensusChartList, #demACSChartList {
+    margin-top:5px;
     font-size: 80%;
     border: none;
+}
+.k-treemap{
+    font-size: 10px;
 }
 .demChartCategoryItem {
     cursor: pointer;
@@ -933,6 +944,9 @@ margin-top:5px;
 .demChartCategoryItem  button {
     width: 100%;
 }
+.demChartCategoryItem .k-button{
+    width: 100% !important;
+}
 #demExportSummary {
     width: 80px;
 }
@@ -940,7 +954,7 @@ margin-top:5px;
     position: absolute;
     left: 390px;
 }
-#demSplitContainer {
+#demCensusSplitContainer, #demACSSplitContainer {
     margin: 0px 0 0 0;
 }
 .reportTabPageOptionRow {
@@ -1633,3 +1647,16 @@ margin-top:5px;
 .panelBarLi .k-state-selected{
     background-color: transparent;
 }
+
+circle:hover{
+/*    stroke: black;
+    stroke-width: 2;*/
+    cursor: pointer;
+}
+
+.bubbleChart {
+      min-width: 100px;
+      max-width: 700px;
+      height: 300px;
+      margin: 0 auto;
+    }

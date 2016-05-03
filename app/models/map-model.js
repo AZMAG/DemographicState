@@ -105,8 +105,8 @@
                  */
                 self.congressInfoTemplate = new InfoTemplate();
                 self.congressInfoTemplate.setTitle("Congressional Districts");
-                self.congressInfoTemplate.setContent("<strong>${DistrictName}</strong><br>" +
-                    "Representative: ${Representative} - (${Rep_Party})");
+                self.congressInfoTemplate.setContent("<strong>${CDNAME}</strong><br>" +
+                    "Representative: ${CDRepresentative} - (${CDParty})");
 
                 /**
                  * infoTemplate for Legislative Districts
@@ -114,10 +114,16 @@
                  */
                 self.legislatureInfoTemplate = new InfoTemplate();
                 self.legislatureInfoTemplate.setTitle("Legislative Districts");
-                self.legislatureInfoTemplate.setContent("<strong>${DistrictName}</strong><br>" +
-                    "Representative: ${HouseRep1} - (${HRep1_Party})<br>" +
-                    "Representative: ${HouseRep2} - (${HRep2_Party})<br>" +
-                    "Senator: ${Senator} - (${S_Party})<br>");
+                self.legislatureInfoTemplate.setContent("<strong>${SLDNAME}</strong><br>" +
+                    "Representative: ${HouseRep1} - (${Party_HRep1})<br>" +
+                    "Representative: ${HouseRep2} - (${Party_HRep2})<br>" +
+                    "Senator: ${Senator} - (${Party_Sen})<br>");
+
+                self.zipCodesInfoTemplate = new InfoTemplate();
+                self.zipCodesInfoTemplate.setTitle("Zip Code");
+                self.zipCodesInfoTemplate.setContent("<strong>${ZIPCODE}</strong><br>" +
+                    "<strong>Jurisdiction:</strong> ${NAME}"
+                    );
 
                 self.featureFillSymbol = new SimpleFillSymbol(SimpleFillSymbol.STYLE_BACKWARD_DIAGONAL,
                     new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID,
@@ -293,6 +299,9 @@
                             }
                             if (info.id === "legislativeDistricts") {
                                 featureTemplate = self.legislatureInfoTemplate;
+                            }
+                            if (info.id === "zipCodes") {
+                                featureTemplate = self.zipCodesInfoTemplate;
                             }
                             layer = new FeatureLayer(info.url + token, {
                                 id: info.id,

@@ -37,8 +37,8 @@
                 placeholder: "Pinal County"
             }, {
                 featureLayer: new FeatureLayer(appConfig.legislativeService),
-                searchFields: ["DISTRICT_NUM"],
-                displayField: "DISTRICT_NUM",
+                searchFields: ["SLDIST_NAME"],
+                displayField: "SLDIST_NAME",
                 name: "Legislative Districts",
                 outFields: ["*"],
                 placeholder: "Legislative District 03"
@@ -51,11 +51,19 @@
                 placeholder: "Scottsdale"
             }, {
                 featureLayer: new FeatureLayer(appConfig.congressionalService),
-                searchFields: ["DISTRICT_NUM"],
-                displayField: "DISTRICT_NUM",
+                searchFields: ["CDIST_NAME"],
+                displayField: "CDIST_NAME",
                 name: "Congressional Districts",
                 outFields: ["*"],
                 placeholder: "Congressional District 1"
+            }, {
+                featureLayer: new FeatureLayer(appConfig.zipCodeService),
+                searchFields: ["ZIPCODE"],
+                displayField: "ZIPCODE",
+                autoNavigate: true,
+                name: "Zip Codes",
+                outFields: ["*"],
+                placeholder: "85254"
             }, {
                 featureLayer: new FeatureLayer(appConfig.tractService),
                 searchFields: ["NAMELSAD"],

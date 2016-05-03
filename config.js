@@ -33,7 +33,7 @@
 
 var appConfig = new function() {
 
-    this.Version = "v2.1.6 | 04/06/2016";
+    this.Version = "v2.2.2 | 04/28/2016";
 
     this.jasonemail = "https://www.azmag.gov/EmailPages/JasonHoward.asp";
 
@@ -42,17 +42,16 @@ var appConfig = new function() {
     this.exportWebMapUrl = "http://geo.azmag.gov/gismag/rest/services/gp/stateDemo/GPServer/Export%20Web%20Map"; // Custom Print Service
     this.webServicePasscode = "sun sand dry heat grand canyon";
 
-    this.mainURL = "http://geo.azmag.gov/gismag/rest/services/maps/DemographicState2013/MapServer";
+    this.mainURL = "http://geo.azmag.gov/gismag/rest/services/maps/DemographicState2014/MapServer";
 
     // Search Service URLs
     this.geoCoderService = "//geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer";
-    this.countyService = this.mainURL + "/4";
+    this.countyService = this.mainURL + "/2";
     this.placeService = this.mainURL + "/1";
-    this.legislativeService = this.mainURL + "/2";
-    this.congressionalService = this.mainURL + "/3";
-    this.tractService = this.mainURL + "/8";
-
-
+    this.legislativeService = this.mainURL + "/3";
+    this.congressionalService = this.mainURL + "/4";
+    this.zipCodeService = this.mainURL + "/5";
+    this.tractService = this.mainURL + "/15";
 
     this.layerInfo = [{
         layerNum: 0,
@@ -60,9 +59,9 @@ var appConfig = new function() {
         title: "Census Tract Labels",
         type: "dynamic",
         url: this.mainURL,
-        queryUrl: this.mainURL + "/8",
+        queryUrl: this.mainURL + "/16",
         queryWhere: "1=1",
-        layers: [7, 8],
+        layers: [15, 16],
         opacity: 1,
         visible: false,
         showTOC: true
@@ -72,9 +71,9 @@ var appConfig = new function() {
         title: "County Boundaries",
         type: "dynamic",
         url: this.mainURL,
-        queryUrl: this.mainURL + "/4",
+        queryUrl: this.mainURL + "/14",
         queryWhere: "1=1",
-        layers: [4],
+        layers: [14],
         opacity: 0.8,
         visible: true,
         showTOC: true
@@ -83,10 +82,10 @@ var appConfig = new function() {
         id: "congressionalDistricts",
         title: "Congressional Districts",
         type: "feature",
-        url: this.mainURL + "/6",
-        queryUrl: this.mainURL + "/3",
+        url: this.mainURL + "/12",
+        queryUrl: this.mainURL + "/12",
         queryWhere: "1=1",
-        layers: [6],
+        layers: [12],
         opacity: 1,
         visible: false,
         selectable: true,
@@ -98,10 +97,10 @@ var appConfig = new function() {
         id: "legislativeDistricts",
         title: "Legislative Districts",
         type: "feature",
-        url: this.mainURL + "/5",
-        queryUrl: this.mainURL + "/2",
+        url: this.mainURL + "/13",
+        queryUrl: this.mainURL + "/13",
         queryWhere: "1=1",
-        layers: [5],
+        layers: [13],
         opacity: 1,
         visible: false,
         selectable: true,
@@ -110,6 +109,21 @@ var appConfig = new function() {
         showTOC: true
     }, {
         layerNum: 4,
+        id: "zipCodes",
+        title: "Zip Codes",
+        type: "feature",
+        url: this.mainURL + "/5",
+        queryUrl: this.mainURL + "/5",
+        queryWhere: "1=1",
+        layers: [5],
+        opacity: 1,
+        visible: false,
+        selectable: true,
+        outFields: ["*"],
+        filters: [],
+        showTOC: true
+    },{
+        layerNum: 5,
         id: "esriReference",
         title: "Streets",
         type: "tile",
@@ -117,8 +131,8 @@ var appConfig = new function() {
         visible: true,
         showTOC: true
     }, {
-        layerNum: 5,
-        id: "Census2010byBlockGroup",
+        layerNum: 6,
+        id: "ACS2014byBlockGroup",
         title: "American Community Survey by Block Group, 2014",
         type: "dynamic",
         url: this.mainURL,
@@ -139,7 +153,7 @@ var appConfig = new function() {
         isBasemap: false,
         showTOC: false
     }, {
-        layerNum: 6,
+        layerNum: 8,
         id: "esriImagery",
         title: "Imagery",
         type: "tile",
@@ -164,6 +178,20 @@ var appConfig = new function() {
     this.seriesColors = ["#A6CEE3", "#1F78B4", "#B2DF8A", "#33A02C", "#FB9A99", "#E31A1C", "#FDBF6F", "#FF7F00", "#CAB2D6", "#6A3D9A", "#FFFF99", "#B15928"];
     //from colorbrewer 2.0 qualitative HEX Set3
     //this.seriesColors = ["#8DD3C7", "#FFFFB3", "#BEBADA", "#FB8072", "#80B1D3", "#FDB462", "#B3DE69", "#FCCDE5", "#D9D9D9", "#BC80BD", "#CCEBC5", "#FFED6F"];
+
+    this.bubbleColors = [
+    
+         {category: "MgBizFin", color: "#A6CEE3"},
+         {category: "CompEngSci", color: "#1F78B4"},
+         {category: "EduLegComArtMedia", color: "#B2DF8A"},
+         {category: "HealthTechnical", color: "#33A02C"},
+         {category: "ServiceOcc", color: "#FB9A99"},
+         {category: "ProtectiveServ", color: "#E31A1C"},
+         {category: "SalesOfficeOcc", color: "#FDBF6F"},
+         {category: "NatResources", color: "#FF7F00"},
+         {category: "ProdTransMaterial", color: "#CAB2D6"}
+    
+    ]
 
     this.URLMinimizer = {
 
