@@ -2158,9 +2158,9 @@
 			   },
 			   {
 			      "fieldName":"NON_SEASONAL_HU",
-			      "fieldAlias":"Non Seasonal Housing",
+			      "fieldAlias":"Non-Seasonal Housing",
 			      "fieldType":"Number",
-			      "tableHeader":"Non Seasonal Housing Units",
+			      "tableHeader":"Non-Seasonal Housing Units",
 			      "category":"Housing Units",
 			      "rowID":93,
 			      "groupID":"<span class='myHiddenClass'>08</span>Housing Units",
@@ -2289,7 +2289,7 @@
 			   },
 			   {
 			      "fieldName":"NON_SEASONAL_VACANCY_RATE",
-			      "fieldAlias":"Non Seasonal Vacancy Rate",
+			      "fieldAlias":"Non-Seasonal Vacancy Rate",
 			      "fieldType":"Number",
 			      "tableHeader":"Non Seasonal Vacancy Rate",
 			      "category":"Housing Units",
