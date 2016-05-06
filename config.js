@@ -33,7 +33,7 @@
 
 var appConfig = new function() {
 
-    this.Version = "v2.2.2 | 04/28/2016";
+    this.Version = "v2.1.5 | 03/01/2016";
 
     this.jasonemail = "https://www.azmag.gov/EmailPages/JasonHoward.asp";
 
@@ -133,7 +133,7 @@ var appConfig = new function() {
     }, {
         layerNum: 6,
         id: "ACS2014byBlockGroup",
-        title: "American Community Survey by Block Group, 2014",
+        title: "American Community Survey by Block Group, 2010-2014 5yr",
         type: "dynamic",
         url: this.mainURL,
         layers: [0],
@@ -223,7 +223,7 @@ var appConfig = new function() {
 
         this.textSymbolFontSizes = [8, 9, 10, 11, 12, 14, 16, 18, 20, 24, 30, 50];
         
-        this.sourceLabel = "Source: American Community Survey 2014";
+        this.sourceLabel = "Source: American Community Survey 2010-2014 5yr";
 
         this.sourceLabel2 = "Source: Census 2010";
 

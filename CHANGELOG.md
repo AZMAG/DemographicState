@@ -4,6 +4,10 @@ CHANGELOG for State Demographics Map Viewer
 
 ### Version x.x.x (xx/xx/2016)
 
+### Version 2.2.3 (05/04/2016)
+
+* Fixed some data sources and fixed bug with legend layer checkboxes being in sync when using multiple map frames.
+
 ### Version 2.2.2 (04/28/2016)
 
 * Fixed souce label on tab switch

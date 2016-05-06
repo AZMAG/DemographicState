@@ -171,7 +171,7 @@
                         comparePlaceField: "NAME",
                         summaryField: "NAME",
                         isTimeVaryingData: false,
-                        source: "American Community Survey 2014",
+                        source: "American Community Survey 2010-2014 5yr",
                         populateDropDown: false
                     },
 
@@ -186,7 +186,7 @@
                         comparePlaceField: "NAME",
                         summaryField: "NAME",
                         isTimeVaryingData: false,
-                        source: "American Community Survey 2014",
+                        source: "American Community Survey 2010-2014 5yr",
                         dropdown: "#countyComboBox"
                     },
                     placeSummary: {
@@ -200,7 +200,7 @@
                         comparePlaceField: "NAME",
                         summaryField: "NAME",
                         isTimeVaryingData: false,
-                        source: "American Community Survey 2014",
+                        source: "American Community Survey 2010-2014 5yr",
                         dropdown: "#placeComboBox"
                     },
                     legislativeSummary: {
@@ -214,7 +214,7 @@
                         comparePlaceField: "SLDIST_NAME",
                         summaryField: "SLDIST_NAME",
                         isTimeVaryingData: false,
-                        source: "American Community Survey 2014",
+                        source: "American Community Survey 2010-2014 5yr",
                         dropdown: "#legislativeComboBox"
                     },
                     congressionalSummary: {
@@ -228,7 +228,7 @@
                         comparePlaceField: "CDIST_NAME",
                         summaryField: "CDIST_NAME",
                         isTimeVaryingData: false,
-                        source: "American Community Survey 2014",
+                        source: "American Community Survey 2010-2014 5yr",
                         dropdown: "#congressionalComboBox"
                     },
                     zipCodeSummary: {
@@ -242,7 +242,7 @@
                         comparePlaceField: "ZIPCODE",
                         summaryField: "ZIPCODE",
                         isTimeVaryingData: false,
-                        source: "American Community Survey 2014",
+                        source: "American Community Survey 2010-2014 5yr",
                         dropdown: "#zipCodeComboBox"
                     },
                     censusTracts: {
@@ -256,7 +256,7 @@
                         comparePlaceField: "NAME",
                         summaryField: "OBJECTID",
                         isTimeVaryingData: false,
-                        source: "American Community Survey 2014",
+                        source: "American Community Survey 2010-2014 5yr",
                         populateDropDown: false
                     }
                 };
