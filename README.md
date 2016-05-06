@@ -11,25 +11,31 @@ Use this site to explore Explore data from Census 2010 and American Community Su
 
 This web app viewer was developed by MAG staff for MAG member agencies and the public using ESRI's JavaScript API.
 
-#### Version
+### Keywords
 
-`Major/Minor/Patch 0.0.0`
+`Demographics` `Census` `2010` `American Community Survey` `ACS` `2010-2014` `5yr` `State of Arizona` `Maps` `MAG` `ESRI` `#MAGmaps`
 
-#### `v2.2.2 - 04/28/2016`
+### Version
 
-#### `Created: 10/21/2014`
+#### `version 2.2.2` ####
+ `Updated: 04/28/2016`
+ `Created: 10/21/2014`
 
-1. MAJOR version when you make incompatible API changes.
-2. MINOR version when you add functionality in a backwards-compatible manner.
-3. PATCH version when you make backwards-compatible bug fixes.
+Releases will be numbered with the following format:
+
+`<major>.<minor>.<patch>`
+
+And constructed with the following guidelines:
+
+1. MAJOR version when you make incompatible API changes **bumps the major** resets minor and patch
+2. MINOR version when you add functionality in a backwards-compatible manner **bumps the minor** resets patch
+3. PATCH version when you make backwards-compatible bug fixes and misc changes **bumps only the patch**
+
+***************************************************************************************************************
 
 ### Credits
 
 `Maricopa Association of Governments (MAG) and the MAG member agencies`
-
-### Keywords
-
-`Demographics` `Census` `2010` `American Community Survey` `ACS` `2010-2014` `State of Arizona` `Maps` `MAG` `ESRI` `#MAGmaps`
 
 ### Site URL's
 * [Site] (http://geo.azmag.gov/maps/azdemographics/)
@@ -60,6 +66,8 @@ Please acknowledge the Maricopa Association of Governments (MAG) GIS as the sour
 ### Copyright and Licensing
 
 Code released under the MIT license.
+
+- [LICENSE] (LICENSE.txt)
 
 Copyright (c) 2016 Maricopa Association of Governments
 

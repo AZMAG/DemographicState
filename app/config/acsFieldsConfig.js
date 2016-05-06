@@ -7,7 +7,7 @@
         function() {
             var acsFieldsConfig = new function() {
             var self = this;
-			self.fields = 
+			self.fields =
 			[
 			   {
 			      "fieldName":"ACRES",
@@ -71,7 +71,8 @@
 			      "dataSource":"ACS 2014",
 			      "class":null,
 			      "timePeriod":null,
-			      "parentField": ""
+			      "parentField": "",
+			      "percentOfField": "TOTAL_POP"
 			   },
 			   {
 			      "fieldName":"M_Y5LESS5",
@@ -478,7 +479,8 @@
 			      "dataSource":"ACS 2014",
 			      "class":null,
 			      "timePeriod":null,
-			      "parentField": ""
+			      "parentField": "",
+			      "percentOfField": "TOTAL_POP"
 			   },
 			   {
 			      "fieldName":"F_Y5LESS5",
@@ -1888,7 +1890,8 @@
 			      "dataSource":"",
 			      "class":null,
 			      "timePeriod":null,
-			      "parentField": ""
+			      "parentField": "",
+			      "percentOfField": ""
 			   },
 			   {
 			      "fieldName":"TOTAL_HOUSEHOLDS",
@@ -2388,9 +2391,9 @@
 			   },
 			   {
 			      "fieldName":"SOMECOLLEGE",
-			      "fieldAlias":"Some college",
+			      "fieldAlias":"Some College",
 			      "fieldType":"Number",
-			      "tableHeader":"Some college",
+			      "tableHeader":"Some College",
 			      "category":"Education",
 			      "rowID":107,
 			      "groupID":"<span class='myHiddenClass'>09</span>Education",
@@ -2484,7 +2487,8 @@
 			      "dataSource":"",
 			      "class":null,
 			      "timePeriod":null,
-			      "parentField": ""
+			      "parentField": "",
+			      "percentOfField": "TOTAL_POP"
 			   },
 			   {
 			      "fieldName":"CIVPOP18PLUS",
@@ -2500,7 +2504,8 @@
 			      "dataSource":"",
 			      "class":null,
 			      "timePeriod":null,
-			      "parentField": ""
+			      "parentField": "",
+			      "percentOfField": "TOTAL_POP"
 			   },
 			   {
 			      "fieldName":"VETERAN",
@@ -2516,7 +2521,8 @@
 			      "dataSource":"",
 			      "class":null,
 			      "timePeriod":null,
-			      "parentField": ""
+			      "parentField": "",
+			      "percentOfField": "TOTAL_POP"
 			   },
 			   {
 			      "fieldName":"CAR_TRUCK_VAN",
@@ -2690,9 +2696,9 @@
 			   },
 			   {
 			      "fieldName":"WORKED_FROM_HOME",
-			      "fieldAlias":"Worked From Home",
+			      "fieldAlias":"Worked from Home",
 			      "fieldType":"Number",
-			      "tableHeader":"Worked From Home",
+			      "tableHeader":"Worked from Home",
 			      "category":"Modes of Transportation",
 			      "rowID":125,
 			      "groupID":"<span class='myHiddenClass'>10</span>Modes of Transportation",
@@ -2808,7 +2814,7 @@
 			      "percentOfField": "OCCUPIED_HU"
 			   }
 			]
-			   
+
 					        }
             return acsFieldsConfig;
         }

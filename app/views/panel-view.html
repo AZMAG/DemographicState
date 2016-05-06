@@ -1,14 +1,14 @@
 <div id="reportLauncher">
     <h1>Choose a report:</h1>
     <button id="launchStateSummaryWin" type="button" title="State Summary" href="#" data-bind="click: openStateSummaryWindow">State Summary</button>
-        
+
     <button id="launchCountySummaryWin" type="button" title="County Summary" href="#" data-bind="click: displayChoice">County Summary</button>
 	    <div id="countyChoiceDiv">
             <input id="countyComboBox">
             <button id="countyButton" class="getButton" title="Pick a County" type="button" data-bind="click: openSummaryWindow">Get Report</button>
 	     </div>
 
-    <button id="launchPlaceSummaryWin" type="button" title="Place Summary" href="#" data-bind="click: displayChoice">Jurisdiction Summary</button>
+    <button id="launchPlaceSummaryWin" type="button" title="Place Summary" href="#" data-bind="click: displayChoice">Place Summary</button>
         <div id="placeChoiceDiv">
             <input id="placeComboBox">
             <button id="placeButton" class="getButton" title="Pick a City or Town" type="button" data-bind="click: openSummaryWindow">Get Report</button>
@@ -26,12 +26,12 @@
             <button id="congressionalButton" class="getButton" title="Pick a District" type="button" data-bind="click: openSummaryWindow">Get Report</button>
         </div>
 
-    <button id="launchZipCodeEmpSummaryWin" type="button" title="" href="#" data-bind="click: displayChoice">Zip Code Summary</button>
+    <button id="launchZipCodeEmpSummaryWin" type="button" title="" href="#" data-bind="click: displayChoice">ZIP Code Summary</button>
     <div id="zipCodeChoiceDiv">
         <input id="zipCodeComboBox">
         <button id="zipCodeButton" class="k-button getButton" title="Choose a Zip Code" type="button" data-bind="click: openSummaryWindow">Get Report</button>
     </div>
-		
+
     <button id="launchInteractiveSummaryDiv" title="Custom Summary" href="#" data-bind="click: displayInteractiveDiv">Custom Summary</button>
 
     <button id="launchQB" type="button" title="Query Builder" href="#" data-bind="click: openQueryBuilder">Advanced Query</button>
