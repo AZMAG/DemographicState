@@ -4,6 +4,13 @@ CHANGELOG for State Demographics Map Viewer
 
 ### Version x.x.x (xx/xx/2016)
 
+### Version 2.2.4 (05/09/2016)
+
+* Clean up.  
+* Source Label (removed K)
+* Updated help windows
+* Changed from Jurisdiction to Place
+
 ### Version 2.2.3 (05/04/2016)
 
 * Fixed some data sources and fixed bug with legend layer checkboxes being in sync when using multiple map frames.

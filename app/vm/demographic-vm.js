@@ -20,6 +20,9 @@
             "dojo/text!app/views/demographicChartHelp-view.html",
             "dojo/text!app/views/demographicSummaryHelp-view.html",
             "dojo/text!app/views/demographicSelFeaturesHelp-view.html",
+            "dojo/text!app/views/ACSDemographicChartHelp-view.html",
+            "dojo/text!app/views/ACSDemographicSummaryHelp-view.html",
+            "dojo/text!app/views/ACSDemographicSelFeaturesHelp-view.html",
             "app/vm/help-vm",
             "dojo/text!app/views/alert1-view.html",
             "dojo/text!app/views/alert2-view.html",
@@ -38,7 +41,7 @@
             "dojo/_base/Color"
         ],
         function(dc, dom, tp, da, on, view, selCensusFeatsView, selACSFeatsView, chartHelpView, summaryHelpView,
-            selFeatHelpView, helpVM, alertView1, alertView2, alert1VM, alert2VM, layerDelegate, printMapDelegate,
+            selFeatHelpView, ACSChartHelpView, ACSSummaryHelpView, ACSSelFeatHelpView, helpVM, alertView1, alertView2, alert1VM, alert2VM, layerDelegate, printMapDelegate,
             magNumberFormatter, mapModel, demographicConfig, acsFieldsConfig, censusFieldsConfig, graphicsUtils) {
 
             var DemographicVM = new function() {
@@ -332,12 +335,18 @@
                         var tabStrip = $("#demTabStrip").data("kendoTabStrip");
                         var tab = tabStrip.select();
 
-                        if (tab[0].textContent === "Charts") {
+                        if (tab[0].textContent === "ACS 2014 Charts") {
+                            helpVM.openWindow(ACSChartHelpView);
+                        } else if (tab[0].textContent === "Census 2010 Charts") {
                             helpVM.openWindow(chartHelpView);
-                        } else if (tab[0].textContent === "Summary Report") {
+                        } else if (tab[0].textContent === "ACS 2014 Data") {
+                            helpVM.openWindow(ACSSummaryHelpView);
+                        } else if (tab[0].textContent === "Census 2010 Data") {
                             helpVM.openWindow(summaryHelpView);
-                        } else {
-                            helpVM.openWindow(selFeatHelpView);
+                        } else if (tab[0].textContent === "ACS Block Groups") {
+                            helpVM.openWindow(ACSSelFeatHelpView);
+                        } else if (tab[0].textContent === "Census Block Groups") {
+                            helpVM.openWindow(SelFeatHelpView);
                         }
                     });
 
@@ -388,6 +397,7 @@
                  * @param {string} sumName - name of the config for the report type. vw
                  */
                 self.openWindow = function(communityName, sumName) {
+
                     self.hasSelectedFeatures = false;
                     self.commChanged = (self.communityName !== undefined && self.communityName !== "" && self.communityName !== communityName);
                     self.communityName = communityName;
@@ -849,6 +859,9 @@
                                 var percentOf = Number(sumAttributes[field.percentOfField]);
                                 aggValues[field.fieldName].percentValue = (attrValue / percentOf) * 100;
                                 aggValues[field.fieldName].percentValueFormatted = magNumberFormatter.formatValue((attrValue / percentOf) * 100) + "%";
+                                if (aggValues[field.fieldName].percentValueFormatted.indexOf(".")>-1 && aggValues[field.fieldName].percentValueFormatted.length === 3) {
+                                    aggValues[field.fieldName].percentValueFormatted = "0" + aggValues[field.fieldName].percentValueFormatted;
+                                }
                             }
                             if (field.densityAreaField !== "") {
                                 var densityArea = Number(sumAttributes[field.densityAreaField]);
@@ -944,7 +957,8 @@
                  * @param {FeatureSet} results - feature set returned by query.
                  */
                 self.acsDataQueryHandler = function(results) {
-                     var features = results.features;
+
+                    var features = results.features;
                     var isACS = false;
                     var fieldCount = Object.keys(features[0].attributes).length;
                     var fields = acsFieldsConfig.fields;
@@ -1016,11 +1030,20 @@
                                 var percentOf = Number(sumAttributes[field.percentOfField]);
                                 aggValues[field.fieldName].percentValue = (attrValue / percentOf) * 100;
                                 aggValues[field.fieldName].percentValueFormatted = magNumberFormatter.formatValue((attrValue / percentOf) * 100) + "%";
+                                if (aggValues[field.fieldName].percentValueFormatted.indexOf(".")>-1 && aggValues[field.fieldName].percentValueFormatted.length === 3) {
+                                    aggValues[field.fieldName].percentValueFormatted = "0" + aggValues[field.fieldName].percentValueFormatted;
+                                }
+
                             }
-                            if (field.densityAreaField !== "") {
+                            if (field.densityAreaField !== "" || field.densityAreaField !== undefined) {
                                 var densityArea = Number(sumAttributes[field.densityAreaField]);
                                 aggValues[field.fieldName].densityValue = attrValue / densityArea;
                                 aggValues[field.fieldName].densityValueFormatted = magNumberFormatter.formatValue(attrValue / densityArea);
+                            }
+
+                            if(aggValues[field.fieldName].percentValueFormatted === "NaN%")
+                            {
+                                aggValues[field.fieldName].percentValueFormatted = "-";
                             }
                         }
                     });
@@ -1103,7 +1126,9 @@
                     if (useCompare) {
                         self.createKendoGridWithCompare(gridType);
                     } else {
+                        
                         self.createKendoGrid(gridType);
+
                     }
                 };
 
@@ -1602,8 +1627,10 @@
                  * @method createChart
                  */
                 self.createChart = function(type) {
+                    console.log("createChart called", type)
                     // Create the div element for the chart
                     var legendVisible = false;
+                    var chartObj;
                     if(self.groupedItems === undefined)
                     {
                         
@@ -1629,7 +1656,7 @@
                         dc.create("div", {
                             id: "demCensusChartArea"
                         }, "demCensusChartAreaPane", "first");
-                        var chartObj = $("#demCensusChartArea");
+                        chartObj = $("#demCensusChartArea");
                         legendVisible = self.legendCensusVisible;
 
                     }
@@ -1637,7 +1664,7 @@
                         dc.create("div", {
                             id: "demACSChartArea"
                         }, "demACSChartAreaPane", "first");
-                        var chartObj = $("#demACSChartArea");
+                        chartObj = $("#demACSChartArea");
                         legendVisible = self.legendACSVisible;
                     }
 
@@ -1657,30 +1684,45 @@
                     }
                     else{
 
-                        var templateString = "#= category #<br>Percent: #= kendo.format('{0:P}', percentage) #<br>Value: #= kendo.format('{0:N0}', value) #";
+                        var templateString = "#= category #<br>#= kendo.format('{0:P}', percentage) #<br>#= kendo.format('{0:N0}', value) #";
                         if(self.groupedItems[0].chartType !== "pie")
                         {
-                           templateString = "#= category #<br>Value: #= kendo.format('{0:N0}', value) #"
+                           templateString = "#= category #<br>#= kendo.format('{0:N0}', value) #"
                         }
 
                         var series1 = [];
+                        var filteredItems = [];
 
                         $.each(self.groupedItems, function(i, item){
+                            //filtering out zero values
+                            if (item.fieldValue !== 0) {
+                                filteredItems.push(item);
+                            }
                             series1.push(item.fieldValue);
                         });
 
                         var largestValue = Math.max.apply(Math, series1);
                         var valueAxisTemplate = "#= kendo.format(\'{0:N0}\', value)#"
-                        if(largestValue > 2000)
+                        var largeValue = false;
+                        if(largestValue > 3000)
                         {
-                            valueAxisTemplate = "#= kendo.format('{0}K', value / 1000) #";
+                            valueAxisTemplate = "#= kendo.format('{0:N0}', value / 1000) #";
+                            largeValue = true;
                         }
+
+                        var showLabels = false;
+                        if(self.groupedItems[0].chartType === "pie"){
+                            showLabels = true;
+                        }
+
+                        if(filteredItems.length !== 0)
+                        {
 
 
                         // Kendo-ize
                         var chart = chartObj.kendoChart({
                             dataSource: {
-                                data: self.groupedItems
+                                data: filteredItems
                             },
 
                             //change color of charts vw
@@ -1708,7 +1750,7 @@
                             }],
                             seriesDefaults: {
                                 labels: {
-                                    visible: true,
+                                    visible: showLabels,
                                     position: "outsideEnd",
                                     background: "#4D4D4D",
                                     format: "{0:n}",
@@ -1748,8 +1790,8 @@
                                 field: "fieldAlias",
                                 color: "white",
                                 labels: {
-                                    visible: false,
-                                    rotation: 45
+                                    visible: true,
+                                    rotation: 0
                                 },
                                 majorGridLines: {
                                     visible: false
@@ -1763,9 +1805,18 @@
                                 color: "white",
                                 labels: {
                                     template: valueAxisTemplate
+                                },
+                                title: {
+                                    text: "*Values shown in thousands",
+                                    font: "10px Arial,Helvetica,sans-serif",
+                                    visible: largeValue
                                 }
                             }
                         }).data("kendoChart");
+                        }
+                        else{
+                            chartObj.html("<span style='margin:30%;'>No data available for this chart.<span>");
+                        }
                     }
                 };
 
@@ -1822,6 +1873,11 @@
                         {
                             value["fieldValueFormatted"] = "$ " + magNumberFormatter.formatValue(value["fieldValue"]);
 
+                        }
+                        else if(value["fieldType"] === "Rate")
+                        {
+                            value["percentValueFormatted"] =  magNumberFormatter.formatValue(value["fieldValue"]) + "%";
+                            value["fieldValueFormatted"] = "-"
                         }
                     });
 
@@ -2229,9 +2285,11 @@
                     var chartObj = $("#demACSChartArea");
                     var largestValue = Math.max.apply(Math, maleSeries);
                     var valueAxisTemplate = "#= kendo.format(\'{0:N0}\', Math.abs(value))#"
+                    var largeValue = false;
                     if(largestValue > 2000)
                     {
-                        valueAxisTemplate = "#= kendo.format('{0}K', Math.abs(value) / 1000) #";
+                        valueAxisTemplate = "#= kendo.format('{0}', Math.abs(value) / 1000) #";
+                        largeValue = true;
                     }
 
                 //Kendo-ize
@@ -2256,32 +2314,32 @@
                             data: femaleSeries,
                             color: "#FF69B4",
                         },
-                        {
-                            name: "State Male",
-                            type: "line",
-                            data: stateLineMale,
-                            color: "#000",
-                            stack: false,
-                            tooltip: {
-                                color: "white",
-                                visible: true,
-                                format: "{0:N0}",
-                                template: "#=series.name # #= kendo.format(\'{0:P1}\', (value / " + self.totalMale + "))#"
-                            }
-                        },
-                        {
-                            name: "State Female",
-                            type: "line",
-                            data: stateLineFemale,
-                            color: "#000",
-                            stack: false,
-                            tooltip: {
-                                color: "white",
-                                visible: true,
-                                format: "{0:N0}",
-                                template: "#=series.name # #= kendo.format(\'{0:P1}\', (Math.abs(value) / " + self.totalFemale + "))#"
-                            }
-                        }
+                        // {
+                        //     name: "State Male",
+                        //     type: "line",
+                        //     data: stateLineMale,
+                        //     color: "#000",
+                        //     stack: false,
+                        //     tooltip: {
+                        //         color: "white",
+                        //         visible: true,
+                        //         format: "{0:N0}",
+                        //         template: "#=series.name # #= kendo.format(\'{0:P1}\', (value / " + self.totalMale + "))#"
+                        //     }
+                        // },
+                        // {
+                        //     name: "State Female",
+                        //     type: "line",
+                        //     data: stateLineFemale,
+                        //     color: "#000",
+                        //     stack: false,
+                        //     tooltip: {
+                        //         color: "white",
+                        //         visible: true,
+                        //         format: "{0:N0}",
+                        //         template: "#=series.name # #= kendo.format(\'{0:P1}\', (Math.abs(value) / " + self.totalFemale + "))#"
+                        //     }
+                        // }
                         ],
                         seriesDefaults: {
                             stack: true,
@@ -2324,6 +2382,11 @@
                                 labels: {
                                     template: valueAxisTemplate
                                 }, 
+                                title: {
+                                    text: "*Values shown in thousands",
+                                    font: "10px Arial,Helvetica,sans-serif",
+                                    visible: largeValue
+                                },
                                 majorGridLines: {
                                     visible: false
                                 }
@@ -2356,6 +2419,11 @@
                         {
                             value["compareValueFormatted"] = "$ " + magNumberFormatter.formatValue(value["compareValue"]);
                         }
+                        else if(value["fieldType"] === "Rate"){
+                            value["percentValueFormatted"] =  magNumberFormatter.formatValue(value["fieldValue"]) + "%";
+                            value["fieldValueFormatted"] = "-"
+                        }
+
                     });
 
                     // Create the div element for the grid
