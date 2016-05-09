@@ -1627,7 +1627,6 @@
                  * @method createChart
                  */
                 self.createChart = function(type) {
-                    console.log("createChart called", type)
                     // Create the div element for the chart
                     var legendVisible = false;
                     var chartObj;
@@ -1704,9 +1703,14 @@
                         var largestValue = Math.max.apply(Math, series1);
                         var valueAxisTemplate = "#= kendo.format(\'{0:N0}\', value)#"
                         var largeValue = false;
-                        if(largestValue > 3000)
+                        if(largestValue > 1000)
                         {
-                            valueAxisTemplate = "#= kendo.format('{0:N0}', value / 1000) #";
+                            if(largestValue > 5000){
+                            valueAxisTemplate = "#= kendo.format('{0:N0}', Math.abs(value) / 1000) #";
+                            }
+                            else{
+                                valueAxisTemplate = "#= kendo.format('{0:N1}', Math.abs(value) / 1000) #";
+                            }
                             largeValue = true;
                         }
 
@@ -2286,11 +2290,17 @@
                     var largestValue = Math.max.apply(Math, maleSeries);
                     var valueAxisTemplate = "#= kendo.format(\'{0:N0}\', Math.abs(value))#"
                     var largeValue = false;
-                    if(largestValue > 2000)
+                    if(largestValue > 1000)
                     {
-                        valueAxisTemplate = "#= kendo.format('{0}', Math.abs(value) / 1000) #";
+                        if(largestValue > 5000){
+                            valueAxisTemplate = "#= kendo.format('{0:N0}', Math.abs(value) / 1000) #";
+                        }
+                        else{
+                            valueAxisTemplate = "#= kendo.format('{0:N1}', Math.abs(value) / 1000) #";
+                        }
                         largeValue = true;
                     }
+
 
                 //Kendo-ize
                     var chart = chartObj.kendoChart({

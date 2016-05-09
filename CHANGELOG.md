@@ -6,6 +6,10 @@ CHANGELOG for State Demographics Map Viewer
 
 ### Version 2.2.4 (05/09/2016)
 
+* Changed series labels to prevent overlapping
+
+### Version 2.2.4 (05/09/2016)
+
 * Update copyright information.
 
 ### Version 2.2.4 (05/09/2016)
