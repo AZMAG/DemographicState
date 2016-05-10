@@ -4,6 +4,10 @@ CHANGELOG for State Demographics Map Viewer
 
 ### Version x.x.x (xx/xx/2016)
 
+### Version 2.2.5 (05/10/2016)
+
+* Changed cbr view to reflect hierarchy
+
 ### Version 2.2.4 (05/09/2016)
 
 * Changed series labels to prevent overlapping
