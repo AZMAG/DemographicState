@@ -33,7 +33,7 @@
 
 var appConfig = new function() {
 
-    this.Version = "v2.2.2 | 04/28/2016";
+    this.Version = "v2.2.4 | 05/10/2016";
 
     this.jasonemail = "https://www.azmag.gov/EmailPages/JasonHoward.asp";
 
@@ -133,7 +133,7 @@ var appConfig = new function() {
     }, {
         layerNum: 6,
         id: "ACS2014byBlockGroup",
-        title: "American Community Survey by Block Group, 2014",
+        title: "American Community Survey by Block Group, 2010-2014 5yr",
         type: "dynamic",
         url: this.mainURL,
         layers: [0],
@@ -180,7 +180,7 @@ var appConfig = new function() {
     //this.seriesColors = ["#8DD3C7", "#FFFFB3", "#BEBADA", "#FB8072", "#80B1D3", "#FDB462", "#B3DE69", "#FCCDE5", "#D9D9D9", "#BC80BD", "#CCEBC5", "#FFED6F"];
 
     this.bubbleColors = [
-    
+
          {category: "MgBizFin", color: "#A6CEE3"},
          {category: "CompEngSci", color: "#1F78B4"},
          {category: "EduLegComArtMedia", color: "#B2DF8A"},
@@ -190,7 +190,7 @@ var appConfig = new function() {
          {category: "SalesOfficeOcc", color: "#FDBF6F"},
          {category: "NatResources", color: "#FF7F00"},
          {category: "ProdTransMaterial", color: "#CAB2D6"}
-    
+
     ]
 
     this.URLMinimizer = {
@@ -222,8 +222,8 @@ var appConfig = new function() {
         this.outlineColorOpacity = 1.0;
 
         this.textSymbolFontSizes = [8, 9, 10, 11, 12, 14, 16, 18, 20, 24, 30, 50];
-        
-        this.sourceLabel = "Source: American Community Survey 2014";
+
+        this.sourceLabel = "Source: American Community Survey 2010-2014 5yr";
 
         this.sourceLabel2 = "Source: Census 2010";
 

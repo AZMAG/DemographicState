@@ -46,7 +46,7 @@
                 featureLayer: new FeatureLayer(appConfig.placeService),
                 searchFields: ["NAME"],
                 displayField: "NAME",
-                name: "Jurisdiction",
+                name: "Place",
                 outFields: ["*"],
                 placeholder: "Scottsdale"
             }, {

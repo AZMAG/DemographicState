@@ -7,7 +7,7 @@
         function() {
             var acsFieldsConfig = new function() {
             var self = this;
-			self.fields = 
+			self.fields =
 			[
 			   {
 			      "fieldName":"ACRES",
@@ -71,7 +71,8 @@
 			      "dataSource":"ACS 2014",
 			      "class":null,
 			      "timePeriod":null,
-			      "parentField": ""
+			      "parentField": "",
+			      "percentOfField": "TOTAL_POP"
 			   },
 			   {
 			      "fieldName":"M_Y5LESS5",
@@ -478,7 +479,8 @@
 			      "dataSource":"ACS 2014",
 			      "class":null,
 			      "timePeriod":null,
-			      "parentField": ""
+			      "parentField": "",
+			      "percentOfField": "TOTAL_POP"
 			   },
 			   {
 			      "fieldName":"F_Y5LESS5",
@@ -1888,7 +1890,8 @@
 			      "dataSource":"",
 			      "class":null,
 			      "timePeriod":null,
-			      "parentField": ""
+			      "parentField": "",
+			      "percentOfField": ""
 			   },
 			   {
 			      "fieldName":"TOTAL_HOUSEHOLDS",
@@ -2007,9 +2010,9 @@
 			   },
 			   {
 			      "fieldName":"HH_LESS_THAN_25K",
-			      "fieldAlias":"Less Than 25K",
+			      "fieldAlias":"Less Than $25,000",
 			      "fieldType":"Number",
-			      "tableHeader":"Household Income Less Than 25K",
+			      "tableHeader":"Household Income Less Than $25,000",
 			      "category":"Houshold Income",
 			      "rowID":84,
 			      "groupID":"<span class='myHiddenClass'>07</span>Household Income",
@@ -2024,9 +2027,9 @@
 			   },
 			   {
 			      "fieldName":"HH_25K_TO_49K",
-			      "fieldAlias":"25K To 49K",
+			      "fieldAlias":"$25,000 To $49,000",
 			      "fieldType":"Number",
-			      "tableHeader":"Household Income 25K To 49K",
+			      "tableHeader":"Household Income $25,000 To $49,000",
 			      "category":"Houshold Income",
 			      "rowID":85,
 			      "groupID":"<span class='myHiddenClass'>07</span>Household Income",
@@ -2041,9 +2044,9 @@
 			   },
 			   {
 			      "fieldName":"HH_50K_TO_99K",
-			      "fieldAlias":"50K To 99K",
+			      "fieldAlias":"$50,000 To $99,000",
 			      "fieldType":"Number",
-			      "tableHeader":"Household Income 50K To 99K",
+			      "tableHeader":"Household Income $50,000 To $99,000",
 			      "category":"Houshold Income",
 			      "rowID":86,
 			      "groupID":"<span class='myHiddenClass'>07</span>Household Income",
@@ -2058,9 +2061,9 @@
 			   },
 			   {
 			      "fieldName":"HH_100K_PLUS",
-			      "fieldAlias":"100K Plus",
+			      "fieldAlias":"$100,000 Plus",
 			      "fieldType":"Number",
-			      "tableHeader":"Household Income 100K Plus",
+			      "tableHeader":"Household Income $100,000 Plus",
 			      "category":"Houshold Income",
 			      "rowID":87,
 			      "groupID":"<span class='myHiddenClass'>07</span>Household Income",
@@ -2158,9 +2161,9 @@
 			   },
 			   {
 			      "fieldName":"NON_SEASONAL_HU",
-			      "fieldAlias":"Non Seasonal Housing",
+			      "fieldAlias":"Non-Seasonal Housing",
 			      "fieldType":"Number",
-			      "tableHeader":"Non Seasonal Housing Units",
+			      "tableHeader":"Non-Seasonal Housing Units",
 			      "category":"Housing Units",
 			      "rowID":93,
 			      "groupID":"<span class='myHiddenClass'>08</span>Housing Units",
@@ -2258,7 +2261,7 @@
 			   {
 			      "fieldName":"VACANCY_RATE",
 			      "fieldAlias":"Vacancy Rate",
-			      "fieldType":"Number",
+			      "fieldType":"Rate",
 			      "tableHeader":"Vacancy Rate",
 			      "category":"Housing Units",
 			      "rowID":99,
@@ -2274,7 +2277,7 @@
 			   {
 			      "fieldName":"SEASONAL_VACANCY_RATE",
 			      "fieldAlias":"Seasonal Vacancy Rate",
-			      "fieldType":"Number",
+			      "fieldType":"Rate",
 			      "tableHeader":"Seasonal Vacancy Rate",
 			      "category":"Housing Units",
 			      "rowID":100,
@@ -2289,8 +2292,8 @@
 			   },
 			   {
 			      "fieldName":"NON_SEASONAL_VACANCY_RATE",
-			      "fieldAlias":"Non Seasonal Vacancy Rate",
-			      "fieldType":"Number",
+			      "fieldAlias":"Non-Seasonal Vacancy Rate",
+			      "fieldType":"Rate",
 			      "tableHeader":"Non Seasonal Vacancy Rate",
 			      "category":"Housing Units",
 			      "rowID":101,
@@ -2344,7 +2347,7 @@
 			      "rowID":104,
 			      "groupID":"<span class='myHiddenClass'>09</span>Education",
 			      "chartCategory":"Education",
-			      "chartType":"column",
+			      "chartType":"bar",
 			      "canSum":true,
 			      "dataSource":"",
 			      "class":null,
@@ -2361,7 +2364,7 @@
 			      "rowID":105,
 			      "groupID":"<span class='myHiddenClass'>09</span>Education",
 			      "chartCategory":"Education",
-			      "chartType":"column",
+			      "chartType":"bar",
 			      "canSum":true,
 			      "dataSource":"",
 			      "class":null,
@@ -2378,7 +2381,7 @@
 			      "rowID":106,
 			      "groupID":"<span class='myHiddenClass'>09</span>Education",
 			      "chartCategory":"Education",
-			      "chartType":"column",
+			      "chartType":"bar",
 			      "canSum":true,
 			      "dataSource":"",
 			      "class":null,
@@ -2388,14 +2391,14 @@
 			   },
 			   {
 			      "fieldName":"SOMECOLLEGE",
-			      "fieldAlias":"Some college",
+			      "fieldAlias":"Some College",
 			      "fieldType":"Number",
-			      "tableHeader":"Some college",
+			      "tableHeader":"Some College",
 			      "category":"Education",
 			      "rowID":107,
 			      "groupID":"<span class='myHiddenClass'>09</span>Education",
 			      "chartCategory":"Education",
-			      "chartType":"column",
+			      "chartType":"bar",
 			      "canSum":true,
 			      "dataSource":"",
 			      "class":null,
@@ -2412,7 +2415,7 @@
 			      "rowID":108,
 			      "groupID":"<span class='myHiddenClass'>09</span>Education",
 			      "chartCategory":"Education",
-			      "chartType":"column",
+			      "chartType":"bar",
 			      "canSum":true,
 			      "dataSource":"",
 			      "class":null,
@@ -2429,7 +2432,7 @@
 			      "rowID":109,
 			      "groupID":"<span class='myHiddenClass'>09</span>Education",
 			      "chartCategory":"Education",
-			      "chartType":"column",
+			      "chartType":"bar",
 			      "canSum":true,
 			      "dataSource":"",
 			      "class":null,
@@ -2446,7 +2449,7 @@
 			      "rowID":110,
 			      "groupID":"<span class='myHiddenClass'>09</span>Education",
 			      "chartCategory":"Education",
-			      "chartType":"column",
+			      "chartType":"bar",
 			      "canSum":true,
 			      "dataSource":"",
 			      "class":null,
@@ -2484,7 +2487,8 @@
 			      "dataSource":"",
 			      "class":null,
 			      "timePeriod":null,
-			      "parentField": ""
+			      "parentField": "",
+			      "percentOfField": "TOTAL_POP"
 			   },
 			   {
 			      "fieldName":"CIVPOP18PLUS",
@@ -2500,7 +2504,8 @@
 			      "dataSource":"",
 			      "class":null,
 			      "timePeriod":null,
-			      "parentField": ""
+			      "parentField": "",
+			      "percentOfField": "TOTAL_POP"
 			   },
 			   {
 			      "fieldName":"VETERAN",
@@ -2516,7 +2521,8 @@
 			      "dataSource":"",
 			      "class":null,
 			      "timePeriod":null,
-			      "parentField": ""
+			      "parentField": "",
+			      "percentOfField": "TOTAL_POP"
 			   },
 			   {
 			      "fieldName":"CAR_TRUCK_VAN",
@@ -2526,8 +2532,8 @@
 			      "category":"Modes of Transportation",
 			      "rowID":115,
 			      "groupID":"<span class='myHiddenClass'>10</span>Modes of Transportation",
-			      "chartCategory":"Modes of Transportation",
-			      "chartType":"pie",
+			      "chartCategory":"",
+			      "chartType":"",
 			      "canSum":true,
 			      "dataSource":"",
 			      "class":null,
@@ -2690,9 +2696,9 @@
 			   },
 			   {
 			      "fieldName":"WORKED_FROM_HOME",
-			      "fieldAlias":"Worked From Home",
+			      "fieldAlias":"Worked from Home",
 			      "fieldType":"Number",
-			      "tableHeader":"Worked From Home",
+			      "tableHeader":"Worked from Home",
 			      "category":"Modes of Transportation",
 			      "rowID":125,
 			      "groupID":"<span class='myHiddenClass'>10</span>Modes of Transportation",
@@ -2808,7 +2814,7 @@
 			      "percentOfField": "OCCUPIED_HU"
 			   }
 			]
-			   
+
 					        }
             return acsFieldsConfig;
         }

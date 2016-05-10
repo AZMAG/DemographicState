@@ -1,7 +1,7 @@
 {
   "name": "Demographics-Project",
-  "version": "2.2.2",
-  "date": "04/28/2016",
+  "version": "2.2.4",
+  "date": "05/10/2016",
   "description": "MAG State Demographic Viewer",
   "keywords": [
     "Demographics",
@@ -33,7 +33,7 @@
   "private": true,
   "dependencies": {},
   "devDependencies": {
-    "grunt": "*",
+    "grunt": "0.4.5",
     "grunt-contrib-concat": "*",
     "grunt-contrib-csslint": "*",
     "grunt-contrib-cssmin": "*",

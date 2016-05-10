@@ -1,5 +1,5 @@
-MAG State Demographics Map Viewer
-=================================
+# MAG State Demographics Map Viewer
+State Demographics map viewer for selected census info for Arizona
 
 [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
 [![Semver](http://img.shields.io/SemVer/2.0.0.png)](http://semver.org/spec/v2.0.0.html)
@@ -11,25 +11,31 @@ Use this site to explore Explore data from Census 2010 and American Community Su
 
 This web app viewer was developed by MAG staff for MAG member agencies and the public using ESRI's JavaScript API.
 
-#### Version
+### Keywords
 
-`Major/Minor/Patch 0.0.0`
+`Demographics` `Census` `2010` `American Community Survey` `ACS` `2010-2014` `5yr` `State of Arizona` `Maps` `MAG` `ESRI` `#MAGmaps`
 
-#### `v2.2.2 - 04/28/2016`
+### Version
 
-#### `Created: 10/21/2014`
+#### `version 2.2.4` ####
+ `Updated: 05/10/2016`
+ `Created: 10/21/2014`
 
-1. MAJOR version when you make incompatible API changes.
-2. MINOR version when you add functionality in a backwards-compatible manner.
-3. PATCH version when you make backwards-compatible bug fixes.
+Releases will be numbered with the following format:
+
+`<major>.<minor>.<patch>`
+
+And constructed with the following guidelines:
+
+1. MAJOR version when you make incompatible API changes **bumps the major** resets minor and patch
+2. MINOR version when you add functionality in a backwards-compatible manner **bumps the minor** resets patch
+3. PATCH version when you make backwards-compatible bug fixes and misc changes **bumps only the patch**
+
+***************************************************************************************************************
 
 ### Credits
 
 `Maricopa Association of Governments (MAG) and the MAG member agencies`
-
-### Keywords
-
-`Demographics` `Census` `2010` `American Community Survey` `ACS` `2010-2014` `State of Arizona` `Maps` `MAG` `ESRI` `#MAGmaps`
 
 ### Site URL's
 * [Site] (http://geo.azmag.gov/maps/azdemographics/)
@@ -44,7 +50,7 @@ A detailed list of the changes and fixes in each version update can be found in 
 
 ### Legal Disclaimer
 
-The Maricopa Association of Governments provides the data within these pages as a public resource of general information for use "as is." The TMaricopa Association of Governments GIS (Geographic Information System) departments provides this information with the understanding that it is not guaranteed to be accurate, correct or complete and any conclusions drawn from such information are the sole responsibility of the user. Further, the Maricopa Association of Governments GIS departments makes no warranty, representation or guaranty as to the content, sequence, accuracy, timeliness or completeness of any of the spatial or database information provided herein. While every effort has been made to ensure the content, sequence, accuracy, timeliness or completeness of materials presented within these pages, the Maricopa Association of Governments GIS Departments assumes no responsibility for errors or omissions, and explicitly disclaims any representations and warranties, including, without limitation, the implied warranties of merchantability and fitness for a particular purpose. The Maricopa Association of Governments GIS Departments shall assume no liability for:
+The Maricopa Association of Governments provides the data within these pages as a public resource of general information for use "as is." The Maricopa Association of Governments GIS (Geographic Information System) departments provides this information with the understanding that it is not guaranteed to be accurate, correct or complete and any conclusions drawn from such information are the sole responsibility of the user. Further, the Maricopa Association of Governments GIS departments makes no warranty, representation or guaranty as to the content, sequence, accuracy, timeliness or completeness of any of the spatial or database information provided herein. While every effort has been made to ensure the content, sequence, accuracy, timeliness or completeness of materials presented within these pages, the Maricopa Association of Governments GIS Departments assumes no responsibility for errors or omissions, and explicitly disclaims any representations and warranties, including, without limitation, the implied warranties of merchantability and fitness for a particular purpose. The Maricopa Association of Governments GIS Departments shall assume no liability for:
 
     1. Any errors, omissions, or inaccuracies in the information provided, regardless of how caused; or
     2. Any decision made or action taken or not taken by viewer in reliance upon any information or data furnished hereunder.
@@ -60,6 +66,8 @@ Please acknowledge the Maricopa Association of Governments (MAG) GIS as the sour
 ### Copyright and Licensing
 
 Code released under the MIT license.
+
+- [LICENSE] (LICENSE.txt)
 
 Copyright (c) 2016 Maricopa Association of Governments
 

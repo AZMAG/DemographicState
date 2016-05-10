@@ -1,18 +1,46 @@
-CHANGELOG for State Demographics Map Viewer
-===========================================
-`Major/Minor/Patch 0.0.0`
+# CHANGELOG #
+#### State Demographics Map Viewer ####
 
-### Version x.x.x (xx/xx/2016)
+***************************************
+[![Semver](http://img.shields.io/SemVer/2.0.0.png)](http://semver.org/spec/v2.0.0.html)
 
-### Version 2.2.2 (04/28/2016)
+All notable changes to this project will be documented in this file.
 
-* Fixed souce label on tab switch
+Releases will be numbered with the following format:
 
-### Version 2.2.1 (04/28/2016)
+`<major>.<minor>.<patch>`
+
+And constructed with the following guidelines:
+
+1. MAJOR version when you make incompatible API changes **bumps the major** resets minor and patch
+2. MINOR version when you add functionality in a backwards-compatible manner **bumps the minor** resets patch
+3. PATCH version when you make backwards-compatible bug fixes and misc changes **bumps only the patch**
+
+***************************************************************************************************************
+
+### Version 2.2.4 | 05/10/2016
+
+* Changed cbr view to reflect hierarchy
+* Clean up.
+* Source Label (removed K)
+* Updated help windows
+* Changed from Jurisdiction to Place
+* Changed series labels to prevent overlapping
+* Update copyright information.
+
+### Version 2.2.3 | 05/04/2016
+
+* Fixed some data sources and fixed bug with legend layer checkboxes being in sync when using multiple map frames.
+
+### Version 2.2.2 | 04/28/2016
+
+* Fixed source label on tab switch
+
+### Version 2.2.1 | 04/28/2016
 
 * Fixed some typos and minor issues pointed out by Amanda
 
-### Version 2.2.0 (04/25/2016)
+### Version 2.2.0 | 04/25/2016
 
 * Updated percent field to calculate instead of relying on service percentage values
 * Fixed comparison dropdown bug
@@ -38,7 +66,7 @@ CHANGELOG for State Demographics Map Viewer
 ### Version 2.1.7 (03/29/2016)
 
 * Added second tab to demographic view to separate acs and census data
-* Updated config files to new service and to correct layer 
+* Updated config files to new service and to correct layer
 
 ### Version 2.1.6 (03/28/2016)
 

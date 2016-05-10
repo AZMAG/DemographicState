@@ -122,7 +122,7 @@
                 self.zipCodesInfoTemplate = new InfoTemplate();
                 self.zipCodesInfoTemplate.setTitle("Zip Code");
                 self.zipCodesInfoTemplate.setContent("<strong>${ZIPCODE}</strong><br>" +
-                    "<strong>Jurisdiction:</strong> ${NAME}"
+                    "<strong>Place:</strong> ${NAME}"
                     );
 
                 self.featureFillSymbol = new SimpleFillSymbol(SimpleFillSymbol.STYLE_BACKWARD_DIAGONAL,
