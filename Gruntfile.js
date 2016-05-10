@@ -188,11 +188,11 @@ module.exports = function(grunt) {
                 }, {
                     // README.md
                     from: /(#### `version )([0-9]+)(?:\.([0-9]+))(?:\.([0-9]+))/g,
-                    to: "#### `version" + '<%= pkg.version %>' + '` ####',
+                    to: "#### `version " + '<%= pkg.version %>',
                 }, {
                     // README.md
                     from: /(`Updated: )[0-9]{2}\/[0-9]{2}\/[0-9]{4}/g,
-                    to: "`Updated: " + '<%= pkg.date %>' + '`',
+                    to: "`Updated: " + '<%= pkg.date %>',
                 }, {
                     // main.css
                     from: /(main.css)( \| )(version)( \| )([0-9]+)(?:\.([0-9]+))(?:\.([0-9]+))/g,
