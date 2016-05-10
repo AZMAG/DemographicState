@@ -33,7 +33,7 @@
   "private": true,
   "dependencies": {},
   "devDependencies": {
-    "grunt": "*",
+    "grunt": "0.4.5",
     "grunt-contrib-concat": "*",
     "grunt-contrib-csslint": "*",
     "grunt-contrib-cssmin": "*",
