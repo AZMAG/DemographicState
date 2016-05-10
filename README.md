@@ -1,5 +1,5 @@
-MAG State Demographics Map Viewer
-=================================
+# MAG State Demographics Map Viewer
+State Demographics map viewer for selected census info for Arizona
 
 [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
 [![Semver](http://img.shields.io/SemVer/2.0.0.png)](http://semver.org/spec/v2.0.0.html)

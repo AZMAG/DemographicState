@@ -18,6 +18,16 @@ And constructed with the following guidelines:
 
 ***************************************************************************************************************
 
+### Version 2.2.4 | 05/10/2016
+
+* Changed cbr view to reflect hierarchy
+* Clean up.
+* Source Label (removed K)
+* Updated help windows
+* Changed from Jurisdiction to Place
+* Changed series labels to prevent overlapping
+* Update copyright information.
+
 ### Version 2.2.3 | 05/04/2016
 
 * Fixed some data sources and fixed bug with legend layer checkboxes being in sync when using multiple map frames.

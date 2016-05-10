@@ -68,7 +68,7 @@
 
                     $("#helpWindow").kendoWindow({
                         width: self.newWindowWidth,
-                        height: self.newWindowHeight,
+                        maxHeight: self.newWindowHeight,
                         title: "",
                         actions: ["Close"],
                         modal: true,
