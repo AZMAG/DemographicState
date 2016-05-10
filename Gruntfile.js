@@ -11,8 +11,8 @@ module.exports = function(grunt) {
         bannercss:  '/*! ========================================================================\n' +
                     ' * Maricopa Association of Governments\n' +
                     ' * CSS files for MAG State Demographic Viewer\n' +
-                    ' * concat.min.css | version | <%= pkg.version %>\n' +
-                    ' * Production | <%= pkg.date %> | http://ims.azmag.gov/\n' +
+                    ' * @concat.min.css | version | <%= pkg.version %>\n' +
+                    ' * Production | <%= pkg.date %>\n' +
                     ' * http://ims.azmag.gov/\n' +
                     ' * State Demographic Viewer\n' +
                     ' * ==========================================================================\n' +
@@ -187,8 +187,12 @@ module.exports = function(grunt) {
                     to: "Last updated: " + '<%= pkg.date %>',
                 }, {
                     // README.md
-                    from: /(#### `v)([0-9]+)(?:\.([0-9]+))(?:\.([0-9]+))( - )[0-9]{2}\/[0-9]{2}\/[0-9]{4}(`)/g,
-                    to: "#### `v" + '<%= pkg.version %>' + ' - ' + '<%= pkg.date %>' + '`',
+                    from: /(#### `version )([0-9]+)(?:\.([0-9]+))(?:\.([0-9]+))/g,
+                    to: "#### `version" + '<%= pkg.version %>' + '` ####',
+                }, {
+                    // README.md
+                    from: /(`Updated: )[0-9]{2}\/[0-9]{2}\/[0-9]{4}/g,
+                    to: "`Updated: " + '<%= pkg.date %>' + '`',
                 }, {
                     // main.css
                     from: /(main.css)( \| )(version)( \| )([0-9]+)(?:\.([0-9]+))(?:\.([0-9]+))/g,
