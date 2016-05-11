@@ -5,6 +5,8 @@ State Demographics map viewer for selected census info for Arizona
 [![Semver](http://img.shields.io/SemVer/2.0.0.png)](http://semver.org/spec/v2.0.0.html)
 [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
+***********************************************************************************************************
+
 The State Demographic Map Viewer is one of the Maricopa Association of Governments interactive mapping and analysis sites, showing selected population and housing data.  The viewer allows you to graphically view selected population and housing data for all Census block groups for the State of Arizona.  The viewer provides interactive mapping and reporting tools to allow exploration of data from Census 2010 and the American Community Survey (ACS) 2010-2014 5yr.
 
 Use this site to explore Explore data from Census 2010 and American Community Survey (ACS) 2010-2014 5yr.
