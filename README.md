@@ -1,10 +1,11 @@
-# MAG State Demographics Map Viewer
+![](http://geo.azmag.gov/maps/readonaz/app/resources/img/maglogo_black.png)
+# MAG State Demographics Map Viewer 
 State Demographics map viewer for selected census info for Arizona
 
-[![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
 [![dependencies](https://david-dm.org/AZMAG/map-DemographicState.png)](https://david-dm.org/AZMAG/map-DemographicState)
 [![devDependency Status](https://david-dm.org/AZMAG/map-DemographicState/dev-status.png)](https://david-dm.org/AZMAG/map-DemographicState)
 [![Semver](http://img.shields.io/SemVer/2.0.0.png)](http://semver.org/spec/v2.0.0.html)
+[![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
 [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
 ***********************************************************************************************************
