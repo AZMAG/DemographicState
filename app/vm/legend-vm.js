@@ -128,7 +128,7 @@
                 self.openWindow = function() {
                     var win = $("#legendWindowDiv").data("kendoWindow");
                     win.restore();
-                    win.open();                    
+                    win.open();
 
                     $("#legendWindowDiv").closest(".k-window").css({
                         top: "55px",
@@ -223,16 +223,18 @@
                     }
                 };
 
-                self.updateLegendLayers = function(layerId){
+                self.updateLegendLayers = function(layerId) {
                     var layer = mapModel.mapInstance.getLayer(layerId);
                     var baseLayer = mapModel.mapInstance.getLayer("esriBasemap");
-                    (layer.visible) ? layer.hide() : layer.show();
+                    (layer.visible) ? layer.hide(): layer.show();
 
                     if (layer.id === "esriImagery" && layer.visible === true) {
                         baseLayer.hide();
-                    } else {
-                        baseLayer.show();
                     }
+                    // else {
+                    //     baseLayer.show();
+                    // }
+
 
                     if (layer.id === "countyBoundaries") {
                         if (layer.visible === true) {
@@ -243,10 +245,9 @@
                             if (self.countyLegend) {
                                 self.countyLegend.destroy();
                             }
-                            
+
                         }
-                    }
-                    else if (layer.id === "congressionalDistricts") {
+                    } else if (layer.id === "congressionalDistricts") {
                         if (layer.visible === true) {
                             self.CongressionalLegend();
                             bookmarkDelegate.legendLayerOptions.remove("c" + layerId);
@@ -256,8 +257,7 @@
                                 self.congressionalLegend.destroy();
                             }
                         }
-                    }
-                    else if (layer.id === "legislativeDistricts") {
+                    } else if (layer.id === "legislativeDistricts") {
                         if (layer.visible === true) {
                             self.LegislativeLegend();
                             bookmarkDelegate.legendLayerOptions.remove("c" + layerId);
@@ -268,14 +268,14 @@
                             }
                         }
                     }
-                     tp.publish("BaseLayersUpdated");
+                    tp.publish("BaseLayersUpdated");
                 };
 
                 self.onCheckBoxClick = function(e) {
                     var layerId = e.currentTarget.id.substr(1);
 
                     self.updateLegendLayers(layerId);
-                   
+
                 };
 
                 //Supervisor Legend
