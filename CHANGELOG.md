@@ -18,13 +18,17 @@ And constructed with the following guidelines:
 
 ***************************************************************************************************************
 
-### Version 2.2.5 | 05/23/2016
+## Version 2.2.6 | 05/24/2016
+
+* Fixed bug in base-layer operation - base-layer disappeared after imagery layer turned on/off
+
+## Version 2.2.5 | 05/23/2016
 
 * Fixed bug Imagery layer turns off when other layers are turned on.
 * Fixed Facebook settings in share
 * Fixed Subscribe image
 
-### Version 2.2.4 | 05/10/2016
+## Version 2.2.4 | 05/10/2016
 
 * Changed cbr view to reflect hierarchy
 * Clean up.
@@ -34,15 +38,15 @@ And constructed with the following guidelines:
 * Changed series labels to prevent overlapping
 * Update copyright information.
 
-### Version 2.2.3 | 05/04/2016
+## Version 2.2.3 | 05/04/2016
 
 * Fixed some data sources and fixed bug with legend layer checkboxes being in sync when using multiple map frames.
 
-### Version 2.2.2 | 04/28/2016
+## Version 2.2.2 | 04/28/2016
 
 * Fixed source label on tab switch
 
-### Version 2.2.1 | 04/28/2016
+## Version 2.2.1 | 04/28/2016
 
 * Fixed some typos and minor issues pointed out by Amanda
 
