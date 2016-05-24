@@ -228,13 +228,11 @@
                     var baseLayer = mapModel.mapInstance.getLayer("esriBasemap");
                     (layer.visible) ? layer.hide(): layer.show();
 
-                    if (layer.id === "esriImagery" && layer.visible === true) {
-                        baseLayer.hide();
+                    if (layer.id === "esriImagery") {
+                        if (layer.visible === true) {
+                            baseLayer.hide();
+                        } else { baseLayer.show(); }
                     }
-                    // else {
-                    //     baseLayer.show();
-                    // }
-
 
                     if (layer.id === "countyBoundaries") {
                         if (layer.visible === true) {
