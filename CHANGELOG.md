@@ -18,6 +18,12 @@ And constructed with the following guidelines:
 
 ***************************************************************************************************************
 
+### Version 2.2.5 | 05/23/2016
+
+* Fixed bug Imagery layer turns off when other layers are turned on.
+* Fixed Facebook settings in share
+* Fixed Subscribe image
+
 ### Version 2.2.4 | 05/10/2016
 
 * Changed cbr view to reflect hierarchy
