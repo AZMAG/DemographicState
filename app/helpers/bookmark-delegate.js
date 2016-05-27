@@ -34,6 +34,7 @@
                 @param [object] infoList - array of objects representing the settings of all of the maps in the application
                 **/
                 mapInfoUpdated: function(infoList) {
+                    //console.log(infoList);
                     this.mapInfoList.removeAll();
                     for (var i = 0; i < infoList.length; i++) {
                         var classMethod = "";
@@ -53,6 +54,7 @@
                                 ShortName: infoList[i].MapInfo.ShortName.replace("%", "{percent}")
                             } : "",
                             classMethod: classMethod,
+                            layers: infoList[i].Layers,
                             colorPalet: {
                                 ramp: (infoList[i].CBRCurrent) ? infoList[i].CBRCurrent : "",
                                 numBreaks: (infoList[i].ColorRamp) ? infoList[i].ColorRamp.length : 0
@@ -63,7 +65,7 @@
                     this.mapExtent(infoList[0].Extent.toJson());
                     //console.log(this.mapInfoList());
                     var queryString = this.buildMapQueryString();
-                    //console.log(queryString);
+                    console.log(queryString);
                 },
 
                 /**
@@ -80,8 +82,9 @@
                             queryString = queryString + ",";
                         }
                     }
-                    queryString = queryString + "],\"LO\":" + JSON.stringify(this.legendLayerOptions()) + ",\"E\":" + JSON.stringify(this.mapExtent()) + "}";
-
+                    //queryString = queryString + "],\"LO\":" + JSON.stringify(this.legendLayerOptions()) + ",\"E\":" + JSON.stringify(this.mapExtent()) + "}";
+                    queryString = queryString + "],\"E\":" + JSON.stringify(this.mapExtent()) + "}";
+                    //console.log(queryString);
                     return "?" + queryString;
                 },
 

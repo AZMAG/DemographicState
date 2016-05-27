@@ -156,6 +156,11 @@
                         autoResize: true
                     });
 
+                    esriConfig.defaults.map.panDuration = 10;
+                    esriConfig.defaults.map.panRate = 10;
+                    esriConfig.defaults.map.zoomDuration = 100;
+                    esriConfig.defaults.map.zoomRate = 10;
+
                     if (showScalebar) {
                         var scalebar = new Scalebar({
                             map: self.map,
@@ -352,6 +357,23 @@
                         }
                     }
                 }; //end mapRendererUpdated
+
+                self.getVisibleLayers = function() {
+
+                    var visibleLayers = [];
+                    $.each(appConfig.layerInfo, function(i, info) {
+
+                        if (info.showTOC) {
+
+                            var layer = self.map.getLayer(info.id);
+                            if (layer.visible) {
+                                visibleLayers.push(info.id);
+                            }
+                        }
+                    });
+                    return visibleLayers;
+                }
+
 
                 /**
                 This is called when the color ramp is changed on a map. This is tracked by an observable variable in the map object.
@@ -561,6 +583,7 @@
                     return {
                         ID: self.mapID,
                         Extent: self.mapExtent(),
+                        Layers: self.getVisibleLayers(),
                         MapInfo: self.mapTheme(),
                         Opacity: self.legendOpacity(),
                         Renderer: self.renderer(),
@@ -569,6 +592,8 @@
                         customBreaks: self.customBreaks()
                     };
                 }; //end getMapBookmarkInfo
+
+
 
                 /**
                 method exicuted when a map is removed from the display.

@@ -30,7 +30,7 @@
                 self.Title = "Share";
 
                 self.winWidth = document.documentElement.clientWidth;
-                self.baseURL = window.location.origin;
+                self.baseURL = appConfig.siteUrl;
                 self.shareURL = ko.observable("");
 
                 /**
@@ -55,7 +55,7 @@
                     });
 
                     var shareWindow = $("#shareWindowDiv").kendoWindow({
-                        width: "175", //465px
+                        width: "200", //465px
                         height: "215", //255px
                         title: self.Title,
                         actions: ["Help", "Minimize", "Close"],
@@ -85,7 +85,9 @@
                  * @param {string} content - the content to display in the window.
                  */
                 self.openWindow = function() {
-                    var shareURL = window.location.origin + window.location.pathname + bookmarkDelegate.buildMapQueryString();
+                    //var shareURL = window.location.origin + window.location.pathname + bookmarkDelegate.buildMapQueryString();
+                    var shareURL = self.baseURL + bookmarkDelegate.buildMapQueryString();
+
                     bookmarkDelegate.minifyURL(shareURL, self.changeShareLinks);
                     self.changeShareLinks(shareURL);
                     var win = $("#shareWindowDiv").data("kendoWindow");
@@ -132,21 +134,10 @@
                  * @param {string} s - tag type
                  * @param {string} id - id of the element created
                  */
-                // self.initFacebook = function(d, s, id) {
-                //     var js, fjs = d.getElementsByTagName(s)[0];
-                //     if (d.getElementById(id)) {
-                //         return;
-                //     }
-                //     js = d.createElement(s);
-                //     js.id = id;
-                //     js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=1409314459302648";
-                //     fjs.parentNode.insertBefore(js, fjs);
-                // };
-
                 self.initFacebook = function() {
                     window.fbAsyncInit = function() {
                         FB.init({
-                            appId: '1509296789333308',
+                            appId: '237366436641850',
                             xfbml: true,
                             version: 'v2.6'
                         });
@@ -162,7 +153,6 @@
                         js.src = "//connect.facebook.net/en_US/sdk.js";
                         fjs.parentNode.insertBefore(js, fjs);
                     }(document, 'script', 'facebook-jssdk'));
-
                 };
 
                 /**
@@ -206,7 +196,9 @@
                  */
                 self.initLinkedin = function() {
                     if (typeof(IN) !== "undefined") {
-                        IN.parse();
+                        if (IN.parse) {
+                            IN.parse();
+                        }
                     } else {
                         $.getScript("http://platform.linkedin.com/in.js");
                     }
@@ -234,12 +226,12 @@
                     $("script#twitter-wjs").remove();
                     var twitterDiv = $("div#twitter");
                     $(twitterDiv).empty();
-                    var twitterLink = '<a href="https://twitter.com/share" class="twitter-share-button" data-url="' + replaceToken + '" data-text="MAG | Demographics" data-via="MAGregion" data-hashtags="MAGmaps">Tweet</a>';
+                    var twitterLink = '<a href="https://twitter.com/share" class="twitter-share-button" data-url="' + replaceToken + '" data-text="MAG | Projections" data-via="MAGregion" data-hashtags="MAGmaps">Tweet</a>';
                     $(twitterDiv).html(twitterLink.replace(replaceToken, minimizedURL));
                     //Linkedin
                     var linkedinDiv = $("div#linkedin");
                     $(linkedinDiv).empty();
-                    var linkedScript = '<script type="IN/Share" data-url="' + replaceToken + '" data-action="share" data-counter="right"></script>';
+                    var linkedScript = '<script type="IN/Share" data-url="' + replaceToken + '" data-action="share"></script>';
                     $(linkedinDiv).html(linkedScript.replace(replaceToken, minimizedURL));
                     //Google+
                     var googleDiv = $("div#google");
@@ -249,7 +241,7 @@
                     //Email
                     var emailDiv = $("div#email");
                     $(emailDiv).empty();
-                    var emailStructure = '<a href="mailto:?subject=MAG Demographics Map Viewer&body=%0A%0ACheck out this website.%0A%0AMAG Demographics Map Viewer - #MAGmaps%0A' + replaceToken + '" title="MAG|Demographics"><img id="mailicon" src="app/resources/img/mail-icon.png"></a>';
+                    var emailStructure = '<a href="mailto:?subject=MAG Projections Map Viewer&body=%0A%0ACheck out this website.%0A%0AMAG Projections Map Viewer - #MAGmaps%0A' + replaceToken + '" title="MAG|Projections"><img id="mailicon" src="app/resources/img/mail-icon.png"></a>';
                     $(emailDiv).html(emailStructure.replace(replaceToken, minimizedURL));
 
                     self.initTwitter(document, "script", "twitter-wjs");

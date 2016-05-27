@@ -18,6 +18,11 @@ And constructed with the following guidelines:
 
 ***************************************************************************************************************
 
+## Version 2.2.7 | 05/27/2016
+
+* Updated share functionality to work better with multiple map frames.
+* Added image for sharing functionality.
+
 ## Version 2.2.6 | 05/24/2016
 
 * Fixed bug in base-layer operation - base-layer disappeared after imagery layer turned on/off

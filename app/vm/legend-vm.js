@@ -178,14 +178,20 @@
                             //layer.visible set by check in layer options passed in if present
                             var chkId = "c" + layer.id;
                             if (mapModel.initializationData !== undefined) {
-                                for (var i = 0; i < mapModel.initializationData.LO.length; i++) {
+                                for (var i = 0; i < mapModel.initializationData.maps[0].layers.length; i++) {
                                     layer.visible = false;
-                                    if (mapModel.initializationData.LO[i] === chkId) {
+                                    if ("c" + mapModel.initializationData.maps[0].layers[i] === chkId) {
                                         layer.visible = true;
                                         break;
                                     }
+                                    if (mapModel.initializationData.maps[0].layers[i] === "esriImagery") {
+                                        var baseLayer = mapModel.mapInstance.getLayer("esriBasemap");
+                                        baseLayer.hide();
+                                    }
+
                                 }
                             }
+
                             dc.create("input", {
                                 id: chkId,
                                 type: "checkbox",
@@ -341,6 +347,29 @@
                             dom.byId("dataSource").innerHTML = self.sourceInfo;
                             self.legendInitialized = true;
                         }
+                    }
+
+                    if (mapModel.initializationData !== undefined) {
+
+                        var initData = mapModel.GetMapInitDataByID(map.id);
+
+                        $.each(initData.layers, function(i, initLayer) {
+                            var layer = map.getLayer(initLayer);
+                            layer.visible = true;
+                            //self.updateLegendByMapId(map.id);
+
+                            if (initLayer === "esriImagery") {
+                                var baseLayer = mapModel.mapInstance.getLayer("esriBasemap");
+                                baseLayer.hide();
+                            }
+                        });
+                    }
+                };
+
+                self.updateMultipleMapLegend = function() {
+
+                    if (mapModel.mapInstance.id) {
+
                     }
                 };
 

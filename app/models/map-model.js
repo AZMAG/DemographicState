@@ -123,11 +123,11 @@
                 self.zipCodesInfoTemplate.setTitle("Zip Code");
                 self.zipCodesInfoTemplate.setContent("<strong>${ZIPCODE}</strong><br>" +
                     "<strong>Place:</strong> ${NAME}"
-                    );
+                );
 
                 self.featureFillSymbol = new SimpleFillSymbol(SimpleFillSymbol.STYLE_BACKWARD_DIAGONAL,
                     new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID,
-                    new Color([0, 255, 255]), 2), new Color([0, 255, 255, 0.25]));
+                        new Color([0, 255, 255]), 2), new Color([0, 255, 255, 0.25]));
             },
             // =====================================================================================================================================>
             // end initialize
@@ -293,6 +293,7 @@
                             });
                             break;
                         case "feature":
+
                             var featureTemplate;
                             if (info.id === "congressionalDistricts") {
                                 featureTemplate = self.congressInfoTemplate;
@@ -311,6 +312,8 @@
                                 outFields: info.outFields,
                                 infoTemplate: featureTemplate
                             });
+
+
                             break;
                     }
 
@@ -375,6 +378,20 @@
                 if (typeof info.historical === "undefined") {
                     layer.historical = false;
                 }
+
+                // var initData = this.GetMapInitDataByID(this.getMap().id);
+// if (initData) {
+//     $.each(initData.layers, function(i, layerId) {
+//         if (info.id === layerId) {
+//             // console.log(info.id, layerId);
+//             // console.log(info, layer)
+
+//             info.visible = true;
+//             layer.setVisibility(true);
+//         }
+//     });
+// }
+
 
                 //Apply a definition expression on the layer if
                 //it is a historical layer
