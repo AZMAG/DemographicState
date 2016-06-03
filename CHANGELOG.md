@@ -22,6 +22,7 @@ And constructed with the following guidelines:
 
 * Updated share functionality to work better with multiple map frames.
 * Added image for sharing functionality.
+* Updated interactive summary to include selected graphics.
 
 ## Version 2.2.6 | 05/24/2016
 

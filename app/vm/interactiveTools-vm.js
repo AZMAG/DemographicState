@@ -294,15 +294,13 @@
                                 //call original callback
 
                                 var type = "census";
-                                if (Object.keys(results.features[0].attributes).length > 120)
-                                {
+                                if (Object.keys(results.features[0].attributes).length > 120) {
                                     type = "acs";
                                 }
 
-                                if(type === "acs"){
+                                if (type === "acs") {
                                     acsCallback(results);
-                                }
-                                else{
+                                } else {
                                     censusCallback(results);
                                 }
 
@@ -314,14 +312,30 @@
                             //perform query with buffered geometry
                             layerDelegate.query(censusUrl, queryOrigFeature, qryErrback, geometries[0], undefined, true);
                             layerDelegate.query(acsUrl, queryOrigFeature, qryErrback, geometries[0], undefined, true);
+                            demographicVM.updateSelectionGraphic();
                         }, function(error) {
                             //error buffering - query without buffering
                             layerDelegate.query(censusUrl, censusCallback, qryErrback, evt.geometry, undefined, true);
                             layerDelegate.query(acsUrl, acsCallback, qryErrback, evt.geometry, undefined, true);
+                            demographicVM.updateSelectionGraphic();
                         });
                     } else {
                         layerDelegate.query(censusUrl, censusCallback, qryErrback, evt.geometry, undefined, true);
                         layerDelegate.query(acsUrl, acsCallback, qryErrback, evt.geometry, undefined, true);
+
+
+
+                        var selectionSymbol = null;
+                        var selectionGraphic = null;
+
+                        //add original selection to map
+                        if (evt.geometry.type === "point") {
+                            selectionSymbol = new SimpleMarkerSymbol(interactiveToolConfig.selectionPointSymbol);
+                        } else {
+                            selectionSymbol = new SimpleFillSymbol(interactiveToolConfig.selectionSymbol);
+                        }
+                        selectionGraphic = new Graphic(evt.geometry, selectionSymbol);
+                        demographicVM.updateSelectionGraphic(selectionGraphic);
                     }
                 };
             };
