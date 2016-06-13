@@ -65,7 +65,7 @@
                     this.mapExtent(infoList[0].Extent.toJson());
                     //console.log(this.mapInfoList());
                     var queryString = this.buildMapQueryString();
-                    console.log(queryString);
+                    // console.log(queryString);
                 },
 
                 /**

@@ -13,8 +13,8 @@
     <meta name="contact" content="www.azmag.gov">
     <meta name="url" content="http://geo.azmag.gov/maps/azdemographics/">
     <meta name="creation-date" content="10/21/2014">
-    <meta name="revision-date" content="05/24/2016">
-    <meta name="version" content="2.2.6">
+    <meta name="revision-date" content="06/13/2016">
+    <meta name="version" content="2.2.8">
     <!-- Apple-Specific Meta Tags -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -54,9 +54,9 @@
     <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2015.2.902/styles/kendo.common.min.css" />
     <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2013.1.514/styles/kendo.black.min.css" />
     <!-- Application CSS -->
-    <link rel="stylesheet" href="app/resources/css/normalize.css">
-    <link rel="stylesheet" href="app/resources/css/main.css">
-    <!-- <link rel="stylesheet" type="text/css" href="app/resources/css/concat.min.css"> -->
+    <!-- <link rel="stylesheet" href="app/resources/css/normalize.css"> -->
+    <!-- <link rel="stylesheet" href="app/resources/css/main.css"> -->
+    <link rel="stylesheet" type="text/css" href="app/resources/css/concat.min.css">
     <!-- prevent cache -->
     <!--  removed once App goes into production -->
     <!-- <meta http-equiv="cache-control" content="no-cache">
@@ -70,6 +70,23 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
     <!-- ========================================================================================================================== -->
+    <!-- Google Analytics -->
+    <script>
+    (function(b, o, i, l, e, r) {
+        b.GoogleAnalyticsObject = l;
+        b[l] || (b[l] =
+            function() {
+                (b[l].q = b[l].q || []).push(arguments)
+            });
+        b[l].l = +new Date;
+        e = o.createElement(i);
+        r = o.getElementsByTagName(i)[0];
+        e.src = "//www.google-analytics.com/analytics.js";
+        r.parentNode.insertBefore(e, r)
+    }(window, document, "script", "ga"));
+    ga("create", "UA-29422512-1");
+    ga("send", "pageview");
+    </script>
 </head>
 
 <body class="claro">
@@ -106,9 +123,6 @@
     <script src="https://kendo.cdn.telerik.com/2015.2.902/js/jquery.min.js"></script>
     <script src="https://kendo.cdn.telerik.com/2015.2.902/js/kendo.all.min.js"></script>
     <script src="http://kendo.cdn.telerik.com/2016.1.226/js/jszip.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.js"></script>
-    <script src="//d3js.org/d3.v3.min.js"></script>
-    <script src="app/vm/bubbleChart.js"></script>
     <!-- Make sure Dojo can find our code, app folder and vendor code. -->
     <script>
     var dojoConfig = {
@@ -123,26 +137,7 @@
     <script src="config.js"></script>
     <script src="app/run.js"></script>
     <!-- Call the init method on run.js, which, in turn, will load main.js. -->
-    <script>
-    require(["esri/map", "dojo/domReady!"], init)
-    </script>
-    <!-- Google Analytics -->
-    <script>
-    (function(b, o, i, l, e, r) {
-        b.GoogleAnalyticsObject = l;
-        b[l] || (b[l] =
-            function() {
-                (b[l].q = b[l].q || []).push(arguments)
-            });
-        b[l].l = +new Date;
-        e = o.createElement(i);
-        r = o.getElementsByTagName(i)[0];
-        e.src = "//www.google-analytics.com/analytics.js";
-        r.parentNode.insertBefore(e, r)
-    }(window, document, "script", "ga"));
-    ga("create", "UA-29422512-1");
-    ga("send", "pageview");
-    </script>
+    <script>require(["esri/map", "dojo/domReady!"], init)</script>
 </body>
 
 </html>
