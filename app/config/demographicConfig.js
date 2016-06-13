@@ -11,8 +11,8 @@
                 // self.exportPDFCompareReportUrl = "http://geo.azmag.gov/services/Demographics/CompareReport.html";
                 // self.exportPDFReportUrl = "http://geo.azmag.gov/services/Demographics/reports.html";
 
-                self.exportPDFCompareReportUrl = "http://geo.azmag.gov/services/test/Demographic/CompareReport.html";
-                self.exportPDFReportUrl = "http://geo.azmag.gov/services/test/Demographic/Reports.html";
+                self.exportPDFCompareReportUrl = "http://geo.azmag.gov/services/test/Demographic2014/CompareReport.html";
+                self.exportPDFReportUrl = "http://geo.azmag.gov/services/test/Demographic2014/Reports.html";
 
 
                 self.viewReportUrl = "http://localhost/MAG/MAGDemographicsReports/DemographicChartsReport.html";
