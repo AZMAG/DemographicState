@@ -609,9 +609,9 @@
                 **/
                 self.mapSelectionChanged = function() {
                     var dataItem = null;
-                        //if (mapInitializationData != undefined) {
-                        //    self.toc.select(self.toc.findByText(mapInitializationData.selectedMap.ShortName));
-                        //}
+                    //if (mapInitializationData != undefined) {
+                    //    self.toc.select(self.toc.findByText(mapInitializationData.selectedMap.ShortName));
+                    //}
                     dataItem = self.toc.dataItem(self.toc.select());
                     if (dataItem) {
                         //bookmarkDelegate.currentMap(dataItem);

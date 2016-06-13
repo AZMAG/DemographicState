@@ -18,6 +18,16 @@ And constructed with the following guidelines:
 
 ***************************************************************************************************************
 
+## Version 2.2.8 | 06/13/2016
+
+* Fixed PDF reports - new service URL location
+
+## Version 2.2.7 | 05/27/2016
+
+* Updated share functionality to work better with multiple map frames.
+* Added image for sharing functionality.
+* Updated interactive summary to include selected graphics.
+
 ## Version 2.2.6 | 05/24/2016
 
 * Fixed bug in base-layer operation - base-layer disappeared after imagery layer turned on/off

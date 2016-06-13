@@ -104,6 +104,9 @@
                  */
                 self.reportConfigItem = {};
 
+
+                self.selectionGraphic = "";
+
                 /**
                  * Array of aggregate values based on the current report configuration object.
                  *
@@ -112,7 +115,7 @@
                  */
                 self.aggCensusValuesArray = [];
 
-                 /**
+                /**
                  * Array of aggregate values based on the current report configuration object.
                  *
                  * @property aggACSValuesArray
@@ -219,7 +222,7 @@
                  */
                 self.featureAttributeArray = [];
 
-                self.totalFemale = 0; 
+                self.totalFemale = 0;
                 self.totalMale = 0;
 
                 /**
@@ -287,14 +290,13 @@
                             if (kendoChart !== undefined) {
                                 kendoChart.destroy();
                                 kendoChart.element.remove();
-                            }
-                            else{
+                            } else {
                                 $("#demACSChartArea").remove();
                             }
                             self.createChart("ACS");
                             self.reloadChart();
                         }
-                        
+
                     });
 
                     // Display legend checkbox click event
@@ -306,8 +308,7 @@
                             if (kendoChart !== undefined) {
                                 kendoChart.destroy();
                                 kendoChart.element.remove();
-                            }
-                            else{
+                            } else {
                                 $("#demACSChartArea").remove();
                             }
                             self.createChart("census");
@@ -401,6 +402,8 @@
                     self.hasSelectedFeatures = false;
                     self.commChanged = (self.communityName !== undefined && self.communityName !== "" && self.communityName !== communityName);
                     self.communityName = communityName;
+
+                    self.updateSelectionGraphic();
 
                     // Set the summary report config item
                     switch (sumName) {
@@ -519,8 +522,7 @@
                     }
 
                     var type = "census";
-                    if (Object.keys(results.features[0].attributes).length > 120)
-                    {
+                    if (Object.keys(results.features[0].attributes).length > 120) {
                         type = "acs";
                     }
 
@@ -598,19 +600,17 @@
                     }
 
                     // We already have the data, so handle it.
-                    if (type === "census")
-                    {
-                       self.censusDataQueryHandler(results);
-                       var tabName = "Census Block Groups";
-                       var tabContent = selCensusFeatsView;
-                       var optionsRow = "demCensusSelFeatOptionsRow";
-                       var gridName = "demCensusFeatGrid";
-                       var exportButton = "demCensusExportSelFeatResults";
-                       var countLabel = "fCensusCount";
-                       var columnConfig = demographicConfig.selectedCensusBlockGroups;
-                       
-                    }
-                    else{
+                    if (type === "census") {
+                        self.censusDataQueryHandler(results);
+                        var tabName = "Census Block Groups";
+                        var tabContent = selCensusFeatsView;
+                        var optionsRow = "demCensusSelFeatOptionsRow";
+                        var gridName = "demCensusFeatGrid";
+                        var exportButton = "demCensusExportSelFeatResults";
+                        var countLabel = "fCensusCount";
+                        var columnConfig = demographicConfig.selectedCensusBlockGroups;
+
+                    } else {
                         self.acsDataQueryHandler(results);
                         var tabName = "ACS Block Groups";
                         var tabContent = selACSFeatsView;
@@ -680,7 +680,7 @@
                     // Reload the chart to update to current data
 
                     var tab = tabStrip.select();
-                    if(tab.length > 0){
+                    if (tab.length > 0) {
                         if (tab[0].textContent === "ACS 2014 Charts" || tab[0].textContent === "Census 2010 Charts") {
                             self.reloadChart();
                         }
@@ -743,11 +743,9 @@
                     var chartListDivObj = $("#demCensusChartList");
 
                     //Sets the correct source label at bottom of report
-                    if (tab[0].textContent === "Census 2010 Charts" || tab[0].textContent === "Census 2010 Data")
-                    {   
+                    if (tab[0].textContent === "Census 2010 Charts" || tab[0].textContent === "Census 2010 Data") {
                         $("#demSource").html(appConfig.sourceLabel2);
-                    }
-                    else{
+                    } else {
                         $("#demSource").html(appConfig.sourceLabel);
                     }
 
@@ -796,7 +794,7 @@
                     var featuresCount = features.length;
 
                     // Clear the current graphics
-                    //mapModel.clearGraphics();
+                    mapModel.clearGraphics();
 
                     var tabStrip = $("#demTabStrip").data("kendoTabStrip");
                     if (tabStrip !== undefined && tabStrip !== null) {
@@ -854,12 +852,11 @@
                             }
                             if (field.percentOfField === "" || field.percentOfField === undefined) {
                                 aggValues[field.fieldName].percentValueFormatted = "-";
-                            }
-                            else if (field.percentOfField !== undefined) {
+                            } else if (field.percentOfField !== undefined) {
                                 var percentOf = Number(sumAttributes[field.percentOfField]);
                                 aggValues[field.fieldName].percentValue = (attrValue / percentOf) * 100;
                                 aggValues[field.fieldName].percentValueFormatted = magNumberFormatter.formatValue((attrValue / percentOf) * 100) + "%";
-                                if (aggValues[field.fieldName].percentValueFormatted.indexOf(".")>-1 && aggValues[field.fieldName].percentValueFormatted.length === 3) {
+                                if (aggValues[field.fieldName].percentValueFormatted.indexOf(".") > -1 && aggValues[field.fieldName].percentValueFormatted.length === 3) {
                                     aggValues[field.fieldName].percentValueFormatted = "0" + aggValues[field.fieldName].percentValueFormatted;
                                 }
                             }
@@ -871,34 +868,34 @@
                         }
                     });
                     // 
-                        // Filter and group for chart categories
-                        self.chartCategories = [];
-                        self.aggCensusValuesArray = [];
-                        self.aggValuesCensusGroupedByChartCategory = {};
-                        self.aggValuesGroupedByFieldCategory = {};
-                        $.each(aggValues, function(index, item) {
-                            self.aggCensusValuesArray.push(aggValues[item.fieldName]);
-                                // Chart Categories
-                                if (item.chartCategory !== "") {
-                                    if (item.chartCategory in self.aggValuesCensusGroupedByChartCategory) {
-                                        self.aggValuesCensusGroupedByChartCategory[item.chartCategory].push(aggValues[item.fieldName]);
-                                    } else {
-                                        self.chartCategories.push({
-                                            chartCategory: item.chartCategory
-                                        });
-                                        self.aggValuesCensusGroupedByChartCategory[item.chartCategory] = [aggValues[item.fieldName]];
-                                    }
-                                }
-                            
-                            // Field Categories
-                            if (item.fieldCategory !== "") {
-                                if (item.fieldCategory in self.aggValuesGroupedByFieldCategory) {
-                                    self.aggValuesGroupedByFieldCategory[item.fieldCategory].push(aggValues[item.fieldName]);
-                                } else {
-                                    self.aggValuesGroupedByFieldCategory[item.fieldCategory] = [aggValues[item.fieldName]];
-                                }
+                    // Filter and group for chart categories
+                    self.chartCategories = [];
+                    self.aggCensusValuesArray = [];
+                    self.aggValuesCensusGroupedByChartCategory = {};
+                    self.aggValuesGroupedByFieldCategory = {};
+                    $.each(aggValues, function(index, item) {
+                        self.aggCensusValuesArray.push(aggValues[item.fieldName]);
+                        // Chart Categories
+                        if (item.chartCategory !== "") {
+                            if (item.chartCategory in self.aggValuesCensusGroupedByChartCategory) {
+                                self.aggValuesCensusGroupedByChartCategory[item.chartCategory].push(aggValues[item.fieldName]);
+                            } else {
+                                self.chartCategories.push({
+                                    chartCategory: item.chartCategory
+                                });
+                                self.aggValuesCensusGroupedByChartCategory[item.chartCategory] = [aggValues[item.fieldName]];
                             }
-                        });
+                        }
+
+                        // Field Categories
+                        if (item.fieldCategory !== "") {
+                            if (item.fieldCategory in self.aggValuesGroupedByFieldCategory) {
+                                self.aggValuesGroupedByFieldCategory[item.fieldCategory].push(aggValues[item.fieldName]);
+                            } else {
+                                self.aggValuesGroupedByFieldCategory[item.fieldCategory] = [aggValues[item.fieldName]];
+                            }
+                        }
+                    });
 
                     if (self.compareFeature !== null) {
                         self.addCompareValues("census");
@@ -952,7 +949,15 @@
                     }
                 };
 
-                 /**
+                self.updateSelectionGraphic = function(selectionGraphic) {
+                    if (selectionGraphic) {
+                        self.selectionGraphic = selectionGraphic;
+                    } else {
+                        self.selectionGraphic = "";
+                    }
+                };
+
+                /**
                  * Callback method for query results from getData method.
                  * @param {FeatureSet} results - feature set returned by query.
                  */
@@ -1025,12 +1030,11 @@
                             }
                             if (field.percentOfField === "" || field.percentOfField === undefined) {
                                 aggValues[field.fieldName].percentValueFormatted = "-";
-                            }
-                            else if (field.percentOfField !== undefined) {
+                            } else if (field.percentOfField !== undefined) {
                                 var percentOf = Number(sumAttributes[field.percentOfField]);
                                 aggValues[field.fieldName].percentValue = (attrValue / percentOf) * 100;
                                 aggValues[field.fieldName].percentValueFormatted = magNumberFormatter.formatValue((attrValue / percentOf) * 100) + "%";
-                                if (aggValues[field.fieldName].percentValueFormatted.indexOf(".")>-1 && aggValues[field.fieldName].percentValueFormatted.length === 3) {
+                                if (aggValues[field.fieldName].percentValueFormatted.indexOf(".") > -1 && aggValues[field.fieldName].percentValueFormatted.length === 3) {
                                     aggValues[field.fieldName].percentValueFormatted = "0" + aggValues[field.fieldName].percentValueFormatted;
                                 }
 
@@ -1041,41 +1045,40 @@
                                 aggValues[field.fieldName].densityValueFormatted = magNumberFormatter.formatValue(attrValue / densityArea);
                             }
 
-                            if(aggValues[field.fieldName].percentValueFormatted === "NaN%")
-                            {
+                            if (aggValues[field.fieldName].percentValueFormatted === "NaN%") {
                                 aggValues[field.fieldName].percentValueFormatted = "-";
                             }
                         }
                     });
-                        // 
-                        // Filter and group for chart categories
-                        self.chartCategories = [];
-                        self.aggACSValuesArray = [];
-                        self.aggValuesACSGroupedByChartCategory = {};
-                        self.aggValuesGroupedByFieldCategory = {};
-                        $.each(aggValues, function(index, item) {
-                            self.aggACSValuesArray.push(aggValues[item.fieldName]);
-                                // Chart Categories
-                                if (item.chartCategory !== "") {
-                                    if (item.chartCategory in self.aggValuesACSGroupedByChartCategory) {
-                                        self.aggValuesACSGroupedByChartCategory[item.chartCategory].push(aggValues[item.fieldName]);
-                                    } else {
-                                        self.chartCategories.push({
-                                            chartCategory: item.chartCategory
-                                        });
-                                        self.aggValuesACSGroupedByChartCategory[item.chartCategory] = [aggValues[item.fieldName]];
-                                    }
-                                }
-                            
-                            // Field Categories
-                            if (item.fieldCategory !== "") {
-                                if (item.fieldCategory in self.aggValuesGroupedByFieldCategory) {
-                                    self.aggValuesGroupedByFieldCategory[item.fieldCategory].push(aggValues[item.fieldName]);
-                                } else {
-                                    self.aggValuesGroupedByFieldCategory[item.fieldCategory] = [aggValues[item.fieldName]];
-                                }
+                    // 
+                    // Filter and group for chart categories
+                    self.chartCategories = [];
+                    self.aggACSValuesArray = [];
+                    self.aggValuesACSGroupedByChartCategory = {};
+                    self.aggValuesGroupedByFieldCategory = {};
+                    $.each(aggValues, function(index, item) {
+                        self.aggACSValuesArray.push(aggValues[item.fieldName]);
+                        // Chart Categories
+                        if (item.chartCategory !== "") {
+                            if (item.chartCategory in self.aggValuesACSGroupedByChartCategory) {
+                                self.aggValuesACSGroupedByChartCategory[item.chartCategory].push(aggValues[item.fieldName]);
+                            } else {
+                                self.chartCategories.push({
+                                    chartCategory: item.chartCategory
+                                });
+                                self.aggValuesACSGroupedByChartCategory[item.chartCategory] = [aggValues[item.fieldName]];
                             }
-                        });
+                        }
+
+                        // Field Categories
+                        if (item.fieldCategory !== "") {
+                            if (item.fieldCategory in self.aggValuesGroupedByFieldCategory) {
+                                self.aggValuesGroupedByFieldCategory[item.fieldCategory].push(aggValues[item.fieldName]);
+                            } else {
+                                self.aggValuesGroupedByFieldCategory[item.fieldCategory] = [aggValues[item.fieldName]];
+                            }
+                        }
+                    });
 
                     if (self.compareFeature !== null) {
                         self.addCompareValues("acs");
@@ -1126,10 +1129,13 @@
                     if (useCompare) {
                         self.createKendoGridWithCompare(gridType);
                     } else {
-                        
                         self.createKendoGrid(gridType);
-
                     }
+
+                    if (self.selectionGraphic !== "") {
+                        mapModel.addGraphic(self.selectionGraphic, undefined, true, true);
+                    }
+
                 };
 
                 /**
@@ -1159,24 +1165,24 @@
                  *
                  * @param features - returned array of features from esri query
                  */
-                self.summarizeAttributes = function(features){
-                        // Summarize the features
-                        var sumAttributes = {};
-                        $.each(features, function(index, feature) {
-                            for (var attribute in feature.attributes) {
-                                if (attribute in sumAttributes) {
-                                    var val = sumAttributes[attribute];
-                                    sumAttributes[attribute] = val + feature.attributes[attribute];
-                                } else {
-                                    var newVal = feature.attributes[attribute];
-                                    if ($.isNumeric(newVal)) {
-                                        sumAttributes[attribute] = newVal;
-                                    }
+                self.summarizeAttributes = function(features) {
+                    // Summarize the features
+                    var sumAttributes = {};
+                    $.each(features, function(index, feature) {
+                        for (var attribute in feature.attributes) {
+                            if (attribute in sumAttributes) {
+                                var val = sumAttributes[attribute];
+                                sumAttributes[attribute] = val + feature.attributes[attribute];
+                            } else {
+                                var newVal = feature.attributes[attribute];
+                                if ($.isNumeric(newVal)) {
+                                    sumAttributes[attribute] = newVal;
                                 }
                             }
-                        });
-                        return sumAttributes;
-                    };
+                        }
+                    });
+                    return sumAttributes;
+                };
 
                 /**
                  * Fired when user clicks the comparison check box.
@@ -1192,8 +1198,7 @@
                     var handler = self.placeCensusListQueryHandler
                     var url = self.reportConfigItem.compareCensusUrl;
 
-                    if(sender.target.id === "demACSUseComp")
-                    {
+                    if (sender.target.id === "demACSUseComp") {
                         // Toggle the compare combobox
                         compareComboBoxInput = $("#demACSCompareComboBox");
                         compareComboBoxObj = compareComboBoxInput.data("kendoComboBox");
@@ -1207,8 +1212,7 @@
                         var whereClause = self.reportConfigItem.compareWhereClause;
                         var outFields = self.reportConfigItem.comparePlaceField;
                         layerDelegate.query(url, handler, self.placeListQueryFault, null, whereClause, false, [outFields], null, true);
-                    } 
-                    else {
+                    } else {
                         if ($(this).is(":checked")) {
                             compareComboBoxObj.enable(true);
                             var selectedIndex = compareComboBoxObj.select();
@@ -1221,8 +1225,7 @@
                                 }
                                 self.createKendoGridWithCompare(type);
                             }
-                        } 
-                        else {
+                        } else {
                             compareComboBoxObj.enable(false);
                             self.compareFeature = null;
 
@@ -1367,15 +1370,14 @@
                  * @param e - event arguments
                  */
                 self.compareNameSelected = function(e) {
-                    
+
                     var senderID = e.sender.element.prop("id");
                     var handler = self.placeCensusQueryHelper;
                     var type = "census";
                     var gridID = "#demCensusDataGrid";
                     var url = self.reportConfigItem.compareCensusUrl;
 
-                    if(senderID === "demACSCompareComboBox")
-                    {
+                    if (senderID === "demACSCompareComboBox") {
                         handler = self.placeACSQueryHelper;
                         type = "ACS";
                         gridID = "#demACSDataGrid";
@@ -1390,7 +1392,7 @@
                             self.compareToName = selectedName.Name;
 
                             // Query for the place record
-                            
+
                             var whereClause = self.reportConfigItem.comparePlaceField + " = '" + self.compareToName + "'";
                             layerDelegate.query(url, handler, self.placeQueryFault, null, whereClause, true);
                         } else {
@@ -1458,7 +1460,7 @@
                     self.createKendoGridWithCompare("ACS");
                 };
 
-                
+
 
                 /**
                  * Add the comparison values to the aggregated values of the current community or Selected Block Groups.
@@ -1472,7 +1474,7 @@
 
                     var dataSource = self.aggACSValuesArray;
 
-                    if(type === "census"){
+                    if (type === "census") {
                         dataSource = self.aggCensusValuesArray;
                     }
 
@@ -1494,15 +1496,13 @@
                             if (item.derivedPercentOfField === "" || item.derivedPercentOfField === undefined) {
                                 item.comparePercentValueFormatted = "-";
                             }
-                            if(item.derivedPercentOfField !== "" && item.derivedPercentOfField !== undefined)
-                            {
+                            if (item.derivedPercentOfField !== "" && item.derivedPercentOfField !== undefined) {
                                 var percentOf = Number(self.compareFeature.attributes[item.derivedPercentOfField]);
                                 var value = item.compareValue;
                                 item.comparePercentValue = (value / percentOf) * 100;
-                                if(item.comparePercentValue !== null && !Number.isNaN(item.comparePercentValue) && item.comparePercentValue !== Infinity){
+                                if (item.comparePercentValue !== null && !Number.isNaN(item.comparePercentValue) && item.comparePercentValue !== Infinity) {
                                     item.comparePercentValueFormatted = magNumberFormatter.formatValue(item.comparePercentValue) + "%";
-                                }
-                                else{
+                                } else {
                                     item.comparePercentValueFormatted = "-";
                                 }
                             }
@@ -1519,7 +1519,7 @@
                     });
                 };
 
-                
+
 
                 /**
                  * Fired when user selects an item in the chart category list view
@@ -1531,8 +1531,7 @@
                     self.selectedCategoryObj = this.select();
                     self.groupedItems = self.aggValuesCensusGroupedByChartCategory[self.selectedCategoryObj[0].childNodes[1].innerHTML];
 
-                    if(self.groupedItems === undefined)
-                    {
+                    if (self.groupedItems === undefined) {
                         self.groupedItems = self.aggValuesACSGroupedByChartCategory[self.selectedCategoryObj[0].childNodes[1].innerHTML];
                     }
 
@@ -1544,25 +1543,22 @@
                         kendoChart1.destroy();
                         kendoChart1.element.remove();
                         self.createChart("census");
-                    }
-                    else{
+                    } else {
                         censusChartAreaSelector.remove();
                         self.createChart("census");
                     }
-                    
+
                     var kendoChart2 = $("#demACSChartArea").data("kendoChart");
                     var d3Chart = $("#demACSChartArea");
-                    
+
                     if (kendoChart2 !== null && kendoChart2 !== undefined) {
                         kendoChart2.destroy();
                         kendoChart2.element.remove();
                         self.createChart("ACS");
-                    }
-                    else if (d3Chart !== null && d3Chart !== undefined) {
+                    } else if (d3Chart !== null && d3Chart !== undefined) {
                         d3Chart.remove();
                         self.createChart("ACS");
-                    }
-                    else{
+                    } else {
                         self.createChart("ACS");
                     }
 
@@ -1589,8 +1585,7 @@
                         if (kendoChart !== null && kendoChart !== undefined) {
                             kendoChart.destroy();
                             kendoChart.element.remove();
-                        }
-                        else{
+                        } else {
                             $("#demCensusChartArea").remove();
                         }
                         self.createChart("census");
@@ -1604,17 +1599,15 @@
                         // Update the chart
                         var kendoChart2 = $("#demACSChartArea").data("kendoChart");
                         var kendoChart3 = $("#demACSChartArea")
-                        
+
                         if (kendoChart2 !== null && kendoChart2 !== undefined) {
                             kendoChart2.destroy();
                             kendoChart2.element.remove();
                             self.createChart("ACS");
-                        }
-                        else if (kendoChart3 !== null && kendoChart3 !== undefined) {
+                        } else if (kendoChart3 !== null && kendoChart3 !== undefined) {
                             kendoChart3.remove();
                             self.createChart("ACS");
-                        }
-                        else{
+                        } else {
                             self.createChart("ACS");
                         }
                     }
@@ -1630,18 +1623,15 @@
                     // Create the div element for the chart
                     var legendVisible = false;
                     var chartObj;
-                    if(self.groupedItems === undefined)
-                    {
-                        
-                        if(type === "census")
-                        {
+                    if (self.groupedItems === undefined) {
+
+                        if (type === "census") {
                             var chartListDivObj = $("#demCensusChartList");
                             var kendoListView = chartListDivObj.data("kendoListView");
                             self.selectedCategoryObj = kendoListView.select();
                             self.groupedItems = self.aggValuesCensusGroupedByChartCategory[self.selectedCategoryObj[0].childNodes[1].innerHTML];
                             legendVisible = self.legendCensusVisible;
-                        }
-                        else{
+                        } else {
                             var chartListDivObj = $("#demACSChartList");
                             var kendoListView = chartListDivObj.data("kendoListView");
                             self.selectedCategoryObj = kendoListView.select();
@@ -1650,16 +1640,14 @@
                         }
                     }
 
-                    if(type === "census")
-                    {
+                    if (type === "census") {
                         dc.create("div", {
                             id: "demCensusChartArea"
                         }, "demCensusChartAreaPane", "first");
                         chartObj = $("#demCensusChartArea");
                         legendVisible = self.legendCensusVisible;
 
-                    }
-                    else{
+                    } else {
                         dc.create("div", {
                             id: "demACSChartArea"
                         }, "demACSChartAreaPane", "first");
@@ -1675,24 +1663,21 @@
 
                     var categoryName = self.selectedCategoryObj[0].childNodes[1].innerHTML;
 
-                    if(categoryName === "Occupation"){
+                    if (categoryName === "Occupation") {
                         self.createTreeMap();
-                    }
-                    else if(categoryName === "Age By Gender"){
+                    } else if (categoryName === "Age By Gender") {
                         self.createAgePyramid();
-                    }
-                    else{
+                    } else {
 
                         var templateString = "#= category #<br>#= kendo.format('{0:P}', percentage) #<br>#= kendo.format('{0:N0}', value) #";
-                        if(self.groupedItems[0].chartType !== "pie")
-                        {
-                           templateString = "#= category #<br>#= kendo.format('{0:N0}', value) #"
+                        if (self.groupedItems[0].chartType !== "pie") {
+                            templateString = "#= category #<br>#= kendo.format('{0:N0}', value) #"
                         }
 
                         var series1 = [];
                         var filteredItems = [];
 
-                        $.each(self.groupedItems, function(i, item){
+                        $.each(self.groupedItems, function(i, item) {
                             //filtering out zero values
                             if (item.fieldValue !== 0) {
                                 filteredItems.push(item);
@@ -1703,122 +1688,118 @@
                         var largestValue = Math.max.apply(Math, series1);
                         var valueAxisTemplate = "#= kendo.format(\'{0:N0}\', value)#"
                         var largeValue = false;
-                        if(largestValue > 1000)
-                        {
-                            if(largestValue > 5000){
-                            valueAxisTemplate = "#= kendo.format('{0:N0}', Math.abs(value) / 1000) #";
-                            }
-                            else{
+                        if (largestValue > 1000) {
+                            if (largestValue > 5000) {
+                                valueAxisTemplate = "#= kendo.format('{0:N0}', Math.abs(value) / 1000) #";
+                            } else {
                                 valueAxisTemplate = "#= kendo.format('{0:N1}', Math.abs(value) / 1000) #";
                             }
                             largeValue = true;
                         }
 
                         var showLabels = false;
-                        if(self.groupedItems[0].chartType === "pie"){
+                        if (self.groupedItems[0].chartType === "pie") {
                             showLabels = true;
                         }
 
-                        if(filteredItems.length !== 0)
-                        {
+                        if (filteredItems.length !== 0) {
 
 
-                        // Kendo-ize
-                        var chart = chartObj.kendoChart({
-                            dataSource: {
-                                data: filteredItems
-                            },
-
-                            //change color of charts vw
-                            seriesColors: appConfig.seriesColors,
-
-                            legend: {
-                                visible: legendVisible,
-                                position: "bottom",
-                                // offsetX: 15,
-                                // offsetY: -80,
-                                margin: {
-                                    left: 0,
-                                    right: 10
+                            // Kendo-ize
+                            var chart = chartObj.kendoChart({
+                                dataSource: {
+                                    data: filteredItems
                                 },
-                                labels: {
-                                    color: "white"
-                                }
-                            },
-                            series: [{
-                                name: self.groupedItems[0].chartName,
-                                type: self.groupedItems[0].chartType,
-                                field: "fieldValue",
-                                categoryField: "fieldAlias",
-                                padding: 75
-                            }],
-                            seriesDefaults: {
-                                labels: {
-                                    visible: showLabels,
-                                    position: "outsideEnd",
+
+                                //change color of charts vw
+                                seriesColors: appConfig.seriesColors,
+
+                                legend: {
+                                    visible: legendVisible,
+                                    position: "bottom",
+                                    // offsetX: 15,
+                                    // offsetY: -80,
+                                    margin: {
+                                        left: 0,
+                                        right: 10
+                                    },
+                                    labels: {
+                                        color: "white"
+                                    }
+                                },
+                                series: [{
+                                    name: self.groupedItems[0].chartName,
+                                    type: self.groupedItems[0].chartType,
+                                    field: "fieldValue",
+                                    categoryField: "fieldAlias",
+                                    padding: 75
+                                }],
+                                seriesDefaults: {
+                                    labels: {
+                                        visible: showLabels,
+                                        position: "outsideEnd",
+                                        background: "#4D4D4D",
+                                        format: "{0:n}",
+                                        color: "white",
+                                        // template: "#= category #"
+                                        template: "#= category #"
+                                    },
+                                    tooltip: {
+                                        visible: true,
+                                        //background: "#4D4D4D",
+                                        color: "black",
+                                        // border: {
+                                        //     width: 1,
+                                        //     color: "white"
+                                        // },
+                                        // template: "#= kendo.format('{0:n0}', value) # - #= kendo.format('{0:P}', percentage) #"
+                                        // template: "#= kendo.format('{0:P}', percentage) #"
+                                        template: templateString
+                                    }
+                                },
+                                plotArea: {
+                                    margin: {
+                                        right: 30,
+
+                                    }
+                                },
+                                chartArea: {
                                     background: "#4D4D4D",
-                                    format: "{0:n}",
+                                    margin: {
+                                        left: 15,
+                                        top: 5,
+                                        right: 15
+                                    }
+                                },
+                                categoryAxis: {
+                                    //title: { text: "test"},
+                                    field: "fieldAlias",
                                     color: "white",
-                                    // template: "#= category #"
-                                    template: "#= category #"
+                                    labels: {
+                                        visible: true,
+                                        rotation: 0
+                                    },
+                                    majorGridLines: {
+                                        visible: false
+                                    },
+                                    line: {
+                                        visible: false
+                                    }
                                 },
-                                tooltip: {
-                                    visible: true,
-                                    //background: "#4D4D4D",
-                                    color: "black",
-                                    // border: {
-                                    //     width: 1,
-                                    //     color: "white"
-                                    // },
-                                    // template: "#= kendo.format('{0:n0}', value) # - #= kendo.format('{0:P}', percentage) #"
-                                    // template: "#= kendo.format('{0:P}', percentage) #"
-                                    template: templateString
+                                valueAxis: {
+                                    //title: { text: "test"},
+                                    color: "white",
+                                    labels: {
+                                        template: valueAxisTemplate
+                                    },
+                                    title: {
+                                        text: "*Values shown in thousands",
+                                        font: "10px Arial,Helvetica,sans-serif",
+                                        visible: largeValue
+                                    }
                                 }
-                            },
-                            plotArea: {
-                                margin: {
-                                    right: 30,
-
-                                }
-                            },
-                            chartArea: {
-                                background: "#4D4D4D",
-                                margin: {
-                                    left: 15,
-                                    top: 5,
-                                    right: 15
-                                }
-                            },
-                            categoryAxis: {
-                                //title: { text: "test"},
-                                field: "fieldAlias",
-                                color: "white",
-                                labels: {
-                                    visible: true,
-                                    rotation: 0
-                                },
-                                majorGridLines: {
-                                    visible: false
-                                },
-                                line: {
-                                    visible: false
-                                }
-                            },
-                            valueAxis: {
-                                //title: { text: "test"},
-                                color: "white",
-                                labels: {
-                                    template: valueAxisTemplate
-                                },
-                                title: {
-                                    text: "*Values shown in thousands",
-                                    font: "10px Arial,Helvetica,sans-serif",
-                                    visible: largeValue
-                                }
-                            }
-                        }).data("kendoChart");
-                        }
-                        else{
+                            }).data("kendoChart");
+                        } else {
                             chartObj.html("<span style='margin:30%;'>No data available for this chart.<span>");
                         }
                     }
@@ -1865,22 +1846,18 @@
                     var demoOptionsRowName = "demACSSummaryOptionsRow";
                     var dataSource = self.aggACSValuesArray;
 
-                    if(type === "census")
-                    {
+                    if (type === "census") {
                         dataGridName = "demCensusDataGrid";
                         demoOptionsRowName = "demCensusSummaryOptionsRow";
                         dataSource = self.aggCensusValuesArray
                     }
 
-                    $.each(dataSource,function(i,value){
-                        if(value["fieldType"] === "Currency")
-                        {
+                    $.each(dataSource, function(i, value) {
+                        if (value["fieldType"] === "Currency") {
                             value["fieldValueFormatted"] = "$ " + magNumberFormatter.formatValue(value["fieldValue"]);
 
-                        }
-                        else if(value["fieldType"] === "Rate")
-                        {
-                            value["percentValueFormatted"] =  magNumberFormatter.formatValue(value["fieldValue"]) + "%";
+                        } else if (value["fieldType"] === "Rate") {
+                            value["percentValueFormatted"] = magNumberFormatter.formatValue(value["fieldValue"]) + "%";
                             value["fieldValueFormatted"] = "-"
                         }
                     });
@@ -1929,24 +1906,21 @@
                             //{field: "densityValueFormatted", title: "Per Sq Mile", format: "{0:n1}"}
                         ],
                         dataBound: function(e) {
-                            if(this.wrapper[0].id !== "demCensusDataGrid")
-                            {
+                            if (this.wrapper[0].id !== "demCensusDataGrid") {
                                 // get the index of the UnitsInStock cell
                                 var rowCollection = e.sender.tbody[0].children;
                                 var data = e.sender._data;
                                 var realRows = [];
 
-                                $.each(rowCollection, function(i, row){
-                                    if(row.className !== "k-grouping-row")
-                                    {
+                                $.each(rowCollection, function(i, row) {
+                                    if (row.className !== "k-grouping-row") {
                                         realRows.push(row);
                                     }
                                 });
-                                 $.each(realRows, function(i, row){
-                                    if(data[i]){
-                                        if(data[i]["fieldCategory"] === "Occupation"){
-                                            if(data[i].parentField === "" || data[i].fieldName === "ProtectiveServ")
-                                            {
+                                $.each(realRows, function(i, row) {
+                                    if (data[i]) {
+                                        if (data[i]["fieldCategory"] === "Occupation") {
+                                            if (data[i].parentField === "" || data[i].fieldName === "ProtectiveServ") {
                                                 var jRow = $(row);
                                                 jRow.addClass('k-header');
                                                 jRow.removeClass('k-alt');
@@ -1961,37 +1935,34 @@
                     self.sizeGrid("#" + dataGridName);
                 };
 
-                self.createTreeMap = function(){
+                self.createTreeMap = function() {
                     var data = [];
                     var parents = [];
                     var items = [];
                     $("#demACSChartArea").addClass("bubbleChart");
-                    $.each(self.groupedItems, function(i, item){
+                    $.each(self.groupedItems, function(i, item) {
 
                         var parentObj = {};
 
-                        if(item.parentField !== "" && item.fieldAlias !== "Protective service occupations" && item.fieldValue !== 0)
-                        {
+                        if (item.parentField !== "" && item.fieldAlias !== "Protective service occupations" && item.fieldValue !== 0) {
                             var strArray = item.fieldAlias.split(" ");
                             var text1 = "";
                             var text2 = "";
                             var text3 = "";
 
-                            if(strArray.length < 4){
+                            if (strArray.length < 4) {
 
                                 for (var i = 0; i < strArray.length; i++) {
                                     text1 += strArray[i] + " ";
                                 }
-                            }
-                            else if(strArray.length > 3 && strArray.length < 6){
+                            } else if (strArray.length > 3 && strArray.length < 6) {
                                 for (var i = 0; i < 3; i++) {
                                     text1 += strArray[i] + " ";
                                 }
                                 for (var i = 3; i < strArray.length; i++) {
                                     text2 += strArray[i] + " ";
                                 }
-                            }
-                            else {
+                            } else {
                                 for (var i = 0; i < 3; i++) {
                                     text1 += strArray[i] + " ";
                                 }
@@ -2017,150 +1988,159 @@
                     });
 
                     var bubbleChart = new d3.svg.BubbleChart({
-                    supportResponsive: true,
-                    //container: => use @default
-                    size: 500,
-                    viewBoxSize: 500,
-                    innerRadius: 120,
-                    //outerRadius: => use @default
-                    radiusMin: 10,
-                    radiusMax: 20,
-                    //intersectDelta: 100,
-                    intersectInc: 20,
-                    circleColor: "category",//use @default
-                    data: {
-                      items: items,
-                      eval: function (item) {return item.count;},
-                      color: function (item){
-                        var color = "";
-                        $.each(appConfig.bubbleColors, function(i, value){
-                            //console.log(value.category);
-                            if(value.category === item.category)
-                            {
-                                color = value.color;
-                                return;
-                            }
-                        });
+                        supportResponsive: true,
+                        //container: => use @default
+                        size: 500,
+                        viewBoxSize: 500,
+                        innerRadius: 120,
+                        //outerRadius: => use @default
+                        radiusMin: 10,
+                        radiusMax: 20,
+                        //intersectDelta: 100,
+                        intersectInc: 20,
+                        circleColor: "category", //use @default
+                        data: {
+                            items: items,
+                            eval: function(item) {
+                                return item.count;
+                            },
+                            color: function(item) {
+                                var color = "";
+                                $.each(appConfig.bubbleColors, function(i, value) {
+                                    //console.log(value.category);
+                                    if (value.category === item.category) {
+                                        color = value.color;
+                                        return;
+                                    }
+                                });
 
-                        //console.log(item.category)
+                                //console.log(item.category)
 
-                        return color;
-                      },
-                      classed: function (item) {return item.text.split(" ").join("");
-                    }
-                    },
-                    plugins: [
-                      {
-                        name: "lines",
-                        options: {
-                          format: [
-                            {// Line #0
-                              textField: "label",
-                              classed: {label: true},
-                              style: {
-                                "font-family": "Source Sans Pro, sans-serif",
-                                "text-anchor": "middle",
-                                "font-weight": 500,
-                                fill: "black",
-                                opacity: "hidden"
-                              },
-                              attr: {
-                                "font-size": "1px",
-                                dy: "-30px",
-                                x: function (d) {return d.cx;},
-                                y: function (d) {return d.cy;}
-                              }
+                                return color;
                             },
-                            {// Line #0
-                              textField: "percent",
-                              classed: {label: true},
-                              style: {
-                                "font-family": "Source Sans Pro, sans-serif",
-                                "text-anchor": "middle",
-                                fill: "black",
-                                opacity: "0"
-                              },
-                              attr: {
-                                "font-size": "1px",
-                                dy: "-4px",
-                                x: function (d) {return d.cx;},
-                                y: function (d) {return d.cy;}
-                              }
-                            },
-                            {// Line #1
-                              textField: "text",
-                              classed: {text: true},
-                              style: {
-                                "font-family": "Source Sans Pro, sans-serif",
-                                "text-anchor": "middle",
-                                fill: "black",
-                                opacity: "0"
-                              },
-                              attr: {
-                                "font-size": "1px",
-                                dy: "20px",
-                                x: function (d) {return d.cx;},
-                                y: function (d) {return d.cy;}
-                              }
-                            },
-                            {// Line #2
-                              textField: "text2",
-                              classed: {text2: true},
-                              style: {
-                                "font-family": "Source Sans Pro, sans-serif",
-                                "text-anchor": "middle",
-                                fill: "black",
-                                opacity: "0"
-                              },
-                              attr: {
-                                "font-size": "1px",
-                                dy: "40px",
-                                x: function (d) {return d.cx;},
-                                y: function (d) {return d.cy;}
-                              }
-                            },
-                            {// Line #3
-                              textField: "text3",
-                              classed: {text3: true},
-                              style: {
-                                "font-family": "Source Sans Pro, sans-serif",
-                                "text-anchor": "middle",
-                                fill: "black",
-                                opacity: "0"
-                              },
-                              attr: {
-                                "font-size": "1px",
-                                dy: "60px",
-                                x: function (d) {return d.cx;},
-                                y: function (d) {return d.cy;}
-                              }
+                            classed: function(item) {
+                                return item.text.split(" ").join("");
                             }
-                          ],
-                          centralFormat: [
-                            {// Line #0
-                              attr: {"font-size": "28px"},
-                              style: {"opacity": "1"}
-                            },
-                            {// Line #1
-                              attr: {"font-size": "20px"},
-                              style: {"opacity": "1"}
-                            },
-                            {// Line #2
-                              attr: {"font-size": "18px"},
-                              style: {"opacity": "1"}
-                            },
-                            {// Line #3
-                              attr: {"font-size": "18px"},
-                              style: {"opacity": "1"}
-                            },
-                            {// Line #4
-                              attr: {"font-size": "48px"},
-                              style: {"opacity": "1"}
-                            },
-                          ]
-                        }
-                      }]
-                  });
+                        },
+                        plugins: [{
+                            name: "lines",
+                            options: {
+                                format: [{ // Line #0
+                                    textField: "label",
+                                    classed: { label: true },
+                                    style: {
+                                        "font-family": "Source Sans Pro, sans-serif",
+                                        "text-anchor": "middle",
+                                        "font-weight": 500,
+                                        fill: "black",
+                                        opacity: "hidden"
+                                    },
+                                    attr: {
+                                        "font-size": "1px",
+                                        dy: "-30px",
+                                        x: function(d) {
+                                            return d.cx;
+                                        },
+                                        y: function(d) {
+                                            return d.cy;
+                                        }
+                                    }
+                                }, { // Line #0
+                                    textField: "percent",
+                                    classed: { label: true },
+                                    style: {
+                                        "font-family": "Source Sans Pro, sans-serif",
+                                        "text-anchor": "middle",
+                                        fill: "black",
+                                        opacity: "0"
+                                    },
+                                    attr: {
+                                        "font-size": "1px",
+                                        dy: "-4px",
+                                        x: function(d) {
+                                            return d.cx;
+                                        },
+                                        y: function(d) {
+                                            return d.cy;
+                                        }
+                                    }
+                                }, { // Line #1
+                                    textField: "text",
+                                    classed: { text: true },
+                                    style: {
+                                        "font-family": "Source Sans Pro, sans-serif",
+                                        "text-anchor": "middle",
+                                        fill: "black",
+                                        opacity: "0"
+                                    },
+                                    attr: {
+                                        "font-size": "1px",
+                                        dy: "20px",
+                                        x: function(d) {
+                                            return d.cx;
+                                        },
+                                        y: function(d) {
+                                            return d.cy;
+                                        }
+                                    }
+                                }, { // Line #2
+                                    textField: "text2",
+                                    classed: { text2: true },
+                                    style: {
+                                        "font-family": "Source Sans Pro, sans-serif",
+                                        "text-anchor": "middle",
+                                        fill: "black",
+                                        opacity: "0"
+                                    },
+                                    attr: {
+                                        "font-size": "1px",
+                                        dy: "40px",
+                                        x: function(d) {
+                                            return d.cx;
+                                        },
+                                        y: function(d) {
+                                            return d.cy;
+                                        }
+                                    }
+                                }, { // Line #3
+                                    textField: "text3",
+                                    classed: { text3: true },
+                                    style: {
+                                        "font-family": "Source Sans Pro, sans-serif",
+                                        "text-anchor": "middle",
+                                        fill: "black",
+                                        opacity: "0"
+                                    },
+                                    attr: {
+                                        "font-size": "1px",
+                                        dy: "60px",
+                                        x: function(d) {
+                                            return d.cx;
+                                        },
+                                        y: function(d) {
+                                            return d.cy;
+                                        }
+                                    }
+                                }],
+                                centralFormat: [{ // Line #0
+                                    attr: { "font-size": "28px" },
+                                    style: { "opacity": "1" }
+                                }, { // Line #1
+                                    attr: { "font-size": "20px" },
+                                    style: { "opacity": "1" }
+                                }, { // Line #2
+                                    attr: { "font-size": "18px" },
+                                    style: { "opacity": "1" }
+                                }, { // Line #3
+                                    attr: { "font-size": "18px" },
+                                    style: { "opacity": "1" }
+                                }, { // Line #4
+                                    attr: { "font-size": "48px" },
+                                    style: { "opacity": "1" }
+                                }, ]
+                            }
+                        }]
+                    });
 
                     var tooltip = d3.select("body")
                         .append("div")
@@ -2169,7 +2149,7 @@
                         .style("visibility", "hidden")
                         .style("border", "1px solid black")
                         .style("background-color", "white")
-                        .style("border-radius","3px")
+                        .style("border-radius", "3px")
                         .style("padding", "3px")
                         .style("color", "black")
                         .style("max-width", "140px")
@@ -2177,17 +2157,18 @@
                         .style("font-size", "12px");
 
                     var node = d3.selectAll(".node")
-                    .on("mouseover", function(sender){
-                        var html = "<strong>Occupation: </strong>" + sender.item.fullText + "<br><strong> Category: </strong>" + sender.item.category + "<br> <strong>Employee Count: </strong>" + sender.item.label + "<br> <strong>Percentage: </strong>" + sender.item.percent;
-                        tooltip.html(html);
-                            return   tooltip.style("visibility", "visible")
+                        .on("mouseover", function(sender) {
+                            var html = "<strong>Occupation: </strong>" + sender.item.fullText + "<br><strong> Category: </strong>" + sender.item.category + "<br> <strong>Employee Count: </strong>" + sender.item.label + "<br> <strong>Percentage: </strong>" + sender.item.percent;
+                            tooltip.html(html);
+                            return tooltip.style("visibility", "visible")
                         })
-                        .on("mousemove", function(){
-                            return tooltip.style("top", (d3.event.screenY - 100)+"px").style("left",(d3.event.screenX +10)+"px");
+                        .on("mousemove", function() {
+                            return tooltip.style("top", (d3.event.screenY - 100) + "px").style("left", (d3.event.screenX + 10) + "px");
                         })
-                        .on("mouseout", function(event){
+                        .on("mouseout", function(event) {
                             d3.select(this).attr("stroke", "black").attr("stroke-width", "0");
-                            return tooltip.style("visibility", "hidden");})
+                            return tooltip.style("visibility", "hidden");
+                        })
                 };
 
 
@@ -2196,7 +2177,7 @@
                  *
                  * @method createAgePyramid
                  */
-                self.createAgePyramid = function(){
+                self.createAgePyramid = function() {
                     var stateLineMale = [];
                     var stateLineFemale = [];
                     self.pyramidData = [];
@@ -2204,37 +2185,27 @@
                     var combinedMaleValue = 0;
                     var combinedFemaleValue = 0;
 
-                    $.each( self.groupedItems, function( key, item ) {
-                        if(item !== undefined){
-                            if(item.fieldName === "TOTAL_MALE"){
+                    $.each(self.groupedItems, function(key, item) {
+                        if (item !== undefined) {
+                            if (item.fieldName === "TOTAL_MALE") {
                                 self.totalMale = item.fieldValue;
-                            }
-                            else if(item.fieldName === "TOTAL_FEMALE"){
+                            } else if (item.fieldName === "TOTAL_FEMALE") {
                                 self.totalFemale = item.fieldValue;
-                            }
-                            else if (item.fieldName === "M_Y18TO19" || item.fieldName === "M_Y20")
-                            {
+                            } else if (item.fieldName === "M_Y18TO19" || item.fieldName === "M_Y20") {
                                 combinedMaleValue += item.fieldValue;
-                            }
-                            else if (item.fieldName === "M_Y21")
-                            {
+                            } else if (item.fieldName === "M_Y21") {
                                 combinedMaleValue += item.fieldValue;
                                 var object = jQuery.extend({}, item);
                                 object.fieldValue = combinedMaleValue;
                                 self.pyramidData.push(object);
-                            }
-                            else if (item.fieldName === "F_Y18TO19" || item.fieldName === "F_Y20")
-                            {
+                            } else if (item.fieldName === "F_Y18TO19" || item.fieldName === "F_Y20") {
                                 combinedFemaleValue += item.fieldValue;
-                            }
-                            else if (item.fieldName === "F_Y21")
-                            {
+                            } else if (item.fieldName === "F_Y21") {
                                 combinedFemaleValue += item.fieldValue;
                                 var object = jQuery.extend({}, item);
                                 object.fieldValue = combinedFemaleValue;
                                 self.pyramidData.push(object);
-                            }
-                            else{
+                            } else {
                                 var object = item;
 
                                 self.pyramidData.push(object);
@@ -2247,117 +2218,107 @@
                     var whereClause = "NAME = 'Arizona State'";
                     layerDelegate.query(url, self.populationPyramidComparison, self.dataQueryFault, null, whereClause, false, demographicConfig.agePyramidFields);
 
-                    self.populationPyramidComparison = function(results){
+                    self.populationPyramidComparison = function(results) {
                         var feature = results.features[0];
-                        $.each( self.pyramidData, function( key, item ) {
+                        $.each(self.pyramidData, function(key, item) {
                             var baseLineValue = feature.attributes[item.fieldName];
-                            if( item.tableHeader === "Females age 21")
-                            {
+                            if (item.tableHeader === "Females age 21") {
                                 var value = feature.attributes["F_Y18TO19"] + feature.attributes["F_Y21"] + feature.attributes["F_Y20"];
                                 var percentage = value / feature.attributes["TOTAL_FEMALE"];
-                                stateLineFemale.push((percentage * self.totalFemale)* -1);
-                            }
-                            else if (item.tableHeader.indexOf("Females") > -1) {
+                                stateLineFemale.push((percentage * self.totalFemale) * -1);
+                            } else if (item.tableHeader.indexOf("Females") > -1) {
                                 var percentage = baseLineValue / feature.attributes["TOTAL_FEMALE"];
                                 stateLineFemale.push((percentage * self.totalFemale) * -1);
-                            }
-                            else if( item.tableHeader === "Males age 21")
-                            {
+                            } else if (item.tableHeader === "Males age 21") {
                                 var value = feature.attributes["M_Y18TO19"] + feature.attributes["M_Y21"] + feature.attributes["M_Y20"];
                                 var percentage = value / feature.attributes["TOTAL_MALE"];
                                 stateLineMale.push((percentage * self.totalMale));
-                            }
-                            else{
+                            } else {
                                 var percentage = baseLineValue / feature.attributes["TOTAL_MALE"];
                                 stateLineMale.push((percentage * self.totalMale));
                             }
                         });
-  
-                    var maleSeries = [];
-                    var femaleSeries = [];
 
-                    $.each( self.pyramidData, function( key, item ) {
-                        if (item.tableHeader.indexOf("Females") > -1) {
-                            var negativeValue = item.fieldValue * -1;
-                            femaleSeries.push(negativeValue);
-                        }
-                        else{
-                            maleSeries.push(item.fieldValue);
-                        }
-                    });
+                        var maleSeries = [];
+                        var femaleSeries = [];
 
-                    var chartObj = $("#demACSChartArea");
-                    var largestValue = Math.max.apply(Math, maleSeries);
-                    var valueAxisTemplate = "#= kendo.format(\'{0:N0}\', Math.abs(value))#"
-                    var largeValue = false;
-                    if(largestValue > 1000)
-                    {
-                        if(largestValue > 5000){
-                            valueAxisTemplate = "#= kendo.format('{0:N0}', Math.abs(value) / 1000) #";
-                        }
-                        else{
-                            valueAxisTemplate = "#= kendo.format('{0:N1}', Math.abs(value) / 1000) #";
-                        }
-                        largeValue = true;
-                    }
-
-
-                //Kendo-ize
-                    var chart = chartObj.kendoChart({
-                        legend: {
-                            visible: self.legendACSVisible,
-                            position: "bottom",
-                            labels: {
-                                color: "white"
+                        $.each(self.pyramidData, function(key, item) {
+                            if (item.tableHeader.indexOf("Females") > -1) {
+                                var negativeValue = item.fieldValue * -1;
+                                femaleSeries.push(negativeValue);
+                            } else {
+                                maleSeries.push(item.fieldValue);
                             }
-                        },
-                        series: [
-                        {
-                            name: "Male",
-                            type: "bar",
-                            data: maleSeries,
-                            color: "#00BFFF",
-                        },
-                        {
-                            name: "Female",
-                            type: "bar",
-                            data: femaleSeries,
-                            color: "#FF69B4",
-                        },
-                        // {
-                        //     name: "State Male",
-                        //     type: "line",
-                        //     data: stateLineMale,
-                        //     color: "#000",
-                        //     stack: false,
-                        //     tooltip: {
-                        //         color: "white",
-                        //         visible: true,
-                        //         format: "{0:N0}",
-                        //         template: "#=series.name # #= kendo.format(\'{0:P1}\', (value / " + self.totalMale + "))#"
-                        //     }
-                        // },
-                        // {
-                        //     name: "State Female",
-                        //     type: "line",
-                        //     data: stateLineFemale,
-                        //     color: "#000",
-                        //     stack: false,
-                        //     tooltip: {
-                        //         color: "white",
-                        //         visible: true,
-                        //         format: "{0:N0}",
-                        //         template: "#=series.name # #= kendo.format(\'{0:P1}\', (Math.abs(value) / " + self.totalFemale + "))#"
-                        //     }
-                        // }
-                        ],
-                        seriesDefaults: {
-                            stack: true,
-                            tooltip: {
-                                color: "black",
-                                visible: true,
-                                format: "{0:N0}",
-                                template: "#=series.name # #= category #: #= kendo.format(\'{0:N0}\', Math.abs(value))#"
+                        });
+
+                        var chartObj = $("#demACSChartArea");
+                        var largestValue = Math.max.apply(Math, maleSeries);
+                        var valueAxisTemplate = "#= kendo.format(\'{0:N0}\', Math.abs(value))#"
+                        var largeValue = false;
+                        if (largestValue > 1000) {
+                            if (largestValue > 5000) {
+                                valueAxisTemplate = "#= kendo.format('{0:N0}', Math.abs(value) / 1000) #";
+                            } else {
+                                valueAxisTemplate = "#= kendo.format('{0:N1}', Math.abs(value) / 1000) #";
+                            }
+                            largeValue = true;
+                        }
+
+
+                        //Kendo-ize
+                        var chart = chartObj.kendoChart({
+                            legend: {
+                                visible: self.legendACSVisible,
+                                position: "bottom",
+                                labels: {
+                                    color: "white"
+                                }
+                            },
+                            series: [{
+                                    name: "Male",
+                                    type: "bar",
+                                    data: maleSeries,
+                                    color: "#00BFFF",
+                                }, {
+                                    name: "Female",
+                                    type: "bar",
+                                    data: femaleSeries,
+                                    color: "#FF69B4",
+                                },
+                                // {
+                                //     name: "State Male",
+                                //     type: "line",
+                                //     data: stateLineMale,
+                                //     color: "#000",
+                                //     stack: false,
+                                //     tooltip: {
+                                //         color: "white",
+                                //         visible: true,
+                                //         format: "{0:N0}",
+                                //         template: "#=series.name # #= kendo.format(\'{0:P1}\', (value / " + self.totalMale + "))#"
+                                //     }
+                                // },
+                                // {
+                                //     name: "State Female",
+                                //     type: "line",
+                                //     data: stateLineFemale,
+                                //     color: "#000",
+                                //     stack: false,
+                                //     tooltip: {
+                                //         color: "white",
+                                //         visible: true,
+                                //         format: "{0:N0}",
+                                //         template: "#=series.name # #= kendo.format(\'{0:P1}\', (Math.abs(value) / " + self.totalFemale + "))#"
+                                //     }
+                                // }
+                            ],
+                            seriesDefaults: {
+                                stack: true,
+                                tooltip: {
+                                    color: "black",
+                                    visible: true,
+                                    format: "{0:N0}",
+                                    template: "#=series.name # #= category #: #= kendo.format(\'{0:N0}\', Math.abs(value))#"
                                 }
                             },
                             plotArea: {
@@ -2373,25 +2334,24 @@
                                     right: 15
                                 }
                             },
-                             categoryAxis: [{
+                            categoryAxis: [{
                                 categories: ["85 and up", "80 to 84", "75 to 79", "70 to 74", "67 to 69", "65 to 66", "62 to 64", "60 to 61", "55 to 59", "50 to 54", "45 to 49", "40 to 44", "35 to 39", "30 to 34", "25 to 29", "22 to 24", "18 to 21", "15 to 17", "10 to 14", "5 to 9", "Less than 5"],
                                 border: "black",
                                 majorGridLines: {
                                     visible: false
                                 },
-                                labels:  {
-                                 margin: {
-                                     right: 195
-                                   },
-                                color: "#FFFFFF"
+                                labels: {
+                                    margin: {
+                                        right: 195
+                                    },
+                                    color: "#FFFFFF"
                                 }
-                            }
-                            ],
+                            }],
                             valueAxis: {
                                 color: "white",
                                 labels: {
                                     template: valueAxisTemplate
-                                }, 
+                                },
                                 title: {
                                     text: "*Values shown in thousands",
                                     font: "10px Arial,Helvetica,sans-serif",
@@ -2401,8 +2361,8 @@
                                     visible: false
                                 }
                             }
-                    }).data("kendoChart");
-                };
+                        }).data("kendoChart");
+                    };
                 };
 
                 /**
@@ -2417,20 +2377,17 @@
                     var demoOptionsRowName = "demACSSummaryOptionsRow";
                     var dataSource = self.aggACSValuesArray;
 
-                    if(type === "census")
-                    {
+                    if (type === "census") {
                         dataGridName = "demCensusDataGrid";
                         demoOptionsRowName = "demCensusSummaryOptionsRow";
                         dataSource = self.aggCensusValuesArray;
                     }
 
-                    $.each(dataSource,function(i,value){
-                        if(value["fieldType"] === "Currency")
-                        {
+                    $.each(dataSource, function(i, value) {
+                        if (value["fieldType"] === "Currency") {
                             value["compareValueFormatted"] = "$ " + magNumberFormatter.formatValue(value["compareValue"]);
-                        }
-                        else if(value["fieldType"] === "Rate"){
-                            value["percentValueFormatted"] =  magNumberFormatter.formatValue(value["fieldValue"]) + "%";
+                        } else if (value["fieldType"] === "Rate") {
+                            value["percentValueFormatted"] = magNumberFormatter.formatValue(value["fieldValue"]) + "%";
                             value["fieldValueFormatted"] = "-"
                         }
 
@@ -2489,24 +2446,21 @@
                             //{field: "compareDensityValueFormatted",title: "Per Sq Mile", format: "{0:n1}"}
                         ],
                         dataBound: function(e) {
-                            if(this.wrapper[0].id !== "demCensusDataGrid")
-                            {
+                            if (this.wrapper[0].id !== "demCensusDataGrid") {
                                 // get the index of the UnitsInStock cell
                                 var rowCollection = e.sender.tbody[0].children;
                                 var data = e.sender._data;
                                 var realRows = [];
 
-                                $.each(rowCollection, function(i, row){
-                                    if(row.className !== "k-grouping-row")
-                                    {
+                                $.each(rowCollection, function(i, row) {
+                                    if (row.className !== "k-grouping-row") {
                                         realRows.push(row);
                                     }
                                 });
-                                 $.each(realRows, function(i, row){
-                                    if(data[i]){
-                                        if(data[i]["fieldCategory"] === "Occupation"){
-                                            if(data[i].parentField === "" || data[i].fieldName === "ProtectiveServ")
-                                            {
+                                $.each(realRows, function(i, row) {
+                                    if (data[i]) {
+                                        if (data[i]["fieldCategory"] === "Occupation") {
+                                            if (data[i].parentField === "" || data[i].fieldName === "ProtectiveServ") {
                                                 var jRow = $(row);
                                                 jRow.addClass('k-header');
                                                 jRow.removeClass('k-alt');
@@ -2539,46 +2493,37 @@
                     var colSpan;
                     var rowSpan;
 
-                    if (exportButtonId === "demACSExportResults")
-                    {
+                    if (exportButtonId === "demACSExportResults") {
                         //Summary report export button clicked
                         grid = $("#demACSDataGrid").data("kendoGrid");
                         headerValue = self.communityName + " Demographics";
                         fileName = self.communityName + ".xlsx";
-                        if(self.compareFeature === null){
+                        if (self.compareFeature === null) {
                             colSpan = 4;
-                            rowSpan = 25; 
-                        }
-                        else{
+                            rowSpan = 25;
+                        } else {
                             colSpan = 6;
                             rowSpan = 20;
                         }
-                    }
-                    else if (exportButtonId === "demCensusExportResults")
-                    {
+                    } else if (exportButtonId === "demCensusExportResults") {
                         grid = $("#demCensusDataGrid").data("kendoGrid");
                         headerValue = self.communityName + " Demographics";
                         fileName = self.communityName + ".xlsx";
-                        if(self.compareFeature === null){
+                        if (self.compareFeature === null) {
                             colSpan = 4;
-                            rowSpan = 25; 
-                        }
-                        else{
+                            rowSpan = 25;
+                        } else {
                             colSpan = 6;
                             rowSpan = 20;
                         }
-                    }
-                    else if (exportButtonId === "demCensusExportSelFeatResults")
-                    {
+                    } else if (exportButtonId === "demCensusExportSelFeatResults") {
                         //Block group export clicked
                         grid = $("#demCensusFeatGrid").data("kendoGrid");
                         headerValue = "Selected Block Groups";
                         fileName = self.communityName + ".xlsx";
                         colSpan = 51;
                         rowSpan = 4;
-                    }
-                    else if (exportButtonId === "demACSExportSelFeatResults")
-                    {
+                    } else if (exportButtonId === "demACSExportSelFeatResults") {
                         //Block group export clicked
                         grid = $("#demACSFeatGrid").data("kendoGrid");
                         headerValue = "Selected Block Groups";
@@ -2587,89 +2532,86 @@
                         rowSpan = 4;
                     }
                     grid.bind("excelExport", function(e) {
-                            var rows = e.workbook.sheets[0].rows;
-                            var columns = e.workbook.sheets[0].columns;
-                            columns[1].width = 290;
+                        var rows = e.workbook.sheets[0].rows;
+                        var columns = e.workbook.sheets[0].columns;
+                        columns[1].width = 290;
 
-                            $.each(rows, function(index, row) {
-                                if(row.type === "group-header")
-                                {
-                                    row.cells[0].value = row.cells[0].value.substring(37);
+                        $.each(rows, function(index, row) {
+                            if (row.type === "group-header") {
+                                row.cells[0].value = row.cells[0].value.substring(37);
+                            } else {
+
+                                if (row.cells[1].value.indexOf("Male Population") > -1 || row.cells[1].value.indexOf("Female Population") > -1) {
+                                    row.cells[1].value = row.cells[1].value.replace("Male Population", "Male Population:");
+                                    row.cells[1].value = row.cells[1].value.replace("Female Population", "Female Population:");
+                                    $.each(row.cells, function(i, value) {
+                                        if (i > 0) {
+                                            value.background = "#333";
+                                            value.color = "#fff";
+                                        }
+                                    });
                                 }
-                                else
-                                {
 
-                                    if(row.cells[1].value.indexOf("Male Population") > -1 || row.cells[1].value.indexOf("Female Population") > -1){
-                                        row.cells[1].value = row.cells[1].value.replace("Male Population", "Male Population:");
-                                        row.cells[1].value = row.cells[1].value.replace("Female Population", "Female Population:");
-                                        $.each(row.cells, function(i, value){
-                                            if(i>0){
-                                                value.background = "#333";
-                                                value.color = "#fff";
-                                            }
-                                        });
-                                    }
-                                    
-                                    row.cells[1].value = row.cells[1].value.replace("Males age", "Age");
-                                    row.cells[1].value = row.cells[1].value.replace("Males less", "Less");
-                                    row.cells[1].value = row.cells[1].value.replace("Females age", "Age");
-                                    row.cells[1].value = row.cells[1].value.replace("Females less", "Less");
-                                }
-                            });
-
-                            e.workbook.sheets[0]["name"] = "Demographic Data";
-                            e.workbook.sheets[0]["frozenRows"] = 2;
-
-                            var headerRow = {
-                                cells: [{
-                                    background: "#000",
-                                    colSpan: colSpan,
-                                    color: "#fff",
-                                    rowSpan: 1,
-                                    fontSize: 14,
-                                    value: headerValue,
-                                    hAlign: "center"
-                                }],
-                                height: 30,
-                                headerRow: "added"
-                            };
-
-                            var sourceRow = {
-                                cells: [{
-                                    background: "#000",
-                                    colSpan: colSpan,
-                                    color: "#fff",
-                                    rowSpan: 1,
-                                    fontSize: 11,
-                                    value: appConfig.sourceLabel,
-                                    hAlign: "left",
-                                    wrap: true
-                                }]
-                            };
-
-                            var footerRow = {
-                                cells: [{
-                                    background: "#d3d3d3",
-                                    colSpan: colSpan,
-                                    color: "#000",
-                                    rowSpan: rowSpan,
-                                    fontSize: 8,
-                                    value: appConfig.legalDisclaimer,
-                                    hAlign: "center",
-                                    wrap: true
-                                }]
-                            };
-
-                            if (rows[0].headerRow !== "added") {
-                                //Add custom header row
-                                rows.unshift(headerRow);
-                                rows.push(sourceRow);
-                                rows.push(footerRow);
+                                row.cells[1].value = row.cells[1].value.replace("Males age", "Age");
+                                row.cells[1].value = row.cells[1].value.replace("Males less", "Less");
+                                row.cells[1].value = row.cells[1].value.replace("Females age", "Age");
+                                row.cells[1].value = row.cells[1].value.replace("Females less", "Less");
                             }
-
-                            e.workbook.fileName = fileName;
                         });
-                        grid.saveAsExcel();
+
+                        e.workbook.sheets[0]["name"] = "Demographic Data";
+                        e.workbook.sheets[0]["frozenRows"] = 2;
+
+                        var headerRow = {
+                            cells: [{
+                                background: "#000",
+                                colSpan: colSpan,
+                                color: "#fff",
+                                rowSpan: 1,
+                                fontSize: 14,
+                                value: headerValue,
+                                hAlign: "center"
+                            }],
+                            height: 30,
+                            headerRow: "added"
+                        };
+
+                        var sourceRow = {
+                            cells: [{
+                                background: "#000",
+                                colSpan: colSpan,
+                                color: "#fff",
+                                rowSpan: 1,
+                                fontSize: 11,
+                                value: appConfig.sourceLabel,
+                                hAlign: "left",
+                                wrap: true
+                            }]
+                        };
+
+                        var footerRow = {
+                            cells: [{
+                                background: "#d3d3d3",
+                                colSpan: colSpan,
+                                color: "#000",
+                                rowSpan: rowSpan,
+                                fontSize: 8,
+                                value: appConfig.legalDisclaimer,
+                                hAlign: "center",
+                                wrap: true
+                            }]
+                        };
+
+                        if (rows[0].headerRow !== "added") {
+                            //Add custom header row
+                            rows.unshift(headerRow);
+                            rows.push(sourceRow);
+                            rows.push(footerRow);
+                        }
+
+                        e.workbook.fileName = fileName;
+                    });
+                    grid.saveAsExcel();
                 };
 
                 self.exportPDFReport = function() {
@@ -2717,15 +2659,13 @@
                             localStorage.OBJECTID = ObjectIdArray;
                             self.reportURL = encodeURI(demographicConfig.exportPDFReportUrl + "?stateInteractive");
                             var newWindow = window.open(self.reportURL, "_new");
-                        } else if(self.communityName === "Arizona State") {
+                        } else if (self.communityName === "Arizona State") {
                             self.reportURL = encodeURI(demographicConfig.exportPDFReportUrl + "?state=" + self.communityName);
                             var newWindow = window.open(self.reportURL, "_new");
-                        }
-                        else if(self.communityName.length === 5 && !isNaN(parseInt(self.communityName))) {
+                        } else if (self.communityName.length === 5 && !isNaN(parseInt(self.communityName))) {
                             self.reportURL = encodeURI(demographicConfig.exportPDFReportUrl + "?zipCode=" + self.communityName);
                             var newWindow = window.open(self.reportURL, "_new");
-                        }
-                        else{
+                        } else {
                             self.reportURL = encodeURI(demographicConfig.exportPDFReportUrl + "?city=" + self.communityName);
                             var newWindow = window.open(self.reportURL, "_new");
                         }
@@ -2761,18 +2701,18 @@
                     iframe.src = url;
                 };
 
-                 /**
+                /**
                  * Simply resets comparison combo boxes
                  *
                  * @method resetComparisonDropdowns
                  */
-                self.resetComparisonDropdowns = function(){
+                self.resetComparisonDropdowns = function() {
                     var resetObject = [{
                         combobox: "#demCensusCompareComboBox",
                         grid: "#demCensusDataGrid",
                         checkbox: "#demCensusUseComp",
                         type: "census"
-                    },{
+                    }, {
                         comboBox: "#demACSCompareComboBox",
                         grid: "#demACSDataGrid",
                         checkBox: "#demACSUseComp",
@@ -2781,29 +2721,27 @@
 
 
                     var test = $("#demCensusCompareComboBox").data("kendoComboBox");
-                        if(test !== null){
+                    if (test !== null) {
                         test.destroy();
                         test.wrapper.remove();
                     }
 
 
-                    $.each(resetObject, function(i, value){
+                    $.each(resetObject, function(i, value) {
                         $(value.checkbox).prop("checked", false);
                         var compareComboBoxInput = $(value.comboBox);
                         var compareComboBoxObj = compareComboBoxInput.data("kendoComboBox");
                         if (compareComboBoxObj !== null) {
                             compareComboBoxObj.destroy();
                             compareComboBoxObj.wrapper.remove();
-                        }
-                        else {
-                        }
+                        } else {}
                         var kendoGrid = $(value.grid).data("kendoGrid");
                         if (kendoGrid !== undefined && kendoGrid !== null) {
                             kendoGrid.element.remove();
                             kendoGrid.destroy();
                         }
                         self.createKendoGrid(value.type);
-                    });    
+                    });
                 }
             }; //end DemographicVM
             return DemographicVM;
