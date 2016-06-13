@@ -8,12 +8,8 @@
             var demographicConfig = new function() {
                 var self = this;
 
-                // self.exportPDFCompareReportUrl = "http://geo.azmag.gov/services/Demographics/CompareReport.html";
-                // self.exportPDFReportUrl = "http://geo.azmag.gov/services/Demographics/reports.html";
-
-                self.exportPDFCompareReportUrl = "http://geo.azmag.gov/services/test/Demographic2014/CompareReport.html";
-                self.exportPDFReportUrl = "http://geo.azmag.gov/services/test/Demographic2014/Reports.html";
-
+                self.exportPDFCompareReportUrl = "http://geo.azmag.gov/services/Demographics2014/CompareReport.html";
+                self.exportPDFReportUrl = "http://geo.azmag.gov/services/Demographics2014/reports.html";
 
                 self.viewReportUrl = "http://localhost/MAG/MAGDemographicsReports/DemographicChartsReport.html";
                 self.ACS2014byBlockGroup = appConfig.layerInfo[6].url;
