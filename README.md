@@ -23,8 +23,10 @@ This web app viewer was developed by MAG staff for MAG member agencies and the p
 
 ## Version
 
-#### `version 2.2.8` ####
+#### version 2.2.8 ####
+
  `Updated: 06/13/2016`
+ 
  `Created: 10/21/2014`
 
 Releases will be numbered with the following format:
