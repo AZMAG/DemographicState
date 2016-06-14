@@ -13,8 +13,8 @@
     <meta name="contact" content="www.azmag.gov">
     <meta name="url" content="http://geo.azmag.gov/maps/azdemographics/">
     <meta name="creation-date" content="10/21/2014">
-    <meta name="revision-date" content="06/13/2016">
-    <meta name="version" content="2.2.8">
+    <meta name="revision-date" content="06/14/2016">
+    <meta name="version" content="2.2.9">
     <!-- Apple-Specific Meta Tags -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -24,9 +24,9 @@
     <meta property="og:site_name" content="Arizona Demographics">
     <meta property="og:image" content="http://geo.azmag.gov/maps/azdemographics/app/resources/img/shareImg.png">
     <meta property="og:url" content="http://geo.azmag.gov/maps/azdemographics/">
-    <meta property="og:type" contant="website">
+    <meta property="og:type" content="website">
     <meta property="og:description" content="A map viewer showing demographic data for State of Arizona.  #MAGmaps">
-    <meta property="fb:app_id" content="1509296789333308">
+    <meta property="fb:app_id" content="237366436641850">
     <meta property="place:location:latitude" content="33.451741">
     <meta property="place:location:longitude" content="-112.075375">
     <meta property="place:location:region" content="AZ">
@@ -137,7 +137,9 @@
     <script src="config.js"></script>
     <script src="app/run.js"></script>
     <!-- Call the init method on run.js, which, in turn, will load main.js. -->
-    <script>require(["esri/map", "dojo/domReady!"], init)</script>
+    <script>
+    require(["esri/map", "dojo/domReady!"], init)
+    </script>
 </body>
 
 </html>
