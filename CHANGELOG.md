@@ -21,6 +21,8 @@ And constructed with the following guidelines:
 ## Version 2.2.8 | 06/13/2016
 
 * Fixed PDF reports - new service URL location
+* Fixed issue with excel report button not repeatable
+* Remove state query from age pyramid chart
 
 ## Version 2.2.7 | 05/27/2016
 

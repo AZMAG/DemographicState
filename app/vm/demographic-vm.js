@@ -402,6 +402,7 @@
                     self.hasSelectedFeatures = false;
                     self.commChanged = (self.communityName !== undefined && self.communityName !== "" && self.communityName !== communityName);
                     self.communityName = communityName;
+                    self.compareFeature = null;
 
                     self.updateSelectionGraphic();
 
@@ -533,7 +534,8 @@
 
                     // Perform actions similar to the openWindow method
                     var communityName = "Selected Block Groups";
-                    self.commChanged = (self.communityName !== undefined && self.communityName !== "" && self.communityName !== communityName);
+                    self.commChanged = true;
+                    //(self.communityName !== undefined && self.communityName !== "" && self.communityName !== communityName);
                     self.communityName = communityName;
                     self.reportConfigItem = demographicConfig.reports.censusTracts;
 
@@ -2214,155 +2216,156 @@
                     });
                     self.pyramidData.reverse();
 
-                    var url = demographicConfig.reports.stateSummary.ACSRestUrl;
-                    var whereClause = "NAME = 'Arizona State'";
-                    layerDelegate.query(url, self.populationPyramidComparison, self.dataQueryFault, null, whereClause, false, demographicConfig.agePyramidFields);
+                    // var url = demographicConfig.reports.stateSummary.ACSRestUrl;
+                    // var whereClause = "NAME = 'Arizona State'";
+                    // layerDelegate.query(url, self.populationPyramidComparison, self.dataQueryFault, null, whereClause, false, demographicConfig.agePyramidFields);
 
-                    self.populationPyramidComparison = function(results) {
-                        var feature = results.features[0];
-                        $.each(self.pyramidData, function(key, item) {
-                            var baseLineValue = feature.attributes[item.fieldName];
-                            if (item.tableHeader === "Females age 21") {
-                                var value = feature.attributes["F_Y18TO19"] + feature.attributes["F_Y21"] + feature.attributes["F_Y20"];
-                                var percentage = value / feature.attributes["TOTAL_FEMALE"];
-                                stateLineFemale.push((percentage * self.totalFemale) * -1);
-                            } else if (item.tableHeader.indexOf("Females") > -1) {
-                                var percentage = baseLineValue / feature.attributes["TOTAL_FEMALE"];
-                                stateLineFemale.push((percentage * self.totalFemale) * -1);
-                            } else if (item.tableHeader === "Males age 21") {
-                                var value = feature.attributes["M_Y18TO19"] + feature.attributes["M_Y21"] + feature.attributes["M_Y20"];
-                                var percentage = value / feature.attributes["TOTAL_MALE"];
-                                stateLineMale.push((percentage * self.totalMale));
-                            } else {
-                                var percentage = baseLineValue / feature.attributes["TOTAL_MALE"];
-                                stateLineMale.push((percentage * self.totalMale));
-                            }
-                        });
+                    // self.populationPyramidComparison = function(results) {
+                    //     var feature = results.features[0];
+                    //     $.each(self.pyramidData, function(key, item) {
+                    //         var baseLineValue = feature.attributes[item.fieldName];
+                    //         if (item.tableHeader === "Females age 21") {
+                    //             var value = feature.attributes["F_Y18TO19"] + feature.attributes["F_Y21"] + feature.attributes["F_Y20"];
+                    //             var percentage = value / feature.attributes["TOTAL_FEMALE"];
+                    //             stateLineFemale.push((percentage * self.totalFemale) * -1);
+                    //         } else if (item.tableHeader.indexOf("Females") > -1) {
+                    //             var percentage = baseLineValue / feature.attributes["TOTAL_FEMALE"];
+                    //             stateLineFemale.push((percentage * self.totalFemale) * -1);
+                    //         } else if (item.tableHeader === "Males age 21") {
+                    //             var value = feature.attributes["M_Y18TO19"] + feature.attributes["M_Y21"] + feature.attributes["M_Y20"];
+                    //             var percentage = value / feature.attributes["TOTAL_MALE"];
+                    //             stateLineMale.push((percentage * self.totalMale));
+                    //         } else {
+                    //             var percentage = baseLineValue / feature.attributes["TOTAL_MALE"];
+                    //             stateLineMale.push((percentage * self.totalMale));
+                    //         }
+                    //     });
 
-                        var maleSeries = [];
-                        var femaleSeries = [];
+                    var maleSeries = [];
+                    var femaleSeries = [];
 
-                        $.each(self.pyramidData, function(key, item) {
-                            if (item.tableHeader.indexOf("Females") > -1) {
-                                var negativeValue = item.fieldValue * -1;
-                                femaleSeries.push(negativeValue);
-                            } else {
-                                maleSeries.push(item.fieldValue);
-                            }
-                        });
-
-                        var chartObj = $("#demACSChartArea");
-                        var largestValue = Math.max.apply(Math, maleSeries);
-                        var valueAxisTemplate = "#= kendo.format(\'{0:N0}\', Math.abs(value))#"
-                        var largeValue = false;
-                        if (largestValue > 1000) {
-                            if (largestValue > 5000) {
-                                valueAxisTemplate = "#= kendo.format('{0:N0}', Math.abs(value) / 1000) #";
-                            } else {
-                                valueAxisTemplate = "#= kendo.format('{0:N1}', Math.abs(value) / 1000) #";
-                            }
-                            largeValue = true;
+                    $.each(self.pyramidData, function(key, item) {
+                        if (item.tableHeader.indexOf("Females") > -1) {
+                            var negativeValue = item.fieldValue * -1;
+                            femaleSeries.push(negativeValue);
+                        } else {
+                            maleSeries.push(item.fieldValue);
                         }
+                    });
+
+                    var chartObj = $("#demACSChartArea");
+                    var largestValue = Math.max.apply(Math, maleSeries);
+                    var valueAxisTemplate = "#= kendo.format(\'{0:N0}\', Math.abs(value))#"
+                    var largeValue = false;
+                    if (largestValue > 1000) {
+                        if (largestValue > 5000) {
+                            valueAxisTemplate = "#= kendo.format('{0:N0}', Math.abs(value) / 1000) #";
+                        } else {
+                            valueAxisTemplate = "#= kendo.format('{0:N1}', Math.abs(value) / 1000) #";
+                        }
+                        largeValue = true;
+                    }
 
 
-                        //Kendo-ize
-                        var chart = chartObj.kendoChart({
-                            legend: {
-                                visible: self.legendACSVisible,
-                                position: "bottom",
-                                labels: {
-                                    color: "white"
-                                }
-                            },
-                            series: [{
-                                    name: "Male",
-                                    type: "bar",
-                                    data: maleSeries,
-                                    color: "#00BFFF",
-                                }, {
-                                    name: "Female",
-                                    type: "bar",
-                                    data: femaleSeries,
-                                    color: "#FF69B4",
-                                },
-                                // {
-                                //     name: "State Male",
-                                //     type: "line",
-                                //     data: stateLineMale,
-                                //     color: "#000",
-                                //     stack: false,
-                                //     tooltip: {
-                                //         color: "white",
-                                //         visible: true,
-                                //         format: "{0:N0}",
-                                //         template: "#=series.name # #= kendo.format(\'{0:P1}\', (value / " + self.totalMale + "))#"
-                                //     }
-                                // },
-                                // {
-                                //     name: "State Female",
-                                //     type: "line",
-                                //     data: stateLineFemale,
-                                //     color: "#000",
-                                //     stack: false,
-                                //     tooltip: {
-                                //         color: "white",
-                                //         visible: true,
-                                //         format: "{0:N0}",
-                                //         template: "#=series.name # #= kendo.format(\'{0:P1}\', (Math.abs(value) / " + self.totalFemale + "))#"
-                                //     }
-                                // }
-                            ],
-                            seriesDefaults: {
-                                stack: true,
-                                tooltip: {
-                                    color: "black",
-                                    visible: true,
-                                    format: "{0:N0}",
-                                    template: "#=series.name # #= category #: #= kendo.format(\'{0:N0}\', Math.abs(value))#"
-                                }
-                            },
-                            plotArea: {
-                                margin: {
-                                    right: 30
-                                }
-                            },
-                            chartArea: {
-                                background: "#4D4D4D",
-                                margin: {
-                                    left: 15,
-                                    top: 5,
-                                    right: 15
-                                }
-                            },
-                            categoryAxis: [{
-                                categories: ["85 and up", "80 to 84", "75 to 79", "70 to 74", "67 to 69", "65 to 66", "62 to 64", "60 to 61", "55 to 59", "50 to 54", "45 to 49", "40 to 44", "35 to 39", "30 to 34", "25 to 29", "22 to 24", "18 to 21", "15 to 17", "10 to 14", "5 to 9", "Less than 5"],
-                                border: "black",
-                                majorGridLines: {
-                                    visible: false
-                                },
-                                labels: {
-                                    margin: {
-                                        right: 195
-                                    },
-                                    color: "#FFFFFF"
-                                }
-                            }],
-                            valueAxis: {
-                                color: "white",
-                                labels: {
-                                    template: valueAxisTemplate
-                                },
-                                title: {
-                                    text: "*Values shown in thousands",
-                                    font: "10px Arial,Helvetica,sans-serif",
-                                    visible: largeValue
-                                },
-                                majorGridLines: {
-                                    visible: false
-                                }
+                    //Kendo-ize
+                    var chart = chartObj.kendoChart({
+                        legend: {
+                            visible: self.legendACSVisible,
+                            position: "bottom",
+                            labels: {
+                                color: "white"
                             }
-                        }).data("kendoChart");
-                    };
+                        },
+                        series: [{
+                                name: "Male",
+                                type: "bar",
+                                data: maleSeries,
+                                color: "#00BFFF",
+                            }, {
+                                name: "Female",
+                                type: "bar",
+                                data: femaleSeries,
+                                color: "#FF69B4",
+                            },
+                            // {
+                            //     name: "State Male",
+                            //     type: "line",
+                            //     data: stateLineMale,
+                            //     color: "#000",
+                            //     stack: false,
+                            //     tooltip: {
+                            //         color: "white",
+                            //         visible: true,
+                            //         format: "{0:N0}",
+                            //         template: "#=series.name # #= kendo.format(\'{0:P1}\', (value / " + self.totalMale + "))#"
+                            //     }
+                            // },
+                            // {
+                            //     name: "State Female",
+                            //     type: "line",
+                            //     data: stateLineFemale,
+                            //     color: "#000",
+                            //     stack: false,
+                            //     tooltip: {
+                            //         color: "white",
+                            //         visible: true,
+                            //         format: "{0:N0}",
+                            //         template: "#=series.name # #= kendo.format(\'{0:P1}\', (Math.abs(value) / " + self.totalFemale + "))#"
+                            //     }
+                            // }
+                        ],
+                        seriesDefaults: {
+                            stack: true,
+                            tooltip: {
+                                color: "black",
+                                visible: true,
+                                format: "{0:N0}",
+                                template: "#=series.name # #= category #: #= kendo.format(\'{0:N0}\', Math.abs(value))#"
+                            }
+                        },
+                        plotArea: {
+                            margin: {
+                                right: 30
+                            }
+                        },
+                        chartArea: {
+                            background: "#4D4D4D",
+                            margin: {
+                                left: 15,
+                                top: 5,
+                                right: 15
+                            }
+                        },
+                        categoryAxis: [{
+                            categories: ["85 and up", "80 to 84", "75 to 79", "70 to 74", "67 to 69", "65 to 66", "62 to 64", "60 to 61", "55 to 59", "50 to 54", "45 to 49", "40 to 44", "35 to 39", "30 to 34", "25 to 29", "22 to 24", "18 to 21", "15 to 17", "10 to 14", "5 to 9", "Less than 5"],
+                            border: "black",
+                            majorGridLines: {
+                                visible: false
+                            },
+                            labels: {
+                                margin: {
+                                    right: 195
+                                },
+                                color: "#FFFFFF"
+                            }
+                        }],
+                        valueAxis: {
+                            color: "white",
+                            labels: {
+                                template: valueAxisTemplate
+                            },
+                            title: {
+                                text: "*Values shown in thousands",
+                                font: "10px Arial,Helvetica,sans-serif",
+                                visible: largeValue
+                            },
+                            majorGridLines: {
+                                visible: false
+                            }
+                        }
+                    }).data("kendoChart");
+                    // };
+
                 };
 
                 /**
@@ -2531,6 +2534,11 @@
                         colSpan = 22;
                         rowSpan = 4;
                     }
+
+                    if (self.compareFeature !== null) {
+                        headerValue = self.communityName + " - " + self.compareToName + " Comparative Demographic Report";
+                    }
+
                     grid.bind("excelExport", function(e) {
                         var rows = e.workbook.sheets[0].rows;
                         var columns = e.workbook.sheets[0].columns;
@@ -2601,10 +2609,41 @@
                                 wrap: true
                             }]
                         };
+                        var compareRow = null;
+                        if (self.compareFeature !== null) {
+                            compareRow = {
+                                cells: [{
+                                    background: "#fff"
+                                }, {
+                                    background: "#fff"
+                                }, {
+                                    background: "#fff",
+                                    color: "#000",
+                                    fontSize: 12,
+                                    colSpan: 2,
+                                    value: self.communityName,
+                                    hAlign: "center",
+                                    wrap: true
+                                }, {
+                                    background: "#fff",
+                                    color: "#000",
+                                    fontSize: 12,
+                                    value: self.compareToName,
+                                    colSpan: 2,
+                                    hAlign: "center",
+                                    wrap: true
+                                }]
+                            }
+                        }
 
                         if (rows[0].headerRow !== "added") {
                             //Add custom header row
+                            if (compareRow !== null) {
+                                rows.unshift(compareRow);
+                            }
                             rows.unshift(headerRow);
+                            //console.log(compareRow);
+
                             rows.push(sourceRow);
                             rows.push(footerRow);
                         }
@@ -2612,6 +2651,7 @@
                         e.workbook.fileName = fileName;
                     });
                     grid.saveAsExcel();
+                    grid.unbind("excelExport");
                 };
 
                 self.exportPDFReport = function() {
@@ -2716,8 +2756,7 @@
                         grid: "#demACSDataGrid",
                         checkBox: "#demACSUseComp",
                         type: "acs"
-                    }]
-
+                    }];
 
                     var test = $("#demCensusCompareComboBox").data("kendoComboBox");
                     if (test !== null) {
