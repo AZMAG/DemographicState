@@ -1502,7 +1502,7 @@
                                 var percentOf = Number(self.compareFeature.attributes[item.derivedPercentOfField]);
                                 var value = item.compareValue;
                                 item.comparePercentValue = (value / percentOf) * 100;
-                                if (item.comparePercentValue !== null && !Number.isNaN(item.comparePercentValue) && item.comparePercentValue !== Infinity) {
+                                if (item.comparePercentValue !== null && !isNaN(item.comparePercentValue) && item.comparePercentValue !== Infinity) {
                                     item.comparePercentValueFormatted = magNumberFormatter.formatValue(item.comparePercentValue) + "%";
                                 } else {
                                     item.comparePercentValueFormatted = "-";
