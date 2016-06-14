@@ -351,6 +351,13 @@
                         }
                     });
 
+                    /**
+                     * Used to set the popup property for the summary report
+                     */
+                    tp.subscribe("summaryLinkClick", function() {
+                        self.openSummaryLink();
+                    });
+
                 }; // end Init
                 //****************************************************************
                 /**
@@ -391,6 +398,30 @@
                 };
 
                 /**
+                 * Opens the popup link "View Summary" for each layer specified
+                 * @return {[type]} [description]
+                 */
+                self.openSummaryLink = function() {
+                    var county = dom.byId("countyLink");
+                    var congress = dom.byId("congressionalLink");
+                    var legislative = dom.byId("legislativeLink");
+                    var zipCode = dom.byId("zipCodeLink");
+
+                    if (county) {
+                        self.openWindow(county.innerHTML, "county");
+                    }
+                    if (congress) {
+                        self.openWindow(congress.innerHTML, "congressional");
+                    }
+                    if (legislative) {
+                        self.openWindow(legislative.innerHTML, "legislative");
+                    }
+                    if (zipCode) {
+                        self.openWindow(zipCode.innerHTML, "zipCode");
+                    }
+                };
+
+                /**
                  * Open the window and initialize the contents.
                  *
                  * @method openWindow
@@ -402,6 +433,7 @@
                     self.hasSelectedFeatures = false;
                     self.commChanged = (self.communityName !== undefined && self.communityName !== "" && self.communityName !== communityName);
                     self.communityName = communityName;
+                    self.compareToName = "";
                     self.compareFeature = null;
 
                     self.updateSelectionGraphic();
@@ -869,7 +901,7 @@
                             }
                         }
                     });
-                    // 
+                    //
                     // Filter and group for chart categories
                     self.chartCategories = [];
                     self.aggCensusValuesArray = [];
@@ -1052,7 +1084,7 @@
                             }
                         }
                     });
-                    // 
+                    //
                     // Filter and group for chart categories
                     self.chartCategories = [];
                     self.aggACSValuesArray = [];
@@ -2029,7 +2061,9 @@
                             options: {
                                 format: [{ // Line #0
                                     textField: "label",
-                                    classed: { label: true },
+                                    classed: {
+                                        label: true
+                                    },
                                     style: {
                                         "font-family": "Source Sans Pro, sans-serif",
                                         "text-anchor": "middle",
@@ -2049,7 +2083,9 @@
                                     }
                                 }, { // Line #0
                                     textField: "percent",
-                                    classed: { label: true },
+                                    classed: {
+                                        label: true
+                                    },
                                     style: {
                                         "font-family": "Source Sans Pro, sans-serif",
                                         "text-anchor": "middle",
@@ -2068,7 +2104,9 @@
                                     }
                                 }, { // Line #1
                                     textField: "text",
-                                    classed: { text: true },
+                                    classed: {
+                                        text: true
+                                    },
                                     style: {
                                         "font-family": "Source Sans Pro, sans-serif",
                                         "text-anchor": "middle",
@@ -2087,7 +2125,9 @@
                                     }
                                 }, { // Line #2
                                     textField: "text2",
-                                    classed: { text2: true },
+                                    classed: {
+                                        text2: true
+                                    },
                                     style: {
                                         "font-family": "Source Sans Pro, sans-serif",
                                         "text-anchor": "middle",
@@ -2106,7 +2146,9 @@
                                     }
                                 }, { // Line #3
                                     textField: "text3",
-                                    classed: { text3: true },
+                                    classed: {
+                                        text3: true
+                                    },
                                     style: {
                                         "font-family": "Source Sans Pro, sans-serif",
                                         "text-anchor": "middle",
@@ -2125,20 +2167,40 @@
                                     }
                                 }],
                                 centralFormat: [{ // Line #0
-                                    attr: { "font-size": "28px" },
-                                    style: { "opacity": "1" }
+                                    attr: {
+                                        "font-size": "28px"
+                                    },
+                                    style: {
+                                        "opacity": "1"
+                                    }
                                 }, { // Line #1
-                                    attr: { "font-size": "20px" },
-                                    style: { "opacity": "1" }
+                                    attr: {
+                                        "font-size": "20px"
+                                    },
+                                    style: {
+                                        "opacity": "1"
+                                    }
                                 }, { // Line #2
-                                    attr: { "font-size": "18px" },
-                                    style: { "opacity": "1" }
+                                    attr: {
+                                        "font-size": "18px"
+                                    },
+                                    style: {
+                                        "opacity": "1"
+                                    }
                                 }, { // Line #3
-                                    attr: { "font-size": "18px" },
-                                    style: { "opacity": "1" }
+                                    attr: {
+                                        "font-size": "18px"
+                                    },
+                                    style: {
+                                        "opacity": "1"
+                                    }
                                 }, { // Line #4
-                                    attr: { "font-size": "48px" },
-                                    style: { "opacity": "1" }
+                                    attr: {
+                                        "font-size": "48px"
+                                    },
+                                    style: {
+                                        "opacity": "1"
+                                    }
                                 }, ]
                             }
                         }]

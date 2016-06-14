@@ -33,7 +33,7 @@
 
 var appConfig = new function() {
 
-    this.Version = "v2.2.8 | 06/13/2016";
+    this.Version = "v2.2.9 | 06/14/2016";
 
     this.jasonemail = "https://www.azmag.gov/EmailPages/JasonHoward.asp";
 
@@ -65,19 +65,24 @@ var appConfig = new function() {
         layers: [15, 16],
         opacity: 1,
         visible: false,
-        showTOC: true
+        showTOC: true,
+        link: false
     }, {
         layerNum: 1,
         id: "countyBoundaries",
         title: "County Boundaries",
-        type: "dynamic",
-        url: this.mainURL,
+        type: "feature",
+        url: this.mainURL + "/14",
         queryUrl: this.mainURL + "/14",
         queryWhere: "1=1",
         layers: [14],
-        opacity: 0.8,
+        opacity: 1,
         visible: true,
-        showTOC: true
+        selectable: true,
+        outFields: ["*"],
+        filters: [],
+        showTOC: true,
+        link: true
     }, {
         layerNum: 2,
         id: "congressionalDistricts",
@@ -92,7 +97,8 @@ var appConfig = new function() {
         selectable: true,
         outFields: ["*"],
         filters: [],
-        showTOC: true
+        showTOC: true,
+        link: true
     }, {
         layerNum: 3,
         id: "legislativeDistricts",
@@ -107,7 +113,8 @@ var appConfig = new function() {
         selectable: true,
         outFields: ["*"],
         filters: [],
-        showTOC: true
+        showTOC: true,
+        link: true
     }, {
         layerNum: 4,
         id: "zipCodes",
@@ -122,7 +129,8 @@ var appConfig = new function() {
         selectable: true,
         outFields: ["*"],
         filters: [],
-        showTOC: true
+        showTOC: true,
+        link: true
     }, {
         layerNum: 5,
         id: "esriReference",
@@ -140,7 +148,8 @@ var appConfig = new function() {
         layers: [0],
         opacity: 0.8,
         visible: true,
-        showTOC: false
+        showTOC: false,
+        link: false
     }, {
         layerNum: 7,
         id: "esriBasemap",

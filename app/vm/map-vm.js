@@ -12,6 +12,7 @@
             "dojo/dom-construct",
             "dojo/_base/array",
             "dojo/_base/lang",
+            "dojo/query",
             "dojo/on",
             "dojo/dom",
             "dojo/dom-style",
@@ -35,7 +36,7 @@
             "app/vm/legend-vm",
             "app/vm/markupTools-vm"
         ],
-        function(dc, da, lang, on, dom, ds, topic, view, mapModel, Map, HomeButton, Scalebar, Legend, Extent, Color, SimpleMarkerSymbol, SimpleLineSymbol, SimpleFillSymbol, Popup, PopupTemplate, InfoTemplate, legendVM, markupToolsVM) {
+        function(dc, da, lang, query, on, dom, ds, topic, view, mapModel, Map, HomeButton, Scalebar, Legend, Extent, Color, SimpleMarkerSymbol, SimpleLineSymbol, SimpleFillSymbol, Popup, PopupTemplate, InfoTemplate, legendVM, markupToolsVM) {
 
             //var MapVM = new function () {
             var MapVM = function() {
@@ -195,6 +196,17 @@
                         //self.mapCBRCurrent(self.colorPalet);
                     }
 
+                    var linkHTML = "";
+
+                    var Link = dc.create("a", {
+                        "class": "action",
+                        "id": "summaryLink",
+                        "type": "button",
+                        "innerHTML": "View Summary",
+                        "href": "#"
+                    }, query(".actionList", this.map.infoWindow.domNode)[0]);
+                    on(Link, "click", self.linkClicked);
+
                 }; //end createMap
 
                 /**
@@ -334,6 +346,15 @@
                     markupToolsVM.initializeGraphics(self.mapID);
 
                 }; //end mapLoaded
+
+                /**
+                 * Fired when "View Summary" link in Popup infoWindow is clicked
+                 * @return {[type]} [description]
+                 */
+                self.linkClicked = function(e) {
+                    console.log(e.target.id);
+                    topic.publish(e.target.id + "Click");
+                };
 
                 /**
                 This is called when the renderer is updated for a map. This it tracked by an observable variable in the map object.
