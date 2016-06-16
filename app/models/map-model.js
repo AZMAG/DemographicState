@@ -105,7 +105,8 @@
                  */
                 self.congressInfoTemplate = new InfoTemplate();
                 self.congressInfoTemplate.setTitle("Congressional Districts");
-                self.congressInfoTemplate.setContent("<strong>${CDNAME}</strong><br>" +
+                self.congressInfoTemplate.setContent("<strong><div id='congressionalLink'>${CDNAME}</div></strong>" +
+                    "<hr>" +
                     "Representative: ${CDRepresentative} - (${CDParty})");
 
                 /**
@@ -114,15 +115,29 @@
                  */
                 self.legislatureInfoTemplate = new InfoTemplate();
                 self.legislatureInfoTemplate.setTitle("Legislative Districts");
-                self.legislatureInfoTemplate.setContent("<strong>${SLDNAME}</strong><br>" +
+                self.legislatureInfoTemplate.setContent("<strong><div id='legislativeLink'>${SLDNAME}</div></strong>" +
+                    "<hr>" +
                     "Representative: ${HouseRep1} - (${Party_HRep1})<br>" +
                     "Representative: ${HouseRep2} - (${Party_HRep2})<br>" +
                     "Senator: ${Senator} - (${Party_Sen})<br>");
 
+                /**
+                 * infoTemplate for ZIP code areas
+                 * @type {InfoTemplate}
+                 */
                 self.zipCodesInfoTemplate = new InfoTemplate();
-                self.zipCodesInfoTemplate.setTitle("Zip Code");
-                self.zipCodesInfoTemplate.setContent("<strong>${ZIPCODE}</strong><br>" +
+                self.zipCodesInfoTemplate.setTitle("ZIP Codes");
+                self.zipCodesInfoTemplate.setContent("<strong><div id='zipCodeLink'>${ZIPCODE}</div></strong><br>" +
                     "<strong>Place:</strong> ${NAME}"
+                );
+
+                /**
+                 * infoTemplate for Counties
+                 * @type {InfoTemplate}
+                 */
+                self.countyInfoTemplate = new InfoTemplate();
+                self.countyInfoTemplate.setTitle("Counties");
+                self.countyInfoTemplate.setContent("<strong><div id='countyLink'>${NAME}</div></strong>"
                 );
 
                 self.featureFillSymbol = new SimpleFillSymbol(SimpleFillSymbol.STYLE_BACKWARD_DIAGONAL,
@@ -304,6 +319,10 @@
                             if (info.id === "zipCodes") {
                                 featureTemplate = self.zipCodesInfoTemplate;
                             }
+                            if (info.id === "countyBoundaries") {
+                                featureTemplate = self.countyInfoTemplate;
+                            }
+
                             layer = new FeatureLayer(info.url + token, {
                                 id: info.id,
                                 visible: info.visible,
@@ -312,8 +331,6 @@
                                 outFields: info.outFields,
                                 infoTemplate: featureTemplate
                             });
-
-
                             break;
                     }
 

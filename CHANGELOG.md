@@ -18,6 +18,12 @@ And constructed with the following guidelines:
 
 ***************************************************************************************************************
 
+## Version 2.2.9 | 06/14/2016
+
+* Added Summary Link to all popups
+* Add popup to counties layer
+* Fixed bug in IE showing summary comparison reports
+
 ## Version 2.2.8 | 06/13/2016
 
 * Fixed PDF reports - new service URL location
