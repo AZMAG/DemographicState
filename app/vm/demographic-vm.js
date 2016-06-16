@@ -1386,27 +1386,11 @@
                         url = self.reportConfigItem.compareACSUrl;
                     }
 
-
-
                     if (e.item.text() !== " Compare with...") {
-                        if (e.item.index() > 0) {
-                            var selectedName = this.dataItem(e.item.index());
-                            self.compareToName = selectedName.Name;
-
-                            // Query for the place record
-
-                            var whereClause = self.reportConfigItem.comparePlaceField + " = '" + self.compareToName + "'";
-                            layerDelegate.query(url, handler, self.placeQueryFault, null, whereClause, true);
-                        } else {
-                            self.compareFeature = null;
-                            // Update the Grid
-                            var kendoGrid = $(gridID).data("kendoGrid");
-                            if (kendoGrid !== undefined) {
-                                kendoGrid.destroy();
-                                kendoGrid.element.remove();
-                            }
-                            self.createKendoGrid(type);
-                        }
+                        var selectedName = this.dataItem(e.item.index());
+                        self.compareToName = selectedName.Name;
+                        var whereClause = self.reportConfigItem.comparePlaceField + " = '" + self.compareToName + "'";
+                        layerDelegate.query(url, handler, self.placeQueryFault, null, whereClause, true);
                     }
                 };
 
