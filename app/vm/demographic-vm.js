@@ -284,7 +284,6 @@
                     // Display legend checkbox click event
                     $("#displayACSLegend").bind("click", function() {
                         self.legendACSVisible = this.checked;
-
                         if (self.selectedCategoryObj !== undefined && self.groupedItems !== undefined) {
                             var kendoChart = $("#demACSChartArea").data("kendoChart");
                             if (kendoChart !== undefined) {
@@ -296,7 +295,6 @@
                             self.createChart("ACS");
                             self.reloadChart();
                         }
-
                     });
 
                     // Display legend checkbox click event
@@ -550,7 +548,7 @@
                     if (num === 0) {
                         // Get the alert window and open it. vw
                         alert2VM.openWindow(alertView2);
-                        esri.hide(dom.byId("loadingImg"));
+                        esri.hide(dom.byId("loading"));
                         return;
                     }
 
@@ -587,7 +585,7 @@
                     self.resetComparisonDropdowns();
 
                     // hide loading gif when window opens. vw
-                    esri.hide(dom.byId("loadingImg"));
+                    esri.hide(dom.byId("loading"));
 
                     // enables the infoWindow after interactive summary selection is done.
                     mapModel.showInfoWindow();

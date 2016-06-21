@@ -88,7 +88,8 @@
                 // create div for loading gif. vw
                 var loading = dc.create("div", {
                     id: "loading"
-                }, "display", "first"); //dc.create("div", { id: "loading" }, "map", "first");
+                }, "display", "after");
+                //dc.create("div", { id: "loading" }, "map", "first");
                 var img = dc.create("img", {
                     id: "loadimag",
                     src: "app/resources/img/loading.gif"
@@ -137,8 +138,7 @@
                  */
                 self.countyInfoTemplate = new InfoTemplate();
                 self.countyInfoTemplate.setTitle("Counties");
-                self.countyInfoTemplate.setContent("<strong><div id='countyLink'>${NAME}</div></strong>"
-                );
+                self.countyInfoTemplate.setContent("<strong><div id='countyLink'>${NAME}</div></strong>");
 
                 self.featureFillSymbol = new SimpleFillSymbol(SimpleFillSymbol.STYLE_BACKWARD_DIAGONAL,
                     new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID,
@@ -397,17 +397,17 @@
                 }
 
                 // var initData = this.GetMapInitDataByID(this.getMap().id);
-// if (initData) {
-//     $.each(initData.layers, function(i, layerId) {
-//         if (info.id === layerId) {
-//             // console.log(info.id, layerId);
-//             // console.log(info, layer)
+                // if (initData) {
+                //     $.each(initData.layers, function(i, layerId) {
+                //         if (info.id === layerId) {
+                //             // console.log(info.id, layerId);
+                //             // console.log(info, layer)
 
-//             info.visible = true;
-//             layer.setVisibility(true);
-//         }
-//     });
-// }
+                //             info.visible = true;
+                //             layer.setVisibility(true);
+                //         }
+                //     });
+                // }
 
 
                 //Apply a definition expression on the layer if

@@ -337,6 +337,7 @@
                         selectionGraphic = new Graphic(evt.geometry, selectionSymbol);
                         demographicVM.updateSelectionGraphic(selectionGraphic);
                     }
+
                 };
             };
 
