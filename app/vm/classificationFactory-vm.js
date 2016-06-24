@@ -152,7 +152,7 @@
                         change: self.spinnerChange
                     };
                     if (self.Renderer.asPercent) {
-                        numSettings.format = "p0";
+                        //numSettings.format = "p0";
                         numSettings.step = 0.01;
                     } else {
                         numSettings.format = "n0";
@@ -233,7 +233,7 @@
                         var start;
                         var end;
                         if (self.Renderer.asPercent) {
-                            start = Math.round(self.Renderer.infos[j].minValue );
+                            start = Math.round(self.Renderer.infos[j].minValue);
                             end = Math.round(self.Renderer.infos[j].maxValue) + "%";
                         } else {
                             start = magNum.formatValue(Math.round(self.Renderer.infos[j].minValue));
