@@ -2568,15 +2568,15 @@
                         grid = $("#demCensusFeatGrid").data("kendoGrid");
                         headerValue = "Selected Block Groups";
                         fileName = self.communityName + ".xlsx";
-                        colSpan = 51;
-                        rowSpan = 4;
+                        colSpan = 22;
+                        rowSpan = 7;
                     } else if (exportButtonId === "demACSExportSelFeatResults") {
                         //Block group export clicked
                         grid = $("#demACSFeatGrid").data("kendoGrid");
                         headerValue = "Selected Block Groups";
                         fileName = self.communityName + ".xlsx";
                         colSpan = 22;
-                        rowSpan = 4;
+                        rowSpan = 7;
                     }
 
                     if (self.compareFeature !== null) {
@@ -2587,29 +2587,30 @@
                         var rows = e.workbook.sheets[0].rows;
                         var columns = e.workbook.sheets[0].columns;
                         columns[1].width = 290;
+                        if (exportButtonId !== "demCensusExportSelFeatResults" && exportButtonId !== "demACSExportSelFeatResults") {
+                            $.each(rows, function(index, row) {
+                                if (row.type === "group-header") {
+                                    row.cells[0].value = row.cells[0].value.substring(37);
+                                } else {
 
-                        $.each(rows, function(index, row) {
-                            if (row.type === "group-header") {
-                                row.cells[0].value = row.cells[0].value.substring(37);
-                            } else {
+                                    if (row.cells[1].value.indexOf("Male Population") > -1 || row.cells[1].value.indexOf("Female Population") > -1) {
+                                        row.cells[1].value = row.cells[1].value.replace("Male Population", "Male Population:");
+                                        row.cells[1].value = row.cells[1].value.replace("Female Population", "Female Population:");
+                                        $.each(row.cells, function(i, value) {
+                                            if (i > 0) {
+                                                value.background = "#333";
+                                                value.color = "#fff";
+                                            }
+                                        });
+                                    }
 
-                                if (row.cells[1].value.indexOf("Male Population") > -1 || row.cells[1].value.indexOf("Female Population") > -1) {
-                                    row.cells[1].value = row.cells[1].value.replace("Male Population", "Male Population:");
-                                    row.cells[1].value = row.cells[1].value.replace("Female Population", "Female Population:");
-                                    $.each(row.cells, function(i, value) {
-                                        if (i > 0) {
-                                            value.background = "#333";
-                                            value.color = "#fff";
-                                        }
-                                    });
+                                    row.cells[1].value = row.cells[1].value.replace("Males age", "Age");
+                                    row.cells[1].value = row.cells[1].value.replace("Males less", "Less");
+                                    row.cells[1].value = row.cells[1].value.replace("Females age", "Age");
+                                    row.cells[1].value = row.cells[1].value.replace("Females less", "Less");
                                 }
-
-                                row.cells[1].value = row.cells[1].value.replace("Males age", "Age");
-                                row.cells[1].value = row.cells[1].value.replace("Males less", "Less");
-                                row.cells[1].value = row.cells[1].value.replace("Females age", "Age");
-                                row.cells[1].value = row.cells[1].value.replace("Females less", "Less");
-                            }
-                        });
+                            });
+                        }
 
                         e.workbook.sheets[0]["name"] = "Demographic Data";
                         e.workbook.sheets[0]["frozenRows"] = 2;
