@@ -33,7 +33,7 @@
 
 var appConfig = new function() {
 
-    this.Version = "v2.2.9 | 06/14/2016";
+    this.Version = "v2.2.10 | 06/24/2016";
 
     this.jasonemail = "https://www.azmag.gov/EmailPages/JasonHoward.asp";
 
