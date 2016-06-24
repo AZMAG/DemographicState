@@ -2568,7 +2568,7 @@
                         grid = $("#demCensusFeatGrid").data("kendoGrid");
                         headerValue = "Selected Block Groups";
                         fileName = self.communityName + ".xlsx";
-                        colSpan = 22;
+                        colSpan = 40;
                         rowSpan = 7;
                     } else if (exportButtonId === "demACSExportSelFeatResults") {
                         //Block group export clicked
@@ -2579,7 +2579,7 @@
                         rowSpan = 7;
                     }
 
-                    if (self.compareFeature !== null) {
+                    if (self.compareFeature !== null && exportButtonId !== "demCensusExportSelFeatResults" && exportButtonId !== "demACSExportSelFeatResults") {
                         headerValue = self.communityName + " - " + self.compareToName + " Comparative Demographic Report";
                     }
 
@@ -2683,7 +2683,7 @@
 
                         if (rows[0].headerRow !== "added") {
                             //Add custom header row
-                            if (compareRow !== null) {
+                            if (compareRow !== null && exportButtonId !== "demCensusExportSelFeatResults" && exportButtonId !== "demACSExportSelFeatResults") {
                                 rows.unshift(compareRow);
                             }
                             rows.unshift(headerRow);
