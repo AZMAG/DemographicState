@@ -129,9 +129,9 @@
                         visible: false,
                         resizable: false,
                         deactivate: function() {
-                                self.queryItems = [];
-                                this.destroy();
-                            }
+                            self.queryItems = [];
+                            this.destroy();
+                        }
                     }).data("kendoWindow");
 
                     var helpButton = qbWindow2.wrapper.find(".k-i-help");
@@ -177,7 +177,7 @@
                     });
                     treeView.data("kendoTreeView").expand("li:first");
 
-                    $("#treeView").on("dblclick", function (e) {
+                    $("#treeView").on("dblclick", function(e) {
                         var treeView = $("#treeView").data("kendoTreeView");
                         var dataItem = treeView.dataItem(e.target);
                         self.dataItemSelected = dataItem;
@@ -192,12 +192,12 @@
                     $("#treeView").kendoDraggable({
                         filter: ".k-in", //specify which items will be draggable
                         hint: function(element) { //create a UI hint, the `element` argument is the dragged item
-                          return element.clone().css({
-                            "opacity": 0.4,
-                            "padding": "5px",
-                            "cursor": "move"
-                        });
-                      },
+                            return element.clone().css({
+                                "opacity": 0.4,
+                                "padding": "5px",
+                                "cursor": "move"
+                            });
+                        },
                         dragstart: function(e) {
                             var treeView = $("#treeView").data("kendoTreeView");
                             var dataItem = treeView.dataItem(e.currentTarget);
@@ -220,14 +220,14 @@
                     $("#target").kendoDropTarget({
                         dragenter: function(e) {
                             if (self.dataItemSelected.Type !== undefined) {
-                              e.draggable.hint.css("opacity", 1);
-                              $("#target").css("backgroundColor", "darkgrey");
+                                e.draggable.hint.css("opacity", 1);
+                                $("#target").css("backgroundColor", "darkgrey");
                             }
                         },
                         dragleave: function(e) {
                             if (self.dataItemSelected.Type !== undefined) {
-                              e.draggable.hint.css("opacity", 0.5);
-                              $("#target").css("backgroundColor", "grey");
+                                e.draggable.hint.css("opacity", 0.5);
+                                $("#target").css("backgroundColor", "grey");
                             }
                         },
                         drop: self.onDrop
@@ -241,8 +241,7 @@
                         if (previousDropdown.length > 0) {
                             //remove dropdown
                             previousDropdown.remove();
-                        }
-                        else{
+                        } else {
                             $(this).parent().parent().nextAll(".joinDDLClass:first").remove();
                         }
 
@@ -250,7 +249,7 @@
                         $(this).parents("div:first").remove();
 
                         //update array
-                        $.each(self.queryItems, function( index, queryItem ) {
+                        $.each(self.queryItems, function(index, queryItem) {
                             if (queryItem.name === fieldName) {
                                 self.queryItems.splice(index, 1);
                                 return false;
@@ -262,7 +261,7 @@
                     $("body").on("click", ".clearRowBtn", function() {
                         var selector = $(this).parents("div:first")[0].id;
                         var textBoxes = $("#" + selector + " .style1");
-                        $.each(textBoxes, function( index, textBox ) {
+                        $.each(textBoxes, function(index, textBox) {
                             var tb = $(textBox).data("kendoNumericTextBox");
                             if (tb) {
                                 tb._old = tb._value;
@@ -291,10 +290,9 @@
                     self.addRow(dataItem);
                 };
 
-                self.addRow = function(dataItem)
-                {
+                self.addRow = function(dataItem) {
                     var count = self.queryItems.length + 1;
-                    var target = $( "#target" );
+                    var target = $("#target");
 
                     if (dataItem.Type !== undefined) {
                         if (count > 1) {
@@ -316,9 +314,9 @@
 
                         if (dataItem.Type === "number" || dataItem.Type === "percent") {
                             target.append("<div class='demo-section k-header' id='" + dataItem.uid + count + "'>" + "<input class='hiddenFld' type='hidden' value='" + dataItem.Type + "' placeholder='" + dataItem.Placeholder + "'>" +
-                            "<span class='queryItem'>" + dataItem.ShortName + ": </span>" + '<span class="inputBoxes"><select class="operatorDDL" id="operatorDDL' + count + '"></select><input class="style1" placeholder="min">' +
-                            '</input><input placeholder="max" class="style1"></input><button class="removeRowBtn">Remove</button><button class="clearRowBtn">Clear</button></span>' +
-                            "</div>");
+                                "<span class='queryItem'>" + dataItem.ShortName + ": </span>" + '<span class="inputBoxes"><select class="operatorDDL" id="operatorDDL' + count + '"></select><input class="style1" placeholder="min">' +
+                                '</input><input placeholder="max" class="style1"></input><button class="removeRowBtn">Remove</button><button class="clearRowBtn">Clear</button></span>' +
+                                "</div>");
 
                             var operatorDropDown = $("#operatorDDL" + count).kendoDropDownList({
                                 dataSource: demographicConfig.CompareOperators.number,
@@ -341,8 +339,7 @@
                                     change: self.verifyQuery
                                 }).data("kendoNumericTextBox");
                                 maxValue = 100;
-                            }
-                            else{
+                            } else {
                                 $("#" + selector + " .style1").kendoNumericTextBox({
                                     spinners: false,
                                     min: 0,
@@ -360,11 +357,10 @@
                                 "type": dataItem.Type,
                                 "strDDL": ""
                             };
-                        }
-                        else{
+                        } else {
                             target.append("<div class='demo-section k-header' id='" + dataItem.uid + count + "'>" +
-                            "<span class='queryItem'>" + dataItem.ShortName + ": </span>" + '<span class="inputBoxes"><select class=strMultiselect id="strMS' + count + '"></select><button class="removeRowBtn">Remove</button></span>' +
-                            "</div>");
+                                "<span class='queryItem'>" + dataItem.ShortName + ": </span>" + '<span class="inputBoxes"><select class=strMultiselect id="strMS' + count + '"></select><button class="removeRowBtn">Remove</button></span>' +
+                                "</div>");
 
                             queryItem = {
                                 "id": "#" + dataItem.uid + count,
@@ -374,7 +370,7 @@
                                 "name": dataItem.ShortName,
                                 "maxVal": dataItem.Placeholder,
                                 "type": dataItem.Type,
-                                "strDDL": "#strMS"+ count
+                                "strDDL": "#strMS" + count
                             };
 
                             layerDelegate.query(self.layerACSUrl, self.populateStringDropdowns, self.errBack, undefined, "1=1", false, [dataItem.FieldName], [dataItem.FieldName], true);
@@ -384,7 +380,7 @@
                     }
                 };
 
-                self.onChange = function(e){
+                self.onChange = function(e) {
                     var item = $("#" + e.sender.element[0].id).parent();
                     var selector = item.parent().parent()[0].id.toString();
                     var hiddenData = $("#" + selector + " .hiddenFld")[0];
@@ -394,30 +390,28 @@
 
                     $(item).siblings(".style1").remove();
                     if (dataItem.Sign !== "between") {
-                        $( '<input class="style1" placeholder="value"></input>').insertAfter(item);
-                    }
-                    else{
-                        $( '<input class="style1" placeholder="min"></input><input placeholder="max" class="style1"></input>').insertAfter(item);
+                        $('<input class="style1" placeholder="value"></input>').insertAfter(item);
+                    } else {
+                        $('<input class="style1" placeholder="min"></input><input placeholder="max" class="style1"></input>').insertAfter(item);
                     }
 
                     if (type === "percent") {
-                                $("#" + selector + " .style1").kendoNumericTextBox({
-                                    spinners: false,
-                                    min: 0,
-                                    max: 100,
-                                    format: "# \\%",
-                                    change: self.verifyQuery
-                                });
-                                maxValue = 100;
-                            }
-                            else{
-                                $("#" + selector + " .style1").kendoNumericTextBox({
-                                    spinners: false,
-                                    min: 0,
-                                    max: maxValue,
-                                    change: self.verifyQuery
-                                });
-                            }
+                        $("#" + selector + " .style1").kendoNumericTextBox({
+                            spinners: false,
+                            min: 0,
+                            max: 100,
+                            format: "# \\%",
+                            change: self.verifyQuery
+                        });
+                        maxValue = 100;
+                    } else {
+                        $("#" + selector + " .style1").kendoNumericTextBox({
+                            spinners: false,
+                            min: 0,
+                            max: maxValue,
+                            change: self.verifyQuery
+                        });
+                    }
                     self.verifyQuery();
                 };
 
@@ -430,7 +424,7 @@
                     var queryString = self.buildQueryString();
                     layerDelegate.query(self.layerACSUrl, demographicVM.interactiveSelectionQueryHandler, demographicVM.interactiveSelectionQueryFault, undefined, queryString, true);
                     layerDelegate.query(self.layerCensusUrl, demographicVM.interactiveSelectionQueryHandler, demographicVM.interactiveSelectionQueryFault, undefined, queryString, true);
-                    esri.show(dojo.byId("loadingImg"));
+                    esri.show(dojo.byId("loading"));
                     self.closeWindow();
                 };
 
@@ -466,27 +460,25 @@
                             if (inputBoxes.length > 1) {
 
                                 if (inputBoxes[0].value) {
-                                    min = inputBoxes[0].value.replace(/,/g,"");
+                                    min = inputBoxes[0].value.replace(/,/g, "");
                                     if (self.queryItems[i].type === "percent") {
                                         min = min.replace("%", "");
                                     }
                                 }
                                 if (inputBoxes[1].value) {
-                                    max = inputBoxes[1].value.replace(/,/g,"");
+                                    max = inputBoxes[1].value.replace(/,/g, "");
                                     if (self.queryItems[i].type === "percent") {
                                         max = max.replace("%", "");
                                     }
                                 }
                                 if (i !== (self.queryItems.length - 1)) {
                                     queryString += "(" + fieldName + " >= " + min + " AND  " + fieldName + " <= " + max + ") " + join + " ";
-                                }
-                                else{
+                                } else {
                                     queryString += "(" + fieldName + " >= " + min + " AND  " + fieldName + " <= " + max + ")";
                                 }
-                            }
-                            else{
+                            } else {
                                 if (inputBoxes[0].value) {
-                                    inputValue = inputBoxes[0].value.replace(/,/g,"");
+                                    inputValue = inputBoxes[0].value.replace(/,/g, "");
                                     if (self.queryItems[i].type === "percent") {
                                         inputValue = inputValue.replace("%", "");
                                         //inputValue = (inputValue/100);
@@ -494,20 +486,17 @@
                                 }
                                 if (i !== (self.queryItems.length - 1)) {
                                     queryString += "(" + fieldName + " " + operator + " " + inputValue + ") " + join + " ";
-                                }
-                                else{
+                                } else {
                                     queryString += "(" + fieldName + " " + operator + " " + inputValue + ") ";
                                 }
                             }
-                        }
-                        else if (self.queryItems[i].type === "string"){
+                        } else if (self.queryItems[i].type === "string") {
                             var dropdownValue = $(self.queryItems[i].strDDL).val();
                             if (i !== (self.queryItems.length - 1)) {
-                                    queryString += "(" + fieldName + " = '" + dropdownValue + "') " + join + " ";
-                                }
-                                else{
-                                    queryString += "(" + fieldName + " = '" + dropdownValue + "') ";
-                                }
+                                queryString += "(" + fieldName + " = '" + dropdownValue + "') " + join + " ";
+                            } else {
+                                queryString += "(" + fieldName + " = '" + dropdownValue + "') ";
+                            }
                         }
                     }
                     return queryString;
@@ -523,7 +512,7 @@
                     layerDelegate.verify(self.layerACSUrl, self.verifyCallback, self.errBack, undefined, queryString, true);
                 };
 
-                self.verifyCallback = function(count){
+                self.verifyCallback = function(count) {
                     $("#fCount1").text(count);
                     $("#fCountSpan").show();
                 };
@@ -532,4 +521,3 @@
         }
     );
 }());
-

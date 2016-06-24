@@ -284,7 +284,6 @@
                     // Display legend checkbox click event
                     $("#displayACSLegend").bind("click", function() {
                         self.legendACSVisible = this.checked;
-
                         if (self.selectedCategoryObj !== undefined && self.groupedItems !== undefined) {
                             var kendoChart = $("#demACSChartArea").data("kendoChart");
                             if (kendoChart !== undefined) {
@@ -296,7 +295,6 @@
                             self.createChart("ACS");
                             self.reloadChart();
                         }
-
                     });
 
                     // Display legend checkbox click event
@@ -550,7 +548,7 @@
                     if (num === 0) {
                         // Get the alert window and open it. vw
                         alert2VM.openWindow(alertView2);
-                        esri.hide(dom.byId("loadingImg"));
+                        esri.hide(dom.byId("loading"));
                         return;
                     }
 
@@ -587,7 +585,7 @@
                     self.resetComparisonDropdowns();
 
                     // hide loading gif when window opens. vw
-                    esri.hide(dom.byId("loadingImg"));
+                    esri.hide(dom.byId("loading"));
 
                     // enables the infoWindow after interactive summary selection is done.
                     mapModel.showInfoWindow();
@@ -1418,27 +1416,11 @@
                         url = self.reportConfigItem.compareACSUrl;
                     }
 
-
-
                     if (e.item.text() !== " Compare with...") {
-                        if (e.item.index() > 0) {
-                            var selectedName = this.dataItem(e.item.index());
-                            self.compareToName = selectedName.Name;
-
-                            // Query for the place record
-
-                            var whereClause = self.reportConfigItem.comparePlaceField + " = '" + self.compareToName + "'";
-                            layerDelegate.query(url, handler, self.placeQueryFault, null, whereClause, true);
-                        } else {
-                            self.compareFeature = null;
-                            // Update the Grid
-                            var kendoGrid = $(gridID).data("kendoGrid");
-                            if (kendoGrid !== undefined) {
-                                kendoGrid.destroy();
-                                kendoGrid.element.remove();
-                            }
-                            self.createKendoGrid(type);
-                        }
+                        var selectedName = this.dataItem(e.item.index());
+                        self.compareToName = selectedName.Name;
+                        var whereClause = self.reportConfigItem.comparePlaceField + " = '" + self.compareToName + "'";
+                        layerDelegate.query(url, handler, self.placeQueryFault, null, whereClause, true);
                     }
                 };
 
@@ -2586,15 +2568,15 @@
                         grid = $("#demCensusFeatGrid").data("kendoGrid");
                         headerValue = "Selected Block Groups";
                         fileName = self.communityName + ".xlsx";
-                        colSpan = 51;
-                        rowSpan = 4;
+                        colSpan = 22;
+                        rowSpan = 7;
                     } else if (exportButtonId === "demACSExportSelFeatResults") {
                         //Block group export clicked
                         grid = $("#demACSFeatGrid").data("kendoGrid");
                         headerValue = "Selected Block Groups";
                         fileName = self.communityName + ".xlsx";
                         colSpan = 22;
-                        rowSpan = 4;
+                        rowSpan = 7;
                     }
 
                     if (self.compareFeature !== null) {
@@ -2605,29 +2587,30 @@
                         var rows = e.workbook.sheets[0].rows;
                         var columns = e.workbook.sheets[0].columns;
                         columns[1].width = 290;
+                        if (exportButtonId !== "demCensusExportSelFeatResults" && exportButtonId !== "demACSExportSelFeatResults") {
+                            $.each(rows, function(index, row) {
+                                if (row.type === "group-header") {
+                                    row.cells[0].value = row.cells[0].value.substring(37);
+                                } else {
 
-                        $.each(rows, function(index, row) {
-                            if (row.type === "group-header") {
-                                row.cells[0].value = row.cells[0].value.substring(37);
-                            } else {
+                                    if (row.cells[1].value.indexOf("Male Population") > -1 || row.cells[1].value.indexOf("Female Population") > -1) {
+                                        row.cells[1].value = row.cells[1].value.replace("Male Population", "Male Population:");
+                                        row.cells[1].value = row.cells[1].value.replace("Female Population", "Female Population:");
+                                        $.each(row.cells, function(i, value) {
+                                            if (i > 0) {
+                                                value.background = "#333";
+                                                value.color = "#fff";
+                                            }
+                                        });
+                                    }
 
-                                if (row.cells[1].value.indexOf("Male Population") > -1 || row.cells[1].value.indexOf("Female Population") > -1) {
-                                    row.cells[1].value = row.cells[1].value.replace("Male Population", "Male Population:");
-                                    row.cells[1].value = row.cells[1].value.replace("Female Population", "Female Population:");
-                                    $.each(row.cells, function(i, value) {
-                                        if (i > 0) {
-                                            value.background = "#333";
-                                            value.color = "#fff";
-                                        }
-                                    });
+                                    row.cells[1].value = row.cells[1].value.replace("Males age", "Age");
+                                    row.cells[1].value = row.cells[1].value.replace("Males less", "Less");
+                                    row.cells[1].value = row.cells[1].value.replace("Females age", "Age");
+                                    row.cells[1].value = row.cells[1].value.replace("Females less", "Less");
                                 }
-
-                                row.cells[1].value = row.cells[1].value.replace("Males age", "Age");
-                                row.cells[1].value = row.cells[1].value.replace("Males less", "Less");
-                                row.cells[1].value = row.cells[1].value.replace("Females age", "Age");
-                                row.cells[1].value = row.cells[1].value.replace("Females less", "Less");
-                            }
-                        });
+                            });
+                        }
 
                         e.workbook.sheets[0]["name"] = "Demographic Data";
                         e.workbook.sheets[0]["frozenRows"] = 2;

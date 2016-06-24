@@ -18,6 +18,13 @@ And constructed with the following guidelines:
 
 ***************************************************************************************************************
 
+## Version 2.2.10 | 06/24/2016
+
+* Fixed bug in comparison checkbox
+* Fixed data issue in Advanced Query dropdowns
+* Fixed loading icon
+* Fixed Export bug for Selected Block Groups
+
 ## Version 2.2.9 | 06/14/2016
 
 * Added Summary Link to all popups

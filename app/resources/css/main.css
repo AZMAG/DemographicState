@@ -7,8 +7,10 @@
  * Copyright 2016 MAG
  * Licensed under MIT
  * ======================================================================== */
+
+
 /*! ==========================================
- *  @main.css | version | 2.2.9 | MIT License
+ *  @main.css | version | 2.2.10 | MIT License
  *  ========================================== */
 
 
@@ -20,9 +22,11 @@
  * Kroc Camen, and the H5BP dev community and team.
  */
 
+
 /* ==========================================================================
    Base styles: opinionated defaults
    ========================================================================== */
+
 html,
 body {
     width: 100%;
@@ -31,6 +35,7 @@ body {
     padding: 0;
     border: 0;
 }
+
 html,
 body,
 input,
@@ -42,6 +47,7 @@ textarea {
     overflow: hidden;
     color: #FFFFFF;
 }
+
 
 /*
  * Remove text-shadow in selection highlight: h5bp.com/i
@@ -58,6 +64,7 @@ textarea {
     background: #b3d4fc;
     text-shadow: none;
 }
+
 
 /*
  * A better looking default horizontal rule
@@ -95,6 +102,7 @@ fieldset {
     padding: 0;
 }
 
+
 /*
  * Allow only vertical resizing of textareas.
  */
@@ -102,18 +110,24 @@ fieldset {
 textarea {
     resize: vertical;
 }
+
+
 /* ==========================================================================
    Browse Happy prompt
    ========================================================================== */
+
 .browsehappy {
     margin: 0.2em 0;
     background-color: #cccccc;
     color: #000000;
     padding: 0.2em 0;
 }
+
+
 /* ==========================================================================
    Author's custom styles
    ========================================================================== */
+
 #borderContainer {
     width: 100%;
     height: 100%;
@@ -121,8 +135,9 @@ textarea {
     margin: 0px;
     border: 0px;
 }
+
 button {
-    display:inline-block;
+    display: inline-block;
     text-decoration: none;
     background-color: #000000;
     color: #FFFFFF;
@@ -132,14 +147,17 @@ button {
     -webkit-border-radius: 8px;
     border-radius: 8px;
 }
+
 button:hover {
     background-color: #646464;
     border-color: #646464;
 }
+
 .buttonimg {
     height: 50px;
     width: 50px;
 }
+
 #display {
     position: absolute;
     top: 50px;
@@ -149,6 +167,7 @@ button:hover {
     margin: 0px;
     overflow: hidden;
 }
+
 #mapContainer {
     position: absolute;
     width: 100%;
@@ -158,7 +177,8 @@ button:hover {
     right: 0px;
     bottom: 0px
 }
-.map{
+
+.map {
     overflow: hidden;
     position: absolute;
     position: absolute;
@@ -168,94 +188,98 @@ button:hover {
     right: 0px;
     bottom: 0px;
     background-color: white;
-	border-color: black;
-	border-width: .2%;
+    border-color: black;
+    border-width: .2%;
     border-style: solid;
 }
-.map #map_root{
+
+.map #map_root {
     height: 100%;
     width: 100%
 }
-#mapContainer .k-splitter
-{
+
+#mapContainer .k-splitter {
     width: 100%;
     height: 100%;
 }
-.mapFrameTitlePanel
-{
+
+.mapFrameTitlePanel {
     position: absolute;
     top: 20px;
     padding: .4em !important;
     border-radius: 4px;
-    border-color: rgba(0,0,0,0.3);
-    -webkit-box-shadow: 1px 1px 7px 1px rgba(128,128,128,0.3);
-    box-shadow: 1px 1px 7px 1px rgba(128,128,128,0.3);
+    border-color: rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: 1px 1px 7px 1px rgba(128, 128, 128, 0.3);
+    box-shadow: 1px 1px 7px 1px rgba(128, 128, 128, 0.3);
     background-color: #4d4d4d;
     border-style: solid;
     border-width: 1px;
     cursor: pointer;
 }
-.mapFrameTitlePanel.selected
-{
+
+.mapFrameTitlePanel.selected {
     background-color: #06c;
 }
-.mapFrameTitlePanel h2
-{
+
+.mapFrameTitlePanel h2 {
     font-size: 1.2em;
     display: inline-block;
 }
-.mapFrameLegendPanel
-{
+
+.mapFrameLegendPanel {
     position: absolute;
     bottom: 20px;
     min-width: 180px;
     max-width: 250px;
     font-size: .85em;
 }
-.mapFrameLegendPanel .k-panelbar .k-content
-{
+
+.mapFrameLegendPanel .k-panelbar .k-content {
     padding: .58em;
 }
 
-.k-list>.k-state-selected
-{
-	background-color: transparent !important;
-	border-color: transparent !important;
+.k-list>.k-state-selected {
+    background-color: transparent !important;
+    border-color: transparent !important;
 }
 
-.k-panelbar>li>.k-state-selected
-{
-	background-color:transparent !important;
+.k-panelbar>li>.k-state-selected {
+    background-color: transparent !important;
 }
 
-.mapFrameLegendPanel .legendSliderDiv
-{
+.mapFrameLegendPanel .legendSliderDiv {
     text-align: center;
     margin: 0 auto;
 }
-.mapFrameElementRight
-{
+
+.mapFrameElementRight {
     right: 20px;
 }
-.mapFrameElementLeft
-{
+
+.mapFrameElementLeft {
     left: 20px;
 }
 
+
 /*.k-widget .k-colorpalette{
-	width: 150px !important;
+    width: 150px !important;
 }*/
 
+
 /* for interactive tool tooltips*/
+
 .map .tooltip {
     background-color: #000000 !important;
     color: #E8E8E8 !important;
     border-color: transparent !important;
     text-align: center;
 }
+
+
 /* ==========================================
 **** Custom Controls Styles ****
 ============================================= */
+
 .esriSimpleSlider {
     bottom: 55px !important;
     left: 20px !important;
@@ -263,120 +287,163 @@ button:hover {
     background-color: #383838;
     color: #ffffff;
 }
+
 .esriSimpleSliderDecrementButton:hover,
 .esriSimpleSliderIncrementButton:hover {
-  background-color: #646464;
+    background-color: #646464;
 }
+
 .esriSimpleSliderVertical .esriSimpleSliderIncrementButton,
-.esriSimpleSliderVertical .esriSimpleSliderDecrementButton{
-  font-weight: 500;
-  font-size: 20px;
-  line-height: 27px;
+.esriSimpleSliderVertical .esriSimpleSliderDecrementButton {
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 27px;
 }
+
 .esriSimpleSliderVertical .esriSimpleSliderIncrementButton {
-  border-bottom: 1px solid #cccccc;
+    border-bottom: 1px solid #cccccc;
 }
+
 .esriSimpleSliderDisabledButton,
 .esriSimpleSliderDisabledButton:active,
 .esriSimpleSliderDisabledButton:hover {
-cursor: default;
-background-color: #cccccc;
-color: #ffffff;
+    cursor: default;
+    background-color: #cccccc;
+    color: #ffffff;
 }
+
 .HomeButton {
     position: absolute;
     bottom: 120px;
     left: 21px;
 }
+
 .HomeButton .home {
     background-color: #383838;
     padding: 0 0 0 0;
 }
+
 .HomeButton .home:hover {
     background-color: #646464;
 }
+
 .HomeButton .home:active {
-    background-color:#ddd;
+    background-color: #ddd;
 }
+
 #LocateButton {
     position: absolute;
     bottom: 160px;
     left: 20px;
 }
+
+
 /* Search Widget */
+
 #search {
     display: inline-block;
     float: right;
     margin: 8px 0 0 0;
     overflow: visible;
 }
+
 div.searchBtn.searchSubmit {
     background-color: #5cb85c;
     color: #ffffff;
 }
+
 div.searchBtn.searchSubmit:hover {
     background-color: #449d44;
 }
+
 span.searchIcon.esriIconZoom {
     display: none;
 }
+
 .arcgisSearch .searchButtonText {
-  display: inline-block;
+    display: inline-block;
 }
+
 .arcgisSearch .searchBtn {
     font-size: .85em;
     padding: 6px 8px;
 }
-.dijitBorderContainerPane, .dijitBorderContainerNoGutterPane {
-   z-index: auto;
+
+.dijitBorderContainerPane,
+.dijitBorderContainerNoGutterPane {
+    z-index: auto;
 }
-.search.suggestionsMenu {
 
+.search.suggestionsMenu {}
+
+#loading {
+    position: relative;
+    margin: auto;
+    top: 41%;
 }
 
-
+#loadimag {
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+    display: block;
+    position: absolute;
+    top: 35%;
+    left: 51%;
+}
 
 
 /* ==========================================
 **** Header Customs Styles ****
 ============================================= */
+
 #header {
     border: none;
     height: 50px;
-    background-color: #000000; /* Old browsers */
+    background-color: #000000;
+    /* Old browsers */
     padding: 0px;
     overflow: visible;
 }
+
 #titlebar {
     position: absolute;
     height: 100%;
 }
-#titlebar h1, h2 {
+
+#titlebar h1,
+h2 {
     margin: 0px;
     /*padding-left: 3px;
     padding-right: 3px;*/
 }
+
 #title1 {
     font-size: 1.4em;
     padding-top: 11.5px;
     padding-bottom: 11.5px;
 }
+
 #title2 {
     font-size: 1.2em;
     padding-top: 13.25px;
     padding-bottom: 13.25px;
 }
+
 .bar {
     font-size: 35px;
 }
+
 #magLogo {
     width: 144px;
     padding: 15px 2px 15px 2px;
 }
+
 .magLogo {
     max-width: 100%;
     height: auto;
 }
+
 ul.tb {
     list-style-type: none;
     float: left;
@@ -384,6 +451,7 @@ ul.tb {
     padding: 0px;
     margin: 0px;
 }
+
 li.tb {
     display: inline-block;
     vertical-align: middle;
@@ -391,31 +459,33 @@ li.tb {
     padding: 0px;
     margin: 0px;
 }
+
+
 /*
 *** navagation button styles
 */
+
 .nav {
-  display: block;
-  float: left;
-  padding-top: 18px;
-  padding-bottom: 18px;
-  padding-left: 10px;
-  padding-right: 10px;
-  font-weight: bold;
-  font-size: .95em;
-  color: #FFFFFF;
-  text-decoration: none;
-  cursor: pointer;
+    display: block;
+    float: left;
+    padding-top: 18px;
+    padding-bottom: 18px;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-weight: bold;
+    font-size: .95em;
+    color: #FFFFFF;
+    text-decoration: none;
+    cursor: pointer;
 }
-.nav:hover{
 
-	color: #8C8C8C;
-
+.nav:hover {
+    color: #8C8C8C;
 }
 
 .aDisabled {
     pointer-events: none;
-    color:gray;
+    color: gray;
 }
 
 #cbrlaunchbar,
@@ -428,34 +498,42 @@ li.tb {
     height: inherit;
     float: right;
 }
+
+
 /*
  * Social Buttons
  */
- #facebook {
- }
- #twitter {
- }
- #linkedin {
- }
- #google {
- }
- #email {
- }
+
+#facebook {}
+
+#twitter {}
+
+#linkedin {}
+
+#google {}
+
+#email {}
+
 .social {
     margin-top: 10px;
 }
+
 #mailicon {
     height: 21px;
     width: 35px;
 }
-.fb-like iframe{
+
+.fb-like iframe {
     position: absolute;
     min-height: 20px !important;
     min-width: 100px !important;
 }
+
+
 /* ==========================================
 **** Query Window styles ****
 ============================================= */
+
 .queryContainer {
     margin: 5px;
     overflow-y: auto;
@@ -465,13 +543,16 @@ li.tb {
     font-weight: bold;
     font-size: 16px;
 }
+
 .queryHeader th {
     height: 30px;
     line-height: 30px;
 }
+
 .queryButtons {
     padding: 4px 12px;
 }
+
 .queryPic {
     display: block;
     margin-right: auto;
@@ -480,46 +561,46 @@ li.tb {
     width: 446.25px;
 }
 
-.queryItem{
+.queryItem {
     margin-left: 3%;
     line-height: 50px;
 }
 
-.inputBoxes{
-    float:right;
+.inputBoxes {
+    float: right;
     margin-right: 1%;
     margin-top: 14px;
     margin-bottom: 10px;
-    color:black;
+    color: black;
 }
 
-.joinDDLClass{
+.joinDDLClass {
     width: 80px;
     margin-left: 40%;
     margin-bottom: 5px;
     margin-top: 5px;
 }
 
-.operatorDDL{
+.operatorDDL {
     margin-right: 10px;
     width: 130px;
 }
 
-.removeRowBtn{
+.removeRowBtn {
     margin-left: 10px;
 }
 
-.strMultiselect{
+.strMultiselect {
     width: 90px;
 }
 
-#dropPrompt{
-    color:black;
+#dropPrompt {
+    color: black;
     margin-left: 40%;
     margin-right: 35%;
     margin-top: 21%;
     /*border: 1px solid black;*/
-    padding:10px;
+    padding: 10px;
     font-size: 18px;
 }
 
@@ -528,82 +609,97 @@ li.tb {
     font-size: .95em;
 }
 
-#runQuery{
+#runQuery {
     background-color: #137721;
 }
 
 #treeView {
     max-height: 350px;
 }
+
 #target {
-  float:left;
-  width:  660px;
-  height: 312px;
-  border: 3px solid black;
-  border-radius: 3px;
-  max-height: 312px;
-  overflow: auto;
-}
-.style1{
-    width: 60px;
-    margin-left:5px;
-    color:black;
+    float: left;
+    width: 660px;
+    height: 312px;
+    border: 3px solid black;
+    border-radius: 3px;
+    max-height: 312px;
+    overflow: auto;
 }
 
-#treeViewContainer{
-    width: 300px;
-    float:left;
+.style1 {
+    width: 60px;
+    margin-left: 5px;
+    color: black;
 }
+
+#treeViewContainer {
+    width: 300px;
+    float: left;
+}
+
+
 /* ==========================================
 **** panel-view.html Window styles ****
 ============================================= */
+
 #reportLauncher {
     padding-top: 5px;
     padding-left: 20px;
     padding-right: 20px;
     padding-bottom: 5px;
 }
+
 #reportLauncher h1 {
     margin: 2px;
     font-size: .95em;
 }
+
 #reportLauncher a {
     text-decoration: none;
     color: #FFFFFF;
 }
+
 #reportLauncher button {
     width: 100%;
     padding: 3px;
     margin-top: 2px;
     font-size: 1em;
 }
+
 #countyChoiceDiv,
 #pnlPlaceChoiceDiv {
     margin-left: 10px !important;
     margin-top: 2px !important;
     /*margin-bottom: 2px !important;*/
 }
+
 .getButton {
     float: right;
     width: 45% !important;
     font-size: .80em !important;
     background-color: #0066cc;
 }
+
 .clearButton {
     float: right;
     width: 45% !important;
     font-size: .80em !important;
     background-color: #0066cc;
 }
+
+
 /* ==========================================
 **** Help-view.html Window styles ****
 ============================================= */
+
 #helpWindow {
     padding-top: 5px;
     padding-left: 15px;
     padding-right: 15px;
     padding-bottom: 15px;
 }
+
 .help h1 {
     font-weight: bold;
     font-size: 1.5em;
@@ -611,171 +707,210 @@ li.tb {
     margin-bottom: 1px;
     color: #10828B;
 }
+
 .help h2 {
     font-weight: bold;
     font-size: 1.1em;
     margin-top: 1px;
     margin-bottom: 1px;
 }
+
 #mapNotes {
     width: 200px;
     height: 100px;
 }
+
 #helpTabs {
     width: 375px;
     height: auto;
     margin: 10px auto;
     padding: 80px, 15px 0 15px;
 }
+
 #tabstrip .tabs {
     font-weight: bold;
     font-size: .95em;
 }
+
 #tabstrip .tabs a {
     color: #10828B;
     /*color: #0066cc;*/
 }
+
 #version {
     text-align: center;
 }
+
 #copyR {
     text-align: center;
     padding-top: 15px;
     padding-bottom: 5px;
 }
+
+
 /* ==========================================
 **** print-view.html Window styles ****
 ============================================= */
+
 #scottMapLayouts {
-     width: 200px;
+    width: 200px;
 }
+
 #printWindow p {
     margin: 5px;
 }
+
 input.mapTitle {
-    width:  300px;
+    width: 300px;
 }
-.mapNotes, .mapTitle {
+
+.mapNotes,
+.mapTitle {
     color: #000000;
 }
+
+
 /* ==========================================
 **** contacts-view.html Window styles ****
 ============================================= */
-#contactsWindow
-p {
+
+#contactsWindow p {
     margin: 5px;
 }
+
 #col-Right {
     margin: 0px;
     padding: 0px;
     float: right;
     width: 600px;
-    }
+}
+
 .twoColLeft {
     width: 270px;
     margin-right: 20px;
     float: left;
     font-size: 0.9em;
 }
+
 .twoColRight {
     float: left;
     width: 270px;
     font-size: 0.9em;
 }
+
+
 /* ==========================================
 **** Custom Kendow Window styles ****
 ============================================= */
+
 .k-window-content.k-content {
     color: #FFFFFF;
 }
+
 .k-window-content {
     font-size: .85em;
     padding: 10px;
 }
+
 .k-icon.k-i-help {
     background-image: url('../img/question-frame.png');
     background-position: 0 0;
 }
+
 .reportTabPageOptionRow {
     height: 25px;
 }
+
 .exportButtonImage {
     width: 20px;
     height: 20px;
     margin: 1px;
 }
+
 .reportExportSpan {
     float: right;
     font-size: .8em;
 }
+
 .smallFont {
     font-size: .8em;
 }
+
 .smallWhiteFont {
     font-size: .8em;
     margin: 5px;
 }
+
 .k-widget.k-combobox.k-header {
     font-size: .85em;
     vertical-align: top;
     width: 180px;
     margin: 0 0 0 5px;
 }
+
 .interactiveItem:hover {
     background-color: #b3d4fc;
 }
+
 #demSelectedFeaturesTab {
     display: none;
 }
+
 .k-tabstrip-items .k-item {
     font-size: .8em;
 }
+
 .k-tooltip {
     margin-left: -50px;
 }
+
 .k-window-title {
     position: relative !important;
 }
+
 .cb {
     background-color: #000000;
 }
+
+
 /* ==========================================
 **** cbr-view.html styles ****
 ============================================= */
+
 #mapHeader {
     margin-bottom: 8px;
 }
-#mapFramesOptionsControl
-{
+
+#mapFramesOptionsControl {
     padding: 5px;
 }
-.mapFramesButtons
-{
+
+.mapFramesButtons {
     padding-left: 40px;
 }
-.mapFramesButtons button
-{
+
+.mapFramesButtons button {
     font-weight: bold;
     width: 20px;
     height: 20px;
 }
-.mapFrameGridControl
-{
+
+.mapFrameGridControl {
     background-color: rgb(29, 29, 29);
     margin: 0 auto;
     width: 220px;
 }
-.mapFrameGridRow
-{
+
+.mapFrameGridRow {
     margin: 0;
     padding: 0;
 }
-.mapFrameGridRow.bottom .mapFrameGridCell
-{
+
+.mapFrameGridRow.bottom .mapFrameGridCell {
     margin-top: 0;
 }
-.mapFrameGridCell
-{
+
+.mapFrameGridCell {
     display: inline-block;
     width: 100px;
     height: 50px;
@@ -787,100 +922,119 @@ p {
     line-height: 50px;
     font-weight: bold;
 }
-.mapFrameGridCell.left
-{
+
+.mapFrameGridCell.left {
     margin-right: 0;
 }
-.mapFrameGridCell:hover
-{
+
+.mapFrameGridCell:hover {
     background-color: gray;
 }
-.mapFrameGridCell.selected
-{
+
+.mapFrameGridCell.selected {
     background-color: #06c;
 }
-.mapFrameGridCell.selected:hover
-{
+
+.mapFrameGridCell.selected:hover {
     background-color: #06c;
 }
+
 #thematicTOC {
     overflow-x: hidden !important;
     padding-right: 20px;
     height: 265px;
     white-space: normal;
 }
+
 #organizer {
     width: 292px;
     height: auto;
     margin: 0 auto;
     padding: 0px 0 0 0;
 }
+
 #breaksControl {
     padding: 5px;
 }
+
 #editCustom {
     margin-left: 10px;
     padding: 3px 8px;
 }
+
 #rampPad {
     cursor: pointer;
 }
+
 #dataClass {
     text-align: center;
     width: 35px;
 }
+
 #dataType {
     left: 90px;
 }
+
 .breaksCount {
     /*display: none;*/
     width: 50px !important;
     margin: 2px 0 2px 0 !important;
 }
+
 .classScheme {
     /*display: none;*/
     width: 130px !important;
     margin: 2px 0 2px 15px !important;
 }
 
+
 /* ==========================================
 **** classBreaks-view.html styles ****
 ============================================= */
+
 #classBreakSliders {
     height: 60px;
 }
+
+
 /* ==========================================
 **** colorRamp-view.html styles ****
 ============================================= */
+
 #colRampWindow {
     overflow-x: hidden !important;
     padding-right: 20px;
     padding-left: 15px;
     padding-top: 5px;
 }
+
 #colRampsList {
     cursor: pointer;
 }
+
 #colText {
     width: 180px;
 }
+
 #citation {
     padding-top: 5px;
 }
+
 .legal {
     font-size: .8em;
 }
+
 .subscribe {
-    padding:10px;
+    padding: 10px;
 }
 
-#subscribeWindow .long{
-margin-left:15px;
-border-radius:5px;
-color:black;
+#subscribeWindow .long {
+    margin-left: 15px;
+    border-radius: 5px;
+    color: black;
 }
 
-#subscribeWindow .form_button{
+#subscribeWindow .form_button {
     margin-left: 40%;
     margin-top: 10px;
     border-radius: 6px;
@@ -894,146 +1048,191 @@ color:black;
     padding: 2px;
     margin: 0px;
 }
+
 .link {
     color: #00ccff;
     cursor: pointer;
     text-decoration: none;
 }
+
+
 /* ==========================================
 **** demographic-view.html styles ****
 ============================================= */
-#demCensusChartListPane, #demACSChartListPane {
 
+#demCensusChartListPane,
+#demACSChartListPane {
     width: 95px !important;
     left: 480px !important;
-    float:right;
+    float: right;
     max-height: 300px;
     overflow-y: scroll;
 }
-.k-splitter .k-ghost-splitbar-horizontal, .k-splitter .k-splitbar-horizontal {
+
+.k-splitter .k-ghost-splitbar-horizontal,
+.k-splitter .k-splitbar-horizontal {
     left: 480px;
-	border-color: transparent;
+    border-color: transparent;
     background-color: transparent;
 }
+
+
 /*#demTabStrip-3 .reportTabPageOptionRow, #demTabStrip-2 .reportTabPageOptionRow {
     height: 15px;
 }*/
+
 .reportTabPageOptionRowEX {
     height: 15px;
 }
-#demCensusChartAreaPane, #demACSChartAreaPane {
+
+#demCensusChartAreaPane,
+#demACSChartAreaPane {
     width: 480px !important;
     float: left;
 }
-#demCensusChartList, #demACSChartList {
-    margin-top:5px;
+
+#demCensusChartList,
+#demACSChartList {
+    margin-top: 5px;
     font-size: 80%;
     border: none;
 }
-.k-treemap{
+
+.k-treemap {
     font-size: 10px;
 }
+
 .demChartCategoryItem {
     cursor: pointer;
     padding-top: 3px;
     padding-bottom: 3px;
 }
-.demChartCategoryItem  button {
+
+.demChartCategoryItem button {
     width: 100%;
 }
-.demChartCategoryItem .k-button{
+
+.demChartCategoryItem .k-button {
     width: 100% !important;
 }
+
 #demExportSummary {
     width: 80px;
 }
+
 #exportReportResponse {
     position: absolute;
     left: 390px;
 }
-#demCensusSplitContainer, #demACSSplitContainer {
+
+#demCensusSplitContainer,
+#demACSSplitContainer {
     margin: 0px 0 0 0;
 }
+
 .reportTabPageOptionRow {
     padding-top: 2px;
     padding-bottom: 2px;
 }
+
 .myHiddenClass {
     visibility: hidden;
     display: none;
 }
+
 .colT {
     border-style: outset;
     border-color: #383838;
 }
+
 .exStyle {
     width: 80px;
 }
+
+
 /* ==========================================
 **** selectedFeaturesTabPage-view.html styles ****
 ============================================= */
+
 .k-grid-header .k-header {
     white-space: normal !important;
     text-align: center !important;
     padding: 0px !important;
 }
+
 #demFeatGrid.k-grid td {
     text-align: center;
     font-size: .85em;
 }
+
 #demFeatGrid.k-grid-header {
     padding-left: 30px;
     padding-right: 12px;
 }
+
+
 /* ==========================================
 **** legend-view.html styles ****
 ============================================= */
+
 #legendTitle {
     text-align: center;
     font-size: 1.2em;
     font-weight: bold;
     padding-bottom: 5px;
 }
+
 #sliderDiv {
     margin-left: 17px;
     margin-right: 17px;
 }
+
 .layersList {
     list-style: none;
     margin: 0px 5px;
     padding: 0px;
 }
+
 .layerListLabel {
     margin: 0px 5px;
 }
+
 .sliderInfo {
     font-size: .8em;
     padding: 2px;
     margin: 0px;
     text-align: center;
 }
+
 .vertMiddle {
     vertical-align: middle;
 }
+
 .balSlider .k-slider-selection {
     width: 300px;
     display: none;
 }
+
 #legendDiv .esriLegendServiceLabel {
     display: none;
 }
+
 .esriLegendLayerLabel {
     display: none;
 }
+
 #organizer2 {
     width: 230px;
     height: auto;
     margin: 0 auto;
     padding: 0px 0 0 0;
 }
+
+
 /* ==========================================
 **** warning-view.html styles ****
 ============================================= */
+
 .alert h1 {
     font-weight: bold;
     text-align: center;
@@ -1042,57 +1241,76 @@ color:black;
     margin-bottom: 1px;
     color: #FF0000;
 }
+
 .warningButton {
     font-size: 1.1em;
     font-weight: bold;
     margin-left: 10px;
     padding: 6px 8px;
 }
+
 #warnButton {
     width: 100%;
     text-align: center;
 }
+
 #fCount2 {
     font-size: 1.1em;
     font-weight: bold;
     color: #FF0000;
 }
+
 #a2 {
     text-align: center;
 }
+
+
 /* ==========================================
 **** Popup styles ****
 ============================================= */
+
 .esriPopup .titleButton.maximize {
     display: none;
 }
+
 .esriPopup .titleButton.next {
-  right: 25px;
+    right: 25px;
 }
+
 .esriPopup .titleButton.prev {
-  right: 50px;
+    right: 50px;
 }
+
+
 /* ==========================================
 **** Custom scrollbar CSS styles ****
 ============================================= */
- ::-webkit-scrollbar {
+
+::-webkit-scrollbar {
     width: 12px;
 }
+
 ::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
     border-radius: 10px;
 }
+
 ::-webkit-scrollbar-thumb {
     border-radius: 10px;
-    background-color: rgba(120,120,120,0.8);
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+    background-color: rgba(120, 120, 120, 0.8);
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
 }
+
+
 /* ==========================================================================
    Helper classes
    ========================================================================== */
+
+
 /*
  * Image replacement
  */
+
 .ir {
     background-color: transparent;
     border: 0;
@@ -1100,22 +1318,29 @@ color:black;
     /* IE 6/7 fallback */
     *text-indent: -9999px;
 }
+
 .ir:before {
     content: "";
     display: block;
     width: 0;
     height: 150%;
 }
+
+
 /*
  * Hide from both screenreaders and browsers: h5bp.com/u
  */
+
 .hidden {
     display: none !important;
     visibility: hidden;
 }
+
+
 /*
  * Hide only visually, but have it available for screenreaders: h5bp.com/v
  */
+
 .visuallyhidden {
     border: 0;
     clip: rect(0 0 0 0);
@@ -1126,6 +1351,8 @@ color:black;
     position: absolute;
     width: 1px;
 }
+
+
 /*
  * Extends the .visuallyhidden class to allow the element to be focusable
  * when navigated to via the keyboard: h5bp.com/p
@@ -1141,6 +1368,7 @@ color:black;
     width: auto;
 }
 
+
 /*
  * Hide visually and from screenreaders, but maintain layout
  */
@@ -1148,6 +1376,7 @@ color:black;
 .invisible {
     visibility: hidden;
 }
+
 
 /*
  * Clearfix: contain floats
@@ -1163,13 +1392,16 @@ color:black;
 
 .clearfix:before,
 .clearfix:after {
-    content: " "; /* 1 */
-    display: table; /* 2 */
+    content: " ";
+    /* 1 */
+    display: table;
+    /* 2 */
 }
 
 .clearfix:after {
     clear: both;
 }
+
 
 /*
  * For IE 6/7 only
@@ -1180,28 +1412,38 @@ color:black;
     *zoom: 1;
 }
 
+
 /* ==========================================================================
    EXAMPLE Media Queries for Responsive Design.
    These examples override the primary ('mobile first') styles.
    Modify as content requires.
    ========================================================================== */
 
+
 /*** Tablets (iPad) ***/
+
+
 /*@media only screen and (min-device-width : 768px) and (max-device-width : 1024px)*/
-@media only screen and (min-width : 768px) and (max-width : 1024px) {
-/* Style adjustments for viewports that meet the condition */
 
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+    /* Style adjustments for viewports that meet the condition */
 }
+
+
 /*** Mobile (iPhone) ***/
-/*@media only screen and (min-device-width : 320px) and (max-device-width : 480px)*/
-@media only screen and (min-width : 320px) and (max-width : 480px) {
-/* Style adjustments for viewports that meet the condition */
 
+
+/*@media only screen and (min-device-width : 320px) and (max-device-width : 480px)*/
+
+@media only screen and (min-width: 320px) and (max-width: 480px) {
+    /* Style adjustments for viewports that meet the condition */
 }
+
 
 /* Large devices (desktops, less than 1200px) */
+
 @media only screen and (max-width: 1200px) {
-/* Style adjustments for viewports that meet the condition */
+    /* Style adjustments for viewports that meet the condition */
     #title1 {
         font-size: 1.2em;
         padding-top: 13.5px;
@@ -1220,7 +1462,7 @@ color:black;
         max-width: 95%;
         height: auto;
     }
-/* **** help-view.html styles *** */
+    /* **** help-view.html styles *** */
     .help h1 {
         font-size: 1.2em;
     }
@@ -1233,7 +1475,7 @@ color:black;
     #tabstrip .tabs {
         font-size: .90em;
     }
-/* **** cbr-view.html styles *** */
+    /* **** cbr-view.html styles *** */
     #organizer {
         width: 290px;
     }
@@ -1242,7 +1484,7 @@ color:black;
         width: 130px !important;
         margin: 2px 0 2px 10px !important;
     }
-/* **** legend-view.html styles *** */
+    /* **** legend-view.html styles *** */
     #organizer2 {
         width: auto;
     }
@@ -1257,9 +1499,11 @@ color:black;
     }
 }
 
+
 /* Medium devices (desktops, less than 1024px) */
+
 @media only screen and (max-width: 1024px) {
-/* Style adjustments for viewports that meet the condition */
+    /* Style adjustments for viewports that meet the condition */
     #title1 {
         font-size: .95em;
         padding: 16px 0 16px 0;
@@ -1294,7 +1538,7 @@ color:black;
         max-width: 95%;
         height: auto;
     }
-/***** help-view.html styles *** */
+    /***** help-view.html styles *** */
     .help h1 {
         font-size: 1.2em;
     }
@@ -1307,7 +1551,7 @@ color:black;
     #tabstrip .tabs {
         font-size: .90em;
     }
-/***** cbr-view.html styles *** */
+    /***** cbr-view.html styles *** */
     #organizer {
         width: 275px;
     }
@@ -1316,7 +1560,7 @@ color:black;
         width: 130px !important;
         margin: 2px 0 2px 10px !important;
     }
-/***** legend-view.html styles *** */
+    /***** legend-view.html styles *** */
     #organizer2 {
         width: auto;
     }
@@ -1337,9 +1581,11 @@ color:black;
     }
 }
 
+
 /* Small devices (tablets, less than 768px) */
+
 @media only screen and (max-width: 800px) {
-/* Style adjustments for viewports that meet the condition */
+    /* Style adjustments for viewports that meet the condition */
     #title1 {
         font-size: .8em;
         padding: 17px 0 17px 0;
@@ -1378,7 +1624,7 @@ color:black;
         max-width: 95%;
         height: auto;
     }
-/* **** help-view.html styles *** */
+    /* **** help-view.html styles *** */
     .help h1 {
         font-size: 1.2em;
     }
@@ -1391,7 +1637,7 @@ color:black;
     #tabstrip .tabs {
         font-size: .85em;
     }
-/* **** cbr-view.html styles *** */
+    /* **** cbr-view.html styles *** */
     #organizer {
         width: 280px;
     }
@@ -1400,7 +1646,7 @@ color:black;
         width: 130px !important;
         margin: 2px 0 2px 10px !important;
     }
-/* **** legend-view.html styles *** */
+    /* **** legend-view.html styles *** */
     #organizer2 {
         width: 190px
     }
@@ -1413,21 +1659,22 @@ color:black;
     #legendTitle {
         font-size: .75em;
     }
-/* **** cbr-view.html styles *** */
+    /* **** cbr-view.html styles *** */
     #thematicTOC {
         overflow-x: hidden !important;
         padding-right: 20px;
         height: 190px;
     }
-
 }
 
+
 /* Small devices (phones, less than 668px) */
+
 @media only screen and (max-width: 668px) {
     /* Style adjustments for viewports that meet the condition */
     .nav {
-      padding: 16.5px 5px 16.5px 5px;
-      font-size: .80em;
+        padding: 16.5px 5px 16.5px 5px;
+        font-size: .80em;
     }
     .nav:hover {
         color: #8C8C8C;
@@ -1472,7 +1719,7 @@ color:black;
         max-width: 90%;
         height: auto;
     }
-/* **** help-view.html styles *** */
+    /* **** help-view.html styles *** */
     .help h1 {
         font-size: 1.2em;
     }
@@ -1485,7 +1732,7 @@ color:black;
     #tabstrip .tabs {
         font-size: .85em;
     }
-/* **** cbr-view.html styles *** */
+    /* **** cbr-view.html styles *** */
     #organizer {
         width: 280px;
     }
@@ -1494,7 +1741,7 @@ color:black;
         width: 130px !important;
         margin: 2px 0 2px 10px !important;
     }
-/* **** legend-view.html styles *** */
+    /* **** legend-view.html styles *** */
     #organizer2 {
         width: 190px
     }
@@ -1516,11 +1763,12 @@ color:black;
 }
 
 @media print,
-       (-o-min-device-pixel-ratio: 5/4),
-       (-webkit-min-device-pixel-ratio: 1.25),
-       (min-resolution: 120dppx) {
+(-o-min-device-pixel-ratio: 5/4),
+(-webkit-min-device-pixel-ratio: 1.25),
+(min-resolution: 120dppx) {
     /* Style adjustments for high resolution devices */
 }
+
 
 /* ==========================================================================
    Print styles.
@@ -1530,90 +1778,83 @@ color:black;
 @media print {
     * {
         background-color: transparent !important;
-        color: #000000 !important; /* Black prints faster: h5bp.com/s */
+        color: #000000 !important;
+        /* Black prints faster: h5bp.com/s */
         box-shadow: none !important;
         text-shadow: none !important;
     }
-
     a,
     a:visited {
         text-decoration: underline;
     }
-
     a[href]:after {
         content: " (" attr(href) ")";
     }
-
     abbr[title]:after {
         content: " (" attr(title) ")";
     }
-
     /*
      * Don't show links for images, or javascript/internal links
      */
-
     .ir a:after,
     a[href^="javascript:"]:after,
     a[href^="#"]:after {
         content: "";
     }
-
     pre,
     blockquote {
         border: 1px solid #999;
         page-break-inside: avoid;
     }
-
     thead {
-        display: table-header-group; /* h5bp.com/t */
+        display: table-header-group;
+        /* h5bp.com/t */
     }
-
     tr,
     img {
         page-break-inside: avoid;
     }
-
     img {
         width: 100%;
         max-width: 100% !important;
     }
-
     @page {
         margin: 0.5cm;
     }
-
     p,
     h2,
     h3 {
         orphans: 3;
         widows: 3;
     }
-
     h2,
     h3 {
         page-break-after: avoid;
     }
-
-
 }
 
 
 /*Markup Tools Styling*/
+
 .k-colorpalette .k-item.k-state-selected {
-    -webkit-box-shadow: 2px 2px 2px 2px #000,1px 1px 1px 4px #fff;
-    -moz-box-shadow: 2px 2px 2px 2px #000,1px 1px 1px 4px #fff;
-    box-shadow: 2px 2px 2px 2px #000,1px 1px 1px 4px #fff;
+    -webkit-box-shadow: 2px 2px 2px 2px #000, 1px 1px 1px 4px #fff;
+    -moz-box-shadow: 2px 2px 2px 2px #000, 1px 1px 1px 4px #fff;
+    box-shadow: 2px 2px 2px 2px #000, 1px 1px 1px 4px #fff;
 }
-#mtSliderDiv{
-    margin: 0px 5px 5px 5px ;
+
+#mtSliderDiv {
+    margin: 0px 5px 5px 5px;
 }
+
 .editMarkupBtns button.active {
     background-color: #06c;
 }
-.editMarkupBtns{
+
+.editMarkupBtns {
     margin-left: 20%;
 }
-.queryResultCount{
+
+.queryResultCount {
     height: 22px;
     padding: 5px 15px 5px 15px;
     margin-top: 8px;
@@ -1621,39 +1862,47 @@ color:black;
     width: 300px;
     border-radius: 3px;
 }
-.k-treeview .k-sprite, .k-treeview .k-image {
-            vertical-align: middle;
-        }
 
-.mapLayerLabel{
+.k-treeview .k-sprite,
+.k-treeview .k-image {
+    vertical-align: middle;
+}
+
+.mapLayerLabel {
     margin-left: 10px;
 }
-.mapLayerLabel:hover{
+
+.mapLayerLabel:hover {
     cursor: pointer;
 }
 
 .resultBanner {
-    background: White; /* For browsers that do not support gradients */
-    background: -webkit-linear-gradient(White, LightGray); /* For Safari 5.1 to 6.0 */
-    background: -o-linear-gradient(White, LightGray); /* For Opera 11.1 to 12.0 */
-    background: -moz-linear-gradient(White, LightGray); /* For Firefox 3.6 to 15 */
-    background: linear-gradient(White, LightGray); /* Standard syntax (must be last) */
+    background: White;
+    /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(White, LightGray);
+    /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(White, LightGray);
+    /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(White, LightGray);
+    /* For Firefox 3.6 to 15 */
+    background: linear-gradient(White, LightGray);
+    /* Standard syntax (must be last) */
     color: black;
 }
 
-.panelBarLi .k-state-selected{
+.panelBarLi .k-state-selected {
     background-color: transparent;
 }
 
-circle:hover{
-/*    stroke: black;
+circle:hover {
+    /*    stroke: black;
     stroke-width: 2;*/
     cursor: pointer;
 }
 
 .bubbleChart {
-      min-width: 100px;
-      max-width: 700px;
-      height: 300px;
-      margin: 0 auto;
-    }
+    min-width: 100px;
+    max-width: 700px;
+    height: 300px;
+    margin: 0 auto;
+}
