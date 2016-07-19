@@ -18,9 +18,10 @@ And constructed with the following guidelines:
 
 ***************************************************************************************************************
 
-## Version 2.2.11 | 07/18/2016
+## Version 2.2.11 | 07/19/2016
 
 * Small spelling mistake
+* Updated excel reports to have accurate headers and source label.
 
 ## Version 2.2.10 | 06/24/2016
 
