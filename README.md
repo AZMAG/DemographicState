@@ -19,7 +19,7 @@ This web app viewer was developed by MAG staff for MAG member agencies and the p
 
 ## Keywords
 
-`Demographics` `Census` `2010` `American Community Survey` `ACS` `2010-2014` `5yr` `State` `Arizona` `Block Group``Maps` `MAG` `ESRI` `#MAGmaps`
+`Demographics` `Census` `2010` `American Community Survey` `ACS` `2010-2014` `5yr` `counties` `State` `Arizona` `block group` `Maps` `MAG` `ESRI` `#MAGmaps`
 
 ## Version
 
