@@ -19,38 +19,39 @@ This web app viewer was developed by MAG staff for MAG member agencies and the p
 
 ## Keywords
 
-`Demographics` `Census` `2010` `American Community Survey` `ACS` `2010-2014` `5yr` `State of Arizona` `Maps` `MAG` `ESRI` `#MAGmaps`
+`Demographics` `Census` `2010` `American Community Survey` `ACS` `2010-2014` `5yr` `Counties` `State` `Arizona` `Maps` `MAG` `ESRI` `#MAGmaps`
 
 ## Version
 
-#### `version 2.2.10` ####
+### `version 2.2.11` ###
 
- `Updated: 06/24/2016`
+ `Updated: 07/22/2016`
 
  `Created: 10/21/2014`
 
 Releases will be numbered with the following format:
 
-`<major>.<minor>.<patch>`
+**`<major>.<minor>.<patch>`**
 
 And constructed with the following guidelines:
 
-1. MAJOR version when you make incompatible API changes **bumps the major** resets minor and patch
-2. MINOR version when you add functionality in a backwards-compatible manner **bumps the minor** resets patch
-3. PATCH version when you make backwards-compatible bug fixes and misc changes **bumps only the patch**
+1. **MAJOR** version when you make incompatible API changes **bumps the major** resets minor and patch
+2. **MINOR** version when you add functionality in a backwards-compatible manner **bumps the minor** resets patch
+3. **PATCH** version when you make backwards-compatible bug fixes and misc changes **bumps only the patch**
 
 ## Credits
 
 `Maricopa Association of Governments (MAG) and the MAG member agencies`
 
 ## Site URL's
-* [Site] (http://geo.azmag.gov/maps/azdemographics/)
+
+* [http://geo.azmag.gov/maps/azdemographics/] (http://geo.azmag.gov/maps/azdemographics/)
 
 ## Documentation
 
 A detailed list of the changes and fixes in each version update can be found in the CHANGELOG.md.
 
-- [CHANGELOG] (CHANGELOG.md)
+* [CHANGELOG] (CHANGELOG.md)
 
 ## Resources
 
@@ -73,7 +74,7 @@ Please acknowledge the Maricopa Association of Governments (MAG) GIS as the sour
 
 Code released under the MIT license.
 
-- [LICENSE] (LICENSE)
+* [LICENSE] (LICENSE)
 
 Copyright (c) 2016 Maricopa Association of Governments
 
