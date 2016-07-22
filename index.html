@@ -13,8 +13,8 @@
     <meta name="contact" content="www.azmag.gov">
     <meta name="url" content="http://geo.azmag.gov/maps/azdemographics/">
     <meta name="creation-date" content="10/21/2014">
-    <meta name="revision-date" content="06/24/2016">
-    <meta name="version" content="2.2.10">
+    <meta name="revision-date" content="07/22/2016">
+    <meta name="version" content="2.2.11">
     <!-- Apple-Specific Meta Tags -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -54,9 +54,9 @@
     <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2015.2.902/styles/kendo.common.min.css" />
     <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2013.1.514/styles/kendo.black.min.css" />
     <!-- Application CSS -->
-    <link rel="stylesheet" href="app/resources/css/normalize.css">
-    <link rel="stylesheet" href="app/resources/css/main.css">
-    <!-- <link rel="stylesheet" type="text/css" href="app/resources/css/concat.min.css"> -->
+    <!-- <link rel="stylesheet" href="app/resources/css/normalize.css"> -->
+    <!-- <link rel="stylesheet" href="app/resources/css/main.css"> -->
+    <link rel="stylesheet" type="text/css" href="app/resources/css/concat.min.css">
     <!-- prevent cache -->
     <!--  removed once App goes into production -->
     <!-- <meta http-equiv="cache-control" content="no-cache">
@@ -93,6 +93,13 @@
     <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
+    <div id="load">
+        <div id="loadingBox">
+            <h2>Loading MAG Viewer...</h2>
+            <br>
+            <img src="http://smallenvelop.com/wp-content/uploads/2014/08/Preloader_3.gif">
+        </div>
+    </div>
     <div id="borderContainer" data-dojo-type="dijit.layout.BorderContainer" data-dojo-props="design:" headline ", gutters:false">
         <header id="header" data-dojo-type="dijit.layout.ContentPane" data-dojo-props="region:" top ", gutters:false">
             <div id="titlebar">
@@ -116,6 +123,16 @@
         <div id="display" data-dojo-type="dijit.layout.ContentPane" data-dojo-props="region:'center'">
         </div>
     </div>
+    <script type="text/javascript">
+    document.onreadystatechange = function() {
+        var state = document.readyState
+        if (state == 'complete') {
+            setTimeout(function() {
+                $("#load").fadeOut();
+            }, 500);
+        }
+    }
+    </script>
     <!-- /borderContainer -->
     <!-- *** JavaScript *** -->
     <!-- =================================================================================================== -->

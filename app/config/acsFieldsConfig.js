@@ -2228,9 +2228,9 @@
 			   },
 			   {
 			      "fieldName":"AVG_HH_SIZE_OWNER_HU",
-			      "fieldAlias":"Avgerage Household Size Owner Housing Units",
+			      "fieldAlias":"Average Household Size Owner Housing Units",
 			      "fieldType":"Number",
-			      "tableHeader":"Avgerage Household Size Owner Housing Units",
+			      "tableHeader":"Average Household Size Owner Housing Units",
 			      "category":"Housing Units",
 			      "rowID":97,
 			      "groupID":"<span class='myHiddenClass'>08</span>Housing Units",

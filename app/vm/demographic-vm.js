@@ -2539,37 +2539,40 @@
                     var headerValue = self.communityName;
                     var colSpan;
                     var rowSpan;
+                    var sourceLabel = appConfig.sourceLabel;
 
                     if (exportButtonId === "demACSExportResults") {
                         //Summary report export button clicked
                         grid = $("#demACSDataGrid").data("kendoGrid");
-                        headerValue = self.communityName + " Demographics";
+                        headerValue = self.communityName + " ACS 2014 Data";
                         fileName = self.communityName + ".xlsx";
                         if (self.compareFeature === null) {
                             colSpan = 4;
                             rowSpan = 25;
                         } else {
                             colSpan = 6;
-                            rowSpan = 20;
+                            rowSpan = 18;
                         }
                     } else if (exportButtonId === "demCensusExportResults") {
                         grid = $("#demCensusDataGrid").data("kendoGrid");
-                        headerValue = self.communityName + " Demographics";
+                        headerValue = self.communityName + " Census 2010 Data";
                         fileName = self.communityName + ".xlsx";
+                        sourceLabel = appConfig.sourceLabel2;
                         if (self.compareFeature === null) {
                             colSpan = 4;
                             rowSpan = 25;
                         } else {
                             colSpan = 6;
-                            rowSpan = 20;
+                            rowSpan = 18;
                         }
                     } else if (exportButtonId === "demCensusExportSelFeatResults") {
                         //Block group export clicked
                         grid = $("#demCensusFeatGrid").data("kendoGrid");
                         headerValue = "Selected Block Groups";
                         fileName = self.communityName + ".xlsx";
-                        colSpan = 22;
-                        rowSpan = 7;
+                        sourceLabel = appConfig.sourceLabel2;
+                        colSpan = 40;
+                        rowSpan = 6;
                     } else if (exportButtonId === "demACSExportSelFeatResults") {
                         //Block group export clicked
                         grid = $("#demACSFeatGrid").data("kendoGrid");
@@ -2579,7 +2582,7 @@
                         rowSpan = 7;
                     }
 
-                    if (self.compareFeature !== null) {
+                    if (self.compareFeature !== null && exportButtonId !== "demCensusExportSelFeatResults" && exportButtonId !== "demACSExportSelFeatResults") {
                         headerValue = self.communityName + " - " + self.compareToName + " Comparative Demographic Report";
                     }
 
@@ -2636,7 +2639,7 @@
                                 color: "#fff",
                                 rowSpan: 1,
                                 fontSize: 11,
-                                value: appConfig.sourceLabel,
+                                value: sourceLabel,
                                 hAlign: "left",
                                 wrap: true
                             }]
@@ -2683,7 +2686,7 @@
 
                         if (rows[0].headerRow !== "added") {
                             //Add custom header row
-                            if (compareRow !== null) {
+                            if (compareRow !== null && exportButtonId !== "demCensusExportSelFeatResults" && exportButtonId !== "demACSExportSelFeatResults") {
                                 rows.unshift(compareRow);
                             }
                             rows.unshift(headerRow);
