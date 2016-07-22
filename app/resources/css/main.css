@@ -1906,3 +1906,23 @@ circle:hover {
     height: 300px;
     margin: 0 auto;
 }
+
+
+#load {
+    width: 100%;
+    height: 100%;
+    background-color: lightgray;
+    background: rgba(0, 0, 0, 0.4);
+    position: fixed;
+    z-index: 9999999999;
+}
+
+#loadingBox {
+    color: white;
+    margin-left: 0%;
+    text-align: center;
+    margin-top: 15%;
+    background-color: gray;
+    background: rgba(0, 0, 0, .6);
+    padding: 5%;
+}

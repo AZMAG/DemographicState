@@ -18,6 +18,10 @@ And constructed with the following guidelines:
 
 ***************************************************************************************************************
 
+## Version 2.2.12 | 07/21/2016
+
+* Added loading splash screen
+
 ## Version 2.2.11 | 07/19/2016
 
 * Small spelling mistake

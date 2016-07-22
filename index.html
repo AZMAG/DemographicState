@@ -93,6 +93,13 @@
     <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
+    <div id="load">
+        <div id="loadingBox">
+            <h2>Loading MAG Viewer...</h2>
+            <br>
+            <img src="http://smallenvelop.com/wp-content/uploads/2014/08/Preloader_3.gif">
+        </div>
+    </div>
     <div id="borderContainer" data-dojo-type="dijit.layout.BorderContainer" data-dojo-props="design:" headline ", gutters:false">
         <header id="header" data-dojo-type="dijit.layout.ContentPane" data-dojo-props="region:" top ", gutters:false">
             <div id="titlebar">
@@ -116,6 +123,16 @@
         <div id="display" data-dojo-type="dijit.layout.ContentPane" data-dojo-props="region:'center'">
         </div>
     </div>
+    <script type="text/javascript">
+    document.onreadystatechange = function() {
+        var state = document.readyState
+        if (state == 'complete') {
+            setTimeout(function() {
+                $("#load").fadeOut();
+            }, 500);
+        }
+    }
+    </script>
     <!-- /borderContainer -->
     <!-- *** JavaScript *** -->
     <!-- =================================================================================================== -->
