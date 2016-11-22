@@ -47,12 +47,13 @@ var appConfig = new function() {
 
     // Search Service URLs
     this.geoCoderService = "//geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer";
-    this.countyService = this.mainURL + "/2";
+    this.countyService = this.mainURL + "/3";
+    this.cogService = this.mainURL + "/2";
     this.placeService = this.mainURL + "/1";
-    this.legislativeService = this.mainURL + "/3";
-    this.congressionalService = this.mainURL + "/4";
-    this.zipCodeService = this.mainURL + "/5";
-    this.tractService = this.mainURL + "/15";
+    this.legislativeService = this.mainURL + "/4";
+    this.congressionalService = this.mainURL + "/5";
+    this.zipCodeService = this.mainURL + "/6";
+    this.tractService = this.mainURL + "/17";
 
     this.layerInfo = [{
         layerNum: 0,
@@ -60,22 +61,38 @@ var appConfig = new function() {
         title: "Census Tract Labels",
         type: "dynamic",
         url: this.mainURL,
-        queryUrl: this.mainURL + "/16",
+        queryUrl: this.mainURL + "/18",
         queryWhere: "1=1",
-        layers: [15, 16],
+        layers: [17, 18],
         opacity: 1,
         visible: false,
         showTOC: true,
         link: false
     }, {
         layerNum: 1,
+        id: "cogBoundaries",
+        title: "Cog / Mpo Boundaries",
+        type: "feature",
+        url: this.mainURL + "/2",
+        queryUrl: this.mainURL + "/2",
+        queryWhere: "1=1",
+        layers: [2],
+        opacity: 1,
+        visible: false,
+        selectable: true,
+        outFields: ["*"],
+        filters: [],
+        showTOC: true,
+        link: true
+    }, {
+        layerNum: 2,
         id: "countyBoundaries",
         title: "County Boundaries",
         type: "feature",
-        url: this.mainURL + "/14",
-        queryUrl: this.mainURL + "/14",
+        url: this.mainURL + "/16",
+        queryUrl: this.mainURL + "/16",
         queryWhere: "1=1",
-        layers: [14],
+        layers: [16],
         opacity: 1,
         visible: true,
         selectable: true,
@@ -84,41 +101,9 @@ var appConfig = new function() {
         showTOC: true,
         link: true
     }, {
-        layerNum: 2,
+        layerNum: 3,
         id: "congressionalDistricts",
         title: "Congressional Districts",
-        type: "feature",
-        url: this.mainURL + "/12",
-        queryUrl: this.mainURL + "/12",
-        queryWhere: "1=1",
-        layers: [12],
-        opacity: 1,
-        visible: false,
-        selectable: true,
-        outFields: ["*"],
-        filters: [],
-        showTOC: true,
-        link: true
-    }, {
-        layerNum: 3,
-        id: "legislativeDistricts",
-        title: "Legislative Districts",
-        type: "feature",
-        url: this.mainURL + "/13",
-        queryUrl: this.mainURL + "/13",
-        queryWhere: "1=1",
-        layers: [13],
-        opacity: 1,
-        visible: false,
-        selectable: true,
-        outFields: ["*"],
-        filters: [],
-        showTOC: true,
-        link: true
-    }, {
-        layerNum: 4,
-        id: "zipCodes",
-        title: "Zip Codes",
         type: "feature",
         url: this.mainURL + "/5",
         queryUrl: this.mainURL + "/5",
@@ -132,7 +117,39 @@ var appConfig = new function() {
         showTOC: true,
         link: true
     }, {
+        layerNum: 4,
+        id: "legislativeDistricts",
+        title: "Legislative Districts",
+        type: "feature",
+        url: this.mainURL + "/4",
+        queryUrl: this.mainURL + "/4",
+        queryWhere: "1=1",
+        layers: [4],
+        opacity: 1,
+        visible: false,
+        selectable: true,
+        outFields: ["*"],
+        filters: [],
+        showTOC: true,
+        link: true
+    }, {
         layerNum: 5,
+        id: "zipCodes",
+        title: "Zip Codes",
+        type: "feature",
+        url: this.mainURL + "/6",
+        queryUrl: this.mainURL + "/6",
+        queryWhere: "1=1",
+        layers: [6],
+        opacity: 1,
+        visible: false,
+        selectable: true,
+        outFields: ["*"],
+        filters: [],
+        showTOC: true,
+        link: true
+    }, {
+        layerNum: 6,
         id: "esriReference",
         title: "Streets",
         type: "tile",
@@ -140,7 +157,7 @@ var appConfig = new function() {
         visible: true,
         showTOC: true
     }, {
-        layerNum: 6,
+        layerNum: 7,
         id: "ACS2014byBlockGroup",
         title: "American Community Survey by Block Group, 2010-2014 5yr",
         type: "dynamic",
@@ -151,7 +168,7 @@ var appConfig = new function() {
         showTOC: false,
         link: false
     }, {
-        layerNum: 7,
+        layerNum: 8,
         id: "esriBasemap",
         title: "Terrain",
         type: "tile",
@@ -163,7 +180,7 @@ var appConfig = new function() {
         isBasemap: false,
         showTOC: false
     }, {
-        layerNum: 8,
+        layerNum: 9,
         id: "esriImagery",
         title: "Imagery",
         type: "tile",

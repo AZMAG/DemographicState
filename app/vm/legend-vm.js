@@ -271,6 +271,16 @@
                                 self.legislativeLegend.destroy();
                             }
                         }
+                    } else if (layer.id === "cogBoundaries") {
+                        if (layer.visible === true) {
+                            self.CogLegend();
+                            bookmarkDelegate.legendLayerOptions.remove("c" + layerId);
+                        } else {
+                            bookmarkDelegate.legendLayerOptions.push("c" + layerId);
+                            if (self.cogLegend) {
+                                self.cogLegend.destroy();
+                            }
+                        }
                     }
                     tp.publish("BaseLayersUpdated");
                 };
@@ -328,6 +338,21 @@
                         id: "legendDiv5"
                     }, insertElement, "after"));
                     self.legislativeLegend.startup();
+                };
+
+                self.CogLegend = function() {
+                    var insertElement = "legendDiv";
+                    self.cogLegend = new Legend({
+                        map: mapModel.mapInstance,
+                        layerInfos: [{
+                            layer: mapModel.mapInstance.getLayer("cogBoundaries"),
+                            title: "COG / MPO boundaries"
+                        }],
+                        autoUpdate: true
+                    }, dc.create("div", {
+                        id: "legendDiv6"
+                    }, insertElement, "after"));
+                    self.cogLegend.startup();
                 };
 
                 //Thematic Legend

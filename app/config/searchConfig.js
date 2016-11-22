@@ -36,6 +36,14 @@
                 outFields: ["*"],
                 placeholder: "Pinal County"
             }, {
+                featureLayer: new FeatureLayer(appConfig.cogService),
+                searchFields: ["NAME"],
+                displayField: "NAME",
+                autoNavigate: true,
+                name: "COG / MPO",
+                outFields: ["*"],
+                placeholder: "Southeastern Arizona Governments Assoc."
+            }, {
                 featureLayer: new FeatureLayer(appConfig.legislativeService),
                 searchFields: ["SLDIST_NAME"],
                 displayField: "SLDIST_NAME",

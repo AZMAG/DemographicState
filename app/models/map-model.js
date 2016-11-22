@@ -123,6 +123,15 @@
                     "Senator: ${Senator} - (${Party_Sen})<br>");
 
                 /**
+                 * infoTemplate for Cogs / MPOs
+                 * @type {InfoTemplate}
+                 */
+                self.cogInfoTemplate = new InfoTemplate();
+                self.cogInfoTemplate.setTitle("COGs / MPOs");
+                self.cogInfoTemplate.setContent("<strong><div id='cogLink'>${NAME}</div></strong><br>" +
+                    "<strong>Name:</strong> ${NAME}");
+
+                /**
                  * infoTemplate for ZIP code areas
                  * @type {InfoTemplate}
                  */
@@ -321,6 +330,9 @@
                             }
                             if (info.id === "countyBoundaries") {
                                 featureTemplate = self.countyInfoTemplate;
+                            }
+                            if (info.id === "cogBoundaries") {
+                                featureTemplate = self.cogInfoTemplate;
                             }
 
                             layer = new FeatureLayer(info.url + token, {

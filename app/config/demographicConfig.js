@@ -12,7 +12,7 @@
                 self.exportPDFReportUrl = "http://geo.azmag.gov/services/Demographics2014/reports.html";
 
                 self.viewReportUrl = "http://localhost/MAG/MAGDemographicsReports/DemographicChartsReport.html";
-                self.ACS2014byBlockGroup = appConfig.layerInfo[6].url;
+                self.ACS2014byBlockGroup = appConfig.layerInfo[7].url;
 
                 self.CompareOperators = {
                     string: [{
@@ -314,11 +314,11 @@
 
                     stateSummary: {
                         name: "Demographic Summary",
-                        censusRestUrl: self.ACS2014byBlockGroup + "/8",
-                        ACSRestUrl: self.ACS2014byBlockGroup + "/2",
+                        censusRestUrl: self.ACS2014byBlockGroup + "/10",
+                        ACSRestUrl: self.ACS2014byBlockGroup + "/3",
                         whereClause: "NAME = 'Arizona State'",
-                        compareCensusUrl: self.ACS2014byBlockGroup + "/8",
-                        compareACSUrl: self.ACS2014byBlockGroup + "/2",
+                        compareCensusUrl: self.ACS2014byBlockGroup + "/10",
+                        compareACSUrl: self.ACS2014byBlockGroup + "/3",
                         compareWhereClause: "OBJECTID > -1",
                         comparePlaceField: "NAME",
                         summaryField: "NAME",
@@ -329,11 +329,11 @@
 
                     countySummary: {
                         name: "Demographic Summary",
-                        censusRestUrl: self.ACS2014byBlockGroup + "/8",
-                        ACSRestUrl: self.ACS2014byBlockGroup + "/2",
+                        censusRestUrl: self.ACS2014byBlockGroup + "/10",
+                        ACSRestUrl: self.ACS2014byBlockGroup + "/3",
                         whereClause: "NAME <> 'Arizona State'",
-                        compareCensusUrl: self.ACS2014byBlockGroup + "/8",
-                        compareACSUrl: self.ACS2014byBlockGroup + "/2",
+                        compareCensusUrl: self.ACS2014byBlockGroup + "/10",
+                        compareACSUrl: self.ACS2014byBlockGroup + "/3",
                         compareWhereClause: "OBJECTID > -1",
                         comparePlaceField: "NAME",
                         summaryField: "NAME",
@@ -341,12 +341,27 @@
                         source: "American Community Survey 2010-2014 5yr",
                         dropdown: "#countyComboBox"
                     },
+
+                    cogSummary: {
+                        name: "Demographic Summary",
+                        censusRestUrl: self.ACS2014byBlockGroup + "/9",
+                        ACSRestUrl: self.ACS2014byBlockGroup + "/2",
+                        compareCensusUrl: self.ACS2014byBlockGroup + "/8",
+                        compareACSUrl: self.ACS2014byBlockGroup + "/1",
+                        compareWhereClause: "OBJECTID > -1",
+                        comparePlaceField: "NAME",
+                        summaryField: "NAME",
+                        isTimeVaryingData: false,
+                        source: "American Community Survey 2010-2014 5yr",
+                        dropdown: "#cogComboBox"
+                    },
+                    
                     placeSummary: {
                         name: "Demographic Summary",
-                        censusRestUrl: self.ACS2014byBlockGroup + "/7",
+                        censusRestUrl: self.ACS2014byBlockGroup + "/8",
                         ACSRestUrl: self.ACS2014byBlockGroup + "/1",
                         whereClause: "OBJECTID > -1",
-                        compareCensusUrl: self.ACS2014byBlockGroup + "/7",
+                        compareCensusUrl: self.ACS2014byBlockGroup + "/8",
                         compareACSUrl: self.ACS2014byBlockGroup + "/1",
                         compareWhereClause: "OBJECTID > -1",
                         comparePlaceField: "NAME",
@@ -357,11 +372,11 @@
                     },
                     legislativeSummary: {
                         name: "Demographic Summary",
-                        censusRestUrl: self.ACS2014byBlockGroup + "/9",
-                        ACSRestUrl: self.ACS2014byBlockGroup + "/3",
+                        censusRestUrl: self.ACS2014byBlockGroup + "/11",
+                        ACSRestUrl: self.ACS2014byBlockGroup + "/4",
                         whereClause: "OBJECTID > -1",
-                        compareCensusUrl: self.ACS2014byBlockGroup + "/9",
-                        compareACSUrl: self.ACS2014byBlockGroup + "/3",
+                        compareCensusUrl: self.ACS2014byBlockGroup + "/11",
+                        compareACSUrl: self.ACS2014byBlockGroup + "/4",
                         compareWhereClause: "OBJECTID > -1",
                         comparePlaceField: "SLDIST_NAME",
                         summaryField: "SLDIST_NAME",
@@ -371,11 +386,11 @@
                     },
                     congressionalSummary: {
                         name: "Demographic Summary",
-                        censusRestUrl: self.ACS2014byBlockGroup + "/10",
-                        ACSRestUrl: self.ACS2014byBlockGroup + "/4",
+                        censusRestUrl: self.ACS2014byBlockGroup + "/12",
+                        ACSRestUrl: self.ACS2014byBlockGroup + "/5",
                         whereClause: "OBJECTID > -1",
-                        compareCensusUrl: self.ACS2014byBlockGroup + "/10",
-                        compareACSUrl: self.ACS2014byBlockGroup + "/4",
+                        compareCensusUrl: self.ACS2014byBlockGroup + "/12",
+                        compareACSUrl: self.ACS2014byBlockGroup + "/5",
                         compareWhereClause: "OBJECTID > -1",
                         comparePlaceField: "CDIST_NAME",
                         summaryField: "CDIST_NAME",
@@ -385,11 +400,11 @@
                     },
                     zipCodeSummary: {
                         name: "Demographic Summary",
-                        censusRestUrl: self.ACS2014byBlockGroup + "/11",
-                        ACSRestUrl: self.ACS2014byBlockGroup + "/5",
+                        censusRestUrl: self.ACS2014byBlockGroup + "/13",
+                        ACSRestUrl: self.ACS2014byBlockGroup + "/6",
                         whereClause: "OBJECTID > -1",
-                        compareCensusUrl: self.ACS2014byBlockGroup + "/11",
-                        compareACSUrl: self.ACS2014byBlockGroup + "/5",
+                        compareCensusUrl: self.ACS2014byBlockGroup + "/13",
+                        compareACSUrl: self.ACS2014byBlockGroup + "/6",
                         compareWhereClause: "OBJECTID > -1",
                         comparePlaceField: "ZIPCODE",
                         summaryField: "ZIPCODE",
@@ -399,7 +414,7 @@
                     },
                     censusTracts: {
                         name: "Demographic Summary",
-                        censusRestUrl: self.ACS2014byBlockGroup + "/6",
+                        censusRestUrl: self.ACS2014byBlockGroup + "/7",
                         ACSRestUrl: self.ACS2014byBlockGroup + "/0",
                         whereClause: "OBJECTID > -1",
                         compareCensusUrl: self.ACS2014byBlockGroup + "/7",

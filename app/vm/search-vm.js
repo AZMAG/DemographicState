@@ -85,15 +85,18 @@
                             searchType = "county";
                             break;
                         case 2:
-                            searchType = "legislative";
+                            searchType = "cog";
                             break;
                         case 3:
-                            searchType = "place";
+                            searchType = "legislative";
                             break;
                         case 4:
-                            searchType = "congressional";
+                            searchType = "place";
                             break;
                         case 5:
+                            searchType = "congressional";
+                            break;
+                        case 6:
                             searchType = "zipCode";
                             break;
                     }

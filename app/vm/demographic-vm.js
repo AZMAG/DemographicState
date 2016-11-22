@@ -404,6 +404,7 @@
                     var congress = dom.byId("congressionalLink");
                     var legislative = dom.byId("legislativeLink");
                     var zipCode = dom.byId("zipCodeLink");
+                    var cogs = dom.byId("cogLink");
 
                     if (county) {
                         self.openWindow(county.innerHTML, "county");
@@ -416,6 +417,9 @@
                     }
                     if (zipCode) {
                         self.openWindow(zipCode.innerHTML, "zipCode");
+                    }
+                    if (cogs) {
+                        self.openWindow(cogs.innerHTML, "cog");
                     }
                 };
 
@@ -455,6 +459,9 @@
                             break;
                         case "zipCode":
                             self.reportConfigItem = demographicConfig.reports.zipCodeSummary;
+                            break;
+                        case "cog":
+                            self.reportConfigItem = demographicConfig.reports.cogSummary;
                             break;
                     }
 
@@ -2732,6 +2739,9 @@
                             newWindow = window.open(self.reportURL, "_new");
                         } else if (self.communityName.indexOf("District") > -1) {
                             self.reportURL = encodeURI(demographicConfig.exportPDFReportUrl + "?council=" + self.communityName);
+                            newWindow = window.open(self.reportURL, "_new");
+                        } else if (self.communityName.indexOf("Governments") > -1 || self.communityName.indexOf("COG") > -1 || self.communityName.indexOf("MPO") > -1) {
+                            self.reportURL = encodeURI(demographicConfig.exportPDFReportUrl + "?cog=" + self.communityName);
                             newWindow = window.open(self.reportURL, "_new");
                         } else if (self.communityName === "Selected Block Groups") {
                             var ObjectIdArray = "";
