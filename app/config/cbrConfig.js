@@ -1498,7 +1498,7 @@
                             "Type": "percent"
                         }]
                     }]
-                }]
+                }];
             };
             return cbrConfig;
         }
