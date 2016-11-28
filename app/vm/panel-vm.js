@@ -109,8 +109,8 @@
 
                     qbVM.init("display", "after");
 
-                    $.each(demographicConfig.reports, function(i, configItem){
-                        if(configItem.populateDropDown !== false){
+                    $.each(demographicConfig.reports, function(i, configItem) {
+                        if (configItem.populateDropDown !== false) {
                             var url = configItem.ACSRestUrl;
                             var whereClause = configItem.whereClause;
                             layerDelegate.query(url, self.dropDownQueryHandler, self.queryFault, null, whereClause, false);
@@ -180,19 +180,17 @@
                 self.dropDownQueryHandler = function(results) {
                     var configItem;
                     var attributes = results.features[0].attributes;
-                    if(attributes["PLACENAME14"]){
+                    if (attributes["PLACENAME14"]) {
                         configItem = demographicConfig.reports.placeSummary;
-                    }
-                    else if(attributes["ZIPCODE"]){
+                    } else if (attributes["ZIPCODE"]) {
                         configItem = demographicConfig.reports.zipCodeSummary;
-                    }
-                    else if(attributes["SLDIST_NAME"]){
+                    } else if (attributes["SLDIST_NAME"]) {
                         configItem = demographicConfig.reports.legislativeSummary;
-                    }
-                    else if(attributes["CDIST_NAME"]){
+                    } else if (attributes["CDIST_NAME"]) {
                         configItem = demographicConfig.reports.congressionalSummary;
-                    }
-                    else if(attributes["COUNTY"]){
+                    } else if (attributes["COG"]) {
+                        configItem = demographicConfig.reports.cogSummary;
+                    } else if (attributes["COUNTY"]) {
                         configItem = demographicConfig.reports.countySummary;
                     }
 
@@ -230,46 +228,50 @@
                     });
                 };
 
-                self.displayChoice = function(e){
+                self.displayChoice = function(e) {
 
                     var sender = e.target.id;
                     var type;
                     var layerID;
 
                     switch (sender) {
-                      case "launchStateSummaryWin":
-                        type = "state";
-                        layerID = ""
-                        break;
-                      case "launchCountySummaryWin":
-                        type = "county";
-                        layerID = "countyBoundaries"
-                        break;
-                      case "launchPlaceSummaryWin":
-                        type = "place";
-                        layerID = ""
-                        break;
-                      case "launchLegislativeSummaryWin":
-                        type = "legislative";
-                        layerID = "legislativeDistricts"
-                        break;
-                      case "launchCongressionalSummaryWin":
-                        type = "congressional";
-                        layerID = "congressionalDistricts"
-                        break;
-                      case "launchZipCodeEmpSummaryWin":
-                        type = "zipCode";
-                        layerID = "zipCodes"
-                        break;
-                      case "launchInteractiveSummaryDiv":
-                        type = "demInteractive";
-                        layerID = ""
-                        break;
+                        case "launchStateSummaryWin":
+                            type = "state";
+                            layerID = "";
+                            break;
+                        case "launchCountySummaryWin":
+                            type = "county";
+                            layerID = "countyBoundaries";
+                            break;
+                        case "launchPlaceSummaryWin":
+                            type = "place";
+                            layerID = "";
+                            break;
+                        case "launchLegislativeSummaryWin":
+                            type = "legislative";
+                            layerID = "legislativeDistricts";
+                            break;
+                        case "launchCongressionalSummaryWin":
+                            type = "congressional";
+                            layerID = "congressionalDistricts";
+                            break;
+                        case "launchZipCodeEmpSummaryWin":
+                            type = "zipCode";
+                            layerID = "zipCodes";
+                            break;
+                        case "launchInteractiveSummaryDiv":
+                            type = "demInteractive";
+                            layerID = "";
+                            break;
+                        case "launchCogSummaryWin":
+                            type = "cog";
+                            layerID = "cogBoundaries";
+                            break;
                     }
                     var layer = null;
                     var boxChecked = null;
 
-                    if(layerID !== ""){
+                    if (layerID !== "") {
                         layer = mapModel.mapInstance.getLayer(layerID);
                         boxChecked = dom.byId("c" + layerID).checked;
                     }
@@ -298,23 +300,23 @@
                  *
                  * @parameter choice
                  */
-                self.hideChoices = function(choice){
-                    var choiceDivs = ["#countyChoiceDiv", "#placeChoiceDiv", "#legislativeChoiceDiv", "#congressionalChoiceDiv", "#zipCodeChoiceDiv"];
-                    $.each(choiceDivs, function(i, divID){
-                        if(divID !== choice){
+                self.hideChoices = function(choice) {
+                    var choiceDivs = ["#countyChoiceDiv", "#placeChoiceDiv", "#legislativeChoiceDiv", "#congressionalChoiceDiv", "#zipCodeChoiceDiv", "#cogChoiceDiv"];
+                    $.each(choiceDivs, function(i, divID) {
+                        if (divID !== choice) {
                             $(divID).hide();
                         }
                     });
                 };
 
-                self.hideLayers = function(layerID){
-                    var layerIds = ["countyBoundaries", "congressionalDistricts", "legislativeDistricts", "zipCodes"];
-                    $.each(layerIds, function(i, item){
-                        if(layerID !== item){
-                            var layer =  mapModel.mapInstance.getLayer(item);
-                            if(layer){
+                self.hideLayers = function(layerID) {
+                    var layerIds = ["countyBoundaries", "congressionalDistricts", "legislativeDistricts", "zipCodes", "cogBoundaries"];
+                    $.each(layerIds, function(i, item) {
+                        if (layerID !== item) {
+                            var layer = mapModel.mapInstance.getLayer(item);
+                            if (layer) {
                                 layer.hide();
-                                dom.byId("c" + item).checked = false; 
+                                dom.byId("c" + item).checked = false;
                             }
                         }
                     });
@@ -328,7 +330,7 @@
                 self.openSummaryWindow = function(e) {
                     var parent = e.target.parentNode;
                     var comboBox = $("#" + parent.id + " input")[1].id;
-                    var type = comboBox.replace('ComboBox','');
+                    var type = comboBox.replace("ComboBox", "");
 
                     // Get the selected name
                     var selectedName = $("#" + comboBox).data("kendoComboBox").dataItem();
@@ -345,7 +347,7 @@
                  */
                 self.openStateSummaryWindow = function(e) {
                     // Open the window
-                    demographicVM.openWindow("Arizona State","state");
+                    demographicVM.openWindow("Arizona State", "state");
                 };
 
                 /**
@@ -357,10 +359,10 @@
                     var div = $("#demInteractiveDiv");
                     if (div.length === 0) {
                         interactiveToolsVM.insertAfter("demInteractiveDiv", "launchInteractiveSummaryDiv", demographicVM.interactiveCensusSelectionQueryHandler, demographicVM.interactiveSelectionQueryFault, demographicConfig.reports.censusTracts.ACSRestUrl);
-                        self.hideChoices("#demInteractiveDiv")
+                        self.hideChoices("#demInteractiveDiv");
                     } else {
                         if (div.is(":hidden")) {
-                            self.hideChoices("#demInteractiveDiv")
+                            self.hideChoices("#demInteractiveDiv");
                             $("#demInteractiveDiv").show();
                         } else {
                             interactiveToolsVM.clearSelection();
@@ -378,7 +380,7 @@
                     self.hideChoices();
                     qbVM.openWindow();
                 };
-                
+
             }; // End of PanelVM
 
             return PanelVM;

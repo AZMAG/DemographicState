@@ -17,6 +17,15 @@ And constructed with the following guidelines:
 
 ***************************************************************************************************************
 
+## Version 2.3.0 | 11/28/2016
+
+* Added COG/MPO Summary Reports
+* Added COG/MPO PDF reports
+* Added COG/MPO Boundaries
+* updated panelHelp-view.html with new info
+* updated mainHelp-view.html with new info
+* linted javascript code
+
 ## Version 2.2.11 | 07/22/2016
 
 * Added loading splash screen
