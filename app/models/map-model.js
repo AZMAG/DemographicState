@@ -128,8 +128,7 @@
                  */
                 self.cogInfoTemplate = new InfoTemplate();
                 self.cogInfoTemplate.setTitle("COGs / MPOs");
-                self.cogInfoTemplate.setContent("<strong><div id='cogLink'>${NAME}</div></strong><br>" +
-                    "<strong>Name:</strong> ${NAME}");
+                self.cogInfoTemplate.setContent("<strong><div id='cogLink'>${NAME}</div></strong>");
 
                 /**
                  * infoTemplate for ZIP code areas
