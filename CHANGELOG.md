@@ -24,6 +24,7 @@ And constructed with the following guidelines:
 * Added COG/MPO Boundaries
 * updated panelHelp-view.html with new info
 * updated mainHelp-view.html with new info
+* linted javascript code
 
 ## Version 2.2.11 | 07/22/2016
 

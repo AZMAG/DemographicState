@@ -33,7 +33,7 @@
 
 var appConfig = new function() {
 
-    this.Version = "v2.2.11 | 07/22/2016";
+    this.Version = "v2.3.0 | 11/28/2016";
 
     this.jasonemail = "https://www.azmag.gov/EmailPages/JasonHoward.asp";
 
@@ -208,17 +208,35 @@ var appConfig = new function() {
 
     this.bubbleColors = [
 
-        { category: "MgBizFin", color: "#A6CEE3" },
-        { category: "CompEngSci", color: "#1F78B4" },
-        { category: "EduLegComArtMedia", color: "#B2DF8A" },
-        { category: "HealthTechnical", color: "#33A02C" },
-        { category: "ServiceOcc", color: "#FB9A99" },
-        { category: "ProtectiveServ", color: "#E31A1C" },
-        { category: "SalesOfficeOcc", color: "#FDBF6F" },
-        { category: "NatResources", color: "#FF7F00" },
-        { category: "ProdTransMaterial", color: "#CAB2D6" }
-
-    ]
+        {
+            category: "MgBizFin",
+            color: "#A6CEE3"
+        }, {
+            category: "CompEngSci",
+            color: "#1F78B4"
+        }, {
+            category: "EduLegComArtMedia",
+            color: "#B2DF8A"
+        }, {
+            category: "HealthTechnical",
+            color: "#33A02C"
+        }, {
+            category: "ServiceOcc",
+            color: "#FB9A99"
+        }, {
+            category: "ProtectiveServ",
+            color: "#E31A1C"
+        }, {
+            category: "SalesOfficeOcc",
+            color: "#FDBF6F"
+        }, {
+            category: "NatResources",
+            color: "#FF7F00"
+        }, {
+            category: "ProdTransMaterial",
+            color: "#CAB2D6"
+        }
+    ];
 
     this.URLMinimizer = {
 
@@ -231,12 +249,37 @@ var appConfig = new function() {
     // ------------------------------
 
     // Specify the Markup / drawing tools.
-    this.markupToolTreeNodes = [{ id: 1, text: "Polygon", DisplayText: "Polygon", Type: "POLYGON", imageUrl: "app/resources/img/i_draw_poly.png" },
-        { id: 2, text: "Circle", DisplayText: "Circle", Type: "CIRCLE", imageUrl: "app/resources/img/i_draw_circle.png" },
-        { id: 3, text: "Arrow", DisplayText: "Arrow", Type: "ARROW", imageUrl: "app/resources/img/i_draw_arrow.png" },
-        { id: 4, text: "Freehand", DisplayText: "Freehand", Type: "FREEHAND_POLYGON", imageUrl: "app/resources/img/i_draw_freepoly.png" },
-        { id: 5, text: "Text", DisplayText: "Text Box", Type: "POINT", imageUrl: "app/resources/img/i_draw_text.png" }
-    ];
+    this.markupToolTreeNodes = [{
+        id: 1,
+        text: "Polygon",
+        DisplayText: "Polygon",
+        Type: "POLYGON",
+        imageUrl: "app/resources/img/i_draw_poly.png"
+    }, {
+        id: 2,
+        text: "Circle",
+        DisplayText: "Circle",
+        Type: "CIRCLE",
+        imageUrl: "app/resources/img/i_draw_circle.png"
+    }, {
+        id: 3,
+        text: "Arrow",
+        DisplayText: "Arrow",
+        Type: "ARROW",
+        imageUrl: "app/resources/img/i_draw_arrow.png"
+    }, {
+        id: 4,
+        text: "Freehand",
+        DisplayText: "Freehand",
+        Type: "FREEHAND_POLYGON",
+        imageUrl: "app/resources/img/i_draw_freepoly.png"
+    }, {
+        id: 5,
+        text: "Text",
+        DisplayText: "Text Box",
+        Type: "POINT",
+        imageUrl: "app/resources/img/i_draw_text.png"
+    }];
 
     // Specify the Markup Tool's Fill and Outline Kendo Color Pallettes.
     this.fillColorPalette = ["rgba(163, 73, 164, .50)", "rgba(63, 72, 204, .5)", "rgba(0, 162, 232, 0.50)",

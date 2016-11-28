@@ -199,17 +199,17 @@
                         switch (self.mapVMs.length) {
                             case 2:
                                 $("#map2").addClass("hidden");
-                                $("#map1").css("width", "100%");                                
+                                $("#map1").css("width", "100%");
 
                                 //Ensures legend is updated to first map legend
                                 var lis = document.getElementById("layerOptionPanelBar_map1").getElementsByTagName("li");
-                                $.each(lis, function(i,li){
+                                $.each(lis, function(i, li) {
                                     var checkbox = li.getElementsByTagName("input")[0];
                                     var checkbox2 = $("#c" + checkbox.value);
                                     if (checkbox.checked !== checkbox2.is(":checked")) {
                                         checkbox2.click();
                                     }
-                                })
+                                });
 
                                 $("#launchLegend").removeClass("aDisabled");
                                 self.mapVMs[0].toggleMapElements(false);

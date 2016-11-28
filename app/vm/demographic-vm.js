@@ -609,11 +609,11 @@
                         });
                     }
                     tabStrip = $("#demTabStrip").data("kendoTabStrip");
-
+                    var firstTab;
                     if (tabStrip !== undefined && tabStrip !== null) {
 
                         var tabStripList = tabStrip.items();
-                        var firstTab = tabStripList[0].textContent;
+                        firstTab = tabStripList[0].textContent;
                         var secondTab = tabStripList[1].textContent;
 
                         if (firstTab === "Census Block Groups" && secondTab === "ACS Block Groups") {
@@ -637,27 +637,27 @@
                             }]
                         });
                     }
-
+                    var tabName, tabContent, optionsRow, gridName, exportButton, countLabel, columnConfig;
                     // We already have the data, so handle it.
                     if (type === "census") {
                         self.censusDataQueryHandler(results);
-                        var tabName = "Census Block Groups";
-                        var tabContent = selCensusFeatsView;
-                        var optionsRow = "demCensusSelFeatOptionsRow";
-                        var gridName = "demCensusFeatGrid";
-                        var exportButton = "demCensusExportSelFeatResults";
-                        var countLabel = "fCensusCount";
-                        var columnConfig = demographicConfig.selectedCensusBlockGroups;
+                        tabName = "Census Block Groups";
+                        tabContent = selCensusFeatsView;
+                        optionsRow = "demCensusSelFeatOptionsRow";
+                        gridName = "demCensusFeatGrid";
+                        exportButton = "demCensusExportSelFeatResults";
+                        countLabel = "fCensusCount";
+                        columnConfig = demographicConfig.selectedCensusBlockGroups;
 
                     } else {
                         self.acsDataQueryHandler(results);
-                        var tabName = "ACS Block Groups";
-                        var tabContent = selACSFeatsView;
-                        var optionsRow = "demACSSelFeatOptionsRow";
-                        var gridName = "demACSFeatGrid";
-                        var exportButton = "demACSExportSelFeatResults";
-                        var countLabel = "fACSCount";
-                        var columnConfig = demographicConfig.selectedACSBlockGroups;
+                        tabName = "ACS Block Groups";
+                        tabContent = selACSFeatsView;
+                        optionsRow = "demACSSelFeatOptionsRow";
+                        gridName = "demACSFeatGrid";
+                        exportButton = "demACSExportSelFeatResults";
+                        countLabel = "fACSCount";
+                        columnConfig = demographicConfig.selectedACSBlockGroups;
                     }
 
                     // Create the feature attribute array
@@ -667,7 +667,7 @@
                     });
 
                     // Check to see if the tab is already present
-                    var firstTab = tabStrip.tabGroup.children("li:first");
+                    firstTab = tabStrip.tabGroup.children("li:first");
 
                     if (firstTab[0].textContent !== tabName) {
                         // Add the Selected Block Groups tab
@@ -1018,7 +1018,7 @@
                     // Add the new graphics. vw
                     if (features[0].geometry !== null) {
                         mapModel.addGraphics(features, undefined, true);
-                        if (($("#demInteractiveDiv").is(":visible") == false) || $("#zoomSelection").prop("checked")) {
+                        if (($("#demInteractiveDiv").is(":visible") === false) || $("#zoomSelection").prop("checked")) {
                             // Zoom to selected graphics. vw
                             var zoomExtent = graphicsUtils.graphicsExtent(features);
                             mapModel.setMapExtent(zoomExtent);
@@ -1234,7 +1234,7 @@
                     var compareComboBoxObj = compareComboBoxInput.data("kendoComboBox");
                     var kendoGrid = $("#demCensusDataGrid").data("kendoGrid");
                     var type = "census";
-                    var handler = self.placeCensusListQueryHandler
+                    var handler = self.placeCensusListQueryHandler;
                     var url = self.reportConfigItem.compareCensusUrl;
 
                     if (sender.target.id === "demACSUseComp") {
@@ -1621,7 +1621,7 @@
 
                         // Update the chart
                         var kendoChart2 = $("#demACSChartArea").data("kendoChart");
-                        var kendoChart3 = $("#demACSChartArea")
+                        var kendoChart3 = $("#demACSChartArea");
 
                         if (kendoChart2 !== null && kendoChart2 !== undefined) {
                             kendoChart2.destroy();
@@ -1694,7 +1694,7 @@
 
                         var templateString = "#= category #<br>#= kendo.format('{0:P}', percentage) #<br>#= kendo.format('{0:N0}', value) #";
                         if (self.groupedItems[0].chartType !== "pie") {
-                            templateString = "#= category #<br>#= kendo.format('{0:N0}', value) #"
+                            templateString = "#= category #<br>#= kendo.format('{0:N0}', value) #";
                         }
 
                         var series1 = [];
@@ -1709,7 +1709,7 @@
                         });
 
                         var largestValue = Math.max.apply(Math, series1);
-                        var valueAxisTemplate = "#= kendo.format(\'{0:N0}\', value)#"
+                        var valueAxisTemplate = "#= kendo.format(\'{0:N0}\', value)#";
                         var largeValue = false;
                         if (largestValue > 1000) {
                             if (largestValue > 5000) {
@@ -1872,7 +1872,7 @@
                     if (type === "census") {
                         dataGridName = "demCensusDataGrid";
                         demoOptionsRowName = "demCensusSummaryOptionsRow";
-                        dataSource = self.aggCensusValuesArray
+                        dataSource = self.aggCensusValuesArray;
                     }
 
                     $.each(dataSource, function(i, value) {
@@ -1881,7 +1881,7 @@
 
                         } else if (value["fieldType"] === "Rate") {
                             value["percentValueFormatted"] = magNumberFormatter.formatValue(value["fieldValue"]) + "%";
-                            value["fieldValueFormatted"] = "-"
+                            value["fieldValueFormatted"] = "-";
                         }
                     });
 
@@ -1945,8 +1945,8 @@
                                         if (data[i]["fieldCategory"] === "Occupation") {
                                             if (data[i].parentField === "" || data[i].fieldName === "ProtectiveServ") {
                                                 var jRow = $(row);
-                                                jRow.addClass('k-header');
-                                                jRow.removeClass('k-alt');
+                                                jRow.addClass("k-header");
+                                                jRow.removeClass("k-alt");
                                             }
                                         }
                                     }
@@ -1974,22 +1974,21 @@
                             var text3 = "";
 
                             if (strArray.length < 4) {
-
-                                for (var i = 0; i < strArray.length; i++) {
+                                for (i = 0; i < strArray.length; i++) {
                                     text1 += strArray[i] + " ";
                                 }
                             } else if (strArray.length > 3 && strArray.length < 6) {
-                                for (var i = 0; i < 3; i++) {
+                                for (i = 0; i < 3; i++) {
                                     text1 += strArray[i] + " ";
                                 }
-                                for (var i = 3; i < strArray.length; i++) {
+                                for (i = 3; i < strArray.length; i++) {
                                     text2 += strArray[i] + " ";
                                 }
                             } else {
-                                for (var i = 0; i < 3; i++) {
+                                for (i = 0; i < 3; i++) {
                                     text1 += strArray[i] + " ";
                                 }
-                                for (var i = 3; i < 6; i++) {
+                                for (i = 3; i < 6; i++) {
                                     text2 += strArray[i] + " ";
                                 }
                                 text3 = "...";
@@ -2004,7 +2003,7 @@
                                 label: item.fieldValue.toLocaleString(),
                                 percent: item.percentValueFormatted,
                                 category: item.parentField
-                            }
+                            };
 
                             items.push(childObj);
                         }
@@ -2213,7 +2212,7 @@
                         .on("mouseover", function(sender) {
                             var html = "<strong>Occupation: </strong>" + sender.item.fullText + "<br><strong> Category: </strong>" + sender.item.category + "<br> <strong>Employee Count: </strong>" + sender.item.label + "<br> <strong>Percentage: </strong>" + sender.item.percent;
                             tooltip.html(html);
-                            return tooltip.style("visibility", "visible")
+                            return tooltip.style("visibility", "visible");
                         })
                         .on("mousemove", function() {
                             return tooltip.style("top", (d3.event.screenY - 100) + "px").style("left", (d3.event.screenX + 10) + "px");
@@ -2221,7 +2220,7 @@
                         .on("mouseout", function(event) {
                             d3.select(this).attr("stroke", "black").attr("stroke-width", "0");
                             return tooltip.style("visibility", "hidden");
-                        })
+                        });
                 };
 
 
@@ -2237,6 +2236,7 @@
                     self.pyramidData.length = 0;
                     var combinedMaleValue = 0;
                     var combinedFemaleValue = 0;
+                    var object;
 
                     $.each(self.groupedItems, function(key, item) {
                         if (item !== undefined) {
@@ -2248,19 +2248,18 @@
                                 combinedMaleValue += item.fieldValue;
                             } else if (item.fieldName === "M_Y21") {
                                 combinedMaleValue += item.fieldValue;
-                                var object = jQuery.extend({}, item);
+                                object = jQuery.extend({}, item);
                                 object.fieldValue = combinedMaleValue;
                                 self.pyramidData.push(object);
                             } else if (item.fieldName === "F_Y18TO19" || item.fieldName === "F_Y20") {
                                 combinedFemaleValue += item.fieldValue;
                             } else if (item.fieldName === "F_Y21") {
                                 combinedFemaleValue += item.fieldValue;
-                                var object = jQuery.extend({}, item);
+                                object = jQuery.extend({}, item);
                                 object.fieldValue = combinedFemaleValue;
                                 self.pyramidData.push(object);
                             } else {
-                                var object = item;
-
+                                object = item;
                                 self.pyramidData.push(object);
                             }
                         }
@@ -2306,7 +2305,7 @@
 
                     var chartObj = $("#demACSChartArea");
                     var largestValue = Math.max.apply(Math, maleSeries);
-                    var valueAxisTemplate = "#= kendo.format(\'{0:N0}\', Math.abs(value))#"
+                    var valueAxisTemplate = "#= kendo.format(\'{0:N0}\', Math.abs(value))#";
                     var largeValue = false;
                     if (largestValue > 1000) {
                         if (largestValue > 5000) {
@@ -2442,7 +2441,7 @@
                             value["compareValueFormatted"] = "$ " + magNumberFormatter.formatValue(value["compareValue"]);
                         } else if (value["fieldType"] === "Rate") {
                             value["percentValueFormatted"] = magNumberFormatter.formatValue(value["fieldValue"]) + "%";
-                            value["fieldValueFormatted"] = "-"
+                            value["fieldValueFormatted"] = "-";
                         }
 
                     });
@@ -2516,8 +2515,8 @@
                                         if (data[i]["fieldCategory"] === "Occupation") {
                                             if (data[i].parentField === "" || data[i].fieldName === "ProtectiveServ") {
                                                 var jRow = $(row);
-                                                jRow.addClass('k-header');
-                                                jRow.removeClass('k-alt');
+                                                jRow.addClass("k-header");
+                                                jRow.removeClass("k-alt");
                                             }
                                         }
                                     }
@@ -2688,7 +2687,7 @@
                                     hAlign: "center",
                                     wrap: true
                                 }]
-                            }
+                            };
                         }
 
                         if (rows[0].headerRow !== "added") {
@@ -2711,6 +2710,7 @@
 
                 self.exportPDFReport = function() {
                     var parameterString = "";
+                    var newWindow;
                     if (self.compareFeature) {
                         if (self.communityName === "Selected Block Groups") {
                             var ObjectIdArray = "";
@@ -2723,7 +2723,7 @@
                             parameterString = self.communityName;
                         }
                         self.reportURL = encodeURI(demographicConfig.exportPDFCompareReportUrl + "?city1=" + parameterString + "&?city2=" + self.compareToName);
-                        var newWindow = window.open(self.reportURL, "_new");
+                        newWindow = window.open(self.reportURL, "_new");
                     } else {
                         if (self.communityName.indexOf("County") > -1) {
                             self.reportURL = encodeURI(demographicConfig.exportPDFReportUrl + "?county=" + self.communityName);
@@ -2755,16 +2755,16 @@
                             }
                             localStorage.OBJECTID = ObjectIdArray;
                             self.reportURL = encodeURI(demographicConfig.exportPDFReportUrl + "?StateInteractive");
-                            var newWindow = window.open(self.reportURL, "_new");
+                            newWindow = window.open(self.reportURL, "_new");
                         } else if (self.communityName === "Arizona State") {
                             self.reportURL = encodeURI(demographicConfig.exportPDFReportUrl + "?state=" + self.communityName);
-                            var newWindow = window.open(self.reportURL, "_new");
+                            newWindow = window.open(self.reportURL, "_new");
                         } else if (self.communityName.length === 5 && !isNaN(parseInt(self.communityName))) {
                             self.reportURL = encodeURI(demographicConfig.exportPDFReportUrl + "?zipCode=" + self.communityName);
-                            var newWindow = window.open(self.reportURL, "_new");
+                            newWindow = window.open(self.reportURL, "_new");
                         } else {
                             self.reportURL = encodeURI(demographicConfig.exportPDFReportUrl + "?city=" + self.communityName);
-                            var newWindow = window.open(self.reportURL, "_new");
+                            newWindow = window.open(self.reportURL, "_new");
                         }
                     }
                 };
@@ -2838,7 +2838,7 @@
                         }
                         self.createKendoGrid(value.type);
                     });
-                }
+                };
             }; //end DemographicVM
             return DemographicVM;
         } // end function

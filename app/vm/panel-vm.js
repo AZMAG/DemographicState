@@ -237,35 +237,35 @@
                     switch (sender) {
                         case "launchStateSummaryWin":
                             type = "state";
-                            layerID = ""
+                            layerID = "";
                             break;
                         case "launchCountySummaryWin":
                             type = "county";
-                            layerID = "countyBoundaries"
+                            layerID = "countyBoundaries";
                             break;
                         case "launchPlaceSummaryWin":
                             type = "place";
-                            layerID = ""
+                            layerID = "";
                             break;
                         case "launchLegislativeSummaryWin":
                             type = "legislative";
-                            layerID = "legislativeDistricts"
+                            layerID = "legislativeDistricts";
                             break;
                         case "launchCongressionalSummaryWin":
                             type = "congressional";
-                            layerID = "congressionalDistricts"
+                            layerID = "congressionalDistricts";
                             break;
                         case "launchZipCodeEmpSummaryWin":
                             type = "zipCode";
-                            layerID = "zipCodes"
+                            layerID = "zipCodes";
                             break;
                         case "launchInteractiveSummaryDiv":
                             type = "demInteractive";
-                            layerID = ""
+                            layerID = "";
                             break;
                         case "launchCogSummaryWin":
                             type = "cog";
-                            layerID = "cogBoundaries"
+                            layerID = "cogBoundaries";
                             break;
                     }
                     var layer = null;
@@ -330,7 +330,7 @@
                 self.openSummaryWindow = function(e) {
                     var parent = e.target.parentNode;
                     var comboBox = $("#" + parent.id + " input")[1].id;
-                    var type = comboBox.replace('ComboBox', '');
+                    var type = comboBox.replace("ComboBox", "");
 
                     // Get the selected name
                     var selectedName = $("#" + comboBox).data("kendoComboBox").dataItem();
@@ -359,10 +359,10 @@
                     var div = $("#demInteractiveDiv");
                     if (div.length === 0) {
                         interactiveToolsVM.insertAfter("demInteractiveDiv", "launchInteractiveSummaryDiv", demographicVM.interactiveCensusSelectionQueryHandler, demographicVM.interactiveSelectionQueryFault, demographicConfig.reports.censusTracts.ACSRestUrl);
-                        self.hideChoices("#demInteractiveDiv")
+                        self.hideChoices("#demInteractiveDiv");
                     } else {
                         if (div.is(":hidden")) {
-                            self.hideChoices("#demInteractiveDiv")
+                            self.hideChoices("#demInteractiveDiv");
                             $("#demInteractiveDiv").show();
                         } else {
                             interactiveToolsVM.clearSelection();
