@@ -17,6 +17,12 @@ And constructed with the following guidelines:
 
 ***************************************************************************************************************
 
+## Version 2.3.1 | 11/28/2016
+
+* fixed COG/MPO Popup information
+* fixed PDF doc issue with basemap
+* updated mxd info
+
 ## Version 2.3.0 | 11/28/2016
 
 * Added COG/MPO Summary Reports
