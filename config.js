@@ -71,7 +71,7 @@ var appConfig = new function() {
     }, {
         layerNum: 1,
         id: "cogBoundaries",
-        title: "Cog / Mpo Boundaries",
+        title: "COG / MPO Boundaries",
         type: "feature",
         url: this.mainURL + "/2",
         queryUrl: this.mainURL + "/2",
@@ -135,7 +135,7 @@ var appConfig = new function() {
     }, {
         layerNum: 5,
         id: "zipCodes",
-        title: "Zip Codes",
+        title: "ZIP Codes",
         type: "feature",
         url: this.mainURL + "/6",
         queryUrl: this.mainURL + "/6",

@@ -1,7 +1,7 @@
 {
   "name": "Demographics-Project",
-  "version": "2.2.11",
-  "date": "07/22/2016",
+  "version": "2.3.0",
+  "date": "11/28/2016",
   "description": "MAG State Demographic Viewer",
   "keywords": [
     "Demographics",
@@ -14,6 +14,7 @@
     "American Community Survey",
     "ACS",
     "2010-2014",
+    "5 year",
     "ESRI",
     "#MAGmaps"
   ],
