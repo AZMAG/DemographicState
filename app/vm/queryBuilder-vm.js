@@ -77,7 +77,7 @@
 
                 self.layerACSUrl = appConfig.mainURL + "/0";
 
-                self.layerCensusUrl = appConfig.mainURL + "/6";
+                self.layerCensusUrl = appConfig.mainURL + "/7";
 
 
                 /**

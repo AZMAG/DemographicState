@@ -74,12 +74,12 @@
                         ShortName: "County",
                         Type: "string"
                     }, {
-                        FieldName: "TRACTCE14",
+                        FieldName: "TRACTCE",
                         Name: "Tract",
                         ShortName: "Tract",
                         Type: "string"
                     }, {
-                        FieldName: "BLKGRPCE14",
+                        FieldName: "BLKGRPCE",
                         Name: "Block Group",
                         ShortName: "Block Group",
                         Type: "string"
@@ -96,7 +96,7 @@
                     { field: "OBJECTID", hidden: true },
                     { field: "COUNTY", title: "County", width: "80px" },
                     { field: "TRACT_LABEL", title: "Tract", width: "75px", template: "<a class='link tractLink'>#=TRACT_LABEL#</a>" },
-                    { field: "BLKGRPCE10", title: "Block Group", width: "60px" },
+                    { field: "BLKGRPCE", title: "Block Group", width: "60px" },
                     { field: "SQMI", title: "Square Miles", width: "60px", format: "{0:n2}" },
                     { field: "ACRES", title: "Acres", width: "60px", format: "{0:n2}" },
                     { field: "TOTAL_POP", title: "Total Population", width: "80px", format: "{0:n0}" },
@@ -141,7 +141,7 @@
                     { field: "OBJECTID", hidden: true },
                     { field: "COUNTY", title: "County", width: "80px" },
                     { field: "TRACT_LABEL", title: "Tract", width: "75px", template: "<a class='link tractLink'>#=TRACT_LABEL#</a>" },
-                    { field: "BLKGRPCE14", title: "Block Group", width: "60px" },
+                    { field: "BLKGRPCE", title: "Block Group", width: "60px" },
                     { field: "SQMI", title: "Square Miles", width: "60px", format: "{0:n2}" },
                     { field: "ACRES", title: "Acres", width: "80px", format: "{0:n2}" },
                     { field: "TOTAL_POP", title: "Total Population", width: "80px", format: "{0:n0}" },
