@@ -100,7 +100,7 @@
                             searchType = "zipCode";
                             break;
                     }
-                    if (e.sourceIndex === 6) {
+                    if (e.sourceIndex === 7) {
                         var symbol = mapModel.getSymbol(e.result.feature.geometry, "cyan");
                         var graphic = new Graphic(e.result.feature.geometry, symbol);
                         mapModel.addGraphic(graphic, undefined, true, true);
