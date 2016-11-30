@@ -562,7 +562,7 @@
                     "items": [{
                         "NodeType": "map",
                         "LayerId": 0,
-                        "Name": null,
+                        "Name": "Total Workers Age 16+",
                         "Service": "ACS2014byBlockGroup",
                         "ShortName": "Total Workers Age 16+",
                         "DefaultColorRamp": "OrRd",
@@ -576,7 +576,7 @@
                     }, {
                         "NodeType": "map",
                         "LayerId": 0,
-                        "Name": null,
+                        "Name": "Civilian Population Age 16+",
                         "Service": "ACS2014byBlockGroup",
                         "ShortName": "Civilian Population Age 16+",
                         "DefaultColorRamp": "OrRd",
@@ -590,7 +590,7 @@
                     }, {
                         "NodeType": "map",
                         "LayerId": 0,
-                        "Name": null,
+                        "Name": "Civilian Population Age 18+",
                         "Service": "ACS2014byBlockGroup",
                         "ShortName": "Civilian Population Age 18+",
                         "DefaultColorRamp": "OrRd",
@@ -609,7 +609,7 @@
                         "items": [{
                                 "NodeType": "map",
                                 "LayerId": 0,
-                                "Name": null,
+                                "Name": "% Management, business, science, and arts occupations",
                                 "Service": "ACS2014byBlockGroup",
                                 "ShortName": "% Management, business, science, and arts occupations",
                                 "DefaultColorRamp": "OrRd",
@@ -623,7 +623,7 @@
                                 "items": [{
                                         "NodeType": "map",
                                         "LayerId": 0,
-                                        "Name": null,
+                                        "Name": "% Management, business, and financial occupations",
                                         "Service": "ACS2014byBlockGroup",
                                         "ShortName": "% Management, business, and financial occupations",
                                         "DefaultColorRamp": "OrRd",
@@ -637,7 +637,7 @@
                                         "items": [{
                                             "NodeType": "map",
                                             "LayerId": 0,
-                                            "Name": null,
+                                            "Name": "% Management occupations",
                                             "Service": "ACS2014byBlockGroup",
                                             "ShortName": "% Management occupations",
                                             "DefaultColorRamp": "OrRd",
@@ -651,7 +651,7 @@
                                         }, {
                                             "NodeType": "map",
                                             "LayerId": 0,
-                                            "Name": null,
+                                            "Name": "% Business and financial operations occupations",
                                             "Service": "ACS2014byBlockGroup",
                                             "ShortName": "% Business and financial operations occupations",
                                             "DefaultColorRamp": "OrRd",
@@ -666,7 +666,7 @@
                                     }, {
                                         "NodeType": "map",
                                         "LayerId": 0,
-                                        "Name": null,
+                                        "Name": "% Computer, engineering, and science occupations",
                                         "Service": "ACS2014byBlockGroup",
                                         "ShortName": "% Computer, engineering, and science occupations",
                                         "DefaultColorRamp": "OrRd",
@@ -680,7 +680,7 @@
                                         "items": [{
                                             "NodeType": "map",
                                             "LayerId": 0,
-                                            "Name": null,
+                                            "Name": "% Computer and mathematical occupations",
                                             "Service": "ACS2014byBlockGroup",
                                             "ShortName": "% Computer and mathematical occupations",
                                             "DefaultColorRamp": "OrRd",
@@ -694,7 +694,7 @@
                                         }, {
                                             "NodeType": "map",
                                             "LayerId": 0,
-                                            "Name": null,
+                                            "Name": "% Architecture and engineering occupations",
                                             "Service": "ACS2014byBlockGroup",
                                             "ShortName": "% Architecture and engineering occupations",
                                             "DefaultColorRamp": "OrRd",
@@ -708,7 +708,7 @@
                                         }, {
                                             "NodeType": "map",
                                             "LayerId": 0,
-                                            "Name": null,
+                                            "Name": "% Life, physical, and social science occupations",
                                             "Service": "ACS2014byBlockGroup",
                                             "ShortName": "% Life, physical, and social science occupations",
                                             "DefaultColorRamp": "OrRd",
@@ -725,7 +725,7 @@
                                     {
                                         "NodeType": "map",
                                         "LayerId": 0,
-                                        "Name": null,
+                                        "Name": "% Education, legal, community service, arts, and media occupations",
                                         "Service": "ACS2014byBlockGroup",
                                         "ShortName": "% Education, legal, community service, arts, and media occupations",
                                         "DefaultColorRamp": "OrRd",
@@ -739,7 +739,7 @@
                                         "items": [{
                                             "NodeType": "map",
                                             "LayerId": 0,
-                                            "Name": null,
+                                            "Name": "% Community and social service occupations",
                                             "Service": "ACS2014byBlockGroup",
                                             "ShortName": "% Community and social service occupations",
                                             "DefaultColorRamp": "OrRd",
@@ -753,7 +753,7 @@
                                         }, {
                                             "NodeType": "map",
                                             "LayerId": 0,
-                                            "Name": null,
+                                            "Name": "% Legal occupations",
                                             "Service": "ACS2014byBlockGroup",
                                             "ShortName": "% Legal occupations",
                                             "DefaultColorRamp": "OrRd",
@@ -767,7 +767,7 @@
                                         }, {
                                             "NodeType": "map",
                                             "LayerId": 0,
-                                            "Name": null,
+                                            "Name": "% Education, training, and library occupations",
                                             "Service": "ACS2014byBlockGroup",
                                             "ShortName": "% Education, training, and library occupations",
                                             "DefaultColorRamp": "OrRd",
@@ -781,7 +781,7 @@
                                         }, {
                                             "NodeType": "map",
                                             "LayerId": 0,
-                                            "Name": null,
+                                            "Name": "% Arts, design, entertainment, sports, and media occupations",
                                             "Service": "ACS2014byBlockGroup",
                                             "ShortName": "% Arts, design, entertainment, sports, and media occupations",
                                             "DefaultColorRamp": "OrRd",
@@ -796,7 +796,7 @@
                                     }, {
                                         "NodeType": "map",
                                         "LayerId": 0,
-                                        "Name": null,
+                                        "Name": "% Healthcare practitioners and technical occupations",
                                         "Service": "ACS2014byBlockGroup",
                                         "ShortName": "% Healthcare practitioners and technical occupations",
                                         "DefaultColorRamp": "OrRd",
@@ -810,7 +810,7 @@
                                         "items": [{
                                             "NodeType": "map",
                                             "LayerId": 0,
-                                            "Name": null,
+                                            "Name": "% Health diagnosing and treating practitioners and other technical occupations",
                                             "Service": "ACS2014byBlockGroup",
                                             "ShortName": "% Health diagnosing and treating practitioners and other technical occupations",
                                             "DefaultColorRamp": "OrRd",
@@ -824,7 +824,7 @@
                                         }, {
                                             "NodeType": "map",
                                             "LayerId": 0,
-                                            "Name": null,
+                                            "Name": "% Health technologists and technicians ",
                                             "Service": "ACS2014byBlockGroup",
                                             "ShortName": "% Health technologists and technicians ",
                                             "DefaultColorRamp": "OrRd",
@@ -841,7 +841,7 @@
                             }, {
                                 "NodeType": "map",
                                 "LayerId": 0,
-                                "Name": null,
+                                "Name": "% Service occupations",
                                 "Service": "ACS2014byBlockGroup",
                                 "ShortName": "% Service occupations",
                                 "DefaultColorRamp": "OrRd",
@@ -855,7 +855,7 @@
                                 "items": [{
                                     "NodeType": "map",
                                     "LayerId": 0,
-                                    "Name": null,
+                                    "Name": "% Healthcare support occupations",
                                     "Service": "ACS2014byBlockGroup",
                                     "ShortName": "% Healthcare support occupations",
                                     "DefaultColorRamp": "OrRd",
@@ -869,7 +869,7 @@
                                 }, {
                                     "NodeType": "map",
                                     "LayerId": 0,
-                                    "Name": null,
+                                    "Name": "% Protective service occupations",
                                     "Service": "ACS2014byBlockGroup",
                                     "ShortName": "% Protective service occupations",
                                     "DefaultColorRamp": "OrRd",
@@ -883,7 +883,7 @@
                                     "items": [{
                                         "NodeType": "map",
                                         "LayerId": 0,
-                                        "Name": null,
+                                        "Name": "% Firefighting and prevention, and other protective service workers including supervisors",
                                         "Service": "ACS2014byBlockGroup",
                                         "ShortName": "% Firefighting and prevention, and other protective service workers including supervisors",
                                         "DefaultColorRamp": "OrRd",
@@ -897,7 +897,7 @@
                                     }, {
                                         "NodeType": "map",
                                         "LayerId": 0,
-                                        "Name": null,
+                                        "Name": "% Law enforcement workers including supervisors",
                                         "Service": "ACS2014byBlockGroup",
                                         "ShortName": "% Law enforcement workers including supervisors",
                                         "DefaultColorRamp": "OrRd",
@@ -912,7 +912,7 @@
                                 }, {
                                     "NodeType": "map",
                                     "LayerId": 0,
-                                    "Name": null,
+                                    "Name": "% Food preparation and serving related occupations",
                                     "Service": "ACS2014byBlockGroup",
                                     "ShortName": "% Food preparation and serving related occupations",
                                     "DefaultColorRamp": "OrRd",
@@ -926,7 +926,7 @@
                                 }, {
                                     "NodeType": "map",
                                     "LayerId": 0,
-                                    "Name": null,
+                                    "Name": "% Building and grounds cleaning and maintenance occupations",
                                     "Service": "ACS2014byBlockGroup",
                                     "ShortName": "% Building and grounds cleaning and maintenance occupations",
                                     "DefaultColorRamp": "OrRd",
@@ -940,7 +940,7 @@
                                 }, {
                                     "NodeType": "map",
                                     "LayerId": 0,
-                                    "Name": null,
+                                    "Name": "% Personal care and service occupations",
                                     "Service": "ACS2014byBlockGroup",
                                     "ShortName": "% Personal care and service occupations",
                                     "DefaultColorRamp": "OrRd",
@@ -955,7 +955,7 @@
                             }, {
                                 "NodeType": "map",
                                 "LayerId": 0,
-                                "Name": null,
+                                "Name": "% Sales and office occupations",
                                 "Service": "ACS2014byBlockGroup",
                                 "ShortName": "% Sales and office occupations",
                                 "DefaultColorRamp": "OrRd",
@@ -969,7 +969,7 @@
                                 "items": [{
                                     "NodeType": "map",
                                     "LayerId": 0,
-                                    "Name": null,
+                                    "Name": "% Sales and related occupations",
                                     "Service": "ACS2014byBlockGroup",
                                     "ShortName": "% Sales and related occupations",
                                     "DefaultColorRamp": "OrRd",
@@ -983,7 +983,7 @@
                                 }, {
                                     "NodeType": "map",
                                     "LayerId": 0,
-                                    "Name": null,
+                                    "Name": "% Office and administrative support occupations",
                                     "Service": "ACS2014byBlockGroup",
                                     "ShortName": "% Office and administrative support occupations",
                                     "DefaultColorRamp": "OrRd",
@@ -998,7 +998,7 @@
                             }, {
                                 "NodeType": "map",
                                 "LayerId": 0,
-                                "Name": null,
+                                "Name": "% Natural resources, construction, and maintenance occupations",
                                 "Service": "ACS2014byBlockGroup",
                                 "ShortName": "% Natural resources, construction, and maintenance occupations",
                                 "DefaultColorRamp": "OrRd",
@@ -1012,7 +1012,7 @@
                                 "items": [{
                                     "NodeType": "map",
                                     "LayerId": 0,
-                                    "Name": null,
+                                    "Name": "% Farming, fishing, and forestry occupations",
                                     "Service": "ACS2014byBlockGroup",
                                     "ShortName": "% Farming, fishing, and forestry occupations",
                                     "DefaultColorRamp": "OrRd",
@@ -1026,7 +1026,7 @@
                                 }, {
                                     "NodeType": "map",
                                     "LayerId": 0,
-                                    "Name": null,
+                                    "Name": "% Construction and extraction occupations",
                                     "Service": "ACS2014byBlockGroup",
                                     "ShortName": "% Construction and extraction occupations",
                                     "DefaultColorRamp": "OrRd",
@@ -1040,7 +1040,7 @@
                                 }, {
                                     "NodeType": "map",
                                     "LayerId": 0,
-                                    "Name": null,
+                                    "Name": "% Installation, maintenance, and repair occupations",
                                     "Service": "ACS2014byBlockGroup",
                                     "ShortName": "% Installation, maintenance, and repair occupations",
                                     "DefaultColorRamp": "OrRd",
@@ -1055,7 +1055,7 @@
                             }, {
                                 "NodeType": "map",
                                 "LayerId": 0,
-                                "Name": null,
+                                "Name": "% Production, transportation, and material moving occupations",
                                 "Service": "ACS2014byBlockGroup",
                                 "ShortName": "% Production, transportation, and material moving occupations",
                                 "DefaultColorRamp": "OrRd",
@@ -1069,7 +1069,7 @@
                                 "items": [{
                                     "NodeType": "map",
                                     "LayerId": 0,
-                                    "Name": null,
+                                    "Name": "% Production occupations",
                                     "Service": "ACS2014byBlockGroup",
                                     "ShortName": "% Production occupations",
                                     "DefaultColorRamp": "OrRd",
@@ -1083,7 +1083,7 @@
                                 }, {
                                     "NodeType": "map",
                                     "LayerId": 0,
-                                    "Name": null,
+                                    "Name": "% Transportation occupations",
                                     "Service": "ACS2014byBlockGroup",
                                     "ShortName": "% Transportation occupations",
                                     "DefaultColorRamp": "OrRd",
@@ -1097,7 +1097,7 @@
                                 }, {
                                     "NodeType": "map",
                                     "LayerId": 0,
-                                    "Name": null,
+                                    "Name": "% Material moving occupations",
                                     "Service": "ACS2014byBlockGroup",
                                     "ShortName": "% Material moving occupations",
                                     "DefaultColorRamp": "OrRd",
@@ -1126,7 +1126,7 @@
                         "items": [{
                             "NodeType": "map",
                             "LayerId": 0,
-                            "Name": null,
+                            "Name": "% No Vehicle",
                             "Service": "ACS2014byBlockGroup",
                             "ShortName": "% No Vehicle",
                             "DefaultColorRamp": "OrRd",
@@ -1140,7 +1140,7 @@
                         }, {
                             "NodeType": "map",
                             "LayerId": 0,
-                            "Name": null,
+                            "Name": "% One Vehicle",
                             "Service": "ACS2014byBlockGroup",
                             "ShortName": "% One Vehicle",
                             "DefaultColorRamp": "OrRd",
@@ -1154,7 +1154,7 @@
                         }, {
                             "NodeType": "map",
                             "LayerId": 0,
-                            "Name": null,
+                            "Name": "% Two Vehicles",
                             "Service": "ACS2014byBlockGroup",
                             "ShortName": "% Two Vehicles",
                             "DefaultColorRamp": "OrRd",
@@ -1168,7 +1168,7 @@
                         }, {
                             "NodeType": "map",
                             "LayerId": 0,
-                            "Name": null,
+                            "Name": "% Three Vehicles",
                             "Service": "ACS2014byBlockGroup",
                             "ShortName": "% Three Vehicles",
                             "DefaultColorRamp": "OrRd",
@@ -1182,7 +1182,7 @@
                         }, {
                             "NodeType": "map",
                             "LayerId": 0,
-                            "Name": null,
+                            "Name": "% Four Vehicles",
                             "Service": "ACS2014byBlockGroup",
                             "ShortName": "% Four Vehicles",
                             "DefaultColorRamp": "OrRd",
@@ -1196,7 +1196,7 @@
                         }, {
                             "NodeType": "map",
                             "LayerId": 0,
-                            "Name": null,
+                            "Name": "% Five Vehicles",
                             "Service": "ACS2014byBlockGroup",
                             "ShortName": "% Five Vehicles",
                             "DefaultColorRamp": "OrRd",
@@ -1216,7 +1216,7 @@
                         "items": [{
                             "NodeType": "map",
                             "LayerId": 0,
-                            "Name": null,
+                            "Name": "% Car Truck Van",
                             "Service": "ACS2014byBlockGroup",
                             "ShortName": "% Car Truck Van",
                             "DefaultColorRamp": "OrRd",
@@ -1230,7 +1230,7 @@
                         }, {
                             "NodeType": "map",
                             "LayerId": 0,
-                            "Name": null,
+                            "Name": "% Drove Alone",
                             "Service": "ACS2014byBlockGroup",
                             "ShortName": "% Drove Alone",
                             "DefaultColorRamp": "OrRd",
@@ -1244,7 +1244,7 @@
                         }, {
                             "NodeType": "map",
                             "LayerId": 0,
-                            "Name": null,
+                            "Name": "% Car Pooled",
                             "Service": "ACS2014byBlockGroup",
                             "ShortName": "% Car Pooled",
                             "DefaultColorRamp": "OrRd",
@@ -1258,7 +1258,7 @@
                         }, {
                             "NodeType": "map",
                             "LayerId": 0,
-                            "Name": null,
+                            "Name": "% Bus",
                             "Service": "ACS2014byBlockGroup",
                             "ShortName": "% Bus",
                             "DefaultColorRamp": "OrRd",
@@ -1272,7 +1272,7 @@
                         }, {
                             "NodeType": "map",
                             "LayerId": 0,
-                            "Name": null,
+                            "Name": "% Rail",
                             "Service": "ACS2014byBlockGroup",
                             "ShortName": "% Rail",
                             "DefaultColorRamp": "OrRd",
@@ -1286,7 +1286,7 @@
                         }, {
                             "NodeType": "map",
                             "LayerId": 0,
-                            "Name": null,
+                            "Name": "% Taxi",
                             "Service": "ACS2014byBlockGroup",
                             "ShortName": "% Taxi",
                             "DefaultColorRamp": "OrRd",
@@ -1300,7 +1300,7 @@
                         }, {
                             "NodeType": "map",
                             "LayerId": 0,
-                            "Name": null,
+                            "Name": "% Motorcycle",
                             "Service": "ACS2014byBlockGroup",
                             "ShortName": "% Motorcycle",
                             "DefaultColorRamp": "OrRd",
@@ -1314,7 +1314,7 @@
                         }, {
                             "NodeType": "map",
                             "LayerId": 0,
-                            "Name": null,
+                            "Name": "% Bicycle",
                             "Service": "ACS2014byBlockGroup",
                             "ShortName": "% Bicycle",
                             "DefaultColorRamp": "OrRd",
@@ -1328,7 +1328,7 @@
                         }, {
                             "NodeType": "map",
                             "LayerId": 0,
-                            "Name": null,
+                            "Name": "% Walked",
                             "Service": "ACS2014byBlockGroup",
                             "ShortName": "% Walked",
                             "DefaultColorRamp": "OrRd",
@@ -1342,7 +1342,7 @@
                         }, {
                             "NodeType": "map",
                             "LayerId": 0,
-                            "Name": null,
+                            "Name": "% Other Means",
                             "Service": "ACS2014byBlockGroup",
                             "ShortName": "% Other Means",
                             "DefaultColorRamp": "OrRd",
@@ -1356,7 +1356,7 @@
                         }, {
                             "NodeType": "map",
                             "LayerId": 0,
-                            "Name": null,
+                            "Name": "% Worked from Home",
                             "Service": "ACS2014byBlockGroup",
                             "ShortName": "% Worked from Home",
                             "DefaultColorRamp": "OrRd",
