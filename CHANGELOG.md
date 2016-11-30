@@ -17,6 +17,15 @@ And constructed with the following guidelines:
 
 ***************************************************************************************************************
 
+## Version 2.3.2 | 11/30/2016
+
+* Fixed block group values in custom summary and advanced query.
+* Updated advanced query url to the correct census url.
+* Fixed popup for Legislative Districts.
+* Fixed extra block groups tab bug.
+* Added Print titles to Occupation cbr items.
+* Updated search census layer to work correctly and not open a summary window.
+
 ## Version 2.3.1 | 11/28/2016
 
 * fixed COG/MPO Popup information
