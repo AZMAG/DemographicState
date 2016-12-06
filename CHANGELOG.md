@@ -17,6 +17,9 @@ And constructed with the following guidelines:
 
 ***************************************************************************************************************
 
+## Version 2.3.3 | 12/6/2016
+* Fixed bug in advanced query when census fields weren't used no data would be brought in. The query now uses an acs query string and uses the resulting geoids to lookup census block groups.
+
 ## Version 2.3.2 | 11/30/2016
 
 * Fixed block group values in custom summary and advanced query.
