@@ -421,7 +421,7 @@
                  @method runQuery
                  **/
                 self.runQuery = function() {
-                    var queryString = self.buildQueryString();                   
+                    var queryString = self.buildQueryString();
 
                     self.acsCallback = function(results){
                         var censusQueryString = "GEOID in(";
@@ -430,14 +430,14 @@
                             censusQueryString += "'" + geoId + "'" + ", ";
                         });
                         censusQueryString = censusQueryString.slice(0, -2) + ")";
-                        
+
                         self.censusCallback = function(censusResults){
                             demographicVM.interactiveSelectionQueryHandler(censusResults);
                             demographicVM.interactiveSelectionQueryHandler(results);
                         };
 
                         layerDelegate.query(self.layerCensusUrl, self.censusCallback, demographicVM.interactiveSelectionQueryFault, undefined, censusQueryString, true);
-                    }
+                    };
 
                     layerDelegate.query(self.layerACSUrl, self.acsCallback, demographicVM.interactiveSelectionQueryFault, undefined, queryString, true);
                     esri.show(dojo.byId("loading"));
