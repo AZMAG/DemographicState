@@ -119,7 +119,7 @@
                 self.legislatureInfoTemplate.setContent("<strong><div id='legislativeLink'>${SLDNAME}</div></strong>" +
                     "<hr>" +
                     "Representative: ${HouseRep1} - (${Party_HRep1})<br>" +
-                    "Representative: ${HouseRep2} - (${Party_HRep2})<br>" +
+                    "Representative: ${HouseRep2} - (${Party_Hrep2})<br>" +
                     "Senator: ${Senator} - (${Party_Sen})<br>");
 
                 /**

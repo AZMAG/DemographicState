@@ -77,7 +77,7 @@
 
                 self.layerACSUrl = appConfig.mainURL + "/0";
 
-                self.layerCensusUrl = appConfig.mainURL + "/6";
+                self.layerCensusUrl = appConfig.mainURL + "/7";
 
 
                 /**
@@ -422,8 +422,24 @@
                  **/
                 self.runQuery = function() {
                     var queryString = self.buildQueryString();
-                    layerDelegate.query(self.layerACSUrl, demographicVM.interactiveSelectionQueryHandler, demographicVM.interactiveSelectionQueryFault, undefined, queryString, true);
-                    layerDelegate.query(self.layerCensusUrl, demographicVM.interactiveSelectionQueryHandler, demographicVM.interactiveSelectionQueryFault, undefined, queryString, true);
+
+                    self.acsCallback = function(results){
+                        var censusQueryString = "GEOID in(";
+                        $.each(results.features, function(i, feature){
+                            var geoId = feature.attributes.GEOID;
+                            censusQueryString += "'" + geoId + "'" + ", ";
+                        });
+                        censusQueryString = censusQueryString.slice(0, -2) + ")";
+
+                        self.censusCallback = function(censusResults){
+                            demographicVM.interactiveSelectionQueryHandler(censusResults);
+                            demographicVM.interactiveSelectionQueryHandler(results);
+                        };
+
+                        layerDelegate.query(self.layerCensusUrl, self.censusCallback, demographicVM.interactiveSelectionQueryFault, undefined, censusQueryString, true);
+                    };
+
+                    layerDelegate.query(self.layerACSUrl, self.acsCallback, demographicVM.interactiveSelectionQueryFault, undefined, queryString, true);
                     esri.show(dojo.byId("loading"));
                     self.closeWindow();
                 };

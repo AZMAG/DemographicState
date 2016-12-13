@@ -617,9 +617,9 @@
                         var secondTab = tabStripList[1].textContent;
 
                         if (firstTab === "Census Block Groups" && secondTab === "ACS Block Groups") {
-                            // tabStrip.remove(0);
-                            // tabStrip.remove(0);
-                            // tabStrip.select(1);
+                            tabStrip.remove(0);
+                            tabStrip.remove(0);
+                            tabStrip.select(0);
                         }
                     }
 
