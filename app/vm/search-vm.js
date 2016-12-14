@@ -101,14 +101,17 @@
                             break;
                     }
                     if (e.sourceIndex === 7) {
+                        $("#summaryLink").show();
                         var symbol = mapModel.getSymbol(e.result.feature.geometry, "cyan");
                         var graphic = new Graphic(e.result.feature.geometry, symbol);
                         mapModel.addGraphic(graphic, undefined, true, true);
                     } else if (e.sourceIndex === 0) {
+                        $("#summaryLink").hide();
                         var symbol = new PictureMarkerSymbol("app/resources/img/Point.png", 36, 36).setOffset(9, 18);
                         var graphic = new Graphic(e.result.feature.geometry, symbol);
                         mapModel.addGraphic(graphic, undefined, true, true);
                     } else {
+                        $("#summaryLink").show();
                         demographicVM.openWindow(communityName, searchType);
                     }
                 };

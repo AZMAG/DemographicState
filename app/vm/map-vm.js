@@ -352,7 +352,6 @@
                  * @return {[type]} [description]
                  */
                 self.linkClicked = function(e) {
-                    console.log(e.target.id);
                     topic.publish(e.target.id + "Click");
                 };
 
