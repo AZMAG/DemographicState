@@ -106,7 +106,7 @@
                  */
                 self.congressInfoTemplate = new InfoTemplate();
                 self.congressInfoTemplate.setTitle("Congressional Districts");
-                self.congressInfoTemplate.setContent("<strong><div id='congressionalLink'>${CDNAME}</div></strong>" +
+                self.congressInfoTemplate.setContent("<strong><div id='congressionalLink'>${CDIST_NAME}</div></strong>" +
                     "<hr>" +
                     "Representative: ${CDRepresentative} - (${CDParty})");
 
@@ -116,7 +116,7 @@
                  */
                 self.legislatureInfoTemplate = new InfoTemplate();
                 self.legislatureInfoTemplate.setTitle("Legislative Districts");
-                self.legislatureInfoTemplate.setContent("<strong><div id='legislativeLink'>${SLDNAME}</div></strong>" +
+                self.legislatureInfoTemplate.setContent("<strong><div id='legislativeLink'>${SLDIST_NAME}</div></strong>" +
                     "<hr>" +
                     "Representative: ${HouseRep1} - (${Party_HRep1})<br>" +
                     "Representative: ${HouseRep2} - (${Party_Hrep2})<br>" +
