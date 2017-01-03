@@ -101,7 +101,6 @@
                             break;
                     }
                     if (e.sourceIndex === 7) {
-                        $("#summaryLink").show();
                         var symbol = mapModel.getSymbol(e.result.feature.geometry, "cyan");
                         var graphic = new Graphic(e.result.feature.geometry, symbol);
                         mapModel.addGraphic(graphic, undefined, true, true);
@@ -111,7 +110,6 @@
                         var graphic = new Graphic(e.result.feature.geometry, symbol);
                         mapModel.addGraphic(graphic, undefined, true, true);
                     } else {
-                        $("#summaryLink").show();
                         demographicVM.openWindow(communityName, searchType);
                     }
                 };
