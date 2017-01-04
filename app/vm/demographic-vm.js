@@ -803,12 +803,13 @@
                                 $("#demSource").html(appConfig.sourceLabel);
                             }
                         }
+
+                        // Reload the chart to ensure it is up-to-date
+                        if (tab[0].textContent === "Census 2010 Charts" || tab[0].textContent === "ACS 2014 Charts") {
+                            self.reloadChart();
+                        }
                     }
 
-                    // Reload the chart to ensure it is up-to-date
-                    if (tab[0].textContent === "Census 2010 Charts" || tab[0].textContent === "ACS 2014 Charts") {
-                        self.reloadChart();
-                    }
                 };
 
                 /**
