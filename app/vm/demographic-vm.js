@@ -500,8 +500,7 @@
                             activate: self.tabActivated,
                             scrollable: false
                         });
-                    }
-                    else{
+                    } else {
                         tabStrip.select(0);
                         tabStrip.trigger("activate");
                     }
@@ -788,20 +787,21 @@
                     var tab = tabStrip.select();
                     var chartListDivObj = $("#demCensusChartList");
 
-                    if (self.reportType == 'cog'){
-                        //Sets the correct source label at bottom of report
-                        if (tab[0].textContent === "Census 2010 Charts" || tab[0].textContent === "Census 2010 Data") {
-                            $("#demSource").html("Source: United States Census Bureau, 2010 Decennial Census (Interpolation used, see help for more details.) ");
+                    if (tab[0]) {
+                        if (self.reportType == 'cog') {
+                            //Sets the correct source label at bottom of report
+                            if (tab[0].textContent === "Census 2010 Charts" || tab[0].textContent === "Census 2010 Data") {
+                                $("#demSource").html("Source: United States Census Bureau, 2010 Decennial Census (Interpolation used, see help for more details.) ");
+                            } else {
+                                $("#demSource").html("Source: United States Census Bureau, American Community Survey 2010-2014 5yr Estimates (Interpolation used, see help for more details.) ");
+                            }
                         } else {
-                            $("#demSource").html("Source: United States Census Bureau, American Community Survey 2010-2014 5yr Estimates (Interpolation used, see help for more details.) ");
-                        }                     
-                    }
-                    else{
-                        //Sets the correct source label at bottom of report
-                        if (tab[0].textContent === "Census 2010 Charts" || tab[0].textContent === "Census 2010 Data") {
-                            $("#demSource").html(appConfig.sourceLabel2);
-                        } else {
-                            $("#demSource").html(appConfig.sourceLabel);
+                            //Sets the correct source label at bottom of report
+                            if (tab[0].textContent === "Census 2010 Charts" || tab[0].textContent === "Census 2010 Data") {
+                                $("#demSource").html(appConfig.sourceLabel2);
+                            } else {
+                                $("#demSource").html(appConfig.sourceLabel);
+                            }
                         }
                     }
 
