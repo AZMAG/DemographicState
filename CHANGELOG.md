@@ -17,6 +17,10 @@ And constructed with the following guidelines:
 
 ***************************************************************************************************************
 
+## Version 2.3.3 | 1/23/2017
+* Added Title 6 tab to the MPO/COG reporting window
+* Changed wording from MAG Viewer to Viewer
+
 ## Version 2.3.3 | 12/13/2016
 * Fixed bug in advanced query when census fields weren't used no data would be brought in. The query now uses an acs query string and uses the resulting geoids to lookup census block groups.
 
