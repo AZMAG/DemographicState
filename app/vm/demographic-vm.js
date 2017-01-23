@@ -23,6 +23,8 @@
             "dojo/text!app/views/ACSDemographicChartHelp-view.html",
             "dojo/text!app/views/ACSDemographicSummaryHelp-view.html",
             "dojo/text!app/views/ACSDemographicSelFeaturesHelp-view.html",
+            "dojo/text!app/views/interHelp-view.html",
+            "dojo/text!app/views/title6-view.html",
             "app/vm/help-vm",
             "dojo/text!app/views/alert1-view.html",
             "dojo/text!app/views/alert2-view.html",
@@ -41,7 +43,7 @@
             "dojo/_base/Color"
         ],
         function(dc, dom, tp, da, on, view, selCensusFeatsView, selACSFeatsView, chartHelpView, summaryHelpView,
-            selFeatHelpView, ACSChartHelpView, ACSSummaryHelpView, ACSSelFeatHelpView, helpVM, alertView1, alertView2, alert1VM, alert2VM, layerDelegate, printMapDelegate,
+            selFeatHelpView, ACSChartHelpView, ACSSummaryHelpView, ACSSelFeatHelpView, InterHelpView, title6View, helpVM, alertView1, alertView2, alert1VM, alert2VM, layerDelegate, printMapDelegate,
             magNumberFormatter, mapModel, demographicConfig, acsFieldsConfig, censusFieldsConfig, graphicsUtils) {
 
             var DemographicVM = new function() {
@@ -330,6 +332,18 @@
                         }
                     });
 
+                    $("body").on("click", ".interHelp", function() {
+                        //open InterpolationHelp
+                        helpVM.openWindow(InterHelpView);
+                    });
+
+                    $("body").on("click", "#title6ExportResults", function(e) {
+                        self.exportToExcel(e);
+                    });
+
+
+
+
                     // Get the help button and assign the click event.
                     var helpButton = chartWindow.wrapper.find(".k-i-help");
                     helpButton.click(function() {
@@ -466,7 +480,7 @@
                             break;
                         case "cog":
                             self.reportConfigItem = demographicConfig.reports.cogSummary;
-                            $("#demSource").html("Source: United States Census Bureau, American Community Survey 2010-2014 5yr Estimates (Interpolation Used, See help for more details) ");
+                            $("#demSource").html("Source: United States Census Bureau, American Community Survey 2010-2014 5yr Estimates <br> (Interpolation Used, <a class='interHelp link'>Click here</a> for more details) ");
                             break;
                     }
 
@@ -791,9 +805,9 @@
                         if (self.reportType == 'cog') {
                             //Sets the correct source label at bottom of report
                             if (tab[0].textContent === "Census 2010 Charts" || tab[0].textContent === "Census 2010 Data") {
-                                $("#demSource").html("Source: United States Census Bureau, 2010 Decennial Census (Interpolation used, see help for more details.) ");
+                                $("#demSource").html("Source: United States Census Bureau, 2010 Decennial Census (Interpolation method used, <a class='interHelp link'>Click here</a> for more details) ");
                             } else {
-                                $("#demSource").html("Source: United States Census Bureau, American Community Survey 2010-2014 5yr Estimates (Interpolation used, see help for more details.) ");
+                                $("#demSource").html("Source: United States Census Bureau, American Community Survey 2010-2014 5yr Estimates <br> (Interpolation method used, <a class='interHelp link'>Click here</a> for more details) ");
                             }
                         } else {
                             //Sets the correct source label at bottom of report
@@ -1002,6 +1016,7 @@
                     } else {
                         self.createKendoGrid(gridType);
                     }
+
                 };
 
                 self.updateSelectionGraphic = function(selectionGraphic) {
@@ -1050,7 +1065,6 @@
                     $.each(fields, function(index, field) {
                         var attribute = sumAttributes[field.fieldName];
                         var attrValue = Number(attribute);
-
                         if (field.canSum === true || featuresCount === 1) {
                             aggValues[field.fieldName] = {
                                 fieldCategory: field.category,
@@ -1153,8 +1167,12 @@
 
                         // Select the first item
                         var listView = chartListDivObj.data("kendoListView");
-                        listView.select(listView.element.children().first());
+                        if (listView) {
+                            listView.select(listView.element.children().first());
+                        }
                     }
+
+                    var tabStrip = $("#demTabStrip").data("kendoTabStrip");
 
                     // Reset comparison if community has changed
                     if (self.commChanged) {
@@ -1163,7 +1181,6 @@
                         $("#demCensusUseComp").prop("checked", false);
 
                         // Reload the chart if on the charts tab
-                        var tabStrip = $("#demTabStrip").data("kendoTabStrip");
                         var tab = tabStrip.select();
                         if (tab[0].textContent === "Census 2010 Charts" || tab[0].textContent === "ACS 2014 Charts") {
                             self.reloadChart();
@@ -1191,6 +1208,66 @@
                         mapModel.addGraphic(self.selectionGraphic, undefined, true, true);
                     }
 
+                    var item = tabStrip.tabGroup.find('li:contains("Title VI Data")');
+                    if (item) {
+                        tabStrip.remove(item);
+                        tabStrip.select(0);
+                    }
+
+                    if (self.reportType === "cog") {
+                        var attributes = features[0].attributes;
+                        var dataSrc = [
+                        {
+                            name: "Population Base <br> (Civilian Noninstitutionalized Population)",
+                            value: attributes["CIV_NON_INST_POP"],
+                            percent: "N/A"
+                        }, {
+                            name: "Minority<sup>a</sup>",
+                            value: attributes["MINORITY_POP"],
+                            percent: (attributes["MINORITY_POP"] / attributes["CIV_NON_INST_POP"])
+                        },{
+                            name: "Age 60+<sup>a</sup>",
+                            value: attributes["AGE60PLUS"],
+                            percent: (attributes["AGE60PLUS"] / attributes["CIV_NON_INST_POP"])
+                        },{
+                            name: "Age 65+<sup>a</sup>",
+                            value: attributes["AGE65PLUS"],
+                            percent: (attributes["AGE65PLUS"] / attributes["CIV_NON_INST_POP"])
+                        },{
+                            name: "Age 75+<sup>a</sup>",
+                            value: attributes["AGE75PLUS"],
+                            percent: (attributes["AGE75PLUS"] / attributes["CIV_NON_INST_POP"])
+                        }, {
+                            name: "Below Poverty Level<sup>b</sup>",
+                            value: attributes["INCOME_BELOW_POVERTY_LEVEL"],
+                            percent: (attributes["INCOME_BELOW_POVERTY_LEVEL"] / attributes["CIV_NON_INST_POP"])
+                        },{
+                            name: "Population with a Disability<sup>c</sup>",
+                            value: attributes["DISABILITY"],
+                            percent: (attributes["DISABILITY"] / attributes["CIV_NON_INST_POP"])
+                        }, {
+                            name: "Limited English Proficient Persons (LEP)<sup>f</sup>",
+                            value: attributes["LIMITED_ENGLISH"],
+                            percent: (attributes["LIMITED_ENGLISH"] / attributes["CIV_NON_INST_POP"])
+                        }];
+
+                        tabStrip.append({
+                            text: "Title VI Data",
+                            content: title6View
+                        });
+
+                        $("#title6Grid").kendoGrid({
+                            dataSource: {
+                                data: dataSrc
+                            },
+                            height: 150,
+                            columns: [
+                                { field: "name", title: " ", width: "220px", encoded: false },
+                                { field: "value", title: "Total", format: "{0:N0}", width: "130px" },
+                                { field: "percent", title: "Percent", format: "{0:p}", width: "130px" },
+                            ]
+                        });
+                    }
                 };
 
                 /**
@@ -2602,6 +2679,13 @@
                         fileName = self.communityName + ".xlsx";
                         colSpan = 22;
                         rowSpan = 7;
+                    } else if (exportButtonId === "title6ExportResults") {
+                        grid = $("#title6Grid").data("kendoGrid");
+                        headerValue = "Title VI data for " + self.communityName;
+                        fileName = self.communityName + ".xlsx";
+                        colSpan = 4;
+                        rowSpan = 15;
+
                     }
 
                     if (self.compareFeature !== null && exportButtonId !== "demCensusExportSelFeatResults" && exportButtonId !== "demACSExportSelFeatResults") {
@@ -2612,7 +2696,7 @@
                         var rows = e.workbook.sheets[0].rows;
                         var columns = e.workbook.sheets[0].columns;
                         columns[1].width = 290;
-                        if (exportButtonId !== "demCensusExportSelFeatResults" && exportButtonId !== "demACSExportSelFeatResults") {
+                        if (exportButtonId !== "demCensusExportSelFeatResults" && exportButtonId !== "demACSExportSelFeatResults" && exportButtonId !== "title6ExportResults") {
                             $.each(rows, function(index, row) {
                                 if (row.type === "group-header") {
                                     row.cells[0].value = row.cells[0].value.substring(37);

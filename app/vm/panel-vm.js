@@ -277,17 +277,19 @@
                     }
                     var selector = "#" + type + "ChoiceDiv";
                     var $choiceDiv = $(selector);
+                    $("#demInteractiveDiv").hide();
 
                     if ($choiceDiv.is(":hidden")) {
                         $choiceDiv.show();
                         self.hideChoices(selector);
+                        self.hideLayers(layerID);
                         if (layer !== null && layer.visible === false && boxChecked === false) {
-                            self.hideLayers(layerID);
                             layer.show();
                             dom.byId("c" + layerID).checked = true;
                         }
                     } else {
                         $choiceDiv.hide();
+                        self.hideLayers(layerID);
                         if (layer !== null && layer.visible === true && boxChecked === true) {
                             layer.hide();
                             dom.byId("c" + layerID).checked = false;
@@ -360,6 +362,7 @@
                     if (div.length === 0) {
                         interactiveToolsVM.insertAfter("demInteractiveDiv", "launchInteractiveSummaryDiv", demographicVM.interactiveCensusSelectionQueryHandler, demographicVM.interactiveSelectionQueryFault, demographicConfig.reports.censusTracts.ACSRestUrl);
                         self.hideChoices("#demInteractiveDiv");
+                        self.hideLayers("");
                     } else {
                         if (div.is(":hidden")) {
                             self.hideChoices("#demInteractiveDiv");
