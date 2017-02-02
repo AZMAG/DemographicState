@@ -23,6 +23,7 @@
             "dojo/text!app/views/ACSDemographicChartHelp-view.html",
             "dojo/text!app/views/ACSDemographicSummaryHelp-view.html",
             "dojo/text!app/views/ACSDemographicSelFeaturesHelp-view.html",
+            "dojo/text!app/views/title6Help-view.html",
             "dojo/text!app/views/interHelp-view.html",
             "dojo/text!app/views/title6-view.html",
             "app/vm/help-vm",
@@ -43,7 +44,7 @@
             "dojo/_base/Color"
         ],
         function(dc, dom, tp, da, on, view, selCensusFeatsView, selACSFeatsView, chartHelpView, summaryHelpView,
-            selFeatHelpView, ACSChartHelpView, ACSSummaryHelpView, ACSSelFeatHelpView, InterHelpView, title6View, helpVM, alertView1, alertView2, alert1VM, alert2VM, layerDelegate, printMapDelegate,
+            selFeatHelpView, ACSChartHelpView, ACSSummaryHelpView, ACSSelFeatHelpView, Title6HelpView, InterHelpView, title6View, helpVM, alertView1, alertView2, alert1VM, alert2VM, layerDelegate, printMapDelegate,
             magNumberFormatter, mapModel, demographicConfig, acsFieldsConfig, censusFieldsConfig, graphicsUtils) {
 
             var DemographicVM = new function() {
@@ -341,20 +342,17 @@
                         self.exportToExcel(e);
                     });
 
-
-
-
                     // Get the help button and assign the click event.
                     var helpButton = chartWindow.wrapper.find(".k-i-help");
                     helpButton.click(function() {
                         var tabStrip = $("#demTabStrip").data("kendoTabStrip");
                         var tab = tabStrip.select();
 
-                        if (tab[0].textContent === "ACS 2014 Charts") {
+                        if (tab[0].textContent === "ACS 2015 Charts") {
                             helpVM.openWindow(ACSChartHelpView);
                         } else if (tab[0].textContent === "Census 2010 Charts") {
                             helpVM.openWindow(chartHelpView);
-                        } else if (tab[0].textContent === "ACS 2014 Data") {
+                        } else if (tab[0].textContent === "ACS 2015 Data") {
                             helpVM.openWindow(ACSSummaryHelpView);
                         } else if (tab[0].textContent === "Census 2010 Data") {
                             helpVM.openWindow(summaryHelpView);
@@ -362,6 +360,8 @@
                             helpVM.openWindow(ACSSelFeatHelpView);
                         } else if (tab[0].textContent === "Census Block Groups") {
                             helpVM.openWindow(SelFeatHelpView);
+                        } else if (tab[0].textContent === "Title VI Data") {
+                            helpVM.openWindow(Title6HelpView);
                         }
                     });
 
@@ -480,7 +480,7 @@
                             break;
                         case "cog":
                             self.reportConfigItem = demographicConfig.reports.cogSummary;
-                            $("#demSource").html("Source: United States Census Bureau, American Community Survey 2010-2014 5yr Estimates <br> (Interpolation Used, <a class='interHelp link'>Click here</a> for more details) ");
+                            $("#demSource").html("Source: United States Census Bureau, American Community Survey 2011-2015 5yr Estimates <br> (Interpolation Used, <a class='interHelp link'>Click here</a> for more details) ");
                             break;
                     }
 
@@ -740,7 +740,7 @@
 
                     var tab = tabStrip.select();
                     if (tab.length > 0) {
-                        if (tab[0].textContent === "ACS 2014 Charts" || tab[0].textContent === "Census 2010 Charts") {
+                        if (tab[0].textContent === "ACS 2015 Charts" || tab[0].textContent === "Census 2010 Charts") {
                             self.reloadChart();
                         }
                     }
@@ -807,10 +807,11 @@
                             if (tab[0].textContent === "Census 2010 Charts" || tab[0].textContent === "Census 2010 Data") {
                                 $("#demSource").html("Source: United States Census Bureau, 2010 Decennial Census (Interpolation method used, <a class='interHelp link'>Click here</a> for more details) ");
                             } else {
-                                $("#demSource").html("Source: United States Census Bureau, American Community Survey 2010-2014 5yr Estimates <br> (Interpolation method used, <a class='interHelp link'>Click here</a> for more details) ");
+                                $("#demSource").html("Source: United States Census Bureau, American Community Survey 2011-2015 5yr Estimates <br> (Interpolation method used, <a class='interHelp link'>Click here</a> for more details) ");
                             }
                         } else {
                             //Sets the correct source label at bottom of report
+                            $("#footNotes").html("");
                             if (tab[0].textContent === "Census 2010 Charts" || tab[0].textContent === "Census 2010 Data") {
                                 $("#demSource").html(appConfig.sourceLabel2);
                             } else {
@@ -818,7 +819,7 @@
                             }
                         }
                         // Reload the chart to ensure it is up-to-date
-                        if (tab[0].textContent === "Census 2010 Charts" || tab[0].textContent === "ACS 2014 Charts") {
+                        if (tab[0].textContent === "Census 2010 Charts" || tab[0].textContent === "ACS 2015 Charts") {
                             self.reloadChart();
                         }
                     }
@@ -995,8 +996,10 @@
                         // Reload the chart if on the charts tab
                         var tabStrip = $("#demTabStrip").data("kendoTabStrip");
                         var tab = tabStrip.select();
-                        if (tab[0].textContent === "Census 2010 Charts") {
-                            self.reloadChart();
+                        if (tab[0]) {
+                            if (tab[0].textContent === "Census 2010 Charts") {
+                                self.reloadChart();
+                            }
                         }
 
                         // Reload the comparison places
@@ -1182,7 +1185,7 @@
 
                         // Reload the chart if on the charts tab
                         var tab = tabStrip.select();
-                        if (tab[0].textContent === "Census 2010 Charts" || tab[0].textContent === "ACS 2014 Charts") {
+                        if (tab[0].textContent === "Census 2010 Charts" || tab[0].textContent === "ACS 2015 Charts") {
                             self.reloadChart();
                         }
 
@@ -1216,57 +1219,131 @@
 
                     if (self.reportType === "cog") {
                         var attributes = features[0].attributes;
-                        var dataSrc = [
-                        {
-                            name: "Population Base <br> (Civilian Noninstitutionalized Population)",
-                            value: attributes["CIV_NON_INST_POP"],
-                            percent: "N/A"
-                        }, {
-                            name: "Minority<sup>a</sup>",
-                            value: attributes["MINORITY_POP"],
-                            percent: (attributes["MINORITY_POP"] / attributes["CIV_NON_INST_POP"])
-                        },{
-                            name: "Age 60+<sup>a</sup>",
-                            value: attributes["AGE60PLUS"],
-                            percent: (attributes["AGE60PLUS"] / attributes["CIV_NON_INST_POP"])
-                        },{
-                            name: "Age 65+<sup>a</sup>",
-                            value: attributes["AGE65PLUS"],
-                            percent: (attributes["AGE65PLUS"] / attributes["CIV_NON_INST_POP"])
-                        },{
-                            name: "Age 75+<sup>a</sup>",
-                            value: attributes["AGE75PLUS"],
-                            percent: (attributes["AGE75PLUS"] / attributes["CIV_NON_INST_POP"])
-                        }, {
-                            name: "Below Poverty Level<sup>b</sup>",
-                            value: attributes["INCOME_BELOW_POVERTY_LEVEL"],
-                            percent: (attributes["INCOME_BELOW_POVERTY_LEVEL"] / attributes["CIV_NON_INST_POP"])
-                        },{
-                            name: "Population with a Disability<sup>c</sup>",
-                            value: attributes["DISABILITY"],
-                            percent: (attributes["DISABILITY"] / attributes["CIV_NON_INST_POP"])
-                        }, {
-                            name: "Limited English Proficient Persons (LEP)<sup>f</sup>",
-                            value: attributes["LIMITED_ENGLISH"],
-                            percent: (attributes["LIMITED_ENGLISH"] / attributes["CIV_NON_INST_POP"])
-                        }];
+
+                        // console.log(attributes);
+                        var fivePlus = attributes["TOTAL_POP"] - attributes["UNDER5"];
+                        var totalPop = attributes["TOTAL_POP"];
+                        var totalBlockCount = attributes["TOT_BLOCK_COUNT"];
+
+                        var dataSrc = [{
+                                Category: "Population Base",
+                                Total: totalPop,
+                                Percent: "N/A",
+                                NumberOfBlocks: totalBlockCount,
+                                PercentOfBlocks: totalBlockCount / totalBlockCount,
+                                AffectedPopulation: "N/A",
+                                PercentAffectedCaptured: "N/A"
+                            },
+                            // {
+                            //     Category: "Civilian Noninstitutionalized Population",
+                            //     Total: attributes["CIV_NON_INST_POP"],
+                            //     Percent: "N/A",
+                            //     NumberOfBlocks: attributes[''],
+                            //     PercentOfBlocks: attributes[''] / totalBlockCount,
+                            //     AffectedPopulation: attributes[''],
+                            //     PercentAffectedCaptured: attributes[''] / attributes["CIV_NON_INST_POP"]
+                            // }, 
+                            {
+                                Category: "Minority",
+                                Total: attributes["MINORITY_POP"],
+                                Percent: (attributes["MINORITY_POP"] / totalPop),
+                                NumberOfBlocks: attributes['AFFECTED_MIN_POP_COUNT'],
+                                PercentOfBlocks: attributes['AFFECTED_MIN_POP_COUNT'] / totalBlockCount,
+                                AffectedPopulation: attributes['AFFECTED_MIN_POP'],
+                                PercentAffectedCaptured: attributes['AFFECTED_MIN_POP'] / attributes["MINORITY_POP"]
+                            }, {
+                                Category: "Age 60+",
+                                Total: attributes["AGE60PLUS"],
+                                Percent: (attributes["AGE60PLUS"] / totalPop),
+                                NumberOfBlocks: attributes['AFFECTED_60_PLUS_COUNT'],
+                                PercentOfBlocks: attributes['AFFECTED_60_PLUS_COUNT'] / totalBlockCount,
+                                AffectedPopulation: attributes['AFFECTED_60_PLUS'],
+                                PercentAffectedCaptured: attributes['AFFECTED_60_PLUS'] / attributes["AGE60PLUS"]
+                            }, {
+                                Category: "Age 65+",
+                                Total: attributes["AGE65PLUS"],
+                                Percent: (attributes["AGE65PLUS"] / totalPop),
+                                NumberOfBlocks: attributes['AFFECTED_65_PLUS_COUNT'],
+                                PercentOfBlocks: attributes['AFFECTED_65_PLUS_COUNT'] / totalBlockCount,
+                                AffectedPopulation: attributes['AFFECTED_65_PLUS'],
+                                PercentAffectedCaptured: attributes['AFFECTED_65_PLUS'] / attributes["AGE65PLUS"]
+                            }, {
+                                Category: "Age 75+",
+                                Total: attributes["AGE75PLUS"],
+                                Percent: (attributes["AGE75PLUS"] / totalPop),
+                                NumberOfBlocks: attributes['AFFECTED_75_PLUS_COUNT'],
+                                PercentOfBlocks: attributes['AFFECTED_75_PLUS_COUNT'] / totalBlockCount,
+                                AffectedPopulation: attributes['AFFECTED_75_PLUS'],
+                                PercentAffectedCaptured: attributes['AFFECTED_75_PLUS'] / attributes["AGE75PLUS"]
+                            }, {
+                                Category: "Below Poverty Level",
+                                Total: attributes["INCOME_BELOW_POVERTY_LEVEL"],
+                                Percent: (attributes["INCOME_BELOW_POVERTY_LEVEL"] / attributes["CIV_NON_INST_POP"]),
+                                NumberOfBlocks: attributes['AFFECTED_BELOW_POVERTY_LEVEL_COUNT'],
+                                PercentOfBlocks: attributes['AFFECTED_BELOW_POVERTY_LEVEL_COUNT'] / totalBlockCount,
+                                AffectedPopulation: attributes['AFFECTED_BELOW_POVERTY_LEVEL'],
+                                PercentAffectedCaptured: attributes['AFFECTED_BELOW_POVERTY_LEVEL'] / attributes["INCOME_BELOW_POVERTY_LEVEL"]
+                            }, {
+                                Category: "Population with a Disability",
+                                Total: attributes["DISABILITY"],
+                                Percent: (attributes["DISABILITY"] / attributes["CIV_NON_INST_POP"]),
+                                NumberOfBlocks: attributes['AFFECTED_DISABILITY_COUNT'],
+                                PercentOfBlocks: attributes['AFFECTED_DISABILITY_COUNT'] / totalBlockCount,
+                                AffectedPopulation: attributes['AFFECTED_DISABILITY'],
+                                PercentAffectedCaptured: attributes['AFFECTED_DISABILITY'] / attributes["DISABILITY"]
+                            }, {
+                                Category: "Limited English Proficient Persons (LEP)",
+                                Total: attributes["LIMITED_ENGLISH"],
+                                Percent: (attributes["LIMITED_ENGLISH"] / fivePlus),
+                                NumberOfBlocks: attributes['AFFECTED_LEP_COUNT'],
+                                PercentOfBlocks: attributes['AFFECTED_LEP_COUNT'] / totalBlockCount,
+                                AffectedPopulation: attributes['AFFECTED_LEP'],
+                                PercentAffectedCaptured: attributes['AFFECTED_LEP'] / attributes["LIMITED_ENGLISH"]
+                            }
+                        ];
 
                         tabStrip.append({
                             text: "Title VI Data",
                             content: title6View
                         });
 
+
                         $("#title6Grid").kendoGrid({
                             dataSource: {
                                 data: dataSrc
                             },
-                            height: 150,
-                            columns: [
-                                { field: "name", title: " ", width: "220px", encoded: false },
-                                { field: "value", title: "Total", format: "{0:N0}", width: "130px" },
-                                { field: "percent", title: "Percent", format: "{0:p}", width: "130px" },
+                            //height: 200,
+                            columns: [{
+                                    title: "Population and Households",
+                                    width: "235px",
+                                    columns: [{
+                                        field: "Category",
+                                        title: "Category",
+                                        width: "105px"
+                                    }, {
+                                        title: "MPO",
+                                        width: "130px",
+                                        columns: [
+                                            { field: "Total", title: "Total", width: "70px", format: "{0:n0}" },
+                                            { field: "Percent", title: "Percent", format: "{0:p1}", width: "60px" }
+                                        ]
+                                    }]
+                                }, {
+                                    title: "Census Blocks",
+                                    width: "325px",
+                                    columns: [
+                                        { field: "NumberOfBlocks", title: "Number of blocks >= MPO Percentage", width: "95px", format: "{0:n0}" },
+                                        { field: "PercentOfBlocks", title: "% Blocks", format: "{0:p1}", width: "65px" },
+                                        { field: "AffectedPopulation", title: "Affected Population", width: "70px", format: "{0:n0}" },
+                                        { field: "PercentAffectedCaptured", title: "% of Affected Population Captured in Census Blocks", width: "95px", format: "{0:p1}" }
+                                    ]
+                                },
+
+
                             ]
                         });
+
+                        $("#footnotePanelBar").kendoPanelBar();
                     }
                 };
 
@@ -1778,12 +1855,16 @@
                     });
 
                     var categoryName = self.selectedCategoryObj[0].childNodes[1].innerHTML;
+                    var padding = 75;
 
                     if (categoryName === "Occupation") {
                         self.createTreeMap();
                     } else if (categoryName === "Age By Gender") {
                         self.createAgePyramid();
                     } else {
+                        if (categoryName == "Race and Ethnicity") {
+                            padding = 100;
+                        }
 
                         var templateString = "#= category #<br>#= kendo.format('{0:P}', percentage) #<br>#= kendo.format('{0:N0}', value) #";
                         if (self.groupedItems[0].chartType !== "pie") {
@@ -1848,7 +1929,7 @@
                                     type: self.groupedItems[0].chartType,
                                     field: "fieldValue",
                                     categoryField: "fieldAlias",
-                                    padding: 75
+                                    padding: padding
                                 }],
                                 seriesDefaults: {
                                     labels: {
@@ -2360,7 +2441,7 @@
                     self.pyramidData.reverse();
 
                     // var url = demographicConfig.reports.stateSummary.ACSRestUrl;
-                    // var whereClause = "NAME = 'Arizona State'";
+                    // var whereClause = "NAME = 'Arizona'";
                     // layerDelegate.query(url, self.populationPyramidComparison, self.dataQueryFault, null, whereClause, false, demographicConfig.agePyramidFields);
 
                     // self.populationPyramidComparison = function(results) {
@@ -2643,7 +2724,7 @@
                     if (exportButtonId === "demACSExportResults") {
                         //Summary report export button clicked
                         grid = $("#demACSDataGrid").data("kendoGrid");
-                        headerValue = self.communityName + " ACS 2014 Data";
+                        headerValue = self.communityName + " ACS 2015 Data";
                         fileName = self.communityName + ".xlsx";
                         if (self.compareFeature === null) {
                             colSpan = 4;
@@ -2683,8 +2764,8 @@
                         grid = $("#title6Grid").data("kendoGrid");
                         headerValue = "Title VI data for " + self.communityName;
                         fileName = self.communityName + ".xlsx";
-                        colSpan = 4;
-                        rowSpan = 15;
+                        colSpan = 7;
+                        rowSpan = 13;
 
                     }
 
@@ -2856,7 +2937,7 @@
                             localStorage.OBJECTID = ObjectIdArray;
                             self.reportURL = encodeURI(demographicConfig.exportPDFReportUrl + "?StateInteractive");
                             newWindow = window.open(self.reportURL, "_new");
-                        } else if (self.communityName === "Arizona State") {
+                        } else if (self.communityName === "Arizona") {
                             self.reportURL = encodeURI(demographicConfig.exportPDFReportUrl + "?state=" + self.communityName);
                             newWindow = window.open(self.reportURL, "_new");
                         } else if (self.communityName.length === 5 && !isNaN(parseInt(self.communityName))) {

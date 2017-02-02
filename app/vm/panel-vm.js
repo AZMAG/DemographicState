@@ -180,7 +180,7 @@
                 self.dropDownQueryHandler = function(results) {
                     var configItem;
                     var attributes = results.features[0].attributes;
-                    if (attributes["PLACENAME14"]) {
+                    if (attributes["PLACE_TYPE"]) {
                         configItem = demographicConfig.reports.placeSummary;
                     } else if (attributes["ZIPCODE"]) {
                         configItem = demographicConfig.reports.zipCodeSummary;
@@ -190,7 +190,7 @@
                         configItem = demographicConfig.reports.congressionalSummary;
                     } else if (attributes["COG"]) {
                         configItem = demographicConfig.reports.cogSummary;
-                    } else if (attributes["COUNTY"]) {
+                    } else if (attributes["COUNTYFP"]) {
                         configItem = demographicConfig.reports.countySummary;
                     }
 
@@ -349,7 +349,7 @@
                  */
                 self.openStateSummaryWindow = function(e) {
                     // Open the window
-                    demographicVM.openWindow("Arizona State", "state");
+                    demographicVM.openWindow("Arizona", "state");
                 };
 
                 /**

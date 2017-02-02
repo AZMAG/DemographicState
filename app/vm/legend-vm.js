@@ -211,11 +211,11 @@
 
                         $("#slider").kendoSlider({
                             change: function(e) {
-                                var sLayer = mapModel.baseMapInstance.getLayer("ACS2014byBlockGroup");
+                                var sLayer = mapModel.baseMapInstance.getLayer("ACS2015byBlockGroup");
                                 sLayer.setOpacity(e.value);
                             },
                             slide: function(e) {
-                                var sLayer = mapModel.baseMapInstance.getLayer("ACS2014byBlockGroup");
+                                var sLayer = mapModel.baseMapInstance.getLayer("ACS2015byBlockGroup");
                                 sLayer.setOpacity(e.value);
                             },
                             increaseButtonTitle: "Decrease",
@@ -362,7 +362,7 @@
                             self.legend = new Legend({
                                 map: map,
                                 layerInfos: [{
-                                    layer: map.getLayer("ACS2014byBlockGroup"),
+                                    layer: map.getLayer("ACS2015byBlockGroup"),
                                     title: self.legendMapTitle
                                 }]
                             }, "legendDiv");
@@ -402,7 +402,7 @@
                 self.updateLegend = function() {
                     if (mapModel.mapInstance.id === mapModel.baseMapInstance.id) {
                         self.legend.refresh([{
-                            layer: mapModel.mapInstance.getLayer("ACS2014byBlockGroup"),
+                            layer: mapModel.mapInstance.getLayer("ACS2015byBlockGroup"),
                             title: self.legendMapTitle
                         }]);
                         dom.byId("legendTitle").innerHTML = self.legendMapTitle;

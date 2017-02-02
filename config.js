@@ -42,7 +42,7 @@ var appConfig = new function() {
     this.exportWebMapUrl = "http://geo.azmag.gov/gismag/rest/services/gp/stateDemo/GPServer/Export%20Web%20Map"; // Custom Print Service
     this.webServicePasscode = "sun sand dry heat grand canyon";
 
-    this.mainURL = "http://geo.azmag.gov/gismag/rest/services/maps/DemographicState2014/MapServer";
+    this.mainURL = "http://geo.azmag.gov/gismag/rest/services/maps/DemographicState2015/MapServer";
     this.siteUrl = "http://geo.azmag.gov/maps/azdemographics/?";
 
     // Search Service URLs
@@ -77,7 +77,7 @@ var appConfig = new function() {
         queryUrl: this.mainURL + "/2",
         queryWhere: "1=1",
         layers: [2],
-        opacity: 1,
+        opacity: .6,
         visible: false,
         selectable: true,
         outFields: ["*"],
@@ -89,11 +89,11 @@ var appConfig = new function() {
         id: "countyBoundaries",
         title: "County Boundaries",
         type: "feature",
-        url: this.mainURL + "/16",
-        queryUrl: this.mainURL + "/16",
+        url: this.mainURL + "/19",
+        queryUrl: this.mainURL + "/19",
         queryWhere: "1=1",
         layers: [16],
-        opacity: 1,
+        opacity: .9,
         visible: true,
         selectable: true,
         outFields: ["*"],
@@ -158,8 +158,8 @@ var appConfig = new function() {
         showTOC: true
     }, {
         layerNum: 7,
-        id: "ACS2014byBlockGroup",
-        title: "American Community Survey by Block Group, 2010-2014 5yr",
+        id: "ACS2015byBlockGroup",
+        title: "American Community Survey by Block Group, 2011-2015 5yr",
         type: "dynamic",
         url: this.mainURL,
         layers: [0],
@@ -296,7 +296,7 @@ var appConfig = new function() {
 
     this.textSymbolFontSizes = [8, 9, 10, 11, 12, 14, 16, 18, 20, 24, 30, 50];
 
-    this.sourceLabel = "Source: United States Census Bureau, American Community Survey 2010-2014 5yr Estimates";
+    this.sourceLabel = "Source: United States Census Bureau, American Community Survey 2011-2015 5yr Estimates";
 
     this.sourceLabel2 = "Source: United States Census Bureau, 2010 Decennial Census";
 

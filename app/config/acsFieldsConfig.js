@@ -19,7 +19,7 @@
 						"chartCategory": "",
 						"chartType": "",
 						"canSum": true,
-						"dataSource": "ACS 2014",
+						"dataSource": "ACS 2015",
 						"class": null,
 						"timePeriod": null,
 						"parentField": ""
@@ -34,7 +34,7 @@
 						"chartCategory": "",
 						"chartType": "",
 						"canSum": true,
-						"dataSource": "ACS 2014",
+						"dataSource": "ACS 2015",
 						"class": null,
 						"timePeriod": null,
 						"parentField": ""
@@ -49,7 +49,7 @@
 						"chartCategory": "",
 						"chartType": "",
 						"canSum": true,
-						"dataSource": "ACS 2014",
+						"dataSource": "ACS 2015",
 						"class": null,
 						"timePeriod": null,
 						"parentField": ""
@@ -64,7 +64,7 @@
 						"chartCategory": "Age By Gender",
 						"chartType": "",
 						"canSum": true,
-						"dataSource": "ACS 2014",
+						"dataSource": "ACS 2015",
 						"class": null,
 						"timePeriod": null,
 						"parentField": "",
@@ -80,7 +80,7 @@
 						"chartCategory": "Age By Gender",
 						"chartType": "pyramid",
 						"canSum": true,
-						"dataSource": "ACS 2014",
+						"dataSource": "ACS 2015",
 						"class": null,
 						"timePeriod": null,
 						"parentField": "",
@@ -96,7 +96,7 @@
 						"chartCategory": "Age By Gender",
 						"chartType": "pyramid",
 						"canSum": true,
-						"dataSource": "ACS 2014",
+						"dataSource": "ACS 2015",
 						"class": null,
 						"timePeriod": null,
 						"parentField": "",
@@ -112,7 +112,7 @@
 						"chartCategory": "Age By Gender",
 						"chartType": "pyramid",
 						"canSum": true,
-						"dataSource": "ACS 2014",
+						"dataSource": "ACS 2015",
 						"class": null,
 						"timePeriod": null,
 						"parentField": "",
@@ -128,7 +128,7 @@
 						"chartCategory": "Age By Gender",
 						"chartType": "pyramid",
 						"canSum": true,
-						"dataSource": "ACS 2014",
+						"dataSource": "ACS 2015",
 						"class": null,
 						"timePeriod": null,
 						"parentField": "",
@@ -144,7 +144,7 @@
 						"chartCategory": "Age By Gender",
 						"chartType": "pyramid",
 						"canSum": true,
-						"dataSource": "ACS 2014",
+						"dataSource": "ACS 2015",
 						"class": null,
 						"timePeriod": null,
 						"parentField": "",
@@ -160,7 +160,7 @@
 						"chartCategory": "Age By Gender",
 						"chartType": "pyramid",
 						"canSum": true,
-						"dataSource": "ACS 2014",
+						"dataSource": "ACS 2015",
 						"class": null,
 						"timePeriod": null,
 						"parentField": "",
@@ -176,7 +176,7 @@
 						"chartCategory": "Age By Gender",
 						"chartType": "pyramid",
 						"canSum": true,
-						"dataSource": "ACS 2014",
+						"dataSource": "ACS 2015",
 						"class": null,
 						"timePeriod": null,
 						"parentField": "",
@@ -192,7 +192,7 @@
 						"chartCategory": "Age By Gender",
 						"chartType": "pyramid",
 						"canSum": true,
-						"dataSource": "ACS 2014",
+						"dataSource": "ACS 2015",
 						"class": null,
 						"timePeriod": null,
 						"parentField": "",
@@ -208,7 +208,7 @@
 						"chartCategory": "Age By Gender",
 						"chartType": "pyramid",
 						"canSum": true,
-						"dataSource": "ACS 2014",
+						"dataSource": "ACS 2015",
 						"class": null,
 						"timePeriod": null,
 						"parentField": "",
@@ -224,7 +224,7 @@
 						"chartCategory": "Age By Gender",
 						"chartType": "pyramid",
 						"canSum": true,
-						"dataSource": "ACS 2014",
+						"dataSource": "ACS 2015",
 						"class": null,
 						"timePeriod": null,
 						"parentField": "",
@@ -240,7 +240,7 @@
 						"chartCategory": "Age By Gender",
 						"chartType": "pyramid",
 						"canSum": true,
-						"dataSource": "ACS 2014",
+						"dataSource": "ACS 2015",
 						"class": null,
 						"timePeriod": null,
 						"parentField": "",
@@ -256,7 +256,7 @@
 						"chartCategory": "Age By Gender",
 						"chartType": "pyramid",
 						"canSum": true,
-						"dataSource": "ACS 2014",
+						"dataSource": "ACS 2015",
 						"class": null,
 						"timePeriod": null,
 						"parentField": "",
@@ -272,7 +272,7 @@
 						"chartCategory": "Age By Gender",
 						"chartType": "pyramid",
 						"canSum": true,
-						"dataSource": "ACS 2014",
+						"dataSource": "ACS 2015",
 						"class": null,
 						"timePeriod": null,
 						"parentField": "",
@@ -288,7 +288,7 @@
 						"chartCategory": "Age By Gender",
 						"chartType": "pyramid",
 						"canSum": true,
-						"dataSource": "ACS 2014",
+						"dataSource": "ACS 2015",
 						"class": null,
 						"timePeriod": null,
 						"parentField": "",
@@ -304,7 +304,7 @@
 						"chartCategory": "Age By Gender",
 						"chartType": "pyramid",
 						"canSum": true,
-						"dataSource": "ACS 2014",
+						"dataSource": "ACS 2015",
 						"class": null,
 						"timePeriod": null,
 						"parentField": "",
@@ -320,7 +320,7 @@
 						"chartCategory": "Age By Gender",
 						"chartType": "pyramid",
 						"canSum": true,
-						"dataSource": "ACS 2014",
+						"dataSource": "ACS 2015",
 						"class": null,
 						"timePeriod": null,
 						"parentField": "",
@@ -336,7 +336,7 @@
 						"chartCategory": "Age By Gender",
 						"chartType": "pyramid",
 						"canSum": true,
-						"dataSource": "ACS 2014",
+						"dataSource": "ACS 2015",
 						"class": null,
 						"timePeriod": null,
 						"parentField": "",
@@ -352,7 +352,7 @@
 						"chartCategory": "Age By Gender",
 						"chartType": "pyramid",
 						"canSum": true,
-						"dataSource": "ACS 2014",
+						"dataSource": "ACS 2015",
 						"class": null,
 						"timePeriod": null,
 						"parentField": "",
@@ -368,7 +368,7 @@
 						"chartCategory": "Age By Gender",
 						"chartType": "pyramid",
 						"canSum": true,
-						"dataSource": "ACS 2014",
+						"dataSource": "ACS 2015",
 						"class": null,
 						"timePeriod": null,
 						"parentField": "",
@@ -384,7 +384,7 @@
 						"chartCategory": "Age By Gender",
 						"chartType": "pyramid",
 						"canSum": true,
-						"dataSource": "ACS 2014",
+						"dataSource": "ACS 2015",
 						"class": null,
 						"timePeriod": null,
 						"parentField": "",
@@ -400,7 +400,7 @@
 						"chartCategory": "Age By Gender",
 						"chartType": "pyramid",
 						"canSum": true,
-						"dataSource": "ACS 2014",
+						"dataSource": "ACS 2015",
 						"class": null,
 						"timePeriod": null,
 						"parentField": "",
@@ -416,7 +416,7 @@
 						"chartCategory": "Age By Gender",
 						"chartType": "pyramid",
 						"canSum": true,
-						"dataSource": "ACS 2014",
+						"dataSource": "ACS 2015",
 						"class": null,
 						"timePeriod": null,
 						"parentField": "",
@@ -432,7 +432,7 @@
 						"chartCategory": "Age By Gender",
 						"chartType": "pyramid",
 						"canSum": true,
-						"dataSource": "ACS 2014",
+						"dataSource": "ACS 2015",
 						"class": null,
 						"timePeriod": null,
 						"parentField": "",
@@ -448,7 +448,7 @@
 						"chartCategory": "Age By Gender",
 						"chartType": "",
 						"canSum": true,
-						"dataSource": "ACS 2014",
+						"dataSource": "ACS 2015",
 						"class": null,
 						"timePeriod": null,
 						"parentField": "",
@@ -464,7 +464,7 @@
 						"chartCategory": "Age By Gender",
 						"chartType": "pyramid",
 						"canSum": true,
-						"dataSource": "ACS 2014",
+						"dataSource": "ACS 2015",
 						"class": null,
 						"timePeriod": null,
 						"parentField": "",
@@ -480,7 +480,7 @@
 						"chartCategory": "Age By Gender",
 						"chartType": "pyramid",
 						"canSum": true,
-						"dataSource": "ACS 2014",
+						"dataSource": "ACS 2015",
 						"class": null,
 						"timePeriod": null,
 						"parentField": "",
@@ -496,7 +496,7 @@
 						"chartCategory": "Age By Gender",
 						"chartType": "pyramid",
 						"canSum": true,
-						"dataSource": "ACS 2014",
+						"dataSource": "ACS 2015",
 						"class": null,
 						"timePeriod": null,
 						"parentField": "",
@@ -512,7 +512,7 @@
 						"chartCategory": "Age By Gender",
 						"chartType": "pyramid",
 						"canSum": true,
-						"dataSource": "ACS 2014",
+						"dataSource": "ACS 2015",
 						"class": null,
 						"timePeriod": null,
 						"parentField": "",
@@ -528,7 +528,7 @@
 						"chartCategory": "Age By Gender",
 						"chartType": "pyramid",
 						"canSum": true,
-						"dataSource": "ACS 2014",
+						"dataSource": "ACS 2015",
 						"class": null,
 						"timePeriod": null,
 						"parentField": "",
@@ -544,7 +544,7 @@
 						"chartCategory": "Age By Gender",
 						"chartType": "pyramid",
 						"canSum": true,
-						"dataSource": "ACS 2014",
+						"dataSource": "ACS 2015",
 						"class": null,
 						"timePeriod": null,
 						"parentField": "",
@@ -560,7 +560,7 @@
 						"chartCategory": "Age By Gender",
 						"chartType": "pyramid",
 						"canSum": true,
-						"dataSource": "ACS 2014",
+						"dataSource": "ACS 2015",
 						"class": null,
 						"timePeriod": null,
 						"parentField": "",
@@ -576,7 +576,7 @@
 						"chartCategory": "Age By Gender",
 						"chartType": "pyramid",
 						"canSum": true,
-						"dataSource": "ACS 2014",
+						"dataSource": "ACS 2015",
 						"class": null,
 						"timePeriod": null,
 						"parentField": "",
@@ -592,7 +592,7 @@
 						"chartCategory": "Age By Gender",
 						"chartType": "pyramid",
 						"canSum": true,
-						"dataSource": "ACS 2014",
+						"dataSource": "ACS 2015",
 						"class": null,
 						"timePeriod": null,
 						"parentField": "",
@@ -608,7 +608,7 @@
 						"chartCategory": "Age By Gender",
 						"chartType": "pyramid",
 						"canSum": true,
-						"dataSource": "ACS 2014",
+						"dataSource": "ACS 2015",
 						"class": null,
 						"timePeriod": null,
 						"parentField": "",
@@ -624,7 +624,7 @@
 						"chartCategory": "Age By Gender",
 						"chartType": "pyramid",
 						"canSum": true,
-						"dataSource": "ACS 2014",
+						"dataSource": "ACS 2015",
 						"class": null,
 						"timePeriod": null,
 						"parentField": "",
@@ -640,7 +640,7 @@
 						"chartCategory": "Age By Gender",
 						"chartType": "pyramid",
 						"canSum": true,
-						"dataSource": "ACS 2014",
+						"dataSource": "ACS 2015",
 						"class": null,
 						"timePeriod": null,
 						"parentField": "",
@@ -656,7 +656,7 @@
 						"chartCategory": "Age By Gender",
 						"chartType": "pyramid",
 						"canSum": true,
-						"dataSource": "ACS 2014",
+						"dataSource": "ACS 2015",
 						"class": null,
 						"timePeriod": null,
 						"parentField": "",
@@ -672,7 +672,7 @@
 						"chartCategory": "Age By Gender",
 						"chartType": "pyramid",
 						"canSum": true,
-						"dataSource": "ACS 2014",
+						"dataSource": "ACS 2015",
 						"class": null,
 						"timePeriod": null,
 						"parentField": "",
@@ -688,7 +688,7 @@
 						"chartCategory": "Age By Gender",
 						"chartType": "pyramid",
 						"canSum": true,
-						"dataSource": "ACS 2014",
+						"dataSource": "ACS 2015",
 						"class": null,
 						"timePeriod": null,
 						"parentField": "",
@@ -704,7 +704,7 @@
 						"chartCategory": "Age By Gender",
 						"chartType": "pyramid",
 						"canSum": true,
-						"dataSource": "ACS 2014",
+						"dataSource": "ACS 2015",
 						"class": null,
 						"timePeriod": null,
 						"parentField": "",
@@ -720,7 +720,7 @@
 						"chartCategory": "Age By Gender",
 						"chartType": "pyramid",
 						"canSum": true,
-						"dataSource": "ACS 2014",
+						"dataSource": "ACS 2015",
 						"class": null,
 						"timePeriod": null,
 						"parentField": "",
@@ -736,7 +736,7 @@
 						"chartCategory": "Age By Gender",
 						"chartType": "pyramid",
 						"canSum": true,
-						"dataSource": "ACS 2014",
+						"dataSource": "ACS 2015",
 						"class": null,
 						"timePeriod": null,
 						"parentField": "",
@@ -752,7 +752,7 @@
 						"chartCategory": "Age By Gender",
 						"chartType": "pyramid",
 						"canSum": true,
-						"dataSource": "ACS 2014",
+						"dataSource": "ACS 2015",
 						"class": null,
 						"timePeriod": null,
 						"parentField": "",
@@ -768,7 +768,7 @@
 						"chartCategory": "Age By Gender",
 						"chartType": "pyramid",
 						"canSum": true,
-						"dataSource": "ACS 2014",
+						"dataSource": "ACS 2015",
 						"class": null,
 						"timePeriod": null,
 						"parentField": "",
@@ -784,7 +784,7 @@
 						"chartCategory": "Age By Gender",
 						"chartType": "pyramid",
 						"canSum": true,
-						"dataSource": "ACS 2014",
+						"dataSource": "ACS 2015",
 						"class": null,
 						"timePeriod": null,
 						"parentField": "",
@@ -800,7 +800,7 @@
 						"chartCategory": "Age By Gender",
 						"chartType": "pyramid",
 						"canSum": true,
-						"dataSource": "ACS 2014",
+						"dataSource": "ACS 2015",
 						"class": null,
 						"timePeriod": null,
 						"parentField": "",
@@ -816,13 +816,13 @@
 						"chartCategory": "Age By Gender",
 						"chartType": "pyramid",
 						"canSum": true,
-						"dataSource": "ACS 2014",
+						"dataSource": "ACS 2015",
 						"class": null,
 						"timePeriod": null,
 						"parentField": "",
 						"percentOfField": "TOTAL_FEMALE"
 					}, {
-						"fieldName": "MgBizSciArt",
+						"fieldName": "MGBIZSCIART",
 						"fieldAlias": "Management, business, science, and arts occupations",
 						"fieldType": "Number",
 						"tableHeader": "Management, business, science, and arts occupations",
@@ -836,9 +836,9 @@
 						"class": null,
 						"timePeriod": null,
 						"parentField": "",
-						"percentOfField": "TOTAL_WORKERS_16PLUS"
+						"percentOfField": "TOT_WORKERS_16PLUS"
 					}, {
-						"fieldName": "MgBizFin",
+						"fieldName": "MGBIZFIN",
 						"fieldAlias": "Management, business, and financial occupations",
 						"fieldType": "Number",
 						"tableHeader": "Management, business, and financial occupations",
@@ -851,10 +851,10 @@
 						"dataSource": "",
 						"class": null,
 						"timePeriod": null,
-						"parentField": "MgBizSciArt",
-						"percentOfField": "TOTAL_WORKERS_16PLUS"
+						"parentField": "MGBIZSCIART",
+						"percentOfField": "TOT_WORKERS_16PLUS"
 					}, {
-						"fieldName": "Mgmt",
+						"fieldName": "MGMT",
 						"fieldAlias": "Management occupations",
 						"fieldType": "Number",
 						"tableHeader": "Management occupations",
@@ -867,10 +867,10 @@
 						"dataSource": "",
 						"class": null,
 						"timePeriod": null,
-						"parentField": "MgBizFin",
-						"percentOfField": "TOTAL_WORKERS_16PLUS"
+						"parentField": "MGBIZFIN",
+						"percentOfField": "TOT_WORKERS_16PLUS"
 					}, {
-						"fieldName": "BizFin",
+						"fieldName": "BIZFIN",
 						"fieldAlias": "Business and financial operations occupations",
 						"fieldType": "Number",
 						"tableHeader": "Business and financial operations occupations",
@@ -883,10 +883,10 @@
 						"dataSource": "",
 						"class": null,
 						"timePeriod": null,
-						"parentField": "MgBizFin",
-						"percentOfField": "TOTAL_WORKERS_16PLUS"
+						"parentField": "MGBIZFIN",
+						"percentOfField": "TOT_WORKERS_16PLUS"
 					}, {
-						"fieldName": "CompEngSci",
+						"fieldName": "COMPENGSCI",
 						"fieldAlias": "Computer, engineering, and science occupations",
 						"fieldType": "Number",
 						"tableHeader": "Computer, engineering, and science occupations",
@@ -900,9 +900,9 @@
 						"class": null,
 						"timePeriod": null,
 						"parentField": "",
-						"percentOfField": "TOTAL_WORKERS_16PLUS"
+						"percentOfField": "TOT_WORKERS_16PLUS"
 					}, {
-						"fieldName": "CompMath",
+						"fieldName": "COMPMATH",
 						"fieldAlias": "Computer and mathematical occupations",
 						"fieldType": "Number",
 						"tableHeader": "Computer and mathematical occupations",
@@ -915,10 +915,10 @@
 						"dataSource": "",
 						"class": null,
 						"timePeriod": null,
-						"parentField": "CompEngSci",
-						"percentOfField": "TOTAL_WORKERS_16PLUS"
+						"parentField": "COMPENGSCI",
+						"percentOfField": "TOT_WORKERS_16PLUS"
 					}, {
-						"fieldName": "ArchEngin",
+						"fieldName": "ARCHENGIN",
 						"fieldAlias": "Architecture and engineering occupations",
 						"fieldType": "Number",
 						"tableHeader": "Architecture and engineering occupations",
@@ -931,10 +931,10 @@
 						"dataSource": "",
 						"class": null,
 						"timePeriod": null,
-						"parentField": "CompEngSci",
-						"percentOfField": "TOTAL_WORKERS_16PLUS"
+						"parentField": "COMPENGSCI",
+						"percentOfField": "TOT_WORKERS_16PLUS"
 					}, {
-						"fieldName": "LifePhysSocSci",
+						"fieldName": "LIFEPHYSSOCSCI",
 						"fieldAlias": "Life, physical, and social science occupations",
 						"fieldType": "Number",
 						"tableHeader": "Life, physical, and social science occupations",
@@ -948,9 +948,9 @@
 						"class": null,
 						"timePeriod": null,
 						"parentField": "",
-						"percentOfField": "TOTAL_WORKERS_16PLUS"
+						"percentOfField": "TOT_WORKERS_16PLUS"
 					}, {
-						"fieldName": "EduLegComArtMedia",
+						"fieldName": "EDULEGCOMARTMEDIA",
 						"fieldAlias": "Education, legal, community service, arts, and media occupations",
 						"fieldType": "Number",
 						"tableHeader": "Education, legal, community service, arts, and media occupations",
@@ -964,9 +964,9 @@
 						"class": null,
 						"timePeriod": null,
 						"parentField": "",
-						"percentOfField": "TOTAL_WORKERS_16PLUS"
+						"percentOfField": "TOT_WORKERS_16PLUS"
 					}, {
-						"fieldName": "CommSocServ",
+						"fieldName": "COMMSOCSERV",
 						"fieldAlias": "Community and social service occupations",
 						"fieldType": "Number",
 						"tableHeader": "Community and social service occupations",
@@ -979,10 +979,10 @@
 						"dataSource": "",
 						"class": null,
 						"timePeriod": null,
-						"parentField": "EduLegComArtMedia",
-						"percentOfField": "TOTAL_WORKERS_16PLUS"
+						"parentField": "EDULEGCOMARTMEDIA",
+						"percentOfField": "TOT_WORKERS_16PLUS"
 					}, {
-						"fieldName": "Legal",
+						"fieldName": "LEGAL",
 						"fieldAlias": "Legal occupations",
 						"fieldType": "Number",
 						"tableHeader": "Legal occupations",
@@ -995,10 +995,10 @@
 						"dataSource": "",
 						"class": null,
 						"timePeriod": null,
-						"parentField": "EduLegComArtMedia",
-						"percentOfField": "TOTAL_WORKERS_16PLUS"
+						"parentField": "EDULEGCOMARTMEDIA",
+						"percentOfField": "TOT_WORKERS_16PLUS"
 					}, {
-						"fieldName": "EduTrainLib",
+						"fieldName": "EDUTRAINLIB",
 						"fieldAlias": "Education, training, and library occupations",
 						"fieldType": "Number",
 						"tableHeader": "Education, training, and library occupations",
@@ -1011,10 +1011,10 @@
 						"dataSource": "",
 						"class": null,
 						"timePeriod": null,
-						"parentField": "EduLegComArtMedia",
-						"percentOfField": "TOTAL_WORKERS_16PLUS"
+						"parentField": "EDULEGCOMARTMEDIA",
+						"percentOfField": "TOT_WORKERS_16PLUS"
 					}, {
-						"fieldName": "ArtEntSportMedia",
+						"fieldName": "ARTENTSPORTMEDIA",
 						"fieldAlias": "Arts, design, entertainment, sports, and media occupations",
 						"fieldType": "Number",
 						"tableHeader": "Arts, design, entertainment, sports, and media occupations",
@@ -1027,10 +1027,10 @@
 						"dataSource": "",
 						"class": null,
 						"timePeriod": null,
-						"parentField": "EduLegComArtMedia",
-						"percentOfField": "TOTAL_WORKERS_16PLUS"
+						"parentField": "EDULEGCOMARTMEDIA",
+						"percentOfField": "TOT_WORKERS_16PLUS"
 					}, {
-						"fieldName": "HealthTechnical",
+						"fieldName": "HEALTHTECHNICAL",
 						"fieldAlias": "Healthcare practitioners and technical occupations",
 						"fieldType": "Number",
 						"tableHeader": "Healthcare practitioners and technical occupations",
@@ -1044,9 +1044,9 @@
 						"class": null,
 						"timePeriod": null,
 						"parentField": "",
-						"percentOfField": "TOTAL_WORKERS_16PLUS"
+						"percentOfField": "TOT_WORKERS_16PLUS"
 					}, {
-						"fieldName": "HealthDiagTechOcc",
+						"fieldName": "HEALTHDIAGTECHOCC",
 						"fieldAlias": "Health diagnosing and treating practitioners and other technical occupations",
 						"fieldType": "Number",
 						"tableHeader": "Health diagnosing and treating practitioners and other technical occupations",
@@ -1059,10 +1059,10 @@
 						"dataSource": "",
 						"class": null,
 						"timePeriod": null,
-						"parentField": "HealthTechnical",
-						"percentOfField": "TOTAL_WORKERS_16PLUS"
+						"parentField": "HEALTHTECHNICAL",
+						"percentOfField": "TOT_WORKERS_16PLUS"
 					}, {
-						"fieldName": "HealthTech",
+						"fieldName": "HEALTHTECH",
 						"fieldAlias": "Health technologists and technicians ",
 						"fieldType": "Number",
 						"tableHeader": "Health technologists and technicians ",
@@ -1075,10 +1075,10 @@
 						"dataSource": "",
 						"class": null,
 						"timePeriod": null,
-						"parentField": "HealthTechnical",
-						"percentOfField": "TOTAL_WORKERS_16PLUS"
+						"parentField": "HEALTHTECHNICAL",
+						"percentOfField": "TOT_WORKERS_16PLUS"
 					}, {
-						"fieldName": "ServiceOcc",
+						"fieldName": "SERVICEOCC",
 						"fieldAlias": "Service occupations",
 						"fieldType": "Number",
 						"tableHeader": "Service occupations",
@@ -1092,9 +1092,9 @@
 						"class": null,
 						"timePeriod": null,
 						"parentField": "",
-						"percentOfField": "TOTAL_WORKERS_16PLUS"
+						"percentOfField": "TOT_WORKERS_16PLUS"
 					}, {
-						"fieldName": "HealthSupport",
+						"fieldName": "HEALTHSUPPORT",
 						"fieldAlias": "Healthcare support occupations",
 						"fieldType": "Number",
 						"tableHeader": "Healthcare support occupations",
@@ -1107,10 +1107,10 @@
 						"dataSource": "",
 						"class": null,
 						"timePeriod": null,
-						"parentField": "ServiceOcc",
-						"percentOfField": "TOTAL_WORKERS_16PLUS"
+						"parentField": "SERVICEOCC",
+						"percentOfField": "TOT_WORKERS_16PLUS"
 					}, {
-						"fieldName": "ProtectiveServ",
+						"fieldName": "PROTECTIVESERV",
 						"fieldAlias": "Protective service occupations",
 						"fieldType": "Number",
 						"tableHeader": "Protective service occupations",
@@ -1123,10 +1123,10 @@
 						"dataSource": "",
 						"class": null,
 						"timePeriod": null,
-						"parentField": "ServiceOcc",
-						"percentOfField": "TOTAL_WORKERS_16PLUS"
+						"parentField": "SERVICEOCC",
+						"percentOfField": "TOT_WORKERS_16PLUS"
 					}, {
-						"fieldName": "Firefighting",
+						"fieldName": "FIREFIGHTING",
 						"fieldAlias": "Firefighting and prevention, and other protective service workers including supervisors",
 						"fieldType": "Number",
 						"tableHeader": "Firefighting and prevention, and other protective service workers including supervisors",
@@ -1139,10 +1139,10 @@
 						"dataSource": "",
 						"class": null,
 						"timePeriod": null,
-						"parentField": "ProtectiveServ",
-						"percentOfField": "TOTAL_WORKERS_16PLUS"
+						"parentField": "PROTECTIVESERV",
+						"percentOfField": "TOT_WORKERS_16PLUS"
 					}, {
-						"fieldName": "LawEnforcement",
+						"fieldName": "LAWENFORCEMENT",
 						"fieldAlias": "Law enforcement workers including supervisors",
 						"fieldType": "Number",
 						"tableHeader": "Law enforcement workers including supervisors",
@@ -1155,10 +1155,10 @@
 						"dataSource": "",
 						"class": null,
 						"timePeriod": null,
-						"parentField": "ProtectiveServ",
-						"percentOfField": "TOTAL_WORKERS_16PLUS"
+						"parentField": "PROTECTIVESERV",
+						"percentOfField": "TOT_WORKERS_16PLUS"
 					}, {
-						"fieldName": "FoodPrep",
+						"fieldName": "FOODPREP",
 						"fieldAlias": "Food preparation and serving related occupations",
 						"fieldType": "Number",
 						"tableHeader": "Food preparation and serving related occupations",
@@ -1171,10 +1171,10 @@
 						"dataSource": "",
 						"class": null,
 						"timePeriod": null,
-						"parentField": "ServiceOcc",
-						"percentOfField": "TOTAL_WORKERS_16PLUS"
+						"parentField": "SERVICEOCC",
+						"percentOfField": "TOT_WORKERS_16PLUS"
 					}, {
-						"fieldName": "GroundsMaint",
+						"fieldName": "GROUNDSMAINT",
 						"fieldAlias": "Building and grounds cleaning and maintenance occupations",
 						"fieldType": "Number",
 						"tableHeader": "Building and grounds cleaning and maintenance occupations",
@@ -1187,10 +1187,10 @@
 						"dataSource": "",
 						"class": null,
 						"timePeriod": null,
-						"parentField": "ServiceOcc",
-						"percentOfField": "TOTAL_WORKERS_16PLUS"
+						"parentField": "SERVICEOCC",
+						"percentOfField": "TOT_WORKERS_16PLUS"
 					}, {
-						"fieldName": "PersonalCare",
+						"fieldName": "PERSONALCARE",
 						"fieldAlias": "Personal care and service occupations",
 						"fieldType": "Number",
 						"tableHeader": "Personal care and service occupations",
@@ -1203,10 +1203,10 @@
 						"dataSource": "",
 						"class": null,
 						"timePeriod": null,
-						"parentField": "ServiceOcc",
-						"percentOfField": "TOTAL_WORKERS_16PLUS"
+						"parentField": "SERVICEOCC",
+						"percentOfField": "TOT_WORKERS_16PLUS"
 					}, {
-						"fieldName": "SalesOfficeOcc",
+						"fieldName": "SALESOFFICEOCC",
 						"fieldAlias": "Sales and office occupations",
 						"fieldType": "Number",
 						"tableHeader": "Sales and office occupations",
@@ -1220,9 +1220,9 @@
 						"class": null,
 						"timePeriod": null,
 						"parentField": "",
-						"percentOfField": "TOTAL_WORKERS_16PLUS"
+						"percentOfField": "TOT_WORKERS_16PLUS"
 					}, {
-						"fieldName": "SalesOcc",
+						"fieldName": "SALESOCC",
 						"fieldAlias": "Sales and related occupations",
 						"fieldType": "Number",
 						"tableHeader": "Sales and related occupations",
@@ -1235,10 +1235,10 @@
 						"dataSource": "",
 						"class": null,
 						"timePeriod": null,
-						"parentField": "SalesOfficeOcc",
-						"percentOfField": "TOTAL_WORKERS_16PLUS"
+						"parentField": "SALESOFFICEOCC",
+						"percentOfField": "TOT_WORKERS_16PLUS"
 					}, {
-						"fieldName": "OfficeAdmin",
+						"fieldName": "OFFICEADMIN",
 						"fieldAlias": "Office and administrative support occupations",
 						"fieldType": "Number",
 						"tableHeader": "Office and administrative support occupations",
@@ -1251,10 +1251,10 @@
 						"dataSource": "",
 						"class": null,
 						"timePeriod": null,
-						"parentField": "SalesOfficeOcc",
-						"percentOfField": "TOTAL_WORKERS_16PLUS"
+						"parentField": "SALESOFFICEOCC",
+						"percentOfField": "TOT_WORKERS_16PLUS"
 					}, {
-						"fieldName": "NatResources",
+						"fieldName": "NATRESOURCES",
 						"fieldAlias": "Natural resources, construction, and maintenance occupations",
 						"fieldType": "Number",
 						"tableHeader": "Natural resources, construction, and maintenance occupations",
@@ -1268,9 +1268,9 @@
 						"class": null,
 						"timePeriod": null,
 						"parentField": "",
-						"percentOfField": "TOTAL_WORKERS_16PLUS"
+						"percentOfField": "TOT_WORKERS_16PLUS"
 					}, {
-						"fieldName": "FarmFish",
+						"fieldName": "FARMFISH",
 						"fieldAlias": "Farming, fishing, and forestry occupations",
 						"fieldType": "Number",
 						"tableHeader": "Farming, fishing, and forestry occupations",
@@ -1283,10 +1283,10 @@
 						"dataSource": "",
 						"class": null,
 						"timePeriod": null,
-						"parentField": "NatResources",
-						"percentOfField": "TOTAL_WORKERS_16PLUS"
+						"parentField": "NATRESOURCES",
+						"percentOfField": "TOT_WORKERS_16PLUS"
 					}, {
-						"fieldName": "Construction",
+						"fieldName": "CONSTRUCTION",
 						"fieldAlias": "Construction and extraction occupations",
 						"fieldType": "Number",
 						"tableHeader": "Construction and extraction occupations",
@@ -1299,10 +1299,10 @@
 						"dataSource": "",
 						"class": null,
 						"timePeriod": null,
-						"parentField": "NatResources",
-						"percentOfField": "TOTAL_WORKERS_16PLUS"
+						"parentField": "NATRESOURCES",
+						"percentOfField": "TOT_WORKERS_16PLUS"
 					}, {
-						"fieldName": "InstRepair",
+						"fieldName": "INSTREPAIR",
 						"fieldAlias": "Installation, maintenance, and repair occupations",
 						"fieldType": "Number",
 						"tableHeader": "Installation, maintenance, and repair occupations",
@@ -1315,10 +1315,10 @@
 						"dataSource": "",
 						"class": null,
 						"timePeriod": null,
-						"parentField": "NatResources",
-						"percentOfField": "TOTAL_WORKERS_16PLUS"
+						"parentField": "NATRESOURCES",
+						"percentOfField": "TOT_WORKERS_16PLUS"
 					}, {
-						"fieldName": "ProdTransMaterial",
+						"fieldName": "PRODTRANSMATERIAL",
 						"fieldAlias": "Production, transportation, and material moving occupations",
 						"fieldType": "Number",
 						"tableHeader": "Production, transportation, and material moving occupations",
@@ -1332,9 +1332,9 @@
 						"class": null,
 						"timePeriod": null,
 						"parentField": "",
-						"percentOfField": "TOTAL_WORKERS_16PLUS"
+						"percentOfField": "TOT_WORKERS_16PLUS"
 					}, {
-						"fieldName": "Production",
+						"fieldName": "PRODUCTION",
 						"fieldAlias": "Production occupations",
 						"fieldType": "Number",
 						"tableHeader": "Production occupations",
@@ -1347,10 +1347,10 @@
 						"dataSource": "",
 						"class": null,
 						"timePeriod": null,
-						"parentField": "ProdTransMaterial",
-						"percentOfField": "TOTAL_WORKERS_16PLUS"
+						"parentField": "PRODTRANSMATERIAL",
+						"percentOfField": "TOT_WORKERS_16PLUS"
 					}, {
-						"fieldName": "Transportation",
+						"fieldName": "TRANSPORTATION",
 						"fieldAlias": "Transportation occupations",
 						"fieldType": "Number",
 						"tableHeader": "Transportation occupations",
@@ -1363,10 +1363,10 @@
 						"dataSource": "",
 						"class": null,
 						"timePeriod": null,
-						"parentField": "ProdTransMaterial",
-						"percentOfField": "TOTAL_WORKERS_16PLUS"
+						"parentField": "PRODTRANSMATERIAL",
+						"percentOfField": "TOT_WORKERS_16PLUS"
 					}, {
-						"fieldName": "MaterialMoving",
+						"fieldName": "MATERIALMOVING",
 						"fieldAlias": "Material moving occupations",
 						"fieldType": "Number",
 						"tableHeader": "Material moving occupations",
@@ -1379,9 +1379,9 @@
 						"dataSource": "",
 						"class": null,
 						"timePeriod": null,
-						"parentField": "ProdTransMaterial",
-						"percentOfField": "TOTAL_WORKERS_16PLUS"
-					}, {
+						"parentField": "PRODTRANSMATERIAL",
+						"percentOfField": "TOT_WORKERS_16PLUS"
+					},  {
 						"fieldName": "MEDIAN_AGE",
 						"fieldAlias": "Median Age",
 						"fieldType": "Number",
@@ -1392,7 +1392,7 @@
 						"chartCategory": "",
 						"chartType": "",
 						"canSum": false,
-						"dataSource": "ACS 2014",
+						"dataSource": "ACS 2015",
 						"class": null,
 						"timePeriod": null,
 						"parentField": ""
@@ -1407,7 +1407,7 @@
 						"chartCategory": "",
 						"chartType": "bar",
 						"canSum": true,
-						"dataSource": "ACS 2014",
+						"dataSource": "ACS 2015",
 						"class": null,
 						"timePeriod": null,
 						"parentField": "",
@@ -1424,7 +1424,7 @@
 						"chartCategory": "",
 						"chartType": "bar",
 						"canSum": true,
-						"dataSource": "ACS 2014",
+						"dataSource": "ACS 2015",
 						"class": null,
 						"timePeriod": null,
 						"parentField": "",
@@ -1440,7 +1440,7 @@
 						"chartCategory": "",
 						"chartType": "bar",
 						"canSum": true,
-						"dataSource": "ACS 2014",
+						"dataSource": "ACS 2015",
 						"class": null,
 						"timePeriod": null,
 						"parentField": "",
@@ -1456,7 +1456,7 @@
 						"chartCategory": "",
 						"chartType": "bar",
 						"canSum": true,
-						"dataSource": "ACS 2014",
+						"dataSource": "ACS 2015",
 						"class": null,
 						"timePeriod": null,
 						"parentField": "",
@@ -1472,7 +1472,7 @@
 						"chartCategory": "",
 						"chartType": "bar",
 						"canSum": true,
-						"dataSource": "ACS 2014",
+						"dataSource": "ACS 2015",
 						"class": null,
 						"timePeriod": null,
 						"parentField": "",
@@ -1488,7 +1488,7 @@
 						"chartCategory": "",
 						"chartType": "bar",
 						"canSum": true,
-						"dataSource": "ACS 2014",
+						"dataSource": "ACS 2015",
 						"class": null,
 						"timePeriod": null,
 						"parentField": "",
@@ -1504,7 +1504,7 @@
 						"chartCategory": "",
 						"chartType": "bar",
 						"canSum": true,
-						"dataSource": "ACS 2014",
+						"dataSource": "ACS 2015",
 						"class": null,
 						"timePeriod": null,
 						"parentField": "",
@@ -1520,7 +1520,7 @@
 						"chartCategory": "",
 						"chartType": "",
 						"canSum": true,
-						"dataSource": "ACS 2014",
+						"dataSource": "ACS 2015",
 						"class": null,
 						"timePeriod": null,
 						"parentField": "",
@@ -1536,7 +1536,7 @@
 						"chartCategory": "",
 						"chartType": "",
 						"canSum": true,
-						"dataSource": "ACS 2014",
+						"dataSource": "ACS 2015",
 						"class": null,
 						"timePeriod": null,
 						"parentField": "",
@@ -1552,7 +1552,7 @@
 						"chartCategory": "",
 						"chartType": "",
 						"canSum": true,
-						"dataSource": "ACS 2014",
+						"dataSource": "ACS 2015",
 						"class": null,
 						"timePeriod": null,
 						"parentField": "",
@@ -1568,7 +1568,7 @@
 						"chartCategory": "",
 						"chartType": "",
 						"canSum": true,
-						"dataSource": "ACS 2014",
+						"dataSource": "ACS 2015",
 						"class": null,
 						"timePeriod": null,
 						"parentField": "",
@@ -1584,7 +1584,7 @@
 						"chartCategory": "",
 						"chartType": "",
 						"canSum": true,
-						"dataSource": "ACS 2014",
+						"dataSource": "ACS 2015",
 						"class": null,
 						"timePeriod": null,
 						"parentField": "",
@@ -1600,36 +1600,36 @@
 						"chartCategory": "",
 						"chartType": "",
 						"canSum": true,
-						"dataSource": "ACS 2014",
+						"dataSource": "ACS 2015",
 						"class": null,
 						"timePeriod": null,
 						"parentField": "",
 						"percentOfField": "TOTAL_POP"
 					}, {
-						"fieldName": "WHITE",
-						"fieldAlias": "White",
+						"fieldName": "WHITE_NON_HISPANIC",
+						"fieldAlias": "White, Non-Hispanic",
 						"fieldType": "Number",
-						"tableHeader": "White, NH",
-						"category": "Race",
+						"tableHeader": "White, Non-Hispanic",
+						"category": "Race and Ethnicity",
 						"rowID": 66,
-						"groupID": "<span class='myHiddenClass'>04</span>Population by Race",
-						"chartCategory": "Race",
+						"groupID": "<span class='myHiddenClass'>04</span>Race and Ethnicity",
+						"chartCategory": "Race and Ethnicity",
 						"chartType": "pie",
 						"canSum": true,
-						"dataSource": "ACS 2014",
+						"dataSource": "ACS 2015",
 						"class": null,
 						"timePeriod": null,
 						"parentField": "",
 						"percentOfField": "TOTAL_POP"
 					}, {
-						"fieldName": "BLACK",
-						"fieldAlias": "Black",
+						"fieldName": "BLACK_NON_HISPANIC",
+						"fieldAlias": "Black, Non-Hispanic",
 						"fieldType": "Number",
-						"tableHeader": "Black, NH",
-						"category": "Race",
+						"tableHeader": "Black, Non-Hispanic",
+						"category": "Race and Ethnicity",
 						"rowID": 67,
-						"groupID": "<span class='myHiddenClass'>04</span>Population by Race",
-						"chartCategory": "Race",
+						"groupID": "<span class='myHiddenClass'>04</span>Race and Ethnicity",
+						"chartCategory": "Race and Ethnicity",
 						"chartType": "pie",
 						"canSum": true,
 						"dataSource": "",
@@ -1638,14 +1638,14 @@
 						"parentField": "",
 						"percentOfField": "TOTAL_POP"
 					}, {
-						"fieldName": "NATIVE",
-						"fieldAlias": "Native American",
+						"fieldName": "NATIVE_NON_HISPANIC",
+						"fieldAlias": "Native American, Non-Hispanic",
 						"fieldType": "Number",
-						"tableHeader": "Native American, NH",
-						"category": "Race",
+						"tableHeader": "Native American, Non-Hispanic",
+						"category": "Race and Ethnicity",
 						"rowID": 68,
-						"groupID": "<span class='myHiddenClass'>04</span>Population by Race",
-						"chartCategory": "Race",
+						"groupID": "<span class='myHiddenClass'>04</span>Race and Ethnicity",
+						"chartCategory": "Race and Ethnicity",
 						"chartType": "pie",
 						"canSum": true,
 						"dataSource": "",
@@ -1654,14 +1654,14 @@
 						"parentField": "",
 						"percentOfField": "TOTAL_POP"
 					}, {
-						"fieldName": "ASIAN",
-						"fieldAlias": "Asian",
+						"fieldName": "ASIAN_NON_HISPANIC",
+						"fieldAlias": "Asian, Non-Hispanic",
 						"fieldType": "Number",
-						"tableHeader": "Asian, NH",
-						"category": "Race",
+						"tableHeader": "Asian, Non-Hispanic",
+						"category": "Race and Ethnicity",
 						"rowID": 69,
-						"groupID": "<span class='myHiddenClass'>04</span>Population by Race",
-						"chartCategory": "Race",
+						"groupID": "<span class='myHiddenClass'>04</span>Race and Ethnicity",
+						"chartCategory": "Race and Ethnicity",
 						"chartType": "pie",
 						"canSum": true,
 						"dataSource": "",
@@ -1670,14 +1670,14 @@
 						"parentField": "",
 						"percentOfField": "TOTAL_POP"
 					}, {
-						"fieldName": "PACIFIC",
-						"fieldAlias": "Pacific Islander",
+						"fieldName": "PACIFIC_NON_HISPANIC",
+						"fieldAlias": "Pacific Islander, Non-Hispanic",
 						"fieldType": "Number",
-						"tableHeader": "Pacific Islander, NH",
-						"category": "Race",
+						"tableHeader": "Pacific Islander, Non-Hispanic",
+						"category": "Race and Ethnicity",
 						"rowID": 70,
-						"groupID": "<span class='myHiddenClass'>04</span>Population by Race",
-						"chartCategory": "Race",
+						"groupID": "<span class='myHiddenClass'>04</span>Race and Ethnicity",
+						"chartCategory": "Race and Ethnicity",
 						"chartType": "pie",
 						"canSum": true,
 						"dataSource": "",
@@ -1686,14 +1686,14 @@
 						"parentField": "",
 						"percentOfField": "TOTAL_POP"
 					}, {
-						"fieldName": "OTHER",
-						"fieldAlias": "Other",
+						"fieldName": "OTHER_NON_HISPANIC",
+						"fieldAlias": "Other, Non-Hispanic",
 						"fieldType": "Number",
-						"tableHeader": "Other, NH",
-						"category": "Race",
+						"tableHeader": "Other, Non-Hispanic",
+						"category": "Race and Ethnicity",
 						"rowID": 71,
-						"groupID": "<span class='myHiddenClass'>04</span>Population by Race",
-						"chartCategory": "Race",
+						"groupID": "<span class='myHiddenClass'>04</span>Race and Ethnicity",
+						"chartCategory": "Race and Ethnicity",
 						"chartType": "pie",
 						"canSum": true,
 						"dataSource": "",
@@ -1702,14 +1702,14 @@
 						"parentField": "",
 						"percentOfField": "TOTAL_POP"
 					}, {
-						"fieldName": "TWO_OR_MORE",
-						"fieldAlias": "Two or More",
+						"fieldName": "TWO_OR_MORE_NON_HISPANIC",
+						"fieldAlias": "Two or More, Non-Hispanic",
 						"fieldType": "Number",
-						"tableHeader": "Two or More, NH",
-						"category": "Race",
+						"tableHeader": "Two or More, Non-Hispanic",
+						"category": "Race and Ethnicity",
 						"rowID": 72,
-						"groupID": "<span class='myHiddenClass'>04</span>Population by Race",
-						"chartCategory": "Race",
+						"groupID": "<span class='myHiddenClass'>04</span>Race and Ethnicity",
+						"chartCategory": "Race and Ethnicity",
 						"chartType": "pie",
 						"canSum": true,
 						"dataSource": "",
@@ -1722,10 +1722,10 @@
 						"fieldAlias": "Hispanic",
 						"fieldType": "Number",
 						"tableHeader": "Hispanic",
-						"category": "Ethnicity",
+						"category": "Race and Ethnicity",
 						"rowID": 73,
-						"groupID": "<span class='myHiddenClass'>05</span>Population by Ethnicity",
-						"chartCategory": "Ethnicity",
+						"groupID": "<span class='myHiddenClass'>04</span>Race and Ethnicity",
+						"chartCategory": "Race and Ethnicity",
 						"chartType": "pie",
 						"canSum": true,
 						"dataSource": "",
@@ -1734,14 +1734,14 @@
 						"parentField": "",
 						"percentOfField": "TOTAL_POP"
 					}, {
-						"fieldName": "NOT_HISPANIC",
+						"fieldName": "NON_HISPANIC",
 						"fieldAlias": "Non-Hispanic",
 						"fieldType": "Number",
 						"tableHeader": "Non-Hispanic",
-						"category": "Ethnicity",
+						"category": "",
 						"rowID": 74,
-						"groupID": "<span class='myHiddenClass'>05</span>Population by Ethnicity",
-						"chartCategory": "Ethnicity",
+						"groupID": "<span class='myHiddenClass'>04</span>Race and Ethnicity",
+						"chartCategory": "",
 						"chartType": "pie",
 						"canSum": true,
 						"dataSource": "",
@@ -1812,7 +1812,7 @@
 						"timePeriod": null,
 						"parentField": ""
 					}, {
-						"fieldName": "LINGLSO_HH",
+						"fieldName": "LINGISO_HH",
 						"fieldAlias": "Linguistically Isolated Households",
 						"fieldType": "Number",
 						"tableHeader": "Linguistically Isolated Households",
@@ -1865,7 +1865,7 @@
 						"category": "Houshold Income",
 						"rowID": 82,
 						"groupID": "<span class='myHiddenClass'>07</span>Household Income",
-						"chartCategory": "Poverty Level",
+						"chartCategory": "Poverty in Households",
 						"chartType": "pie",
 						"canSum": true,
 						"dataSource": "",
@@ -1881,7 +1881,7 @@
 						"category": "Houshold Income",
 						"rowID": 83,
 						"groupID": "<span class='myHiddenClass'>07</span>Household Income",
-						"chartCategory": "Poverty Level",
+						"chartCategory": "Poverty in Households",
 						"chartType": "pie",
 						"canSum": true,
 						"dataSource": "",
@@ -1889,7 +1889,75 @@
 						"timePeriod": null,
 						"parentField": "",
 						"percentOfField": "TOTAL_HOUSEHOLDS"
-					}, {
+					}, 
+					{
+						"fieldName": "POP_FOR_POVERTY",
+						"fieldAlias": "Poverty Population",
+						"fieldType": "Number",
+						"tableHeader": "Poverty Population",
+						"category": "Poverty",
+						"rowID": 82,
+						"groupID": "<span class='myHiddenClass'>08</span>Poverty Level",
+						"chartCategory": "",
+						"chartType": "pie",
+						"canSum": true,
+						"dataSource": "",
+						"class": null,
+						"timePeriod": null,
+						"parentField": ""
+					},
+					{
+						"fieldName": "POP_BELOW_100_PCT_POV",
+						"fieldAlias": "Below 100% Poverty",
+						"fieldType": "Number",
+						"tableHeader": "Population below 100% Poverty",
+						"category": "Poverty",
+						"rowID": 82,
+						"groupID": "<span class='myHiddenClass'>08</span>Poverty Level",
+						"chartCategory": "Poverty Level",
+						"chartType": "pie",
+						"canSum": true,
+						"dataSource": "",
+						"class": null,
+						"timePeriod": null,
+						"parentField": "",
+						"percentOfField": "POP_FOR_POVERTY"
+					},
+					{
+						"fieldName": "POP_100_TO_149_PCT_POV",
+						"fieldAlias": "Between 100% and 149% Poverty",
+						"fieldType": "Number",
+						"tableHeader": "Population between 100% and 149% Poverty",
+						"category": "Poverty",
+						"rowID": 82,
+						"groupID": "<span class='myHiddenClass'>08</span>Poverty Level",
+						"chartCategory": "Poverty Level",
+						"chartType": "pie",
+						"canSum": true,
+						"dataSource": "",
+						"class": null,
+						"timePeriod": null,
+						"parentField": "",
+						"percentOfField": "POP_FOR_POVERTY"
+					},
+					{
+						"fieldName": "POP_ABOVE_150_PCT_POV",
+						"fieldAlias": "Above 150% Poverty",
+						"fieldType": "Number",
+						"tableHeader": "Population above 150% Poverty",
+						"category": "Poverty",
+						"rowID": 82,
+						"groupID": "<span class='myHiddenClass'>08</span>Poverty Level",
+						"chartCategory": "Poverty Level",
+						"chartType": "pie",
+						"canSum": true,
+						"dataSource": "",
+						"class": null,
+						"timePeriod": null,
+						"parentField": "",
+						"percentOfField": "POP_FOR_POVERTY"
+					},
+					{
 						"fieldName": "HH_LESS_THAN_25K",
 						"fieldAlias": "Less Than $25,000",
 						"fieldType": "Number",
@@ -2140,7 +2208,7 @@
 						"timePeriod": null,
 						"parentField": ""
 					}, {
-						"fieldName": "SEASONAL_VACANCY_RATE",
+						"fieldName": "VACANCY_RATE_OF_SEASONAL",
 						"fieldAlias": "Seasonal Vacancy Rate",
 						"fieldType": "Rate",
 						"tableHeader": "Seasonal Vacancy Rate",
@@ -2155,7 +2223,7 @@
 						"timePeriod": null,
 						"parentField": ""
 					}, {
-						"fieldName": "NON_SEASONAL_VACANCY_RATE",
+						"fieldName": "VACANCY_RATE_OF_NON_SEASONAL",
 						"fieldAlias": "Non-Seasonal Vacancy Rate",
 						"fieldType": "Rate",
 						"tableHeader": "Non Seasonal Vacancy Rate",
@@ -2312,7 +2380,7 @@
 						"parentField": "",
 						"percentOfField": "AGE25PLUS"
 					}, {
-						"fieldName": "TOTAL_WORKERS_16PLUS",
+						"fieldName": "TOT_WORKERS_16PLUS",
 						"fieldAlias": "Total Workers 16 Plus",
 						"fieldType": "Number",
 						"tableHeader": "Total Workers 16 Plus",
@@ -2327,7 +2395,7 @@
 						"timePeriod": null,
 						"parentField": "false"
 					}, {
-						"fieldName": "CIVPOP16PLUS",
+						"fieldName": "CIVILIAN_EMPLOYED_16_PLUS",
 						"fieldAlias": "Civilian Population 16 Plus",
 						"fieldType": "Number",
 						"tableHeader": "Civilian Population 16 Plus",
@@ -2343,7 +2411,7 @@
 						"parentField": "",
 						"percentOfField": "TOTAL_POP"
 					}, {
-						"fieldName": "CIVPOP18PLUS",
+						"fieldName": "CIV_POP_18PLUS",
 						"fieldAlias": "Civilian Population 18 Plus",
 						"fieldType": "Number",
 						"tableHeader": "Civilian Population 18 Plus",
@@ -2389,7 +2457,7 @@
 						"class": null,
 						"timePeriod": null,
 						"parentField": "",
-						"percentOfField": "TOTAL_WORKERS_16PLUS"
+						"percentOfField": "TOT_WORKERS_16PLUS"
 					}, {
 						"fieldName": "DROVE_ALONE",
 						"fieldAlias": "Drove Alone",
@@ -2405,7 +2473,7 @@
 						"class": null,
 						"timePeriod": null,
 						"parentField": "",
-						"percentOfField": "TOTAL_WORKERS_16PLUS"
+						"percentOfField": "TOT_WORKERS_16PLUS"
 					}, {
 						"fieldName": "CARPOOLED",
 						"fieldAlias": "Carpooled",
@@ -2421,7 +2489,7 @@
 						"class": null,
 						"timePeriod": null,
 						"parentField": "",
-						"percentOfField": "TOTAL_WORKERS_16PLUS"
+						"percentOfField": "TOT_WORKERS_16PLUS"
 					}, {
 						"fieldName": "BUS",
 						"fieldAlias": "Bus",
@@ -2437,7 +2505,7 @@
 						"class": null,
 						"timePeriod": null,
 						"parentField": "",
-						"percentOfField": "TOTAL_WORKERS_16PLUS"
+						"percentOfField": "TOT_WORKERS_16PLUS"
 					}, {
 						"fieldName": "RAIL",
 						"fieldAlias": "Rail",
@@ -2453,7 +2521,7 @@
 						"class": null,
 						"timePeriod": null,
 						"parentField": "",
-						"percentOfField": "TOTAL_WORKERS_16PLUS"
+						"percentOfField": "TOT_WORKERS_16PLUS"
 					}, {
 						"fieldName": "TAXI",
 						"fieldAlias": "Taxi",
@@ -2469,7 +2537,7 @@
 						"class": null,
 						"timePeriod": null,
 						"parentField": "",
-						"percentOfField": "TOTAL_WORKERS_16PLUS"
+						"percentOfField": "TOT_WORKERS_16PLUS"
 					}, {
 						"fieldName": "MOTORCYCLE",
 						"fieldAlias": "Motorcycle",
@@ -2485,7 +2553,7 @@
 						"class": null,
 						"timePeriod": null,
 						"parentField": "",
-						"percentOfField": "TOTAL_WORKERS_16PLUS"
+						"percentOfField": "TOT_WORKERS_16PLUS"
 					}, {
 						"fieldName": "BICYCLE",
 						"fieldAlias": "Bicycle",
@@ -2501,7 +2569,7 @@
 						"class": null,
 						"timePeriod": null,
 						"parentField": "",
-						"percentOfField": "TOTAL_WORKERS_16PLUS"
+						"percentOfField": "TOT_WORKERS_16PLUS"
 					}, {
 						"fieldName": "WALKED",
 						"fieldAlias": "Walked",
@@ -2517,7 +2585,7 @@
 						"class": null,
 						"timePeriod": null,
 						"parentField": "",
-						"percentOfField": "TOTAL_WORKERS_16PLUS"
+						"percentOfField": "TOT_WORKERS_16PLUS"
 					}, {
 						"fieldName": "OTHER_MEANS",
 						"fieldAlias": "Other Means",
@@ -2533,7 +2601,7 @@
 						"class": null,
 						"timePeriod": null,
 						"parentField": "",
-						"percentOfField": "TOTAL_WORKERS_16PLUS"
+						"percentOfField": "TOT_WORKERS_16PLUS"
 					}, {
 						"fieldName": "WORKED_FROM_HOME",
 						"fieldAlias": "Worked from Home",
@@ -2549,7 +2617,7 @@
 						"class": null,
 						"timePeriod": null,
 						"parentField": "",
-						"percentOfField": "TOTAL_WORKERS_16PLUS"
+						"percentOfField": "TOT_WORKERS_16PLUS"
 					}, {
 						"fieldName": "NO_VEHICLE",
 						"fieldAlias": "No Vehicle",

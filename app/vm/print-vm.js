@@ -144,7 +144,7 @@
                     }];
 
                     var legendLayer = new LegendLayer();
-                    legendLayer.layerId = "ACS2014byBlockGroup";
+                    legendLayer.layerId = "ACS2015byBlockGroup";
                     legendLayer.subLayerIds = [0];
 
                     printTemplate.layoutOptions = {
