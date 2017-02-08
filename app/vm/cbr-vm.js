@@ -470,6 +470,7 @@
                 @method updateRenderer
                 **/
                 self.updateRenderer = function() {
+
                     if (self.ReadyToRender !== true || self.customSet) {
                         return;
                     }
@@ -494,6 +495,7 @@
                         params.classificationDefinition = classDef;
 
                         var mapServiceUrl = conf.mapServices[thematicMap.Service] + "/" + thematicMap.LayerId;
+
                         var generateRenderer = new GenerateRendererTask(mapServiceUrl);
                         generateRenderer.execute(params, self.applyRenderer, self.rendererGenError);
                     }
@@ -523,7 +525,6 @@
                     // note: this applies symbology for No Data class, does not work with normalization
                     renderer.defaultSymbol = self.simpleFillSymbol;
                     renderer.defaultLabel = "No Data";
-
                     var dataItem = self.toc.dataItem(self.toc.select());
                     renderer.asPercent = dataItem.AsPercentages;
                     self.currentRenderer = renderer;
@@ -609,11 +610,13 @@
                 **/
                 self.mapSelectionChanged = function() {
                     var dataItem = null;
+
                     //if (mapInitializationData != undefined) {
                     //    self.toc.select(self.toc.findByText(mapInitializationData.selectedMap.ShortName));
                     //}
                     dataItem = self.toc.dataItem(self.toc.select());
                     if (dataItem) {
+
                         //bookmarkDelegate.currentMap(dataItem);
 
                         if (!self.isMapChangeUpdate) {
@@ -629,6 +632,7 @@
                             });
                             tp.publish("SetNumBreaks", dataItem.DefaultBreaks.length);
                             var newRenderer = new ClassBreaksRenderer(null, dataItem.FieldName);
+
                             if (dataItem.hasOwnProperty("NormalizeField")) {
                                 newRenderer.normalizationField = dataItem.NormalizeField;
                                 newRenderer.normalizationType = "field";

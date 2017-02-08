@@ -1131,7 +1131,7 @@
                     $.each(aggValues, function(index, item) {
                         self.aggACSValuesArray.push(aggValues[item.fieldName]);
                         // Chart Categories
-                        if (item.chartCategory !== "") {
+                        if (item.chartCategory !== "" && item.chartCategory !== undefined) {
                             if (item.chartCategory in self.aggValuesACSGroupedByChartCategory) {
                                 self.aggValuesACSGroupedByChartCategory[item.chartCategory].push(aggValues[item.fieldName]);
                             } else {
@@ -2038,7 +2038,6 @@
                  * @method createKendoGrid
                  */
                 self.createKendoGrid = function(type) {
-
                     var dataGridName = "demACSDataGrid";
                     var demoOptionsRowName = "demACSSummaryOptionsRow";
                     var dataSource = self.aggACSValuesArray;
@@ -2070,9 +2069,10 @@
                     $("#" + dataGridName).kendoGrid({
                         dataSource: {
                             data: dataSource,
-                            group: {
+                            group: [{
                                 field: "fieldGroup"
-                            },
+                            }
+                            ],
                             sort: {
                                 field: "fieldRowSort",
                                 dir: "asc"
@@ -2104,7 +2104,6 @@
                         ],
                         dataBound: function(e) {
                             if (this.wrapper[0].id !== "demCensusDataGrid") {
-                                // get the index of the UnitsInStock cell
                                 var rowCollection = e.sender.tbody[0].children;
                                 var data = e.sender._data;
                                 var realRows = [];
@@ -2126,6 +2125,10 @@
                                     }
                                 });
                             }
+                            var grid = $("#" + this.wrapper[0].id).data("kendoGrid");
+                            grid.tbody.find("tr.k-grouping-row").each(function(index) {
+                                grid.collapseGroup(this);
+                            });
                         }
                     });
 

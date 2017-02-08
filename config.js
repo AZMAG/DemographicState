@@ -89,8 +89,8 @@ var appConfig = new function() {
         id: "countyBoundaries",
         title: "County Boundaries",
         type: "feature",
-        url: this.mainURL + "/19",
-        queryUrl: this.mainURL + "/19",
+        url: this.mainURL + "/16",
+        queryUrl: this.mainURL + "/16",
         queryWhere: "1=1",
         layers: [16],
         opacity: .9,
@@ -166,7 +166,8 @@ var appConfig = new function() {
         opacity: 0.8,
         visible: true,
         showTOC: false,
-        link: false
+        link: false,
+        populateDropDown: false
     }, {
         layerNum: 8,
         id: "esriBasemap",
@@ -207,7 +208,6 @@ var appConfig = new function() {
     //this.seriesColors = ["#8DD3C7", "#FFFFB3", "#BEBADA", "#FB8072", "#80B1D3", "#FDB462", "#B3DE69", "#FCCDE5", "#D9D9D9", "#BC80BD", "#CCEBC5", "#FFED6F"];
 
     this.bubbleColors = [
-
         {
             category: "MgBizFin",
             color: "#A6CEE3"

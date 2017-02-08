@@ -333,7 +333,6 @@
                             if (info.id === "cogBoundaries") {
                                 featureTemplate = self.cogInfoTemplate;
                             }
-
                             layer = new FeatureLayer(info.url + token, {
                                 id: info.id,
                                 visible: info.visible,
