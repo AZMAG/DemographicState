@@ -119,7 +119,7 @@
                 self.legislatureInfoTemplate.setContent("<strong><div id='legislativeLink'>${SLDIST_NAME}</div></strong>" +
                     "<hr>" +
                     "Representative: ${HouseRep1} - (${Party_HRep1})<br>" +
-                    "Representative: ${HouseRep2} - (${Party_Hrep2})<br>" +
+                    "Representative: ${HouseRep2} - (${Party_HRep2})<br>" +
                     "Senator: ${Senator} - (${Party_Sen})<br>");
 
                 /**
@@ -655,7 +655,9 @@
                     for (var i = 0; i < this.mapInstances.length; i += 1) {
                         var newGraphic = new Graphic(graphic.geometry, graphic.symbol, graphic.attributes, graphic.infoTemplate);
                         this.mapInstances[i].graphics.add(newGraphic);
-                        newGraphic.getShape().moveToFront();
+                        if (newGraphic.getShape()) {
+                          newGraphic.getShape().moveToFront();  
+                        }
                     }
                 } else {
                     this.mapInstance.graphics.add(graphic);

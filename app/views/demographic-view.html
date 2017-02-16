@@ -14,9 +14,12 @@
                 </span>
                 <span class="reportExportSpan">
                     <span>Export Results:</span>
-                    <button id="demACSExportResults" type="button" data-bind="click: exportToExcel">
-                        <img src="app/resources/img/i_excel.png" class="exportButtonImage">
-                    </button>
+                <button id="demACSExportResults" type="button" data-bind="click: exportToExcel">
+                    <img src="app/resources/img/i_excel.png" class="exportButtonImage">
+                </button>
+                </span>
+                <span style="float: right; margin-right: 10px; margin-top: 4px; font-size: 12px;">
+                    <button class="gridGroupToggle" value="expand">Expand/Collapse</button>
                 </span>
             </div>
         </div>
@@ -24,66 +27,68 @@
             <div class="reportTabPageOptionRow">
                 <input id="displayACSLegend" type="checkbox" data-bind="checked: isChecked">
                 <label for="displayACSLegend" class="smallFont">Display chart legend</label>
-
                 <span class="reportExportSpan">
                     <div id="exportACSReportRequest">
                         <span>Export Report to PDF:</span>
-                        <button id="printACSSummary" type="button" data-bind="click: exportPDFReport">
-                            <img src="app/resources/img/i_pdf.png" class="exportButtonImage">
-                        </button>
-                    </div>
-                </span>
+                <button id="printACSSummary" type="button" data-bind="click: exportPDFReport">
+                    <img src="app/resources/img/i_pdf.png" class="exportButtonImage">
+                </button>
             </div>
-            <br>     
-            <div id="demACSSplitContainer">
-                <div id="demACSChartAreaPane">
-                </div>
-                <div id="demACSChartListPane">
-                    <div id="demACSChartList"></div>
-                </div>
+            </span>
+        </div>
+        <br>
+        <div id="demACSSplitContainer">
+            <div id="demACSChartAreaPane">
+            </div>
+            <div id="demACSChartListPane">
+                <div id="demACSChartList"></div>
             </div>
         </div>
-        <div id="demCensusSummaryReportTab">
-            <div id="demCensusSummaryOptionsRow" class="reportTabPageOptionRow">
-                <span>
+    </div>
+    <div id="demCensusSummaryReportTab">
+        <div id="demCensusSummaryOptionsRow" class="reportTabPageOptionRow">
+            <span>
                     <input id="demCensusUseComp" type="checkbox">
                     <label id="demCensusUseCompLabel" for="demCensusUseComp" class="smallFont">Use Comparison</label>
                 </span>
-                <span class="reportExportSpan">
+            <span class="reportExportSpan">
                     <span>Export Results:</span>
-                    <button id="demCensusExportResults" type="button" data-bind="click: exportToExcel">
-                        <img src="app/resources/img/i_excel.png" class="exportButtonImage">
-                    </button>
+            <button id="demCensusExportResults" type="button" data-bind="click: exportToExcel">
+                <img src="app/resources/img/i_excel.png" class="exportButtonImage">
+            </button>
+            </span>
+            <span style="float: right; margin-right: 10px; margin-top: 4px; font-size: 12px;">
+                <button class="gridGroupToggle" value="expand">Expand/Collapse</button>
                 </span>
-            </div>
         </div>
-        <div id="demCensusChartsTab">
-            <div class="reportTabPageOptionRow">
-                <input id="displayCensusLegend" type="checkbox" data-bind="checked: isChecked">
-                <label for="displayCensusLegend" class="smallFont">Display chart legend</label>
-				<span class="reportExportSpan">
-					<div id="exportCensusReportRequest">
-						<span>Export Report to PDF:</span>
-						<button id="printCensusSummary" type="button" data-bind="click: exportPDFReport">
-							<img src="app/resources/img/i_pdf.png" class="exportButtonImage">
-						</button>
-					</div>
-				</span>
-            </div>
-            <br>		
-            <div id="demCensusSplitContainer">
-                <div id="demCensusChartAreaPane">
-                </div>
-                <div id="demCensusChartListPane">
-                    <div id="demCensusChartList"></div>
-                </div>
-            </div>
-        </div>        
     </div>
-    <p id="demSource" class="legal">Source: United States Census Bureau, American Community Survey 2011-2015 5yr Estimates</p>
-    <script type="text/x-kendo-tmpl" id="demChartListTemplate">
-        <div class="demChartCategoryItem">
-            <div class="k-button button">#:chartCategory#</div>
+    <div id="demCensusChartsTab">
+        <div class="reportTabPageOptionRow">
+            <input id="displayCensusLegend" type="checkbox" data-bind="checked: isChecked">
+            <label for="displayCensusLegend" class="smallFont">Display chart legend</label>
+            <span class="reportExportSpan">
+                    <div id="exportCensusReportRequest">
+                        <span>Export Report to PDF:</span>
+            <button id="printCensusSummary" type="button" data-bind="click: exportPDFReport">
+                <img src="app/resources/img/i_pdf.png" class="exportButtonImage">
+            </button>
         </div>
-    </script>
+        </span>
+    </div>
+    <br>
+    <div id="demCensusSplitContainer">
+        <div id="demCensusChartAreaPane">
+        </div>
+        <div id="demCensusChartListPane">
+            <div id="demCensusChartList"></div>
+        </div>
+    </div>
+</div>
+</div>
+<p id="demSource" class="legal">Source: United States Census Bureau, American Community Survey 2011-2015 5yr Estimates</p>
+<script type="text/x-kendo-tmpl" id="demChartListTemplate">
+    <div class="demChartCategoryItem">
+        <div class="k-button button">#:chartCategory#</div>
+    </div>
+</script>
 </div>

@@ -165,7 +165,7 @@
 
                     $(".k-item").removeClass("k-state-selected");
 
-                    var combinedFieldList = cbrConfig.thematicMaps.concat(demographicConfig.queryFields);
+                    var combinedFieldList = demographicConfig.queryFields.concat(cbrConfig.thematicMaps);
 
                     var fieldDataSource = new kendo.data.HierarchicalDataSource({
                         data: combinedFieldList
@@ -423,15 +423,15 @@
                 self.runQuery = function() {
                     var queryString = self.buildQueryString();
 
-                    self.acsCallback = function(results){
+                    self.acsCallback = function(results) {
                         var censusQueryString = "GEOID in(";
-                        $.each(results.features, function(i, feature){
-                            var geoId = feature.attributes.GEOID;
+                        $.each(results.features, function(i, feature) {
+                            var geoId = feature.attributes.GEOID10;
                             censusQueryString += "'" + geoId + "'" + ", ";
                         });
                         censusQueryString = censusQueryString.slice(0, -2) + ")";
 
-                        self.censusCallback = function(censusResults){
+                        self.censusCallback = function(censusResults) {
                             demographicVM.interactiveSelectionQueryHandler(censusResults);
                             demographicVM.interactiveSelectionQueryHandler(results);
                         };
@@ -493,17 +493,19 @@
                                     queryString += "(" + fieldName + " >= " + min + " AND  " + fieldName + " <= " + max + ")";
                                 }
                             } else {
-                                if (inputBoxes[0].value) {
-                                    inputValue = inputBoxes[0].value.replace(/,/g, "");
-                                    if (self.queryItems[i].type === "percent") {
-                                        inputValue = inputValue.replace("%", "");
-                                        //inputValue = (inputValue/100);
+                                if (inputBoxes[0]) {
+                                    if (inputBoxes[0].value) {
+                                        inputValue = inputBoxes[0].value.replace(/,/g, "");
+                                        if (self.queryItems[i].type === "percent") {
+                                            inputValue = inputValue.replace("%", "");
+                                            //inputValue = (inputValue/100);
+                                        }
                                     }
-                                }
-                                if (i !== (self.queryItems.length - 1)) {
-                                    queryString += "(" + fieldName + " " + operator + " " + inputValue + ") " + join + " ";
-                                } else {
-                                    queryString += "(" + fieldName + " " + operator + " " + inputValue + ") ";
+                                    if (i !== (self.queryItems.length - 1)) {
+                                        queryString += "(" + fieldName + " " + operator + " " + inputValue + ") " + join + " ";
+                                    } else {
+                                        queryString += "(" + fieldName + " " + operator + " " + inputValue + ") ";
+                                    }
                                 }
                             }
                         } else if (self.queryItems[i].type === "string") {
@@ -515,6 +517,10 @@
                             }
                         }
                     }
+                    if (queryString === "" || queryString.indexOf("null") > -1) {
+                        queryString = "1=1";
+                    }
+
                     return queryString;
                 };
 
@@ -525,6 +531,7 @@
                  **/
                 self.verifyQuery = function() {
                     var queryString = self.buildQueryString();
+                    console.log(queryString);
                     layerDelegate.verify(self.layerACSUrl, self.verifyCallback, self.errBack, undefined, queryString, true);
                 };
 

@@ -292,7 +292,6 @@
 
                             var queryOrigFeature = function(results) {
                                 //call original callback
-
                                 var type = "census";
                                 if (Object.keys(results.features[0].attributes).length > 120) {
                                     type = "acs";

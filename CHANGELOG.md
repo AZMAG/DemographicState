@@ -16,6 +16,14 @@ And constructed with the following guidelines:
 3. **PATCH** version when you make backwards-compatible bug fixes and misc changes **bumps only the patch**
 
 ***************************************************************************************************************
+## Version 2.3.4 | 2/16/2017
+* Updated Excel Eporting Functionality to reflect new tabular reporting structure
+* Updated kendo version
+* Added logic to style the reports by indenting, coloring and changing the font style
+* Added an expand and collapse button on tabular reports to make it easier to see data more quickly
+* Removed age pyramid and replaced with regular bar chart
+* Updated the charts section to include some new fields
+* Added logic to word wrap the labels on charts to prevent labels from being hidden
 
 ## Version 2.3.3 | 1/23/2017
 * Added Title 6 tab to the MPO/COG reporting window

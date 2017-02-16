@@ -302,6 +302,26 @@
                         }
                     });
 
+                    $(".gridGroupToggle").click(function(e) {
+                        $.each($(".k-grid"), function(i, val) {
+                            if ($(val).is(":visible")) {
+                                var grid = $(val).data('kendoGrid');
+                                if (e.target.value === "collapse") {
+                                    e.target.value = "expand";
+                                    grid.tbody.find("tr.k-grouping-row").each(function(index) {
+                                        grid.collapseGroup(this);
+                                    });
+                                } else {
+                                    e.target.value = "collapse";
+                                    grid.tbody.find("tr.k-grouping-row").each(function(index) {
+                                        grid.expandGroup(this);
+                                    });
+                                }
+                            }
+                        })
+                    });
+
+
                     // Display legend checkbox click event
                     $("#displayCensusLegend").bind("click", function() {
                         self.legendCensusVisible = this.checked;
@@ -659,6 +679,8 @@
                     }
                     var tabName, tabContent, optionsRow, gridName, exportButton, countLabel, columnConfig;
                     // We already have the data, so handle it.
+                    // console.log(type);
+                    // console.log(results);
                     if (type === "census") {
                         self.censusDataQueryHandler(results);
                         tabName = "Census Block Groups";
@@ -721,7 +743,7 @@
                         dataSource: {
                             data: self.featureAttributeArray
                         },
-                        selectable: true,
+                        selectable: false,
                         sortable: true,
                         scrollable: true,
                         resizable: false,
@@ -967,6 +989,7 @@
                         }
                     });
 
+
                     if (self.compareFeature !== null) {
                         self.addCompareValues("census");
                     }
@@ -1087,6 +1110,8 @@
                                 timePeriod: field.timePeriod,
                                 percentOfField: field.percentOfField,
                                 derivedTargetField: field.fieldName,
+                                indentLevel: field.indentLevel,
+                                universeField: field.universeField,
                                 derivedPercentOfField: field.percentOfField,
                                 percentValue: 0,
                                 percentValueFormatted: "0",
@@ -1109,7 +1134,6 @@
                                 if (aggValues[field.fieldName].percentValueFormatted.indexOf(".") > -1 && aggValues[field.fieldName].percentValueFormatted.length === 3) {
                                     aggValues[field.fieldName].percentValueFormatted = "0" + aggValues[field.fieldName].percentValueFormatted;
                                 }
-
                             }
                             if (field.densityAreaField !== "" || field.densityAreaField !== undefined) {
                                 var densityArea = Number(sumAttributes[field.densityAreaField]);
@@ -1141,7 +1165,6 @@
                                 self.aggValuesACSGroupedByChartCategory[item.chartCategory] = [aggValues[item.fieldName]];
                             }
                         }
-
                         // Field Categories
                         if (item.fieldCategory !== "") {
                             if (item.fieldCategory in self.aggValuesGroupedByFieldCategory) {
@@ -1226,87 +1249,61 @@
                         var totalBlockCount = attributes["TOT_BLOCK_COUNT"];
 
                         var dataSrc = [{
-                                Category: "Population Base",
-                                Total: totalPop,
-                                Percent: "N/A",
-                                NumberOfBlocks: totalBlockCount,
-                                PercentOfBlocks: totalBlockCount / totalBlockCount,
-                                AffectedPopulation: "N/A",
-                                PercentAffectedCaptured: "N/A"
-                            },
-                            // {
-                            //     Category: "Civilian Noninstitutionalized Population",
-                            //     Total: attributes["CIV_NON_INST_POP"],
-                            //     Percent: "N/A",
-                            //     NumberOfBlocks: attributes[''],
-                            //     PercentOfBlocks: attributes[''] / totalBlockCount,
-                            //     AffectedPopulation: attributes[''],
-                            //     PercentAffectedCaptured: attributes[''] / attributes["CIV_NON_INST_POP"]
-                            // }, 
-                            {
-                                Category: "Minority",
-                                Total: attributes["MINORITY_POP"],
-                                Percent: (attributes["MINORITY_POP"] / totalPop),
-                                NumberOfBlocks: attributes['AFFECTED_MIN_POP_COUNT'],
-                                PercentOfBlocks: attributes['AFFECTED_MIN_POP_COUNT'] / totalBlockCount,
-                                AffectedPopulation: attributes['AFFECTED_MIN_POP'],
-                                PercentAffectedCaptured: attributes['AFFECTED_MIN_POP'] / attributes["MINORITY_POP"]
-                            }, {
-                                Category: "Age 60+",
-                                Total: attributes["AGE60PLUS"],
-                                Percent: (attributes["AGE60PLUS"] / totalPop),
-                                NumberOfBlocks: attributes['AFFECTED_60_PLUS_COUNT'],
-                                PercentOfBlocks: attributes['AFFECTED_60_PLUS_COUNT'] / totalBlockCount,
-                                AffectedPopulation: attributes['AFFECTED_60_PLUS'],
-                                PercentAffectedCaptured: attributes['AFFECTED_60_PLUS'] / attributes["AGE60PLUS"]
-                            }, {
-                                Category: "Age 65+",
-                                Total: attributes["AGE65PLUS"],
-                                Percent: (attributes["AGE65PLUS"] / totalPop),
-                                NumberOfBlocks: attributes['AFFECTED_65_PLUS_COUNT'],
-                                PercentOfBlocks: attributes['AFFECTED_65_PLUS_COUNT'] / totalBlockCount,
-                                AffectedPopulation: attributes['AFFECTED_65_PLUS'],
-                                PercentAffectedCaptured: attributes['AFFECTED_65_PLUS'] / attributes["AGE65PLUS"]
-                            }, {
-                                Category: "Age 75+",
-                                Total: attributes["AGE75PLUS"],
-                                Percent: (attributes["AGE75PLUS"] / totalPop),
-                                NumberOfBlocks: attributes['AFFECTED_75_PLUS_COUNT'],
-                                PercentOfBlocks: attributes['AFFECTED_75_PLUS_COUNT'] / totalBlockCount,
-                                AffectedPopulation: attributes['AFFECTED_75_PLUS'],
-                                PercentAffectedCaptured: attributes['AFFECTED_75_PLUS'] / attributes["AGE75PLUS"]
-                            }, {
-                                Category: "Below Poverty Level",
-                                Total: attributes["INCOME_BELOW_POVERTY_LEVEL"],
-                                Percent: (attributes["INCOME_BELOW_POVERTY_LEVEL"] / attributes["CIV_NON_INST_POP"]),
-                                NumberOfBlocks: attributes['AFFECTED_BELOW_POVERTY_LEVEL_COUNT'],
-                                PercentOfBlocks: attributes['AFFECTED_BELOW_POVERTY_LEVEL_COUNT'] / totalBlockCount,
-                                AffectedPopulation: attributes['AFFECTED_BELOW_POVERTY_LEVEL'],
-                                PercentAffectedCaptured: attributes['AFFECTED_BELOW_POVERTY_LEVEL'] / attributes["INCOME_BELOW_POVERTY_LEVEL"]
-                            }, {
-                                Category: "Population with a Disability",
-                                Total: attributes["DISABILITY"],
-                                Percent: (attributes["DISABILITY"] / attributes["CIV_NON_INST_POP"]),
-                                NumberOfBlocks: attributes['AFFECTED_DISABILITY_COUNT'],
-                                PercentOfBlocks: attributes['AFFECTED_DISABILITY_COUNT'] / totalBlockCount,
-                                AffectedPopulation: attributes['AFFECTED_DISABILITY'],
-                                PercentAffectedCaptured: attributes['AFFECTED_DISABILITY'] / attributes["DISABILITY"]
-                            }, {
-                                Category: "Limited English Proficient Persons (LEP)",
-                                Total: attributes["LIMITED_ENGLISH"],
-                                Percent: (attributes["LIMITED_ENGLISH"] / fivePlus),
-                                NumberOfBlocks: attributes['AFFECTED_LEP_COUNT'],
-                                PercentOfBlocks: attributes['AFFECTED_LEP_COUNT'] / totalBlockCount,
-                                AffectedPopulation: attributes['AFFECTED_LEP'],
-                                PercentAffectedCaptured: attributes['AFFECTED_LEP'] / attributes["LIMITED_ENGLISH"]
-                            }
-                        ];
+                            Category: "Population Base",
+                            Total: totalPop,
+                            Percent: "N/A",
+                            NumberOfBlocks: totalBlockCount,
+                            PercentOfBlocks: totalBlockCount / totalBlockCount,
+                            AffectedPopulation: "N/A",
+                            PercentAffectedCaptured: "N/A"
+                        }, {
+                            Category: "Minority",
+                            Total: attributes["MINORITY_POP"],
+                            Percent: (attributes["MINORITY_POP"] / totalPop),
+                            NumberOfBlocks: attributes['AFFECTED_MINORITY_POP_COUNT'],
+                            PercentOfBlocks: attributes['AFFECTED_MINORITY_POP_COUNT'] / totalBlockCount,
+                            AffectedPopulation: attributes['AFFECTED_MINORITY_POP'],
+                            PercentAffectedCaptured: attributes['AFFECTED_MINORITY_POP'] / attributes["MINORITY_POP"]
+                        }, {
+                            Category: "Age 65+",
+                            Total: attributes["AGE65PLUS"],
+                            Percent: (attributes["AGE65PLUS"] / totalPop),
+                            NumberOfBlocks: attributes['AFFECTED_AGE65PLUS_COUNT'],
+                            PercentOfBlocks: attributes['AFFECTED_AGE65PLUS_COUNT'] / totalBlockCount,
+                            AffectedPopulation: attributes['AFFECTED_AGE65PLUS'],
+                            PercentAffectedCaptured: attributes['AFFECTED_AGE65PLUS'] / attributes["AGE65PLUS"]
+                        }, {
+                            Category: "Below Poverty Level",
+                            Total: attributes["INCOME_BELOW_POVERTY"],
+                            Percent: (attributes["INCOME_BELOW_POVERTY"] / attributes["CIV_NON_INST_POP"]),
+                            NumberOfBlocks: attributes['AFFECTED_INCOME_BELOW_POVERTY_COUNT'],
+                            PercentOfBlocks: attributes['AFFECTED_INCOME_BELOW_POVERTY_COUNT'] / totalBlockCount,
+                            AffectedPopulation: attributes['AFFECTED_INCOME_BELOW_POVERTY'],
+                            PercentAffectedCaptured: attributes['AFFECTED_INCOME_BELOW_POVERTY'] / attributes["INCOME_BELOW_POVERTY"]
+                        }, {
+                            Category: "Population with a Disability",
+                            Total: attributes["DISABILITY"],
+                            Percent: (attributes["DISABILITY"] / attributes["CIV_NON_INST_POP"]),
+                            NumberOfBlocks: attributes['AFFECTED_DISABILITY_COUNT'],
+                            PercentOfBlocks: attributes['AFFECTED_DISABILITY_COUNT'] / totalBlockCount,
+                            AffectedPopulation: attributes['AFFECTED_DISABILITY'],
+                            PercentAffectedCaptured: attributes['AFFECTED_DISABILITY'] / attributes["DISABILITY"]
+                        }, {
+                            Category: "Limited English Proficient Persons (LEP)",
+                            Total: attributes["LIMITED_ENG_PROF"],
+                            Percent: (attributes["LIMITED_ENG_PROF"] / fivePlus),
+                            NumberOfBlocks: attributes['AFFECTED_LIMITED_ENG_PROF_COUNT'],
+                            PercentOfBlocks: attributes['AFFECTED_LIMITED_ENG_PROF_COUNT'] / totalBlockCount,
+                            AffectedPopulation: attributes['AFFECTED_LIMITED_ENG_PROF'],
+                            PercentAffectedCaptured: attributes['AFFECTED_LIMITED_ENG_PROF'] / attributes["LIMITED_ENG_PROF"]
+                        }];
 
                         tabStrip.append({
                             text: "Title VI Data",
                             content: title6View
                         });
 
+                        var type = attributes["TYPE"];
 
                         $("#title6Grid").kendoGrid({
                             dataSource: {
@@ -1321,7 +1318,7 @@
                                         title: "Category",
                                         width: "105px"
                                     }, {
-                                        title: "MPO",
+                                        title: type,
                                         width: "130px",
                                         columns: [
                                             { field: "Total", title: "Total", width: "70px", format: "{0:n0}" },
@@ -1427,7 +1424,6 @@
                             var selectedIndex = compareComboBoxObj.select();
                             if (selectedIndex > 0) {
                                 // Update the Grid
-
                                 if (kendoGrid !== undefined) {
                                     kendoGrid.element.remove();
                                     kendoGrid.destroy();
@@ -1712,8 +1708,6 @@
                     });
                 };
 
-
-
                 /**
                  * Fired when user selects an item in the chart category list view
                  *
@@ -1722,7 +1716,12 @@
                  */
                 self.onChartListSelectionChanged = function() {
                     self.selectedCategoryObj = this.select();
+
                     self.groupedItems = self.aggValuesCensusGroupedByChartCategory[self.selectedCategoryObj[0].childNodes[1].innerHTML];
+
+                    if (this.element[0].id.indexOf("Census") === -1) {
+                        self.groupedItems = self.aggValuesACSGroupedByChartCategory[self.selectedCategoryObj[0].childNodes[1].innerHTML];
+                    }
 
                     if (self.groupedItems === undefined) {
                         self.groupedItems = self.aggValuesACSGroupedByChartCategory[self.selectedCategoryObj[0].childNodes[1].innerHTML];
@@ -1742,14 +1741,10 @@
                     }
 
                     var kendoChart2 = $("#demACSChartArea").data("kendoChart");
-                    var d3Chart = $("#demACSChartArea");
 
                     if (kendoChart2 !== null && kendoChart2 !== undefined) {
                         kendoChart2.destroy();
                         kendoChart2.element.remove();
-                        self.createChart("ACS");
-                    } else if (d3Chart !== null && d3Chart !== undefined) {
-                        d3Chart.remove();
                         self.createChart("ACS");
                     } else {
                         self.createChart("ACS");
@@ -1857,148 +1852,145 @@
                     var categoryName = self.selectedCategoryObj[0].childNodes[1].innerHTML;
                     var padding = 75;
 
-                    if (categoryName === "Occupation") {
-                        self.createTreeMap();
-                    } else if (categoryName === "Age By Gender") {
-                        self.createAgePyramid();
-                    } else {
-                        if (categoryName == "Race and Ethnicity") {
-                            padding = 100;
-                        }
+                    // if (categoryName == "Race and Ethnicity") {
+                    //     padding = 100;
+                    // }
 
-                        var templateString = "#= category #<br>#= kendo.format('{0:P}', percentage) #<br>#= kendo.format('{0:N0}', value) #";
+                    var templateString = "#= category #<br>#= kendo.format('{0:P}', percentage) #<br>#= kendo.format('{0:N0}', value) #";
+                    if (self.groupedItems) {
                         if (self.groupedItems[0].chartType !== "pie") {
                             templateString = "#= category #<br>#= kendo.format('{0:N0}', value) #";
                         }
+                    }
 
-                        var series1 = [];
-                        var filteredItems = [];
+                    var series1 = [];
+                    var filteredItems = [];
 
-                        $.each(self.groupedItems, function(i, item) {
-                            //filtering out zero values
-                            if (item.fieldValue !== 0) {
-                                filteredItems.push(item);
-                            }
-                            series1.push(item.fieldValue);
-                        });
-
-                        var largestValue = Math.max.apply(Math, series1);
-                        var valueAxisTemplate = "#= kendo.format(\'{0:N0}\', value)#";
-                        var largeValue = false;
-                        if (largestValue > 1000) {
-                            if (largestValue > 5000) {
-                                valueAxisTemplate = "#= kendo.format('{0:N0}', Math.abs(value) / 1000) #";
-                            } else {
-                                valueAxisTemplate = "#= kendo.format('{0:N1}', Math.abs(value) / 1000) #";
-                            }
-                            largeValue = true;
+                    $.each(self.groupedItems, function(i, item) {
+                        //filtering out zero values
+                        if (item.fieldValue !== 0) {
+                            filteredItems.push(item);
                         }
+                        series1.push(item.fieldValue);
+                    });
 
-                        var showLabels = false;
-                        if (self.groupedItems[0].chartType === "pie") {
-                            showLabels = true;
-                        }
-
-                        if (filteredItems.length !== 0) {
-
-
-                            // Kendo-ize
-                            var chart = chartObj.kendoChart({
-                                dataSource: {
-                                    data: filteredItems
-                                },
-
-                                //change color of charts vw
-                                seriesColors: appConfig.seriesColors,
-
-                                legend: {
-                                    visible: legendVisible,
-                                    position: "bottom",
-                                    // offsetX: 15,
-                                    // offsetY: -80,
-                                    margin: {
-                                        left: 0,
-                                        right: 10
-                                    },
-                                    labels: {
-                                        color: "white"
-                                    }
-                                },
-                                series: [{
-                                    name: self.groupedItems[0].chartName,
-                                    type: self.groupedItems[0].chartType,
-                                    field: "fieldValue",
-                                    categoryField: "fieldAlias",
-                                    padding: padding
-                                }],
-                                seriesDefaults: {
-                                    labels: {
-                                        visible: showLabels,
-                                        position: "outsideEnd",
-                                        background: "#4D4D4D",
-                                        format: "{0:n}",
-                                        color: "white",
-                                        // template: "#= category #"
-                                        template: "#= category #"
-                                    },
-                                    tooltip: {
-                                        visible: true,
-                                        //background: "#4D4D4D",
-                                        color: "black",
-                                        // border: {
-                                        //     width: 1,
-                                        //     color: "white"
-                                        // },
-                                        // template: "#= kendo.format('{0:n0}', value) # - #= kendo.format('{0:P}', percentage) #"
-                                        // template: "#= kendo.format('{0:P}', percentage) #"
-                                        template: templateString
-                                    }
-                                },
-                                plotArea: {
-                                    margin: {
-                                        right: 30,
-
-                                    }
-                                },
-                                chartArea: {
-                                    background: "#4D4D4D",
-                                    margin: {
-                                        left: 15,
-                                        top: 5,
-                                        right: 15
-                                    }
-                                },
-                                categoryAxis: {
-                                    //title: { text: "test"},
-                                    field: "fieldAlias",
-                                    color: "white",
-                                    labels: {
-                                        visible: true,
-                                        rotation: 0
-                                    },
-                                    majorGridLines: {
-                                        visible: false
-                                    },
-                                    line: {
-                                        visible: false
-                                    }
-                                },
-                                valueAxis: {
-                                    //title: { text: "test"},
-                                    color: "white",
-                                    labels: {
-                                        template: valueAxisTemplate
-                                    },
-                                    title: {
-                                        text: "*Values shown in thousands",
-                                        font: "10px Arial,Helvetica,sans-serif",
-                                        visible: largeValue
-                                    }
-                                }
-                            }).data("kendoChart");
+                    var largestValue = Math.max.apply(Math, series1);
+                    var valueAxisTemplate = "#= kendo.format(\'{0:N0}\', value)#";
+                    var largeValue = false;
+                    if (largestValue > 1000) {
+                        if (largestValue > 5000) {
+                            valueAxisTemplate = "#= kendo.format('{0:N0}', Math.abs(value) / 1000) #";
                         } else {
-                            chartObj.html("<span style='margin:30%;'>No data available for this chart.<span>");
+                            valueAxisTemplate = "#= kendo.format('{0:N1}', Math.abs(value) / 1000) #";
                         }
+                        largeValue = true;
+                    }
+
+                    var showLabels = false;
+                    if (self.groupedItems[0].chartType === "pie") {
+                        showLabels = true;
+                    }
+
+                    if (filteredItems.length !== 0) {
+
+                        // Kendo-ize
+                        var chart = chartObj.kendoChart({
+                            dataSource: {
+                                data: filteredItems
+                            },
+
+                            //change color of charts vw
+                            seriesColors: appConfig.seriesColors,
+
+                            legend: {
+                                visible: legendVisible,
+                                position: "bottom",
+                                // offsetX: 15,
+                                // offsetY: -80,
+                                margin: {
+                                    left: 0,
+                                    right: 10
+                                },
+                                labels: {
+                                    color: "white"
+                                }
+                            },
+                            series: [{
+                                name: self.groupedItems[0].chartName,
+                                type: self.groupedItems[0].chartType,
+                                field: "fieldValue",
+                                categoryField: "fieldAlias",
+                                padding: padding,
+                                //labels: {template: "#=category#"}
+                            }],
+                            seriesDefaults: {
+                                labels: {
+                                    visible: showLabels,
+                                    position: "outsideEnd",
+                                    background: "#4D4D4D",
+                                    format: "{0:n}",
+                                    color: "white",
+                                    // template: "#= category #"
+                                    template: "#= wrapText(category) #"
+                                },
+                                tooltip: {
+                                    visible: true,
+                                    //background: "#4D4D4D",
+                                    color: "black",
+                                    // border: {
+                                    //     width: 1,
+                                    //     color: "white"
+                                    // },
+                                    // template: "#= kendo.format('{0:n0}', value) # - #= kendo.format('{0:P}', percentage) #"
+                                    // template: "#= kendo.format('{0:P}', percentage) #"
+                                    template: templateString
+                                }
+                            },
+                            plotArea: {
+                                margin: {
+                                    right: 30,
+
+                                }
+                            },
+                            chartArea: {
+                                background: "#4D4D4D",
+                                margin: {
+                                    left: 15,
+                                    top: 5,
+                                    right: 15
+                                }
+                            },
+                            categoryAxis: {
+                                //title: { text: "test"},
+                                field: "fieldAlias",
+                                color: "white",
+                                labels: {
+                                    visible: true,
+                                    rotation: 0,
+                                    template: "#= wrapText(value) #"
+                                },
+                                majorGridLines: {
+                                    visible: false
+                                },
+                                line: {
+                                    visible: false
+                                }
+                            },
+                            valueAxis: {
+                                //title: { text: "test"},
+                                color: "white",
+                                labels: {
+                                    template: valueAxisTemplate
+                                },
+                                title: {
+                                    text: "*Values shown in thousands",
+                                    font: "10px Arial,Helvetica,sans-serif",
+                                    visible: largeValue
+                                }
+                            }
+                        }).data("kendoChart");
+                    } else {
+                        chartObj.html("<span style='margin:30%;'>No data available for this chart.<span>");
                     }
                 };
 
@@ -2071,14 +2063,13 @@
                             data: dataSource,
                             group: [{
                                 field: "fieldGroup"
-                            }
-                            ],
+                            }],
                             sort: {
                                 field: "fieldRowSort",
                                 dir: "asc"
                             }
                         },
-                        selectable: true,
+                        selectable: false,
                         scrollable: true,
                         sortable: false,
                         resizable: true,
@@ -2094,7 +2085,7 @@
                                 width: "350px"
                             }, {
                                 field: "fieldValueFormatted",
-                                title: "Total",
+                                title: "Estimate",
                                 format: "{0:n1}"
                             }, {
                                 field: "percentValueFormatted",
@@ -2108,20 +2099,52 @@
                                 var data = e.sender._data;
                                 var realRows = [];
 
-                                $.each(rowCollection, function(i, row) {
-                                    if (row.className !== "k-grouping-row") {
-                                        realRows.push(row);
-                                    }
-                                });
-                                $.each(realRows, function(i, row) {
-                                    if (data[i]) {
-                                        if (data[i]["fieldCategory"] === "Occupation") {
-                                            if (data[i].parentField === "" || data[i].fieldName === "ProtectiveServ") {
-                                                var jRow = $(row);
-                                                jRow.addClass("k-header");
-                                                jRow.removeClass("k-alt");
+                                $.each(data, function(i, el) {
+                                    var foundElement = $("td").filter(function() {
+                                        return $(this).text() === el.tableHeader;
+                                    });
+                                    var finalElement = foundElement;
+                                    if (foundElement.length > 1) {
+                                        $.each(foundElement, function(i, row) {
+                                            if ($(row)[0].previousSibling) {
+                                                if ($(row)[0].previousSibling.innerText.indexOf(el.fieldCategory) != -1) {
+                                                    finalElement = $(row);
+                                                }
                                             }
-                                        }
+                                        });
+                                    } else if (foundElement.length == 1) {
+                                        finalElement = foundElement;
+                                    }
+                                    var indent = el.indentLevel * 20;
+                                    if (indent === 0) {
+                                        indent = 3;
+                                    }
+                                    finalElement.css("padding-left", indent + "px");
+
+                                    var parentElement = $(finalElement[0].parentElement);
+
+                                    if (el.universeField == 1) {
+                                        var universeColor = "#06c";
+                                        parentElement.css({
+                                            "background-color": universeColor,
+                                            "font-weight": "bold",
+                                            "font-style": "italic",
+                                            "font-size": "12px"
+                                        });
+
+                                    } else if (el.universeField == 2) {
+                                        var universeColor = "#808080";
+                                        var nextSib = $(finalElement[0].nextSibling);
+                                        var finalSib = $(nextSib[0].nextSibling);
+                                        parentElement.css({
+                                            "background-color": universeColor,
+                                            "font-weight": "bold",
+                                            "font-size": "11.5px"
+                                        });
+                                        nextSib.empty();
+                                        finalSib.empty();
+                                    } else if (el.universeField == 0) {
+                                        parentElement.css("font-size", "11.5px");
                                     }
                                 });
                             }
@@ -2129,470 +2152,11 @@
                             grid.tbody.find("tr.k-grouping-row").each(function(index) {
                                 grid.collapseGroup(this);
                             });
+                            $(".gridGroupToggle").val("expand");
                         }
                     });
 
                     self.sizeGrid("#" + dataGridName);
-                };
-
-                self.createTreeMap = function() {
-                    var data = [];
-                    var parents = [];
-                    var items = [];
-                    $("#demACSChartArea").addClass("bubbleChart");
-                    $.each(self.groupedItems, function(i, item) {
-
-                        var parentObj = {};
-
-                        if (item.parentField !== "" && item.fieldAlias !== "Protective service occupations" && item.fieldValue !== 0) {
-                            var strArray = item.fieldAlias.split(" ");
-                            var text1 = "";
-                            var text2 = "";
-                            var text3 = "";
-
-                            if (strArray.length < 4) {
-                                for (i = 0; i < strArray.length; i++) {
-                                    text1 += strArray[i] + " ";
-                                }
-                            } else if (strArray.length > 3 && strArray.length < 6) {
-                                for (i = 0; i < 3; i++) {
-                                    text1 += strArray[i] + " ";
-                                }
-                                for (i = 3; i < strArray.length; i++) {
-                                    text2 += strArray[i] + " ";
-                                }
-                            } else {
-                                for (i = 0; i < 3; i++) {
-                                    text1 += strArray[i] + " ";
-                                }
-                                for (i = 3; i < 6; i++) {
-                                    text2 += strArray[i] + " ";
-                                }
-                                text3 = "...";
-                            }
-
-                            var childObj = {
-                                text: text1,
-                                text2: text2,
-                                text3: text3,
-                                fullText: item.fieldAlias,
-                                count: item.fieldValue.toString(),
-                                label: item.fieldValue.toLocaleString(),
-                                percent: item.percentValueFormatted,
-                                category: item.parentField
-                            };
-
-                            items.push(childObj);
-                        }
-                    });
-
-                    var bubbleChart = new d3.svg.BubbleChart({
-                        supportResponsive: true,
-                        //container: => use @default
-                        size: 500,
-                        viewBoxSize: 500,
-                        innerRadius: 120,
-                        //outerRadius: => use @default
-                        radiusMin: 10,
-                        radiusMax: 20,
-                        //intersectDelta: 100,
-                        intersectInc: 20,
-                        circleColor: "category", //use @default
-                        data: {
-                            items: items,
-                            eval: function(item) {
-                                return item.count;
-                            },
-                            color: function(item) {
-                                var color = "";
-                                $.each(appConfig.bubbleColors, function(i, value) {
-                                    //console.log(value.category);
-                                    if (value.category === item.category) {
-                                        color = value.color;
-                                        return;
-                                    }
-                                });
-
-                                //console.log(item.category)
-
-                                return color;
-                            },
-                            classed: function(item) {
-                                return item.text.split(" ").join("");
-                            }
-                        },
-                        plugins: [{
-                            name: "lines",
-                            options: {
-                                format: [{ // Line #0
-                                    textField: "label",
-                                    classed: {
-                                        label: true
-                                    },
-                                    style: {
-                                        "font-family": "Source Sans Pro, sans-serif",
-                                        "text-anchor": "middle",
-                                        "font-weight": 500,
-                                        fill: "black",
-                                        opacity: "hidden"
-                                    },
-                                    attr: {
-                                        "font-size": "1px",
-                                        dy: "-30px",
-                                        x: function(d) {
-                                            return d.cx;
-                                        },
-                                        y: function(d) {
-                                            return d.cy;
-                                        }
-                                    }
-                                }, { // Line #0
-                                    textField: "percent",
-                                    classed: {
-                                        label: true
-                                    },
-                                    style: {
-                                        "font-family": "Source Sans Pro, sans-serif",
-                                        "text-anchor": "middle",
-                                        fill: "black",
-                                        opacity: "0"
-                                    },
-                                    attr: {
-                                        "font-size": "1px",
-                                        dy: "-4px",
-                                        x: function(d) {
-                                            return d.cx;
-                                        },
-                                        y: function(d) {
-                                            return d.cy;
-                                        }
-                                    }
-                                }, { // Line #1
-                                    textField: "text",
-                                    classed: {
-                                        text: true
-                                    },
-                                    style: {
-                                        "font-family": "Source Sans Pro, sans-serif",
-                                        "text-anchor": "middle",
-                                        fill: "black",
-                                        opacity: "0"
-                                    },
-                                    attr: {
-                                        "font-size": "1px",
-                                        dy: "20px",
-                                        x: function(d) {
-                                            return d.cx;
-                                        },
-                                        y: function(d) {
-                                            return d.cy;
-                                        }
-                                    }
-                                }, { // Line #2
-                                    textField: "text2",
-                                    classed: {
-                                        text2: true
-                                    },
-                                    style: {
-                                        "font-family": "Source Sans Pro, sans-serif",
-                                        "text-anchor": "middle",
-                                        fill: "black",
-                                        opacity: "0"
-                                    },
-                                    attr: {
-                                        "font-size": "1px",
-                                        dy: "40px",
-                                        x: function(d) {
-                                            return d.cx;
-                                        },
-                                        y: function(d) {
-                                            return d.cy;
-                                        }
-                                    }
-                                }, { // Line #3
-                                    textField: "text3",
-                                    classed: {
-                                        text3: true
-                                    },
-                                    style: {
-                                        "font-family": "Source Sans Pro, sans-serif",
-                                        "text-anchor": "middle",
-                                        fill: "black",
-                                        opacity: "0"
-                                    },
-                                    attr: {
-                                        "font-size": "1px",
-                                        dy: "60px",
-                                        x: function(d) {
-                                            return d.cx;
-                                        },
-                                        y: function(d) {
-                                            return d.cy;
-                                        }
-                                    }
-                                }],
-                                centralFormat: [{ // Line #0
-                                    attr: {
-                                        "font-size": "28px"
-                                    },
-                                    style: {
-                                        "opacity": "1"
-                                    }
-                                }, { // Line #1
-                                    attr: {
-                                        "font-size": "20px"
-                                    },
-                                    style: {
-                                        "opacity": "1"
-                                    }
-                                }, { // Line #2
-                                    attr: {
-                                        "font-size": "18px"
-                                    },
-                                    style: {
-                                        "opacity": "1"
-                                    }
-                                }, { // Line #3
-                                    attr: {
-                                        "font-size": "18px"
-                                    },
-                                    style: {
-                                        "opacity": "1"
-                                    }
-                                }, { // Line #4
-                                    attr: {
-                                        "font-size": "48px"
-                                    },
-                                    style: {
-                                        "opacity": "1"
-                                    }
-                                }, ]
-                            }
-                        }]
-                    });
-
-                    var tooltip = d3.select("body")
-                        .append("div")
-                        .style("position", "absolute")
-                        .style("z-index", "10000000")
-                        .style("visibility", "hidden")
-                        .style("border", "1px solid black")
-                        .style("background-color", "white")
-                        .style("border-radius", "3px")
-                        .style("padding", "3px")
-                        .style("color", "black")
-                        .style("max-width", "140px")
-                        .style("padding", "10px")
-                        .style("font-size", "12px");
-
-                    var node = d3.selectAll(".node")
-                        .on("mouseover", function(sender) {
-                            var html = "<strong>Occupation: </strong>" + sender.item.fullText + "<br><strong> Category: </strong>" + sender.item.category + "<br> <strong>Employee Count: </strong>" + sender.item.label + "<br> <strong>Percentage: </strong>" + sender.item.percent;
-                            tooltip.html(html);
-                            return tooltip.style("visibility", "visible");
-                        })
-                        .on("mousemove", function() {
-                            return tooltip.style("top", (d3.event.screenY - 100) + "px").style("left", (d3.event.screenX + 10) + "px");
-                        })
-                        .on("mouseout", function(event) {
-                            d3.select(this).attr("stroke", "black").attr("stroke-width", "0");
-                            return tooltip.style("visibility", "hidden");
-                        });
-                };
-
-
-                /**
-                 * Creates Age Pyramid
-                 *
-                 * @method createAgePyramid
-                 */
-                self.createAgePyramid = function() {
-                    var stateLineMale = [];
-                    var stateLineFemale = [];
-                    self.pyramidData = [];
-                    self.pyramidData.length = 0;
-                    var combinedMaleValue = 0;
-                    var combinedFemaleValue = 0;
-                    var object;
-
-                    $.each(self.groupedItems, function(key, item) {
-                        if (item !== undefined) {
-                            if (item.fieldName === "TOTAL_MALE") {
-                                self.totalMale = item.fieldValue;
-                            } else if (item.fieldName === "TOTAL_FEMALE") {
-                                self.totalFemale = item.fieldValue;
-                            } else if (item.fieldName === "M_Y18TO19" || item.fieldName === "M_Y20") {
-                                combinedMaleValue += item.fieldValue;
-                            } else if (item.fieldName === "M_Y21") {
-                                combinedMaleValue += item.fieldValue;
-                                object = jQuery.extend({}, item);
-                                object.fieldValue = combinedMaleValue;
-                                self.pyramidData.push(object);
-                            } else if (item.fieldName === "F_Y18TO19" || item.fieldName === "F_Y20") {
-                                combinedFemaleValue += item.fieldValue;
-                            } else if (item.fieldName === "F_Y21") {
-                                combinedFemaleValue += item.fieldValue;
-                                object = jQuery.extend({}, item);
-                                object.fieldValue = combinedFemaleValue;
-                                self.pyramidData.push(object);
-                            } else {
-                                object = item;
-                                self.pyramidData.push(object);
-                            }
-                        }
-                    });
-                    self.pyramidData.reverse();
-
-                    // var url = demographicConfig.reports.stateSummary.ACSRestUrl;
-                    // var whereClause = "NAME = 'Arizona'";
-                    // layerDelegate.query(url, self.populationPyramidComparison, self.dataQueryFault, null, whereClause, false, demographicConfig.agePyramidFields);
-
-                    // self.populationPyramidComparison = function(results) {
-                    //     var feature = results.features[0];
-                    //     $.each(self.pyramidData, function(key, item) {
-                    //         var baseLineValue = feature.attributes[item.fieldName];
-                    //         if (item.tableHeader === "Females age 21") {
-                    //             var value = feature.attributes["F_Y18TO19"] + feature.attributes["F_Y21"] + feature.attributes["F_Y20"];
-                    //             var percentage = value / feature.attributes["TOTAL_FEMALE"];
-                    //             stateLineFemale.push((percentage * self.totalFemale) * -1);
-                    //         } else if (item.tableHeader.indexOf("Females") > -1) {
-                    //             var percentage = baseLineValue / feature.attributes["TOTAL_FEMALE"];
-                    //             stateLineFemale.push((percentage * self.totalFemale) * -1);
-                    //         } else if (item.tableHeader === "Males age 21") {
-                    //             var value = feature.attributes["M_Y18TO19"] + feature.attributes["M_Y21"] + feature.attributes["M_Y20"];
-                    //             var percentage = value / feature.attributes["TOTAL_MALE"];
-                    //             stateLineMale.push((percentage * self.totalMale));
-                    //         } else {
-                    //             var percentage = baseLineValue / feature.attributes["TOTAL_MALE"];
-                    //             stateLineMale.push((percentage * self.totalMale));
-                    //         }
-                    //     });
-
-                    var maleSeries = [];
-                    var femaleSeries = [];
-
-                    $.each(self.pyramidData, function(key, item) {
-                        if (item.tableHeader.indexOf("Females") > -1) {
-                            var negativeValue = item.fieldValue * -1;
-                            femaleSeries.push(negativeValue);
-                        } else {
-                            maleSeries.push(item.fieldValue);
-                        }
-                    });
-
-                    var chartObj = $("#demACSChartArea");
-                    var largestValue = Math.max.apply(Math, maleSeries);
-                    var valueAxisTemplate = "#= kendo.format(\'{0:N0}\', Math.abs(value))#";
-                    var largeValue = false;
-                    if (largestValue > 1000) {
-                        if (largestValue > 5000) {
-                            valueAxisTemplate = "#= kendo.format('{0:N0}', Math.abs(value) / 1000) #";
-                        } else {
-                            valueAxisTemplate = "#= kendo.format('{0:N1}', Math.abs(value) / 1000) #";
-                        }
-                        largeValue = true;
-                    }
-
-
-                    //Kendo-ize
-                    var chart = chartObj.kendoChart({
-                        legend: {
-                            visible: self.legendACSVisible,
-                            position: "bottom",
-                            labels: {
-                                color: "white"
-                            }
-                        },
-                        series: [{
-                                name: "Male",
-                                type: "bar",
-                                data: maleSeries,
-                                color: "#00BFFF",
-                            }, {
-                                name: "Female",
-                                type: "bar",
-                                data: femaleSeries,
-                                color: "#FF69B4",
-                            },
-                            // {
-                            //     name: "State Male",
-                            //     type: "line",
-                            //     data: stateLineMale,
-                            //     color: "#000",
-                            //     stack: false,
-                            //     tooltip: {
-                            //         color: "white",
-                            //         visible: true,
-                            //         format: "{0:N0}",
-                            //         template: "#=series.name # #= kendo.format(\'{0:P1}\', (value / " + self.totalMale + "))#"
-                            //     }
-                            // },
-                            // {
-                            //     name: "State Female",
-                            //     type: "line",
-                            //     data: stateLineFemale,
-                            //     color: "#000",
-                            //     stack: false,
-                            //     tooltip: {
-                            //         color: "white",
-                            //         visible: true,
-                            //         format: "{0:N0}",
-                            //         template: "#=series.name # #= kendo.format(\'{0:P1}\', (Math.abs(value) / " + self.totalFemale + "))#"
-                            //     }
-                            // }
-                        ],
-                        seriesDefaults: {
-                            stack: true,
-                            tooltip: {
-                                color: "black",
-                                visible: true,
-                                format: "{0:N0}",
-                                template: "#=series.name # #= category #: #= kendo.format(\'{0:N0}\', Math.abs(value))#"
-                            }
-                        },
-                        plotArea: {
-                            margin: {
-                                right: 30
-                            }
-                        },
-                        chartArea: {
-                            background: "#4D4D4D",
-                            margin: {
-                                left: 15,
-                                top: 5,
-                                right: 15
-                            }
-                        },
-                        categoryAxis: [{
-                            categories: ["85 and up", "80 to 84", "75 to 79", "70 to 74", "67 to 69", "65 to 66", "62 to 64", "60 to 61", "55 to 59", "50 to 54", "45 to 49", "40 to 44", "35 to 39", "30 to 34", "25 to 29", "22 to 24", "18 to 21", "15 to 17", "10 to 14", "5 to 9", "Less than 5"],
-                            border: "black",
-                            majorGridLines: {
-                                visible: false
-                            },
-                            labels: {
-                                margin: {
-                                    right: 195
-                                },
-                                color: "#FFFFFF"
-                            }
-                        }],
-                        valueAxis: {
-                            color: "white",
-                            labels: {
-                                template: valueAxisTemplate
-                            },
-                            title: {
-                                text: "*Values shown in thousands",
-                                font: "10px Arial,Helvetica,sans-serif",
-                                visible: largeValue
-                            },
-                            majorGridLines: {
-                                visible: false
-                            }
-                        }
-                    }).data("kendoChart");
-                    // };
-
                 };
 
                 /**
@@ -2606,6 +2170,7 @@
                     var dataGridName = "demACSDataGrid";
                     var demoOptionsRowName = "demACSSummaryOptionsRow";
                     var dataSource = self.aggACSValuesArray;
+                    $(".gridGroupToggle").val("collapse");
 
                     if (type === "census") {
                         dataGridName = "demCensusDataGrid";
@@ -2658,7 +2223,7 @@
                                 width: "120px"
                             }, {
                                 field: "fieldValueFormatted",
-                                title: "Total",
+                                title: "Estimate",
                                 format: "{0:n1}"
                             }, {
                                 field: "percentValueFormatted",
@@ -2667,7 +2232,7 @@
                             //{field: "densityValueFormatted", title: "Per Sq Mile", format: "{0:n1}"},
                             {
                                 field: "compareValueFormatted",
-                                title: "Total",
+                                title: "Estimate",
                                 format: "{0:n1}"
                             }, {
                                 field: "comparePercentValueFormatted",
@@ -2727,14 +2292,14 @@
                     if (exportButtonId === "demACSExportResults") {
                         //Summary report export button clicked
                         grid = $("#demACSDataGrid").data("kendoGrid");
-                        headerValue = self.communityName + " ACS 2015 Data";
+                        headerValue = self.communityName + " ACS 2011-2015 ACS 5-Year Estimates";
                         fileName = self.communityName + ".xlsx";
                         if (self.compareFeature === null) {
                             colSpan = 4;
-                            rowSpan = 25;
+                            rowSpan = 11;
                         } else {
                             colSpan = 6;
-                            rowSpan = 18;
+                            rowSpan = 8;
                         }
                     } else if (exportButtonId === "demCensusExportResults") {
                         grid = $("#demCensusDataGrid").data("kendoGrid");
@@ -2743,10 +2308,10 @@
                         sourceLabel = appConfig.sourceLabel2;
                         if (self.compareFeature === null) {
                             colSpan = 4;
-                            rowSpan = 25;
+                            rowSpan = 11;
                         } else {
                             colSpan = 6;
-                            rowSpan = 18;
+                            rowSpan = 8;
                         }
                     } else if (exportButtonId === "demCensusExportSelFeatResults") {
                         //Block group export clicked
@@ -2781,18 +2346,54 @@
                         var columns = e.workbook.sheets[0].columns;
                         columns[1].width = 290;
                         if (exportButtonId !== "demCensusExportSelFeatResults" && exportButtonId !== "demACSExportSelFeatResults" && exportButtonId !== "title6ExportResults") {
-                            $.each(rows, function(index, row) {
-                                if (row.type === "group-header") {
+                            $.each(rows, function(i, row) {
+                                if (row.type === "header") {
+                                    $.each(row.cells, function(i, cell) {
+                                        cell.background = "#8DB4E2";
+                                        cell.bold = true;
+                                        cell.color = "#000";
+                                    });
+                                } else if (row.type === "group-header") {
                                     row.cells[0].value = row.cells[0].value.substring(37);
+                                    row.cells[0].background = "#000";
+                                    row.cells[0].color = "#fff";
+                                    row.cells[0].bold = true;
                                 } else {
-
-                                    if (row.cells[1].value.indexOf("Male Population") > -1 || row.cells[1].value.indexOf("Female Population") > -1) {
-                                        row.cells[1].value = row.cells[1].value.replace("Male Population", "Male Population:");
-                                        row.cells[1].value = row.cells[1].value.replace("Female Population", "Female Population:");
-                                        $.each(row.cells, function(i, value) {
-                                            if (i > 0) {
-                                                value.background = "#333";
-                                                value.color = "#fff";
+                                    if (exportButtonId !== "demCensusExportResults") {
+                                        $.each(acsFieldsConfig.fields, function(j, el) {
+                                            if (el.tableHeader === row.cells[1].value) {
+                                                switch (el.indentLevel) {
+                                                    case 1:
+                                                        row.cells[1].formula = row.cells[1].value.replace(el.tableHeader, "=\"   " + el.tableHeader + "\"");
+                                                        break;
+                                                    case 2:
+                                                        row.cells[1].formula = row.cells[1].value.replace(el.tableHeader, "=\"      " + el.tableHeader + "\"");
+                                                        break;
+                                                    case 3:
+                                                        row.cells[1].formula = row.cells[1].value.replace(el.tableHeader, "=\"         " + el.tableHeader + "\"");
+                                                        break;
+                                                }
+                                                if (el.universeField == 1) {
+                                                    row.cells[0].value = row.cells[1].value;
+                                                    row.cells[0].colSpan = 2;
+                                                    row.cells.splice(1, 1);
+                                                    $.each(row.cells, function(i, cell) {
+                                                        cell.background = "#8DB4E2";
+                                                        cell.italic = true;
+                                                        cell.bold = true;
+                                                    });
+                                                } else if (el.universeField == 2) {
+                                                    $.each(row.cells, function(i, cell) {
+                                                        if (i > 0) {
+                                                            cell.background = "#D9D9D9";
+                                                            cell.bold = true;
+                                                        }
+                                                        if (i > 1) {
+                                                            cell.value = "";
+                                                        }
+                                                    });
+                                                }
+                                                return false;
                                             }
                                         });
                                     }
@@ -2804,6 +2405,7 @@
                                 }
                             });
                         }
+
 
                         e.workbook.sheets[0]["name"] = "Demographic Data";
                         e.workbook.sheets[0]["frozenRows"] = 2;
@@ -2887,7 +2489,9 @@
                         }
 
                         e.workbook.fileName = fileName;
+
                     });
+
                     grid.saveAsExcel();
                     grid.unbind("excelExport");
                 };
