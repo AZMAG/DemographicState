@@ -57,8 +57,9 @@ var appConfig = new function() {
 
     this.layerInfo = [{
         layerNum: 0,
+        drawOrder:  0,
         id: "censusTracts",
-        title: "Census Tract Labels",
+        title: "Census Tracts",
         type: "dynamic",
         url: this.mainURL,
         queryUrl: this.mainURL + "/18",
@@ -70,6 +71,7 @@ var appConfig = new function() {
         link: false
     }, {
         layerNum: 1,
+        drawOrder:  2,
         id: "cogBoundaries",
         title: "COG / MPO Boundaries",
         type: "feature",
@@ -77,7 +79,7 @@ var appConfig = new function() {
         queryUrl: this.mainURL + "/2",
         queryWhere: "1=1",
         layers: [2],
-        opacity: .6,
+        opacity: .7,
         visible: false,
         selectable: true,
         outFields: ["*"],
@@ -86,6 +88,7 @@ var appConfig = new function() {
         link: true
     }, {
         layerNum: 2,
+        drawOrder:  1,
         id: "countyBoundaries",
         title: "County Boundaries",
         type: "feature",
@@ -102,6 +105,7 @@ var appConfig = new function() {
         link: true
     }, {
         layerNum: 3,
+        drawOrder:  3,
         id: "congressionalDistricts",
         title: "Congressional Districts",
         type: "feature",
@@ -118,6 +122,7 @@ var appConfig = new function() {
         link: true
     }, {
         layerNum: 4,
+        drawOrder:  4,
         id: "legislativeDistricts",
         title: "Legislative Districts",
         type: "feature",
@@ -134,6 +139,7 @@ var appConfig = new function() {
         link: true
     }, {
         layerNum: 5,
+        drawOrder:  5,
         id: "zipCodes",
         title: "ZIP Codes",
         type: "feature",
@@ -150,6 +156,7 @@ var appConfig = new function() {
         link: true
     }, {
         layerNum: 6,
+        drawOrder:  6,
         id: "esriReference",
         title: "Streets",
         type: "tile",
@@ -158,6 +165,7 @@ var appConfig = new function() {
         showTOC: true
     }, {
         layerNum: 7,
+        drawOrder:  7,
         id: "ACS2015byBlockGroup",
         title: "American Community Survey by Block Group, 2011-2015 5yr",
         type: "dynamic",
@@ -170,6 +178,7 @@ var appConfig = new function() {
         populateDropDown: false
     }, {
         layerNum: 8,
+        drawOrder:  8,
         id: "esriBasemap",
         title: "Terrain",
         type: "tile",
@@ -182,6 +191,7 @@ var appConfig = new function() {
         showTOC: false
     }, {
         layerNum: 9,
+        drawOrder:  9,
         id: "esriImagery",
         title: "Imagery",
         type: "tile",

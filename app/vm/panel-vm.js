@@ -21,9 +21,10 @@
             "app/vm/demographic-vm",
             "app/config/demographicConfig",
             "app/vm/interactiveTools-vm",
+            "app/vm/legend-vm",
             "app/vm/queryBuilder-vm"
         ],
-        function(dj, dc, tp, dom, mapModel, helpView, helpVM, view, layerDelegate, demographicVM, demographicConfig, interactiveToolsVM, qbVM) {
+        function(dj, dc, tp, dom, mapModel, helpView, helpVM, view, layerDelegate, demographicVM, demographicConfig, interactiveToolsVM, legendVM, qbVM) {
 
             var PanelVM = new function() {
 
@@ -281,19 +282,33 @@
 
                     if ($choiceDiv.is(":hidden")) {
                         $choiceDiv.show();
+
                         self.hideChoices(selector);
+                        
                         self.hideLayers(layerID);
+
                         if (layer !== null && layer.visible === false && boxChecked === false) {
-                            layer.show();
                             dom.byId("c" + layerID).checked = true;
+                            
+                            //layer.show();
+                            //dom.byId("c" + layerID).checked = true;
                         }
+                        legendVM.updateLegendLayers(layerID);
                     } else {
                         $choiceDiv.hide();
+                        legendVM.updateLegendLayers(layerID);
                         self.hideLayers(layerID);
                         if (layer !== null && layer.visible === true && boxChecked === true) {
-                            layer.hide();
                             dom.byId("c" + layerID).checked = false;
+                            //legendVM.updateLegendLayers(layerID);
+                            layer.hide();
                         }
+                    }
+                    if (type === "cog") {
+                        var countyId = "countyBoundaries";
+                        var countyLayer = mapModel.mapInstance.getLayer(countyId);
+                        countyLayer.show();
+                        dom.byId("c" + countyId).checked = true;
                     }
                 };
 

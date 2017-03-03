@@ -255,6 +255,11 @@
                     // adding loading icon. vw
                     esri.show(dojo.byId("loading"));
 
+                    $("#demACSSummaryOptionsRow").hide();
+                    $("#demACSDataGrid").hide();
+                    //$("#demTabStrip").css("visibility", "hidden");
+                    $("#reportLoading").show();
+
                     var censusUrl = demographicConfig.reports.censusTracts.censusRestUrl;
                     var censusCallback = demographicVM.interactiveSelectionQueryHandler;
                     var acsUrl = demographicConfig.reports.censusTracts.ACSRestUrl;

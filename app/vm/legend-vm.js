@@ -188,7 +188,6 @@
                                         var baseLayer = mapModel.mapInstance.getLayer("esriBasemap");
                                         baseLayer.hide();
                                     }
-
                                 }
                             }
 
@@ -234,6 +233,8 @@
                     var baseLayer = mapModel.mapInstance.getLayer("esriBasemap");
                     (layer.visible) ? layer.hide(): layer.show();
 
+                    //self.cleanupLegends();
+
                     if (layer.id === "esriImagery") {
                         if (layer.visible === true) {
                             baseLayer.hide();
@@ -242,6 +243,9 @@
 
                     if (layer.id === "countyBoundaries") {
                         if (layer.visible === true) {
+                            if (self.countyLegend) {
+                                self.countyLegend.destroy();
+                            }
                             self.CountyLegend();
                             bookmarkDelegate.legendLayerOptions.remove("c" + layerId);
                         } else {
@@ -249,10 +253,12 @@
                             if (self.countyLegend) {
                                 self.countyLegend.destroy();
                             }
-
                         }
                     } else if (layer.id === "congressionalDistricts") {
                         if (layer.visible === true) {
+                            if (self.congressionalLegend) {
+                                self.congressionalLegend.destroy();
+                            }
                             self.CongressionalLegend();
                             bookmarkDelegate.legendLayerOptions.remove("c" + layerId);
                         } else {
@@ -263,6 +269,9 @@
                         }
                     } else if (layer.id === "legislativeDistricts") {
                         if (layer.visible === true) {
+                            if (self.legislativeLegend) {
+                                self.legislativeLegend.destroy();
+                            }
                             self.LegislativeLegend();
                             bookmarkDelegate.legendLayerOptions.remove("c" + layerId);
                         } else {
@@ -273,7 +282,18 @@
                         }
                     } else if (layer.id === "cogBoundaries") {
                         if (layer.visible === true) {
+                            if (self.cogLegend) {
+                                self.cogLegend.destroy();
+                            }
+                            if (self.countyLegend) {
+                                self.countyLegend.destroy();
+                            }
                             self.CogLegend();
+                            self.CountyLegend();
+                            var countyId = "countyBoundaries";
+                            var countyLayer = mapModel.mapInstance.getLayer(countyId);
+                            countyLayer.show();
+                            dom.byId("c" + countyId).checked = true;
                             bookmarkDelegate.legendLayerOptions.remove("c" + layerId);
                         } else {
                             bookmarkDelegate.legendLayerOptions.push("c" + layerId);
@@ -287,9 +307,7 @@
 
                 self.onCheckBoxClick = function(e) {
                     var layerId = e.currentTarget.id.substr(1);
-
                     self.updateLegendLayers(layerId);
-
                 };
 
                 //Supervisor Legend
@@ -333,7 +351,7 @@
                             layer: mapModel.mapInstance.getLayer("legislativeDistricts"),
                             title: "Legislative Districts"
                         }],
-                        autoUpdate: true
+                        autoUpdate: false
                     }, dc.create("div", {
                         id: "legendDiv5"
                     }, insertElement, "after"));
@@ -348,7 +366,7 @@
                             layer: mapModel.mapInstance.getLayer("cogBoundaries"),
                             title: "COG / MPO boundaries"
                         }],
-                        autoUpdate: true
+                        autoUpdate: false
                     }, dc.create("div", {
                         id: "legendDiv6"
                     }, insertElement, "after"));
@@ -389,13 +407,6 @@
                                 baseLayer.hide();
                             }
                         });
-                    }
-                };
-
-                self.updateMultipleMapLegend = function() {
-
-                    if (mapModel.mapInstance.id) {
-
                     }
                 };
 

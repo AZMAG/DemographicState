@@ -1,0 +1,6876 @@
+{
+  "sources": {
+    "esri": {
+      "url": "https:\/\/basemaps.arcgis.com\/b2\/arcgis\/rest\/services\/World_Basemap\/VectorTileServer",
+      "type": "vector"
+    }
+  },
+  "layers": [
+    // {
+    //   "minzoom": 13,
+    //   "source": "esri",
+    //   "source-layer": "Transportation",
+    //   "layout": {
+        
+    //   },
+    //   "type": "fill",
+    //   "paint": {
+    //     "fill-color": "#3A3C45"
+    //   },
+    //   "id": "Transportation"
+    // },
+    {
+      "minzoom": 13,
+      "source": "esri",
+      "source-layer": "Freight",
+      "layout": {
+        
+      },
+      "type": "fill",
+      "paint": {
+        "fill-color": "#3A3C45"
+      },
+      "id": "Freight"
+    },
+    {
+      "source": "esri",
+      "source-layer": "Port",
+      "layout": {
+        
+      },
+      "type": "fill",
+      "paint": {
+        "fill-color": "#3A3C45"
+      },
+      "id": "Port"
+    },
+    {
+      "minzoom": 13,
+      "source": "esri",
+      "source-layer": "Industry",
+      "layout": {
+        
+      },
+      "type": "fill",
+      "paint": {
+        "fill-color": "#3A3C45"
+      },
+      "id": "Industry"
+    },
+    {
+      "minzoom": 1,
+      "source": "esri",
+      "maxzoom": 5,
+      "source-layer": "Water area small scale",
+      "layout": {
+        
+      },
+      "type": "fill",
+      "paint": {
+        "fill-color": "#000F1A"
+      },
+      "id": "Water area small scale"
+    },
+    {
+      "minzoom": 12,
+      "source": "esri",
+      "source-layer": "Water area",
+      "layout": {
+        
+      },
+      "type": "fill",
+      "paint": {
+        "fill-pattern": "Water area\/Playa"
+      },
+      "id": "Water area\/Playa",
+      "filter": [
+        "==",
+        "_symbol",
+        1
+      ]
+    },
+    {
+      "minzoom": 12,
+      "source": "esri",
+      "source-layer": "Water area",
+      "layout": {
+        
+      },
+      "type": "fill",
+      "paint": {
+        "fill-color": "#000F1A"
+      },
+      "id": "Water area\/Dam or weir",
+      "filter": [
+        "==",
+        "_symbol",
+        5
+      ]
+    },
+    {
+      "minzoom": 11,
+      "source": "esri",
+      "source-layer": "Water area",
+      "layout": {
+        
+      },
+      "type": "fill",
+      "paint": {
+        "fill-color": "#000F1A"
+      },
+      "id": "Water area\/Lake, river or bay",
+      "filter": [
+        "==",
+        "_symbol",
+        7
+      ]
+    },
+    {
+      "minzoom": 11,
+      "source": "esri",
+      "source-layer": "Water area",
+      "layout": {
+        
+      },
+      "type": "fill",
+      "paint": {
+        "fill-pattern": "Water area\/Lake or river intermittent"
+      },
+      "id": "Water area\/Lake or river intermittent",
+      "filter": [
+        "==",
+        "_symbol",
+        6
+      ]
+    },
+    {
+      "minzoom": 11,
+      "source": "esri",
+      "source-layer": "Water area",
+      "layout": {
+        
+      },
+      "type": "fill",
+      "paint": {
+        "fill-pattern": "Water area\/Ice mass"
+      },
+      "id": "Water area\/Ice mass",
+      "filter": [
+        "==",
+        "_symbol",
+        2
+      ]
+    },
+    {
+      "minzoom": 11,
+      "source": "esri",
+      "source-layer": "Water area",
+      "layout": {
+        
+      },
+      "type": "fill",
+      "paint": {
+        "fill-pattern": "Water area\/Swamp or marsh"
+      },
+      "id": "Water area\/Swamp or marsh",
+      "filter": [
+        "==",
+        "_symbol",
+        3
+      ]
+    },
+    {
+      "minzoom": 7,
+      "source": "esri",
+      "maxzoom": 11,
+      "source-layer": "Water line large scale",
+      "layout": {
+        "line-join": "round"
+      },
+      "type": "line",
+      "paint": {
+        "line-width": {
+          "base": 1.2,
+          "stops": [
+            [
+              7,
+              1
+            ],
+            [
+              11,
+              1.33
+            ]
+          ]
+        },
+        "line-color": "#000F23"
+      },
+      "id": "Water line large scale"
+    },
+    {
+      "minzoom": 5,
+      "source": "esri",
+      "maxzoom": 7,
+      "source-layer": "Water line medium scale",
+      "layout": {
+        "line-join": "round"
+      },
+      "type": "line",
+      "paint": {
+        "line-width": {
+          "base": 1.2,
+          "stops": [
+            [
+              5,
+              0.5
+            ],
+            [
+              7,
+              1.33
+            ]
+          ]
+        },
+        "line-color": "#000F23"
+      },
+      "id": "Water line medium scale"
+    },
+    {
+      "minzoom": 3,
+      "source": "esri",
+      "maxzoom": 5,
+      "source-layer": "Water line small scale",
+      "layout": {
+        "line-join": "round"
+      },
+      "type": "line",
+      "paint": {
+        "line-width": {
+          "base": 1.2,
+          "stops": [
+            [
+              1,
+              0.5
+            ],
+            [
+              5,
+              1.33
+            ]
+          ]
+        },
+        "line-color": "#000F23"
+      },
+      "id": "Water line small scale"
+    },
+    {
+      "minzoom": 11,
+      "source": "esri",
+      "source-layer": "Water line",
+      "layout": {
+        "line-join": "round"
+      },
+      "type": "line",
+      "paint": {
+        "line-width": {
+          "base": 1.2,
+          "stops": [
+            [
+              11,
+              1
+            ],
+            [
+              14,
+              1.3333
+            ],
+            [
+              17,
+              2
+            ]
+          ]
+        },
+        "line-dasharray": [
+          10.5,
+          1.75
+        ],
+        "line-color": "#000F23"
+      },
+      "id": "Water line\/Stream or river intermittent",
+      "filter": [
+        "==",
+        "_symbol",
+        4
+      ]
+    },
+    {
+      "minzoom": 11,
+      "source": "esri",
+      "source-layer": "Water line",
+      "layout": {
+        "line-join": "round",
+        "line-cap": "round"
+      },
+      "type": "line",
+      "paint": {
+        "line-width": {
+          "base": 1.2,
+          "stops": [
+            [
+              11,
+              1
+            ],
+            [
+              14,
+              1.3333
+            ],
+            [
+              17,
+              2.66667
+            ]
+          ]
+        },
+        "line-color": "#000F23"
+      },
+      "id": "Water line\/Stream river or canal",
+      "filter": [
+        "in",
+        "_symbol",
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "minzoom": 15,
+      "source": "esri",
+      "source-layer": "Special area of interest",
+      "layout": {
+        
+      },
+      "type": "fill",
+      "paint": {
+        "fill-color": "#55554C"
+      },
+      "id": "Special area of interest\/Field or track",
+      "filter": [
+        "in",
+        "_symbol",
+        0,
+        1,
+        4
+      ]
+    },
+    {
+      "minzoom": 15,
+      "source": "esri",
+      "source-layer": "Special area of interest",
+      "layout": {
+        
+      },
+      "type": "fill",
+      "paint": {
+        "fill-color": "#55554C"
+      },
+      "id": "Special area of interest\/Hardcourt",
+      "filter": [
+        "==",
+        "_symbol",
+        10
+      ]
+    },
+    {
+      "minzoom": 15,
+      "source": "esri",
+      "source-layer": "Special area of interest",
+      "layout": {
+        
+      },
+      "type": "fill",
+      "paint": {
+        "fill-color": "#2a2a28"
+      },
+      "id": "Special area of interest\/Sand",
+      "filter": [
+        "==",
+        "_symbol",
+        6
+      ]
+    },
+    {
+      "minzoom": 17,
+      "source": "esri",
+      "source-layer": "Special area of interest",
+      "layout": {
+        
+      },
+      "type": "fill",
+      "paint": {
+        "fill-color": "#55554C"
+      },
+      "id": "Special area of interest\/Garden path",
+      "filter": [
+        "==",
+        "_symbol",
+        12
+      ]
+    },
+    {
+      "minzoom": 17,
+      "source": "esri",
+      "source-layer": "Special area of interest",
+      "layout": {
+        
+      },
+      "type": "fill",
+      "paint": {
+        "fill-color": "#44464F"
+      },
+      "id": "Special area of interest\/Parking",
+      "filter": [
+        "==",
+        "_symbol",
+        15
+      ]
+    },
+    {
+      "minzoom": 17,
+      "source": "esri",
+      "source-layer": "Special area of interest",
+      "layout": {
+        
+      },
+      "type": "fill",
+      "paint": {
+        "fill-color": "#55554C"
+      },
+      "id": "Special area of interest\/Bike, walk or pedestrian",
+      "filter": [
+        "==",
+        "_symbol",
+        2
+      ]
+    },
+    {
+      "minzoom": 15,
+      "source": "esri",
+      "source-layer": "Building",
+      "layout": {
+        
+      },
+      "type": "fill",
+      "paint": {
+        "fill-outline-color": "#515461",
+        "fill-color": "#373845"
+      },
+      "id": "Building\/General"
+    },
+    {
+      "minzoom": 17,
+      "source": "esri",
+      "source-layer": "Special area of interest line",
+      "layout": {
+        "line-join": "round",
+        "line-cap": "round"
+      },
+      "type": "line",
+      "paint": {
+        "line-width": 0.75,
+        "line-color": "#626153"
+      },
+      "id": "Special area of interest line\/Dock or pier",
+      "filter": [
+        "==",
+        "_symbol",
+        0
+      ]
+    },
+    {
+      "minzoom": 16,
+      "source": "esri",
+      "source-layer": "Boundary line",
+      "layout": {
+        "line-join": "round"
+      },
+      "type": "line",
+      "paint": {
+        "line-width": 1.2,
+        "line-dasharray": [
+          6,
+          3
+        ],
+        "line-color": "#847689"
+      },
+      "id": "Boundary line\/Disputed admin3\/4\/5",
+      "filter": [
+        "in",
+        "_symbol",
+        9,
+        10,
+        11
+      ]
+    },
+    {
+      "minzoom": 10,
+      "source": "esri",
+      "source-layer": "Boundary line",
+      "layout": {
+        "line-join": "round"
+      },
+      "type": "line",
+      "paint": {
+        "line-width": {
+          "base": 1.2,
+          "stops": [
+            [
+              10,
+              1.33
+            ],
+            [
+              14,
+              1.6
+            ],
+            [
+              17,
+              1.6
+            ]
+          ]
+        },
+        "line-dasharray": [
+          6,
+          3
+        ],
+        "line-color": "#847689"
+      },
+      "id": "Boundary line\/Disputed admin2",
+      "filter": [
+        "in",
+        "_symbol",
+        8
+      ]
+    },
+    {
+      "minzoom": 3,
+      "source": "esri",
+      "source-layer": "Boundary line",
+      "layout": {
+        "line-join": "round"
+      },
+      "type": "line",
+      "paint": {
+        "line-width": {
+          "base": 1.2,
+          "stops": [
+            [
+              10,
+              1.33
+            ],
+            [
+              14,
+              1.6
+            ],
+            [
+              17,
+              1.6
+            ]
+          ]
+        },
+        "line-dasharray": [
+          6,
+          3
+        ],
+        "line-color": "#847689"
+      },
+      "id": "Boundary line\/Disputed admin1",
+      "filter": [
+        "==",
+        "_symbol",
+        7
+      ]
+    },
+    {
+      "minzoom": 2,
+      "source": "esri",
+      "source-layer": "Boundary line",
+      "layout": {
+        "line-join": "round"
+      },
+      "type": "line",
+      "paint": {
+        "line-width": {
+          "base": 1.2,
+          "stops": [
+            [
+              10,
+              1.33
+            ],
+            [
+              14,
+              1.6
+            ],
+            [
+              17,
+              1.6
+            ]
+          ]
+        },
+        "line-dasharray": [
+          6,
+          3
+        ],
+        "line-color": "#847689"
+      },
+      "id": "Boundary line\/Disputed admin0",
+      "filter": [
+        "!in",
+        "DisputeID",
+        80,
+        0
+      ]
+    },
+    {
+      "minzoom": 16,
+      "source": "esri",
+      "source-layer": "Boundary line",
+      "layout": {
+        "line-join": "round",
+        "line-cap": "round"
+      },
+      "type": "line",
+      "paint": {
+        "line-width": {
+          "base": 1.2,
+          "stops": [
+            [
+              14,
+              1.33
+            ],
+            [
+              17,
+              1.33
+            ]
+          ]
+        },
+        "line-dasharray": [
+          6.5,
+          4
+        ],
+        "line-color": "#7e5c8c"
+      },
+      "id": "Boundary line\/Admin3\/4\/5",
+      "filter": [
+        "in",
+        "_symbol",
+        3,
+        4,
+        5
+      ]
+    },
+    {
+      "minzoom": 8,
+      "source": "esri",
+      "source-layer": "Boundary line",
+      "layout": {
+        "line-join": "round",
+        "line-cap": "round"
+      },
+      "type": "line",
+      "paint": {
+        "line-width": {
+          "base": 1.2,
+          "stops": [
+            [
+              8,
+              1.33
+            ],
+            [
+              14,
+              2.7
+            ],
+            [
+              17,
+              2.7
+            ]
+          ]
+        },
+        "line-color": "#2a2a28"
+      },
+      "id": "Boundary line\/Admin2\/1",
+      "filter": [
+        "==",
+        "_symbol",
+        2
+      ]
+    },
+    {
+      "minzoom": 4,
+      "source": "esri",
+      "source-layer": "Boundary line",
+      "layout": {
+        "line-join": "round",
+        "line-cap": "round"
+      },
+      "type": "line",
+      "paint": {
+        "line-width": {
+          "base": 1.2,
+          "stops": [
+            [
+              4,
+              1.33
+            ],
+            [
+              8,
+              5
+            ],
+            [
+              14,
+              8
+            ],
+            [
+              17,
+              8
+            ]
+          ]
+        },
+        "line-color": "#13111A"
+      },
+      "id": "Boundary line\/Admin1\/1",
+      "filter": [
+        "==",
+        "_symbol",
+        1
+      ]
+    },
+    {
+      "minzoom": 4,
+      "source": "esri",
+      "source-layer": "Boundary line",
+      "layout": {
+        "line-join": "round",
+        "line-cap": "round"
+      },
+      "type": "line",
+      "paint": {
+        "line-width": {
+          "base": 1.2,
+          "stops": [
+            [
+              4,
+              4.33
+            ],
+            [
+              14,
+              9.33
+            ],
+            [
+              17,
+              9.33
+            ]
+          ]
+        },
+        "line-color": "#000000"
+      },
+      "id": "Boundary line\/Admin0\/1",
+      "filter": [
+        "==",
+        "_symbol",
+        0
+      ]
+    },
+    {
+      "minzoom": 8,
+      "source": "esri",
+      "source-layer": "Boundary line",
+      "layout": {
+        "line-join": "round"
+      },
+      "type": "line",
+      "paint": {
+        "line-width": {
+          "base": 1.2,
+          "stops": [
+            [
+              8,
+              0.5
+            ],
+            [
+              14,
+              1.33
+            ],
+            [
+              17,
+              1.33
+            ]
+          ]
+        },
+        "line-dasharray": [
+          8,
+          7
+        ],
+        "line-color": "#7E5C8C"
+      },
+      "id": "Boundary line\/Admin2\/0",
+      "filter": [
+        "==",
+        "_symbol",
+        2
+      ]
+    },
+    {
+      "minzoom": 4,
+      "source": "esri",
+      "source-layer": "Boundary line",
+      "layout": {
+        "line-join": "round",
+        "line-cap": "round"
+      },
+      "type": "line",
+      "paint": {
+        "line-width": {
+          "base": 1.2,
+          "stops": [
+            [
+              5,
+              1
+            ],
+            [
+              14,
+              1.33
+            ],
+            [
+              17,
+              1.33
+            ]
+          ]
+        },
+        "line-color": {
+          "stops": [
+            [
+              4,
+              "#5a5066"
+            ],
+            [
+              8,
+              "#726480"
+            ]
+          ]
+        }
+      },
+      "id": "Boundary line\/Admin1\/0",
+      "filter": [
+        "==",
+        "_symbol",
+        1
+      ]
+    },
+    {
+      "minzoom": 1,
+      "source": "esri",
+      "source-layer": "Boundary line",
+      "layout": {
+        "line-join": "round",
+        "line-cap": "round"
+      },
+      "type": "line",
+      "paint": {
+        "line-width": {
+          "base": 1.2,
+          "stops": [
+            [
+              1,
+              0.75
+            ],
+            [
+              8,
+              1.5
+            ],
+            [
+              17,
+              2
+            ]
+          ]
+        },
+        "line-color": {
+          "stops": [
+            [
+              1,
+              "#716480"
+            ],
+            [
+              5,
+              "#887899"
+            ],
+            [
+              8,
+              "#9f8cb3"
+            ]
+          ]
+        }
+      },
+      "id": "Boundary line\/Admin0\/0",
+      "filter": [
+        "==",
+        "_symbol",
+        0
+      ]
+    },
+    {
+      "minzoom": 12,
+      "source": "esri",
+      "source-layer": "Railroad",
+      "layout": {
+        "line-join": "round"
+      },
+      "type": "line",
+      "paint": {
+        "line-width": 3.33,
+        "line-color": "#506880"
+      },
+      "id": "Railroad\/2"
+    },
+    {
+      "minzoom": 12,
+      "source": "esri",
+      "source-layer": "Railroad",
+      "layout": {
+        "line-join": "round"
+      },
+      "type": "line",
+      "paint": {
+        "line-width": 1.33,
+        "line-color": "#28282A"
+      },
+      "id": "Railroad\/1"
+    },
+    {
+      "minzoom": 15,
+      "source": "esri",
+      "source-layer": "Trail or path",
+      "layout": {
+        "line-join": "round",
+        "line-cap": "round"
+      },
+      "type": "line",
+      "paint": {
+        "line-width": 2,
+        "line-color": "#6B6B60"
+      },
+      "id": "Trail or path"
+    },
+    {
+      "minzoom": 11,
+      "source": "esri",
+      "source-layer": "Ferry",
+      "layout": {
+        "line-join": "round"
+      },
+      "type": "line",
+      "paint": {
+        "line-width": {
+          "base": 1.2,
+          "stops": [
+            [
+              11,
+              1.33
+            ],
+            [
+              14,
+              1.5
+            ],
+            [
+              17,
+              1.5
+            ]
+          ]
+        },
+        "line-dasharray": [
+          6,
+          3
+        ],
+        "line-color": "#1D4391"
+      },
+      "id": "Ferry\/Ferry",
+      "filter": [
+        "==",
+        "_symbol",
+        0
+      ]
+    },
+    {
+      "minzoom": 11,
+      "source": "esri",
+      "source-layer": "Ferry",
+      "layout": {
+        "line-join": "round"
+      },
+      "type": "line",
+      "paint": {
+        "line-width": 3.33,
+        "line-color": "#506880"
+      },
+      "id": "Ferry\/Rail ferry\/2",
+      "filter": [
+        "==",
+        "_symbol",
+        1
+      ]
+    },
+    {
+      "minzoom": 11,
+      "source": "esri",
+      "source-layer": "Ferry",
+      "layout": {
+        "line-join": "round"
+      },
+      "type": "line",
+      "paint": {
+        "line-width": 1.33,
+        "line-color": "#28282A"
+      },
+      "id": "Ferry\/Rail ferry\/1",
+      "filter": [
+        "==",
+        "_symbol",
+        1
+      ]
+    },
+    {
+      "minzoom": 15,
+      "source": "esri",
+      "source-layer": "Road",
+      "layout": {
+        "line-join": "round",
+        "line-cap": "round"
+      },
+      "type": "line",
+      "paint": {
+        "line-width": {
+          "base": 1.2,
+          "stops": [
+            [
+              14,
+              1.6
+            ],
+            [
+              17,
+              2.6
+            ]
+          ]
+        },
+        "line-color": "#55554C"
+      },
+      "id": "Road\/Pedestrian",
+      "filter": [
+        "==",
+        "_symbol",
+        9
+      ]
+    },
+    {
+      "minzoom": 13,
+      "source": "esri",
+      "source-layer": "Road",
+      "layout": {
+        "line-join": "round"
+      },
+      "type": "line",
+      "paint": {
+        "line-width": {
+          "base": 1.2,
+          "stops": [
+            [
+              12,
+              1.33
+            ],
+            [
+              14,
+              2
+            ],
+            [
+              17,
+              4
+            ]
+          ]
+        },
+        "line-dasharray": [
+          6,
+          3
+        ],
+        "line-color": "#30588D"
+      },
+      "id": "Road\/4WD\/1",
+      "filter": [
+        "==",
+        "_symbol",
+        10
+      ]
+    },
+    {
+      "minzoom": 12,
+      "source": "esri",
+      "source-layer": "Road",
+      "layout": {
+        "line-join": "round"
+      },
+      "type": "line",
+      "paint": {
+        "line-width": {
+          "base": 1.2,
+          "stops": [
+            [
+              12,
+              1.5
+            ],
+            [
+              14,
+              4.5
+            ],
+            [
+              17,
+              8.5
+            ]
+          ]
+        },
+        "line-color": "#30588D"
+      },
+      "id": "Road\/Local\/1",
+      "filter": [
+        "==",
+        "_symbol",
+        7
+      ]
+    },
+    {
+      "minzoom": 15,
+      "source": "esri",
+      "source-layer": "Road",
+      "layout": {
+        "line-join": "round"
+      },
+      "type": "line",
+      "paint": {
+        "line-width": {
+          "base": 1.2,
+          "stops": [
+            [
+              14,
+              1.5
+            ],
+            [
+              17,
+              4.5
+            ]
+          ]
+        },
+        "line-color": "#30588d"
+      },
+      "id": "Road\/Service\/1",
+      "filter": [
+        "==",
+        "_symbol",
+        8
+      ]
+    },
+    {
+      "minzoom": 13,
+      "source": "esri",
+      "source-layer": "Road",
+      "layout": {
+        "line-join": "round"
+      },
+      "type": "line",
+      "paint": {
+        "line-width": {
+          "base": 1.2,
+          "stops": [
+            [
+              11,
+              0.75
+            ],
+            [
+              14,
+              1
+            ],
+            [
+              17,
+              2
+            ]
+          ]
+        },
+        "line-color": "#152d4d"
+      },
+      "id": "Road\/4WD\/0",
+      "filter": [
+        "==",
+        "_symbol",
+        10
+      ]
+    },
+    {
+      "minzoom": 12,
+      "source": "esri",
+      "source-layer": "Road",
+      "layout": {
+        "line-join": "round"
+      },
+      "type": "line",
+      "paint": {
+        "line-width": {
+          "base": 1.2,
+          "stops": [
+            [
+              11,
+              0.75
+            ],
+            [
+              14,
+              2.5
+            ],
+            [
+              17,
+              4
+            ]
+          ]
+        },
+        "line-color": "#152d4d"
+      },
+      "id": "Road\/Local\/0",
+      "filter": [
+        "==",
+        "_symbol",
+        7
+      ]
+    },
+    {
+      "minzoom": 13,
+      "source": "esri",
+      "source-layer": "Road",
+      "layout": {
+        "line-join": "round"
+      },
+      "type": "line",
+      "paint": {
+        "line-width": {
+          "base": 1.2,
+          "stops": [
+            [
+              11,
+              0.75
+            ],
+            [
+              14,
+              1.33
+            ],
+            [
+              17,
+              2.33
+            ]
+          ]
+        },
+        "line-color": "#404759"
+      },
+      "id": "Road\/Service\/0",
+      "filter": [
+        "==",
+        "_symbol",
+        8
+      ]
+    },
+    {
+      "minzoom": 12,
+      "source": "esri",
+      "source-layer": "Road",
+      "layout": {
+        "line-join": "round"
+      },
+      "type": "line",
+      "paint": {
+        "line-width": {
+          "base": 1.2,
+          "stops": [
+            [
+              10,
+              1.5
+            ],
+            [
+              14,
+              4.5
+            ],
+            [
+              17,
+              8.5
+            ]
+          ]
+        },
+        "line-color": "#316ab3"
+      },
+      "id": "Road\/Minor\/1",
+      "filter": [
+        "in",
+        "_symbol",
+        5,
+        6
+      ]
+    },
+    {
+      "minzoom": 12,
+      "source": "esri",
+      "source-layer": "Road",
+      "layout": {
+        "line-join": "round"
+      },
+      "type": "line",
+      "paint": {
+        "line-width": {
+          "base": 1.2,
+          "stops": [
+            [
+              10,
+              1.5
+            ],
+            [
+              14,
+              7.33
+            ],
+            [
+              17,
+              14.33
+            ]
+          ]
+        },
+        "line-color": "#4697ff"
+      },
+      "id": "Road\/Major\/1",
+      "filter": [
+        "==",
+        "_symbol",
+        3
+      ]
+    },
+    {
+      "minzoom": 12,
+      "source": "esri",
+      "source-layer": "Road",
+      "layout": {
+        "line-join": "round"
+      },
+      "type": "line",
+      "paint": {
+        "line-width": {
+          "base": 1.2,
+          "stops": [
+            [
+              9,
+              1.5
+            ],
+            [
+              14,
+              4.7
+            ],
+            [
+              17,
+              7.7
+            ]
+          ]
+        },
+        "line-color": "#4697ff"
+      },
+      "id": "Road\/Major, ramp or traffic circle\/1",
+      "filter": [
+        "==",
+        "_symbol",
+        4
+      ]
+    },
+    {
+      "minzoom": 9,
+      "source": "esri",
+      "source-layer": "Road",
+      "layout": {
+        "line-join": "round"
+      },
+      "type": "line",
+      "paint": {
+        "line-width": {
+          "base": 1.2,
+          "stops": [
+            [
+              9,
+              1.5
+            ],
+            [
+              14,
+              4.7
+            ],
+            [
+              17,
+              8.2
+            ]
+          ]
+        },
+        "line-color": "#4697ff"
+      },
+      "id": "Road\/Freeway Motorway Highway, ramp or traffic circle\/1",
+      "filter": [
+        "==",
+        "_symbol",
+        2
+      ]
+    },
+    {
+      "minzoom": 9,
+      "source": "esri",
+      "source-layer": "Road",
+      "layout": {
+        "line-join": "round",
+        "line-cap": "round"
+      },
+      "type": "line",
+      "paint": {
+        "line-width": {
+          "base": 1.2,
+          "stops": [
+            [
+              9,
+              0.5
+            ],
+            [
+              14,
+              2.5
+            ],
+            [
+              17,
+              4.5
+            ]
+          ]
+        },
+        "line-color": "#1e4678"
+      },
+      "id": "Road\/Minor\/0",
+      "filter": [
+        "in",
+        "_symbol",
+        5,
+        6
+      ]
+    },
+    {
+      "minzoom": 8,
+      "source": "esri",
+      "source-layer": "Road",
+      "layout": {
+        "line-join": "round",
+        "line-cap": "round"
+      },
+      "type": "line",
+      "paint": {
+        "line-width": {
+          "base": 1.2,
+          "stops": [
+            [
+              8,
+              0.75
+            ],
+            [
+              14,
+              5.33
+            ],
+            [
+              17,
+              10.33
+            ]
+          ]
+        },
+        "line-color": "#26528c"
+      },
+      "id": "Road\/Major\/0",
+      "filter": [
+        "==",
+        "_symbol",
+        3
+      ]
+    },
+    {
+      "minzoom": 7,
+      "source": "esri",
+      "source-layer": "Road",
+      "layout": {
+        "line-join": "round"
+      },
+      "type": "line",
+      "paint": {
+        "line-width": {
+          "base": 1.2,
+          "stops": [
+            [
+              9,
+              1.5
+            ],
+            [
+              14,
+              6.5
+            ],
+            [
+              17,
+              14.3
+            ]
+          ]
+        },
+        "line-color": "#66a8ff"
+      },
+      "id": "Road\/Freeway Motorway\/1",
+      "filter": [
+        "==",
+        "_symbol",
+        0
+      ]
+    },
+    {
+      "minzoom": 7,
+      "source": "esri",
+      "source-layer": "Road",
+      "layout": {
+        "line-join": "round"
+      },
+      "type": "line",
+      "paint": {
+        "line-width": {
+          "base": 1.2,
+          "stops": [
+            [
+              9,
+              1
+            ],
+            [
+              14,
+              6.5
+            ],
+            [
+              17,
+              14.3
+            ]
+          ]
+        },
+        "line-color": "#66a8ff"
+      },
+      "id": "Road\/Highway\/1",
+      "filter": [
+        "==",
+        "_symbol",
+        1
+      ]
+    },
+    {
+      "minzoom": 9,
+      "source": "esri",
+      "source-layer": "Road",
+      "layout": {
+        "line-join": "round",
+        "line-cap": "round"
+      },
+      "type": "line",
+      "paint": {
+        "line-width": {
+          "base": 1.2,
+          "stops": [
+            [
+              9,
+              0.75
+            ],
+            [
+              14,
+              2.7
+            ],
+            [
+              17,
+              4.7
+            ]
+          ]
+        },
+        "line-color": "#26528c"
+      },
+      "id": "Road\/Major, ramp or traffic circle\/0",
+      "filter": [
+        "==",
+        "_symbol",
+        4
+      ]
+    },
+    {
+      "minzoom": 9,
+      "source": "esri",
+      "source-layer": "Road",
+      "layout": {
+        "line-join": "round"
+      },
+      "type": "line",
+      "paint": {
+        "line-width": {
+          "base": 1.2,
+          "stops": [
+            [
+              9,
+              0.75
+            ],
+            [
+              14,
+              2.7
+            ],
+            [
+              17,
+              4.7
+            ]
+          ]
+        },
+        "line-color": "#26528c"
+      },
+      "id": "Road\/Freeway Motorway Highway, ramp or traffic circle\/0",
+      "filter": [
+        "==",
+        "_symbol",
+        2
+      ]
+    },
+    {
+      "minzoom": 6,
+      "source": "esri",
+      "source-layer": "Road",
+      "layout": {
+        "line-join": "round",
+        "line-cap": "round"
+      },
+      "type": "line",
+      "paint": {
+        "line-width": {
+          "base": 1.2,
+          "stops": [
+            [
+              4,
+              0.75
+            ],
+            [
+              14,
+              5.33
+            ],
+            [
+              17,
+              10.33
+            ]
+          ]
+        },
+        "line-color": "#3470bf"
+      },
+      "id": "Road\/Freeway Motorway\/0",
+      "filter": [
+        "==",
+        "_symbol",
+        0
+      ]
+    },
+    {
+      "minzoom": 4,
+      "source": "esri",
+      "maxzoom": 6,
+      "source-layer": "Road",
+      "layout": {
+        "line-join": "round",
+        "line-cap": "round"
+      },
+      "type": "line",
+      "paint": {
+        "line-width": {
+          "base": 1.2,
+          "stops": [
+            [
+              4,
+              0.75
+            ],
+            [
+              14,
+              5.33
+            ],
+            [
+              17,
+              10.33
+            ]
+          ]
+        },
+        "line-color": "#2a4b61"
+      },
+      "id": "Road\/Freeway Motorway\/0\/Small Scale",
+      "filter": [
+        "==",
+        "_symbol",
+        0
+      ]
+    },
+    {
+      "minzoom": 6,
+      "source": "esri",
+      "source-layer": "Road",
+      "layout": {
+        "line-join": "round",
+        "line-cap": "round"
+      },
+      "type": "line",
+      "paint": {
+        "line-width": {
+          "base": 1.2,
+          "stops": [
+            [
+              6,
+              0.75
+            ],
+            [
+              14,
+              4.8
+            ],
+            [
+              17,
+              10.33
+            ]
+          ]
+        },
+        "line-color": {
+          "stops": [
+            [
+              6,
+              "#234b80"
+            ],
+            [
+              8,
+              "#2c5ea0"
+            ],
+            [
+              9,
+              "#3470bf"
+            ]
+          ]
+        }
+      },
+      "id": "Road\/Highway\/0",
+      "filter": [
+        "==",
+        "_symbol",
+        1
+      ]
+    },
+    {
+      "minzoom": 15,
+      "source": "esri",
+      "source-layer": "Road tunnel",
+      "layout": {
+        "line-join": "round",
+        "line-cap": "round"
+      },
+      "type": "line",
+      "paint": {
+        "line-opacity": 0.3,
+        "line-width": {
+          "base": 1.2,
+          "stops": [
+            [
+              14,
+              1.6
+            ],
+            [
+              17,
+              2.6
+            ]
+          ]
+        },
+        "line-color": "#55554C"
+      },
+      "id": "Road Tunnel\/Pedestrian",
+      "filter": [
+        "==",
+        "_symbol",
+        9
+      ]
+    },
+    {
+      "minzoom": 13,
+      "source": "esri",
+      "source-layer": "Road tunnel",
+      "layout": {
+        "line-join": "round"
+      },
+      "type": "line",
+      "paint": {
+        "line-opacity": 0.3,
+        "line-width": {
+          "base": 1.2,
+          "stops": [
+            [
+              12,
+              1.33
+            ],
+            [
+              14,
+              2
+            ],
+            [
+              17,
+              4
+            ]
+          ]
+        },
+        "line-dasharray": [
+          6,
+          3
+        ],
+        "line-color": "#30588D"
+      },
+      "id": "Road Tunnel\/4WD\/1",
+      "filter": [
+        "==",
+        "_symbol",
+        11
+      ]
+    },
+    {
+      "minzoom": 12,
+      "source": "esri",
+      "source-layer": "Road tunnel",
+      "layout": {
+        "line-join": "round"
+      },
+      "type": "line",
+      "paint": {
+        "line-opacity": 0.3,
+        "line-width": {
+          "base": 1.2,
+          "stops": [
+            [
+              12,
+              1.5
+            ],
+            [
+              14,
+              4.5
+            ],
+            [
+              17,
+              8.5
+            ]
+          ]
+        },
+        "line-color": "#30588D"
+      },
+      "id": "Road Tunnel\/Local\/1",
+      "filter": [
+        "==",
+        "_symbol",
+        7
+      ]
+    },
+    {
+      "minzoom": 15,
+      "source": "esri",
+      "source-layer": "Road tunnel",
+      "layout": {
+        "line-join": "round"
+      },
+      "type": "line",
+      "paint": {
+        "line-opacity": 0.3,
+        "line-width": {
+          "base": 1.2,
+          "stops": [
+            [
+              14,
+              1.5
+            ],
+            [
+              17,
+              4.5
+            ]
+          ]
+        },
+        "line-color": "#30588d"
+      },
+      "id": "Road Tunnel\/Service\/1",
+      "filter": [
+        "==",
+        "_symbol",
+        8
+      ]
+    },
+    {
+      "minzoom": 13,
+      "source": "esri",
+      "source-layer": "Road tunnel",
+      "layout": {
+        "line-join": "round"
+      },
+      "type": "line",
+      "paint": {
+        "line-opacity": 0.5,
+        "line-width": {
+          "base": 1.2,
+          "stops": [
+            [
+              11,
+              0.75
+            ],
+            [
+              14,
+              1
+            ],
+            [
+              17,
+              2
+            ]
+          ]
+        },
+        "line-color": "#152d4d"
+      },
+      "id": "Road Tunnel\/4WD\/0",
+      "filter": [
+        "==",
+        "_symbol",
+        10
+      ]
+    },
+    {
+      "minzoom": 12,
+      "source": "esri",
+      "source-layer": "Road tunnel",
+      "layout": {
+        "line-join": "round"
+      },
+      "type": "line",
+      "paint": {
+        "line-opacity": 0.5,
+        "line-width": {
+          "base": 1.2,
+          "stops": [
+            [
+              11,
+              0.75
+            ],
+            [
+              14,
+              2.5
+            ],
+            [
+              17,
+              4.5
+            ]
+          ]
+        },
+        "line-color": "#152d4d"
+      },
+      "id": "Road Tunnel\/Local\/0",
+      "filter": [
+        "==",
+        "_symbol",
+        7
+      ]
+    },
+    {
+      "minzoom": 13,
+      "source": "esri",
+      "source-layer": "Road tunnel",
+      "layout": {
+        "line-join": "round"
+      },
+      "type": "line",
+      "paint": {
+        "line-opacity": 0.5,
+        "line-width": {
+          "base": 1.2,
+          "stops": [
+            [
+              11,
+              0.75
+            ],
+            [
+              14,
+              1.33
+            ],
+            [
+              17,
+              2.33
+            ]
+          ]
+        },
+        "line-color": "#404759"
+      },
+      "id": "Road Tunnel\/Service\/0",
+      "filter": [
+        "==",
+        "_symbol",
+        8
+      ]
+    },
+    {
+      "minzoom": 12,
+      "source": "esri",
+      "source-layer": "Road tunnel",
+      "layout": {
+        "line-join": "round"
+      },
+      "type": "line",
+      "paint": {
+        "line-opacity": 0.3,
+        "line-width": {
+          "base": 1.2,
+          "stops": [
+            [
+              10,
+              1.5
+            ],
+            [
+              14,
+              4.5
+            ],
+            [
+              17,
+              8.5
+            ]
+          ]
+        },
+        "line-color": "#316ab3"
+      },
+      "id": "Road Tunnel\/Minor\/1",
+      "filter": [
+        "in",
+        "_symbol",
+        5,
+        6
+      ]
+    },
+    {
+      "minzoom": 12,
+      "source": "esri",
+      "source-layer": "Road tunnel",
+      "layout": {
+        "line-join": "round"
+      },
+      "type": "line",
+      "paint": {
+        "line-opacity": 0.3,
+        "line-width": {
+          "base": 1.2,
+          "stops": [
+            [
+              10,
+              1.5
+            ],
+            [
+              14,
+              7.33
+            ],
+            [
+              17,
+              14.33
+            ]
+          ]
+        },
+        "line-color": "#4697ff"
+      },
+      "id": "Road Tunnel\/Major\/1",
+      "filter": [
+        "==",
+        "_symbol",
+        3
+      ]
+    },
+    {
+      "minzoom": 12,
+      "source": "esri",
+      "source-layer": "Road tunnel",
+      "layout": {
+        "line-join": "round"
+      },
+      "type": "line",
+      "paint": {
+        "line-opacity": 0.3,
+        "line-width": {
+          "base": 1.2,
+          "stops": [
+            [
+              9,
+              1.5
+            ],
+            [
+              14,
+              4.7
+            ],
+            [
+              17,
+              7.7
+            ]
+          ]
+        },
+        "line-color": "#4697ff"
+      },
+      "id": "Road Tunnel\/Major, ramp or traffic circle\/1",
+      "filter": [
+        "==",
+        "_symbol",
+        4
+      ]
+    },
+    {
+      "minzoom": 9,
+      "source": "esri",
+      "source-layer": "Road tunnel",
+      "layout": {
+        "line-join": "round"
+      },
+      "type": "line",
+      "paint": {
+        "line-opacity": 0.3,
+        "line-width": {
+          "base": 1.2,
+          "stops": [
+            [
+              9,
+              1.5
+            ],
+            [
+              14,
+              4.7
+            ],
+            [
+              17,
+              8.7
+            ]
+          ]
+        },
+        "line-color": "#58b9ff"
+      },
+      "id": "Road Tunnel\/Freeway Motorway Highway, ramp or traffic circle\/1",
+      "filter": [
+        "==",
+        "_symbol",
+        2
+      ]
+    },
+    {
+      "minzoom": 9,
+      "source": "esri",
+      "source-layer": "Road tunnel",
+      "layout": {
+        "line-join": "round",
+        "line-cap": "round"
+      },
+      "type": "line",
+      "paint": {
+        "line-opacity": 0.3,
+        "line-width": {
+          "base": 1.2,
+          "stops": [
+            [
+              9,
+              0.5
+            ],
+            [
+              14,
+              2.5
+            ],
+            [
+              17,
+              4.5
+            ]
+          ]
+        },
+        "line-color": "#1e4678"
+      },
+      "id": "Road Tunnel\/Minor\/0",
+      "filter": [
+        "in",
+        "_symbol",
+        5,
+        6
+      ]
+    },
+    {
+      "minzoom": 8,
+      "source": "esri",
+      "source-layer": "Road tunnel",
+      "layout": {
+        "line-join": "round",
+        "line-cap": "round"
+      },
+      "type": "line",
+      "paint": {
+        "line-opacity": 0.3,
+        "line-width": {
+          "base": 1.2,
+          "stops": [
+            [
+              8,
+              0.75
+            ],
+            [
+              14,
+              5.33
+            ],
+            [
+              17,
+              10.33
+            ]
+          ]
+        },
+        "line-color": "#26528c"
+      },
+      "id": "Road Tunnel\/Major\/0",
+      "filter": [
+        "==",
+        "_symbol",
+        3
+      ]
+    },
+    {
+      "minzoom": 7,
+      "source": "esri",
+      "source-layer": "Road tunnel",
+      "layout": {
+        "line-join": "round"
+      },
+      "type": "line",
+      "paint": {
+        "line-opacity": 0.3,
+        "line-width": {
+          "base": 1.2,
+          "stops": [
+            [
+              9,
+              1.5
+            ],
+            [
+              14,
+              7.3
+            ],
+            [
+              17,
+              14.3
+            ]
+          ]
+        },
+        "line-color": "#58b9ff"
+      },
+      "id": "Road Tunnel\/Freeway Motorway\/1",
+      "filter": [
+        "==",
+        "_symbol",
+        0
+      ]
+    },
+    {
+      "minzoom": 7,
+      "source": "esri",
+      "source-layer": "Road tunnel",
+      "layout": {
+        "line-join": "round"
+      },
+      "type": "line",
+      "paint": {
+        "line-opacity": 0.3,
+        "line-width": {
+          "base": 1.2,
+          "stops": [
+            [
+              9,
+              1.5
+            ],
+            [
+              14,
+              4.7
+            ],
+            [
+              17,
+              7.7
+            ]
+          ]
+        },
+        "line-color": "#58b9ff"
+      },
+      "id": "Road Tunnel\/Highway\/1",
+      "filter": [
+        "==",
+        "_symbol",
+        1
+      ]
+    },
+    {
+      "minzoom": 9,
+      "source": "esri",
+      "source-layer": "Road tunnel",
+      "layout": {
+        "line-join": "round",
+        "line-cap": "round"
+      },
+      "type": "line",
+      "paint": {
+        "line-opacity": 0.5,
+        "line-width": {
+          "base": 1.2,
+          "stops": [
+            [
+              9,
+              0.75
+            ],
+            [
+              14,
+              2.7
+            ],
+            [
+              17,
+              4.7
+            ]
+          ]
+        },
+        "line-color": "#26528c"
+      },
+      "id": "Road Tunnel\/Major, ramp or traffic circle\/0",
+      "filter": [
+        "==",
+        "_symbol",
+        4
+      ]
+    },
+    {
+      "minzoom": 9,
+      "source": "esri",
+      "source-layer": "Road tunnel",
+      "layout": {
+        "line-join": "round"
+      },
+      "type": "line",
+      "paint": {
+        "line-opacity": 0.5,
+        "line-width": {
+          "base": 1.2,
+          "stops": [
+            [
+              9,
+              0.75
+            ],
+            [
+              14,
+              2.7
+            ],
+            [
+              17,
+              4.7
+            ]
+          ]
+        },
+        "line-color": "#2a6b99"
+      },
+      "id": "Road Tunnel\/Freeway Motorway Highway, ramp or traffic circle\/0",
+      "filter": [
+        "==",
+        "_symbol",
+        2
+      ]
+    },
+    {
+      "minzoom": 4,
+      "source": "esri",
+      "source-layer": "Road tunnel",
+      "layout": {
+        "line-join": "round",
+        "line-cap": "round"
+      },
+      "type": "line",
+      "paint": {
+        "line-opacity": 0.5,
+        "line-width": {
+          "base": 1.2,
+          "stops": [
+            [
+              4,
+              0.75
+            ],
+            [
+              14,
+              5.33
+            ],
+            [
+              17,
+              10.33
+            ]
+          ]
+        },
+        "line-color": "#2a6b99"
+      },
+      "id": "Road Tunnel\/Freeway Motorway\/0",
+      "filter": [
+        "==",
+        "_symbol",
+        0
+      ]
+    },
+    {
+      "minzoom": 6,
+      "source": "esri",
+      "source-layer": "Road tunnel",
+      "layout": {
+        "line-join": "round",
+        "line-cap": "round"
+      },
+      "type": "line",
+      "paint": {
+        "line-opacity": 0.5,
+        "line-width": {
+          "base": 1.2,
+          "stops": [
+            [
+              6,
+              0.75
+            ],
+            [
+              14,
+              5.33
+            ],
+            [
+              17,
+              10.33
+            ]
+          ]
+        },
+        "line-color": "#2a6b99"
+      },
+      "id": "Road Tunnel\/Highway\/0",
+      "filter": [
+        "==",
+        "_symbol",
+        1
+      ]
+    },
+    {
+      "minzoom": 12,
+      "source": "esri",
+      "source-layer": "Water line\/label",
+      "layout": {
+        "text-letter-spacing": 0.1,
+        "text-max-width": 8,
+        "text-field": "{_name_global}",
+        "symbol-avoid-edges": true,
+        "text-padding": 1,
+        "text-size": 10.5,
+        "text-font": [
+          "Arial Italic"
+        ],
+        "symbol-placement": "line"
+      },
+      "type": "symbol",
+      "paint": {
+        "text-color": "#5C9BD9"
+      },
+      "id": "Water line\/label\/Default"
+    },
+    {
+      "source": "esri",
+      "maxzoom": 10,
+      "source-layer": "Marine waterbody\/label",
+      "layout": {
+        "text-letter-spacing": 0.1,
+        "text-max-width": 8,
+        "text-field": "{_name}",
+        "symbol-avoid-edges": true,
+        "text-padding": 1,
+        "text-size": 14.5,
+        "text-font": [
+          "Arial Italic"
+        ]
+      },
+      "type": "symbol",
+      "paint": {
+        "text-color": "#5C9BD9"
+      },
+      "id": "Marine waterbody\/label\/x large",
+      "filter": [
+        "==",
+        "_label_class",
+        0
+      ]
+    },
+    {
+      "source": "esri",
+      "maxzoom": 10,
+      "source-layer": "Marine waterbody\/label",
+      "layout": {
+        "text-letter-spacing": 0.1,
+        "text-max-width": 8,
+        "text-field": "{_name}",
+        "symbol-avoid-edges": true,
+        "text-padding": 1,
+        "text-size": 12,
+        "text-font": [
+          "Arial Italic"
+        ]
+      },
+      "type": "symbol",
+      "paint": {
+        "text-color": "#5C9BD9"
+      },
+      "id": "Marine waterbody\/label\/large",
+      "filter": [
+        "in",
+        "_label_class",
+        1,
+        3
+      ]
+    },
+    {
+      "source": "esri",
+      "maxzoom": 10,
+      "source-layer": "Marine waterbody\/label",
+      "layout": {
+        "text-letter-spacing": 0.1,
+        "text-max-width": 8,
+        "text-field": "{_name}",
+        "symbol-avoid-edges": true,
+        "text-padding": 1,
+        "text-size": 10.5,
+        "text-font": [
+          "Arial Italic"
+        ]
+      },
+      "type": "symbol",
+      "paint": {
+        "text-color": "#5C9BD9"
+      },
+      "id": "Marine waterbody\/label\/small",
+      "filter": [
+        "==",
+        "_label_class",
+        4
+      ]
+    },
+    {
+      "minzoom": 11,
+      "source": "esri",
+      "source-layer": "Marine area\/label",
+      "layout": {
+        "text-letter-spacing": 0.15,
+        "text-max-width": 8,
+        "text-field": "{_name_global}",
+        "symbol-avoid-edges": true,
+        "text-padding": 1,
+        "text-size": 12,
+        "text-font": [
+          "Arial Italic"
+        ]
+      },
+      "type": "symbol",
+      "paint": {
+        "text-color": "#5C9BD9"
+      },
+      "id": "Marine area\/label\/Default"
+    },
+    {
+      "minzoom": 11,
+      "source": "esri",
+      "source-layer": "Water area\/label",
+      "layout": {
+        "text-letter-spacing": 0.5,
+        "text-max-width": 8,
+        "text-field": "{_name_global}",
+        "symbol-avoid-edges": true,
+        "text-padding": 1,
+        "text-size": 10.5,
+        "text-font": [
+          "Arial Italic"
+        ]
+      },
+      "type": "symbol",
+      "paint": {
+        "text-color": "#96968C"
+      },
+      "id": "Water area\/label\/Small island",
+      "filter": [
+        "==",
+        "_label_class",
+        0
+      ]
+    },
+    {
+      "minzoom": 11,
+      "source": "esri",
+      "source-layer": "Water area\/label",
+      "layout": {
+        "text-letter-spacing": 1,
+        "text-max-width": 8,
+        "text-field": "{_name_global}",
+        "symbol-avoid-edges": true,
+        "text-padding": 1,
+        "text-size": 13.33,
+        "text-font": [
+          "Arial Italic"
+        ]
+      },
+      "type": "symbol",
+      "paint": {
+        "text-color": "#96968C"
+      },
+      "id": "Water area\/label\/Large island",
+      "filter": [
+        "==",
+        "_label_class",
+        5
+      ]
+    },
+    {
+      "minzoom": 11,
+      "source": "esri",
+      "source-layer": "Water area\/label",
+      "layout": {
+        "text-letter-spacing": 0.15,
+        "text-max-width": 8,
+        "text-field": "{_name_global}",
+        "symbol-avoid-edges": true,
+        "text-padding": 1,
+        "text-size": 12,
+        "text-font": [
+          "Arial Italic"
+        ]
+      },
+      "type": "symbol",
+      "paint": {
+        "text-color": "#5C9BD9"
+      },
+      "id": "Water area\/label\/Canal or ditch",
+      "filter": [
+        "==",
+        "_label_class",
+        2
+      ]
+    },
+    {
+      "minzoom": 11,
+      "source": "esri",
+      "source-layer": "Water area\/label",
+      "layout": {
+        "text-letter-spacing": 0.15,
+        "text-max-width": 8,
+        "text-field": "{_name_global}",
+        "symbol-avoid-edges": true,
+        "text-padding": 1,
+        "text-size": 12,
+        "text-font": [
+          "Arial Italic"
+        ]
+      },
+      "type": "symbol",
+      "paint": {
+        "text-color": "#5C9BD9"
+      },
+      "id": "Water area\/label\/Bay or inlet",
+      "filter": [
+        "==",
+        "_label_class",
+        1
+      ]
+    },
+    {
+      "minzoom": 11,
+      "source": "esri",
+      "source-layer": "Water area\/label",
+      "layout": {
+        "text-letter-spacing": 0.15,
+        "text-max-width": 8,
+        "text-field": "{_name_global}",
+        "symbol-avoid-edges": true,
+        "text-padding": 1,
+        "text-size": 11,
+        "text-font": [
+          "Arial Italic"
+        ]
+      },
+      "type": "symbol",
+      "paint": {
+        "text-color": "#5C9BD9"
+      },
+      "id": "Water area\/label\/Small lake or reservoir",
+      "filter": [
+        "==",
+        "_label_class",
+        6
+      ]
+    },
+    {
+      "minzoom": 11,
+      "source": "esri",
+      "source-layer": "Water area\/label",
+      "layout": {
+        "text-letter-spacing": 0.15,
+        "text-max-width": 8,
+        "text-field": "{_name_global}",
+        "symbol-avoid-edges": true,
+        "text-padding": 1,
+        "text-size": 13,
+        "text-font": [
+          "Arial Italic"
+        ]
+      },
+      "type": "symbol",
+      "paint": {
+        "text-color": "#5C9BD9"
+      },
+      "id": "Water area\/label\/Large lake or reservoir",
+      "filter": [
+        "==",
+        "_label_class",
+        3
+      ]
+    },
+    {
+      "minzoom": 11,
+      "source": "esri",
+      "source-layer": "Water area\/label",
+      "layout": {
+        "text-letter-spacing": 0.15,
+        "text-max-width": 8,
+        "text-field": "{_name_global}",
+        "symbol-avoid-edges": true,
+        "text-padding": 1,
+        "text-size": 13,
+        "text-font": [
+          "Arial Italic"
+        ]
+      },
+      "type": "symbol",
+      "paint": {
+        "text-color": "#5C9BD9"
+      },
+      "id": "Water area\/label\/Large river",
+      "filter": [
+        "==",
+        "_label_class",
+        4
+      ]
+    },
+    {
+      "minzoom": 11,
+      "source": "esri",
+      "source-layer": "Water area\/label",
+      "layout": {
+        "text-letter-spacing": 0.15,
+        "text-max-width": 8,
+        "text-field": "{_name_global}",
+        "symbol-avoid-edges": true,
+        "text-padding": 1,
+        "text-size": 11,
+        "text-font": [
+          "Arial Italic"
+        ]
+      },
+      "type": "symbol",
+      "paint": {
+        "text-color": "#5C9BD9"
+      },
+      "id": "Water area\/label\/Small river",
+      "filter": [
+        "==",
+        "_label_class",
+        7
+      ]
+    },
+    {
+      "minzoom": 14,
+      "source": "esri",
+      "source-layer": "Railroad\/label",
+      "layout": {
+        "text-letter-spacing": 0.2,
+        "text-max-width": 8,
+        "text-field": "{_name_global}",
+        "symbol-avoid-edges": true,
+        "text-padding": 1,
+        "text-size": 10.5,
+        "text-font": [
+          "Arial Regular"
+        ],
+        "symbol-placement": "line"
+      },
+      "type": "symbol",
+      "paint": {
+        "text-halo-width": 1.5,
+        "text-halo-color": "#2A2A28",
+        "text-color": "#95BDE6"
+      },
+      "id": "Railroad\/label\/Default"
+    },
+    {
+      "minzoom": 12,
+      "source": "esri",
+      "source-layer": "Ferry\/label",
+      "layout": {
+        "text-letter-spacing": 0.2,
+        "text-max-width": 8,
+        "text-field": "{_name_global}",
+        "symbol-avoid-edges": true,
+        "text-padding": 1,
+        "text-size": 12,
+        "text-font": [
+          "Arial Regular"
+        ],
+        "symbol-placement": "line"
+      },
+      "type": "symbol",
+      "paint": {
+        "text-halo-width": 1,
+        "text-halo-color": "#2A2A28",
+        "text-color": "#5785B3"
+      },
+      "id": "Ferry\/label\/Rail ferry",
+      "filter": [
+        "==",
+        "_label_class",
+        1
+      ]
+    },
+    {
+      "minzoom": 12,
+      "source": "esri",
+      "source-layer": "Ferry\/label",
+      "layout": {
+        "text-letter-spacing": 0.2,
+        "text-max-width": 8,
+        "text-field": "{_name_global}",
+        "symbol-avoid-edges": true,
+        "text-padding": 1,
+        "text-size": 10.5,
+        "text-font": [
+          "Arial Regular"
+        ],
+        "symbol-placement": "line"
+      },
+      "type": "symbol",
+      "paint": {
+        "text-halo-width": 1,
+        "text-halo-color": "#2A2A28",
+        "text-color": "#5785B3"
+      },
+      "id": "Ferry\/label\/Ferry",
+      "filter": [
+        "==",
+        "_label_class",
+        0
+      ]
+    },
+    {
+      "minzoom": 6,
+      "source": "esri",
+      "source-layer": "Road\/label",
+      "layout": {
+        "text-letter-spacing": 0.05,
+        "text-size": 8.5,
+        "text-padding": 30,
+        "text-field": "{_name}",
+        "icon-rotation-alignment": "viewport",
+        "text-offset": [
+          0,
+          0.2
+        ],
+        "text-rotation-alignment": "viewport",
+        "text-max-width": 8,
+        "symbol-avoid-edges": true,
+        "icon-image": "Road\/Rectangle white black (Alt)\/{_len}",
+        "text-font": [
+          "Arial Regular"
+        ],
+        "symbol-placement": "line"
+      },
+      "type": "symbol",
+      "paint": {
+        "text-color": "#ffffff"
+      },
+      "id": "Road\/label\/Rectangle white black (Alt)",
+      "filter": [
+        "==",
+        "_label_class",
+        32
+      ]
+    },
+    {
+      "minzoom": 6,
+      "source": "esri",
+      "source-layer": "Road\/label",
+      "layout": {
+        "text-letter-spacing": 0.05,
+        "text-size": 8.5,
+        "text-padding": 30,
+        "text-field": "{_name}",
+        "icon-rotation-alignment": "viewport",
+        "text-offset": [
+          0,
+          0.2
+        ],
+        "text-rotation-alignment": "viewport",
+        "text-max-width": 8,
+        "symbol-avoid-edges": true,
+        "icon-image": "Road\/Rectangle white black\/{_len}",
+        "text-font": [
+          "Arial Regular"
+        ],
+        "symbol-placement": "line"
+      },
+      "type": "symbol",
+      "paint": {
+        "text-color": "#ffffff"
+      },
+      "id": "Road\/label\/Rectangle white black",
+      "filter": [
+        "==",
+        "_label_class",
+        31
+      ]
+    },
+    {
+      "minzoom": 6,
+      "source": "esri",
+      "source-layer": "Road\/label",
+      "layout": {
+        "icon-rotation-alignment": "viewport",
+        "text-size": 8.5,
+        "text-field": "{_name}",
+        "symbol-avoid-edges": true,
+        "text-padding": 30,
+        "text-max-width": 8,
+        "text-font": [
+          "Arial Regular"
+        ],
+        "icon-image": "Road\/Secondary Hwy red white (Alt)\/{_len}",
+        "symbol-placement": "line",
+        "text-rotation-alignment": "viewport",
+        "text-offset": [
+          0,
+          0.3
+        ]
+      },
+      "type": "symbol",
+      "paint": {
+        "text-color": "#ffffff"
+      },
+      "id": "Road\/label\/Secondary Hwy red white (Alt)",
+      "filter": [
+        "==",
+        "_label_class",
+        16
+      ]
+    },
+    {
+      "minzoom": 6,
+      "source": "esri",
+      "source-layer": "Road\/label",
+      "layout": {
+        "icon-rotation-alignment": "viewport",
+        "text-size": 8.5,
+        "text-field": "{_name}",
+        "symbol-avoid-edges": true,
+        "text-padding": 30,
+        "text-max-width": 8,
+        "text-font": [
+          "Arial Regular"
+        ],
+        "icon-image": "Road\/Secondary Hwy red white\/{_len}",
+        "symbol-placement": "line",
+        "text-rotation-alignment": "viewport",
+        "text-offset": [
+          0,
+          0.3
+        ]
+      },
+      "type": "symbol",
+      "paint": {
+        "text-color": "#ffffff"
+      },
+      "id": "Road\/label\/Secondary Hwy red white",
+      "filter": [
+        "==",
+        "_label_class",
+        15
+      ]
+    },
+    {
+      "minzoom": 6,
+      "source": "esri",
+      "source-layer": "Road\/label",
+      "layout": {
+        "text-letter-spacing": 0.02,
+        "text-size": 9.33,
+        "text-padding": 30,
+        "text-field": "{_name}",
+        "icon-rotation-alignment": "viewport",
+        "text-offset": [
+          0,
+          0.1
+        ],
+        "text-rotation-alignment": "viewport",
+        "text-max-width": 8,
+        "symbol-avoid-edges": true,
+        "icon-image": "Road\/U-shaped yellow black (Alt)\/{_len}",
+        "text-font": [
+          "Arial Regular"
+        ],
+        "symbol-placement": "line"
+      },
+      "type": "symbol",
+      "paint": {
+        "text-color": "#ffffff"
+      },
+      "id": "Road\/label\/U-shaped yellow black (Alt)",
+      "filter": [
+        "==",
+        "_label_class",
+        24
+      ]
+    },
+    {
+      "minzoom": 6,
+      "source": "esri",
+      "source-layer": "Road\/label",
+      "layout": {
+        "text-letter-spacing": 0.02,
+        "text-size": 9.33,
+        "text-padding": 30,
+        "text-field": "{_name}",
+        "icon-rotation-alignment": "viewport",
+        "text-offset": [
+          0,
+          0.1
+        ],
+        "text-rotation-alignment": "viewport",
+        "text-max-width": 8,
+        "symbol-avoid-edges": true,
+        "icon-image": "Road\/U-shaped yellow black\/{_len}",
+        "text-font": [
+          "Arial Regular"
+        ],
+        "symbol-placement": "line"
+      },
+      "type": "symbol",
+      "paint": {
+        "text-color": "#ffffff"
+      },
+      "id": "Road\/label\/U-shaped yellow black",
+      "filter": [
+        "==",
+        "_label_class",
+        23
+      ]
+    },
+    {
+      "minzoom": 6,
+      "source": "esri",
+      "source-layer": "Road\/label",
+      "layout": {
+        "icon-rotation-alignment": "viewport",
+        "text-size": 9.33,
+        "text-field": "{_name}",
+        "symbol-avoid-edges": true,
+        "text-padding": 30,
+        "text-max-width": 8,
+        "text-font": [
+          "Arial Regular"
+        ],
+        "icon-image": "Road\/U-shaped red white (Alt)\/{_len}",
+        "symbol-placement": "line",
+        "text-rotation-alignment": "viewport",
+        "text-offset": [
+          0,
+          0.1
+        ]
+      },
+      "type": "symbol",
+      "paint": {
+        "text-color": "#ffffff"
+      },
+      "id": "Road\/label\/U-shaped red white (Alt)",
+      "filter": [
+        "==",
+        "_label_class",
+        26
+      ]
+    },
+    {
+      "minzoom": 6,
+      "source": "esri",
+      "source-layer": "Road\/label",
+      "layout": {
+        "icon-rotation-alignment": "viewport",
+        "text-size": 9.33,
+        "text-field": "{_name}",
+        "symbol-avoid-edges": true,
+        "text-padding": 30,
+        "text-max-width": 8,
+        "text-font": [
+          "Arial Regular"
+        ],
+        "icon-image": "Road\/U-shaped red white\/{_len}",
+        "symbol-placement": "line",
+        "text-rotation-alignment": "viewport",
+        "text-offset": [
+          0,
+          0.1
+        ]
+      },
+      "type": "symbol",
+      "paint": {
+        "text-color": "#ffffff"
+      },
+      "id": "Road\/label\/U-shaped red white",
+      "filter": [
+        "==",
+        "_label_class",
+        25
+      ]
+    },
+    {
+      "minzoom": 6,
+      "source": "esri",
+      "source-layer": "Road\/label",
+      "layout": {
+        "text-letter-spacing": 0.02,
+        "text-size": 9.33,
+        "text-padding": 30,
+        "text-field": "{_name}",
+        "icon-rotation-alignment": "viewport",
+        "text-offset": [
+          0,
+          0.1
+        ],
+        "text-rotation-alignment": "viewport",
+        "text-max-width": 8,
+        "symbol-avoid-edges": true,
+        "icon-image": "Road\/U-shaped blue white (Alt)\/{_len}",
+        "text-font": [
+          "Arial Regular"
+        ],
+        "symbol-placement": "line"
+      },
+      "type": "symbol",
+      "paint": {
+        "text-color": "#ffffff"
+      },
+      "id": "Road\/label\/U-shaped blue white (Alt)",
+      "filter": [
+        "==",
+        "_label_class",
+        28
+      ]
+    },
+    {
+      "minzoom": 6,
+      "source": "esri",
+      "source-layer": "Road\/label",
+      "layout": {
+        "text-letter-spacing": 0.02,
+        "text-size": 9.33,
+        "text-padding": 30,
+        "text-field": "{_name}",
+        "icon-rotation-alignment": "viewport",
+        "text-offset": [
+          0,
+          0.1
+        ],
+        "text-rotation-alignment": "viewport",
+        "text-max-width": 8,
+        "symbol-avoid-edges": true,
+        "icon-image": "Road\/U-shaped blue white\/{_len}",
+        "text-font": [
+          "Arial Regular"
+        ],
+        "symbol-placement": "line"
+      },
+      "type": "symbol",
+      "paint": {
+        "text-color": "#ffffff"
+      },
+      "id": "Road\/label\/U-shaped blue white",
+      "filter": [
+        "==",
+        "_label_class",
+        27
+      ]
+    },
+    {
+      "minzoom": 6,
+      "source": "esri",
+      "source-layer": "Road\/label",
+      "layout": {
+        "icon-rotation-alignment": "viewport",
+        "text-size": 8.5,
+        "text-field": "{_name}",
+        "symbol-avoid-edges": true,
+        "text-padding": 30,
+        "text-max-width": 8,
+        "text-font": [
+          "Arial Regular"
+        ],
+        "icon-image": "Road\/V-shaped white black (Alt)\/{_len}",
+        "symbol-placement": "line",
+        "text-rotation-alignment": "viewport",
+        "text-offset": [
+          0,
+          0
+        ]
+      },
+      "type": "symbol",
+      "paint": {
+        "text-color": "#ffffff"
+      },
+      "id": "Road\/label\/V-shaped white black (Alt)",
+      "filter": [
+        "==",
+        "_label_class",
+        30
+      ]
+    },
+    {
+      "minzoom": 6,
+      "source": "esri",
+      "source-layer": "Road\/label",
+      "layout": {
+        "icon-rotation-alignment": "viewport",
+        "text-size": 8.5,
+        "text-field": "{_name}",
+        "symbol-avoid-edges": true,
+        "text-padding": 30,
+        "text-max-width": 8,
+        "text-font": [
+          "Arial Regular"
+        ],
+        "icon-image": "Road\/V-shaped white black\/{_len}",
+        "symbol-placement": "line",
+        "text-rotation-alignment": "viewport",
+        "text-offset": [
+          0,
+          0
+        ]
+      },
+      "type": "symbol",
+      "paint": {
+        "text-color": "#ffffff"
+      },
+      "id": "Road\/label\/V-shaped white black",
+      "filter": [
+        "==",
+        "_label_class",
+        29
+      ]
+    },
+    {
+      "minzoom": 6,
+      "source": "esri",
+      "source-layer": "Road\/label",
+      "layout": {
+        "icon-rotation-alignment": "viewport",
+        "text-size": 9.33,
+        "text-field": "{_name}",
+        "symbol-avoid-edges": true,
+        "text-padding": 1,
+        "text-max-width": 8,
+        "text-font": [
+          "Arial Regular"
+        ],
+        "icon-image": "Road\/U-shaped white black (Alt)\/{_len}",
+        "symbol-placement": "line",
+        "text-rotation-alignment": "viewport",
+        "text-offset": [
+          0,
+          0.1
+        ]
+      },
+      "type": "symbol",
+      "paint": {
+        "text-color": "#ffffff"
+      },
+      "id": "Road\/label\/U-shaped white black (Alt)",
+      "filter": [
+        "==",
+        "_label_class",
+        18
+      ]
+    },
+    {
+      "minzoom": 6,
+      "source": "esri",
+      "source-layer": "Road\/label",
+      "layout": {
+        "icon-rotation-alignment": "viewport",
+        "text-size": 9.33,
+        "text-field": "{_name}",
+        "symbol-avoid-edges": true,
+        "text-padding": 30,
+        "text-max-width": 8,
+        "text-font": [
+          "Arial Regular"
+        ],
+        "icon-image": "Road\/U-shaped white black\/{_len}",
+        "symbol-placement": "line",
+        "text-rotation-alignment": "viewport",
+        "text-offset": [
+          0,
+          0.1
+        ]
+      },
+      "type": "symbol",
+      "paint": {
+        "text-color": "#ffffff"
+      },
+      "id": "Road\/label\/U-shaped white black",
+      "filter": [
+        "==",
+        "_label_class",
+        17
+      ]
+    },
+    {
+      "minzoom": 6,
+      "source": "esri",
+      "source-layer": "Road\/label",
+      "layout": {
+        "icon-rotation-alignment": "viewport",
+        "text-size": 8.5,
+        "text-field": "{_name}",
+        "symbol-avoid-edges": true,
+        "text-padding": 30,
+        "text-max-width": 8,
+        "text-font": [
+          "Arial Regular"
+        ],
+        "icon-image": "Road\/U-shaped white green (Alt)\/{_len}",
+        "symbol-placement": "line",
+        "text-rotation-alignment": "viewport",
+        "text-offset": [
+          0,
+          0.1
+        ]
+      },
+      "type": "symbol",
+      "paint": {
+        "text-color": "#ffffff"
+      },
+      "id": "Road\/label\/U-shaped white green (Alt)",
+      "filter": [
+        "==",
+        "_label_class",
+        20
+      ]
+    },
+    {
+      "minzoom": 6,
+      "source": "esri",
+      "source-layer": "Road\/label",
+      "layout": {
+        "icon-rotation-alignment": "viewport",
+        "text-size": 8.5,
+        "text-field": "{_name}",
+        "symbol-avoid-edges": true,
+        "text-padding": 30,
+        "text-max-width": 8,
+        "text-font": [
+          "Arial Regular"
+        ],
+        "icon-image": "Road\/U-shaped white green\/{_len}",
+        "symbol-placement": "line",
+        "text-rotation-alignment": "viewport",
+        "text-offset": [
+          0,
+          0.1
+        ]
+      },
+      "type": "symbol",
+      "paint": {
+        "text-color": "#ffffff"
+      },
+      "id": "Road\/label\/U-shaped white green",
+      "filter": [
+        "==",
+        "_label_class",
+        19
+      ]
+    },
+    {
+      "minzoom": 6,
+      "source": "esri",
+      "source-layer": "Road\/label",
+      "layout": {
+        "icon-rotation-alignment": "viewport",
+        "text-size": 8.5,
+        "text-field": "{_name}",
+        "symbol-avoid-edges": true,
+        "text-padding": 30,
+        "text-max-width": 8,
+        "text-font": [
+          "Arial Bold"
+        ],
+        "icon-image": "Road\/U-shaped green leaf (Alt)\/{_len}",
+        "symbol-placement": "line",
+        "text-rotation-alignment": "viewport",
+        "text-offset": [
+          0,
+          0.3
+        ]
+      },
+      "type": "symbol",
+      "paint": {
+        "text-color": "#ffffff"
+      },
+      "id": "Road\/label\/U-shaped green leaf (Alt)",
+      "filter": [
+        "==",
+        "_label_class",
+        22
+      ]
+    },
+    {
+      "minzoom": 6,
+      "source": "esri",
+      "source-layer": "Road\/label",
+      "layout": {
+        "icon-rotation-alignment": "viewport",
+        "text-size": 8.5,
+        "text-field": "{_name}",
+        "symbol-avoid-edges": true,
+        "text-padding": 30,
+        "text-max-width": 8,
+        "text-font": [
+          "Arial Bold"
+        ],
+        "icon-image": "Road\/U-shaped green leaf\/{_len}",
+        "symbol-placement": "line",
+        "text-rotation-alignment": "viewport",
+        "text-offset": [
+          0,
+          0.3
+        ]
+      },
+      "type": "symbol",
+      "paint": {
+        "text-color": "#ffffff"
+      },
+      "id": "Road\/label\/U-shaped green leaf",
+      "filter": [
+        "==",
+        "_label_class",
+        21
+      ]
+    },
+    {
+      "minzoom": 6,
+      "source": "esri",
+      "source-layer": "Road\/label",
+      "layout": {
+        "text-letter-spacing": 0.05,
+        "text-size": 8.5,
+        "text-padding": 30,
+        "text-field": "{_name}",
+        "icon-rotation-alignment": "viewport",
+        "text-offset": [
+          0,
+          0.2
+        ],
+        "text-rotation-alignment": "viewport",
+        "text-max-width": 8,
+        "symbol-avoid-edges": true,
+        "icon-image": "Road\/Rectangle yellow black (Alt)\/{_len}",
+        "text-font": [
+          "Arial Regular"
+        ],
+        "symbol-placement": "line"
+      },
+      "type": "symbol",
+      "paint": {
+        "text-color": "#ffffff"
+      },
+      "id": "Road\/label\/Rectangle yellow black (Alt)",
+      "filter": [
+        "==",
+        "_label_class",
+        38
+      ]
+    },
+    {
+      "minzoom": 6,
+      "source": "esri",
+      "source-layer": "Road\/label",
+      "layout": {
+        "text-letter-spacing": 0.05,
+        "text-size": 8.5,
+        "text-padding": 30,
+        "text-field": "{_name}",
+        "icon-rotation-alignment": "viewport",
+        "text-offset": [
+          0,
+          0.2
+        ],
+        "text-rotation-alignment": "viewport",
+        "text-max-width": 8,
+        "symbol-avoid-edges": true,
+        "icon-image": "Road\/Rectangle yellow black\/{_len}",
+        "text-font": [
+          "Arial Regular"
+        ],
+        "symbol-placement": "line"
+      },
+      "type": "symbol",
+      "paint": {
+        "text-color": "#ffffff"
+      },
+      "id": "Road\/label\/Rectangle yellow black",
+      "filter": [
+        "==",
+        "_label_class",
+        37
+      ]
+    },
+    {
+      "minzoom": 6,
+      "source": "esri",
+      "source-layer": "Road\/label",
+      "layout": {
+        "text-letter-spacing": 0.05,
+        "text-size": 8.5,
+        "text-padding": 30,
+        "text-field": "{_name}",
+        "icon-rotation-alignment": "viewport",
+        "text-offset": [
+          0,
+          0.2
+        ],
+        "text-rotation-alignment": "viewport",
+        "text-max-width": 8,
+        "symbol-avoid-edges": true,
+        "icon-image": "Road\/Rectangle red white (Alt)\/{_len}",
+        "text-font": [
+          "Arial Regular"
+        ],
+        "symbol-placement": "line"
+      },
+      "type": "symbol",
+      "paint": {
+        "text-color": "#ffffff"
+      },
+      "id": "Road\/label\/Rectangle red white (Alt)",
+      "filter": [
+        "==",
+        "_label_class",
+        36
+      ]
+    },
+    {
+      "minzoom": 6,
+      "source": "esri",
+      "source-layer": "Road\/label",
+      "layout": {
+        "text-letter-spacing": 0.05,
+        "text-size": 8.5,
+        "text-padding": 30,
+        "text-field": "{_name}",
+        "icon-rotation-alignment": "viewport",
+        "text-offset": [
+          0,
+          0.2
+        ],
+        "text-rotation-alignment": "viewport",
+        "text-max-width": 8,
+        "symbol-avoid-edges": true,
+        "icon-image": "Road\/Rectangle red white\/{_len}",
+        "text-font": [
+          "Arial Regular"
+        ],
+        "symbol-placement": "line"
+      },
+      "type": "symbol",
+      "paint": {
+        "text-color": "#ffffff"
+      },
+      "id": "Road\/label\/Rectangle red white",
+      "filter": [
+        "==",
+        "_label_class",
+        35
+      ]
+    },
+    {
+      "minzoom": 6,
+      "source": "esri",
+      "source-layer": "Road\/label",
+      "layout": {
+        "text-letter-spacing": 0,
+        "text-size": 8.5,
+        "text-padding": 30,
+        "text-field": "{_name}",
+        "icon-rotation-alignment": "viewport",
+        "text-offset": [
+          0,
+          0.2
+        ],
+        "text-rotation-alignment": "viewport",
+        "text-max-width": 8,
+        "symbol-avoid-edges": true,
+        "icon-image": "Road\/Rectangle green white (Alt)\/{_len}",
+        "text-font": [
+          "Arial Regular"
+        ],
+        "symbol-placement": "line"
+      },
+      "type": "symbol",
+      "paint": {
+        "text-color": "#ffffff"
+      },
+      "id": "Road\/label\/Rectangle green white (Alt)",
+      "filter": [
+        "==",
+        "_label_class",
+        40
+      ]
+    },
+    {
+      "minzoom": 6,
+      "source": "esri",
+      "source-layer": "Road\/label",
+      "layout": {
+        "text-letter-spacing": 0.05,
+        "text-size": 8.5,
+        "text-padding": 30,
+        "text-field": "{_name}",
+        "icon-rotation-alignment": "viewport",
+        "text-offset": [
+          0,
+          0.2
+        ],
+        "text-rotation-alignment": "viewport",
+        "text-max-width": 8,
+        "symbol-avoid-edges": true,
+        "icon-image": "Road\/Rectangle green white\/{_len}",
+        "text-font": [
+          "Arial Regular"
+        ],
+        "symbol-placement": "line"
+      },
+      "type": "symbol",
+      "paint": {
+        "text-color": "#ffffff"
+      },
+      "id": "Road\/label\/Rectangle green white",
+      "filter": [
+        "==",
+        "_label_class",
+        39
+      ]
+    },
+    {
+      "minzoom": 6,
+      "source": "esri",
+      "source-layer": "Road\/label",
+      "layout": {
+        "icon-rotation-alignment": "viewport",
+        "text-size": 8.5,
+        "text-field": "{_name}",
+        "symbol-avoid-edges": true,
+        "text-padding": 30,
+        "text-max-width": 8,
+        "text-font": [
+          "Arial Regular"
+        ],
+        "icon-image": "Road\/Rectangle green yellow (Alt)\/{_len}",
+        "symbol-placement": "line",
+        "text-rotation-alignment": "viewport",
+        "text-offset": [
+          0,
+          0.2
+        ]
+      },
+      "type": "symbol",
+      "paint": {
+        "text-color": "#ffff73"
+      },
+      "id": "Road\/label\/Rectangle green yellow (Alt)",
+      "filter": [
+        "==",
+        "_label_class",
+        42
+      ]
+    },
+    // {
+    //   "minzoom": 6,
+    //   "source": "esri",
+    //   "source-layer": "Road\/label",
+    //   "layout": {
+    //     "icon-rotation-alignment": "viewport",
+    //     "text-size": 8.5,
+    //     "text-field": "{_name}",
+    //     "symbol-avoid-edges": true,
+    //     "text-padding": 30,
+    //     "text-max-width": 8,
+    //     "text-font": [
+    //       "Arial Regular"
+    //     ],
+    //     "icon-image": "Road\/Rectangle green yellow\/{_len}",
+    //     "symbol-placement": "line",
+    //     "text-rotation-alignment": "viewport",
+    //     "text-offset": [
+    //       0,
+    //       0.2
+    //     ]
+    //   },
+    //   "type": "symbol",
+    //   "paint": {
+    //     "text-color": "#ffff73"
+    //   },
+    //   "id": "Road\/label\/Rectangle green yellow",
+    //   "filter": [
+    //     "==",
+    //     "_label_class",
+    //     41
+    //   ]
+    // },
+    // {
+    //   "minzoom": 6,
+    //   "source": "esri",
+    //   "source-layer": "Road\/label",
+    //   "layout": {
+    //     "icon-rotation-alignment": "viewport",
+    //     "text-size": 9.33,
+    //     "text-field": "{_name}",
+    //     "symbol-avoid-edges": true,
+    //     "text-padding": 30,
+    //     "text-max-width": 8,
+    //     "text-font": [
+    //       "Arial Regular"
+    //     ],
+    //     "icon-image": "Road\/Rectangle blue white (Alt)\/{_len}",
+    //     "symbol-placement": "line",
+    //     "text-rotation-alignment": "viewport",
+    //     "text-offset": [
+    //       0,
+    //       0.2
+    //     ]
+    //   },
+    //   "type": "symbol",
+    //   "paint": {
+    //     "text-color": "#ffffff"
+    //   },
+    //   "id": "Road\/label\/Rectangle blue white (Alt)",
+    //   "filter": [
+    //     "==",
+    //     "_label_class",
+    //     34
+    //   ]
+    // },
+    // {
+    //   "minzoom": 6,
+    //   "source": "esri",
+    //   "source-layer": "Road\/label",
+    //   "layout": {
+    //     "icon-rotation-alignment": "viewport",
+    //     "text-size": 9.33,
+    //     "text-field": "{_name}",
+    //     "symbol-avoid-edges": true,
+    //     "text-padding": 30,
+    //     "text-max-width": 8,
+    //     "text-font": [
+    //       "Arial Regular"
+    //     ],
+    //     "icon-image": "Road\/Rectangle blue white\/{_len}",
+    //     "symbol-placement": "line",
+    //     "text-rotation-alignment": "viewport",
+    //     "text-offset": [
+    //       0,
+    //       0.2
+    //     ]
+    //   },
+    //   "type": "symbol",
+    //   "paint": {
+    //     "text-color": "#ffffff"
+    //   },
+    //   "id": "Road\/label\/Rectangle blue white",
+    //   "filter": [
+    //     "==",
+    //     "_label_class",
+    //     33
+    //   ]
+    // },
+    // {
+    //   "minzoom": 6,
+    //   "source": "esri",
+    //   "source-layer": "Road\/label",
+    //   "layout": {
+    //     "icon-rotation-alignment": "viewport",
+    //     "text-size": 9.33,
+    //     "text-field": "{_name}",
+    //     "symbol-avoid-edges": true,
+    //     "text-padding": 30,
+    //     "text-max-width": 8,
+    //     "text-font": [
+    //       "Arial Regular"
+    //     ],
+    //     "icon-image": "Road\/Pentagon inverse white black (Alt)\/{_len}",
+    //     "symbol-placement": "line",
+    //     "text-rotation-alignment": "viewport",
+    //     "text-offset": [
+    //       0,
+    //       0.3
+    //     ]
+    //   },
+    //   "type": "symbol",
+    //   "paint": {
+    //     "text-color": "#ffffff"
+    //   },
+    //   "id": "Road\/label\/Pentagon inverse white black (Alt)",
+    //   "filter": [
+    //     "==",
+    //     "_label_class",
+    //     44
+    //   ]
+    // },
+    // {
+    //   "minzoom": 6,
+    //   "source": "esri",
+    //   "source-layer": "Road\/label",
+    //   "layout": {
+    //     "icon-rotation-alignment": "viewport",
+    //     "text-size": 9.33,
+    //     "text-field": "{_name}",
+    //     "symbol-avoid-edges": true,
+    //     "text-padding": 30,
+    //     "text-max-width": 8,
+    //     "text-font": [
+    //       "Arial Regular"
+    //     ],
+    //     "icon-image": "Road\/Pentagon inverse white black\/{_len}",
+    //     "symbol-placement": "line",
+    //     "text-rotation-alignment": "viewport",
+    //     "text-offset": [
+    //       0,
+    //       0.3
+    //     ]
+    //   },
+    //   "type": "symbol",
+    //   "paint": {
+    //     "text-color": "#ffffff"
+    //   },
+    //   "id": "Road\/label\/Pentagon inverse white black",
+    //   "filter": [
+    //     "==",
+    //     "_label_class",
+    //     43
+    //   ]
+    // },
+    // {
+    //   "minzoom": 6,
+    //   "source": "esri",
+    //   "source-layer": "Road\/label",
+    //   "layout": {
+    //     "icon-rotation-alignment": "viewport",
+    //     "text-size": 8.5,
+    //     "text-field": "{_name}",
+    //     "symbol-avoid-edges": true,
+    //     "text-padding": 30,
+    //     "text-max-width": 8,
+    //     "text-font": [
+    //       "Arial Regular"
+    //     ],
+    //     "icon-image": "Road\/Pentagon white black (Alt)\/{_len}",
+    //     "symbol-placement": "line",
+    //     "text-rotation-alignment": "viewport",
+    //     "text-offset": [
+    //       0,
+    //       0.2
+    //     ]
+    //   },
+    //   "type": "symbol",
+    //   "paint": {
+    //     "text-color": "#ffffff"
+    //   },
+    //   "id": "Road\/label\/Pentagon white black (Alt)",
+    //   "filter": [
+    //     "==",
+    //     "_label_class",
+    //     46
+    //   ]
+    // },
+    // {
+    //   "minzoom": 6,
+    //   "source": "esri",
+    //   "source-layer": "Road\/label",
+    //   "layout": {
+    //     "icon-rotation-alignment": "viewport",
+    //     "text-size": 8.5,
+    //     "text-field": "{_name}",
+    //     "symbol-avoid-edges": true,
+    //     "text-padding": 30,
+    //     "text-max-width": 8,
+    //     "text-font": [
+    //       "Arial Regular"
+    //     ],
+    //     "icon-image": "Road\/Pentagon white black\/{_len}",
+    //     "symbol-placement": "line",
+    //     "text-rotation-alignment": "viewport",
+    //     "text-offset": [
+    //       0,
+    //       0.2
+    //     ]
+    //   },
+    //   "type": "symbol",
+    //   "paint": {
+    //     "text-color": "#ffffff"
+    //   },
+    //   "id": "Road\/label\/Pentagon white black",
+    //   "filter": [
+    //     "==",
+    //     "_label_class",
+    //     45
+    //   ]
+    // },
+    // {
+    //   "minzoom": 6,
+    //   "source": "esri",
+    //   "source-layer": "Road\/label",
+    //   "layout": {
+    //     "text-letter-spacing": 0.02,
+    //     "text-size": 8.5,
+    //     "text-padding": 30,
+    //     "text-field": "{_name}",
+    //     "icon-rotation-alignment": "viewport",
+    //     "text-offset": [
+    //       0,
+    //       0.3
+    //     ],
+    //     "text-rotation-alignment": "viewport",
+    //     "text-max-width": 8,
+    //     "symbol-avoid-edges": true,
+    //     "icon-image": "Road\/Pentagon yellow black (Alt)\/{_len}",
+    //     "text-font": [
+    //       "Arial Regular"
+    //     ],
+    //     "symbol-placement": "line"
+    //   },
+    //   "type": "symbol",
+    //   "paint": {
+    //     "text-color": "#ffffff"
+    //   },
+    //   "id": "Road\/label\/Pentagon yellow black (Alt)",
+    //   "filter": [
+    //     "==",
+    //     "_label_class",
+    //     50
+    //   ]
+    // },
+    // {
+    //   "minzoom": 6,
+    //   "source": "esri",
+    //   "source-layer": "Road\/label",
+    //   "layout": {
+    //     "text-letter-spacing": 0,
+    //     "text-size": 8.5,
+    //     "text-padding": 30,
+    //     "text-field": "{_name}",
+    //     "icon-rotation-alignment": "viewport",
+    //     "text-offset": [
+    //       0,
+    //       0.3
+    //     ],
+    //     "text-rotation-alignment": "viewport",
+    //     "text-max-width": 8,
+    //     "symbol-avoid-edges": true,
+    //     "icon-image": "Road\/Pentagon yellow black\/{_len}",
+    //     "text-font": [
+    //       "Arial Regular"
+    //     ],
+    //     "symbol-placement": "line"
+    //   },
+    //   "type": "symbol",
+    //   "paint": {
+    //     "text-color": "#ffffff"
+    //   },
+    //   "id": "Road\/label\/Pentagon yellow black",
+    //   "filter": [
+    //     "==",
+    //     "_label_class",
+    //     49
+    //   ]
+    // },
+    // {
+    //   "minzoom": 6,
+    //   "source": "esri",
+    //   "source-layer": "Road\/label",
+    //   "layout": {
+    //     "icon-rotation-alignment": "viewport",
+    //     "text-size": 8.5,
+    //     "text-field": "{_name}",
+    //     "symbol-avoid-edges": true,
+    //     "text-padding": 30,
+    //     "text-max-width": 8,
+    //     "text-font": [
+    //       "Arial Regular"
+    //     ],
+    //     "icon-image": "Road\/Pentagon green white (Alt)\/{_len}",
+    //     "symbol-placement": "line",
+    //     "text-rotation-alignment": "viewport",
+    //     "text-offset": [
+    //       0,
+    //       0
+    //     ]
+    //   },
+    //   "type": "symbol",
+    //   "paint": {
+    //     "text-color": "#ffffff"
+    //   },
+    //   "id": "Road\/label\/Pentagon green white (Alt)",
+    //   "filter": [
+    //     "==",
+    //     "_label_class",
+    //     52
+    //   ]
+    // },
+    // {
+    //   "minzoom": 6,
+    //   "source": "esri",
+    //   "source-layer": "Road\/label",
+    //   "layout": {
+    //     "icon-rotation-alignment": "viewport",
+    //     "text-size": 8.5,
+    //     "text-field": "{_name}",
+    //     "symbol-avoid-edges": true,
+    //     "text-padding": 30,
+    //     "text-max-width": 8,
+    //     "text-font": [
+    //       "Arial Regular"
+    //     ],
+    //     "icon-image": "Road\/Pentagon green white\/{_len}",
+    //     "symbol-placement": "line",
+    //     "text-rotation-alignment": "viewport",
+    //     "text-offset": [
+    //       0,
+    //       0
+    //     ]
+    //   },
+    //   "type": "symbol",
+    //   "paint": {
+    //     "text-color": "#ffffff"
+    //   },
+    //   "id": "Road\/label\/Pentagon green white",
+    //   "filter": [
+    //     "==",
+    //     "_label_class",
+    //     51
+    //   ]
+    // },
+    // {
+    //   "minzoom": 6,
+    //   "source": "esri",
+    //   "source-layer": "Road\/label",
+    //   "layout": {
+    //     "icon-rotation-alignment": "viewport",
+    //     "text-size": 9.33,
+    //     "text-field": "{_name}",
+    //     "symbol-avoid-edges": true,
+    //     "text-padding": 30,
+    //     "text-max-width": 8,
+    //     "text-font": [
+    //       "Arial Regular"
+    //     ],
+    //     "icon-image": "Road\/Pentagon green yellow (Alt)\/{_len}",
+    //     "symbol-placement": "line",
+    //     "text-rotation-alignment": "viewport",
+    //     "text-offset": [
+    //       0,
+    //       0
+    //     ]
+    //   },
+    //   "type": "symbol",
+    //   "paint": {
+    //     "text-color": "#ffff73"
+    //   },
+    //   "id": "Road\/label\/Pentagon green yellow (Alt)",
+    //   "filter": [
+    //     "==",
+    //     "_label_class",
+    //     54
+    //   ]
+    // },
+    // {
+    //   "minzoom": 6,
+    //   "source": "esri",
+    //   "source-layer": "Road\/label",
+    //   "layout": {
+    //     "icon-rotation-alignment": "viewport",
+    //     "text-size": 9.33,
+    //     "text-field": "{_name}",
+    //     "symbol-avoid-edges": true,
+    //     "text-padding": 30,
+    //     "text-max-width": 8,
+    //     "text-font": [
+    //       "Arial Regular"
+    //     ],
+    //     "icon-image": "Road\/Pentagon green yellow\/{_len}",
+    //     "symbol-placement": "line",
+    //     "text-rotation-alignment": "viewport",
+    //     "text-offset": [
+    //       0,
+    //       0
+    //     ]
+    //   },
+    //   "type": "symbol",
+    //   "paint": {
+    //     "text-color": "#ffff73"
+    //   },
+    //   "id": "Road\/label\/Pentagon green yellow",
+    //   "filter": [
+    //     "==",
+    //     "_label_class",
+    //     53
+    //   ]
+    // },
+    // {
+    //   "minzoom": 6,
+    //   "source": "esri",
+    //   "source-layer": "Road\/label",
+    //   "layout": {
+    //     "text-letter-spacing": 0.02,
+    //     "text-size": 9.33,
+    //     "text-padding": 30,
+    //     "text-field": "{_name}",
+    //     "icon-rotation-alignment": "viewport",
+    //     "text-offset": [
+    //       0,
+    //       0.1
+    //     ],
+    //     "text-rotation-alignment": "viewport",
+    //     "text-max-width": 8,
+    //     "symbol-avoid-edges": true,
+    //     "icon-image": "Road\/Pentagon blue white (Alt)\/{_len}",
+    //     "text-font": [
+    //       "Arial Regular"
+    //     ],
+    //     "symbol-placement": "line"
+    //   },
+    //   "type": "symbol",
+    //   "paint": {
+    //     "text-color": "#ffffff"
+    //   },
+    //   "id": "Road\/label\/Pentagon blue white (Alt)",
+    //   "filter": [
+    //     "==",
+    //     "_label_class",
+    //     48
+    //   ]
+    // },
+    // {
+    //   "minzoom": 6,
+    //   "source": "esri",
+    //   "source-layer": "Road\/label",
+    //   "layout": {
+    //     "text-letter-spacing": 0.02,
+    //     "text-size": 9.33,
+    //     "text-padding": 30,
+    //     "text-field": "{_name}",
+    //     "icon-rotation-alignment": "viewport",
+    //     "text-offset": [
+    //       0,
+    //       0.1
+    //     ],
+    //     "text-rotation-alignment": "viewport",
+    //     "text-max-width": 8,
+    //     "symbol-avoid-edges": true,
+    //     "icon-image": "Road\/Pentagon blue white\/{_len}",
+    //     "text-font": [
+    //       "Arial Regular"
+    //     ],
+    //     "symbol-placement": "line"
+    //   },
+    //   "type": "symbol",
+    //   "paint": {
+    //     "text-color": "#ffffff"
+    //   },
+    //   "id": "Road\/label\/Pentagon blue white",
+    //   "filter": [
+    //     "==",
+    //     "_label_class",
+    //     47
+    //   ]
+    // },
+    // {
+    //   "minzoom": 6,
+    //   "source": "esri",
+    //   "source-layer": "Road\/label",
+    //   "layout": {
+    //     "text-letter-spacing": 0.03,
+    //     "text-size": 8.5,
+    //     "text-padding": 30,
+    //     "text-field": "{_name}",
+    //     "icon-rotation-alignment": "viewport",
+    //     "text-offset": [
+    //       0,
+    //       0.1
+    //     ],
+    //     "text-rotation-alignment": "viewport",
+    //     "text-max-width": 8,
+    //     "symbol-avoid-edges": true,
+    //     "icon-image": "Road\/Hexagon white black (Alt)\/{_len}",
+    //     "text-font": [
+    //       "Arial Regular"
+    //     ],
+    //     "symbol-placement": "line"
+    //   },
+    //   "type": "symbol",
+    //   "paint": {
+    //     "text-color": "#ffffff"
+    //   },
+    //   "id": "Road\/label\/Hexagon white black (Alt)",
+    //   "filter": [
+    //     "==",
+    //     "_label_class",
+    //     56
+    //   ]
+    // },
+    // {
+    //   "minzoom": 6,
+    //   "source": "esri",
+    //   "source-layer": "Road\/label",
+    //   "layout": {
+    //     "text-letter-spacing": 0.03,
+    //     "text-size": 8.5,
+    //     "text-padding": 30,
+    //     "text-field": "{_name}",
+    //     "icon-rotation-alignment": "viewport",
+    //     "text-offset": [
+    //       0,
+    //       0.1
+    //     ],
+    //     "text-rotation-alignment": "viewport",
+    //     "text-max-width": 8,
+    //     "symbol-avoid-edges": true,
+    //     "icon-image": "Road\/Hexagon white black\/{_len}",
+    //     "text-font": [
+    //       "Arial Regular"
+    //     ],
+    //     "symbol-placement": "line"
+    //   },
+    //   "type": "symbol",
+    //   "paint": {
+    //     "text-color": "#ffffff"
+    //   },
+    //   "id": "Road\/label\/Hexagon white black",
+    //   "filter": [
+    //     "==",
+    //     "_label_class",
+    //     55
+    //   ]
+    // },
+    // {
+    //   "minzoom": 6,
+    //   "source": "esri",
+    //   "source-layer": "Road\/label",
+    //   "layout": {
+    //     "text-letter-spacing": 0.03,
+    //     "text-size": 8.5,
+    //     "text-padding": 30,
+    //     "text-field": "{_name}",
+    //     "icon-rotation-alignment": "viewport",
+    //     "text-offset": [
+    //       0,
+    //       0.1
+    //     ],
+    //     "text-rotation-alignment": "viewport",
+    //     "text-max-width": 8,
+    //     "symbol-avoid-edges": true,
+    //     "icon-image": "Road\/Hexagon blue white (Alt)\/{_len}",
+    //     "text-font": [
+    //       "Arial Regular"
+    //     ],
+    //     "symbol-placement": "line"
+    //   },
+    //   "type": "symbol",
+    //   "paint": {
+    //     "text-color": "#ffffff"
+    //   },
+    //   "id": "Road\/label\/Hexagon blue white (Alt)",
+    //   "filter": [
+    //     "==",
+    //     "_label_class",
+    //     58
+    //   ]
+    // },
+    // {
+    //   "minzoom": 6,
+    //   "source": "esri",
+    //   "source-layer": "Road\/label",
+    //   "layout": {
+    //     "text-letter-spacing": 0.03,
+    //     "text-size": 8.5,
+    //     "text-padding": 30,
+    //     "text-field": "{_name}",
+    //     "icon-rotation-alignment": "viewport",
+    //     "text-offset": [
+    //       0,
+    //       0.3
+    //     ],
+    //     "text-rotation-alignment": "viewport",
+    //     "text-max-width": 8,
+    //     "symbol-avoid-edges": true,
+    //     "icon-image": "Road\/Hexagon blue white\/{_len}",
+    //     "text-font": [
+    //       "Arial Regular"
+    //     ],
+    //     "symbol-placement": "line"
+    //   },
+    //   "type": "symbol",
+    //   "paint": {
+    //     "text-color": "#ffffff"
+    //   },
+    //   "id": "Road\/label\/Hexagon blue white",
+    //   "filter": [
+    //     "==",
+    //     "_label_class",
+    //     57
+    //   ]
+    // },
+    // {
+    //   "minzoom": 6,
+    //   "source": "esri",
+    //   "source-layer": "Road\/label",
+    //   "layout": {
+    //     "text-letter-spacing": 0.03,
+    //     "text-size": 8.5,
+    //     "text-padding": 30,
+    //     "text-field": "{_name}",
+    //     "icon-rotation-alignment": "viewport",
+    //     "text-offset": [
+    //       0,
+    //       0.1
+    //     ],
+    //     "text-rotation-alignment": "viewport",
+    //     "text-max-width": 8,
+    //     "symbol-avoid-edges": true,
+    //     "icon-image": "Road\/Hexagon red white (Alt)\/{_len}",
+    //     "text-font": [
+    //       "Arial Regular"
+    //     ],
+    //     "symbol-placement": "line"
+    //   },
+    //   "type": "symbol",
+    //   "paint": {
+    //     "text-color": "#ffffff"
+    //   },
+    //   "id": "Road\/label\/Hexagon red white (Alt)",
+    //   "filter": [
+    //     "==",
+    //     "_label_class",
+    //     60
+    //   ]
+    // },
+    // {
+    //   "minzoom": 6,
+    //   "source": "esri",
+    //   "source-layer": "Road\/label",
+    //   "layout": {
+    //     "text-letter-spacing": 0.03,
+    //     "text-size": 8.5,
+    //     "text-padding": 30,
+    //     "text-field": "{_name}",
+    //     "icon-rotation-alignment": "viewport",
+    //     "text-offset": [
+    //       0,
+    //       0.1
+    //     ],
+    //     "text-rotation-alignment": "viewport",
+    //     "text-max-width": 8,
+    //     "symbol-avoid-edges": true,
+    //     "icon-image": "Road\/Hexagon red white\/{_len}",
+    //     "text-font": [
+    //       "Arial Regular"
+    //     ],
+    //     "symbol-placement": "line"
+    //   },
+    //   "type": "symbol",
+    //   "paint": {
+    //     "text-color": "#ffffff"
+    //   },
+    //   "id": "Road\/label\/Hexagon red white",
+    //   "filter": [
+    //     "==",
+    //     "_label_class",
+    //     59
+    //   ]
+    // },
+    // {
+    //   "minzoom": 6,
+    //   "source": "esri",
+    //   "source-layer": "Road\/label",
+    //   "layout": {
+    //     "text-letter-spacing": 0.03,
+    //     "text-size": 8.5,
+    //     "text-padding": 30,
+    //     "text-field": "{_name}",
+    //     "icon-rotation-alignment": "viewport",
+    //     "text-offset": [
+    //       0,
+    //       0.1
+    //     ],
+    //     "text-rotation-alignment": "viewport",
+    //     "text-max-width": 8,
+    //     "symbol-avoid-edges": true,
+    //     "icon-image": "Road\/Hexagon green white (Alt)\/{_len}",
+    //     "text-font": [
+    //       "Arial Regular"
+    //     ],
+    //     "symbol-placement": "line"
+    //   },
+    //   "type": "symbol",
+    //   "paint": {
+    //     "text-color": "#ffffff"
+    //   },
+    //   "id": "Road\/label\/Hexagon green white (Alt)",
+    //   "filter": [
+    //     "==",
+    //     "_label_class",
+    //     62
+    //   ]
+    // },
+    // {
+    //   "minzoom": 6,
+    //   "source": "esri",
+    //   "source-layer": "Road\/label",
+    //   "layout": {
+    //     "text-letter-spacing": 0.03,
+    //     "text-size": 8.5,
+    //     "text-padding": 30,
+    //     "text-field": "{_name}",
+    //     "icon-rotation-alignment": "viewport",
+    //     "text-offset": [
+    //       0,
+    //       0.1
+    //     ],
+    //     "text-rotation-alignment": "viewport",
+    //     "text-max-width": 8,
+    //     "symbol-avoid-edges": true,
+    //     "icon-image": "Road\/Hexagon green white\/{_len}",
+    //     "text-font": [
+    //       "Arial Regular"
+    //     ],
+    //     "symbol-placement": "line"
+    //   },
+    //   "type": "symbol",
+    //   "paint": {
+    //     "text-color": "#ffffff"
+    //   },
+    //   "id": "Road\/label\/Hexagon green white",
+    //   "filter": [
+    //     "==",
+    //     "_label_class",
+    //     61
+    //   ]
+    // },
+    // {
+    //   "minzoom": 6,
+    //   "source": "esri",
+    //   "source-layer": "Road\/label",
+    //   "layout": {
+    //     "text-letter-spacing": 0.03,
+    //     "text-size": 8.5,
+    //     "text-padding": 30,
+    //     "text-field": "{_name}",
+    //     "icon-rotation-alignment": "viewport",
+    //     "text-offset": [
+    //       0,
+    //       0.1
+    //     ],
+    //     "text-rotation-alignment": "viewport",
+    //     "text-max-width": 8,
+    //     "symbol-avoid-edges": true,
+    //     "icon-image": "Road\/Hexagon orange black (Alt)\/{_len}",
+    //     "text-font": [
+    //       "Arial Regular"
+    //     ],
+    //     "symbol-placement": "line"
+    //   },
+    //   "type": "symbol",
+    //   "paint": {
+    //     "text-color": "#ffffff"
+    //   },
+    //   "id": "Road\/label\/Hexagon orange black (Alt)",
+    //   "filter": [
+    //     "==",
+    //     "_label_class",
+    //     64
+    //   ]
+    // },
+    // {
+    //   "minzoom": 6,
+    //   "source": "esri",
+    //   "source-layer": "Road\/label",
+    //   "layout": {
+    //     "text-letter-spacing": 0.03,
+    //     "text-size": 8.5,
+    //     "text-padding": 30,
+    //     "text-field": "{_name}",
+    //     "icon-rotation-alignment": "viewport",
+    //     "text-offset": [
+    //       0,
+    //       0.1
+    //     ],
+    //     "text-rotation-alignment": "viewport",
+    //     "text-max-width": 8,
+    //     "symbol-avoid-edges": true,
+    //     "icon-image": "Road\/Hexagon orange black\/{_len}",
+    //     "text-font": [
+    //       "Arial Regular"
+    //     ],
+    //     "symbol-placement": "line"
+    //   },
+    //   "type": "symbol",
+    //   "paint": {
+    //     "text-color": "#ffffff"
+    //   },
+    //   "id": "Road\/label\/Hexagon orange black",
+    //   "filter": [
+    //     "==",
+    //     "_label_class",
+    //     63
+    //   ]
+    // },
+    // {
+    //   "minzoom": 6,
+    //   "source": "esri",
+    //   "source-layer": "Road\/label",
+    //   "layout": {
+    //     "icon-rotation-alignment": "viewport",
+    //     "text-size": 8.5,
+    //     "text-field": "{_name}",
+    //     "symbol-avoid-edges": true,
+    //     "text-padding": 30,
+    //     "text-max-width": 8,
+    //     "text-font": [
+    //       "Arial Regular"
+    //     ],
+    //     "icon-image": "Road\/Rectangle hexagon blue white (Alt)\/{_len}",
+    //     "symbol-placement": "line",
+    //     "text-rotation-alignment": "viewport",
+    //     "text-offset": [
+    //       0,
+    //       0.3
+    //     ]
+    //   },
+    //   "type": "symbol",
+    //   "paint": {
+    //     "text-color": "#ffffff"
+    //   },
+    //   "id": "Road\/label\/Rectangle hexagon blue white (Alt)",
+    //   "filter": [
+    //     "==",
+    //     "_label_class",
+    //     66
+    //   ]
+    // },
+    // {
+    //   "minzoom": 6,
+    //   "source": "esri",
+    //   "source-layer": "Road\/label",
+    //   "layout": {
+    //     "icon-rotation-alignment": "viewport",
+    //     "text-size": 8.5,
+    //     "text-field": "{_name}",
+    //     "symbol-avoid-edges": true,
+    //     "text-padding": 30,
+    //     "text-max-width": 8,
+    //     "text-font": [
+    //       "Arial Regular"
+    //     ],
+    //     "icon-image": "Road\/Rectangle hexagon blue white\/{_len}",
+    //     "symbol-placement": "line",
+    //     "text-rotation-alignment": "viewport",
+    //     "text-offset": [
+    //       0,
+    //       0.3
+    //     ]
+    //   },
+    //   "type": "symbol",
+    //   "paint": {
+    //     "text-color": "#ffffff"
+    //   },
+    //   "id": "Road\/label\/Rectangle hexagon blue white",
+    //   "filter": [
+    //     "==",
+    //     "_label_class",
+    //     65
+    //   ]
+    // },
+    // {
+    //   "minzoom": 6,
+    //   "source": "esri",
+    //   "source-layer": "Road\/label",
+    //   "layout": {
+    //     "icon-rotation-alignment": "viewport",
+    //     "text-size": 8.5,
+    //     "text-field": "{_name}",
+    //     "symbol-avoid-edges": true,
+    //     "text-padding": 30,
+    //     "text-max-width": 8,
+    //     "text-font": [
+    //       "Arial Regular"
+    //     ],
+    //     "icon-image": "Road\/Rectangle hexagon red white (Alt)\/{_len}",
+    //     "symbol-placement": "line",
+    //     "text-rotation-alignment": "viewport",
+    //     "text-offset": [
+    //       0,
+    //       0.3
+    //     ]
+    //   },
+    //   "type": "symbol",
+    //   "paint": {
+    //     "text-color": "#ffffff"
+    //   },
+    //   "id": "Road\/label\/Rectangle hexagon red white (Alt)",
+    //   "filter": [
+    //     "==",
+    //     "_label_class",
+    //     68
+    //   ]
+    // },
+    // {
+    //   "minzoom": 6,
+    //   "source": "esri",
+    //   "source-layer": "Road\/label",
+    //   "layout": {
+    //     "icon-rotation-alignment": "viewport",
+    //     "text-size": 8.5,
+    //     "text-field": "{_name}",
+    //     "symbol-avoid-edges": true,
+    //     "text-padding": 30,
+    //     "text-max-width": 8,
+    //     "text-font": [
+    //       "Arial Regular"
+    //     ],
+    //     "icon-image": "Road\/Rectangle hexagon red white\/{_len}",
+    //     "symbol-placement": "line",
+    //     "text-rotation-alignment": "viewport",
+    //     "text-offset": [
+    //       0,
+    //       0.3
+    //     ]
+    //   },
+    //   "type": "symbol",
+    //   "paint": {
+    //     "text-color": "#ffffff"
+    //   },
+    //   "id": "Road\/label\/Rectangle hexagon red white",
+    //   "filter": [
+    //     "==",
+    //     "_label_class",
+    //     67
+    //   ]
+    // },
+    // {
+    //   "minzoom": 6,
+    //   "source": "esri",
+    //   "source-layer": "Road\/label",
+    //   "layout": {
+    //     "icon-rotation-alignment": "viewport",
+    //     "text-size": 8.5,
+    //     "text-field": "{_name}",
+    //     "symbol-avoid-edges": true,
+    //     "text-padding": 30,
+    //     "text-max-width": 8,
+    //     "text-font": [
+    //       "Arial Regular"
+    //     ],
+    //     "icon-image": "Road\/Rectangle hexagon green white (Alt)\/{_len}",
+    //     "symbol-placement": "line",
+    //     "text-rotation-alignment": "viewport",
+    //     "text-offset": [
+    //       0,
+    //       0.3
+    //     ]
+    //   },
+    //   "type": "symbol",
+    //   "paint": {
+    //     "text-color": "#ffffff"
+    //   },
+    //   "id": "Road\/label\/Rectangle hexagon green white (Alt)",
+    //   "filter": [
+    //     "==",
+    //     "_label_class",
+    //     70
+    //   ]
+    // },
+    // {
+    //   "minzoom": 6,
+    //   "source": "esri",
+    //   "source-layer": "Road\/label",
+    //   "layout": {
+    //     "icon-rotation-alignment": "viewport",
+    //     "text-size": 8.5,
+    //     "text-field": "{_name}",
+    //     "symbol-avoid-edges": true,
+    //     "text-padding": 30,
+    //     "text-max-width": 8,
+    //     "text-font": [
+    //       "Arial Regular"
+    //     ],
+    //     "icon-image": "Road\/Rectangle hexagon green white\/{_len}",
+    //     "symbol-placement": "line",
+    //     "text-rotation-alignment": "viewport",
+    //     "text-offset": [
+    //       0,
+    //       0.3
+    //     ]
+    //   },
+    //   "type": "symbol",
+    //   "paint": {
+    //     "text-color": "#ffffff"
+    //   },
+    //   "id": "Road\/label\/Rectangle hexagon green white",
+    //   "filter": [
+    //     "==",
+    //     "_label_class",
+    //     69
+    //   ]
+    // },
+    // {
+    //   "minzoom": 6,
+    //   "source": "esri",
+    //   "source-layer": "Road\/label",
+    //   "layout": {
+    //     "icon-rotation-alignment": "viewport",
+    //     "text-size": 8.5,
+    //     "text-field": "{_name}",
+    //     "symbol-avoid-edges": true,
+    //     "text-padding": 30,
+    //     "text-max-width": 8,
+    //     "text-font": [
+    //       "Arial Regular"
+    //     ],
+    //     "icon-image": "Road\/Rectangle hexagon brown white (Alt)\/{_len}",
+    //     "symbol-placement": "line",
+    //     "text-rotation-alignment": "viewport",
+    //     "text-offset": [
+    //       0,
+    //       0.3
+    //     ]
+    //   },
+    //   "type": "symbol",
+    //   "paint": {
+    //     "text-color": "#ffffff"
+    //   },
+    //   "id": "Road\/label\/Rectangle hexagon brown white (Alt)",
+    //   "filter": [
+    //     "==",
+    //     "_label_class",
+    //     72
+    //   ]
+    // },
+    // {
+    //   "minzoom": 6,
+    //   "source": "esri",
+    //   "source-layer": "Road\/label",
+    //   "layout": {
+    //     "icon-rotation-alignment": "viewport",
+    //     "text-size": 8.5,
+    //     "text-field": "{_name}",
+    //     "symbol-avoid-edges": true,
+    //     "text-padding": 30,
+    //     "text-max-width": 8,
+    //     "text-font": [
+    //       "Arial Regular"
+    //     ],
+    //     "icon-image": "Road\/Rectangle hexagon brown white\/{_len}",
+    //     "symbol-placement": "line",
+    //     "text-rotation-alignment": "viewport",
+    //     "text-offset": [
+    //       0,
+    //       0.3
+    //     ]
+    //   },
+    //   "type": "symbol",
+    //   "paint": {
+    //     "text-color": "#ffffff"
+    //   },
+    //   "id": "Road\/label\/Rectangle hexagon brown white",
+    //   "filter": [
+    //     "==",
+    //     "_label_class",
+    //     71
+    //   ]
+    // },
+    // {
+    //   "minzoom": 6,
+    //   "source": "esri",
+    //   "source-layer": "Road\/label",
+    //   "layout": {
+    //     "text-letter-spacing": 0.02,
+    //     "text-size": 8.5,
+    //     "text-padding": 30,
+    //     "text-field": "{_name}",
+    //     "icon-rotation-alignment": "viewport",
+    //     "text-offset": [
+    //       0,
+    //       0.1
+    //     ],
+    //     "text-rotation-alignment": "viewport",
+    //     "text-max-width": 8,
+    //     "symbol-avoid-edges": true,
+    //     "icon-image": "Road\/Octagon green white (Alt)\/{_len}",
+    //     "text-font": [
+    //       "Arial Regular"
+    //     ],
+    //     "symbol-placement": "line"
+    //   },
+    //   "type": "symbol",
+    //   "paint": {
+    //     "text-color": "#ffffff"
+    //   },
+    //   "id": "Road\/label\/Octagon green white (Alt)",
+    //   "filter": [
+    //     "==",
+    //     "_label_class",
+    //     74
+    //   ]
+    // },
+    // {
+    //   "minzoom": 6,
+    //   "source": "esri",
+    //   "source-layer": "Road\/label",
+    //   "layout": {
+    //     "text-letter-spacing": 0.02,
+    //     "text-size": 8.5,
+    //     "text-padding": 30,
+    //     "text-field": "{_name}",
+    //     "icon-rotation-alignment": "viewport",
+    //     "text-offset": [
+    //       0,
+    //       0.1
+    //     ],
+    //     "text-rotation-alignment": "viewport",
+    //     "text-max-width": 8,
+    //     "symbol-avoid-edges": true,
+    //     "icon-image": "Road\/Octagon green white\/{_len}",
+    //     "text-font": [
+    //       "Arial Regular"
+    //     ],
+    //     "symbol-placement": "line"
+    //   },
+    //   "type": "symbol",
+    //   "paint": {
+    //     "text-color": "#ffffff"
+    //   },
+    //   "id": "Road\/label\/Octagon green white",
+    //   "filter": [
+    //     "==",
+    //     "_label_class",
+    //     73
+    //   ]
+    // },
+    // {
+    //   "minzoom": 6,
+    //   "source": "esri",
+    //   "source-layer": "Road\/label",
+    //   "layout": {
+    //     "text-offset": [
+    //       0,
+    //       -0.142857
+    //     ],
+    //     "text-size": 9.33,
+    //     "text-max-width": 8,
+    //     "text-field": "{_name}",
+    //     "symbol-avoid-edges": true,
+    //     "text-padding": 30,
+    //     "text-font": [
+    //       "Arial Regular"
+    //     ],
+    //     "icon-rotation-alignment": "viewport",
+    //     "icon-image": "Road\/Shield white black (Alt)\/{_len}",
+    //     "symbol-placement": "line",
+    //     "text-rotation-alignment": "viewport"
+    //   },
+    //   "type": "symbol",
+    //   "paint": {
+    //     "text-color": "#ffffff"
+    //   },
+    //   "id": "Road\/label\/Shield white black (Alt)",
+    //   "filter": [
+    //     "==",
+    //     "_label_class",
+    //     10
+    //   ]
+    // },
+    // {
+    //   "minzoom": 6,
+    //   "source": "esri",
+    //   "source-layer": "Road\/label",
+    //   "layout": {
+    //     "text-offset": [
+    //       0,
+    //       -0.142857
+    //     ],
+    //     "text-size": 9.33,
+    //     "text-max-width": 8,
+    //     "text-field": "{_name}",
+    //     "symbol-avoid-edges": true,
+    //     "text-padding": 30,
+    //     "text-font": [
+    //       "Arial Regular"
+    //     ],
+    //     "icon-rotation-alignment": "viewport",
+    //     "icon-image": "Road\/Shield white black\/{_len}",
+    //     "symbol-placement": "line",
+    //     "text-rotation-alignment": "viewport"
+    //   },
+    //   "type": "symbol",
+    //   "paint": {
+    //     "text-color": "#ffffff"
+    //   },
+    //   "id": "Road\/label\/Shield white black",
+    //   "filter": [
+    //     "==",
+    //     "_label_class",
+    //     9
+    //   ]
+    // },
+    // {
+    //   "minzoom": 6,
+    //   "source": "esri",
+    //   "source-layer": "Road\/label",
+    //   "layout": {
+    //     "icon-rotation-alignment": "viewport",
+    //     "text-size": 9.33,
+    //     "text-field": "{_name}",
+    //     "symbol-avoid-edges": true,
+    //     "text-padding": 30,
+    //     "text-max-width": 8,
+    //     "text-font": [
+    //       "Arial Regular"
+    //     ],
+    //     "icon-image": "Road\/Secondary Hwy green white (Alt)\/{_len}",
+    //     "symbol-placement": "line",
+    //     "text-rotation-alignment": "viewport",
+    //     "text-offset": [
+    //       -0.1,
+    //       0
+    //     ]
+    //   },
+    //   "type": "symbol",
+    //   "paint": {
+    //     "text-color": "#ffffff"
+    //   },
+    //   "id": "Road\/label\/Secondary Hwy green white (Alt)",
+    //   "filter": [
+    //     "==",
+    //     "_label_class",
+    //     14
+    //   ]
+    // },
+    // {
+    //   "minzoom": 6,
+    //   "source": "esri",
+    //   "source-layer": "Road\/label",
+    //   "layout": {
+    //     "icon-rotation-alignment": "viewport",
+    //     "text-size": 9.33,
+    //     "text-field": "{_name}",
+    //     "symbol-avoid-edges": true,
+    //     "text-padding": 30,
+    //     "text-max-width": 8,
+    //     "text-font": [
+    //       "Arial Regular"
+    //     ],
+    //     "icon-image": "Road\/Secondary Hwy green white\/{_len}",
+    //     "symbol-placement": "line",
+    //     "text-rotation-alignment": "viewport",
+    //     "text-offset": [
+    //       -0.1,
+    //       0
+    //     ]
+    //   },
+    //   "type": "symbol",
+    //   "paint": {
+    //     "text-color": "#ffffff"
+    //   },
+    //   "id": "Road\/label\/Secondary Hwy green white",
+    //   "filter": [
+    //     "==",
+    //     "_label_class",
+    //     13
+    //   ]
+    // },
+    // {
+    //   "minzoom": 6,
+    //   "source": "esri",
+    //   "source-layer": "Road\/label",
+    //   "layout": {
+    //     "icon-rotation-alignment": "viewport",
+    //     "text-size": 8.5,
+    //     "text-field": "{_name}",
+    //     "symbol-avoid-edges": true,
+    //     "text-padding": 1,
+    //     "text-max-width": 8,
+    //     "text-font": [
+    //       "Arial Regular"
+    //     ],
+    //     "icon-image": "Road\/Secondary Hwy white black (Alt)\/{_len}",
+    //     "symbol-placement": "line",
+    //     "text-rotation-alignment": "viewport",
+    //     "text-offset": [
+    //       0,
+    //       0
+    //     ]
+    //   },
+    //   "type": "symbol",
+    //   "paint": {
+    //     "text-color": "#ffffff"
+    //   },
+    //   "id": "Road\/label\/Secondary Hwy white black (Alt)",
+    //   "filter": [
+    //     "==",
+    //     "_label_class",
+    //     12
+    //   ]
+    // },
+    // {
+    //   "minzoom": 6,
+    //   "source": "esri",
+    //   "source-layer": "Road\/label",
+    //   "layout": {
+    //     "icon-rotation-alignment": "viewport",
+    //     "text-size": 8.5,
+    //     "text-field": "{_name}",
+    //     "symbol-avoid-edges": true,
+    //     "text-padding": 30,
+    //     "text-max-width": 8,
+    //     "text-font": [
+    //       "Arial Regular"
+    //     ],
+    //     "icon-image": "Road\/Secondary Hwy white black\/{_len}",
+    //     "symbol-placement": "line",
+    //     "text-rotation-alignment": "viewport",
+    //     "text-offset": [
+    //       0,
+    //       0
+    //     ]
+    //   },
+    //   "type": "symbol",
+    //   "paint": {
+    //     "text-color": "#ffffff"
+    //   },
+    //   "id": "Road\/label\/Secondary Hwy white black",
+    //   "filter": [
+    //     "==",
+    //     "_label_class",
+    //     11
+    //   ]
+    // },
+    // {
+    //   "minzoom": 6,
+    //   "source": "esri",
+    //   "source-layer": "Road\/label",
+    //   "layout": {
+    //     "text-offset": [
+    //       0,
+    //       0
+    //     ],
+    //     "text-size": 8.5,
+    //     "text-max-width": 8,
+    //     "text-field": "{_name}",
+    //     "symbol-avoid-edges": true,
+    //     "text-padding": 30,
+    //     "text-font": [
+    //       "Arial Regular"
+    //     ],
+    //     "icon-rotation-alignment": "viewport",
+    //     "icon-image": "Road\/Shield blue white (Alt)\/{_len}",
+    //     "symbol-placement": "line",
+    //     "text-rotation-alignment": "viewport"
+    //   },
+    //   "type": "symbol",
+    //   "paint": {
+    //     "text-color": "#ffffff"
+    //   },
+    //   "id": "Road\/label\/Shield blue white (Alt)",
+    //   "filter": [
+    //     "==",
+    //     "_label_class",
+    //     8
+    //   ]
+    // },
+    // {
+    //   "minzoom": 6,
+    //   "source": "esri",
+    //   "source-layer": "Road\/label",
+    //   "layout": {
+    //     "text-offset": [
+    //       0,
+    //       0
+    //     ],
+    //     "text-size": 8.5,
+    //     "text-max-width": 8,
+    //     "text-field": "{_name}",
+    //     "symbol-avoid-edges": true,
+    //     "text-padding": 30,
+    //     "text-font": [
+    //       "Arial Regular"
+    //     ],
+    //     "icon-rotation-alignment": "viewport",
+    //     "icon-image": "Road\/Shield blue white\/{_len}",
+    //     "symbol-placement": "line",
+    //     "text-rotation-alignment": "viewport"
+    //   },
+    //   "type": "symbol",
+    //   "paint": {
+    //     "text-color": "#ffffff"
+    //   },
+    //   "id": "Road\/label\/Shield blue white",
+    //   "filter": [
+    //     "==",
+    //     "_label_class",
+    //     7
+    //   ]
+    // },
+    // {
+    //   "minzoom": 15,
+    //   "source": "esri",
+    //   "source-layer": "Trail or path\/label",
+    //   "layout": {
+    //     "text-letter-spacing": 0.05,
+    //     "text-max-width": 8,
+    //     "text-field": "{_name_global}",
+    //     "symbol-avoid-edges": true,
+    //     "text-padding": 301,
+    //     "text-size": 9.33,
+    //     "text-font": [
+    //       "Arial Bold"
+    //     ],
+    //     "symbol-placement": "line"
+    //   },
+    //   "type": "symbol",
+    //   "paint": {
+    //     "text-halo-width": 1,
+    //     "text-halo-color": "#2A2A28",
+    //     "text-color": "#9DC5F2"
+    //   },
+    //   "id": "Trail or path\/label\/Default"
+    // },
+    // {
+    //   "minzoom": 13,
+    //   "source": "esri",
+    //   "source-layer": "Pedestrian\/label",
+    //   "layout": {
+    //     "text-letter-spacing": 0.05,
+    //     "text-max-width": 8,
+    //     "text-field": "{_name_global}",
+    //     "symbol-avoid-edges": true,
+    //     "text-padding": 1,
+    //     "text-size": 10,
+    //     "text-font": [
+    //       "Arial Bold"
+    //     ]
+    //   },
+    //   "type": "symbol",
+    //   "paint": {
+    //     "text-halo-width": 1,
+    //     "text-halo-color": "#2a2a28",
+    //     "text-color": "#bfbdbb"
+    //   },
+    //   "id": "Pedestrian\/label\/Default"
+    // },
+    // {
+    //   "minzoom": 12,
+    //   "source": "esri",
+    //   "source-layer": "Road\/label",
+    //   "layout": {
+    //     "text-letter-spacing": 0.1,
+    //     "text-max-width": 8,
+    //     "text-field": "{_name_global}",
+    //     "symbol-avoid-edges": true,
+    //     "text-padding": 1,
+    //     "text-size": 10.5,
+    //     "text-font": [
+    //       "Arial Bold"
+    //     ],
+    //     "symbol-placement": "line"
+    //   },
+    //   "type": "symbol",
+    //   "paint": {
+    //     "text-halo-width": 1,
+    //     "text-halo-color": "#262624",
+    //     "text-color": "#9DC5F2"
+    //   },
+    //   "id": "Road\/label\/Local",
+    //   "filter": [
+    //     "in",
+    //     "_label_class",
+    //     5,
+    //     7
+    //   ]
+    // },
+    // {
+    //   "minzoom": 10,
+    //   "source": "esri",
+    //   "source-layer": "Road\/label",
+    //   "layout": {
+    //     "text-letter-spacing": 0.1,
+    //     "text-max-width": 8,
+    //     "text-field": "{_name_global}",
+    //     "symbol-avoid-edges": true,
+    //     "text-padding": 1,
+    //     "text-size": 10.5,
+    //     "text-font": [
+    //       "Arial Bold"
+    //     ],
+    //     "symbol-placement": "line"
+    //   },
+    //   "type": "symbol",
+    //   "paint": {
+    //     "text-halo-width": 1,
+    //     "text-halo-color": "#262624",
+    //     "text-color": "#9DC5F2"
+    //   },
+    //   "id": "Road\/label\/Highway, Major",
+    //   "filter": [
+    //     "in",
+    //     "_label_class",
+    //     0,
+    //     2
+    //   ]
+    // },
+    // {
+    //   "minzoom": 11,
+    //   "source": "esri",
+    //   "source-layer": "Road\/label",
+    //   "layout": {
+    //     "text-letter-spacing": 0.1,
+    //     "text-max-width": 8,
+    //     "text-field": "{_name_global}",
+    //     "symbol-avoid-edges": true,
+    //     "text-padding": 1,
+    //     "text-size": 10.5,
+    //     "text-font": [
+    //       "Arial Bold"
+    //     ],
+    //     "symbol-placement": "line"
+    //   },
+    //   "type": "symbol",
+    //   "paint": {
+    //     "text-halo-width": 1,
+    //     "text-halo-color": "#262624",
+    //     "text-color": "#9DC5F2"
+    //   },
+    //   "id": "Road\/label\/Highway, Minor",
+    //   "filter": [
+    //     "==",
+    //     "_label_class",
+    //     4
+    //   ]
+    // },
+    // {
+    //   "minzoom": 10,
+    //   "source": "esri",
+    //   "source-layer": "Road\/label",
+    //   "layout": {
+    //     "text-letter-spacing": 0.1,
+    //     "text-max-width": 8,
+    //     "text-field": "{_name}",
+    //     "symbol-avoid-edges": true,
+    //     "text-padding": 1,
+    //     "text-size": 10.5,
+    //     "text-font": [
+    //       "Arial Bold"
+    //     ],
+    //     "symbol-placement": "line"
+    //   },
+    //   "type": "symbol",
+    //   "paint": {
+    //     "text-halo-width": 1,
+    //     "text-halo-color": "#262624",
+    //     "text-color": "#9DC5F2"
+    //   },
+    //   "id": "Road\/label\/Highway, Major, alt name",
+    //   "filter": [
+    //     "in",
+    //     "_label_class",
+    //     1,
+    //     3
+    //   ]
+    // },
+    // {
+    //   "minzoom": 15,
+    //   "source": "esri",
+    //   "source-layer": "Road tunnel\/label",
+    //   "layout": {
+    //     "text-letter-spacing": 0.05,
+    //     "text-max-width": 8,
+    //     "text-field": "{_name_global}",
+    //     "symbol-avoid-edges": true,
+    //     "text-padding": 1,
+    //     "text-size": 9.33,
+    //     "text-font": [
+    //       "Arial Bold"
+    //     ],
+    //     "symbol-placement": "line"
+    //   },
+    //   "type": "symbol",
+    //   "paint": {
+    //     "text-halo-width": 1,
+    //     "text-halo-color": "#262624",
+    //     "text-color": "#9DC5F2"
+    //   },
+    //   "id": "Road tunnel\/label\/Pedestrian",
+    //   "filter": [
+    //     "==",
+    //     "_label_class",
+    //     6
+    //   ]
+    // },
+    // {
+    //   "minzoom": 12,
+    //   "source": "esri",
+    //   "source-layer": "Road tunnel\/label",
+    //   "layout": {
+    //     "text-letter-spacing": 0.1,
+    //     "text-max-width": 8,
+    //     "text-field": "{_name_global}",
+    //     "symbol-avoid-edges": true,
+    //     "text-padding": 1,
+    //     "text-size": 10.666667,
+    //     "text-font": [
+    //       "Arial Regular"
+    //     ],
+    //     "symbol-placement": "line"
+    //   },
+    //   "type": "symbol",
+    //   "paint": {
+    //     "text-halo-width": 1,
+    //     "text-halo-color": "#262624",
+    //     "text-color": "#9DC5F2"
+    //   },
+    //   "id": "Road tunnel\/label\/Local",
+    //   "filter": [
+    //     "in",
+    //     "_label_class",
+    //     5,
+    //     7
+    //   ]
+    // },
+    // {
+    //   "minzoom": 10,
+    //   "source": "esri",
+    //   "source-layer": "Road tunnel\/label",
+    //   "layout": {
+    //     "text-letter-spacing": 0.1,
+    //     "text-max-width": 8,
+    //     "text-field": "{_name_global}",
+    //     "symbol-avoid-edges": true,
+    //     "text-padding": 1,
+    //     "text-size": 10.5,
+    //     "text-font": [
+    //       "Arial Bold"
+    //     ],
+    //     "symbol-placement": "line"
+    //   },
+    //   "type": "symbol",
+    //   "paint": {
+    //     "text-halo-width": 1,
+    //     "text-halo-color": "#262624",
+    //     "text-color": "#9DC5F2"
+    //   },
+    //   "id": "Road tunnel\/label\/Highway",
+    //   "filter": [
+    //     "in",
+    //     "_label_class",
+    //     0,
+    //     2
+    //   ]
+    // },
+    // {
+    //   "minzoom": 10,
+    //   "source": "esri",
+    //   "source-layer": "Road tunnel\/label",
+    //   "layout": {
+    //     "text-letter-spacing": 0.1,
+    //     "text-max-width": 8,
+    //     "text-field": "{_name_global}",
+    //     "symbol-avoid-edges": true,
+    //     "text-padding": 1,
+    //     "text-size": 10.5,
+    //     "text-font": [
+    //       "Arial Bold"
+    //     ],
+    //     "symbol-placement": "line"
+    //   },
+    //   "type": "symbol",
+    //   "paint": {
+    //     "text-halo-width": 1,
+    //     "text-halo-color": "#262624",
+    //     "text-color": "#9DC5F2"
+    //   },
+    //   "id": "Road tunnel\/label\/Minor",
+    //   "filter": [
+    //     "==",
+    //     "_label_class",
+    //     4
+    //   ]
+    // },
+    // {
+    //   "minzoom": 10,
+    //   "source": "esri",
+    //   "source-layer": "Road tunnel\/label",
+    //   "layout": {
+    //     "text-letter-spacing": 0.1,
+    //     "text-max-width": 8,
+    //     "text-field": "{_name}",
+    //     "symbol-avoid-edges": true,
+    //     "text-padding": 1,
+    //     "text-size": 10.5,
+    //     "text-font": [
+    //       "Arial Bold"
+    //     ],
+    //     "symbol-placement": "line"
+    //   },
+    //   "type": "symbol",
+    //   "paint": {
+    //     "text-halo-width": 1,
+    //     "text-halo-color": "#262624",
+    //     "text-color": "#9DC5F2"
+    //   },
+    //   "id": "Road tunnel\/label\/Highway, alt name",
+    //   "filter": [
+    //     "in",
+    //     "_label_class",
+    //     1,
+    //     3
+    //   ]
+    // },
+    // {
+    //   "minzoom": 15,
+    //   "source": "esri",
+    //   "source-layer": "Exit",
+    //   "layout": {
+    //     "text-letter-spacing": 0.05,
+    //     "text-anchor": "center",
+    //     "text-field": "{_name_global}",
+    //     "symbol-avoid-edges": true,
+    //     "text-padding": 1,
+    //     "text-max-width": 9,
+    //     "text-size": 10,
+    //     "text-font": [
+    //       "Arial Bold"
+    //     ]
+    //   },
+    //   "type": "symbol",
+    //   "paint": {
+    //     "text-halo-width": 1,
+    //     "text-halo-color": "#000000",
+    //     "text-color": "#6eff24",
+    //     "text-halo-blur": 1.3
+    //   },
+    //   "id": "Exit\/Default"
+    // },
+    // {
+    //   "minzoom": 15,
+    //   "source": "esri",
+    //   "source-layer": "Building\/label",
+    //   "layout": {
+    //     "text-letter-spacing": 0.05,
+    //     "text-max-width": 8,
+    //     "text-field": "{_name_global}",
+    //     "symbol-avoid-edges": true,
+    //     "text-padding": 1,
+    //     "text-size": 10,
+    //     "text-font": [
+    //       "Arial Regular"
+    //     ]
+    //   },
+    //   "type": "symbol",
+    //   "paint": {
+    //     "text-halo-width": 1,
+    //     "text-halo-color": "#2A2A28",
+    //     "text-color": "#969696"
+    //   },
+    //   "id": "Building\/label\/Default"
+    // },
+    // {
+    //   "minzoom": 6,
+    //   "source": "esri",
+    //   "source-layer": "Military\/label",
+    //   "layout": {
+    //     "text-letter-spacing": 0.05,
+    //     "text-max-width": 8,
+    //     "text-field": "{_name_global}",
+    //     "symbol-avoid-edges": true,
+    //     "text-padding": 1,
+    //     "text-size": 10,
+    //     "text-font": [
+    //       "Arial Regular"
+    //     ]
+    //   },
+    //   "type": "symbol",
+    //   "paint": {
+    //     "text-halo-width": 1,
+    //     "text-halo-color": "#262624",
+    //     "text-color": "#b8b878"
+    //   },
+    //   "id": "Military\/label\/Default"
+    // },
+    // {
+    //   "minzoom": 13,
+    //   "source": "esri",
+    //   "source-layer": "Transportation\/label",
+    //   "layout": {
+    //     "text-letter-spacing": 0.05,
+    //     "text-max-width": 8,
+    //     "text-field": "{_name_global}",
+    //     "symbol-avoid-edges": true,
+    //     "text-padding": 1,
+    //     "text-size": 10,
+    //     "text-font": [
+    //       "Arial Regular"
+    //     ]
+    //   },
+    //   "type": "symbol",
+    //   "paint": {
+    //     "text-halo-width": 1,
+    //     "text-halo-color": "#262624",
+    //     "text-color": "#b8b878"
+    //   },
+    //   "id": "Transportation\/label\/Default"
+    // },
+    // {
+    //   "minzoom": 13,
+    //   "source": "esri",
+    //   "source-layer": "Freight\/label",
+    //   "layout": {
+    //     "text-letter-spacing": 0.05,
+    //     "text-max-width": 8,
+    //     "text-field": "{_name_global}",
+    //     "symbol-avoid-edges": true,
+    //     "text-padding": 1,
+    //     "text-size": 10,
+    //     "text-font": [
+    //       "Arial Regular"
+    //     ]
+    //   },
+    //   "type": "symbol",
+    //   "paint": {
+    //     "text-halo-width": 1,
+    //     "text-halo-color": "#262624",
+    //     "text-color": "#b8b878"
+    //   },
+    //   "id": "Freight\/label\/Default"
+    // },
+    // {
+    //   "source": "esri",
+    //   "source-layer": "Port\/label",
+    //   "layout": {
+    //     "text-letter-spacing": 0.05,
+    //     "text-max-width": 8,
+    //     "text-field": "{_name}",
+    //     "symbol-avoid-edges": true,
+    //     "text-padding": 1,
+    //     "text-size": 10,
+    //     "text-font": [
+    //       "Arial Regular"
+    //     ]
+    //   },
+    //   "type": "symbol",
+    //   "paint": {
+    //     "text-halo-width": 1,
+    //     "text-halo-color": "#262624",
+    //     "text-color": "#b8b878"
+    //   },
+    //   "id": "Port\/label\/Default"
+    // },
+    // {
+    //   "minzoom": 13,
+    //   "source": "esri",
+    //   "source-layer": "Industry\/label",
+    //   "layout": {
+    //     "text-letter-spacing": 0.05,
+    //     "text-max-width": 8,
+    //     "text-field": "{_name_global}",
+    //     "symbol-avoid-edges": true,
+    //     "text-padding": 1,
+    //     "text-size": 10,
+    //     "text-font": [
+    //       "Arial Regular"
+    //     ]
+    //   },
+    //   "type": "symbol",
+    //   "paint": {
+    //     "text-halo-width": 1,
+    //     "text-halo-color": "#262624",
+    //     "text-color": "#b8b878"
+    //   },
+    //   "id": "Industry\/label\/Default"
+    // },
+    // {
+    //   "minzoom": 13,
+    //   "source": "esri",
+    //   "source-layer": "Water and wastewater\/label",
+    //   "layout": {
+    //     "text-letter-spacing": 0.05,
+    //     "text-max-width": 8,
+    //     "text-field": "{_name_global}",
+    //     "symbol-avoid-edges": true,
+    //     "text-padding": 1,
+    //     "text-size": 10,
+    //     "text-font": [
+    //       "Arial Regular"
+    //     ]
+    //   },
+    //   "type": "symbol",
+    //   "paint": {
+    //     "text-halo-width": 1,
+    //     "text-halo-color": "#262624",
+    //     "text-color": "#b8b878"
+    //   },
+    //   "id": "Water and wastewater\/label\/Default"
+    // },
+    // {
+    //   "minzoom": 13,
+    //   "source": "esri",
+    //   "source-layer": "Government\/label",
+    //   "layout": {
+    //     "text-letter-spacing": 0.05,
+    //     "text-max-width": 8,
+    //     "text-field": "{_name_global}",
+    //     "symbol-avoid-edges": true,
+    //     "text-padding": 1,
+    //     "text-size": 10,
+    //     "text-font": [
+    //       "Arial Regular"
+    //     ]
+    //   },
+    //   "type": "symbol",
+    //   "paint": {
+    //     "text-halo-width": 1,
+    //     "text-halo-color": "#262624",
+    //     "text-color": "#b8b878"
+    //   },
+    //   "id": "Government\/label\/Default"
+    // },
+    // {
+    //   "minzoom": 13,
+    //   "source": "esri",
+    //   "source-layer": "Finance\/label",
+    //   "layout": {
+    //     "text-letter-spacing": 0.05,
+    //     "text-max-width": 8,
+    //     "text-field": "{_name_global}",
+    //     "symbol-avoid-edges": true,
+    //     "text-padding": 1,
+    //     "text-size": 10,
+    //     "text-font": [
+    //       "Arial Regular"
+    //     ]
+    //   },
+    //   "type": "symbol",
+    //   "paint": {
+    //     "text-halo-width": 1,
+    //     "text-halo-color": "#262624",
+    //     "text-color": "#b8b878"
+    //   },
+    //   "id": "Finance\/label\/Default"
+    // },
+    // {
+    //   "minzoom": 13,
+    //   "source": "esri",
+    //   "source-layer": "Retail\/label",
+    //   "layout": {
+    //     "text-letter-spacing": 0.05,
+    //     "text-max-width": 8,
+    //     "text-field": "{_name_global}",
+    //     "symbol-avoid-edges": true,
+    //     "text-padding": 1,
+    //     "text-size": 10,
+    //     "text-font": [
+    //       "Arial Regular"
+    //     ]
+    //   },
+    //   "type": "symbol",
+    //   "paint": {
+    //     "text-halo-width": 1,
+    //     "text-halo-color": "#262624",
+    //     "text-color": "#b8b878"
+    //   },
+    //   "id": "Retail\/label\/Default"
+    // },
+    // {
+    //   "minzoom": 7,
+    //   "source": "esri",
+    //   "source-layer": "Indigenous\/label",
+    //   "layout": {
+    //     "text-letter-spacing": 0.05,
+    //     "text-max-width": 8,
+    //     "text-field": "{_name_global}",
+    //     "symbol-avoid-edges": true,
+    //     "text-padding": 1,
+    //     "text-size": 10,
+    //     "text-font": [
+    //       "Arial Regular"
+    //     ]
+    //   },
+    //   "type": "symbol",
+    //   "paint": {
+    //     "text-halo-width": 1,
+    //     "text-halo-color": "#262624",
+    //     "text-color": "#b8b878"
+    //   },
+    //   "id": "Indigenous\/label\/Default"
+    // },
+    // {
+    //   "minzoom": 13,
+    //   "source": "esri",
+    //   "source-layer": "Landmark\/label",
+    //   "layout": {
+    //     "text-letter-spacing": 0.05,
+    //     "text-max-width": 8,
+    //     "text-field": "{_name_global}",
+    //     "symbol-avoid-edges": true,
+    //     "text-padding": 1,
+    //     "text-size": 10,
+    //     "text-font": [
+    //       "Arial Regular"
+    //     ]
+    //   },
+    //   "type": "symbol",
+    //   "paint": {
+    //     "text-halo-width": 1,
+    //     "text-halo-color": "#262624",
+    //     "text-color": "#b8b878"
+    //   },
+    //   "id": "Landmark\/label\/Default"
+    // },
+    // {
+    //   "minzoom": 13,
+    //   "source": "esri",
+    //   "source-layer": "Emergency\/label",
+    //   "layout": {
+    //     "text-letter-spacing": 0.05,
+    //     "text-max-width": 8,
+    //     "text-field": "{_name_global}",
+    //     "symbol-avoid-edges": true,
+    //     "text-padding": 1,
+    //     "text-size": 10,
+    //     "text-font": [
+    //       "Arial Regular"
+    //     ]
+    //   },
+    //   "type": "symbol",
+    //   "paint": {
+    //     "text-halo-width": 1,
+    //     "text-halo-color": "#262624",
+    //     "text-color": "#b8b878"
+    //   },
+    //   "id": "Emergency\/label\/Default"
+    // },
+    // {
+    //   "minzoom": 9,
+    //   "source": "esri",
+    //   "source-layer": "Airport\/label",
+    //   "layout": {
+    //     "text-letter-spacing": 0.05,
+    //     "text-max-width": 8,
+    //     "text-field": "{_name_global}",
+    //     "symbol-avoid-edges": true,
+    //     "text-padding": 1,
+    //     "text-size": 10,
+    //     "text-font": [
+    //       "Arial Regular"
+    //     ]
+    //   },
+    //   "type": "symbol",
+    //   "paint": {
+    //     "text-halo-width": 1,
+    //     "text-halo-color": "#262624",
+    //     "text-color": "#b8b878"
+    //   },
+    //   "id": "Airport\/label\/Airport property"
+    // },
+    // {
+    //   "minzoom": 11,
+    //   "source": "esri",
+    //   "source-layer": "Education\/label",
+    //   "layout": {
+    //     "text-letter-spacing": 0.05,
+    //     "text-max-width": 8,
+    //     "text-field": "{_name_global}",
+    //     "symbol-avoid-edges": true,
+    //     "text-padding": 1,
+    //     "text-size": 10,
+    //     "text-font": [
+    //       "Arial Regular"
+    //     ]
+    //   },
+    //   "type": "symbol",
+    //   "paint": {
+    //     "text-halo-width": 1,
+    //     "text-halo-color": "#262624",
+    //     "text-color": "#b8b878"
+    //   },
+    //   "id": "Education\/label\/Default"
+    // },
+    // {
+    //   "minzoom": 11,
+    //   "source": "esri",
+    //   "source-layer": "Medical\/label",
+    //   "layout": {
+    //     "text-letter-spacing": 0.05,
+    //     "text-max-width": 8,
+    //     "text-field": "{_name_global}",
+    //     "symbol-avoid-edges": true,
+    //     "text-padding": 1,
+    //     "text-size": 10,
+    //     "text-font": [
+    //       "Arial Regular"
+    //     ]
+    //   },
+    //   "type": "symbol",
+    //   "paint": {
+    //     "text-halo-width": 1,
+    //     "text-halo-color": "#262624",
+    //     "text-color": "#b8b878"
+    //   },
+    //   "id": "Medical\/label\/Default"
+    // },
+    // {
+    //   "minzoom": 12,
+    //   "source": "esri",
+    //   "source-layer": "Openspace or forest\/label",
+    //   "layout": {
+    //     "text-letter-spacing": 0.05,
+    //     "text-max-width": 8,
+    //     "text-field": "{_name_global}",
+    //     "symbol-avoid-edges": true,
+    //     "text-padding": 1,
+    //     "text-size": 10,
+    //     "text-font": [
+    //       "Arial Regular"
+    //     ]
+    //   },
+    //   "type": "symbol",
+    //   "paint": {
+    //     "text-halo-width": 1,
+    //     "text-halo-color": "#262624",
+    //     "text-color": "#678C61"
+    //   },
+    //   "id": "Openspace or forest\/label\/Default"
+    // },
+    // {
+    //   "minzoom": 11,
+    //   "source": "esri",
+    //   "source-layer": "Park or farming\/label",
+    //   "layout": {
+    //     "text-letter-spacing": 0.05,
+    //     "text-max-width": 8,
+    //     "text-field": "{_name_global}",
+    //     "symbol-avoid-edges": true,
+    //     "text-padding": 1,
+    //     "text-size": 10,
+    //     "text-font": [
+    //       "Arial Regular"
+    //     ]
+    //   },
+    //   "type": "symbol",
+    //   "paint": {
+    //     "text-halo-width": 1,
+    //     "text-halo-color": "#262624",
+    //     "text-color": "#678C61"
+    //   },
+    //   "id": "Park or farming\/label\/Default"
+    // },
+    // {
+    //   "minzoom": 13,
+    //   "source": "esri",
+    //   "source-layer": "Cemetery\/label",
+    //   "layout": {
+    //     "text-letter-spacing": 0.05,
+    //     "text-max-width": 8,
+    //     "text-field": "{_name_global}",
+    //     "symbol-avoid-edges": true,
+    //     "text-padding": 1,
+    //     "text-size": 10,
+    //     "text-font": [
+    //       "Arial Regular"
+    //     ]
+    //   },
+    //   "type": "symbol",
+    //   "paint": {
+    //     "text-halo-width": 1,
+    //     "text-halo-color": "#262624",
+    //     "text-color": "#678C61"
+    //   },
+    //   "id": "Cemetery\/label\/Default"
+    // },
+    // {
+    //   "minzoom": 11,
+    //   "source": "esri",
+    //   "source-layer": "Golf course\/label",
+    //   "layout": {
+    //     "text-letter-spacing": 0.05,
+    //     "text-max-width": 8,
+    //     "text-field": "{_name_global}",
+    //     "symbol-avoid-edges": true,
+    //     "text-padding": 1,
+    //     "text-size": 10,
+    //     "text-font": [
+    //       "Arial Regular"
+    //     ]
+    //   },
+    //   "type": "symbol",
+    //   "paint": {
+    //     "text-halo-width": 1,
+    //     "text-halo-color": "#262624",
+    //     "text-color": "#678C61"
+    //   },
+    //   "id": "Golf course\/label\/Default"
+    // },
+    // {
+    //   "minzoom": 11,
+    //   "source": "esri",
+    //   "source-layer": "Zoo\/label",
+    //   "layout": {
+    //     "text-letter-spacing": 0.05,
+    //     "text-max-width": 8,
+    //     "text-field": "{_name_global}",
+    //     "symbol-avoid-edges": true,
+    //     "text-padding": 1,
+    //     "text-size": 10,
+    //     "text-font": [
+    //       "Arial Regular"
+    //     ]
+    //   },
+    //   "type": "symbol",
+    //   "paint": {
+    //     "text-halo-width": 1,
+    //     "text-halo-color": "#262624",
+    //     "text-color": "#678C61"
+    //   },
+    //   "id": "Zoo\/label\/Default"
+    // },
+    // {
+    //   "minzoom": 10,
+    //   "source": "esri",
+    //   "source-layer": "Marine park\/label",
+    //   "layout": {
+    //     "text-letter-spacing": 0.05,
+    //     "text-max-width": 8,
+    //     "text-field": "{_name_global}",
+    //     "symbol-avoid-edges": true,
+    //     "text-padding": 1,
+    //     "text-size": 10,
+    //     "text-font": [
+    //       "Arial Regular"
+    //     ]
+    //   },
+    //   "type": "symbol",
+    //   "paint": {
+    //     "text-color": "#5C9BD9"
+    //   },
+    //   "id": "Marine park\/label\/Default"
+    // },
+    // {
+    //   "minzoom": 9,
+    //   "source": "esri",
+    //   "source-layer": "Admin1 forest or park\/label",
+    //   "layout": {
+    //     "text-letter-spacing": 0.05,
+    //     "text-max-width": 8,
+    //     "text-field": "{_name_global}",
+    //     "symbol-avoid-edges": true,
+    //     "text-padding": 1,
+    //     "text-size": 10,
+    //     "text-font": [
+    //       "Arial Regular"
+    //     ]
+    //   },
+    //   "type": "symbol",
+    //   "paint": {
+    //     "text-halo-width": 1,
+    //     "text-halo-color": "#262624",
+    //     "text-color": "#678C61"
+    //   },
+    //   "id": "Admin1 forest or park\/label\/Default"
+    // },
+    // {
+    //   "minzoom": 6,
+    //   "source": "esri",
+    //   "source-layer": "Admin0 forest or park\/label",
+    //   "layout": {
+    //     "text-letter-spacing": 0.05,
+    //     "text-max-width": 8,
+    //     "text-field": "{_name_global}",
+    //     "symbol-avoid-edges": true,
+    //     "text-padding": 1,
+    //     "text-size": 10,
+    //     "text-font": [
+    //       "Arial Regular"
+    //     ]
+    //   },
+    //   "type": "symbol",
+    //   "paint": {
+    //     "text-halo-width": 1,
+    //     "text-halo-color": "#262624",
+    //     "text-color": "#678C61"
+    //   },
+    //   "id": "Admin0 forest or park\/label\/Default"
+    // },
+    // {
+    //   "minzoom": 16,
+    //   "source": "esri",
+    //   "source-layer": "Point of interest",
+    //   "layout": {
+    //     "text-letter-spacing": 0.05,
+    //     "text-anchor": "center",
+    //     "text-field": "{_name_global}",
+    //     "symbol-avoid-edges": true,
+    //     "text-padding": 1,
+    //     "text-max-width": 8,
+    //     "text-size": 10.5,
+    //     "text-font": [
+    //       "Arial Regular"
+    //     ]
+    //   },
+    //   "type": "symbol",
+    //   "paint": {
+    //     "text-halo-width": 1,
+    //     "text-halo-color": "#262624",
+    //     "text-color": "#b8b878"
+    //   },
+    //   "id": "Point of interest\/General and Transit",
+    //   "filter": [
+    //     "in",
+    //     "_symbol",
+    //     0,
+    //     2,
+    //     3
+    //   ]
+    // },
+    // {
+    //   "minzoom": 16,
+    //   "source": "esri",
+    //   "source-layer": "Point of interest",
+    //   "layout": {
+    //     "text-letter-spacing": 0.08,
+    //     "text-anchor": "center",
+    //     "text-field": "{_name_global}",
+    //     "symbol-avoid-edges": true,
+    //     "text-padding": 1,
+    //     "text-max-width": 8,
+    //     "text-size": 10,
+    //     "text-font": [
+    //       "Arial Regular"
+    //     ]
+    //   },
+    //   "type": "symbol",
+    //   "paint": {
+    //     "text-halo-width": 1,
+    //     "text-halo-color": "#262624",
+    //     "text-color": "#678C61"
+    //   },
+    //   "id": "Point of interest\/Park",
+    //   "filter": [
+    //     "==",
+    //     "_label_class",
+    //     1
+    //   ]
+    // },
+    // {
+    //   "minzoom": 8,
+    //   "source": "esri",
+    //   "maxzoom": 11,
+    //   "source-layer": "Admin2 area\/label",
+    //   "layout": {
+    //     "text-size": 10,
+    //     "text-field": "{_name}",
+    //     "text-padding": 1,
+    //     "text-max-width": 8,
+    //     "symbol-avoid-edges": true,
+    //     "text-font": [
+    //       "Arial Regular"
+    //     ]
+    //   },
+    //   "type": "symbol",
+    //   "paint": {
+    //     "text-halo-width": 1,
+    //     "text-halo-color": "#262624",
+    //     "text-color": "#716480"
+    //   },
+    //   "id": "Admin2 area\/label\/small",
+    //   "filter": [
+    //     "==",
+    //     "_label_class",
+    //     1
+    //   ]
+    // },
+    // {
+    //   "minzoom": 8,
+    //   "source": "esri",
+    //   "maxzoom": 11,
+    //   "source-layer": "Admin2 area\/label",
+    //   "layout": {
+    //     "text-size": 12,
+    //     "text-field": "{_name}",
+    //     "text-padding": 1,
+    //     "text-max-width": 8,
+    //     "symbol-avoid-edges": true,
+    //     "text-font": [
+    //       "Arial Regular"
+    //     ]
+    //   },
+    //   "type": "symbol",
+    //   "paint": {
+    //     "text-halo-width": 1,
+    //     "text-halo-color": "#262624",
+    //     "text-color": "#716480"
+    //   },
+    //   "id": "Admin2 area\/label\/large",
+    //   "filter": [
+    //     "==",
+    //     "_label_class",
+    //     0
+    //   ]
+    // },
+    // {
+    //   "minzoom": 6,
+    //   "source": "esri",
+    //   "maxzoom": 10,
+    //   "source-layer": "Admin1 area\/label",
+    //   "layout": {
+    //     "text-size": {
+    //       "stops": [
+    //         [
+    //           6,
+    //           9
+    //         ],
+    //         [
+    //           8,
+    //           11
+    //         ]
+    //       ]
+    //     },
+    //     "text-field": "{_name}",
+    //     "text-padding": 1,
+    //     "text-max-width": 8,
+    //     "symbol-avoid-edges": true,
+    //     "text-font": [
+    //       "Arial Regular"
+    //     ]
+    //   },
+    //   "type": "symbol",
+    //   "paint": {
+    //     "text-halo-width": 1,
+    //     "text-halo-color": "#262624",
+    //     "text-color": "#9378a6"
+    //   },
+    //   "id": "Admin1 area\/label\/x small",
+    //   "filter": [
+    //     "==",
+    //     "_label_class",
+    //     5
+    //   ]
+    // },
+    // {
+    //   "minzoom": 6,
+    //   "source": "esri",
+    //   "maxzoom": 10,
+    //   "source-layer": "Admin1 area\/label",
+    //   "layout": {
+    //     "text-size": {
+    //       "stops": [
+    //         [
+    //           6,
+    //           10
+    //         ],
+    //         [
+    //           8,
+    //           12
+    //         ]
+    //       ]
+    //     },
+    //     "text-field": "{_name}",
+    //     "text-padding": 1,
+    //     "text-max-width": 8,
+    //     "symbol-avoid-edges": true,
+    //     "text-font": [
+    //       "Arial Regular"
+    //     ]
+    //   },
+    //   "type": "symbol",
+    //   "paint": {
+    //     "text-halo-width": 1,
+    //     "text-halo-color": "#262624",
+    //     "text-color": "#9378a6"
+    //   },
+    //   "id": "Admin1 area\/label\/small",
+    //   "filter": [
+    //     "==",
+    //     "_label_class",
+    //     4
+    //   ]
+    // },
+    // {
+    //   "minzoom": 6,
+    //   "source": "esri",
+    //   "maxzoom": 10,
+    //   "source-layer": "Admin1 area\/label",
+    //   "layout": {
+    //     "text-size": {
+    //       "stops": [
+    //         [
+    //           6,
+    //           12
+    //         ],
+    //         [
+    //           8,
+    //           14
+    //         ]
+    //       ]
+    //     },
+    //     "text-field": "{_name}",
+    //     "text-padding": 1,
+    //     "text-max-width": 8,
+    //     "symbol-avoid-edges": true,
+    //     "text-font": [
+    //       "Arial Regular"
+    //     ]
+    //   },
+    //   "type": "symbol",
+    //   "paint": {
+    //     "text-halo-width": 1,
+    //     "text-halo-color": "#262624",
+    //     "text-color": "#9378a6"
+    //   },
+    //   "id": "Admin1 area\/label\/medium",
+    //   "filter": [
+    //     "in",
+    //     "_label_class",
+    //     2,
+    //     3
+    //   ]
+    // },
+    // {
+    //   "minzoom": 6,
+    //   "source": "esri",
+    //   "maxzoom": 10,
+    //   "source-layer": "Admin1 area\/label",
+    //   "layout": {
+    //     "text-size": {
+    //       "stops": [
+    //         [
+    //           6,
+    //           12.5
+    //         ],
+    //         [
+    //           8,
+    //           14.5
+    //         ]
+    //       ]
+    //     },
+    //     "text-field": "{_name}",
+    //     "text-padding": 1,
+    //     "text-max-width": 8,
+    //     "symbol-avoid-edges": true,
+    //     "text-font": [
+    //       "Arial Regular"
+    //     ]
+    //   },
+    //   "type": "symbol",
+    //   "paint": {
+    //     "text-halo-width": 1,
+    //     "text-halo-color": "#262624",
+    //     "text-color": "#9378a6"
+    //   },
+    //   "id": "Admin1 area\/label\/large",
+    //   "filter": [
+    //     "in",
+    //     "_label_class",
+    //     0,
+    //     1
+    //   ]
+    // },
+    // {
+    //   "minzoom": 1,
+    //   "source": "esri",
+    //   "maxzoom": 17,
+    //   "source-layer": "Neighborhood",
+    //   "layout": {
+    //     "text-letter-spacing": 0.1,
+    //     "text-size": 10,
+    //     "text-anchor": "bottom-left",
+    //     "text-field": "{_name_global}",
+    //     "icon-padding": 1,
+    //     "text-padding": 1,
+    //     "icon-allow-overlap": true,
+    //     "text-font": [
+    //       "Arial Regular"
+    //     ],
+    //     "text-max-width": 8,
+    //     "symbol-avoid-edges": true,
+    //     "icon-image": "Neighborhood"
+    //   },
+    //   "type": "symbol",
+    //   "paint": {
+    //     "text-halo-width": 1.33,
+    //     "text-halo-color": "#262624",
+    //     "text-color": "#bebebe"
+    //   },
+    //   "id": "Neighborhood"
+    // },
+    {
+      "minzoom": 10,
+      "source": "esri",
+      "source-layer": "City large scale",
+      "layout": {
+        "text-letter-spacing": 0.1,
+        "text-size": 10.5,
+        "text-anchor": "bottom-left",
+        "text-field": "{_name_global}",
+        "icon-padding": 1,
+        "text-padding": 1,
+        "icon-allow-overlap": true,
+        "text-font": [
+          "Arial Regular"
+        ],
+        "text-max-width": 8,
+        "symbol-avoid-edges": true,
+        "icon-image": "City large scale"
+      },
+      "type": "symbol",
+      // "paint": {
+      //   "text-halo-width": 1.33,
+      //   "text-halo-color": "#262624",
+      //   "text-color": "#bebebe"
+      // },
+      "id": "City large scale\/City large scale\/x small",
+      "filter": [
+        "==",
+        "_label_class",
+        3
+      ]
+    },
+    {
+      "minzoom": 10,
+      "source": "esri",
+      "source-layer": "City large scale",
+      "layout": {
+        "text-letter-spacing": 0.1,
+        "text-size": 10.5,
+        "text-anchor": "bottom-left",
+        "text-field": "{_name_global}",
+        "icon-padding": 1,
+        "text-padding": 1,
+        "icon-allow-overlap": true,
+        "text-font": [
+          "Arial Bold"
+        ],
+        "text-max-width": 8,
+        "symbol-avoid-edges": true,
+        "icon-image": "City large scale"
+      },
+      "type": "symbol",
+      "paint": {
+        "text-halo-width": 1.33,
+        "text-halo-color": "#262624",
+        "text-color": "#bebebe"
+      },
+      "id": "City large scale\/City large scale\/small",
+      "filter": [
+        "in",
+        "_label_class",
+        4,
+        5
+      ]
+    },
+    {
+      "minzoom": 10,
+      "source": "esri",
+      "source-layer": "City large scale",
+      "layout": {
+        "text-letter-spacing": 0.1,
+        "text-size": 12,
+        "text-anchor": "bottom-left",
+        "text-field": "{_name_global}",
+        "icon-padding": 1,
+        "text-padding": 1,
+        "icon-allow-overlap": true,
+        "text-font": [
+          "Arial Bold"
+        ],
+        "text-max-width": 8,
+        "symbol-avoid-edges": true,
+        "icon-image": "City large scale"
+      },
+      "type": "symbol",
+      "paint": {
+        "text-halo-width": 1.33,
+        "text-halo-color": "#262624",
+        "text-color": "#bebebe"
+      },
+      "id": "City large scale\/City large scale\/large",
+      "filter": [
+        "in",
+        "_label_class",
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      "minzoom": 10,
+      "source": "esri",
+      "source-layer": "City large scale",
+      "layout": {
+        "text-letter-spacing": 0.1,
+        "text-size": 13,
+        "text-anchor": "bottom-left",
+        "text-field": "{_name_global}",
+        "icon-padding": 1,
+        "text-padding": 1,
+        "icon-allow-overlap": true,
+        "text-font": [
+          "Arial Bold"
+        ],
+        "text-max-width": 8,
+        "symbol-avoid-edges": true,
+        "icon-image": "City large scale"
+      },
+      "type": "symbol",
+      "paint": {
+        "text-halo-width": 1.33,
+        "text-halo-color": "#262624",
+        "text-color": "#bebebe"
+      },
+      "id": "City large scale\/City large scale\/x large",
+      "filter": [
+        "==",
+        "_label_class",
+        0
+      ]
+    },
+    {
+      "minzoom": 2,
+      "source": "esri",
+      "maxzoom": 10,
+      "source-layer": "City small scale",
+      "layout": {
+        "text-letter-spacing": 0.1,
+        "text-size": 10,
+        "text-anchor": "bottom-left",
+        "text-field": "{_name}",
+        "icon-padding": 1,
+        "text-padding": 1,
+        "icon-allow-overlap": true,
+        "text-font": [
+          "Arial Regular"
+        ],
+        "text-max-width": 8,
+        "symbol-avoid-edges": true,
+        "icon-image": "City small scale\/town small non capital"
+      },
+      "type": "symbol",
+      "paint": {
+        "text-halo-width": 1.33,
+        "text-halo-color": "#262624",
+        "text-color": "#969696"
+      },
+      "id": "City small scale\/town x small",
+      "filter": [
+        "in",
+        "_symbol",
+        16,
+        17,
+        18
+      ]
+    },
+    {
+      "minzoom": 2,
+      "source": "esri",
+      "maxzoom": 10,
+      "source-layer": "City small scale",
+      "layout": {
+        "text-letter-spacing": 0.1,
+        "text-size": 10.5,
+        "text-anchor": "bottom-left",
+        "text-field": "{_name}",
+        "icon-padding": 1,
+        "text-padding": 1,
+        "icon-allow-overlap": true,
+        "text-font": [
+          "Arial Regular"
+        ],
+        "text-max-width": 8,
+        "symbol-avoid-edges": true,
+        "icon-image": "City small scale\/town small non capital"
+      },
+      "type": "symbol",
+      "paint": {
+        "text-halo-width": 1.33,
+        "text-halo-color": "#262624",
+        "text-color": "#969696"
+      },
+      "id": "City small scale\/town small",
+      "filter": [
+        "in",
+        "_symbol",
+        12,
+        13,
+        14,
+        15
+      ]
+    },
+    {
+      "minzoom": 2,
+      "source": "esri",
+      "maxzoom": 10,
+      "source-layer": "City small scale",
+      "layout": {
+        "text-letter-spacing": 0.1,
+        "text-size": 11,
+        "text-anchor": "bottom-left",
+        "text-field": "{_name}",
+        "icon-padding": 1,
+        "text-padding": 1,
+        "icon-allow-overlap": true,
+        "text-font": [
+          "Arial Regular"
+        ],
+        "text-max-width": 8,
+        "symbol-avoid-edges": true,
+        "icon-image": "City small scale\/medium non capital"
+      },
+      "type": "symbol",
+      "paint": {
+        "text-halo-width": 1.33,
+        "text-halo-color": "#262624",
+        "text-color": "#969696"
+      },
+      "id": "City small scale\/town medium",
+      "filter": [
+        "in",
+        "_symbol",
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ]
+    },
+    {
+      "minzoom": 2,
+      "source": "esri",
+      "maxzoom": 10,
+      "source-layer": "City small scale",
+      "layout": {
+        "text-letter-spacing": 0.1,
+        "text-size": 12,
+        "text-anchor": "bottom-left",
+        "text-field": "{_name}",
+        "icon-padding": 1,
+        "text-padding": 1,
+        "icon-allow-overlap": true,
+        "text-font": [
+          "Arial Regular"
+        ],
+        "text-max-width": 8,
+        "symbol-avoid-edges": true,
+        "icon-image": "City small scale\/medium non capital"
+      },
+      "type": "symbol",
+      "paint": {
+        "text-halo-width": 1.33,
+        "text-halo-color": "#262624",
+        "text-color": "#aaaaaa"
+      },
+      "id": "City small scale\/town large",
+      "filter": [
+        "in",
+        "_symbol",
+        0,
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      "minzoom": 2,
+      "source": "esri",
+      "maxzoom": 18,
+      "source-layer": "Admin0 point",
+      "layout": {
+        "text-letter-spacing": 0.15,
+        "text-size": {
+          "stops": [
+            [
+              2,
+              8
+            ],
+            [
+              8,
+              11
+            ]
+          ]
+        },
+        "text-anchor": "center",
+        "text-field": "{_name}",
+        "symbol-avoid-edges": false,
+        "text-padding": 1,
+        "text-max-width": 8,
+        "text-font": [
+          "Arial Regular"
+        ],
+        "text-transform": "uppercase"
+      },
+      "type": "symbol",
+      "paint": {
+        "text-halo-width": 1,
+        "text-halo-color": "#262624",
+        "text-color": "#bb93d9"
+      },
+      "id": "Admin0 point\/x small",
+      "filter": [
+        "==",
+        "_label_class",
+        5
+      ]
+    },
+    {
+      "minzoom": 2,
+      "source": "esri",
+      "maxzoom": 18,
+      "source-layer": "Admin0 point",
+      "layout": {
+        "text-letter-spacing": 0.15,
+        "text-size": {
+          "stops": [
+            [
+              2,
+              8
+            ],
+            [
+              8,
+              10.5
+            ]
+          ]
+        },
+        "text-anchor": "center",
+        "text-field": "{_name}",
+        "symbol-avoid-edges": false,
+        "text-padding": 1,
+        "text-max-width": 8,
+        "text-font": [
+          "Arial Regular"
+        ],
+        "text-transform": "uppercase"
+      },
+      "type": "symbol",
+      "paint": {
+        "text-halo-width": 1,
+        "text-halo-color": "#262624",
+        "text-color": "#bb93d9"
+      },
+      "id": "Admin0 point\/small",
+      "filter": [
+        "==",
+        "_label_class",
+        4
+      ]
+    },
+    {
+      "minzoom": 2,
+      "source": "esri",
+      "maxzoom": 18,
+      "source-layer": "Admin0 point",
+      "layout": {
+        "text-letter-spacing": 0.15,
+        "text-size": {
+          "stops": [
+            [
+              2,
+              9
+            ],
+            [
+              8,
+              11.5
+            ]
+          ]
+        },
+        "text-anchor": "center",
+        "text-field": "{_name}",
+        "symbol-avoid-edges": true,
+        "text-padding": 1,
+        "text-max-width": 8,
+        "text-font": [
+          "Arial Regular"
+        ],
+        "text-transform": "uppercase"
+      },
+      "type": "symbol",
+      "paint": {
+        "text-halo-width": 1,
+        "text-halo-color": "#262624",
+        "text-color": "#bb93d9"
+      },
+      "id": "Admin0 point\/medium",
+      "filter": [
+        "==",
+        "_label_class",
+        3
+      ]
+    },
+    // {
+    //   "minzoom": 2,
+    //   "source": "esri",
+    //   "maxzoom": 18,
+    //   "source-layer": "Admin0 point",
+    //   "layout": {
+    //     "text-letter-spacing": 0.15,
+    //     "text-size": {
+    //       "stops": [
+    //         [
+    //           2,
+    //           10
+    //         ],
+    //         [
+    //           8,
+    //           13
+    //         ]
+    //       ]
+    //     },
+    //     "text-anchor": "center",
+    //     "text-field": "{_name}",
+    //     "symbol-avoid-edges": true,
+    //     "text-padding": 1,
+    //     "text-max-width": 8,
+    //     "text-font": [
+    //       "Arial Regular"
+    //     ],
+    //     "text-transform": "uppercase"
+    //   },
+    //   "type": "symbol",
+    //   "paint": {
+    //     "text-halo-width": 1,
+    //     "text-halo-color": "#262624",
+    //     "text-color": "#bb93d9"
+    //   },
+    //   "id": "Admin0 point\/large",
+    //   "filter": [
+    //     "==",
+    //     "_label_class",
+    //     2
+    //   ]
+    // },
+    // {
+    //   "minzoom": 2,
+    //   "source": "esri",
+    //   "maxzoom": 18,
+    //   "source-layer": "Admin0 point",
+    //   "layout": {
+    //     "text-letter-spacing": 0.25,
+    //     "text-size": {
+    //       "stops": [
+    //         [
+    //           2,
+    //           10
+    //         ],
+    //         [
+    //           8,
+    //           15.5
+    //         ]
+    //       ]
+    //     },
+    //     "text-anchor": "center",
+    //     "text-field": "{_name}",
+    //     "symbol-avoid-edges": true,
+    //     "text-padding": 1,
+    //     "text-max-width": 8,
+    //     "text-font": [
+    //       "Arial Bold"
+    //     ],
+    //     "text-transform": "uppercase"
+    //   },
+    //   "type": "symbol",
+    //   "paint": {
+    //     "text-halo-width": 1,
+    //     "text-halo-color": "#262624",
+    //     "text-color": "#9E81B3"
+    //   },
+    //   "id": "Admin0 point\/x large",
+    //   "filter": [
+    //     "==",
+    //     "_label_class",
+    //     1
+    //   ]
+    // },
+    // {
+    //   "minzoom": 2,
+    //   "source": "esri",
+    //   "maxzoom": 18,
+    //   "source-layer": "Admin0 point",
+    //   "layout": {
+    //     "text-letter-spacing": 0.25,
+    //     "text-size": {
+    //       "stops": [
+    //         [
+    //           2,
+    //           12
+    //         ],
+    //         [
+    //           8,
+    //           16
+    //         ]
+    //       ]
+    //     },
+    //     "text-anchor": "center",
+    //     "text-field": "{_name}",
+    //     "symbol-avoid-edges": true,
+    //     "text-padding": 10,
+    //     "text-max-width": 8,
+    //     "text-font": [
+    //       "Arial Bold"
+    //     ],
+    //     "text-transform": "uppercase"
+    //   },
+    //   "type": "symbol",
+    //   "paint": {
+    //     "text-halo-width": 1,
+    //     "text-halo-color": "#262624",
+    //     "text-color": "#9E81B3"
+    //   },
+    //   "id": "Admin0 point\/2x large",
+    //   "filter": [
+    //     "==",
+    //     "_label_class",
+    //     0
+    //   ]
+    // },
+    // {
+    //   "source": "esri",
+    //   "maxzoom": 2,
+    //   "source-layer": "Continent",
+    //   "layout": {
+    //     "text-allow-overlap": false,
+    //     "text-letter-spacing": 0.35,
+    //     "text-anchor": "center",
+    //     "text-line-height": 1.75,
+    //     "symbol-avoid-edges": true,
+    //     "text-padding": 1,
+    //     "text-max-width": 8,
+    //     "text-size": 10,
+    //     "text-field": "{_name_global}",
+    //     "text-font": [
+    //       "Arial Regular"
+    //     ],
+    //     "text-transform": "uppercase"
+    //   },
+    //   "type": "symbol",
+    //   "paint": {
+    //     "text-color": "#cccccc"
+    //   },
+    //   "id": "Continent"
+    // }
+  ],
+  "sprite": "https:\/\/www.arcgis.com\/sharing\/rest\/content\/items\/bf79e422e9454565ae0cbe9553cf6471\/resources\/styles\/..\/sprites\/sprite",
+  "version": 8,
+  "glyphs": "https:\/\/basemaps.arcgis.com\/b2\/arcgis\/rest\/services\/World_Basemap\/VectorTileServer\/resources\/fonts\/{fontstack}\/{range}.pbf"
+}

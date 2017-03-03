@@ -32,27 +32,14 @@
                         }, {
                             "NodeType": "map",
                             "LayerId": 0,
-                            "Name": "Total Area in Acres",
-                            "ShortName": "Total Area in Acres",
+                            "Name": "Total Population Per Sq Mile",
+                            "ShortName": "Total Population Per Sq Mile",
                             "Service": "ACS2015byBlockGroup",
                             "DefaultColorRamp": "OrRd",
                             "DefaultColorScheme": "Sequential",
                             "Description": "",
                             "Source": "American Community Survey 2011-2015 5yr",
-                            "FieldName": "ACRES",
-                            "Type": "number",
-                            "Placeholder": 100000000
-                        }, {
-                            "NodeType": "map",
-                            "LayerId": 0,
-                            "Name": "Total Area in Square Miles",
-                            "ShortName": "Total Area in Square Miles",
-                            "Service": "ACS2015byBlockGroup",
-                            "DefaultColorRamp": "OrRd",
-                            "DefaultColorScheme": "Sequential",
-                            "Description": "",
-                            "Source": "American Community Survey 2011-2015 5yr",
-                            "FieldName": "SQMI",
+                            "FieldName": "POPPERSQMI",
                             "Type": "number",
                             "Placeholder": 100000000
                         }]
@@ -120,20 +107,7 @@
                         "Name": "Race and Ethnicity",
                         "ShortName": "Race and Ethnicity",
                         "Description": "...",
-                        "items": [{
-                            "NodeType": "map",
-                            "LayerId": 0,
-                            "Name": "Total Population",
-                            "ShortName": "Total Population",
-                            "Service": "ACS2015byBlockGroup",
-                            "DefaultColorRamp": "OrRd",
-                            "DefaultColorScheme": "Sequential",
-                            "Description": "",
-                            "Source": "American Community Survey 2011-2015 5yr",
-                            "FieldName": "TOTAL_POP",
-                            "Type": "number",
-                            "Placeholder": 100000000
-                        }, {
+                        "items": [ {
                             "NodeType": "map",
                             "LayerId": 0,
                             "Name": "Percent Hispanic",
@@ -343,15 +317,16 @@
                         "items": [{
                             "NodeType": "map",
                             "LayerId": 0,
-                            "Name": "Persons with Limited English Proficiency (LEP)",
+                            "Name": "Percent Limited English Proficiency (LEP)",
                             "Service": "ACS2015byBlockGroup",
-                            "ShortName": "Persons with Limited English Proficiency (LEP)",
+                            "ShortName": "% Limited English Proficiency (LEP)",
                             "DefaultColorRamp": "PuBu",
                             "DefaultColorScheme": "Sequential",
                             "Description": "",
                             "Source": "American Community Survey 2011-2015 5yr",
-                            "FieldName": "LIMITED_ENG_PROF",
-                            "Type": "number",
+                            "FieldName": "PCT_LIMITED_ENG_PROF",
+                            "AsPercentages": true,
+                            "Type": "percent",
                             "Placeholder": 100000000
                         }]
                     }, {
@@ -362,15 +337,16 @@
                         "items": [{
                             "NodeType": "map",
                             "LayerId": 0,
-                            "Name": "Civilian veterans",
+                            "Name": "Percent Civilian veterans",
                             "Service": "ACS2015byBlockGroup",
-                            "ShortName": "Civilian veterans",
+                            "ShortName": "% Civilian veterans",
                             "DefaultColorRamp": "PuBuGn",
                             "DefaultColorScheme": "Sequential",
                             "Description": "",
                             "Source": "American Community Survey 2011-2015 5yr",
-                            "FieldName": "VETERANS",
-                            "Type": "number",
+                            "FieldName": "PCT_VETERANS",
+                            "AsPercentages": true,
+                            "Type": "percent",
                             "Placeholder": 100000000
                         }]
                     }, {
@@ -419,15 +395,16 @@
                         "items": [{
                             "NodeType": "map",
                             "LayerId": 0,
-                            "Name": "Persons with income below poverty level",
+                            "Name": "Percent below poverty level",
                             "Service": "ACS2015byBlockGroup",
-                            "ShortName": "Persons with income below poverty level",
+                            "ShortName": "% Below poverty level",
                             "DefaultColorRamp": "PuBuGn",
                             "DefaultColorScheme": "Sequential",
                             "Description": "",
                             "Source": "American Community Survey 2011-2015 5yr",
-                            "FieldName": "INCOME_BELOW_POVERTY",
-                            "Type": "number",
+                            "FieldName": "PCT_INCOME_BELOW_POVERTY",
+                            "AsPercentages": true,
+                            "Type": "percent",
                             "Placeholder": 100000000
                         }]
                     }, {
@@ -438,9 +415,9 @@
                         "items": [{
                             "NodeType": "map",
                             "LayerId": 0,
-                            "Name": "Percent Car, truck, or van - drove alone",
+                            "Name": "Percent Car or Truck - drive alone",
                             "Service": "ACS2015byBlockGroup",
-                            "ShortName": "% Car, truck, or van - drove alone",
+                            "ShortName": "% Car or Truck - drive alone",
                             "DefaultColorRamp": "PuBuGn",
                             "DefaultColorScheme": "Sequential",
                             "Description": "",
@@ -452,9 +429,9 @@
                         }, {
                             "NodeType": "map",
                             "LayerId": 0,
-                            "Name": "Percent Car, truck, or van - carpooled",
+                            "Name": "Percent Car or Truck - carpool",
                             "Service": "ACS2015byBlockGroup",
-                            "ShortName": "% Car, truck, or van - carpooled",
+                            "ShortName": "% Car or Truck - carpool",
                             "DefaultColorRamp": "PuBuGn",
                             "DefaultColorScheme": "Sequential",
                             "Description": "",
@@ -466,9 +443,9 @@
                         }, {
                             "NodeType": "map",
                             "LayerId": 0,
-                            "Name": "Percent Public Transportation (excluding taxicab)",
+                            "Name": "Percent Public Transportation",
                             "Service": "ACS2015byBlockGroup",
-                            "ShortName": "% Public Transportation (excluding taxicab)",
+                            "ShortName": "% Public Transportation",
                             "DefaultColorRamp": "PuBuGn",
                             "DefaultColorScheme": "Sequential",
                             "Description": "",
@@ -508,9 +485,9 @@
                         }, {
                             "NodeType": "map",
                             "LayerId": 0,
-                            "Name": "Percent Taxicab, motorcycle, or other means",
+                            "Name": "Percent Other means (taxicab, motorcycle, etc.)",
                             "Service": "ACS2015byBlockGroup",
-                            "ShortName": "% Taxicab, motorcycle, or other means",
+                            "ShortName": "% Other means (taxicab, motorcycle, etc.)",
                             "DefaultColorRamp": "PuBuGn",
                             "DefaultColorScheme": "Sequential",
                             "Description": "",
@@ -522,9 +499,9 @@
                         }, {
                             "NodeType": "map",
                             "LayerId": 0,
-                            "Name": "Percent Worked at home",
+                            "Name": "Percent Work at home",
                             "Service": "ACS2015byBlockGroup",
-                            "ShortName": "% Worked at home",
+                            "ShortName": "% Work at home",
                             "DefaultColorRamp": "PuBuGn",
                             "DefaultColorScheme": "Sequential",
                             "Description": "",
@@ -638,30 +615,30 @@
                         "items": [{
                             "NodeType": "map",
                             "LayerId": 0,
-                            "Name": "Occupied Housing Units",
+                            "Name": "Percent Occupied Housing Units",
                             "Service": "ACS2015byBlockGroup",
-                            "ShortName": "Occupied Housing Units",
+                            "ShortName": "% Occupied Housing Units",
                             "DefaultColorRamp": "OrRd",
                             "DefaultColorScheme": "Sequential",
                             "Description": null,
                             "Source": "American Community Survey 2011-2015 5yr",
-                            "FieldName": "OCCUPIED_HU",
-                            "Type": "number",
-                            // "AsPercentages": "TRUE",
+                            "FieldName": "PCT_OCCUPIED_HU",
+                            "AsPercentages": true,
+                            "Type": "percent",
                             "Placeholder": 100000000
                         }, {
                             "NodeType": "map",
                             "LayerId": 0,
-                            "Name": "Vacant Housing Units",
+                            "Name": "Percent Vacant Housing Units",
                             "Service": "ACS2015byBlockGroup",
-                            "ShortName": "Vacant Housing Units",
+                            "ShortName": "% Vacant Housing Units",
                             "DefaultColorRamp": "OrRd",
                             "DefaultColorScheme": "Sequential",
                             "Description": null,
                             "Source": "American Community Survey 2011-2015 5yr",
-                            "FieldName": "VACANT_HU",
-                            "Type": "number",
-                            // "AsPercentages": "TRUE",
+                            "FieldName": "PCT_VACANT_HU",
+                            "AsPercentages": true,
+                            "Type": "percent",
                             "Placeholder": 100000000
                         }]
                     }, {

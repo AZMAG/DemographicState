@@ -297,7 +297,7 @@
                             } else {
                                 $("#demACSChartArea").remove();
                             }
-                            self.createChart("ACS");
+                            self.createChart("ACS", true);
                             self.reloadChart();
                         }
                     });
@@ -308,11 +308,13 @@
                                 var grid = $(val).data('kendoGrid');
                                 if (e.target.value === "collapse") {
                                     e.target.value = "expand";
+                                    $(e.target).html('Expand All');
                                     grid.tbody.find("tr.k-grouping-row").each(function(index) {
                                         grid.collapseGroup(this);
                                     });
                                 } else {
                                     e.target.value = "collapse";
+                                    $(e.target).html('Collapse All');
                                     grid.tbody.find("tr.k-grouping-row").each(function(index) {
                                         grid.expandGroup(this);
                                     });
@@ -332,9 +334,9 @@
                                 kendoChart.destroy();
                                 kendoChart.element.remove();
                             } else {
-                                $("#demACSChartArea").remove();
+                                $("#demCensusChartArea").remove();
                             }
-                            self.createChart("census");
+                            self.createChart("census", true);
                             self.reloadChart();
                         }
                     });
@@ -360,6 +362,10 @@
 
                     $("body").on("click", "#title6ExportResults", function(e) {
                         self.exportToExcel(e);
+                    });
+                    $("body").on("click", ".tractLink", function(e) {
+                        console.log(e);
+                        // self.zoomToTract(e);
                     });
 
                     // Get the help button and assign the click event.
@@ -416,7 +422,7 @@
                             var firstTab = tabStrip.tabGroup.children("li:first");
                             if (firstTab[0].textContent === "Selected Block Groups") {
                                 tabStrip.remove(0);
-                                tabStrip.select(1);
+                                tabStrip.select('li:contains("ACS 2015 Data")');
                             }
                         }
                     }
@@ -510,7 +516,7 @@
                     if (!windowIsOpen) {
                         win.restore();
                         // win.center();
-                        redrawChart = true;
+                        //redrawChart = true;
                     }
                     win.restore();
                     // win.center();
@@ -535,7 +541,7 @@
                             scrollable: false
                         });
                     } else {
-                        tabStrip.select(0);
+                        tabStrip.select('li:contains("ACS 2015 Data")');
                         tabStrip.trigger("activate");
                     }
 
@@ -553,18 +559,22 @@
                             }]
                         });
                     }
+                    $("#demACSSummaryOptionsRow").hide();
+                    $("#demACSDataGrid").hide();
+                    //$("#demTabStrip").css("visibility", "hidden");//hide();
+                    $("#reportLoading").show();
 
                     self.getData();
 
-                    if (redrawChart) {
-                        setTimeout(function() {
-                            var chart = $("#demChartArea").data("kendoChart");
-                            if (chart) {
-                                chart.redraw();
-                            }
-                        }, 500);
-                        redrawChart = false;
-                    }
+                    // if (redrawChart) {
+                    //     setTimeout(function() {
+                    //         var chart = $("#demChartArea").data("kendoChart");
+                    //         if (chart) {
+                    //             chart.redraw();
+                    //         }
+                    //     }, 500);
+                    //     redrawChart = false;
+                    // }
 
                 };
 
@@ -642,6 +652,8 @@
 
                     // Create the Kendo tab strip
                     var tabStrip = $("#demTabStrip").data("kendoTabStrip");
+                    //var tabStrip = $("#demTabStrip").data("kendoTabStrip");
+
                     if (tabStrip === undefined) {
                         $("#demTabStrip").kendoTabStrip({
                             activate: self.tabActivated,
@@ -649,9 +661,9 @@
                         });
                     }
                     tabStrip = $("#demTabStrip").data("kendoTabStrip");
+
                     var firstTab;
                     if (tabStrip !== undefined && tabStrip !== null) {
-
                         var tabStripList = tabStrip.items();
                         firstTab = tabStripList[0].textContent;
                         var secondTab = tabStripList[1].textContent;
@@ -659,7 +671,8 @@
                         if (firstTab === "Census Block Groups" && secondTab === "ACS Block Groups") {
                             tabStrip.remove(0);
                             tabStrip.remove(0);
-                            tabStrip.select(0);
+                            //tabStrip.select(0);
+                            tabStrip.select('li:contains("ACS 2015 Data")');
                         }
                     }
 
@@ -718,6 +731,8 @@
                             content: tabContent
                         }, tabStrip.tabGroup.children("li:first"));
                     }
+
+                    tabStrip.remove('li:contains("Title VI Data")');
 
                     // add feature count span to selected block groups tab. vw
                     //
@@ -898,7 +913,8 @@
                         if (firstTab === "ACS Block Groups" && secondTab === "Census Block Groups") {
                             tabStrip.remove(0);
                             tabStrip.remove(0);
-                            tabStrip.select(0);
+                            tabStrip.select('li:contains("ACS 2015 Data")');
+                            //tabStrip.select(0);
                         }
                     }
                     self.resetComparisonDropdowns();
@@ -1069,6 +1085,7 @@
                     var gridType = "ACS";
                     var featuresCount = features.length;
 
+
                     // Clear the current graphics
                     mapModel.clearGraphics();
 
@@ -1208,8 +1225,10 @@
 
                         // Reload the chart if on the charts tab
                         var tab = tabStrip.select();
-                        if (tab[0].textContent === "Census 2010 Charts" || tab[0].textContent === "ACS 2015 Charts") {
-                            self.reloadChart();
+                        if (tab[0]) {
+                            if (tab[0].textContent === "Census 2010 Charts" || tab[0].textContent === "ACS 2015 Charts") {
+                                self.reloadChart();
+                            }
                         }
 
                         // Reload the comparison places
@@ -1237,8 +1256,14 @@
                     var item = tabStrip.tabGroup.find('li:contains("Title VI Data")');
                     if (item) {
                         tabStrip.remove(item);
-                        tabStrip.select(0);
+                        tabStrip.select('li:contains("ACS 2015 Data")');
                     }
+
+                    $("#demACSSummaryOptionsRow").show();
+                    $("#demACSDataGrid").show();
+                    //$("#demTabStrip").show();
+                    //$("#demTabStrip").css("visibility", "visible");
+                    $("#reportLoading").hide();
 
                     if (self.reportType === "cog") {
                         var attributes = features[0].attributes;
@@ -1250,6 +1275,7 @@
 
                         var dataSrc = [{
                             Category: "Population Base",
+                            Footnote: "",
                             Total: totalPop,
                             Percent: "N/A",
                             NumberOfBlocks: totalBlockCount,
@@ -1258,6 +1284,7 @@
                             PercentAffectedCaptured: "N/A"
                         }, {
                             Category: "Minority",
+                            Footnote: "a",
                             Total: attributes["MINORITY_POP"],
                             Percent: (attributes["MINORITY_POP"] / totalPop),
                             NumberOfBlocks: attributes['AFFECTED_MINORITY_POP_COUNT'],
@@ -1266,6 +1293,7 @@
                             PercentAffectedCaptured: attributes['AFFECTED_MINORITY_POP'] / attributes["MINORITY_POP"]
                         }, {
                             Category: "Age 65+",
+                            Footnote: "",
                             Total: attributes["AGE65PLUS"],
                             Percent: (attributes["AGE65PLUS"] / totalPop),
                             NumberOfBlocks: attributes['AFFECTED_AGE65PLUS_COUNT'],
@@ -1274,14 +1302,16 @@
                             PercentAffectedCaptured: attributes['AFFECTED_AGE65PLUS'] / attributes["AGE65PLUS"]
                         }, {
                             Category: "Below Poverty Level",
+                            Footnote: "b",
                             Total: attributes["INCOME_BELOW_POVERTY"],
-                            Percent: (attributes["INCOME_BELOW_POVERTY"] / attributes["CIV_NON_INST_POP"]),
+                            Percent: (attributes["INCOME_BELOW_POVERTY"] / attributes["POP_FOR_POVERTY"]),
                             NumberOfBlocks: attributes['AFFECTED_INCOME_BELOW_POVERTY_COUNT'],
                             PercentOfBlocks: attributes['AFFECTED_INCOME_BELOW_POVERTY_COUNT'] / totalBlockCount,
                             AffectedPopulation: attributes['AFFECTED_INCOME_BELOW_POVERTY'],
                             PercentAffectedCaptured: attributes['AFFECTED_INCOME_BELOW_POVERTY'] / attributes["INCOME_BELOW_POVERTY"]
                         }, {
                             Category: "Population with a Disability",
+                            Footnote: "c",
                             Total: attributes["DISABILITY"],
                             Percent: (attributes["DISABILITY"] / attributes["CIV_NON_INST_POP"]),
                             NumberOfBlocks: attributes['AFFECTED_DISABILITY_COUNT'],
@@ -1290,6 +1320,7 @@
                             PercentAffectedCaptured: attributes['AFFECTED_DISABILITY'] / attributes["DISABILITY"]
                         }, {
                             Category: "Limited English Proficient Persons (LEP)",
+                            Footnote: "d",
                             Total: attributes["LIMITED_ENG_PROF"],
                             Percent: (attributes["LIMITED_ENG_PROF"] / fivePlus),
                             NumberOfBlocks: attributes['AFFECTED_LIMITED_ENG_PROF_COUNT'],
@@ -1303,6 +1334,10 @@
                             content: title6View
                         });
 
+                        $("#povPopFootnote").html(attributes["POP_FOR_POVERTY"].toLocaleString());
+                        $(".pop5PlusFootnote").html(fivePlus.toLocaleString());
+
+
                         var type = attributes["TYPE"];
 
                         $("#title6Grid").kendoGrid({
@@ -1315,6 +1350,7 @@
                                     width: "235px",
                                     columns: [{
                                         field: "Category",
+                                        template: "#:Category#<sup>#:Footnote#</sup>",
                                         title: "Category",
                                         width: "105px"
                                     }, {
@@ -1329,9 +1365,9 @@
                                     title: "Census Blocks",
                                     width: "325px",
                                     columns: [
-                                        { field: "NumberOfBlocks", title: "Number of blocks >= MPO Percentage", width: "95px", format: "{0:n0}" },
+                                        { field: "NumberOfBlocks", title: "Number of blocks >= " + type + " Percentage", width: "95px", format: "{0:n0}" },
                                         { field: "PercentOfBlocks", title: "% Blocks", format: "{0:p1}", width: "65px" },
-                                        { field: "AffectedPopulation", title: "Affected Population", width: "70px", format: "{0:n0}" },
+                                        { field: "AffectedPopulation", title: "Affected Population <sup>e</sup>", width: "70px", format: "{0:n0}" },
                                         { field: "PercentAffectedCaptured", title: "% of Affected Population Captured in Census Blocks", width: "95px", format: "{0:p1}" }
                                     ]
                                 },
@@ -1446,6 +1482,8 @@
                             self.createKendoGrid(type);
                         }
                     }
+                    $("#demACSSummaryOptionsRow").show();
+                    $("#demACSDataGrid").show();
                 };
 
                 /**
@@ -1734,10 +1772,10 @@
                     if (kendoChart1 !== null && kendoChart1 !== undefined) {
                         kendoChart1.destroy();
                         kendoChart1.element.remove();
-                        self.createChart("census");
+                        self.createChart("census", true);
                     } else {
                         censusChartAreaSelector.remove();
-                        self.createChart("census");
+                        self.createChart("census", true);
                     }
 
                     var kendoChart2 = $("#demACSChartArea").data("kendoChart");
@@ -1745,9 +1783,9 @@
                     if (kendoChart2 !== null && kendoChart2 !== undefined) {
                         kendoChart2.destroy();
                         kendoChart2.element.remove();
-                        self.createChart("ACS");
+                        self.createChart("ACS", true);
                     } else {
-                        self.createChart("ACS");
+                        self.createChart("ACS", true);
                     }
 
                 };
@@ -1764,6 +1802,7 @@
                     var chartListDivObj2 = $("#demACSChartList");
                     var kendoListView2 = chartListDivObj2.data("kendoListView");
 
+
                     if (kendoListView1 !== undefined && kendoListView1 !== null) {
                         self.selectedCategoryObj = kendoListView1.select();
                         self.groupedItems = self.aggValuesCensusGroupedByChartCategory[self.selectedCategoryObj[0].childNodes[1].innerHTML];
@@ -1776,7 +1815,7 @@
                         } else {
                             $("#demCensusChartArea").remove();
                         }
-                        self.createChart("census");
+                        self.createChart("census", false);
                     }
 
                     if (kendoListView2 !== undefined && kendoListView2 !== null) {
@@ -1787,16 +1826,15 @@
                         // Update the chart
                         var kendoChart2 = $("#demACSChartArea").data("kendoChart");
                         var kendoChart3 = $("#demACSChartArea");
-
                         if (kendoChart2 !== null && kendoChart2 !== undefined) {
                             kendoChart2.destroy();
                             kendoChart2.element.remove();
-                            self.createChart("ACS");
+                            self.createChart("ACS", false);
                         } else if (kendoChart3 !== null && kendoChart3 !== undefined) {
                             kendoChart3.remove();
-                            self.createChart("ACS");
+                            self.createChart("ACS", false);
                         } else {
-                            self.createChart("ACS");
+                            self.createChart("ACS", false);
                         }
                     }
                 };
@@ -1807,7 +1845,7 @@
                  *
                  * @method createChart
                  */
-                self.createChart = function(type) {
+                self.createChart = function(type, animation) {
                     // Create the div element for the chart
                     var legendVisible = false;
                     var chartObj;
@@ -1923,6 +1961,7 @@
                                 padding: padding,
                                 //labels: {template: "#=category#"}
                             }],
+                            transitions: animation,
                             seriesDefaults: {
                                 labels: {
                                     visible: showLabels,
@@ -2033,11 +2072,13 @@
                     var dataGridName = "demACSDataGrid";
                     var demoOptionsRowName = "demACSSummaryOptionsRow";
                     var dataSource = self.aggACSValuesArray;
+                    var visibility = "display:none;";
 
                     if (type === "census") {
                         dataGridName = "demCensusDataGrid";
                         demoOptionsRowName = "demCensusSummaryOptionsRow";
                         dataSource = self.aggCensusValuesArray;
+                        visibility = "";
                     }
 
                     $.each(dataSource, function(i, value) {
@@ -2050,11 +2091,10 @@
                         }
                     });
 
-
                     // Create the div element for the grid
                     dc.create("div", {
                         id: dataGridName,
-                        style: "margin: 5px 0 0 0; font-size: small;"
+                        style: "margin: 5px 0 0 0; font-size: small; " + visibility
                     }, demoOptionsRowName, "after");
 
                     // Kendo-ize
@@ -2081,7 +2121,7 @@
                                 groupHeaderTemplate: "#=value#"
                             }, {
                                 field: "tableHeader",
-                                title: " ",
+                                title: "Topic",
                                 width: "350px"
                             }, {
                                 field: "fieldValueFormatted",
@@ -2144,7 +2184,10 @@
                                         nextSib.empty();
                                         finalSib.empty();
                                     } else if (el.universeField == 0) {
-                                        parentElement.css("font-size", "11.5px");
+                                        parentElement.css({
+                                            "font-weight": "normal",
+                                            "font-size": "11.5px"
+                                        });
                                     }
                                 });
                             }
@@ -2152,7 +2195,7 @@
                             grid.tbody.find("tr.k-grouping-row").each(function(index) {
                                 grid.collapseGroup(this);
                             });
-                            $(".gridGroupToggle").val("expand");
+                            $(".gridGroupToggle").val("expand").html('Expand All');
                         }
                     });
 
@@ -2170,7 +2213,7 @@
                     var dataGridName = "demACSDataGrid";
                     var demoOptionsRowName = "demACSSummaryOptionsRow";
                     var dataSource = self.aggACSValuesArray;
-                    $(".gridGroupToggle").val("collapse");
+                    $(".gridGroupToggle").val("collapse").html('Collapse All');;
 
                     if (type === "census") {
                         dataGridName = "demCensusDataGrid";

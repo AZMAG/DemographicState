@@ -16,6 +16,11 @@ And constructed with the following guidelines:
 3. **PATCH** version when you make backwards-compatible bug fixes and misc changes **bumps only the patch**
 
 ***************************************************************************************************************
+
+## Version 2.3.5 | 3/3/2017
+* Bug fixes
+* Spelling issues
+
 ## Version 2.3.4 | 2/16/2017
 * Updated Excel Eporting Functionality to reflect new tabular reporting structure
 * Updated kendo version
@@ -24,6 +29,9 @@ And constructed with the following guidelines:
 * Removed age pyramid and replaced with regular bar chart
 * Updated the charts section to include some new fields
 * Added logic to word wrap the labels on charts to prevent labels from being hidden
+* Added loading icon to reports window to prevent showing user dom interaction
+* Removed Title VI tab from Custom Summary Report
+* Removed flicker on chart refresh
 
 ## Version 2.3.3 | 1/23/2017
 * Added Title 6 tab to the MPO/COG reporting window

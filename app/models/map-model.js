@@ -28,16 +28,18 @@
         "esri/layers/WMSLayer",
         "esri/layers/ArcGISDynamicMapServiceLayer",
         "esri/layers/ArcGISTiledMapServiceLayer",
+        "esri/layers/VectorTileLayer",
         "esri/layers/FeatureLayer",
         "esri/Color",
         "esri/symbols/SimpleMarkerSymbol",
         "esri/symbols/SimpleLineSymbol",
         "esri/symbols/SimpleFillSymbol",
+        "esri/renderers/UniqueValueRenderer",
 
         "esri/InfoTemplate",
 
         "dojo/domReady!"
-    ], function(dc, dom, on, tp, lang, Graphic, bookmarkDelegate, Extent, Point, SpatialReference, WMSLayer, ArcGISDynamicMapServiceLayer, ArcGISTiledMapServiceLayer, FeatureLayer, Color, SimpleMarkerSymbol, SimpleLineSymbol, SimpleFillSymbol, InfoTemplate) {
+    ], function(dc, dom, on, tp, lang, Graphic, bookmarkDelegate, Extent, Point, SpatialReference, WMSLayer, ArcGISDynamicMapServiceLayer, ArcGISTiledMapServiceLayer, VectorTileLayer, FeatureLayer, Color, SimpleMarkerSymbol, SimpleLineSymbol, SimpleFillSymbol, UniqueValueRenderer, InfoTemplate) {
 
         /**
          * Holds reference to the map.
@@ -258,10 +260,19 @@
                 var layersTOC = []; // add only certin layers to TOC
                 var layersToAdd = [];
 
-                for (var i = 0; i < appConfig.layerInfo.length; i++) {
+                var layerInfo = appConfig.layerInfo.slice(0);
+
+                layerInfo.sort(function(a, b) {
+                    if (a.drawOrder < b.drawOrder) return -1;
+                    if (a.drawOrder > b.drawOrder) return 1;
+                    return 0;
+                });
+
+
+                for (var i = 0; i < layerInfo.length; i++) {
 
                     // add all layers to TOC
-                    var info = appConfig.layerInfo[i];
+                    var info = layerInfo[i];
                     var layer;
 
                     var token = "";
@@ -309,6 +320,7 @@
                             layer.setVisibleLayers(info.layers);
                             break;
                         case "tile":
+                            // layer = new VectorTileLayer("test.json");
                             layer = new ArcGISTiledMapServiceLayer(info.url + token, {
                                 id: info.id,
                                 visible: visible,
@@ -341,6 +353,7 @@
                                 outFields: info.outFields,
                                 infoTemplate: featureTemplate
                             });
+
                             break;
                     }
 
@@ -371,6 +384,19 @@
                 } else {
                     // publish for new map legends
                 }
+
+                //This section fixed the rendering bug where the renderer is not respecting the drawing order from the MXD
+                var layer = currentMap.getLayer("cogBoundaries");
+                dojo.connect(layer, 'onUpdateEnd', function() {
+                    $.each(this.graphics, function(index, graphic) {
+                        if (graphic.attributes.COG === "MAG" || graphic.attributes.COG === "FMPO" || graphic.attributes.COG === "SVMP" || graphic.attributes.COG === "LHCMP" || graphic.attributes.COG === "CYMP" || graphic.attributes.COG === "SCMPO") {
+                            var shape = graphic.getDojoShape();
+                            if (shape) {
+                                shape.moveToFront();
+                            }
+                        }
+                    });
+                });
             },
 
             /**
@@ -656,7 +682,7 @@
                         var newGraphic = new Graphic(graphic.geometry, graphic.symbol, graphic.attributes, graphic.infoTemplate);
                         this.mapInstances[i].graphics.add(newGraphic);
                         if (newGraphic.getShape()) {
-                          newGraphic.getShape().moveToFront();  
+                            newGraphic.getShape().moveToFront();
                         }
                     }
                 } else {

@@ -226,7 +226,7 @@
                     $("script#twitter-wjs").remove();
                     var twitterDiv = $("div#twitter");
                     $(twitterDiv).empty();
-                    var twitterLink = '<a href="https://twitter.com/share" class="twitter-share-button" data-url="' + replaceToken + '" data-text="MAG | Projections" data-via="MAGregion" data-hashtags="MAGmaps">Tweet</a>';
+                    var twitterLink = '<a href="https://twitter.com/share" class="twitter-share-button" data-url="' + replaceToken + '" data-text="MAG | Statewide Demographics" data-via="MAGregion" data-hashtags="MAGmaps">Tweet</a>';
                     $(twitterDiv).html(twitterLink.replace(replaceToken, minimizedURL));
                     //Linkedin
                     var linkedinDiv = $("div#linkedin");
@@ -241,7 +241,7 @@
                     //Email
                     var emailDiv = $("div#email");
                     $(emailDiv).empty();
-                    var emailStructure = '<a href="mailto:?subject=MAG Projections Map Viewer&body=%0A%0ACheck out this website.%0A%0AMAG Projections Map Viewer - #MAGmaps%0A' + replaceToken + '" title="MAG|Projections"><img id="mailicon" src="app/resources/img/mail-icon.png"></a>';
+                    var emailStructure = '<a href="mailto:?subject=MAG Statewide Demographics Map Viewer&body=%0A%0ACheck out this website.%0A%0AMAG Statewide Demographics Map Viewer - #MAGmaps%0A' + replaceToken + '" title="MAG|Projections"><img id="mailicon" src="app/resources/img/mail-icon.png"></a>';
                     $(emailDiv).html(emailStructure.replace(replaceToken, minimizedURL));
 
                     self.initTwitter(document, "script", "twitter-wjs");

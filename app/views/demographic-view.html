@@ -7,6 +7,12 @@
             <li>Census 2010 Charts</li>
         </ul>
         <div id="demACSSummaryReportTab">
+            <div style="width:100%;" id="reportLoading">
+                <div style=" margin-top: 5%;margin-bottom: 30%;">
+                    <h4 style="margin-left:38%">Loading Report Data</h4>
+                    <img src="app/resources/img/loading2.gif" style="width: 40px; margin-left: 46%;" alt="">
+                </div>
+            </div>
             <div id="demACSSummaryOptionsRow" class="reportTabPageOptionRow">
                 <span>
                     <input id="demACSUseComp" type="checkbox">
@@ -19,14 +25,12 @@
                 </button>
                 </span>
                 <span style="float: right; margin-right: 10px; margin-top: 4px; font-size: 12px;">
-                    <button class="gridGroupToggle" value="expand">Expand/Collapse</button>
+                    <button class="gridGroupToggle" style="background-color: #06c;" value="expand">Expand/Collapse</button>
                 </span>
             </div>
         </div>
         <div id="demACSChartsTab">
             <div class="reportTabPageOptionRow">
-                <input id="displayACSLegend" type="checkbox" data-bind="checked: isChecked">
-                <label for="displayACSLegend" class="smallFont">Display chart legend</label>
                 <span class="reportExportSpan">
                     <div id="exportACSReportRequest">
                         <span>Export Report to PDF:</span>
@@ -58,14 +62,12 @@
             </button>
             </span>
             <span style="float: right; margin-right: 10px; margin-top: 4px; font-size: 12px;">
-                <button class="gridGroupToggle" value="expand">Expand/Collapse</button>
+                <button class="gridGroupToggle" style="background-color: #06c;" value="expand">Expand/Collapse</button>
                 </span>
         </div>
     </div>
     <div id="demCensusChartsTab">
         <div class="reportTabPageOptionRow">
-            <input id="displayCensusLegend" type="checkbox" data-bind="checked: isChecked">
-            <label for="displayCensusLegend" class="smallFont">Display chart legend</label>
             <span class="reportExportSpan">
                     <div id="exportCensusReportRequest">
                         <span>Export Report to PDF:</span>
