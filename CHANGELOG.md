@@ -20,6 +20,7 @@ And constructed with the following guidelines:
 ## Version 2.3.5 | 3/3/2017
 * Bug fixes
 * Spelling issues
+* fixed sorting issue in drop-down menus
 
 ## Version 2.3.4 | 2/16/2017
 * Updated Excel Eporting Functionality to reflect new tabular reporting structure

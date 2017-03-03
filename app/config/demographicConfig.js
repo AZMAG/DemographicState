@@ -274,6 +274,7 @@
                         compareWhereClause: "1 = 1",
                         comparePlaceField: "NAME",
                         summaryField: "NAME",
+                        sortField: "NAME",
                         isTimeVaryingData: false,
                         source: "American Community Survey 2011-2015 5yr",
                         dropdown: "#countyComboBox"
@@ -288,6 +289,7 @@
                         compareWhereClause: "1 = 1",
                         comparePlaceField: "NAME",
                         summaryField: "NAME",
+                        sortField: "NAME",
                         isTimeVaryingData: false,
                         source: "American Community Survey 2011-2015 5yr",
                         dropdown: "#cogComboBox"
@@ -303,6 +305,7 @@
                         compareWhereClause: "1 = 1",
                         comparePlaceField: "NAME",
                         summaryField: "NAME",
+                        sortField: "NAME",
                         isTimeVaryingData: false,
                         source: "American Community Survey 2011-2015 5yr",
                         dropdown: "#placeComboBox"
@@ -317,6 +320,7 @@
                         compareWhereClause: "1 = 1",
                         comparePlaceField: "SLDIST_NAME",
                         summaryField: "SLDIST_NAME",
+                        sortField: "SLDISTID",
                         isTimeVaryingData: false,
                         source: "American Community Survey 2011-2015 5yr",
                         dropdown: "#legislativeComboBox"
@@ -331,6 +335,7 @@
                         compareWhereClause: "1 = 1",
                         comparePlaceField: "CDIST_NAME",
                         summaryField: "CDIST_NAME",
+                        sortField: "CDIST_NAME",
                         isTimeVaryingData: false,
                         source: "American Community Survey 2011-2015 5yr",
                         dropdown: "#congressionalComboBox"
@@ -345,6 +350,7 @@
                         compareWhereClause: "1 = 1",
                         comparePlaceField: "ZIPCODE",
                         summaryField: "ZIPCODE",
+                        sortField: "ZIPCODE",
                         isTimeVaryingData: false,
                         source: "American Community Survey 2011-2015 5yr",
                         dropdown: "#zipCodeComboBox"
@@ -359,6 +365,7 @@
                         compareWhereClause: "1 = 1",
                         comparePlaceField: "NAME",
                         summaryField: "OBJECTID",
+                        sortField: "OBJECTID",
                         isTimeVaryingData: false,
                         source: "American Community Survey 2011-2015 5yr",
                         populateDropDown: false

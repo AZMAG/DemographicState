@@ -198,25 +198,30 @@
                     var features = results.features;
                     var nameArray = [];
                     var fieldName = configItem.summaryField;
+                    var sortField = configItem.sortField;
                     var dropdownSelector = configItem.dropdown;
-
+                    // console.log(features);
                     $.each(features, function(index, feature) {
                         var name = feature.attributes[fieldName];
+                        var sort = feature.attributes[sortField];
                         nameArray.push({
-                            Name: name
+                            Name: name,
+                            Sort: sort
                         });
                     });
+                    console.log(nameArray);
                     // used to sort attributes and put into Array. vw
                     function compare(a, b) {
-                        if (a.Name < b.Name) {
+                        if (a.Sort < b.Sort) {
                             return -1;
                         }
-                        if (a.Name > b.Name) {
+                        if (a.Sort > b.Sort) {
                             return 1;
                         }
                         return 0;
                     }
                     nameArray.sort(compare);
+
 
                     $(dropdownSelector).kendoComboBox({
                         index: 0,
@@ -284,12 +289,12 @@
                         $choiceDiv.show();
 
                         self.hideChoices(selector);
-                        
+
                         self.hideLayers(layerID);
 
                         if (layer !== null && layer.visible === false && boxChecked === false) {
                             dom.byId("c" + layerID).checked = true;
-                            
+
                             //layer.show();
                             //dom.byId("c" + layerID).checked = true;
                         }
