@@ -274,59 +274,35 @@
                             layerID = "cogBoundaries";
                             break;
                     }
-                    var layer;
-                    var boxChecked;
-                    layer = mapModel.mapInstance.getLayer(layerID);
-                    console.log(layerID);
+                    var layer = null;
+                    var boxChecked = null;
 
-                    // if (layerID !== "") {
-                    //     layer = mapModel.mapInstance.getLayer(layerID);
-                    //     boxChecked = dom.byId("c" + layerID).checked;
-                    // }
+                    if (layerID !== "") {
+                        layer = mapModel.mapInstance.getLayer(layerID);
+                        boxChecked = dom.byId("c" + layerID).checked;
+                    }
 
                     var selector = "#" + type + "ChoiceDiv";
                     var $choiceDiv = $(selector);
-                    $("#demInteractiveDiv").hide();
+
+                    // $("#demInteractiveDiv").hide();
 
                     if ($choiceDiv.is(":hidden")) {
                         $choiceDiv.show();
-
                         self.hideChoices(selector);
-
-                        // self.hideLayers(layerID);
-
-                        // layer.show();
-                        // boxChecked = dom.byId("c" + layerID).checked = true;
-
-                        // dom.byId("c" + layerID).checked = true;
-                        // layer.show();
-
-                        // if (layer !== null && layer.visible === false && boxChecked === false) {
-                        //     dom.byId("c" + layerID).checked = true;
-
-                        //     //layer.show();
-                        //     //dom.byId("c" + layerID).checked = true;
-                        // }
-                        legendVM.updateLegendLayers(layerID);
+                        if (layer !== null && layer.visible === false && boxChecked === false) {
+                            self.hideLayers(layerID);
+                            layer.show();
+                            dom.byId("c" + layerID).checked = true;
+                        }
                     } else {
                         $choiceDiv.hide();
-
-                        // layer.hide();
-                        // boxChecked = dom.byId("c" + layerID).checked = false;
-
-
-                        legendVM.updateLegendLayers(layerID);
-                        // self.hideLayers(layerID);
-
-                        // dom.byId("c" + layerID).checked = false;
-                        // layer.hide();
-
-                        // if (layer !== null && layer.visible === true && boxChecked === true) {
-                        //     dom.byId("c" + layerID).checked = false;
-                        //     //legendVM.updateLegendLayers(layerID);
-                        //     layer.hide();
-                        // }
+                        if (layer !== null && layer.visible === true && boxChecked === true) {
+                            layer.hide();
+                            dom.byId("c" + layerID).checked = false;
+                        }
                     }
+
                     if (type === "cog") {
                         var countyId = "countyBoundaries";
                         var countyLayer = mapModel.mapInstance.getLayer(countyId);
