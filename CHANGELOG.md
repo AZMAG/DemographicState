@@ -23,7 +23,7 @@ And constructed with the following guidelines:
 * fixed sorting issue in drop-down menus
 
 ## Version 2.3.4 | 2/16/2017
-* Updated Excel Eporting Functionality to reflect new tabular reporting structure
+* Updated Excel Exporting Functionality to reflect new tabular reporting structure
 * Updated kendo version
 * Added logic to style the reports by indenting, coloring and changing the font style
 * Added an expand and collapse button on tabular reports to make it easier to see data more quickly

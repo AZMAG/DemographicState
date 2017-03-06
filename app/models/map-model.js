@@ -268,7 +268,6 @@
                     return 0;
                 });
 
-
                 for (var i = 0; i < layerInfo.length; i++) {
 
                     // add all layers to TOC
@@ -374,6 +373,7 @@
                 }
 
                 var layersReversed = layersToAdd.reverse();
+                // console.log(layersReversed);
 
                 currentMap.addLayers(layersReversed);
 

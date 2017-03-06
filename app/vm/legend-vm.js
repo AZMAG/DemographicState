@@ -326,7 +326,7 @@
                     self.countyLegend.startup();
                 };
 
-                //Council Legend
+                //Congressional Legend
                 self.CongressionalLegend = function() {
                     var insertElement = "legendDiv";
                     self.congressionalLegend = new Legend({

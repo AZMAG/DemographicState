@@ -209,7 +209,7 @@
                             Sort: sort
                         });
                     });
-                    console.log(nameArray);
+                    // console.log(nameArray);
                     // used to sort attributes and put into Array. vw
                     function compare(a, b) {
                         if (a.Sort < b.Sort) {
@@ -274,13 +274,16 @@
                             layerID = "cogBoundaries";
                             break;
                     }
-                    var layer = null;
-                    var boxChecked = null;
+                    var layer;
+                    var boxChecked;
+                    layer = mapModel.mapInstance.getLayer(layerID);
+                    console.log(layerID);
 
-                    if (layerID !== "") {
-                        layer = mapModel.mapInstance.getLayer(layerID);
-                        boxChecked = dom.byId("c" + layerID).checked;
-                    }
+                    // if (layerID !== "") {
+                    //     layer = mapModel.mapInstance.getLayer(layerID);
+                    //     boxChecked = dom.byId("c" + layerID).checked;
+                    // }
+
                     var selector = "#" + type + "ChoiceDiv";
                     var $choiceDiv = $(selector);
                     $("#demInteractiveDiv").hide();
@@ -290,24 +293,39 @@
 
                         self.hideChoices(selector);
 
-                        self.hideLayers(layerID);
+                        // self.hideLayers(layerID);
 
-                        if (layer !== null && layer.visible === false && boxChecked === false) {
-                            dom.byId("c" + layerID).checked = true;
+                        // layer.show();
+                        // boxChecked = dom.byId("c" + layerID).checked = true;
 
-                            //layer.show();
-                            //dom.byId("c" + layerID).checked = true;
-                        }
+                        // dom.byId("c" + layerID).checked = true;
+                        // layer.show();
+
+                        // if (layer !== null && layer.visible === false && boxChecked === false) {
+                        //     dom.byId("c" + layerID).checked = true;
+
+                        //     //layer.show();
+                        //     //dom.byId("c" + layerID).checked = true;
+                        // }
                         legendVM.updateLegendLayers(layerID);
                     } else {
                         $choiceDiv.hide();
+
+                        // layer.hide();
+                        // boxChecked = dom.byId("c" + layerID).checked = false;
+
+
                         legendVM.updateLegendLayers(layerID);
-                        self.hideLayers(layerID);
-                        if (layer !== null && layer.visible === true && boxChecked === true) {
-                            dom.byId("c" + layerID).checked = false;
-                            //legendVM.updateLegendLayers(layerID);
-                            layer.hide();
-                        }
+                        // self.hideLayers(layerID);
+
+                        // dom.byId("c" + layerID).checked = false;
+                        // layer.hide();
+
+                        // if (layer !== null && layer.visible === true && boxChecked === true) {
+                        //     dom.byId("c" + layerID).checked = false;
+                        //     //legendVM.updateLegendLayers(layerID);
+                        //     layer.hide();
+                        // }
                     }
                     if (type === "cog") {
                         var countyId = "countyBoundaries";
