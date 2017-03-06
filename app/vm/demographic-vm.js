@@ -2542,20 +2542,20 @@
                 self.exportPDFReport = function() {
                     var parameterString = "";
                     var newWindow;
-                    if (self.compareFeature) {
-                        if (self.communityName === "Selected Block Groups") {
-                            var ObjectIdArray = "";
-                            for (var i = 0; i < self.selectedFeatures.length; i++) {
-                                ObjectIdArray += self.selectedFeatures[i].attributes.OBJECTID + ",";
-                            }
-                            parameterString = "StateInteractive";
-                            localStorage.OBJECTID = ObjectIdArray;
-                        } else {
-                            parameterString = self.communityName;
-                        }
-                        self.reportURL = encodeURI(demographicConfig.exportPDFCompareReportUrl + "?city1=" + parameterString + "&?city2=" + self.compareToName);
-                        newWindow = window.open(self.reportURL, "_new");
-                    } else {
+                    // if (self.compareFeature) {
+                    //     if (self.communityName === "Selected Block Groups") {
+                    //         var ObjectIdArray = "";
+                    //         for (var i = 0; i < self.selectedFeatures.length; i++) {
+                    //             ObjectIdArray += self.selectedFeatures[i].attributes.OBJECTID + ",";
+                    //         }
+                    //         parameterString = "StateInteractive";
+                    //         localStorage.OBJECTID = ObjectIdArray;
+                    //     } else {
+                    //         parameterString = self.communityName;
+                    //     }
+                    //     self.reportURL = encodeURI(demographicConfig.exportPDFCompareReportUrl + "?city1=" + parameterString + "&?city2=" + self.compareToName);
+                    //     newWindow = window.open(self.reportURL, "_new");
+                    // } else {
                         if (self.communityName.indexOf("County") > -1) {
                             self.reportURL = encodeURI(demographicConfig.exportPDFReportUrl + "?county=" + self.communityName);
                             newWindow = window.open(self.reportURL, "_new");
@@ -2597,7 +2597,7 @@
                             self.reportURL = encodeURI(demographicConfig.exportPDFReportUrl + "?city=" + self.communityName);
                             newWindow = window.open(self.reportURL, "_new");
                         }
-                    }
+                    // }
                 };
 
                 /**
