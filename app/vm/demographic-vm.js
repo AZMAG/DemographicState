@@ -305,22 +305,22 @@
                     $(".gridGroupToggle").click(function(e) {
                         $.each($(".k-grid"), function(i, val) {
                             if ($(val).is(":visible")) {
-                                var grid = $(val).data('kendoGrid');
+                                var grid = $(val).data("kendoGrid");
                                 if (e.target.value === "collapse") {
                                     e.target.value = "expand";
-                                    $(e.target).html('Expand All');
+                                    $(e.target).html("Expand All");
                                     grid.tbody.find("tr.k-grouping-row").each(function(index) {
                                         grid.collapseGroup(this);
                                     });
                                 } else {
                                     e.target.value = "collapse";
-                                    $(e.target).html('Collapse All');
+                                    $(e.target).html("Collapse All");
                                     grid.tbody.find("tr.k-grouping-row").each(function(index) {
                                         grid.expandGroup(this);
                                     });
                                 }
                             }
-                        })
+                        });
                     });
 
 
@@ -839,7 +839,7 @@
                     var chartListDivObj = $("#demCensusChartList");
 
                     if (tab[0]) {
-                        if (self.reportType == 'cog') {
+                        if (self.reportType === "cog") {
                             //Sets the correct source label at bottom of report
                             if (tab[0].textContent === "Census 2010 Charts" || tab[0].textContent === "Census 2010 Data") {
                                 $("#demSource").html("Source: United States Census Bureau, 2010 Decennial Census (Interpolation method used, <a class='interHelp link'>Click here</a> for more details) ");
@@ -1287,46 +1287,46 @@
                             Footnote: "a",
                             Total: attributes["MINORITY_POP"],
                             Percent: (attributes["MINORITY_POP"] / totalPop),
-                            NumberOfBlocks: attributes['AFFECTED_MINORITY_POP_COUNT'],
-                            PercentOfBlocks: attributes['AFFECTED_MINORITY_POP_COUNT'] / totalBlockCount,
-                            AffectedPopulation: attributes['AFFECTED_MINORITY_POP'],
-                            PercentAffectedCaptured: attributes['AFFECTED_MINORITY_POP'] / attributes["MINORITY_POP"]
+                            NumberOfBlocks: attributes["AFFECTED_MINORITY_POP_COUNT"],
+                            PercentOfBlocks: attributes["AFFECTED_MINORITY_POP_COUNT"] / totalBlockCount,
+                            AffectedPopulation: attributes["AFFECTED_MINORITY_POP"],
+                            PercentAffectedCaptured: attributes["AFFECTED_MINORITY_POP"] / attributes["MINORITY_POP"]
                         }, {
                             Category: "Age 65+",
                             Footnote: "",
                             Total: attributes["AGE65PLUS"],
                             Percent: (attributes["AGE65PLUS"] / totalPop),
-                            NumberOfBlocks: attributes['AFFECTED_AGE65PLUS_COUNT'],
-                            PercentOfBlocks: attributes['AFFECTED_AGE65PLUS_COUNT'] / totalBlockCount,
-                            AffectedPopulation: attributes['AFFECTED_AGE65PLUS'],
-                            PercentAffectedCaptured: attributes['AFFECTED_AGE65PLUS'] / attributes["AGE65PLUS"]
+                            NumberOfBlocks: attributes["AFFECTED_AGE65PLUS_COUNT"],
+                            PercentOfBlocks: attributes["AFFECTED_AGE65PLUS_COUNT"] / totalBlockCount,
+                            AffectedPopulation: attributes["AFFECTED_AGE65PLUS"],
+                            PercentAffectedCaptured: attributes["AFFECTED_AGE65PLUS"] / attributes["AGE65PLUS"]
                         }, {
                             Category: "Below Poverty Level",
                             Footnote: "b",
                             Total: attributes["INCOME_BELOW_POVERTY"],
                             Percent: (attributes["INCOME_BELOW_POVERTY"] / attributes["POP_FOR_POVERTY"]),
-                            NumberOfBlocks: attributes['AFFECTED_INCOME_BELOW_POVERTY_COUNT'],
-                            PercentOfBlocks: attributes['AFFECTED_INCOME_BELOW_POVERTY_COUNT'] / totalBlockCount,
-                            AffectedPopulation: attributes['AFFECTED_INCOME_BELOW_POVERTY'],
-                            PercentAffectedCaptured: attributes['AFFECTED_INCOME_BELOW_POVERTY'] / attributes["INCOME_BELOW_POVERTY"]
+                            NumberOfBlocks: attributes["AFFECTED_INCOME_BELOW_POVERTY_COUNT"],
+                            PercentOfBlocks: attributes["AFFECTED_INCOME_BELOW_POVERTY_COUNT"] / totalBlockCount,
+                            AffectedPopulation: attributes["AFFECTED_INCOME_BELOW_POVERTY"],
+                            PercentAffectedCaptured: attributes["AFFECTED_INCOME_BELOW_POVERTY"] / attributes["INCOME_BELOW_POVERTY"]
                         }, {
                             Category: "Population with a Disability",
                             Footnote: "c",
                             Total: attributes["DISABILITY"],
                             Percent: (attributes["DISABILITY"] / attributes["CIV_NON_INST_POP"]),
-                            NumberOfBlocks: attributes['AFFECTED_DISABILITY_COUNT'],
-                            PercentOfBlocks: attributes['AFFECTED_DISABILITY_COUNT'] / totalBlockCount,
-                            AffectedPopulation: attributes['AFFECTED_DISABILITY'],
-                            PercentAffectedCaptured: attributes['AFFECTED_DISABILITY'] / attributes["DISABILITY"]
+                            NumberOfBlocks: attributes["AFFECTED_DISABILITY_COUNT"],
+                            PercentOfBlocks: attributes["AFFECTED_DISABILITY_COUNT"] / totalBlockCount,
+                            AffectedPopulation: attributes["AFFECTED_DISABILITY"],
+                            PercentAffectedCaptured: attributes["AFFECTED_DISABILITY"] / attributes["DISABILITY"]
                         }, {
                             Category: "Limited English Proficient Persons (LEP)",
                             Footnote: "d",
                             Total: attributes["LIMITED_ENG_PROF"],
                             Percent: (attributes["LIMITED_ENG_PROF"] / fivePlus),
-                            NumberOfBlocks: attributes['AFFECTED_LIMITED_ENG_PROF_COUNT'],
-                            PercentOfBlocks: attributes['AFFECTED_LIMITED_ENG_PROF_COUNT'] / totalBlockCount,
-                            AffectedPopulation: attributes['AFFECTED_LIMITED_ENG_PROF'],
-                            PercentAffectedCaptured: attributes['AFFECTED_LIMITED_ENG_PROF'] / attributes["LIMITED_ENG_PROF"]
+                            NumberOfBlocks: attributes["AFFECTED_LIMITED_ENG_PROF_COUNT"],
+                            PercentOfBlocks: attributes["AFFECTED_LIMITED_ENG_PROF_COUNT"] / totalBlockCount,
+                            AffectedPopulation: attributes["AFFECTED_LIMITED_ENG_PROF"],
+                            PercentAffectedCaptured: attributes["AFFECTED_LIMITED_ENG_PROF"] / attributes["LIMITED_ENG_PROF"]
                         }];
 
                         tabStrip.append({
@@ -2147,12 +2147,12 @@
                                     if (foundElement.length > 1) {
                                         $.each(foundElement, function(i, row) {
                                             if ($(row)[0].previousSibling) {
-                                                if ($(row)[0].previousSibling.innerText.indexOf(el.fieldCategory) != -1) {
+                                                if ($(row)[0].previousSibling.innerText.indexOf(el.fieldCategory) !== -1) {
                                                     finalElement = $(row);
                                                 }
                                             }
                                         });
-                                    } else if (foundElement.length == 1) {
+                                    } else if (foundElement.length === 1) {
                                         finalElement = foundElement;
                                     }
                                     var indent = el.indentLevel * 20;
@@ -2163,7 +2163,7 @@
 
                                     var parentElement = $(finalElement[0].parentElement);
 
-                                    if (el.universeField == 1) {
+                                    if (el.universeField === 1) {
                                         var universeColor = "#06c";
                                         parentElement.css({
                                             "background-color": universeColor,
@@ -2172,7 +2172,7 @@
                                             "font-size": "12px"
                                         });
 
-                                    } else if (el.universeField == 2) {
+                                    } else if (el.universeField === 2) {
                                         var universeColor = "#808080";
                                         var nextSib = $(finalElement[0].nextSibling);
                                         var finalSib = $(nextSib[0].nextSibling);
@@ -2183,7 +2183,7 @@
                                         });
                                         nextSib.empty();
                                         finalSib.empty();
-                                    } else if (el.universeField == 0) {
+                                    } else if (el.universeField === 0) {
                                         parentElement.css({
                                             "font-weight": "normal",
                                             "font-size": "11.5px"
@@ -2195,7 +2195,7 @@
                             grid.tbody.find("tr.k-grouping-row").each(function(index) {
                                 grid.collapseGroup(this);
                             });
-                            $(".gridGroupToggle").val("expand").html('Expand All');
+                            $(".gridGroupToggle").val("expand").html("Expand All");
                         }
                     });
 
@@ -2213,7 +2213,7 @@
                     var dataGridName = "demACSDataGrid";
                     var demoOptionsRowName = "demACSSummaryOptionsRow";
                     var dataSource = self.aggACSValuesArray;
-                    $(".gridGroupToggle").val("collapse").html('Collapse All');;
+                    $(".gridGroupToggle").val("collapse").html("Collapse All");
 
                     if (type === "census") {
                         dataGridName = "demCensusDataGrid";
@@ -2416,7 +2416,7 @@
                                                         row.cells[1].formula = row.cells[1].value.replace(el.tableHeader, "=\"         " + el.tableHeader + "\"");
                                                         break;
                                                 }
-                                                if (el.universeField == 1) {
+                                                if (el.universeField === 1) {
                                                     row.cells[0].value = row.cells[1].value;
                                                     row.cells[0].colSpan = 2;
                                                     row.cells.splice(1, 1);
@@ -2425,7 +2425,7 @@
                                                         cell.italic = true;
                                                         cell.bold = true;
                                                     });
-                                                } else if (el.universeField == 2) {
+                                                } else if (el.universeField === 2) {
                                                     $.each(row.cells, function(i, cell) {
                                                         if (i > 0) {
                                                             cell.background = "#D9D9D9";

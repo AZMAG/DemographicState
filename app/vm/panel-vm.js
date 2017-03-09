@@ -222,7 +222,6 @@
                     }
                     nameArray.sort(compare);
 
-
                     $(dropdownSelector).kendoComboBox({
                         index: 0,
                         dataTextField: "Name",
@@ -251,7 +250,7 @@
                             break;
                         case "launchPlaceSummaryWin":
                             type = "place";
-                            layerID = "";
+                            layerID = null;
                             break;
                         case "launchLegislativeSummaryWin":
                             type = "legislative";
@@ -272,42 +271,82 @@
                         case "launchCogSummaryWin":
                             type = "cog";
                             layerID = "cogBoundaries";
+                            // layerID = null;
                             break;
                     }
-                    var layer = null;
-                    var boxChecked = null;
-
-                    if (layerID !== "") {
+                    var layer;
+                    if (layerID !== null) {
                         layer = mapModel.mapInstance.getLayer(layerID);
-                        boxChecked = dom.byId("c" + layerID).checked;
+                        console.log(layer);
+                        console.log(layer.visible);
+                    } else {
+                        layer = null;
                     }
 
                     var selector = "#" + type + "ChoiceDiv";
                     var $choiceDiv = $(selector);
 
-                    // $("#demInteractiveDiv").hide();
-
                     if ($choiceDiv.is(":hidden")) {
                         $choiceDiv.show();
                         self.hideChoices(selector);
-                        if (layer !== null && layer.visible === false && boxChecked === false) {
-                            self.hideLayers(layerID);
-                            layer.show();
-                            dom.byId("c" + layerID).checked = true;
+                        self.hideLayers(layerID);
+
+                        if (layer !== null && layer.visible !== true && type !== "cog") {
+                            self.boxChecked(layerID);
+                            self.legendUpdate(layerID);
+                            // legendVM.updateLegendLayers(layerID);
                         }
+
+                        if (type === "cog") {
+                            self.cogLayers(open);
+                        }
+
                     } else {
                         $choiceDiv.hide();
-                        if (layer !== null && layer.visible === true && boxChecked === true) {
-                            layer.hide();
-                            dom.byId("c" + layerID).checked = false;
+
+                        if (layerID !== null && type !== "cog") {
+                            self.legendUpdate(layerID);
+                            // legendVM.updateLegendLayers(layerID);
+                            self.boxChecked(layerID);
+                        }
+
+                        if (type === "cog") {
+                            self.cogLayers();
                         }
                     }
+                };
 
-                    if (type === "cog") {
-                        var countyId = "countyBoundaries";
-                        var countyLayer = mapModel.mapInstance.getLayer(countyId);
+                self.boxChecked = function(layerID) {
+                    var checkMark = dom.byId("c" + layerID).checked;
+                    if (checkMark !== true) {
+                        checkMark = dom.byId("c" + layerID).checked = true;
+                    } else {
+                        checkMark = dom.byId("c" + layerID).checked = false;
+                    }
+                };
+
+                self.cogLayers = function(open) {
+                    var countyId = "countyBoundaries";
+                    var countyLayer = mapModel.mapInstance.getLayer(countyId);
+                    var cogId = "cogBoundaries";
+                    var cogLayer = mapModel.mapInstance.getLayer(cogId);
+
+                    if (open) {
+                        legendVM.updateLegendLayers(countyId);
                         countyLayer.show();
                         dom.byId("c" + countyId).checked = true;
+
+                        legendVM.updateLegendLayers(cogId);
+                        cogLayer.show();
+                        dom.byId("c" + cogId).checked = true;
+                    } else {
+                        legendVM.updateLegendLayers(countyId);
+                        countyLayer.hide();
+                        dom.byId("c" + countyId).checked = false;
+
+                        legendVM.updateLegendLayers(cogId);
+                        cogLayer.hide();
+                        dom.byId("c" + cogId).checked = false;
                     }
                 };
 
@@ -337,6 +376,16 @@
                         }
                     });
                 };
+
+                self.legendUpdate = function(layerID) {
+                    var layerIds = ["countyBoundaries", "congressionalDistricts", "legislativeDistricts", "zipCodes", "cogBoundaries"];
+                    $.each(layerIds, function(i, item) {
+                        if (layerID === item) {
+                            legendVM.updateLegendLayers(item);
+                        }
+                    });
+
+                }
 
                 /**
                  * Get the selected county name and call open method on demographicVM.

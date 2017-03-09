@@ -705,7 +705,7 @@
                         }]
                     }
 
-                ]
+                ];
             };
             return cbrConfig;
         });

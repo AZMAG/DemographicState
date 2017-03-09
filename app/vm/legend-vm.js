@@ -77,6 +77,7 @@
                     dc.place(legendview, "mapContainer", "after");
 
                     tp.subscribe("MapLoaded", self.mapLoaded);
+                    tp.subscribe("Counties Loaded", self.CountyLegend);
                     tp.subscribe("addTOCLayers", self.addTOCLayers);
                     tp.subscribe("MapRenderUpdated", self.updateLegend);
                     tp.subscribe("NewMapThemeSelected", self.updateLegendTitle);
@@ -310,7 +311,7 @@
                     self.updateLegendLayers(layerId);
                 };
 
-                //Supervisor Legend
+                //County Legend
                 self.CountyLegend = function() {
                     var insertElement = "legendDiv";
                     self.countyLegend = new Legend({

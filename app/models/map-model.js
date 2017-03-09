@@ -163,6 +163,7 @@
                 this.mapInstances.push(map);
 
                 on(map, "LayerAddResult", this.mapOnLayerAddResult);
+                on(this.mapInstance, "Load", this.countiesLoaded);
                 on(map, "Load", lang.hitch(this, function() {
                     this.mapLoaded(map);
                 }));
@@ -172,8 +173,8 @@
 
                 this.mapInstance = map;
                 this.mapInstances.push(map);
-
                 on(map, "LayerAddResult", this.mapOnLayerAddResult);
+
                 on(map, "Load", lang.hitch(this, function() {
                     this.mapLoaded(this.mapInstance);
                 }));
@@ -246,8 +247,20 @@
                 tp.publish("mapLayerAdded");
             },
 
+            /**
+             * Loads the thematic legend
+             * @return {[type]} [description]
+             */
             mapLoaded: function(map) {
                 tp.publish("MapLoaded", map);
+            },
+
+            /**
+             * Loads the counties legend
+             * @return {[type]} [description]
+             */
+            countiesLoaded: function() {
+                tp.publish("Counties Loaded");
             },
 
             /**
