@@ -21,6 +21,7 @@ And constructed with the following guidelines:
 * Bug fixes
 * Spelling issues
 * fixed sorting issue in drop-down menus
+* fixed legend issues
 
 ## Version 2.3.4 | 2/16/2017
 * Updated Excel Exporting Functionality to reflect new tabular reporting structure

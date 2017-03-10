@@ -352,7 +352,7 @@
                             layer: mapModel.mapInstance.getLayer("legislativeDistricts"),
                             title: "Legislative Districts"
                         }],
-                        autoUpdate: false
+                        autoUpdate: true
                     }, dc.create("div", {
                         id: "legendDiv5"
                     }, insertElement, "after"));

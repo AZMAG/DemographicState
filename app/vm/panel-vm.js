@@ -210,7 +210,7 @@
                         });
                     });
                     // console.log(nameArray);
-                    // used to sort attributes and put into Array. vw
+                    // used to sort attributes and put into Array.
                     function compare(a, b) {
                         if (a.Sort < b.Sort) {
                             return -1;
@@ -232,7 +232,11 @@
                         }
                     });
                 };
-
+                /**
+                 * [displayChoice description]
+                 * @param  {[type]} e [description]
+                 * @return {[type]}   [description]
+                 */
                 self.displayChoice = function(e) {
 
                     var sender = e.target.id;
@@ -242,7 +246,7 @@
                     switch (sender) {
                         case "launchStateSummaryWin":
                             type = "state";
-                            layerID = "";
+                            layerID = null;
                             break;
                         case "launchCountySummaryWin":
                             type = "county";
@@ -266,19 +270,16 @@
                             break;
                         case "launchInteractiveSummaryDiv":
                             type = "demInteractive";
-                            layerID = "";
+                            layerID = null;
                             break;
                         case "launchCogSummaryWin":
                             type = "cog";
                             layerID = "cogBoundaries";
-                            // layerID = null;
                             break;
                     }
                     var layer;
                     if (layerID !== null) {
                         layer = mapModel.mapInstance.getLayer(layerID);
-                        console.log(layer);
-                        console.log(layer.visible);
                     } else {
                         layer = null;
                     }
@@ -294,7 +295,12 @@
                         if (layer !== null && layer.visible !== true && type !== "cog") {
                             self.boxChecked(layerID);
                             self.legendUpdate(layerID);
-                            // legendVM.updateLegendLayers(layerID);
+                        }
+
+                        var cogDOM = dom.byId("legendDiv6");
+                        if (cogDOM !== null && type !== "cog") {
+                             // console.log("TRUE");
+                             $("#legendDiv6").hide();
                         }
 
                         if (type === "cog") {
@@ -306,7 +312,6 @@
 
                         if (layerID !== null && type !== "cog") {
                             self.legendUpdate(layerID);
-                            // legendVM.updateLegendLayers(layerID);
                             self.boxChecked(layerID);
                         }
 
@@ -315,7 +320,11 @@
                         }
                     }
                 };
-
+                /**
+                 * Checks to see if the layer box is checked in the Layer Options
+                 * @param  {String} layerID [description]
+                 * @return {[type]}         [description]
+                 */
                 self.boxChecked = function(layerID) {
                     var checkMark = dom.byId("c" + layerID).checked;
                     if (checkMark !== true) {
@@ -324,7 +333,11 @@
                         checkMark = dom.byId("c" + layerID).checked = false;
                     }
                 };
-
+                /**
+                 * COG/MPO summary report info
+                 * @param  {String} open [description]
+                 * @return {[type]}      [description]
+                 */
                 self.cogLayers = function(open) {
                     var countyId = "countyBoundaries";
                     var countyLayer = mapModel.mapInstance.getLayer(countyId);
@@ -349,11 +362,10 @@
                         dom.byId("c" + cogId).checked = false;
                     }
                 };
-
                 /**
                  * Hide all choice divs except for div id passed in parameter
-                 *
-                 * @parameter choice
+                 * @param  {String} choice [description]
+                 * @return {[type]}        [description]
                  */
                 self.hideChoices = function(choice) {
                     var choiceDivs = ["#countyChoiceDiv", "#placeChoiceDiv", "#legislativeChoiceDiv", "#congressionalChoiceDiv", "#zipCodeChoiceDiv", "#cogChoiceDiv"];
@@ -363,7 +375,11 @@
                         }
                     });
                 };
-
+                /**
+                 * Hides all the layers except for layer passed in parameter
+                 * @param  {String} layerID [description]
+                 * @return {[type]}         [description]
+                 */
                 self.hideLayers = function(layerID) {
                     var layerIds = ["countyBoundaries", "congressionalDistricts", "legislativeDistricts", "zipCodes", "cogBoundaries"];
                     $.each(layerIds, function(i, item) {
@@ -376,7 +392,11 @@
                         }
                     });
                 };
-
+                /**
+                 * Updates the legend with the layer passed in the parameter
+                 * @param  {String} layerID [description]
+                 * @return {[type]}         [description]
+                 */
                 self.legendUpdate = function(layerID) {
                     var layerIds = ["countyBoundaries", "congressionalDistricts", "legislativeDistricts", "zipCodes", "cogBoundaries"];
                     $.each(layerIds, function(i, item) {
@@ -385,7 +405,8 @@
                         }
                     });
 
-                }
+
+                };
 
                 /**
                  * Get the selected county name and call open method on demographicVM.
@@ -413,6 +434,9 @@
                 self.openStateSummaryWindow = function(e) {
                     // Open the window
                     demographicVM.openWindow("Arizona", "state");
+                    self.hideChoices();
+                    self.hideLayers();
+                    self.legendUpdate();
                 };
 
                 /**
