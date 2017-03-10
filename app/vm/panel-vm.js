@@ -404,8 +404,6 @@
                             legendVM.updateLegendLayers(item);
                         }
                     });
-
-
                 };
 
                 /**
