@@ -945,6 +945,7 @@
                                 chartName: field.chartCategory, // added to give name to series for legend. vw
                                 timePeriod: field.timePeriod,
                                 derivedTargetField: field.fieldName,
+                                universeField: field.universeField,
                                 derivedPercentOfField: field.percentOfField,
                                 percentValue: 0,
                                 percentValueFormatted: "0",
@@ -2079,6 +2080,11 @@
                         demoOptionsRowName = "demCensusSummaryOptionsRow";
                         dataSource = self.aggCensusValuesArray;
                         visibility = "";
+                        if (dataSource[3] && dataSource[2] && dataSource[17]) {
+                            dataSource[3].fieldValueFormatted = dataSource[2].fieldValueFormatted;
+                            dataSource[17].fieldValueFormatted = dataSource[2].fieldValueFormatted;
+                            dataSource[25].fieldValueFormatted = dataSource[2].fieldValueFormatted;
+                        }
                     }
 
                     $.each(dataSource, function(i, value) {
@@ -2134,7 +2140,7 @@
                             //{field: "densityValueFormatted", title: "Per Sq Mile", format: "{0:n1}"}
                         ],
                         dataBound: function(e) {
-                            if (this.wrapper[0].id !== "demCensusDataGrid") {
+                            //if (this.wrapper[0].id !== "demCensusDataGrid") {
                                 var rowCollection = e.sender.tbody[0].children;
                                 var data = e.sender._data;
                                 var realRows = [];
@@ -2190,7 +2196,39 @@
                                         });
                                     }
                                 });
-                            }
+                            //} else {
+                                // var rowCollection = e.sender.tbody[0].children;
+                                // var data = e.sender._data;
+                                // var realRows = [];
+                                // $.each(data, function(i, el) {
+                                //     if (el.universeField == 1) {
+                                //         var universeColor = "#06c";
+                                //         parentElement.css({
+                                //             "background-color": universeColor,
+                                //             "font-weight": "bold",
+                                //             "font-style": "italic",
+                                //             "font-size": "12px"
+                                //         });
+
+                                //     } else if (el.universeField == 2) {
+                                //         var universeColor = "#808080";
+                                //         var nextSib = $(finalElement[0].nextSibling);
+                                //         var finalSib = $(nextSib[0].nextSibling);
+                                //         parentElement.css({
+                                //             "background-color": universeColor,
+                                //             "font-weight": "bold",
+                                //             "font-size": "11.5px"
+                                //         });
+                                //         nextSib.empty();
+                                //         finalSib.empty();
+                                //     } else if (el.universeField == 0) {
+                                //         parentElement.css({
+                                //             "font-weight": "normal",
+                                //             "font-size": "11.5px"
+                                //         });
+                                //     }
+                                // });
+                            //}
                             var grid = $("#" + this.wrapper[0].id).data("kendoGrid");
                             grid.tbody.find("tr.k-grouping-row").each(function(index) {
                                 grid.collapseGroup(this);
@@ -2556,47 +2594,47 @@
                     //     self.reportURL = encodeURI(demographicConfig.exportPDFCompareReportUrl + "?city1=" + parameterString + "&?city2=" + self.compareToName);
                     //     newWindow = window.open(self.reportURL, "_new");
                     // } else {
-                        if (self.communityName.indexOf("County") > -1) {
-                            self.reportURL = encodeURI(demographicConfig.exportPDFReportUrl + "?county=" + self.communityName);
-                            newWindow = window.open(self.reportURL, "_new");
-                        } else if (self.communityName.indexOf("Legislative") > -1) {
-                            self.reportURL = encodeURI(demographicConfig.exportPDFReportUrl + "?legislative=" + self.communityName);
-                            newWindow = window.open(self.reportURL, "_new");
-                        } else if (self.communityName.indexOf("Congressional") > -1) {
-                            self.reportURL = encodeURI(demographicConfig.exportPDFReportUrl + "?congressional=" + self.communityName);
-                            newWindow = window.open(self.reportURL, "_new");
-                        } else if (self.communityName.indexOf("Supervisor") > -1) {
-                            self.reportURL = encodeURI(demographicConfig.exportPDFReportUrl + "?supervisor=" + self.communityName);
-                            newWindow = window.open(self.reportURL, "_new");
-                        } else if (self.communityName.indexOf("District") > -1) {
-                            self.reportURL = encodeURI(demographicConfig.exportPDFReportUrl + "?council=" + self.communityName);
-                            newWindow = window.open(self.reportURL, "_new");
-                        } else if (self.communityName.indexOf("Governments") > -1 || self.communityName.indexOf("COG") > -1 || self.communityName.indexOf("MPO") > -1) {
-                            self.reportURL = encodeURI(demographicConfig.exportPDFReportUrl + "?cog=" + self.communityName);
-                            newWindow = window.open(self.reportURL, "_new");
-                        } else if (self.communityName === "Selected Block Groups") {
-                            var ObjectIdArray = "";
+                    if (self.communityName.indexOf("County") > -1) {
+                        self.reportURL = encodeURI(demographicConfig.exportPDFReportUrl + "?county=" + self.communityName);
+                        newWindow = window.open(self.reportURL, "_new");
+                    } else if (self.communityName.indexOf("Legislative") > -1) {
+                        self.reportURL = encodeURI(demographicConfig.exportPDFReportUrl + "?legislative=" + self.communityName);
+                        newWindow = window.open(self.reportURL, "_new");
+                    } else if (self.communityName.indexOf("Congressional") > -1) {
+                        self.reportURL = encodeURI(demographicConfig.exportPDFReportUrl + "?congressional=" + self.communityName);
+                        newWindow = window.open(self.reportURL, "_new");
+                    } else if (self.communityName.indexOf("Supervisor") > -1) {
+                        self.reportURL = encodeURI(demographicConfig.exportPDFReportUrl + "?supervisor=" + self.communityName);
+                        newWindow = window.open(self.reportURL, "_new");
+                    } else if (self.communityName.indexOf("District") > -1) {
+                        self.reportURL = encodeURI(demographicConfig.exportPDFReportUrl + "?council=" + self.communityName);
+                        newWindow = window.open(self.reportURL, "_new");
+                    } else if (self.communityName.indexOf("Governments") > -1 || self.communityName.indexOf("COG") > -1 || self.communityName.indexOf("MPO") > -1) {
+                        self.reportURL = encodeURI(demographicConfig.exportPDFReportUrl + "?cog=" + self.communityName);
+                        newWindow = window.open(self.reportURL, "_new");
+                    } else if (self.communityName === "Selected Block Groups") {
+                        var ObjectIdArray = "";
 
-                            for (var i = 0; i < self.selectedFeatures.length; i++) {
-                                if (i !== self.selectedFeatures.length & self.selectedFeatures.length !== 1) {
-                                    ObjectIdArray += self.selectedFeatures[i].attributes.OBJECTID + ",";
-                                } else {
-                                    ObjectIdArray += self.selectedFeatures[i].attributes.OBJECTID;
-                                }
+                        for (var i = 0; i < self.selectedFeatures.length; i++) {
+                            if (i !== self.selectedFeatures.length & self.selectedFeatures.length !== 1) {
+                                ObjectIdArray += self.selectedFeatures[i].attributes.OBJECTID + ",";
+                            } else {
+                                ObjectIdArray += self.selectedFeatures[i].attributes.OBJECTID;
                             }
-                            localStorage.OBJECTID = ObjectIdArray;
-                            self.reportURL = encodeURI(demographicConfig.exportPDFReportUrl + "?StateInteractive");
-                            newWindow = window.open(self.reportURL, "_new");
-                        } else if (self.communityName === "Arizona") {
-                            self.reportURL = encodeURI(demographicConfig.exportPDFReportUrl + "?state=" + self.communityName);
-                            newWindow = window.open(self.reportURL, "_new");
-                        } else if (self.communityName.length === 5 && !isNaN(parseInt(self.communityName))) {
-                            self.reportURL = encodeURI(demographicConfig.exportPDFReportUrl + "?zipCode=" + self.communityName);
-                            newWindow = window.open(self.reportURL, "_new");
-                        } else {
-                            self.reportURL = encodeURI(demographicConfig.exportPDFReportUrl + "?city=" + self.communityName);
-                            newWindow = window.open(self.reportURL, "_new");
                         }
+                        localStorage.OBJECTID = ObjectIdArray;
+                        self.reportURL = encodeURI(demographicConfig.exportPDFReportUrl + "?StateInteractive");
+                        newWindow = window.open(self.reportURL, "_new");
+                    } else if (self.communityName === "Arizona") {
+                        self.reportURL = encodeURI(demographicConfig.exportPDFReportUrl + "?state=" + self.communityName);
+                        newWindow = window.open(self.reportURL, "_new");
+                    } else if (self.communityName.length === 5 && !isNaN(parseInt(self.communityName))) {
+                        self.reportURL = encodeURI(demographicConfig.exportPDFReportUrl + "?zipCode=" + self.communityName);
+                        newWindow = window.open(self.reportURL, "_new");
+                    } else {
+                        self.reportURL = encodeURI(demographicConfig.exportPDFReportUrl + "?city=" + self.communityName);
+                        newWindow = window.open(self.reportURL, "_new");
+                    }
                     // }
                 };
 
