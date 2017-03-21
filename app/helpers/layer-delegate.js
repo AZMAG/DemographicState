@@ -120,7 +120,7 @@ var queryCountGlobal;
                     where = (typeof where === "undefined") ? "1=1" : where;
                     geometry = (typeof geometry === "undefined") ? null : geometry;
                     returnGeometry = (typeof returnGeometry === "undefined") ? false : returnGeometry;
-                    orderByFields = (typeof orderByFields === "undefined") ? [] : orderByFields;
+                    //orderByFields = (typeof orderByFields === "undefined") ? [] : orderByFields;
 
                     //Create new query
                     if (url.indexOf("?") === -1) {
@@ -135,7 +135,7 @@ var queryCountGlobal;
                     query.where = where;
                     query.returnGeometry = returnGeometry;
                     query.outFields = outFields;
-                    query.orderByFields = orderByFields;
+                    //query.orderByFields = orderByFields;
                     query.returnCountOnly = false;
                     query.returnIdsOnly = false;
                     query.maxAllowableOffset = 0.1;

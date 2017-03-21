@@ -28,16 +28,18 @@
         "esri/layers/WMSLayer",
         "esri/layers/ArcGISDynamicMapServiceLayer",
         "esri/layers/ArcGISTiledMapServiceLayer",
+        "esri/layers/VectorTileLayer",
         "esri/layers/FeatureLayer",
         "esri/Color",
         "esri/symbols/SimpleMarkerSymbol",
         "esri/symbols/SimpleLineSymbol",
         "esri/symbols/SimpleFillSymbol",
+        "esri/renderers/UniqueValueRenderer",
 
         "esri/InfoTemplate",
 
         "dojo/domReady!"
-    ], function(dc, dom, on, tp, lang, Graphic, bookmarkDelegate, Extent, Point, SpatialReference, WMSLayer, ArcGISDynamicMapServiceLayer, ArcGISTiledMapServiceLayer, FeatureLayer, Color, SimpleMarkerSymbol, SimpleLineSymbol, SimpleFillSymbol, InfoTemplate) {
+    ], function(dc, dom, on, tp, lang, Graphic, bookmarkDelegate, Extent, Point, SpatialReference, WMSLayer, ArcGISDynamicMapServiceLayer, ArcGISTiledMapServiceLayer, VectorTileLayer, FeatureLayer, Color, SimpleMarkerSymbol, SimpleLineSymbol, SimpleFillSymbol, UniqueValueRenderer, InfoTemplate) {
 
         /**
          * Holds reference to the map.
@@ -119,7 +121,7 @@
                 self.legislatureInfoTemplate.setContent("<strong><div id='legislativeLink'>${SLDIST_NAME}</div></strong>" +
                     "<hr>" +
                     "Representative: ${HouseRep1} - (${Party_HRep1})<br>" +
-                    "Representative: ${HouseRep2} - (${Party_Hrep2})<br>" +
+                    "Representative: ${HouseRep2} - (${Party_HRep2})<br>" +
                     "Senator: ${Senator} - (${Party_Sen})<br>");
 
                 /**
@@ -161,6 +163,7 @@
                 this.mapInstances.push(map);
 
                 on(map, "LayerAddResult", this.mapOnLayerAddResult);
+                on(this.mapInstance, "Load", this.countiesLoaded);
                 on(map, "Load", lang.hitch(this, function() {
                     this.mapLoaded(map);
                 }));
@@ -170,8 +173,8 @@
 
                 this.mapInstance = map;
                 this.mapInstances.push(map);
-
                 on(map, "LayerAddResult", this.mapOnLayerAddResult);
+
                 on(map, "Load", lang.hitch(this, function() {
                     this.mapLoaded(this.mapInstance);
                 }));
@@ -244,8 +247,20 @@
                 tp.publish("mapLayerAdded");
             },
 
+            /**
+             * Loads the thematic legend
+             * @return {[type]} [description]
+             */
             mapLoaded: function(map) {
                 tp.publish("MapLoaded", map);
+            },
+
+            /**
+             * Loads the counties legend
+             * @return {[type]} [description]
+             */
+            countiesLoaded: function() {
+                tp.publish("Counties Loaded");
             },
 
             /**
@@ -258,10 +273,18 @@
                 var layersTOC = []; // add only certin layers to TOC
                 var layersToAdd = [];
 
-                for (var i = 0; i < appConfig.layerInfo.length; i++) {
+                var layerInfo = appConfig.layerInfo.slice(0);
+
+                layerInfo.sort(function(a, b) {
+                    if (a.drawOrder < b.drawOrder) return -1;
+                    if (a.drawOrder > b.drawOrder) return 1;
+                    return 0;
+                });
+
+                for (var i = 0; i < layerInfo.length; i++) {
 
                     // add all layers to TOC
-                    var info = appConfig.layerInfo[i];
+                    var info = layerInfo[i];
                     var layer;
 
                     var token = "";
@@ -309,6 +332,7 @@
                             layer.setVisibleLayers(info.layers);
                             break;
                         case "tile":
+                            // layer = new VectorTileLayer("test.json");
                             layer = new ArcGISTiledMapServiceLayer(info.url + token, {
                                 id: info.id,
                                 visible: visible,
@@ -333,7 +357,6 @@
                             if (info.id === "cogBoundaries") {
                                 featureTemplate = self.cogInfoTemplate;
                             }
-
                             layer = new FeatureLayer(info.url + token, {
                                 id: info.id,
                                 visible: info.visible,
@@ -342,6 +365,7 @@
                                 outFields: info.outFields,
                                 infoTemplate: featureTemplate
                             });
+
                             break;
                     }
 
@@ -362,6 +386,7 @@
                 }
 
                 var layersReversed = layersToAdd.reverse();
+                // console.log(layersReversed);
 
                 currentMap.addLayers(layersReversed);
 
@@ -372,6 +397,19 @@
                 } else {
                     // publish for new map legends
                 }
+
+                //This section fixed the rendering bug where the renderer is not respecting the drawing order from the MXD
+                var layer = currentMap.getLayer("cogBoundaries");
+                dojo.connect(layer, 'onUpdateEnd', function() {
+                    $.each(this.graphics, function(index, graphic) {
+                        if (graphic.attributes.COG === "MAG" || graphic.attributes.COG === "FMPO" || graphic.attributes.COG === "SVMP" || graphic.attributes.COG === "LHCMP" || graphic.attributes.COG === "CYMP" || graphic.attributes.COG === "SCMPO") {
+                            var shape = graphic.getDojoShape();
+                            if (shape) {
+                                shape.moveToFront();
+                            }
+                        }
+                    });
+                });
             },
 
             /**
@@ -656,7 +694,9 @@
                     for (var i = 0; i < this.mapInstances.length; i += 1) {
                         var newGraphic = new Graphic(graphic.geometry, graphic.symbol, graphic.attributes, graphic.infoTemplate);
                         this.mapInstances[i].graphics.add(newGraphic);
-                        newGraphic.getShape().moveToFront();
+                        if (newGraphic.getShape()) {
+                            newGraphic.getShape().moveToFront();
+                        }
                     }
                 } else {
                     this.mapInstance.graphics.add(graphic);

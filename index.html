@@ -48,15 +48,15 @@
     <link rel="apple-touch-icon" type="image/png" sizes="57x57" href="app/resources/img/magicon_57.png">
     <link rel="shortcut icon" type="image-favorites-icon" href="app/resources/img/stateFavicon.png">
     <!-- ESRI javaScript API CSS -->
-    <link rel="stylesheet" href="http://js.arcgis.com/3.14/dijit/themes/claro/claro.css">
-    <link rel="stylesheet" href="http://js.arcgis.com/3.14/esri/css/esri.css">
+    <link rel="stylesheet" href="http://js.arcgis.com/3.19/dijit/themes/claro/claro.css">
+    <link rel="stylesheet" href="http://js.arcgis.com/3.19/esri/css/esri.css">
     <!-- Kendo UI CSS-->
-    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2015.2.902/styles/kendo.common.min.css" />
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2016.1.226/styles/kendo.common.min.css" />
     <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2013.1.514/styles/kendo.black.min.css" />
     <!-- Application CSS -->
-    <!-- <link rel="stylesheet" href="app/resources/css/normalize.css"> -->
-    <!-- <link rel="stylesheet" href="app/resources/css/main.css"> -->
-    <link rel="stylesheet" type="text/css" href="app/resources/css/concat.min.css">
+    <link rel="stylesheet" href="app/resources/css/normalize.css">
+    <link rel="stylesheet" href="app/resources/css/main.css">
+    <!-- <link rel="stylesheet" type="text/css" href="app/resources/css/concat.min.css"> -->
     <!-- prevent cache -->
     <!--  removed once App goes into production -->
     <!-- <meta http-equiv="cache-control" content="no-cache">
@@ -64,6 +64,7 @@
     <meta http-equiv="pragma" content="no-cache"> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/2.2.0/knockout-min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+    <script type="text/javascript" src="app/vm/utilities.js"></script>
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
@@ -97,7 +98,7 @@
         <div id="loadingBox">
             <h2>Loading Viewer...</h2>
             <br>
-            <img src="http://smallenvelop.com/wp-content/uploads/2014/08/Preloader_3.gif">
+            <img src="app/resources/img/LoadingRubicsCube.gif">
         </div>
     </div>
     <div id="borderContainer" data-dojo-type="dijit.layout.BorderContainer" data-dojo-props="design:" headline ", gutters:false">
@@ -113,9 +114,6 @@
                     <li class="tb ti1">
                         <h1 id="title1">State Demographic Viewer</h1>
                     </li>
-                    <!-- <li class="tb ti2">
-                        <h2 id="title2"></h2>
-                    </li> -->
                 </ul>
             </div>
         </header>
@@ -138,8 +136,8 @@
     <!-- =================================================================================================== -->
     <!-- Kendo UI -->
     <script src="https://kendo.cdn.telerik.com/2015.2.902/js/jquery.min.js"></script>
-    <script src="https://kendo.cdn.telerik.com/2015.2.902/js/kendo.all.min.js"></script>
     <script src="http://kendo.cdn.telerik.com/2016.1.226/js/jszip.min.js"></script>
+    <script src="http://kendo.cdn.telerik.com/2016.1.226/js/kendo.all.min.js"></script>
     <!-- Make sure Dojo can find our code, app folder and vendor code. -->
     <script>
     var dojoConfig = {
@@ -151,12 +149,15 @@
     </script>
     <!-- Global script definitions. -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.4.1/d3.min.js"></script>
-    <script src="http://js.arcgis.com/3.14/"></script>
+    <script src="http://js.arcgis.com/3.19/"></script>
     <script src="config.js"></script>
     <script src="app/run.js"></script>
     <!-- Call the init method on run.js, which, in turn, will load main.js. -->
     <script>
     require(["esri/map", "dojo/domReady!"], init)
+    </script>
+    <script type="text/plain" id="strength">
+        return 100;
     </script>
 </body>
 

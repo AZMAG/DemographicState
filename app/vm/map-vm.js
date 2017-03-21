@@ -303,7 +303,7 @@
                     self.legend = new Legend({
                         map: params.map,
                         layerInfos: [{
-                            layer: self.mapTheme().Service ? params.map.getLayer(self.mapTheme().Service) : params.map.getLayer("ACS2014byBlockGroup"),
+                            layer: self.mapTheme().Service ? params.map.getLayer(self.mapTheme().Service) : params.map.getLayer("ACS2015byBlockGroup"),
                             title: self.mapTheme().ShortName
                         }]
                     }, "legendDiv_{value}".replace(/{value}/gi, self.mapID));
