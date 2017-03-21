@@ -236,13 +236,12 @@
                     $("body").on("click", ".removeRowBtn", function() {
                         var str = $(this).parents("div:first")[0].innerText.toString();
                         var fieldName = str.substring(0, str.indexOf(":"));
-                        var previousDropdown = $(this).parent().parent().prevAll(".joinDDLClass:first");
+                        var nextDropdown = $(this).parent().parent().nextAll(".joinDDLClass:first");
 
-                        if (previousDropdown.length > 0) {
-                            //remove dropdown
-                            previousDropdown.remove();
+                        if (nextDropdown.length > 0) {
+                            nextDropdown.remove();
                         } else {
-                            $(this).parent().parent().nextAll(".joinDDLClass:first").remove();
+                            $(this).parent().parent().prevAll(".joinDDLClass:first").remove();
                         }
 
                         //remove row

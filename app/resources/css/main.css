@@ -1960,3 +1960,9 @@ circle:hover {
 .esriLegendMsg{
     display:none;
 }
+#demTabStrip > .k-tabstrip-items
+{
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+}

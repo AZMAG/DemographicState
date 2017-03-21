@@ -17,11 +17,14 @@ And constructed with the following guidelines:
 
 ***************************************************************************************************************
 
-## Version 2.3.5 | 3/3/2017
+## Version 2.3.5 | 3/21/2017
 * Bug fixes
 * Spelling issues
-* fixed sorting issue in drop-down menus
-* fixed legend issues
+* Fixed sorting issue in drop-down menus
+* Fixed legend issues
+* Updated PDF reporting URL
+* Changed tabstrips to scrollable
+* Fixed bug in advanced query removing items
 
 ## Version 2.3.4 | 2/16/2017
 * Updated Excel Exporting Functionality to reflect new tabular reporting structure

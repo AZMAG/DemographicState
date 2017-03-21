@@ -538,7 +538,7 @@
                     if (tabStrip === undefined) {
                         tabStrip = $("#demTabStrip").kendoTabStrip({
                             activate: self.tabActivated,
-                            scrollable: false
+                            scrollable: true
                         });
                     } else {
                         tabStrip.select('li:contains("ACS 2015 Data")');
@@ -657,7 +657,7 @@
                     if (tabStrip === undefined) {
                         $("#demTabStrip").kendoTabStrip({
                             activate: self.tabActivated,
-                            scrollable: false
+                            scrollable: true
                         });
                     }
                     tabStrip = $("#demTabStrip").data("kendoTabStrip");
@@ -756,7 +756,15 @@
                     // Kendo-ize the grid
                     $("#" + gridName).kendoGrid({
                         dataSource: {
-                            data: self.featureAttributeArray
+                            data: self.featureAttributeArray,
+                            pageSize: 20,
+                            change: function(e){
+                                // console.log(e);
+                                // var grid = $("#" + gridName).data("kendoGrid");
+                                // grid.dataSource.read();
+                                // grid.refresh();
+                                // e.preventDefault();
+                            }
                         },
                         selectable: false,
                         sortable: true,
@@ -764,8 +772,11 @@
                         resizable: false,
                         columnMenu: false,
                         columns: columnConfig,
-                        dataBound: self.gridRowHover
+                        dataBound: function(e){
+                            self.gridRowHover(e);
+                        }
                     });
+                    
 
                     // Size the grid
                     self.sizeGrid("#" + gridName);
@@ -2141,94 +2152,61 @@
                         ],
                         dataBound: function(e) {
                             //if (this.wrapper[0].id !== "demCensusDataGrid") {
-                                var rowCollection = e.sender.tbody[0].children;
-                                var data = e.sender._data;
-                                var realRows = [];
+                            var rowCollection = e.sender.tbody[0].children;
+                            var data = e.sender._data;
+                            var realRows = [];
 
-                                $.each(data, function(i, el) {
-                                    var foundElement = $("td").filter(function() {
-                                        return $(this).text() === el.tableHeader;
-                                    });
-                                    var finalElement = foundElement;
-                                    if (foundElement.length > 1) {
-                                        $.each(foundElement, function(i, row) {
-                                            if ($(row)[0].previousSibling) {
-                                                if ($(row)[0].previousSibling.innerText.indexOf(el.fieldCategory) !== -1) {
-                                                    finalElement = $(row);
-                                                }
-                                            }
-                                        });
-                                    } else if (foundElement.length === 1) {
-                                        finalElement = foundElement;
-                                    }
-                                    var indent = el.indentLevel * 20;
-                                    if (indent === 0) {
-                                        indent = 3;
-                                    }
-                                    finalElement.css("padding-left", indent + "px");
-
-                                    var parentElement = $(finalElement[0].parentElement);
-
-                                    if (el.universeField === 1) {
-                                        var universeColor = "#06c";
-                                        parentElement.css({
-                                            "background-color": universeColor,
-                                            "font-weight": "bold",
-                                            "font-style": "italic",
-                                            "font-size": "12px"
-                                        });
-
-                                    } else if (el.universeField === 2) {
-                                        var universeColor = "#808080";
-                                        var nextSib = $(finalElement[0].nextSibling);
-                                        var finalSib = $(nextSib[0].nextSibling);
-                                        parentElement.css({
-                                            "background-color": universeColor,
-                                            "font-weight": "bold",
-                                            "font-size": "11.5px"
-                                        });
-                                        nextSib.empty();
-                                        finalSib.empty();
-                                    } else if (el.universeField === 0) {
-                                        parentElement.css({
-                                            "font-weight": "normal",
-                                            "font-size": "11.5px"
-                                        });
-                                    }
+                            $.each(data, function(i, el) {
+                                var foundElement = $("td").filter(function() {
+                                    return $(this).text() === el.tableHeader;
                                 });
-                            //} else {
-                                // var rowCollection = e.sender.tbody[0].children;
-                                // var data = e.sender._data;
-                                // var realRows = [];
-                                // $.each(data, function(i, el) {
-                                //     if (el.universeField == 1) {
-                                //         var universeColor = "#06c";
-                                //         parentElement.css({
-                                //             "background-color": universeColor,
-                                //             "font-weight": "bold",
-                                //             "font-style": "italic",
-                                //             "font-size": "12px"
-                                //         });
+                                var finalElement = foundElement;
+                                if (foundElement.length > 1) {
+                                    $.each(foundElement, function(i, row) {
+                                        if ($(row)[0].previousSibling) {
+                                            if ($(row)[0].previousSibling.innerText.indexOf(el.fieldCategory) !== -1) {
+                                                finalElement = $(row);
+                                            }
+                                        }
+                                    });
+                                } else if (foundElement.length === 1) {
+                                    finalElement = foundElement;
+                                }
+                                var indent = el.indentLevel * 20;
+                                if (indent === 0) {
+                                    indent = 3;
+                                }
+                                finalElement.css("padding-left", indent + "px");
 
-                                //     } else if (el.universeField == 2) {
-                                //         var universeColor = "#808080";
-                                //         var nextSib = $(finalElement[0].nextSibling);
-                                //         var finalSib = $(nextSib[0].nextSibling);
-                                //         parentElement.css({
-                                //             "background-color": universeColor,
-                                //             "font-weight": "bold",
-                                //             "font-size": "11.5px"
-                                //         });
-                                //         nextSib.empty();
-                                //         finalSib.empty();
-                                //     } else if (el.universeField == 0) {
-                                //         parentElement.css({
-                                //             "font-weight": "normal",
-                                //             "font-size": "11.5px"
-                                //         });
-                                //     }
-                                // });
-                            //}
+                                var parentElement = $(finalElement[0].parentElement);
+
+                                if (el.universeField === 1) {
+                                    var universeColor = "#06c";
+                                    parentElement.css({
+                                        "background-color": universeColor,
+                                        "font-weight": "bold",
+                                        "font-style": "italic",
+                                        "font-size": "12px"
+                                    });
+
+                                } else if (el.universeField === 2) {
+                                    var universeColor = "#808080";
+                                    var nextSib = $(finalElement[0].nextSibling);
+                                    var finalSib = $(nextSib[0].nextSibling);
+                                    parentElement.css({
+                                        "background-color": universeColor,
+                                        "font-weight": "bold",
+                                        "font-size": "11.5px"
+                                    });
+                                    nextSib.empty();
+                                    finalSib.empty();
+                                } else if (el.universeField === 0) {
+                                    parentElement.css({
+                                        "font-weight": "normal",
+                                        "font-size": "11.5px"
+                                    });
+                                }
+                            });
                             var grid = $("#" + this.wrapper[0].id).data("kendoGrid");
                             grid.tbody.find("tr.k-grouping-row").each(function(index) {
                                 grid.collapseGroup(this);
