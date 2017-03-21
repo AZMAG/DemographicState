@@ -17,6 +17,34 @@ And constructed with the following guidelines:
 
 ***************************************************************************************************************
 
+## Version 3.0.2 | 3/21/2017
+
+* Bug fixes
+* Spelling issues
+* Fixed sorting issue in drop-down menus
+* Fixed legend issues
+* Updated PDF reporting URL
+* Changed tabstrips to scrollable
+* Fixed bug in advanced query removing items
+
+## Version 3.0.1 | 2/16/2017
+
+* Updated Excel Exporting Functionality to reflect new tabular reporting structure
+* Updated kendo version
+* Added logic to style the reports by indenting, coloring and changing the font style
+* Added an expand and collapse button on tabular reports to make it easier to see data more quickly
+* Removed age pyramid and replaced with regular bar chart
+* Updated the charts section to include some new fields
+* Added logic to word wrap the labels on charts to prevent labels from being hidden
+* Added loading icon to reports window to prevent showing user dom interaction
+* Removed Title VI tab from Custom Summary Report
+* Removed flicker on chart refresh
+
+## Version 3.0.0 | 1/23/2017
+
+* Added Title 6 tab to the MPO/COG reporting window
+* Changed wording from MAG Viewer to Viewer
+
 ## Version 2.3.3 | 12/13/2016
 * Fixed bug in advanced query when census fields weren't used no data would be brought in. The query now uses an acs query string and uses the resulting geoids to lookup census block groups.
 

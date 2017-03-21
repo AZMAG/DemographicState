@@ -1,0 +1,18 @@
+<div class="help">
+    <h1>Method Explanation</h1>
+    <hr>
+    <span>
+        The Council of Government / Metropolitan Planning Organization boundaries are not an officially released geometries from the United States Census Bureau.
+    </span>
+    <br>
+    <span>
+        In order to approximate the population, housing and workforce data for these custom areas, we used the following method:
+    </span>
+    <ul>
+        <li>We selected the smallest geometry available from the census data. (Almost always block group data. Title VI data comes from census tracts)</li>
+        <li>We then joined the data to the United States Census Bureau, 2010 Decennial Census block boundaries. We used the appropriate universe field (Persons, Housing Units, etc.) and applied a proportional amount of units by percentage to the newest data.</li>
+        <li>After getting the newest data in blocks, we simply took the centroid of each block and applied it's values to the appropriate Council of Government / Metropolitan Planning Organization.</li>
+        <li>Next, we summed the individual blocks in each area and used the totals.</li>
+    </ul>
+    <p class='legal'>*These numbers were rounded and may not always add up exactly to 100% as expected.</p><p class='legal'> The Maricopa Association of Governments GIS Departments shall assume no liability for:<p class='legal'> Any errors, omissions, or inaccuracies in the information provided, regardless of how caused; or Any decision made or action taken or not taken by viewer in reliance upon any information or data furnished hereunder.</p></p>
+</div>

@@ -16,7 +16,7 @@ module.exports = function(grunt) {
                     ' * http://ims.azmag.gov/\n' +
                     ' * State Demographic Viewer\n' +
                     ' * ==========================================================================\n' +
-                    ' * Copyright 2016 MAG\n' +
+                    ' * Copyright 2017 MAG\n' +
                     ' * Licensed under MIT\n' +
                     ' * ========================================================================== */\n',
 
