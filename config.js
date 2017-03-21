@@ -33,7 +33,7 @@
 
 var appConfig = new function() {
 
-    this.Version = "v3.0.2 | 03/21/2017";
+    this.Version = "v3.0.3 | 03/21/2017";
 
     this.jasonemail = "https://www.azmag.gov/EmailPages/JasonHoward.asp";
 
@@ -42,7 +42,7 @@ var appConfig = new function() {
     this.exportWebMapUrl = "http://geo.azmag.gov/gismag/rest/services/gp/stateDemo/GPServer/Export%20Web%20Map"; // Custom Print Service
     this.webServicePasscode = "sun sand dry heat grand canyon";
 
-    this.mainURL = "http://geo.azmag.gov/gismag/rest/services/maps/DemographicState2014/MapServer";
+    this.mainURL = "http://geo.azmag.gov/gismag/rest/services/maps/DemographicState2015/MapServer";
     this.siteUrl = "http://geo.azmag.gov/maps/azdemographics/?";
 
     // Search Service URLs
@@ -57,8 +57,9 @@ var appConfig = new function() {
 
     this.layerInfo = [{
         layerNum: 0,
+        drawOrder:  0,
         id: "censusTracts",
-        title: "Census Tract Labels",
+        title: "Census Tracts",
         type: "dynamic",
         url: this.mainURL,
         queryUrl: this.mainURL + "/18",
@@ -70,6 +71,7 @@ var appConfig = new function() {
         link: false
     }, {
         layerNum: 1,
+        drawOrder:  2,
         id: "cogBoundaries",
         title: "COG / MPO Boundaries",
         type: "feature",
@@ -77,7 +79,7 @@ var appConfig = new function() {
         queryUrl: this.mainURL + "/2",
         queryWhere: "1=1",
         layers: [2],
-        opacity: 1,
+        opacity: 0.7,
         visible: false,
         selectable: true,
         outFields: ["*"],
@@ -86,6 +88,7 @@ var appConfig = new function() {
         link: true
     }, {
         layerNum: 2,
+        drawOrder:  1,
         id: "countyBoundaries",
         title: "County Boundaries",
         type: "feature",
@@ -93,7 +96,7 @@ var appConfig = new function() {
         queryUrl: this.mainURL + "/16",
         queryWhere: "1=1",
         layers: [16],
-        opacity: 1,
+        opacity: 0.8,
         visible: true,
         selectable: true,
         outFields: ["*"],
@@ -102,6 +105,7 @@ var appConfig = new function() {
         link: true
     }, {
         layerNum: 3,
+        drawOrder:  3,
         id: "congressionalDistricts",
         title: "Congressional Districts",
         type: "feature",
@@ -118,6 +122,7 @@ var appConfig = new function() {
         link: true
     }, {
         layerNum: 4,
+        drawOrder:  4,
         id: "legislativeDistricts",
         title: "Legislative Districts",
         type: "feature",
@@ -134,6 +139,7 @@ var appConfig = new function() {
         link: true
     }, {
         layerNum: 5,
+        drawOrder:  5,
         id: "zipCodes",
         title: "ZIP Codes",
         type: "feature",
@@ -150,6 +156,7 @@ var appConfig = new function() {
         link: true
     }, {
         layerNum: 6,
+        drawOrder:  6,
         id: "esriReference",
         title: "Streets",
         type: "tile",
@@ -158,17 +165,20 @@ var appConfig = new function() {
         showTOC: true
     }, {
         layerNum: 7,
-        id: "ACS2014byBlockGroup",
-        title: "American Community Survey by Block Group, 2010-2014 5yr",
+        drawOrder:  7,
+        id: "ACS2015byBlockGroup",
+        title: "American Community Survey by Block Group, 2011-2015 5yr",
         type: "dynamic",
         url: this.mainURL,
         layers: [0],
         opacity: 0.8,
         visible: true,
         showTOC: false,
-        link: false
+        link: false,
+        populateDropDown: false
     }, {
         layerNum: 8,
+        drawOrder:  8,
         id: "esriBasemap",
         title: "Terrain",
         type: "tile",
@@ -181,6 +191,7 @@ var appConfig = new function() {
         showTOC: false
     }, {
         layerNum: 9,
+        drawOrder:  9,
         id: "esriImagery",
         title: "Imagery",
         type: "tile",
@@ -207,7 +218,6 @@ var appConfig = new function() {
     //this.seriesColors = ["#8DD3C7", "#FFFFB3", "#BEBADA", "#FB8072", "#80B1D3", "#FDB462", "#B3DE69", "#FCCDE5", "#D9D9D9", "#BC80BD", "#CCEBC5", "#FFED6F"];
 
     this.bubbleColors = [
-
         {
             category: "MgBizFin",
             color: "#A6CEE3"
@@ -296,10 +306,10 @@ var appConfig = new function() {
 
     this.textSymbolFontSizes = [8, 9, 10, 11, 12, 14, 16, 18, 20, 24, 30, 50];
 
-    this.sourceLabel = "Source: United States Census Bureau, American Community Survey 2010-2014 5yr Estimates";
+    this.sourceLabel = "Source: United States Census Bureau, American Community Survey 2011-2015 5yr Estimates";
 
     this.sourceLabel2 = "Source: United States Census Bureau, 2010 Decennial Census";
 
-    this.legalDisclaimer = 'The Maricopa Association of Governments (MAG) provides the data within these pages as a public resource of general information for use "as is". The Maricopa Association of Governments GIS (Geographic Information System) departments provides this information with the understanding that it is not guaranteed to be accurate, correct or complete and any conclusions drawn from such information are the sole responsibility of the user. Further, the Maricopa Association of Governments GIS departments makes no warranty, representation or guaranty as to the content, sequence, accuracy, timeliness or completeness of any of the spatial or database information provided herein. While every effort has been made to ensure the content, sequence, accuracy, timeliness or completeness of materials presented within these pages, the Maricopa Association of Governments GIS Departments assumes no responsibility for errors or omissions, and explicitly disclaims any representations and warranties, including, without limitation, the implied warranties of merchantability and fitness for a particular purpose. The Maricopa Association of Governments GIS Departments shall assume no liability for: Any errors, omissions, or inaccuracies in the information provided, regardless of how caused; orAny decision made or action taken or not taken by viewer in reliance upon any information or data furnished hereunder.Availability of the Maricopa Association of Governments Map Server is not guaranteed. Applications, servers, and network connections may be unavailable at any time for maintenance or unscheduled outages. Outages may be of long duration. Users are cautioned to create dependencies on these services for critical needs.THE FOREGOING WARRANTY IS EXCLUSIVE AND IN LIEU OF ALL OTHER WARRANTIES OF MERCHANTABILITY, FITNESS FOR PARTICULAR PURPOSE AND/OR ANY OTHER TYPE WHETHER EXPRESSED OR IMPLIED. In no event shall The Maricopa Association of Governments become liable to users of these data, or any other party, for any loss or direct, indirect, special, incidental or consequential damages, including, but not limited to, time, money or goodwill, arising from the use or modification of the data.To assist the Maricopa Association of Governments in the maintenance and/or correction of the data, users should provide the Maricopa Association of Governments GIS Departments with information concerning errors or discrepancies found in using the data. Please use the e-mail contact address at the bottom of the affected web page.Please acknowledge the Maricopa Association of Governments GIS as the source when Map Server data is used in the preparation of reports, papers, publications, maps, or other products.';
+    this.legalDisclaimer = 'Source: U.S. Census Bureau, 2011-2015 American Community Survey (ACS) 5-Year Estimates. ACS data are based on a sample and are subject to sampling variability.  The degree of uncertainty for an estimate is represented through the use of a margin of error (MOE).  In addition to sampling variability, the ACS estimates are subject to nonsampling error. The MOE and effect of nonsampling error is not represented in these tables. Supporting documentation on subject definitions, data accuracy, and statistical testing can be found on the American Community Survey website (www.census.gov/acs) in the Data and Documentation section. Sample size and data quality measures (including coverage rates, allocation rates, and response rates) can be found on the American Community Survey website (www.census.gov/acs) in the Methodology section.  The MOE for individual data elements can be found on the American FactFinder website (factfinder2.census.gov).  Note: Although the ACS produces population, demographic and housing unit estimates, the 2010 Census provides the official counts of the population and housing units for the nation, states, counties, cities and towns.  Prepared by: Maricopa Association of Governments, www.azmag.gov, (602) 254-6300';
 
 }; //End Config

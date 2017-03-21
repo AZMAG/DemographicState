@@ -77,6 +77,7 @@
                     dc.place(legendview, "mapContainer", "after");
 
                     tp.subscribe("MapLoaded", self.mapLoaded);
+                    tp.subscribe("Counties Loaded", self.CountyLegend);
                     tp.subscribe("addTOCLayers", self.addTOCLayers);
                     tp.subscribe("MapRenderUpdated", self.updateLegend);
                     tp.subscribe("NewMapThemeSelected", self.updateLegendTitle);
@@ -188,7 +189,6 @@
                                         var baseLayer = mapModel.mapInstance.getLayer("esriBasemap");
                                         baseLayer.hide();
                                     }
-
                                 }
                             }
 
@@ -211,11 +211,11 @@
 
                         $("#slider").kendoSlider({
                             change: function(e) {
-                                var sLayer = mapModel.baseMapInstance.getLayer("ACS2014byBlockGroup");
+                                var sLayer = mapModel.baseMapInstance.getLayer("ACS2015byBlockGroup");
                                 sLayer.setOpacity(e.value);
                             },
                             slide: function(e) {
-                                var sLayer = mapModel.baseMapInstance.getLayer("ACS2014byBlockGroup");
+                                var sLayer = mapModel.baseMapInstance.getLayer("ACS2015byBlockGroup");
                                 sLayer.setOpacity(e.value);
                             },
                             increaseButtonTitle: "Decrease",
@@ -234,6 +234,8 @@
                     var baseLayer = mapModel.mapInstance.getLayer("esriBasemap");
                     (layer.visible) ? layer.hide(): layer.show();
 
+                    //self.cleanupLegends();
+
                     if (layer.id === "esriImagery") {
                         if (layer.visible === true) {
                             baseLayer.hide();
@@ -242,6 +244,9 @@
 
                     if (layer.id === "countyBoundaries") {
                         if (layer.visible === true) {
+                            if (self.countyLegend) {
+                                self.countyLegend.destroy();
+                            }
                             self.CountyLegend();
                             bookmarkDelegate.legendLayerOptions.remove("c" + layerId);
                         } else {
@@ -249,10 +254,12 @@
                             if (self.countyLegend) {
                                 self.countyLegend.destroy();
                             }
-
                         }
                     } else if (layer.id === "congressionalDistricts") {
                         if (layer.visible === true) {
+                            if (self.congressionalLegend) {
+                                self.congressionalLegend.destroy();
+                            }
                             self.CongressionalLegend();
                             bookmarkDelegate.legendLayerOptions.remove("c" + layerId);
                         } else {
@@ -263,6 +270,9 @@
                         }
                     } else if (layer.id === "legislativeDistricts") {
                         if (layer.visible === true) {
+                            if (self.legislativeLegend) {
+                                self.legislativeLegend.destroy();
+                            }
                             self.LegislativeLegend();
                             bookmarkDelegate.legendLayerOptions.remove("c" + layerId);
                         } else {
@@ -273,7 +283,18 @@
                         }
                     } else if (layer.id === "cogBoundaries") {
                         if (layer.visible === true) {
+                            if (self.cogLegend) {
+                                self.cogLegend.destroy();
+                            }
+                            if (self.countyLegend) {
+                                self.countyLegend.destroy();
+                            }
                             self.CogLegend();
+                            self.CountyLegend();
+                            var countyId = "countyBoundaries";
+                            var countyLayer = mapModel.mapInstance.getLayer(countyId);
+                            countyLayer.show();
+                            dom.byId("c" + countyId).checked = true;
                             bookmarkDelegate.legendLayerOptions.remove("c" + layerId);
                         } else {
                             bookmarkDelegate.legendLayerOptions.push("c" + layerId);
@@ -287,12 +308,10 @@
 
                 self.onCheckBoxClick = function(e) {
                     var layerId = e.currentTarget.id.substr(1);
-
                     self.updateLegendLayers(layerId);
-
                 };
 
-                //Supervisor Legend
+                //County Legend
                 self.CountyLegend = function() {
                     var insertElement = "legendDiv";
                     self.countyLegend = new Legend({
@@ -308,7 +327,7 @@
                     self.countyLegend.startup();
                 };
 
-                //Council Legend
+                //Congressional Legend
                 self.CongressionalLegend = function() {
                     var insertElement = "legendDiv";
                     self.congressionalLegend = new Legend({
@@ -348,7 +367,7 @@
                             layer: mapModel.mapInstance.getLayer("cogBoundaries"),
                             title: "COG / MPO boundaries"
                         }],
-                        autoUpdate: true
+                        autoUpdate: false
                     }, dc.create("div", {
                         id: "legendDiv6"
                     }, insertElement, "after"));
@@ -362,7 +381,7 @@
                             self.legend = new Legend({
                                 map: map,
                                 layerInfos: [{
-                                    layer: map.getLayer("ACS2014byBlockGroup"),
+                                    layer: map.getLayer("ACS2015byBlockGroup"),
                                     title: self.legendMapTitle
                                 }]
                             }, "legendDiv");
@@ -392,17 +411,10 @@
                     }
                 };
 
-                self.updateMultipleMapLegend = function() {
-
-                    if (mapModel.mapInstance.id) {
-
-                    }
-                };
-
                 self.updateLegend = function() {
                     if (mapModel.mapInstance.id === mapModel.baseMapInstance.id) {
                         self.legend.refresh([{
-                            layer: mapModel.mapInstance.getLayer("ACS2014byBlockGroup"),
+                            layer: mapModel.mapInstance.getLayer("ACS2015byBlockGroup"),
                             title: self.legendMapTitle
                         }]);
                         dom.byId("legendTitle").innerHTML = self.legendMapTitle;

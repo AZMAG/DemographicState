@@ -21,9 +21,10 @@
             "app/vm/demographic-vm",
             "app/config/demographicConfig",
             "app/vm/interactiveTools-vm",
+            "app/vm/legend-vm",
             "app/vm/queryBuilder-vm"
         ],
-        function(dj, dc, tp, dom, mapModel, helpView, helpVM, view, layerDelegate, demographicVM, demographicConfig, interactiveToolsVM, qbVM) {
+        function(dj, dc, tp, dom, mapModel, helpView, helpVM, view, layerDelegate, demographicVM, demographicConfig, interactiveToolsVM, legendVM, qbVM) {
 
             var PanelVM = new function() {
 
@@ -180,7 +181,7 @@
                 self.dropDownQueryHandler = function(results) {
                     var configItem;
                     var attributes = results.features[0].attributes;
-                    if (attributes["PLACENAME14"]) {
+                    if (attributes["PLACE_TYPE"]) {
                         configItem = demographicConfig.reports.placeSummary;
                     } else if (attributes["ZIPCODE"]) {
                         configItem = demographicConfig.reports.zipCodeSummary;
@@ -190,27 +191,31 @@
                         configItem = demographicConfig.reports.congressionalSummary;
                     } else if (attributes["COG"]) {
                         configItem = demographicConfig.reports.cogSummary;
-                    } else if (attributes["COUNTY"]) {
+                    } else if (attributes["COUNTYFP"]) {
                         configItem = demographicConfig.reports.countySummary;
                     }
 
                     var features = results.features;
                     var nameArray = [];
                     var fieldName = configItem.summaryField;
+                    var sortField = configItem.sortField;
                     var dropdownSelector = configItem.dropdown;
-
+                    // console.log(features);
                     $.each(features, function(index, feature) {
                         var name = feature.attributes[fieldName];
+                        var sort = feature.attributes[sortField];
                         nameArray.push({
-                            Name: name
+                            Name: name,
+                            Sort: sort
                         });
                     });
-                    // used to sort attributes and put into Array. vw
+                    // console.log(nameArray);
+                    // used to sort attributes and put into Array.
                     function compare(a, b) {
-                        if (a.Name < b.Name) {
+                        if (a.Sort < b.Sort) {
                             return -1;
                         }
-                        if (a.Name > b.Name) {
+                        if (a.Sort > b.Sort) {
                             return 1;
                         }
                         return 0;
@@ -227,7 +232,11 @@
                         }
                     });
                 };
-
+                /**
+                 * [displayChoice description]
+                 * @param  {[type]} e [description]
+                 * @return {[type]}   [description]
+                 */
                 self.displayChoice = function(e) {
 
                     var sender = e.target.id;
@@ -237,7 +246,7 @@
                     switch (sender) {
                         case "launchStateSummaryWin":
                             type = "state";
-                            layerID = "";
+                            layerID = null;
                             break;
                         case "launchCountySummaryWin":
                             type = "county";
@@ -245,7 +254,7 @@
                             break;
                         case "launchPlaceSummaryWin":
                             type = "place";
-                            layerID = "";
+                            layerID = null;
                             break;
                         case "launchLegislativeSummaryWin":
                             type = "legislative";
@@ -261,46 +270,102 @@
                             break;
                         case "launchInteractiveSummaryDiv":
                             type = "demInteractive";
-                            layerID = "";
+                            layerID = null;
                             break;
                         case "launchCogSummaryWin":
                             type = "cog";
                             layerID = "cogBoundaries";
                             break;
                     }
-                    var layer = null;
-                    var boxChecked = null;
-
-                    if (layerID !== "") {
+                    var layer;
+                    if (layerID !== null) {
                         layer = mapModel.mapInstance.getLayer(layerID);
-                        boxChecked = dom.byId("c" + layerID).checked;
+                    } else {
+                        layer = null;
                     }
+
                     var selector = "#" + type + "ChoiceDiv";
                     var $choiceDiv = $(selector);
-                    $("#demInteractiveDiv").hide();
 
                     if ($choiceDiv.is(":hidden")) {
                         $choiceDiv.show();
                         self.hideChoices(selector);
                         self.hideLayers(layerID);
-                        if (layer !== null && layer.visible === false && boxChecked === false) {
-                            layer.show();
-                            dom.byId("c" + layerID).checked = true;
+
+                        if (layer !== null && layer.visible !== true && type !== "cog") {
+                            self.boxChecked(layerID);
+                            self.legendUpdate(layerID);
                         }
+
+                        var cogDOM = dom.byId("legendDiv6");
+                        if (cogDOM !== null && type !== "cog") {
+                             // console.log("TRUE");
+                             $("#legendDiv6").hide();
+                        }
+
+                        if (type === "cog") {
+                            self.cogLayers(open);
+                        }
+
                     } else {
                         $choiceDiv.hide();
-                        self.hideLayers(layerID);
-                        if (layer !== null && layer.visible === true && boxChecked === true) {
-                            layer.hide();
-                            dom.byId("c" + layerID).checked = false;
+
+                        if (layerID !== null && type !== "cog") {
+                            self.legendUpdate(layerID);
+                            self.boxChecked(layerID);
+                        }
+
+                        if (type === "cog") {
+                            self.cogLayers();
                         }
                     }
                 };
+                /**
+                 * Checks to see if the layer box is checked in the Layer Options
+                 * @param  {String} layerID [description]
+                 * @return {[type]}         [description]
+                 */
+                self.boxChecked = function(layerID) {
+                    var checkMark = dom.byId("c" + layerID).checked;
+                    if (checkMark !== true) {
+                        checkMark = dom.byId("c" + layerID).checked = true;
+                    } else {
+                        checkMark = dom.byId("c" + layerID).checked = false;
+                    }
+                };
+                /**
+                 * COG/MPO summary report info
+                 * @param  {String} open [description]
+                 * @return {[type]}      [description]
+                 */
+                self.cogLayers = function(open) {
+                    var countyId = "countyBoundaries";
+                    var countyLayer = mapModel.mapInstance.getLayer(countyId);
+                    var cogId = "cogBoundaries";
+                    var cogLayer = mapModel.mapInstance.getLayer(cogId);
 
+                    if (open) {
+                        legendVM.updateLegendLayers(countyId);
+                        countyLayer.show();
+                        dom.byId("c" + countyId).checked = true;
+
+                        legendVM.updateLegendLayers(cogId);
+                        cogLayer.show();
+                        dom.byId("c" + cogId).checked = true;
+                    } else {
+                        legendVM.updateLegendLayers(countyId);
+                        countyLayer.hide();
+                        dom.byId("c" + countyId).checked = false;
+
+                        legendVM.updateLegendLayers(cogId);
+                        cogLayer.hide();
+                        dom.byId("c" + cogId).checked = false;
+                    }
+                };
                 /**
                  * Hide all choice divs except for div id passed in parameter
-                 *
-                 * @parameter choice
+                 * @param  {String} choice [description]
+                 * @return {[type]}        [description]
                  */
                 self.hideChoices = function(choice) {
                     var choiceDivs = ["#countyChoiceDiv", "#placeChoiceDiv", "#legislativeChoiceDiv", "#congressionalChoiceDiv", "#zipCodeChoiceDiv", "#cogChoiceDiv"];
@@ -310,7 +375,11 @@
                         }
                     });
                 };
-
+                /**
+                 * Hides all the layers except for layer passed in parameter
+                 * @param  {String} layerID [description]
+                 * @return {[type]}         [description]
+                 */
                 self.hideLayers = function(layerID) {
                     var layerIds = ["countyBoundaries", "congressionalDistricts", "legislativeDistricts", "zipCodes", "cogBoundaries"];
                     $.each(layerIds, function(i, item) {
@@ -320,6 +389,19 @@
                                 layer.hide();
                                 dom.byId("c" + item).checked = false;
                             }
+                        }
+                    });
+                };
+                /**
+                 * Updates the legend with the layer passed in the parameter
+                 * @param  {String} layerID [description]
+                 * @return {[type]}         [description]
+                 */
+                self.legendUpdate = function(layerID) {
+                    var layerIds = ["countyBoundaries", "congressionalDistricts", "legislativeDistricts", "zipCodes", "cogBoundaries"];
+                    $.each(layerIds, function(i, item) {
+                        if (layerID === item) {
+                            legendVM.updateLegendLayers(item);
                         }
                     });
                 };
@@ -349,7 +431,10 @@
                  */
                 self.openStateSummaryWindow = function(e) {
                     // Open the window
-                    demographicVM.openWindow("Arizona State", "state");
+                    demographicVM.openWindow("Arizona", "state");
+                    self.hideChoices();
+                    self.hideLayers();
+                    self.legendUpdate();
                 };
 
                 /**
