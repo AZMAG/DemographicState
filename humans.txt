@@ -22,8 +22,20 @@
     	Twitter:
     	From: Chandler, AZ
 
-        Name:  Amanda Stanko
+        Name:  Debbie Brown
         Role: GIS Analyst
+        Contact:
+        Twitter:
+        From: Phoenix, AZ
+
+        Name:  Jami Dennis
+        Role: Senior Information Services Project Manager
+        Contact:
+        Twitter:
+        From: Phoenix, AZ
+
+        Name:  Peter Burnett
+        Role: Socioeconomic Research Program Manager
         Contact:
         Twitter:
         From: Phoenix, AZ
@@ -60,8 +72,8 @@
 # SITE
     Site Name: Demographic Maps Viewer
     Site URL: http://http://geo.azmag.gov/maps/azdemographics/
-    Version: v2.3.3
-	Last updated: 12/13/2016
+    Version: v3.0.2
+	Last updated: 03/21/2017
     Creation Date: 10/21/2014
 	Language: English
 	Doctype: HTML5
