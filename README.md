@@ -11,21 +11,21 @@ State Demographics map viewer for selected census info for Arizona
 
 ***********************************************************************************************************
 
-The State Demographic Map Viewer is one of the Maricopa Association of Governments interactive mapping and analysis sites, showing selected population and housing data.  The viewer allows you to graphically view selected population and housing data for all Census block groups for the State of Arizona.  The viewer provides interactive mapping and reporting tools to allow exploration of data from Census 2010 and the American Community Survey (ACS) 2010-2014 5yr.
+The State Demographic Map Viewer is one of the Maricopa Association of Governments interactive mapping and analysis sites, showing selected population and housing data.  The viewer allows you to graphically view selected population and housing data for all Census block groups for the State of Arizona.  The viewer provides interactive mapping and reporting tools to allow exploration of data from Census 2010 and the American Community Survey (ACS) 2011-2015 5yr.
 
-Use this site to explore Explore data from Census 2010 and American Community Survey (ACS) 2010-2014 5yr.
+Use this site to explore Explore data from Census 2010 and American Community Survey (ACS) 2011-2015 5yr.
 
 This web app viewer was developed by MAG staff for MAG member agencies and the public using ESRI's JavaScript API.
 
 ## Keywords
 
-`Demographics` `Census` `2010` `American Community Survey` `ACS` `2010-2014` `5yr` `counties` `State` `Arizona` `block group` `Maps` `MAG` `ESRI` `#MAGmaps`
+`Demographics` `Census` `2010` `American Community Survey` `ACS` `2011-2015` `5yr` `counties` `State` `Arizona` `block group` `Maps` `MAG` `ESRI` `#MAGmaps`
 
 ## Version
 
-### version 2.3.1 ###
+### version 3.0.3 ###
 
- `Updated: 11/28/2016`
+ `Updated: 03/21/2017`
  
  `Created: 10/21/2014`
 
@@ -50,7 +50,7 @@ Maricopa Association of Governments (MAG) and the MAG member agencies
 
 A detailed list of the changes and fixes in each version update can be found in the CHANGELOG.md.
 
-* [CHANGELOG] (CHANGELOG.md)
+* [CHANGELOG](CHANGELOG.md)
 
 ## Resources
 
@@ -73,9 +73,9 @@ Please acknowledge the Maricopa Association of Governments (MAG) GIS as the sour
 
 Code released under the MIT license.
 
-* [LICENSE] (LICENSE)
+* [LICENSE](LICENSE)
 
-Copyright (c) 2016 Maricopa Association of Governments
+Copyright (c) 2017 Maricopa Association of Governments
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
