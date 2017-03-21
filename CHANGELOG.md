@@ -17,6 +17,10 @@ And constructed with the following guidelines:
 
 ***************************************************************************************************************
 
+## Version 3.0.3 | 3/21/2017
+
+* cleaning merging conflicts
+
 ## Version 3.0.2 | 3/21/2017
 
 * Bug fixes

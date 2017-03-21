@@ -776,7 +776,7 @@
                             self.gridRowHover(e);
                         }
                     });
-                    
+
 
                     // Size the grid
                     self.sizeGrid("#" + gridName);
@@ -856,11 +856,8 @@
 
                                 $("#demSource").html("Source: United States Census Bureau, 2010 Decennial Census (Interpolation used, see help for more details.) ");
                             } else {
-<<<<<<< HEAD
-                                $("#demSource").html("Source: United States Census Bureau, American Community Survey 2010-2014 5yr Estimates (Interpolation used, see help for more details.) ");
-=======
+
                                 $("#demSource").html("Source: United States Census Bureau, American Community Survey 2011-2015 5yr Estimates <br> (Interpolation method used, <a class='interHelp link'>Click here</a> for more details) ");
->>>>>>> 2015_Update
                             }
                         } else {
                             //Sets the correct source label at bottom of report
