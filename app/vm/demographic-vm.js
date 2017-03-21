@@ -805,9 +805,10 @@
                         if (self.reportType == 'cog') {
                             //Sets the correct source label at bottom of report
                             if (tab[0].textContent === "Census 2010 Charts" || tab[0].textContent === "Census 2010 Data") {
-                                $("#demSource").html("Source: United States Census Bureau, 2010 Decennial Census (Interpolation method used, <a class='interHelp link'>Click here</a> for more details) ");
+
+                                $("#demSource").html("Source: United States Census Bureau, 2010 Decennial Census (Interpolation used, see help for more details.) ");
                             } else {
-                                $("#demSource").html("Source: United States Census Bureau, American Community Survey 2010-2014 5yr Estimates <br> (Interpolation method used, <a class='interHelp link'>Click here</a> for more details) ");
+                                $("#demSource").html("Source: United States Census Bureau, American Community Survey 2010-2014 5yr Estimates (Interpolation used, see help for more details.) ");
                             }
                         } else {
                             //Sets the correct source label at bottom of report
@@ -817,11 +818,13 @@
                                 $("#demSource").html(appConfig.sourceLabel);
                             }
                         }
+
                         // Reload the chart to ensure it is up-to-date
                         if (tab[0].textContent === "Census 2010 Charts" || tab[0].textContent === "ACS 2014 Charts") {
                             self.reloadChart();
                         }
                     }
+
                 };
 
                 /**
