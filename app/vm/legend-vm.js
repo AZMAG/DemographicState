@@ -371,6 +371,7 @@
                             // dom.byId("title2").innerHTML = self.legendMapTitle;
                             dom.byId("dataSource").innerHTML = self.sourceInfo;
                             self.legendInitialized = true;
+                            self.legend.refresh();
                         }
                     }
 

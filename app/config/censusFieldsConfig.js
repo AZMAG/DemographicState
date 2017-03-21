@@ -591,6 +591,53 @@
 						"class": null,
 						"timePeriod": null,
 						"percentField": ""
+					}, {
+						"fieldName": "CIV_NON_INST_POP",
+						"fieldAlias": "CIV_NON_INST_POP",
+						"fieldType": "Number",
+						"tableHeader": "Civilian Noninstitutionalized Population",
+						"category": "Disability Status",
+						"rowID": 132,
+						"groupID": "<span class='myHiddenClass'>12</span>Title VI data",
+						"chartCategory": "",
+						"chartType": "",
+						"canSum": true,
+						"dataSource": "",
+						"class": null,
+						"timePeriod": null,
+						"parentField": "",
+					}, {
+						"fieldName": "DISABILITY",
+						"fieldAlias": "Disability",
+						"fieldType": "Number",
+						"tableHeader": "With a Disability",
+						"category": "Disability Status",
+						"rowID": 133,
+						"groupID": "<span class='myHiddenClass'>12</span>Title VI data",
+						"chartCategory": "",
+						"chartType": "",
+						"canSum": true,
+						"dataSource": "",
+						"class": null,
+						"timePeriod": null,
+						"parentField": "",
+						"percentOfField": "CIV_NON_INST_POP"
+					}, {
+						"fieldName": "LIMITED_ENGLISH",
+						"fieldAlias": "Persons with Limited English Proficiency (LEP)",
+						"fieldType": "Number",
+						"tableHeader": "Persons with Limited English Proficiency (LEP)",
+						"category": "Persons with Limited English Proficiency (LEP)",
+						"rowID": 133,
+						"groupID": "<span class='myHiddenClass'>12</span>Title VI data",
+						"chartCategory": "",
+						"chartType": "",
+						"canSum": true,
+						"dataSource": "",
+						"class": null,
+						"timePeriod": null,
+						"parentField": "",
+						"percentOfField": ""
 					}];
 			};
 			return censusFieldsConfig;

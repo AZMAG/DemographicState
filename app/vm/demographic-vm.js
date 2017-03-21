@@ -107,6 +107,8 @@
 
                 self.selectionGraphic = "";
 
+                self.reportType = "";
+
                 /**
                  * Array of aggregate values based on the current report configuration object.
                  *
@@ -437,8 +439,10 @@
                     self.communityName = communityName;
                     self.compareToName = "";
                     self.compareFeature = null;
+                    self.reportType = sumName;
 
                     self.updateSelectionGraphic();
+                    //$("#demSource").html(appConfig.sourceLabel);
 
                     // Set the summary report config item
                     switch (sumName) {
@@ -462,6 +466,7 @@
                             break;
                         case "cog":
                             self.reportConfigItem = demographicConfig.reports.cogSummary;
+                            $("#demSource").html("Source: United States Census Bureau, American Community Survey 2010-2014 5yr Estimates (Interpolation Used, See help for more details) ");
                             break;
                     }
 
@@ -488,16 +493,16 @@
                         left: (self.winWidth / 2) - 300
                     });
 
-                    // Set the source
-                    //$("#demSource").text("Source: " + self.reportConfigItem.source);
-
                     // Create the Kendo tab strip
                     var tabStrip = $("#demTabStrip").data("kendoTabStrip");
                     if (tabStrip === undefined) {
-                        $("#demTabStrip").kendoTabStrip({
+                        tabStrip = $("#demTabStrip").kendoTabStrip({
                             activate: self.tabActivated,
                             scrollable: false
                         });
+                    } else {
+                        tabStrip.select(0);
+                        tabStrip.trigger("activate");
                     }
 
                     // Create the splitter
@@ -526,6 +531,7 @@
                         }, 500);
                         redrawChart = false;
                     }
+
                 };
 
                 /**
@@ -781,17 +787,29 @@
                     var tab = tabStrip.select();
                     var chartListDivObj = $("#demCensusChartList");
 
-                    //Sets the correct source label at bottom of report
-                    if (tab[0].textContent === "Census 2010 Charts" || tab[0].textContent === "Census 2010 Data") {
-                        $("#demSource").html(appConfig.sourceLabel2);
-                    } else {
-                        $("#demSource").html(appConfig.sourceLabel);
+                    if (tab[0]) {
+                        if (self.reportType == 'cog') {
+                            //Sets the correct source label at bottom of report
+                            if (tab[0].textContent === "Census 2010 Charts" || tab[0].textContent === "Census 2010 Data") {
+                                $("#demSource").html("Source: United States Census Bureau, 2010 Decennial Census (Interpolation used, see help for more details.) ");
+                            } else {
+                                $("#demSource").html("Source: United States Census Bureau, American Community Survey 2010-2014 5yr Estimates (Interpolation used, see help for more details.) ");
+                            }
+                        } else {
+                            //Sets the correct source label at bottom of report
+                            if (tab[0].textContent === "Census 2010 Charts" || tab[0].textContent === "Census 2010 Data") {
+                                $("#demSource").html(appConfig.sourceLabel2);
+                            } else {
+                                $("#demSource").html(appConfig.sourceLabel);
+                            }
+                        }
+
+                        // Reload the chart to ensure it is up-to-date
+                        if (tab[0].textContent === "Census 2010 Charts" || tab[0].textContent === "ACS 2014 Charts") {
+                            self.reloadChart();
+                        }
                     }
 
-                    // Reload the chart to ensure it is up-to-date
-                    if (tab[0].textContent === "Census 2010 Charts" || tab[0].textContent === "ACS 2014 Charts") {
-                        self.reloadChart();
-                    }
                 };
 
                 /**
