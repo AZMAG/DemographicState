@@ -19,6 +19,10 @@ And constructed with the following guidelines:
 
 ## Version 3.0.3 | 3/21/2017
 
+* Updated Kendo UI v2017.1.223 `R1 2017 SP1` [R1 2017 SP1] (http://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-r1-2017-sp1)
+
+## Version 3.0.3 | 3/21/2017
+
 * cleaning merging conflicts
 
 ## Version 3.0.2 | 3/21/2017
