@@ -2668,7 +2668,7 @@
                     }];
 
                     var test = $("#demCensusCompareComboBox").data("kendoComboBox");
-                    if (test !== null) {
+                    if (test !== null && test !== undefined) {
                         test.destroy();
                         test.wrapper.remove();
                     }
@@ -2678,7 +2678,7 @@
                         $(value.checkbox).prop("checked", false);
                         var compareComboBoxInput = $(value.comboBox);
                         var compareComboBoxObj = compareComboBoxInput.data("kendoComboBox");
-                        if (compareComboBoxObj !== null) {
+                        if (compareComboBoxObj !== null && compareComboBoxObj !== undefined) {
                             compareComboBoxObj.destroy();
                             compareComboBoxObj.wrapper.remove();
                         } else {}
