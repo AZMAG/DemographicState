@@ -17,7 +17,12 @@ And constructed with the following guidelines:
 
 ***************************************************************************************************************
 
+## Version 3.0.5 | 3/31/2017
+
+* fix paging issue in custom summary
+
 ## Version 3.0.4 | 3/23/2017
+
 * Fixed Color in advanced query
 * Fixed issue with opening report
 
