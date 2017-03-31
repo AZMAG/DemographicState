@@ -757,7 +757,7 @@
                     $("#" + gridName).kendoGrid({
                         dataSource: {
                             data: self.featureAttributeArray,
-                            pageSize: 20,
+                            // pageSize: 20,
                             change: function(e){
                                 // console.log(e);
                                 // var grid = $("#" + gridName).data("kendoGrid");
