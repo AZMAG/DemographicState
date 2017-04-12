@@ -1,6 +1,4 @@
 fieldName,fieldAlias,fieldType,tableHeader,category,indentLevel,universeField,rowID,groupID,chartCategory,chartType,canSum,parentField,percentOfField
-ACRES,Total Area in Acres,Number,Total Area in Acres,General,0,0,1,<span class='myHiddenClass'>01</span>General,,,TRUE,,
-SQMI,Total Area in Square Miles,Number,Total Area in Square Miles,General,0,0,2,<span class='myHiddenClass'>01</span>General,,,TRUE,,
 TOTAL_POP,Total Population,Number,Total Population ,Gender and Age,0,1,3,<span class='myHiddenClass'>02</span>Gender and Age,,,TRUE,,
 Gender,Gender,Number,Gender,Gender and Age,0,2,4,<span class='myHiddenClass'>02</span>Gender and Age,,,TRUE,,
 MALE,Male,Number,Male,Gender and Age,1,0,5,<span class='myHiddenClass'>02</span>Gender and Age,,,TRUE,,TOTAL_POP
@@ -163,3 +161,5 @@ NO_VEHICLE,No vehicle available,Number,No vehicle available,Vehicles Available,1
 ONE_VEHICLE,1 vehicle available,Number,1 vehicle available,Vehicles Available,1,0,162,<span class='myHiddenClass'>15</span>Vehicles Available,Vehicles,pie,TRUE,,TOTAL_OCCUPIED_HU
 TWO_VEHICLES,2 vehicles available,Number,2 vehicles available,Vehicles Available,1,0,163,<span class='myHiddenClass'>15</span>Vehicles Available,Vehicles,pie,TRUE,,TOTAL_OCCUPIED_HU
 THREE_PLUS_VEHICLES,3 or more vehicles available,Number,3 or more vehicles available,Vehicles Available,1,0,164,<span class='myHiddenClass'>15</span>Vehicles Available,Vehicles,pie,TRUE,,TOTAL_OCCUPIED_HU
+ACRES,Total Area in Acres,Number,Total Area in Acres,Area,0,0,1,<span class='myHiddenClass'>16</span>Area,,,TRUE,,
+SQMI,Total Area in Square Miles,Number,Total Area in Square Miles,Area,0,0,2,<span class='myHiddenClass'>16</span>Area,,,TRUE,,
