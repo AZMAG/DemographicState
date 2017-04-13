@@ -66,10 +66,34 @@
                 };
 
                 self.queryFields = [{
-                    FieldName: "COUNTY",
-                    Name: "County",
-                    ShortName: "County",
-                    Type: "string"
+                    Name: "Area",
+                    ShortName: "Area",
+                    items: [{
+                        FieldName: "COUNTY",
+                        Name: "County",
+                        ShortName: "County",
+                        Type: "string"
+                    }, {
+                        FieldName: "ZIP_CODE",
+                        Name: "Zip Code",
+                        ShortName: "Zip Code",
+                        Type: "string"
+                    },{
+                        FieldName: "TRACTCE",
+                        Name: "Tract",
+                        ShortName: "Tract",
+                        Type: "string"
+                    }, {
+                        FieldName: "BLKGRPCE",
+                        Name: "Block Group",
+                        ShortName: "Block Group",
+                        Type: "string"
+                    }, {
+                        FieldName: "SQMI",
+                        Name: "Square Miles",
+                        ShortName: "Square Miles",
+                        Type: "number"
+                    }]
                 }];
 
                 // config for selected block groups tab

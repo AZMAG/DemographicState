@@ -292,12 +292,12 @@
                 self.addRow = function(dataItem) {
                     var count = self.queryItems.length + 1;
                     var target = $("#target");
-
+                    
                     if (dataItem.Type !== undefined) {
                         if (count > 1) {
 
                             target.append("<select class='joinDDLClass' id='joinDDL" + count + "'></select>");
-
+                           
                             var joinDropDown = $("#joinDDL" + count).kendoDropDownList({
                                 dataSource: [
                                     { name: "AND" },
@@ -449,7 +449,9 @@
                     $.each(results.features, function(index, feature) {
                         for (var id in feature.attributes) {
                             if (feature.attributes.hasOwnProperty(id)) {
-                                sourceArray.push(feature.attributes[id]);
+                                if (feature.attributes[id]) {
+                                    sourceArray.push(feature.attributes[id]);
+                                }
                             }
                         }
                     });
@@ -530,7 +532,6 @@
                  **/
                 self.verifyQuery = function() {
                     var queryString = self.buildQueryString();
-                    console.log(queryString);
                     layerDelegate.verify(self.layerACSUrl, self.verifyCallback, self.errBack, undefined, queryString, true);
                 };
 
