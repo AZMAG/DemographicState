@@ -16,6 +16,11 @@ And constructed with the following guidelines:
 3. **PATCH** version when you make backwards-compatible bug fixes and misc changes **bumps only the patch**
 
 ***************************************************************************************************************
+## Version 3.0.6 | 4/13/2017
+
+* Fixed bugs related to the markup tools. (multiple edit tools were being instantiated, popup was showing when drawing.)
+* Added fields back into the CBR View Model.  This allows them to be seen in the map and in the advanced query.
+* Added area fields back into the advanced query.
 
 ## Version 3.0.5 | 3/31/2017
 
