@@ -330,9 +330,7 @@
 
                     //Add event to end of drawing to add shape to map
                     self.markupToolDraw.on("draw-end", self.addMarkupToolGraphicToMap);
-
-                    $(".esriPopup").css("display", "none");
-
+                    
                     //Loop through and create a graphic layer for each map
                     $.each(mapModel.mapInstances, function(index, mapInstance) {
                         var graphicLayerConfig = self.getMapConfigById(mapInstance.id);
@@ -378,6 +376,7 @@
                 * @param {dataItem} Kendo Tree Node.
                 **/
                 self.activateMarkupTool = function(dataItem) {
+                    mapModel.hideInfoWindow();
                     self.isMarkupToolActive(true);
                     self.activeMarkupTool(dataItem.text);
                     self.markupToolDraw.activate(Draw[dataItem.Type]);
@@ -388,8 +387,7 @@
                  * @method deactivateMarkupTool
                  */
                 self.deactivateMarkupTool = function(e) {
-                    mapModel.getMap().infoWindow.hide();
-                    $(".esriPopup").css("display", "block");
+                    mapModel.showInfoWindow();
                     self.markupToolDraw.deactivate();
 
                     var selectedNode = self.markupToolsKendoTree.select();
@@ -623,6 +621,16 @@
                 @method undoLastMarkupGraphic
                 */
                 self.undoLastMarkupGraphic = function() {
+                    self.isEditingActive(false);
+                    if (self.markupGraphicClickHandler) {
+                        self.markupGraphicClickHandler.remove();
+                    }
+                    if (self.markupToolEdit) {
+                        self.markupToolEdit.deactivate();
+                    }
+                    
+                    mapModel.showInfoWindow();
+
                     $.each(mapModel.mapInstances, function(index, mapInstance) {
                         var graphicLayerConfig = self.getMapConfigById(mapInstance.id);
                         if (graphicLayerConfig.graphicsLayer !== null) {
@@ -644,6 +652,7 @@
                 */
                 self.editGraphics = function() {
                     if (self.isEditingActive()) {
+                        mapModel.showInfoWindow();
                         self.isEditingActive(false);
                         if (self.markupGraphicClickHandler) {
                             self.markupGraphicClickHandler.remove();
@@ -651,6 +660,7 @@
                         self.markupToolEdit.deactivate();
                     } else {
                         self.isEditingActive(true);
+                        mapModel.hideInfoWindow();
                         if (self.isDeleteGraphicActive()) {
                             self.isDeleteGraphicActive(false);
                             if (self.markupGraphicClickHandler) {
@@ -668,13 +678,16 @@
                 @method deleteGraphics
                 */
                 self.deleteGraphics = function() {
+
                     if (self.isDeleteGraphicActive()) {
+                        mapModel.showInfoWindow();
                         self.isDeleteGraphicActive(false);
                         if (self.markupGraphicClickHandler) {
                             self.markupGraphicClickHandler.remove();
                         }
                     } else {
                         self.isDeleteGraphicActive(true);
+                        mapModel.hideInfoWindow();
                         if (self.isEditingActive()) {
                             self.isEditingActive(false);
                             if (self.markupGraphicClickHandler) {
@@ -758,7 +771,9 @@
                  */
                 self.editGraphicClicked = function(evt) {
                     if (evt.graphic) {
+                        self.markupGraphicClickHandler.remove();
                         var graphicMap = evt.srcElement.ownerSVGElement.id.substring(0, 4);
+
                         $.each(mapModel.mapInstances, function(index, mapInstance) {
                             if (mapInstance.id === graphicMap) {
                                 self.markupToolEdit = new Edit(mapInstance);
@@ -813,6 +828,7 @@
                  */
                 self.deleteGraphicClicked = function(evt) {
                     var deletedGraphic = evt.graphic;
+                    mapModel.showInfoWindow();
                     //Loop through all mapinstances and remove the graphic.
                     $.each(mapModel.mapInstances, function(index, mapInstance) {
                         var graphicLayerConfig = self.getMapConfigById(mapInstance.id);

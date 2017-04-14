@@ -17,6 +17,12 @@ And constructed with the following guidelines:
 
 ***************************************************************************************************************
 
+## Version 3.0.6 | 4/13/2017
+
+* Fixed bugs related to the markup tools. (multiple edit tools were being instantiated, popup was showing when drawing.)
+* Added fields back into the CBR View Model.  This allows them to be seen in the map and in the advanced query.
+* Added area fields back into the advanced query.
+
 ## Version 3.0.5 | 3/31/2017
 
 * fix paging issue in custom summary
