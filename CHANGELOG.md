@@ -16,6 +16,7 @@ And constructed with the following guidelines:
 3. **PATCH** version when you make backwards-compatible bug fixes and misc changes **bumps only the patch**
 
 ***************************************************************************************************************
+
 ## Version 3.0.6 | 4/13/2017
 
 * Fixed bugs related to the markup tools. (multiple edit tools were being instantiated, popup was showing when drawing.)
