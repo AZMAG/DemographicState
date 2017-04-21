@@ -80,6 +80,16 @@
                 name: "Census Tracts",
                 outFields: ["*"],
                 placeholder: "Census Tract 8.03"
+            }, {
+                featureLayer: new FeatureLayer(appConfig.SchoolsService),
+                searchFields: ["DistrictName"],
+                displayField: "DistrictName",
+                autoNavigate: true,
+                name: "School Districts",
+                outFields: ["*"],
+                placeholder: "Unified School Districts",
+                enableInfoWindow: true,
+                showInfoWindowOnSelect: true,
             }  ];
         };
         return searchConfig;

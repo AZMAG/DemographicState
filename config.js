@@ -54,6 +54,7 @@ var appConfig = new function() {
     this.congressionalService = this.mainURL + "/5";
     this.zipCodeService = this.mainURL + "/6";
     this.tractService = this.mainURL + "/17";
+    this.SchoolsService = this.mainURL + "/19";
 
     this.layerInfo = [{
         layerNum: 0,
@@ -157,6 +158,23 @@ var appConfig = new function() {
     }, {
         layerNum: 6,
         drawOrder:  6,
+        id: "districts",
+        title: "Unified School Districts",
+        type: "feature",
+        url: this.mainURL + "/19",
+        queryUrl: this.mainURL + "/19",
+        queryWhere: "1=1",
+        layers: [19],
+        opacity: 1,
+        visible: false,
+        selectable: true,
+        outFields: ["*"],
+        filters: [],
+        showTOC: true,
+        link: false
+    }, {
+        layerNum: 7,
+        drawOrder:  7,
         id: "esriReference",
         title: "Streets",
         type: "tile",
@@ -164,8 +182,8 @@ var appConfig = new function() {
         visible: true,
         showTOC: true
     }, {
-        layerNum: 7,
-        drawOrder:  7,
+        layerNum: 8,
+        drawOrder:  8,
         id: "ACS2015byBlockGroup",
         title: "American Community Survey by Block Group, 2011-2015 5yr",
         type: "dynamic",
@@ -177,8 +195,8 @@ var appConfig = new function() {
         link: false,
         populateDropDown: false
     }, {
-        layerNum: 8,
-        drawOrder:  8,
+        layerNum: 9,
+        drawOrder:  9,
         id: "esriBasemap",
         title: "Terrain",
         type: "tile",
@@ -190,8 +208,8 @@ var appConfig = new function() {
         isBasemap: false,
         showTOC: false
     }, {
-        layerNum: 9,
-        drawOrder:  9,
+        layerNum: 10,
+        drawOrder:  10,
         id: "esriImagery",
         title: "Imagery",
         type: "tile",

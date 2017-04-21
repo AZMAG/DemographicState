@@ -150,6 +150,16 @@
                 self.countyInfoTemplate.setTitle("Counties");
                 self.countyInfoTemplate.setContent("<strong><div id='countyLink'>${NAME}</div></strong>");
 
+                /**
+                 * infoTemplate for School Districts
+                 * @type {InfoTemplate}
+                 */
+                self.districtInfoTemplate = new InfoTemplate();
+                self.districtInfoTemplate.setTitle("Unified School Districts");
+                self.districtInfoTemplate.setContent("<strong><div id=''>${DistrictName}</div></strong><br>" +
+                    "District EntityID: ${DistrictEntityID}<br>" +
+                    "Grades Levels: ${GradesServed}");
+
                 self.featureFillSymbol = new SimpleFillSymbol(SimpleFillSymbol.STYLE_BACKWARD_DIAGONAL,
                     new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID,
                         new Color([0, 255, 255]), 2), new Color([0, 255, 255, 0.25]));
@@ -356,6 +366,9 @@
                             }
                             if (info.id === "cogBoundaries") {
                                 featureTemplate = self.cogInfoTemplate;
+                            }
+                            if (info.id === "districts") {
+                                featureTemplate = self.districtInfoTemplate;
                             }
                             layer = new FeatureLayer(info.url + token, {
                                 id: info.id,

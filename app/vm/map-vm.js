@@ -17,6 +17,7 @@
             "dojo/dom",
             "dojo/dom-style",
             "dojo/topic",
+            "dojo/_base/connect",
             "dojo/text!app/views/mapContainer-view.html",
             "app/models/map-model",
             "esri/map",
@@ -36,7 +37,7 @@
             "app/vm/legend-vm",
             "app/vm/markupTools-vm"
         ],
-        function(dc, da, lang, query, on, dom, ds, topic, view, mapModel, Map, HomeButton, Scalebar, Legend, Extent, Color, SimpleMarkerSymbol, SimpleLineSymbol, SimpleFillSymbol, Popup, PopupTemplate, InfoTemplate, legendVM, markupToolsVM) {
+        function(dc, da, lang, query, on, dom, ds, topic, connect,view, mapModel, Map, HomeButton, Scalebar, Legend, Extent, Color, SimpleMarkerSymbol, SimpleLineSymbol, SimpleFillSymbol, Popup, PopupTemplate, InfoTemplate, legendVM, markupToolsVM) {
 
             //var MapVM = new function () {
             var MapVM = function() {
@@ -206,6 +207,17 @@
                         "href": "#"
                     }, query(".actionList", this.map.infoWindow.domNode)[0]);
                     on(Link, "click", self.linkClicked);
+
+                    connect.connect(self.popup, "onSelectionChange", function() {
+                        var graphic = self.popup.getSelectedFeature();
+                        // console.log(graphic);
+                        if (graphic) {
+                            if (graphic.attributes.DistrictType) {
+                                $("#summaryLink").hide();
+                            }
+                        }
+                    })
+
 
                 }; //end createMap
 
