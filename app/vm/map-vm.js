@@ -295,6 +295,7 @@
                         "<li class='panelBarLi'><input " + layersTOC[3].checked + " class='layerOptionCbx' map='" + self.mapID + "' value=" + layersTOC[3].id + " id='" + self.mapID + "chk4' type='checkbox'><label class='mapLayerLabel' for='" + self.mapID + "chk4'>" + layersTOC[3].title + "</label></li>" +
                         "<li class='panelBarLi'><input " + layersTOC[4].checked + " class='layerOptionCbx' map='" + self.mapID + "' value=" + layersTOC[4].id + " id='" + self.mapID + "chk5' type='checkbox'><label class='mapLayerLabel' for='" + self.mapID + "chk5'>" + layersTOC[4].title + "</label></li>" +
                         "<li class='panelBarLi'><input " + layersTOC[5].checked + " class='layerOptionCbx' map='" + self.mapID + "' value=" + layersTOC[5].id + " id='" + self.mapID + "chk6' type='checkbox'><label class='mapLayerLabel' for='" + self.mapID + "chk6'>" + layersTOC[5].title + "</label></li>" +
+                        "<li class='panelBarLi'><input " + layersTOC[6].checked + " class='layerOptionCbx' map='" + self.mapID + "' value=" + layersTOC[6].id + " id='" + self.mapID + "chk6' type='checkbox'><label class='mapLayerLabel' for='" + self.mapID + "chk7'>" + layersTOC[6].title + "</label></li>" +
                         "</ul>" +
                         "</li></ul></div>";
 
