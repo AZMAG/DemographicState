@@ -8,7 +8,7 @@
                 var cbrConfig = new function() {
                     var self = this;
                     self.mapServices = {
-                        ACS2015byBlockGroup: appConfig.layerInfo[7].url
+                        ACS2015byBlockGroup: appConfig.layerInfo[8].url
                     };
 
                     self.thematicMaps = [{

@@ -17,6 +17,7 @@
             "dojo/dom",
             "dojo/dom-style",
             "dojo/topic",
+            "dojo/_base/connect",
             "dojo/text!app/views/mapContainer-view.html",
             "app/models/map-model",
             "esri/map",
@@ -36,7 +37,7 @@
             "app/vm/legend-vm",
             "app/vm/markupTools-vm"
         ],
-        function(dc, da, lang, query, on, dom, ds, topic, view, mapModel, Map, HomeButton, Scalebar, Legend, Extent, Color, SimpleMarkerSymbol, SimpleLineSymbol, SimpleFillSymbol, Popup, PopupTemplate, InfoTemplate, legendVM, markupToolsVM) {
+        function(dc, da, lang, query, on, dom, ds, topic, connect,view, mapModel, Map, HomeButton, Scalebar, Legend, Extent, Color, SimpleMarkerSymbol, SimpleLineSymbol, SimpleFillSymbol, Popup, PopupTemplate, InfoTemplate, legendVM, markupToolsVM) {
 
             //var MapVM = new function () {
             var MapVM = function() {
@@ -207,6 +208,17 @@
                     }, query(".actionList", this.map.infoWindow.domNode)[0]);
                     on(Link, "click", self.linkClicked);
 
+                    connect.connect(self.popup, "onSelectionChange", function() {
+                        var graphic = self.popup.getSelectedFeature();
+                        // console.log(graphic);
+                        if (graphic) {
+                            if (graphic.attributes.DistrictType) {
+                                $("#summaryLink").hide();
+                            }
+                        }
+                    })
+
+
                 }; //end createMap
 
                 /**
@@ -283,6 +295,7 @@
                         "<li class='panelBarLi'><input " + layersTOC[3].checked + " class='layerOptionCbx' map='" + self.mapID + "' value=" + layersTOC[3].id + " id='" + self.mapID + "chk4' type='checkbox'><label class='mapLayerLabel' for='" + self.mapID + "chk4'>" + layersTOC[3].title + "</label></li>" +
                         "<li class='panelBarLi'><input " + layersTOC[4].checked + " class='layerOptionCbx' map='" + self.mapID + "' value=" + layersTOC[4].id + " id='" + self.mapID + "chk5' type='checkbox'><label class='mapLayerLabel' for='" + self.mapID + "chk5'>" + layersTOC[4].title + "</label></li>" +
                         "<li class='panelBarLi'><input " + layersTOC[5].checked + " class='layerOptionCbx' map='" + self.mapID + "' value=" + layersTOC[5].id + " id='" + self.mapID + "chk6' type='checkbox'><label class='mapLayerLabel' for='" + self.mapID + "chk6'>" + layersTOC[5].title + "</label></li>" +
+                        "<li class='panelBarLi'><input " + layersTOC[6].checked + " class='layerOptionCbx' map='" + self.mapID + "' value=" + layersTOC[6].id + " id='" + self.mapID + "chk6' type='checkbox'><label class='mapLayerLabel' for='" + self.mapID + "chk7'>" + layersTOC[6].title + "</label></li>" +
                         "</ul>" +
                         "</li></ul></div>";
 

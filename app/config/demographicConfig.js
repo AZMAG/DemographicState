@@ -12,7 +12,7 @@
                 self.exportPDFReportUrl = "http://geo.azmag.gov/services/Demographics2015/reports.html";
 
                 self.viewReportUrl = "http://localhost/MAG/MAGDemographicsReports/DemographicChartsReport.html";
-                self.ACS2015byBlockGroup = appConfig.layerInfo[7].url;
+                self.ACS2015byBlockGroup = appConfig.layerInfo[8].url;
 
                 self.CompareOperators = {
                     string: [{
