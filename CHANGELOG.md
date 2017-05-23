@@ -17,30 +17,38 @@ And constructed with the following guidelines:
 
 ***************************************************************************************************************
 
-## Version 3.0.6 | 4/13/2017
+## Version 3.1.0 | 05/23/2017
+
+* file changes only!
+* NO code changes!
+* removed node_modules from git
+* added src folder
+* added build folder
+
+## Version 3.0.6 | 04/13/2017
 
 * Fixed bugs related to the markup tools. (multiple edit tools were being instantiated, popup was showing when drawing.)
 * Added fields back into the CBR View Model.  This allows them to be seen in the map and in the advanced query.
 * Added area fields back into the advanced query.
 
-## Version 3.0.5 | 3/31/2017
+## Version 3.0.5 | 03/31/2017
 
 * fix paging issue in custom summary
 
-## Version 3.0.4 | 3/23/2017
+## Version 3.0.4 | 03/23/2017
 
 * Fixed Color in advanced query
 * Fixed issue with opening report
 
-## Version 3.0.3 | 3/21/2017
+## Version 3.0.3 | 03/21/2017
 
 * Updated Kendo UI v2017.1.223 `R1 2017 SP1` [R1 2017 SP1] (http://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-r1-2017-sp1)
 
-## Version 3.0.3 | 3/21/2017
+## Version 3.0.3 | 03/21/2017
 
 * cleaning merging conflicts
 
-## Version 3.0.2 | 3/21/2017
+## Version 3.0.2 | 03/21/2017
 
 * Bug fixes
 * Spelling issues
@@ -50,7 +58,7 @@ And constructed with the following guidelines:
 * Changed tabstrips to scrollable
 * Fixed bug in advanced query removing items
 
-## Version 3.0.1 | 2/16/2017
+## Version 3.0.1 | 02/16/2017
 
 * Updated Excel Exporting Functionality to reflect new tabular reporting structure
 * Updated kendo version
@@ -63,7 +71,7 @@ And constructed with the following guidelines:
 * Removed Title VI tab from Custom Summary Report
 * Removed flicker on chart refresh
 
-## Version 3.0.0 | 1/23/2017
+## Version 3.0.0 | 01/23/2017
 
 * Added Title 6 tab to the MPO/COG reporting window
 * Changed wording from MAG Viewer to Viewer
