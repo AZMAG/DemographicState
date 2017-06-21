@@ -2595,16 +2595,16 @@
                         self.reportURL = encodeURI(demographicConfig.exportPDFReportUrl + "?cog=" + self.communityName);
                         newWindow = window.open(self.reportURL, "_new");
                     } else if (self.communityName === "Selected Block Groups") {
-                        var ObjectIdArray = "";
+                        var PDFIDArray = "";
 
                         for (var i = 0; i < self.selectedFeatures.length; i++) {
                             if (i !== self.selectedFeatures.length & self.selectedFeatures.length !== 1) {
-                                ObjectIdArray += self.selectedFeatures[i].attributes.OBJECTID + ",";
+                                PDFIDArray += self.selectedFeatures[i].attributes.PDFID + ",";
                             } else {
-                                ObjectIdArray += self.selectedFeatures[i].attributes.OBJECTID;
+                                PDFIDArray += self.selectedFeatures[i].attributes.PDFID;
                             }
                         }
-                        localStorage.OBJECTID = ObjectIdArray;
+                        localStorage.statePDFID = PDFIDArray;
                         self.reportURL = encodeURI(demographicConfig.exportPDFReportUrl + "?StateInteractive");
                         newWindow = window.open(self.reportURL, "_new");
                     } else if (self.communityName === "Arizona") {
