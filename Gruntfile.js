@@ -11,13 +11,13 @@ module.exports = function(grunt) {
         bannercss:  '/*! ========================================================================\n' +
                     ' * Maricopa Association of Governments\n' +
                     ' * CSS files for MAG State Demographic Viewer\n' +
-                    ' * @concat.min.css | version | <%= pkg.version %>\n' +
+                    ' * @concat.min.css | @version | <%= pkg.version %>\n' +
                     ' * Production | <%= pkg.date %>\n' +
                     ' * http://ims.azmag.gov/\n' +
                     ' * State Demographic Viewer\n' +
                     ' * ==========================================================================\n' +
-                    ' * Copyright 2017 MAG\n' +
-                    ' * Licensed under MIT\n' +
+                    ' * @Copyright <%= pkg.copyright %> MAG\n' +
+                    ' * @License MIT\n' +
                     ' * ========================================================================== */\n',
 
         htmlhint: {
@@ -121,8 +121,8 @@ module.exports = function(grunt) {
                     banner: '/* <%= pkg.name %> - v<%= pkg.version %> | <%= grunt.template.today("mm-dd-yyyy") %> */'
                 },
                 files: {
-                    "app/resources/css/main.min.css": ["app/resources/css/main.css"],
-                    "app/resources/css/normalize.min.css": ["app/resources/css/normalize.css"]
+                    "dist/app/resources/css/main.min.css": ["src/app/resources/css/main.css"],
+                    "dist/app/resources/css/normalize.min.css": ["src/app/resources/css/normalize.css"]
                 }
             }
         },
@@ -133,8 +133,23 @@ module.exports = function(grunt) {
                 banner: '<%= bannercss %>\n'
             },
             dist: {
-                src: ["app/resources/css/normalize.min.css", "app/resources/css/main.min.css"],
-                dest: "app/resources/css/concat.min.css"
+                src: ["dist/app/resources/css/normalize.min.css", "dist/app/resources/css/main.min.css"],
+                dest: "dist/app/resources/css/concat.min.css"
+            }
+        },
+
+        clean: {
+            build: {
+                src: ["dist/"]
+            }
+        },
+
+        copy: {
+            build: {
+                cwd: "src/",
+                src: ["**"],
+                dest: "dist/",
+                expand: true
             }
         },
 
@@ -162,7 +177,7 @@ module.exports = function(grunt) {
 
         replace: {
             update_Meta: {
-                src: ["index.html", "config.js", "humans.txt", "README.md", "app/resources/css/main.css"], // source files array
+                src: ["src/index.html","src/config.js", "src/humans.txt", "src/app/resources/css/main.css", "README.md"], // source files array
                 // src: ["README.md"], // source files array
                 overwrite: true, // overwrite matched source files
                 replacements: [{
@@ -179,8 +194,8 @@ module.exports = function(grunt) {
                     to: 'v' + '<%= pkg.version %>' + ' | ' + '<%= pkg.date %>',
                 }, {
                     // humans.txt
-                    from: /(Version\: v)([0-9]+)(?:\.([0-9]+))(?:\.([0-9]+))/g,
-                    to: "Version: v" + '<%= pkg.version %>',
+                    from: /(Version\: )([0-9]+)(?:\.([0-9]+))(?:\.([0-9]+))/g,
+                    to: "Version: " + '<%= pkg.version %>',
                 }, {
                     // humans.txt
                     from: /(Last updated\: )[0-9]{2}\/[0-9]{2}\/[0-9]{4}/g,
@@ -195,8 +210,8 @@ module.exports = function(grunt) {
                     to: "`Updated: " + '<%= pkg.date %>',
                 }, {
                     // main.css
-                    from: /(main.css)( \| )(version)( \| )([0-9]+)(?:\.([0-9]+))(?:\.([0-9]+))/g,
-                    to: "main.css | version |" +' <%= pkg.version %>',
+                    from: /(main.css)( \| )(@version)( \| )([0-9]+)(?:\.([0-9]+))(?:\.([0-9]+))/g,
+                    to: "main.css | @version |" +' <%= pkg.version %>',
                 }]
             }
         }
@@ -217,7 +232,8 @@ module.exports = function(grunt) {
 
     grunt.registerTask("update", ["replace"]);
 
-    grunt.registerTask("build", ["replace", "cssmin", "concat"]);
+    // grunt.registerTask("build", ["replace", "cssmin", "concat"]);
+    grunt.registerTask("build", ["clean", "replace", "copy", "cssmin", "concat"]);
 
     // the default task can be run just by typing "grunt" on the command line
     grunt.registerTask("default", []);
