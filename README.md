@@ -1,5 +1,5 @@
 ![](http://geo.azmag.gov/maps/readonaz/app/resources/img/maglogo_black.png)
-# MAG State Demographics Map Viewer 
+# MAG State Demographics Map Viewer
 State Demographics map viewer for selected census info for Arizona
 
 [![GitHub issues](https://img.shields.io/github/issues/AZMAG/map-DemographicState.svg)](https://github.com/AZMAG/map-DemographicState/issues)
@@ -11,22 +11,22 @@ State Demographics map viewer for selected census info for Arizona
 
 ***********************************************************************************************************
 
-The State Demographic Map Viewer is one of the Maricopa Association of Governments interactive mapping and analysis sites, showing selected population and housing data.  The viewer allows you to graphically view selected population and housing data for all Census block groups for the State of Arizona.  The viewer provides interactive mapping and reporting tools to allow exploration of data from Census 2010 and the American Community Survey (ACS) 2011-2015 5yr.
+The State Demographic Map Viewer is one of the Maricopa Association of Governments interactive mapping and analysis sites, showing selected population and housing data.  The viewer allows you to graphically view selected population and housing data for all Census block groups for the State of Arizona.  The viewer provides interactive mapping and reporting tools to allow exploration of data from Census 2010 and the American Community Survey (ACS) 2011-2015.
 
-Use this site to explore Explore data from Census 2010 and American Community Survey (ACS) 2011-2015 5yr.
+Use this site to explore Explore data from Census 2010 and American Community Survey (ACS) 2011-2015.
 
 This web app viewer was developed by MAG staff for MAG member agencies and the public using ESRI's JavaScript API.
 
 ## Keywords
 
-`Demographics` `Census` `2010` `American Community Survey` `ACS` `2011-2015` `5yr` `counties` `State` `Arizona` `block group` `Maps` `MAG` `ESRI` `#MAGmaps`
+`Demographics` `Census` `2010` `American Community Survey` `ACS` `2011-2015` `5yr` `Counties` `State` `Arizona` `Maps` `MAG` `ESRI` `#MAGmaps`
 
 ## Version
 
-### version 3.0.4 ###
+###### `version 3.1.1` ###
 
- `Updated: 03/22/2017`
- 
+ `Updated: 06/21/2017`
+
  `Created: 10/21/2014`
 
 Releases will be numbered with the following format:
@@ -41,10 +41,11 @@ And constructed with the following guidelines:
 
 ## Credits
 
-Maricopa Association of Governments (MAG) and the MAG member agencies
+`Maricopa Association of Governments (MAG) and the MAG member agencies`
 
-## Site URL's
-* [http://geo.azmag.gov/maps/azdemographics/] (http://geo.azmag.gov/maps/azdemographics/)
+## Site URL
+
+* [AZ State Demographics](http://geo.azmag.gov/maps/azdemographics/)
 
 ## Documentation
 
@@ -53,6 +54,12 @@ A detailed list of the changes and fixes in each version update can be found in 
 * [CHANGELOG](CHANGELOG.md)
 
 ## Resources
+
+## Examples
+
+## Dependencies
+
+* [git-labelmaker](https://github.com/himynameisdave/git-labelmaker?utm_source=hashnode.com)
 
 ## Legal Disclaimer
 
@@ -73,12 +80,7 @@ Please acknowledge the Maricopa Association of Governments (MAG) GIS as the sour
 
 Code released under the MIT license.
 
+A copy of the license is available in the repository's `LICENSE` file.
+
 * [LICENSE](LICENSE)
 
-Copyright (c) 2017 Maricopa Association of Governments
-
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
