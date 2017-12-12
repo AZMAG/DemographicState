@@ -22,13 +22,16 @@
   "main": "index.js",
   "homepage": "http://geo.azmag.gov/maps/azdemographics/",
   "author": "MAG Information Services (http://www.azmag.gov/Information_Services/default.asp)",
-  "contributors": [{
-    "name": "Vern Wolfley",
-    "email": "vwolfley@azmag.gov"
-  }, {
-    "name": "Jack Fairfield",
-    "email": "jfairfield@azmag.gov"
-  }],
+  "contributors": [
+    {
+      "name": "Vern Wolfley",
+      "email": "vwolfley@azmag.gov"
+    },
+    {
+      "name": "Jack Fairfield",
+      "email": "jfairfield@azmag.gov"
+    }
+  ],
   "repository": [
     {
       "type": "git",
