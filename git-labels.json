@@ -1,0 +1,67 @@
+[{
+  "name": "Issue: Bug",
+  "color": "#b60205"
+}, {
+  "name": "Issue: Enhancement",
+  "color": "#1c82b4"
+}, {
+  "name": "Issue: Question",
+  "color": "#cc317c"
+}, {
+  "name": "Issue: Maintenance",
+  "color": "#f37735"
+}, {
+  "name": "Issue: Discussion",
+  "color": "#cc317c"
+}, {
+  "name": "Issue: Feature",
+  "color": "#5fb434"
+}, {
+  "name": "Resolved",
+  "color": "#0e8a16"
+}, {
+  "name": "Resolved: By-Design",
+  "color": "#3865a3"
+}, {
+  "name": "Resolved: Duplicate",
+  "color": "#87a2c7"
+}, {
+  "name": "Resolved: Not-Repro",
+  "color": "#93a4b0"
+}, {
+  "name": "Resolved: Wont-Fix",
+  "color": "#cccccc"
+}, {
+  "name": "Priority: High",
+  "color": "#eb6841"
+}, {
+  "name": "Priority: Low",
+  "color": "#00b068"
+}, {
+  "name": "Priority: Medium",
+  "color": "#edc951"
+}, {
+  "name": "Priority: Critical",
+  "color": "#cc2a36"
+}, {
+  "name": "Info: help-wanted",
+  "color": "#5319e7"
+}, {
+  "name": "Status: In-Progress",
+  "color": "#1d76db"
+}, {
+  "name": "Status: Ready",
+  "color": "#006b75"
+}, {
+  "name": "Status: Blocked",
+  "color": "#ee4035"
+}, {
+  "name": "Status: On-Hold",
+  "color": "#ee9d35"
+}, {
+  "name": "Status: Completed",
+  "color": "#0e8a16"
+}, {
+  "name": "Status: Review-Needed",
+  "color": "#fbca04"
+}]
