@@ -16,6 +16,9 @@ And constructed with the following guidelines:
 3. **PATCH** version when you make backwards-compatible bug fixes and misc changes **bumps only the patch**
 
 ***************************************************************************************************************
+## Version 3.2.1 | 01/18/2018
+
+* Fixed the help contact popup window.
 
 ## Version 3.2.0 | 01/18/2018
 

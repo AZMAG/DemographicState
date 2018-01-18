@@ -35,7 +35,7 @@ var appConfig = new function() {
 
     this.Version = "v3.0.6 | 04/14/2017";
     this.LegendSource = "American Community Survey 2012-2016 5yr";
-    this.jasonemail = "https://www.azmag.gov/EmailPages/JasonHoward.asp";
+    this.jasonemail = "http://www.azmag.gov/Contact/4788?s=geo.azmag.gov/maps/azdemographics&n=Jason%20Howard&popUp=true";
 
     this.ArcGISInstanceURL = "http://geo.azmag.gov/gismag/rest";
     //this.exportWebMapUrl = "http://geo.azmag.gov/gismag/rest/services/Utilities/PrintingTools/GPServer/Export%20Web%20Map%20Task";  // Generic Print Service
