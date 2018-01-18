@@ -138,13 +138,13 @@
 
                     // these refer to named text elements in the mxd, sb
                     var customLayoutElements = [{
-                        "txtLegendHeader": thematicMap.Name + " \n<_BOL> " + thematicMap.Source + "</_BOL>"
+                        "txtLegendHeader": thematicMap.Name + " \n<_BOL> " + appConfig.LegendSource + "</_BOL>"
                     }, {
                         "txtComments": notesText
                     }];
 
                     var legendLayer = new LegendLayer();
-                    legendLayer.layerId = "ACS2015byBlockGroup";
+                    legendLayer.layerId = "blockGroups";
                     legendLayer.subLayerIds = [0];
 
                     printTemplate.layoutOptions = {
@@ -220,6 +220,7 @@
                     win.restore();
                     win.center();
                     win.open();
+                    ga('send', 'event', 'Click', 'Opened Window', 'Print Window');
                 };
 
                 self.closeWindow = function() {

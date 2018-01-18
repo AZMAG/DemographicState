@@ -17,6 +17,13 @@ And constructed with the following guidelines:
 
 ***************************************************************************************************************
 
+## Version 3.2.0 | 01/18/2018
+
+* Added Supervisor Districts to Reports and layers
+* Added City Council Districts to Reports and layers
+* Refactored config layers to use the "layerName" property to match the rest endpoint layer instead of having the index hardcoded.
+* Switched the Generate Renderer task to the client using the geostats library instead of the Generate Renderer GP tool.  This will increase speed and allow for dynamic renderering.
+
 ## Version 3.1.0 | 05/23/2017
 
 * file changes only!

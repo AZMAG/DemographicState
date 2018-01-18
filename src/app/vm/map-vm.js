@@ -316,7 +316,7 @@
                     self.legend = new Legend({
                         map: params.map,
                         layerInfos: [{
-                            layer: self.mapTheme().Service ? params.map.getLayer(self.mapTheme().Service) : params.map.getLayer("ACS2015byBlockGroup"),
+                            layer: self.mapTheme().Service ? params.map.getLayer(self.mapTheme().Service) : params.map.getLayer("blockGroups"),
                             title: self.mapTheme().ShortName
                         }]
                     }, "legendDiv_{value}".replace(/{value}/gi, self.mapID));
@@ -561,7 +561,7 @@
                     if (map.id === self.mapID && map.loaded) {
                         self.isSelected = true;
                         $("#" + "mapFrameTitlePanel_{value}".replace(/{value}/gi, self.mapID)).addClass("selected");
-                        topic.publish("SelectedMapChagned.UpdateTOC", {
+                        topic.publish("SelectedMapChanged.UpdateTOC", {
                             mapName: self.mapTheme().ShortName,
                             renderer: self.renderer(),
                             colorRamp: self.mapColorRamp(),

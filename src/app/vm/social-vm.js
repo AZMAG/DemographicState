@@ -93,6 +93,7 @@
                     var win = $("#shareWindowDiv").data("kendoWindow");
                     win.restore();
                     win.open();
+                    ga('send', 'event', 'Click', 'Opened Window', 'Share Window');
                 };
 
                 self.closeWindow = function() {

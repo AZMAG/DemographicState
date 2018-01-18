@@ -107,8 +107,8 @@
                     });
 
                     self.hideChoices();
-
                     qbVM.init("display", "after");
+
 
                     $.each(demographicConfig.reports, function(i, configItem) {
                         if (configItem.populateDropDown !== false) {
@@ -181,9 +181,9 @@
                 self.dropDownQueryHandler = function(results) {
                     var configItem;
                     var attributes = results.features[0].attributes;
-                    if (attributes["PLACE_TYPE"]) {
+                    if (attributes["PLACE"]) {
                         configItem = demographicConfig.reports.placeSummary;
-                    } else if (attributes["ZIPCODE"]) {
+                    } else if (attributes["ZIP_CODE"]) {
                         configItem = demographicConfig.reports.zipCodeSummary;
                     } else if (attributes["SLDIST_NAME"]) {
                         configItem = demographicConfig.reports.legislativeSummary;
@@ -193,10 +193,19 @@
                         configItem = demographicConfig.reports.cogSummary;
                     } else if (attributes["COUNTYFP"]) {
                         configItem = demographicConfig.reports.countySummary;
+                    } else if (attributes["DistNum"]) {
+                        configItem = demographicConfig.reports.supervisorSummary;
+                    } else if (attributes["CityDistrictName"]) {
+                        configItem = demographicConfig.reports.councilDistrictSummary;
                     }
 
                     var features = results.features;
                     var nameArray = [];
+
+                    if (!configItem) {
+                        console.log(attributes)
+                    }
+
                     var fieldName = configItem.summaryField;
                     var sortField = configItem.sortField;
                     var dropdownSelector = configItem.dropdown;
@@ -276,6 +285,14 @@
                             type = "cog";
                             layerID = "cogBoundaries";
                             break;
+                        case "launchSupervisorSummaryWin":
+                            type = "supervisor";
+                            layerID = "supervisorDistricts";
+                            break;
+                        case "launchCouncilDistrictSummaryWin":
+                            type = "councilDistrict";
+                            layerID = "councilDistricts";
+                            break;
                     }
                     var layer;
                     if (layerID !== null) {
@@ -299,8 +316,8 @@
 
                         var cogDOM = dom.byId("legendDiv6");
                         if (cogDOM !== null && type !== "cog") {
-                             // console.log("TRUE");
-                             $("#legendDiv6").hide();
+                            // console.log("TRUE");
+                            $("#legendDiv6").hide();
                         }
 
                         if (type === "cog") {
@@ -368,7 +385,7 @@
                  * @return {[type]}        [description]
                  */
                 self.hideChoices = function(choice) {
-                    var choiceDivs = ["#countyChoiceDiv", "#placeChoiceDiv", "#legislativeChoiceDiv", "#congressionalChoiceDiv", "#zipCodeChoiceDiv", "#cogChoiceDiv"];
+                    var choiceDivs = ["#countyChoiceDiv", "#placeChoiceDiv", "#legislativeChoiceDiv", "#congressionalChoiceDiv", "#zipCodeChoiceDiv", "#cogChoiceDiv", "#supervisorChoiceDiv", "#councilDistrictChoiceDiv"];
                     $.each(choiceDivs, function(i, divID) {
                         if (divID !== choice) {
                             $(divID).hide();
@@ -381,7 +398,7 @@
                  * @return {[type]}         [description]
                  */
                 self.hideLayers = function(layerID) {
-                    var layerIds = ["countyBoundaries", "congressionalDistricts", "legislativeDistricts", "zipCodes", "cogBoundaries"];
+                    var layerIds = ["countyBoundaries", "congressionalDistricts", "legislativeDistricts", "zipCodes", "cogBoundaries", "supervisorDistricts", "councilDistricts"];
                     $.each(layerIds, function(i, item) {
                         if (layerID !== item) {
                             var layer = mapModel.mapInstance.getLayer(item);
@@ -398,7 +415,7 @@
                  * @return {[type]}         [description]
                  */
                 self.legendUpdate = function(layerID) {
-                    var layerIds = ["countyBoundaries", "congressionalDistricts", "legislativeDistricts", "zipCodes", "cogBoundaries"];
+                    var layerIds = ["countyBoundaries", "congressionalDistricts", "legislativeDistricts", "zipCodes", "cogBoundaries", "supervisorDistricts", "councilDistricts"];
                     $.each(layerIds, function(i, item) {
                         if (layerID === item) {
                             legendVM.updateLegendLayers(item);
@@ -419,7 +436,7 @@
                     // Get the selected name
                     var selectedName = $("#" + comboBox).data("kendoComboBox").dataItem();
                     var param = selectedName.Name;
-
+                    ga('send', 'event', 'Click', 'Opened Window', 'Summary Window: ' + param);
                     // Open the window
                     demographicVM.openWindow(param, type);
                 };
@@ -445,7 +462,7 @@
                 self.displayInteractiveDiv = function() {
                     var div = $("#demInteractiveDiv");
                     if (div.length === 0) {
-                        interactiveToolsVM.insertAfter("demInteractiveDiv", "launchInteractiveSummaryDiv", demographicVM.interactiveCensusSelectionQueryHandler, demographicVM.interactiveSelectionQueryFault, demographicConfig.reports.censusTracts.ACSRestUrl);
+                        interactiveToolsVM.insertAfter("demInteractiveDiv", "launchInteractiveSummaryDiv", demographicVM.interactiveCensusSelectionQueryHandler, demographicVM.interactiveSelectionQueryFault, demographicConfig.reports.blockGroups.ACSRestUrl);
                         self.hideChoices("#demInteractiveDiv");
                         self.hideLayers("");
                     } else {

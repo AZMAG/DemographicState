@@ -211,11 +211,11 @@
 
                         $("#slider").kendoSlider({
                             change: function(e) {
-                                var sLayer = mapModel.baseMapInstance.getLayer("ACS2015byBlockGroup");
+                                var sLayer = mapModel.baseMapInstance.getLayer("blockGroups");
                                 sLayer.setOpacity(e.value);
                             },
                             slide: function(e) {
-                                var sLayer = mapModel.baseMapInstance.getLayer("ACS2015byBlockGroup");
+                                var sLayer = mapModel.baseMapInstance.getLayer("blockGroups");
                                 sLayer.setOpacity(e.value);
                             },
                             increaseButtonTitle: "Decrease",
@@ -279,6 +279,32 @@
                             bookmarkDelegate.legendLayerOptions.push("c" + layerId);
                             if (self.legislativeLegend) {
                                 self.legislativeLegend.destroy();
+                            }
+                        }
+                    } else if (layer.id === "councilDistricts") {
+                        if (layer.visible === true) {
+                            if (self.councilLegend) {
+                                self.councilLegend.destroy();
+                            }
+                            self.CouncilLegend();
+                            bookmarkDelegate.legendLayerOptions.remove("c" + layerId);
+                        } else {
+                            bookmarkDelegate.legendLayerOptions.push("c" + layerId);
+                            if (self.councilLegend) {
+                                self.councilLegend.destroy();
+                            }
+                        }
+                    }else if (layer.id === "supervisorDistricts") {
+                        if (layer.visible === true) {
+                            if (self.supervisorLegend) {
+                                self.supervisorLegend.destroy();
+                            }
+                            self.SupervisorLegend();
+                            bookmarkDelegate.legendLayerOptions.remove("c" + layerId);
+                        } else {
+                            bookmarkDelegate.legendLayerOptions.push("c" + layerId);
+                            if (self.supervisorLegend) {
+                                self.supervisorLegend.destroy();
                             }
                         }
                     } else if (layer.id === "cogBoundaries") {
@@ -359,6 +385,36 @@
                     self.legislativeLegend.startup();
                 };
 
+                self.CouncilLegend = function() {
+                    var insertElement = "legendDiv";
+                    self.councilLegend = new Legend({
+                        map: mapModel.mapInstance,
+                        layerInfos: [{
+                            layer: mapModel.mapInstance.getLayer("councilDistricts"),
+                            title: "Council Districts"
+                        }],
+                        autoUpdate: true
+                    }, dc.create("div", {
+                        id: "legendDiv1156"
+                    }, insertElement, "after"));
+                    self.councilLegend.startup();
+                };
+
+                self.SupervisorLegend = function() {
+                    var insertElement = "legendDiv";
+                    self.supervisorLegend = new Legend({
+                        map: mapModel.mapInstance,
+                        layerInfos: [{
+                            layer: mapModel.mapInstance.getLayer("supervisorDistricts"),
+                            title: "Supervisor Districts"
+                        }],
+                        autoUpdate: true
+                    }, dc.create("div", {
+                        id: "legendDiv10"
+                    }, insertElement, "after"));
+                    self.supervisorLegend.startup();
+                };
+
                 self.CogLegend = function() {
                     var insertElement = "legendDiv";
                     self.cogLegend = new Legend({
@@ -381,7 +437,7 @@
                             self.legend = new Legend({
                                 map: map,
                                 layerInfos: [{
-                                    layer: map.getLayer("ACS2015byBlockGroup"),
+                                    layer: map.getLayer("blockGroups"),
                                     title: self.legendMapTitle
                                 }]
                             }, "legendDiv");
@@ -390,7 +446,7 @@
                             // dom.byId("title2").innerHTML = self.legendMapTitle;
                             dom.byId("dataSource").innerHTML = self.sourceInfo;
                             self.legendInitialized = true;
-                            self.legend.refresh();
+                            // self.legend.refresh();
                         }
                     }
 
@@ -414,7 +470,7 @@
                 self.updateLegend = function() {
                     if (mapModel.mapInstance.id === mapModel.baseMapInstance.id) {
                         self.legend.refresh([{
-                            layer: mapModel.mapInstance.getLayer("ACS2015byBlockGroup"),
+                            layer: mapModel.mapInstance.getLayer("blockGroups"),
                             title: self.legendMapTitle
                         }]);
                         dom.byId("legendTitle").innerHTML = self.legendMapTitle;
@@ -426,7 +482,8 @@
                 self.updateLegendTitle = function(dataItem) {
                     if (mapModel.mapInstance.id === mapModel.baseMapInstance.id) {
                         self.legendMapTitle = dataItem.ShortName;
-                        self.sourceInfo = dataItem.Source;
+                        self.sourceInfo = appConfig.LegendSource;
+                        // self.sourceInfo = dataItem.Source;
                     }
                 };
 

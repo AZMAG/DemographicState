@@ -257,6 +257,7 @@
                     var win = $("#markupToolsLauncher").data("kendoWindow");
                     win.restore();
                     win.open();
+                    ga('send', 'event', 'Click', 'Opened Window', 'Markup Window');
 
                     $("#markupToolsLauncher").closest(".k-window").css({
                         top: "55px",

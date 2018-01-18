@@ -260,9 +260,9 @@
                     //$("#demTabStrip").css("visibility", "hidden");
                     $("#reportLoading").show();
 
-                    var censusUrl = demographicConfig.reports.censusTracts.censusRestUrl;
+                    var censusUrl = demographicConfig.reports.blockGroups.censusRestUrl;
                     var censusCallback = demographicVM.interactiveSelectionQueryHandler;
-                    var acsUrl = demographicConfig.reports.censusTracts.ACSRestUrl;
+                    var acsUrl = demographicConfig.reports.blockGroups.ACSRestUrl;
                     var acsCallback = demographicVM.interactiveSelectionQueryHandler;
                     var bufferGeometry = dojo.byId("bufferSelection").checked;
 
