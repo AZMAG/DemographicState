@@ -19,6 +19,7 @@ And constructed with the following guidelines:
 ## Version 3.2.1 | 01/18/2018
 
 * Fixed the help contact popup window.
+* Fixed the field duplication issue for all summary reports.
 
 ## Version 3.2.0 | 01/18/2018
 

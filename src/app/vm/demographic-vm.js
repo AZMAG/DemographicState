@@ -472,19 +472,15 @@
 					var zipCode = dom.byId('zipCodeLink');
 					var cogs = dom.byId('cogLink');
 
-					if (count3) {
+					if (county) {
 						self.openWindow(county.innerHTML, 'county');
-					}
-					if (congress) {
+					} else if (congress) {
 						self.openWindow(congress.innerHTML, 'congressional');
-					}
-					if (legislative) {
+					} else if (legislative) {
 						self.openWindow(legislative.innerHTML, 'legislative');
-					}
-					if (zipCode) {
+					} else if (zipCode) {
 						self.openWindow(zipCode.innerHTML, 'zipCode');
-					}
-					if (cogs) {
+					} else if (cogs) {
 						self.openWindow(cogs.innerHTML, 'cog');
 					}
 				};
@@ -1006,11 +1002,24 @@
 
 					// Get the configuration
 					var aggValues = {};
+					var duplicates = {};
+
 					$.each(fields, function(index, field) {
 						var attribute = sumAttributes[field.fieldName];
 						var attrValue = Number(attribute);
 
 						if (field.canSum === true || featuresCount === 1) {
+							
+							if (aggValues[field.fieldName]) {
+								if (duplicates[field.fieldName]) {
+									duplicates[field.fieldName]++;
+								} else{
+									duplicates[field.fieldName] = 1;
+								}
+
+								field.fieldName += duplicates[field.fieldName];
+							}
+
 							aggValues[field.fieldName] = {
 								fieldCategory: field.category,
 								fieldGroup: field.groupID, // added to sort order in data grid. vw
@@ -1199,10 +1208,23 @@
 
 					// Get the configuration
 					var aggValues = {};
+					var duplicates = {};
+					
 					$.each(fields, function(index, field) {
 						var attribute = sumAttributes[field.fieldName];
 						var attrValue = Number(attribute);
+
 						if (field.canSum === true || featuresCount === 1) {
+							if (aggValues[field.fieldName]) {
+								if (duplicates[field.fieldName]) {
+									duplicates[field.fieldName]++;
+								} else {
+									duplicates[field.fieldName] = 1;
+								}
+
+								field.fieldName += duplicates[field.fieldName];
+							}
+
 							aggValues[field.fieldName] = {
 								fieldCategory: field.category,
 								fieldGroup: field.groupID, // added to sort order in data grid. vw
