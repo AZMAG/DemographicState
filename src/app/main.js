@@ -30,7 +30,8 @@ define([
         "app/vm/legal-vm",
         "app/vm/search-vm",
         "app/vm/subscribe-vm",
-        "app/config/demographicConfig"
+        "app/config/demographicConfig",
+        "app/config/searchConfig"
     ],
 
     function(
@@ -59,7 +60,8 @@ define([
         legalVM,
         searchVM,
         subscribeVM,
-        demographicConfig
+        demographicConfig,
+        searchConfig
     ) {
         $.get(appConfig.mainURL + "/?f=json", function(data) {
             $.each(JSON.parse(data).layers, function(key, layer) {
@@ -80,6 +82,8 @@ define([
                     }
                 }
             });
+            searchConfig.init();            
+
             mapModel.initialize();
 
             mapContainerVM.init();

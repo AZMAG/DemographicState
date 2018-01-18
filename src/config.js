@@ -47,14 +47,8 @@ var appConfig = new function() {
 
     // Search Service URLs
     this.geoCoderService = "//geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer";
-    this.countyService = this.mainURL + "/3";
-    this.cogService = this.mainURL + "/2";
-    this.placeService = this.mainURL + "/1";
-    this.legislativeService = this.mainURL + "/4";
-    this.congressionalService = this.mainURL + "/5";
-    this.zipCodeService = this.mainURL + "/6";
-    this.tractService = this.mainURL + "/17";
-    this.SchoolsService = this.mainURL + "/19";
+    this.tractService = this.mainURL + "/23";
+    this.SchoolsService = this.mainURL + "/25";
 
     this.layerInfo = [{
         drawOrder: 0,
@@ -62,9 +56,9 @@ var appConfig = new function() {
         title: "Census Tracts",
         type: "dynamic",
         url: this.mainURL,
-        queryUrl: this.mainURL + "/18",
+        queryUrl: this.mainURL + "/24",
         queryWhere: "1=1",
-        layers: [17, 18],
+        layers: [23, 24],
         opacity: 1,
         visible: false,
         showTOC: true,
@@ -143,8 +137,8 @@ var appConfig = new function() {
         drawOrder: 6,
         id: "districts",
         title: "Unified School Districts",
-        url: this.mainURL + "/21",
-        queryUrl: this.mainURL + "/21",
+        url: this.mainURL + "/25",
+        queryUrl: this.mainURL + "/25",
         type: "feature",
         queryWhere: "1=1",
         opacity: 1,
@@ -224,6 +218,16 @@ var appConfig = new function() {
         visible: false,
         showTOC: true
     }];
+
+    // function toObject(arr) {
+    //     var rv = {};
+    //     for (var i = 0; i < arr.length; ++i)
+    //         rv[arr[i].id] = arr[i];
+    //     return rv;
+    // }
+
+
+    // this.layerInfoObj = toObject(this.layerInfo);
     // End layerInfo
 
     this.initExtent = {

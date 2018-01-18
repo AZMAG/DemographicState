@@ -496,7 +496,7 @@
                         classDef.breakCount = self.breaksCountList.dataItem();
                         // var params = new GenerateRendererParameters();
                         // params.classificationDefinition = classDef;
-                        console.log(thematicMap);
+                        // console.log(thematicMap);
                         var mapServiceUrl = conf.mapServices[thematicMap.Service] + "/" + thematicMap.LayerId;
 
                         // var generateRenderer = new GenerateRendererTask(mapServiceUrl);

@@ -79,7 +79,6 @@
                         var communityName = e.result.name;
                     }
                     var searchType = "";
-
                     switch (e.sourceIndex) {
                         case 1:
                             searchType = "county";
@@ -97,10 +96,16 @@
                             searchType = "congressional";
                             break;
                         case 6:
+                            searchType = "councilDistrict";
+                            break;
+                        case 7:
+                            searchType = "supervisor";
+                            break;
+                        case 8:
                             searchType = "zipCode";
                             break;
                     }
-                    if (e.sourceIndex === 7) {
+                    if (e.sourceIndex === 9) {
                         var symbol = mapModel.getSymbol(e.result.feature.geometry, "cyan");
                         var graphic = new Graphic(e.result.feature.geometry, symbol);
                         mapModel.addGraphic(graphic, undefined, true, true);
@@ -109,7 +114,7 @@
                         var symbol = new PictureMarkerSymbol("app/resources/img/Point.png", 36, 36).setOffset(9, 18);
                         var graphic = new Graphic(e.result.feature.geometry, symbol);
                         mapModel.addGraphic(graphic, undefined, true, true);
-                    } else if (e.sourceIndex === 8) {
+                    } else if (e.sourceIndex === 10) {
                         var symbol = mapModel.getSymbol(e.result.feature.geometry, "cyan");
                         var graphic = new Graphic(e.result.feature.geometry, symbol);
                         mapModel.addGraphic(graphic, undefined, true, true);

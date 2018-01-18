@@ -20,6 +20,7 @@ And constructed with the following guidelines:
 
 * Fixed the help contact popup window.
 * Fixed the field duplication issue for all summary reports.
+* Fixed the search functionality.  Added new report types to the search.
 
 ## Version 3.2.0 | 01/18/2018
 
