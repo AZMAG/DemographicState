@@ -848,7 +848,7 @@
 
 					switch (color) {
 						case 'cyan':
-							dojoColor = new Color([ 0, 255, 255, 0.5 ]);
+							dojoColor = new Color([ 0, 255, 255, 0.35 ]);
 							break;
 						case 'yellow':
 							dojoColor = new Color([ 255, 255, 0, 0.5 ]);

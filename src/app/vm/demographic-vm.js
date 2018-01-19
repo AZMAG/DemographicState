@@ -688,7 +688,8 @@
 					mapModel.showInfoWindow();
 
 					// Set the source
-					$('#demSource').text('Source: ' + self.reportConfigItem.source);
+
+					$('#demSource').text('Source: ' + appConfig.sourceLabel);
 
 					// Create the Kendo tab strip
 					var tabStrip = $('#demTabStrip').data('kendoTabStrip');
