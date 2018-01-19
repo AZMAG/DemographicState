@@ -1409,9 +1409,12 @@
 					if (
 						self.reportType === 'cog' ||
 						self.reportType == 'county' ||
-						self.reportType == 'state' ||
 						self.reportType == 'place' ||
-						self.reportType == 'interactive'
+						self.reportType == 'legislative' ||
+						self.reportType == 'congressional' ||
+						self.reportType == 'zipCode' ||
+						self.reportType == 'supervisor' ||
+						self.reportType == 'councilDistrict'
 					) {
 						var attributes = features[0].attributes;
 						if (features.length > 1) {
@@ -1421,10 +1424,11 @@
 								});
 							}
 						}
-
+						
 						var fivePlus = attributes['TOTAL_POP'] - attributes['UNDER5'];
 						var totalPop = attributes['TOTAL_POP'];
-						var totalBlockCount = attributes['TOT_BLOCK_COUNT'];
+						var totalBlockCount = attributes['TOT_BLOCKGROUP_COUNT'];
+						var age65Plus = attributes['AGE65TO74'] + attributes['AGE75TO84'] + attributes['AGE85PLUS']
 
 						var dataSrc = [
 							{
@@ -1451,12 +1455,12 @@
 							{
 								Category: 'Age 65+',
 								Footnote: '',
-								Total: attributes['AGE65PLUS'],
-								Percent: attributes['AGE65PLUS'] / totalPop,
+								Total: age65Plus,
+								Percent: age65Plus / totalPop,
 								NumberOfBlocks: attributes['AFFECTED_AGE65PLUS_COUNT'],
 								PercentOfBlocks: attributes['AFFECTED_AGE65PLUS_COUNT'] / totalBlockCount,
 								AffectedPopulation: attributes['AFFECTED_AGE65PLUS'],
-								PercentAffectedCaptured: attributes['AFFECTED_AGE65PLUS'] / attributes['AGE65PLUS']
+								PercentAffectedCaptured: attributes['AFFECTED_AGE65PLUS'] / age65Plus
 							},
 							{
 								Category: 'Below Poverty Level',
@@ -1538,7 +1542,7 @@
 									columns: [
 										{
 											field: 'NumberOfBlocks',
-											title: 'Number of blocks >= Area Percentage',
+											title: 'Number of block groups >= Area Percentage',
 											width: '90px',
 											format: '{0:n0}'
 										},
@@ -1556,7 +1560,7 @@
 										},
 										{
 											field: 'PercentAffectedCaptured',
-											title: '% of Affected Population Captured in Census Blocks',
+											title: '% of Affected Population Captured in Census Block Groups',
 											width: '95px',
 											format: '{0:p1}'
 										}
