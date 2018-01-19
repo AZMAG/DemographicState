@@ -466,12 +466,15 @@
                  * @return {[type]} [description]
                  */
 				self.openSummaryLink = function() {
+
 					var county = dom.byId('countyLink');
 					var congress = dom.byId('congressionalLink');
 					var legislative = dom.byId('legislativeLink');
 					var zipCode = dom.byId('zipCodeLink');
 					var cogs = dom.byId('cogLink');
-
+					var supervisor = dom.byId('supervisorLink');
+					var council = dom.byId('councilDistrictLink');
+					
 					if (county) {
 						self.openWindow(county.innerHTML, 'county');
 					} else if (congress) {
@@ -482,6 +485,10 @@
 						self.openWindow(zipCode.innerHTML, 'zipCode');
 					} else if (cogs) {
 						self.openWindow(cogs.innerHTML, 'cog');
+					} else if (supervisor){
+						self.openWindow(supervisor.innerHTML, 'supervisor');
+					} else if (council){
+						self.openWindow(council.innerHTML, 'councilDistrict');
 					}
 				};
 
