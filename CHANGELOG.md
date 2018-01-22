@@ -24,6 +24,8 @@ And constructed with the following guidelines:
 * Updated the popups for supervisor and city council districts.
 * Reduced the opacity to make it easier to see the colors beneath the selection graphic.
 * Updated help windows to include supervisor and council district verbage.
+* Added Use Statewide Legend checkbox.  Fixed a bug that was making the legend refresh twice.
+* Updated the Advanced Query Window to point to relative urls from demographic congig.
 
 ## Version 3.2.0 | 01/18/2018
 

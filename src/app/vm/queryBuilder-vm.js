@@ -75,10 +75,12 @@
 
                 self.dataItemSelected = null;
 
-                self.layerACSUrl = appConfig.mainURL + "/0";
+                // console.log(demographicConfig.reports);
 
-                self.layerCensusUrl = appConfig.mainURL + "/7";
+                // self.layerACSUrl = appConfig.mainURL + "/0";
+                // self.layerCensusUrl = appConfig.mainURL + "/7";
 
+                
 
                 /**
                  * This id value should match up with the unique id binding handlers.
@@ -118,6 +120,9 @@
                  **/
                 self.init = function(relatedElement, relation) {
                     var node = dc.place(view, relatedElement, relation);
+
+                    self.layerACSUrl = demographicConfig.reports.blockGroups.ACSRestUrl;
+                    self.layerCensusUrl = demographicConfig.reports.blockGroups.censusRestUrl;
                     // ko.applyBindings(self, node);
 
                     var qbWindow2 = $("#qbWindow2").kendoWindow({
@@ -155,7 +160,6 @@
                     self.init("display", "after");
 
                     ga('send', 'event', 'Click', 'Opened Window', 'Advanced Query Window');
-
 
                     $("#runQuery").click(self.runQuery);
                     $("#cancelQuery").click(self.closeWindow);
