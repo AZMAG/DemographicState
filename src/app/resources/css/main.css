@@ -1965,3 +1965,11 @@ circle:hover {
     overflow-y: hidden;
     white-space: nowrap;
 }
+#dynamicRendererLabel {
+    vertical-align: middle;
+    font-size: 12px;
+}
+
+#dynamicRenderer {
+    vertical-align: middle;
+}

@@ -40,6 +40,8 @@
 
                 var self = this;
 
+                var colorRampOnly = false;
+
                 self.tocHTML = "";
                 self.toc = "";
                 self.winWidth = document.documentElement.clientWidth;
@@ -87,6 +89,9 @@
                     if (mapModel.initializationData !== undefined && mapModel.initializationData.maps[0].classificationMethod === "custom") {
                         self.initCustomBreaks = mapModel.initializationData.maps[0].breaks;
                     }
+                    $("#dynamicRenderer").click(function (event) {
+                        self.updateRenderer();
+                    });
 
                     tp.subscribe("CBRStateO", function() {
                         self.openWindow();
@@ -96,6 +101,13 @@
                     });
                     tp.subscribe("NewColorRamp", function(event) {
                         self.updateColorRamp(event);
+                    });
+                    var dynamicRenderer = $("#dynamicRenderer");
+                    tp.subscribe("extentChanged", function (event) {
+                        var dynamic = dynamicRenderer.is(':checked');
+                        if (!dynamic) {
+                            self.updateRenderer();
+                        }
                     });
                     tp.subscribe("ClassBreakOptions", self.setBreaksList);
                     tp.subscribe("CustomBreaksUpdated", function() {
@@ -494,15 +506,9 @@
                             classDef.classificationMethod = self.classMethodList.dataItem().Value;
                         }
                         classDef.breakCount = self.breaksCountList.dataItem();
-                        // var params = new GenerateRendererParameters();
-                        // params.classificationDefinition = classDef;
-                        // console.log(thematicMap);
                         var mapServiceUrl = conf.mapServices[thematicMap.Service] + "/" + thematicMap.LayerId;
-
-                        // var generateRenderer = new GenerateRendererTask(mapServiceUrl);
-                        // generateRenderer.execute(params, self.applyRenderer, self.rendererGenError);
-
-                        self.generateRenderer(classDef, mapServiceUrl, false);
+                        var dynamic = $("#dynamicRenderer").is(':checked');
+                        self.generateRenderer(classDef, mapServiceUrl, !dynamic);
                     }
                 };
 
@@ -531,6 +537,7 @@
                                 var max = breakValues[i + 1];
                                 renderer.addBreak(min, max, new SimpleFillSymbol().setColor(new Color(colorArray)));
                             });
+                            colorRampOnly = false;
                             self.applyRenderer(renderer);
                         }
                     }
@@ -550,6 +557,9 @@
                 @method applyRenderer
                 **/
                 self.applyRenderer = function(renderer) {
+                    // console.log("Apply Renderer Called");
+                    // console.log(legend);
+
                     for (var i = 0; i < self.CurrentRamp.length; i++) {
                         renderer.infos[i].symbol.color = dojo.colorFromRgb(self.CurrentRamp[i]);
                     }
@@ -563,7 +573,7 @@
 
                         self.initCustomBreaks = null;
                     }
-
+                    
                     // note: this applies symbology for No Data class, does not work with normalization
                     renderer.defaultSymbol = self.simpleFillSymbol;
                     renderer.defaultLabel = "No Data";
@@ -571,6 +581,8 @@
                     renderer.asPercent = dataItem.AsPercentages;
                     self.currentRenderer = renderer;
 
+                   
+                    
                     if (self.classMethodList.dataItem().Value === "custom") {
                         tp.publish("ClassificationMethodChanged", self.currentRenderer);
                     } else {
@@ -610,7 +622,7 @@
                         var thematicLayer = mapModel.mapInstance.getLayer('blockGroups');
                         thematicLayer.setLayerDrawingOptions(layerOptions);
                         thematicLayer.visible = true;
-                        // thematicLayer.refresh();
+                        thematicLayer.refresh();
                         tp.publish("MapRenderUpdated");
                     }
                 };
@@ -627,6 +639,8 @@
                         tp.publish("ClassificationMethodChanged", self.currentRenderer);
                     } else {
                         tp.publish("CustomeMapBreaks", {});
+                        var $cbox = $("#dynamicRenderer");
+                        $cbox.removeAttr("disabled");
                         self.updateRenderer();
                     }
                 };
@@ -708,6 +722,7 @@
                 **/
                 self.colorPickerClicked = function() {
                     self.colorRamp.value(null);
+                    colorRampOnly = true;
                     tp.publish("SelectColorRamp", null);
                 };
 
@@ -764,7 +779,7 @@
                     self.breaksCountList.select(function(dataItem) {
                         return dataItem == newRamp.length;
                     });
-                    if (colorChangeOnly) {
+                    if (colorRampOnly) {
                         for (var i = 0; i < self.CurrentRamp.length; i++) {
                             self.currentRenderer.infos[i].symbol.color = dojo.colorFromRgb(self.CurrentRamp[i]);
                         }

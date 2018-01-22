@@ -473,6 +473,7 @@
                             layer: mapModel.mapInstance.getLayer("blockGroups"),
                             title: self.legendMapTitle
                         }]);
+
                         dom.byId("legendTitle").innerHTML = self.legendMapTitle;
                         // dom.byId("title2").innerHTML = "&nbsp;-&nbsp;&nbsp;" + self.legendMapTitle;
                         dom.byId("dataSource").innerHTML = self.sourceInfo;

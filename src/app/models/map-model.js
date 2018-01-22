@@ -236,6 +236,7 @@
 							this.mapLoaded(map);
 						})
 					);
+					on(this.mapInstance, "extent-change", this.extentChanged);
 				},
 
 				loadNewMap: function(map, mapInitData) {
@@ -324,6 +325,10 @@
              */
 				mapLoaded: function(map) {
 					tp.publish('MapLoaded', map);
+				},
+
+				extentChanged: function (e) {
+					tp.publish("extentChanged");
 				},
 
 				/**
