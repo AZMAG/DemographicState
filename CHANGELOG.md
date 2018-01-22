@@ -21,8 +21,9 @@ And constructed with the following guidelines:
 * Fixed the help contact popup window.
 * Fixed the field duplication issue for all summary reports.
 * Fixed the search functionality.  Added new report types to the search.
-* Updated the popups for supervisor and city council districts
-* Reduced the opacity to make it easier to see the colors beneath the selection graphic
+* Updated the popups for supervisor and city council districts.
+* Reduced the opacity to make it easier to see the colors beneath the selection graphic.
+* Updated help windows to include supervisor and council district verbage.
 
 ## Version 3.2.0 | 01/18/2018
 

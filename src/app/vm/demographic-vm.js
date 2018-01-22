@@ -1537,7 +1537,7 @@
 									]
 								},
 								{
-									title: 'Census Blocks',
+									title: 'Census Block Groups',
 									width: '325px',
 									columns: [
 										{
