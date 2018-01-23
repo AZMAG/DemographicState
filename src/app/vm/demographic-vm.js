@@ -529,9 +529,15 @@
 							break;
 						case 'supervisor':
 							self.reportConfigItem = demographicConfig.reports.supervisorSummary;
+							$('#demSource').html(
+								"Source: United States Census Bureau, American Community Survey 2012-2016 5yr Estimates <br> (Interpolation Used, <a class='interHelp link'>Click here</a> for more details) "
+							);
 							break;
 						case 'councilDistrict':
 							self.reportConfigItem = demographicConfig.reports.councilDistrictSummary;
+							$('#demSource').html(
+								"Source: United States Census Bureau, American Community Survey 2012-2016 5yr Estimates <br> (Interpolation Used, <a class='interHelp link'>Click here</a> for more details) "
+							);
 							break;
 						case 'place':
 							self.reportConfigItem = demographicConfig.reports.placeSummary;
@@ -897,7 +903,7 @@
 					var chartListDivObj = $('#demCensusChartList');
 
 					if (tab[0]) {
-						if (self.reportType === 'cog') {
+						if (self.reportType === 'cog' || self.reportType === 'supervisor' || self.reportType === 'councilDistrict') {
 							//Sets the correct source label at bottom of report
 							if (
 								tab[0].textContent === 'Census 2010 Charts' ||
@@ -1015,16 +1021,16 @@
 					$.each(fields, function(index, field) {
 						var attribute = sumAttributes[field.fieldName];
 						var attrValue = Number(attribute);
+						var oldFieldName = field.fieldName;						
 
 						if (field.canSum === true || featuresCount === 1) {
-							
+
 							if (aggValues[field.fieldName]) {
 								if (duplicates[field.fieldName]) {
 									duplicates[field.fieldName]++;
 								} else{
 									duplicates[field.fieldName] = 1;
 								}
-
 								field.fieldName += duplicates[field.fieldName];
 							}
 
@@ -1052,7 +1058,8 @@
 								densityValue: 0,
 								densityValueFormatted: '0'
 							};
-
+							// field.fieldName = oldFieldName;
+							
 							// checks for NaN in the data and blanks out field. vw
 							if (isNaN(attrValue)) {
 								aggValues[field.fieldName].fieldValue = '-';
@@ -1080,8 +1087,11 @@
 									attrValue / densityArea
 								);
 							}
+							
+							field.fieldName = oldFieldName;
 						}
 					});
+
 					//
 					// Filter and group for chart categories
 					self.chartCategories = [];
@@ -1221,6 +1231,7 @@
 					$.each(fields, function(index, field) {
 						var attribute = sumAttributes[field.fieldName];
 						var attrValue = Number(attribute);
+						var oldFieldName = field.fieldName;
 
 						if (field.canSum === true || featuresCount === 1) {
 							if (aggValues[field.fieldName]) {
@@ -1293,6 +1304,7 @@
 								aggValues[field.fieldName].percentValueFormatted = '-';
 							}
 						}
+						field.fieldName = oldFieldName;
 					});
 					//
 					// Filter and group for chart categories
@@ -1424,7 +1436,6 @@
 								});
 							}
 						}
-						
 						var fivePlus = attributes['TOTAL_POP'] - attributes['UNDER5'];
 						var totalPop = attributes['TOTAL_POP'];
 						var totalBlockCount = attributes['TOT_BLOCKGROUP_COUNT'];

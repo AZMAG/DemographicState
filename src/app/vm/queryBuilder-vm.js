@@ -20,9 +20,11 @@
             "app/vm/help-vm",
             "app/vm/demographic-vm",
             "app/config/demographicConfig",
-            "app/config/cbrConfig"
+            "app/config/cbrConfig",
+            'app/vm/alert2-vm',
+            'dojo/text!app/views/alert2-view.html'
         ],
-        function(dj, dc, dom, tp, Query, QueryTask, view, layerDelegate, helpView, helpVM, demographicVM, demographicConfig, cbrConfig) {
+        function(dj, dc, dom, tp, Query, QueryTask, view, layerDelegate, helpView, helpVM, demographicVM, demographicConfig, cbrConfig, alertVM, alertView) {
 
             var QBVM = new function() {
 
@@ -33,6 +35,8 @@
                  * @type {Array}
                  */
                 var tempFields = [];
+
+                var resultCount;
 
                 /**
                  Title for the module's window
@@ -427,27 +431,33 @@
                  @method runQuery
                  **/
                 self.runQuery = function() {
-                    var queryString = self.buildQueryString();
 
-                    self.acsCallback = function(results) {
-                        var censusQueryString = "GEOID in(";
-                        $.each(results.features, function(i, feature) {
-                            var geoId = feature.attributes.GEOID10;
-                            censusQueryString += "'" + geoId + "'" + ", ";
-                        });
-                        censusQueryString = censusQueryString.slice(0, -2) + ")";
+                    if (resultCount === 0) {
+                        alertVM.openWindow(alertView);
+                    }
+                    else {
+                        var queryString = self.buildQueryString();
 
-                        self.censusCallback = function(censusResults) {
-                            demographicVM.interactiveSelectionQueryHandler(censusResults);
-                            demographicVM.interactiveSelectionQueryHandler(results);
+                        self.acsCallback = function(results) {
+                            var censusQueryString = "GEOID in(";
+                            $.each(results.features, function(i, feature) {
+                                var geoId = feature.attributes.GEOID10;
+                                censusQueryString += "'" + geoId + "'" + ", ";
+                            });
+                            censusQueryString = censusQueryString.slice(0, -2) + ")";
+
+                            self.censusCallback = function(censusResults) {
+                                demographicVM.interactiveSelectionQueryHandler(censusResults);
+                                demographicVM.interactiveSelectionQueryHandler(results);
+                            };
+
+                            layerDelegate.query(self.layerCensusUrl, self.censusCallback, demographicVM.interactiveSelectionQueryFault, undefined, censusQueryString, true);
                         };
 
-                        layerDelegate.query(self.layerCensusUrl, self.censusCallback, demographicVM.interactiveSelectionQueryFault, undefined, censusQueryString, true);
-                    };
-
-                    layerDelegate.query(self.layerACSUrl, self.acsCallback, demographicVM.interactiveSelectionQueryFault, undefined, queryString, true);
-                    esri.show(dojo.byId("loading"));
-                    self.closeWindow();
+                        layerDelegate.query(self.layerACSUrl, self.acsCallback, demographicVM.interactiveSelectionQueryFault, undefined, queryString, true);
+                        esri.show(dojo.byId("loading"));
+                        self.closeWindow();
+                    }
                 };
 
                 self.populateStringDropdowns = function(results) {
@@ -545,6 +555,7 @@
                 self.verifyCallback = function(count) {
                     $("#fCount1").text(count);
                     $("#fCountSpan").show();
+                    resultCount = count;
                 };
             };
             return QBVM;
