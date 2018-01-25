@@ -4,7 +4,7 @@
  * @class demographic-vm
  */
 
-(function() {
+(function () {
 	'use strict';
 
 	define(
@@ -43,7 +43,7 @@
 			'esri/symbols/SimpleFillSymbol',
 			'dojo/_base/Color'
 		],
-		function(
+		function (
 			dc,
 			dom,
 			tp,
@@ -75,63 +75,63 @@
 			censusFieldsConfig,
 			graphicsUtils
 		) {
-			var DemographicVM = new function() {
+			var DemographicVM = new function () {
 				/**
-                 * Store reference to module this object.
-                 *
-                 * @property self
-                 * @type {*}
-                 */
+				 * Store reference to module this object.
+				 *
+				 * @property self
+				 * @type {*}
+				 */
 				var self = this;
 
 				/**
-                 * Open state of the Kendo window.
-                 *
-                 * @property windowIsOpen
-                 * @type {boolean}
-                 */
+				 * Open state of the Kendo window.
+				 *
+				 * @property windowIsOpen
+				 * @type {boolean}
+				 */
 				var windowIsOpen = false;
 
 				/**
-                 * Redraw the default chart when the window first opens.
-                 *
-                 * @property redrawChart
-                 * @type {boolean}
-                 */
+				 * Redraw the default chart when the window first opens.
+				 *
+				 * @property redrawChart
+				 * @type {boolean}
+				 */
 				var redrawChart = false;
 
 				/**
-                 * Name of the county for County Summary
-                 *
-                 * @property county
-                 * @type {string}
-                 */
+				 * Name of the county for County Summary
+				 *
+				 * @property county
+				 * @type {string}
+				 */
 				// vern change - moved to 2 county map
 				//var county = "Maricopa County";
 
 				/**
-                 * Current community name.
-                 * Used for display and to determine functionality.
-                 *
-                 * @property communityName
-                 * @type {string}
-                 */
+				 * Current community name.
+				 * Used for display and to determine functionality.
+				 *
+				 * @property communityName
+				 * @type {string}
+				 */
 				self.communityName = '';
 
 				/**
-                 * Base title for the window.
-                 *
-                 * @property windowTitle
-                 * @type {string}
-                 */
+				 * Base title for the window.
+				 *
+				 * @property windowTitle
+				 * @type {string}
+				 */
 				self.windowTitle = 'Report Results for ';
 
 				/**
-                 * Current report configuration object.
-                 *
-                 * @property reportConfigItem
-                 * @type {Object}
-                 */
+				 * Current report configuration object.
+				 *
+				 * @property reportConfigItem
+				 * @type {Object}
+				 */
 				self.reportConfigItem = {};
 
 				self.selectionGraphic = '';
@@ -139,128 +139,128 @@
 				self.reportType = '';
 
 				/**
-                 * Array of aggregate values based on the current report configuration object.
-                 *
-                 * @property aggCensusValuesArray
-                 * @type {Array}
-                 */
+				 * Array of aggregate values based on the current report configuration object.
+				 *
+				 * @property aggCensusValuesArray
+				 * @type {Array}
+				 */
 				self.aggCensusValuesArray = [];
 
 				/**
-                 * Array of aggregate values based on the current report configuration object.
-                 *
-                 * @property aggACSValuesArray
-                 * @type {Array}
-                 */
+				 * Array of aggregate values based on the current report configuration object.
+				 *
+				 * @property aggACSValuesArray
+				 * @type {Array}
+				 */
 				self.aggACSValuesArray = [];
 
 				/**
-                 * Object containing agg values grouped by chart categories.
-                 *
-                 * @property aggValuesCensusGroupedByChartCategory
-                 * @type {Object}
-                 */
+				 * Object containing agg values grouped by chart categories.
+				 *
+				 * @property aggValuesCensusGroupedByChartCategory
+				 * @type {Object}
+				 */
 				self.aggValuesCensusGroupedByChartCategory = {};
 
 				/**
-                 * Object containing agg values grouped by chart categories.
-                 *
-                 * @property aggValuesACSGroupedByChartCategory
-                 * @type {Object}
-                 */
+				 * Object containing agg values grouped by chart categories.
+				 *
+				 * @property aggValuesACSGroupedByChartCategory
+				 * @type {Object}
+				 */
 				self.aggValuesACSGroupedByChartCategory = {};
 
 				/**
-                 * Object containing agg values grouped by field categories.
-                 *
-                 * @property aggValuesGroupedByFieldCategory
-                 * @type {Object}
-                 */
+				 * Object containing agg values grouped by field categories.
+				 *
+				 * @property aggValuesGroupedByFieldCategory
+				 * @type {Object}
+				 */
 				self.aggValuesGroupedByFieldCategory = {};
 
 				/**
-                 * Array of chart categories for list view.
-                 *
-                 * @property chartCategories
-                 * @type {Array}
-                 */
+				 * Array of chart categories for list view.
+				 *
+				 * @property chartCategories
+				 * @type {Array}
+				 */
 				self.chartCategories = [];
 
 				/**
-                 * Currently selected chart category.
-                 *
-                 * @property selectedCategoryObj
-                 * @type {Object}
-                 */
+				 * Currently selected chart category.
+				 *
+				 * @property selectedCategoryObj
+				 * @type {Object}
+				 */
 				self.selectedCategoryObj = undefined;
 
 				/**
-                 * Array of grouped agg values for the currently selected chart category.
-                 *
-                 * @property groupedItems
-                 * @type {undefined}
-                 */
+				 * Array of grouped agg values for the currently selected chart category.
+				 *
+				 * @property groupedItems
+				 * @type {undefined}
+				 */
 				self.groupedItems = undefined;
 
 				self.pyramidData = undefined;
 
 				/**
-                 * Keep track of chart legend visibility
-                 *
-                 * @property legendCensusVisible
-                 * @type {boolean}
-                 */
+				 * Keep track of chart legend visibility
+				 *
+				 * @property legendCensusVisible
+				 * @type {boolean}
+				 */
 				self.legendCensusVisible = false;
 
 				/**
-                 * Keep track of chart legend visibility
-                 *
-                 * @property legendACSVisible
-                 * @type {boolean}
-                 */
+				 * Keep track of chart legend visibility
+				 *
+				 * @property legendACSVisible
+				 * @type {boolean}
+				 */
 				self.legendACSVisible = false;
 
 				/**
-                 * Name of compare to community.
-                 *
-                 * @property compareToName
-                 * @type {string}
-                 */
+				 * Name of compare to community.
+				 *
+				 * @property compareToName
+				 * @type {string}
+				 */
 				self.compareToName = '';
 
 				/**
-                 * Keep track of whether or not there are selected features.
-                 *
-                 * @property hasSelectedFeatures
-                 * @type {boolean}
-                 */
+				 * Keep track of whether or not there are selected features.
+				 *
+				 * @property hasSelectedFeatures
+				 * @type {boolean}
+				 */
 				self.hasSelectedFeatures = false;
 
 				/**
-                 * Currently selected features.
-                 *
-                 * @property selectedFeatures
-                 * @type {null}
-                 */
+				 * Currently selected features.
+				 *
+				 * @property selectedFeatures
+				 * @type {null}
+				 */
 				self.selectedFeatures = null;
 
 				/**
-                 * Array of feature attributes for display in the grid.
-                 *
-                 * @property featureAttributeArray
-                 * @type {Array}
-                 */
+				 * Array of feature attributes for display in the grid.
+				 *
+				 * @property featureAttributeArray
+				 * @type {Array}
+				 */
 				self.featureAttributeArray = [];
 
 				self.totalFemale = 0;
 				self.totalMale = 0;
 
 				/**
-                 * Feature used for comparison values.
-                 *
-                 * @property compareFeature
-                 * @type {null}
-                 */
+				 * Feature used for comparison values.
+				 *
+				 * @property compareFeature
+				 * @type {null}
+				 */
 				self.compareFeature = null;
 
 				// used to size window for mobile. vw
@@ -285,11 +285,11 @@
 				}
 
 				/**
-                 * Initialize the class.
-                 *
-                 * @method init
-                 */
-				self.init = function() {
+				 * Initialize the class.
+				 *
+				 * @method init
+				 */
+				self.init = function () {
 					// Place the HTML from the view into the main application after the map div.
 					dc.place(view, 'mapContainer', 'after');
 
@@ -299,7 +299,7 @@
 							width: self.newWindowWidth, // "630px"
 							height: self.newWindowHeight, // "auto"
 							title: self.windowTitle,
-							actions: [ 'Help', 'Minimize', 'Close' ],
+							actions: ['Help', 'Minimize', 'Close'],
 							modal: false,
 							visible: false,
 							resizable: false,
@@ -314,7 +314,7 @@
 					});
 
 					// Display legend checkbox click event
-					$('#displayACSLegend').bind('click', function() {
+					$('#displayACSLegend').bind('click', function () {
 						self.legendACSVisible = this.checked;
 						if (self.selectedCategoryObj !== undefined && self.groupedItems !== undefined) {
 							var kendoChart = $('#demACSChartArea').data('kendoChart');
@@ -329,20 +329,20 @@
 						}
 					});
 
-					$('.gridGroupToggle').click(function(e) {
-						$.each($('.k-grid'), function(i, val) {
+					$('.gridGroupToggle').click(function (e) {
+						$.each($('.k-grid'), function (i, val) {
 							if ($(val).is(':visible')) {
 								var grid = $(val).data('kendoGrid');
 								if (e.target.value === 'collapse') {
 									e.target.value = 'expand';
 									$(e.target).html('Expand All');
-									grid.tbody.find('tr.k-grouping-row').each(function(index) {
+									grid.tbody.find('tr.k-grouping-row').each(function (index) {
 										grid.collapseGroup(this);
 									});
 								} else {
 									e.target.value = 'collapse';
 									$(e.target).html('Collapse All');
-									grid.tbody.find('tr.k-grouping-row').each(function(index) {
+									grid.tbody.find('tr.k-grouping-row').each(function (index) {
 										grid.expandGroup(this);
 									});
 								}
@@ -351,7 +351,7 @@
 					});
 
 					// Display legend checkbox click event
-					$('#displayCensusLegend').bind('click', function() {
+					$('#displayCensusLegend').bind('click', function () {
 						self.legendCensusVisible = this.checked;
 
 						if (self.selectedCategoryObj !== undefined && self.groupedItems !== undefined) {
@@ -377,26 +377,26 @@
 					$('#demExportSummary').kendoDropDownList({
 						index: 0,
 						dataSource: {
-							data: [ 'Excel', 'CSV' ]
+							data: ['Excel', 'CSV']
 						}
 					});
 
-					$('body').on('click', '.interHelp', function() {
+					$('body').on('click', '.interHelp', function () {
 						//open InterpolationHelp
 						helpVM.openWindow(InterHelpView);
 					});
 
-					$('body').on('click', '#title6ExportResults', function(e) {
+					$('body').on('click', '#title6ExportResults', function (e) {
 						self.exportToExcel(e);
 					});
-					$('body').on('click', '.tractLink', function(e) {
+					$('body').on('click', '.tractLink', function (e) {
 						console.log(e);
 						// self.zoomToTract(e);
 					});
 
 					// Get the help button and assign the click event.
 					var helpButton = chartWindow.wrapper.find('.k-i-help');
-					helpButton.click(function() {
+					helpButton.click(function () {
 						var tabStrip = $('#demTabStrip').data('kendoTabStrip');
 						var tab = tabStrip.select();
 
@@ -418,20 +418,20 @@
 					});
 
 					/**
-                     * Used to set the popup property for the summary report
-                     */
-					tp.subscribe('summaryLinkClick', function() {
+					 * Used to set the popup property for the summary report
+					 */
+					tp.subscribe('summaryLinkClick', function () {
 						self.openSummaryLink();
 					});
 				}; // end Init
 				//****************************************************************
 				/**
-                 * Fired when the window closes
-                 *
-                 * @event close
-                 * @param e - event arguments.
-                 */
-				self.windowClosed = function() {
+				 * Fired when the window closes
+				 *
+				 * @event close
+				 * @param e - event arguments.
+				 */
+				self.windowClosed = function () {
 					windowIsOpen = false;
 					redrawChart = false;
 					mapModel.clearGraphics();
@@ -462,10 +462,10 @@
 				};
 
 				/**
-                 * Opens the popup link "View Summary" for each layer specified
-                 * @return {[type]} [description]
-                 */
-				self.openSummaryLink = function() {
+				 * Opens the popup link "View Summary" for each layer specified
+				 * @return {[type]} [description]
+				 */
+				self.openSummaryLink = function () {
 
 					var county = dom.byId('countyLink');
 					var congress = dom.byId('congressionalLink');
@@ -474,7 +474,7 @@
 					var cogs = dom.byId('cogLink');
 					var supervisor = dom.byId('supervisorLink');
 					var council = dom.byId('councilDistrictLink');
-					
+
 					if (county) {
 						self.openWindow(county.innerHTML, 'county');
 					} else if (congress) {
@@ -485,21 +485,21 @@
 						self.openWindow(zipCode.innerHTML, 'zipCode');
 					} else if (cogs) {
 						self.openWindow(cogs.innerHTML, 'cog');
-					} else if (supervisor){
+					} else if (supervisor) {
 						self.openWindow(supervisor.innerHTML, 'supervisor');
-					} else if (council){
+					} else if (council) {
 						self.openWindow(council.innerHTML, 'councilDistrict');
 					}
 				};
 
 				/**
-                 * Open the window and initialize the contents.
-                 *
-                 * @method openWindow
-                 * @param {string} communityName - name of the community for the report.
-                 * @param {string} sumName - name of the config for the report type. vw
-                 */
-				self.openWindow = function(communityName, sumName) {
+				 * Open the window and initialize the contents.
+				 *
+				 * @method openWindow
+				 * @param {string} communityName - name of the community for the report.
+				 * @param {string} sumName - name of the config for the report type. vw
+				 */
+				self.openWindow = function (communityName, sumName) {
 					self.hasSelectedFeatures = false;
 					self.commChanged =
 						self.communityName !== undefined &&
@@ -592,8 +592,7 @@
 					var splitter = $('#demSplitContainer').data('kendoSplitter');
 					if (splitter === undefined) {
 						$('#demSplitContainer').kendoSplitter({
-							panes: [
-								{
+							panes: [{
 									collapsible: false,
 									resizable: false
 								},
@@ -624,22 +623,22 @@
 				};
 
 				/**
-                 * Callback method for interactive/query errors.
-                 *
-                 * @method interactiveSelectionQueryFault
-                 * @param {Error} error - error object
-                 */
-				self.interactiveSelectionQueryFault = function(error) {
+				 * Callback method for interactive/query errors.
+				 *
+				 * @method interactiveSelectionQueryFault
+				 * @param {Error} error - error object
+				 */
+				self.interactiveSelectionQueryFault = function (error) {
 					console.log(error.message);
 				};
 
 				/**
-                 * Callback method for interactive/query results.
-                 *
-                 * @method interactiveSelectionQueryHandler
-                 * @param {FeatureSet} results - feature set returned by query.
-                 */
-				self.interactiveSelectionQueryHandler = function(results) {
+				 * Callback method for interactive/query results.
+				 *
+				 * @method interactiveSelectionQueryHandler
+				 * @param {FeatureSet} results - feature set returned by query.
+				 */
+				self.interactiveSelectionQueryHandler = function (results) {
 					self.selectedFeatures = results.features;
 
 					// counts number of selected block groups. vw
@@ -727,8 +726,7 @@
 					var splitter = $('#demSplitContainer').data('kendoSplitter');
 					if (splitter === undefined) {
 						$('#demSplitContainer').kendoSplitter({
-							panes: [
-								{
+							panes: [{
 									collapsible: false,
 									resizable: false
 								},
@@ -766,7 +764,7 @@
 
 					// Create the feature attribute array
 					self.featureAttributeArray = [];
-					$.each(self.selectedFeatures, function(index, feature) {
+					$.each(self.selectedFeatures, function (index, feature) {
 						self.featureAttributeArray.push(feature.attributes);
 					});
 
@@ -775,8 +773,7 @@
 
 					if (firstTab[0].textContent !== tabName) {
 						// Add the Selected Block Groups tab
-						tabStrip.insertBefore(
-							{
+						tabStrip.insertBefore({
 								text: tabName,
 								content: tabContent
 							},
@@ -799,8 +796,7 @@
 
 					// Add the grid
 					dc.create(
-						'div',
-						{
+						'div', {
 							id: gridName,
 							style: 'margin: 5px 0 0 0; font-size: small;'
 						},
@@ -814,7 +810,7 @@
 						dataSource: {
 							data: self.featureAttributeArray,
 							// pageSize: 20,
-							change: function(e) {
+							change: function (e) {
 								// console.log(e);
 								// var grid = $("#" + gridName).data("kendoGrid");
 								// grid.dataSource.read();
@@ -828,7 +824,7 @@
 						resizable: false,
 						columnMenu: false,
 						columns: columnConfig,
-						dataBound: function(e) {
+						dataBound: function (e) {
 							self.gridRowHover(e);
 						}
 					});
@@ -849,7 +845,7 @@
 					}
 
 					if (redrawChart) {
-						setTimeout(function() {
+						setTimeout(function () {
 							var chart = $('#demChartArea').data('kendoChart');
 							if (chart) {
 								chart.redraw();
@@ -860,12 +856,12 @@
 				};
 
 				/**
-                 * Creates the hover effect on the grid and highlights the related graphic.
-                 *
-                 * @method gridRowHover
-                 */
-				self.gridRowHover = function() {
-					$('.k-grid table tbody tr').hover(function() {
+				 * Creates the hover effect on the grid and highlights the related graphic.
+				 *
+				 * @method gridRowHover
+				 */
+				self.gridRowHover = function () {
+					$('.k-grid table tbody tr').hover(function () {
 						var thisObj = $(this);
 
 						// Highlight the row
@@ -875,7 +871,7 @@
 						var objectId = thisObj[0].childNodes[0].innerHTML;
 						var objID = Number(objectId);
 						// console.log(mapModel.getGraphics().graphics);
-						$.each(mapModel.getGraphics().graphics, function(index, graphic) {
+						$.each(mapModel.getGraphics().graphics, function (index, graphic) {
 							if (graphic.attributes === undefined) {
 								// do nothing!!
 							} else {
@@ -892,12 +888,12 @@
 				};
 
 				/**
-                 * Fires when a tab is activated.
-                 *
-                 * @event activate
-                 * @param e - event arguments
-                 */
-				self.tabActivated = function() {
+				 * Fires when a tab is activated.
+				 *
+				 * @event activate
+				 * @param e - event arguments
+				 */
+				self.tabActivated = function () {
 					var tabStrip = $('#demTabStrip').data('kendoTabStrip');
 					var tab = tabStrip.select();
 					var chartListDivObj = $('#demCensusChartList');
@@ -937,9 +933,9 @@
 					}
 				};
 
-				self.findIndexFromMapServer = function() {
-					$.get(config.mainUrl + '/?f=json', function(data) {
-						$.each(JSON.parse(data).layers, function(key, layer) {
+				self.findIndexFromMapServer = function () {
+					$.get(config.mainUrl + '/?f=json', function (data) {
+						$.each(JSON.parse(data).layers, function (key, layer) {
 							if (config.layers[layer.name]) {
 								config.layers[layer.name].index = layer.id;
 							}
@@ -949,11 +945,11 @@
 				};
 
 				/**
-                 * Call the layer delegate to query the appropriate map service for the current community.
-                 *
-                 * @method getData
-                 */
-				self.getData = function() {
+				 * Call the layer delegate to query the appropriate map service for the current community.
+				 *
+				 * @method getData
+				 */
+				self.getData = function () {
 					var censusUrl = self.reportConfigItem.censusRestUrl;
 					var acsUrl = self.reportConfigItem.ACSRestUrl;
 					var whereClause = self.reportConfigItem.summaryField + " = '" + self.communityName + "'";
@@ -969,20 +965,20 @@
 				};
 
 				/**
-                 * Callback method for query errors from getData method.
-                 *
-                 * @method dataQueryFault
-                 * @param {Error} error - error object
-                 */
-				self.dataQueryFault = function(error) {
+				 * Callback method for query errors from getData method.
+				 *
+				 * @method dataQueryFault
+				 * @param {Error} error - error object
+				 */
+				self.dataQueryFault = function (error) {
 					console.log(error.message);
 				};
 
 				/**
-                 * Callback method for query results from getData method.
-                 * @param {FeatureSet} results - feature set returned by query.
-                 */
-				self.censusDataQueryHandler = function(results) {
+				 * Callback method for query results from getData method.
+				 * @param {FeatureSet} results - feature set returned by query.
+				 */
+				self.censusDataQueryHandler = function (results) {
 					var features = results.features;
 					var isACS = false;
 					var fieldCount = Object.keys(features[0].attributes).length;
@@ -1017,18 +1013,17 @@
 					// Get the configuration
 					var aggValues = {};
 					var duplicates = {};
-
-					$.each(fields, function(index, field) {
+					$.each(fields, function (index, field) {
 						var attribute = sumAttributes[field.fieldName];
 						var attrValue = Number(attribute);
-						var oldFieldName = field.fieldName;						
+						var oldFieldName = field.fieldName;
 
 						if (field.canSum === true || featuresCount === 1) {
 
 							if (aggValues[field.fieldName]) {
 								if (duplicates[field.fieldName]) {
 									duplicates[field.fieldName]++;
-								} else{
+								} else {
 									duplicates[field.fieldName] = 1;
 								}
 								field.fieldName += duplicates[field.fieldName];
@@ -1059,7 +1054,7 @@
 								densityValueFormatted: '0'
 							};
 							// field.fieldName = oldFieldName;
-							
+
 							// checks for NaN in the data and blanks out field. vw
 							if (isNaN(attrValue)) {
 								aggValues[field.fieldName].fieldValue = '-';
@@ -1087,7 +1082,7 @@
 									attrValue / densityArea
 								);
 							}
-							
+
 							field.fieldName = oldFieldName;
 						}
 					});
@@ -1098,7 +1093,7 @@
 					self.aggCensusValuesArray = [];
 					self.aggValuesCensusGroupedByChartCategory = {};
 					self.aggValuesGroupedByFieldCategory = {};
-					$.each(aggValues, function(index, item) {
+					$.each(aggValues, function (index, item) {
 						self.aggCensusValuesArray.push(aggValues[item.fieldName]);
 						// Chart Categories
 						if (item.chartCategory !== '') {
@@ -1184,7 +1179,7 @@
 					}
 				};
 
-				self.updateSelectionGraphic = function(selectionGraphic) {
+				self.updateSelectionGraphic = function (selectionGraphic) {
 					if (selectionGraphic) {
 						self.selectionGraphic = selectionGraphic;
 					} else {
@@ -1193,10 +1188,10 @@
 				};
 
 				/**
-                 * Callback method for query results from getData method.
-                 * @param {FeatureSet} results - feature set returned by query.
-                 */
-				self.acsDataQueryHandler = function(results) {
+				 * Callback method for query results from getData method.
+				 * @param {FeatureSet} results - feature set returned by query.
+				 */
+				self.acsDataQueryHandler = function (results) {
 					var features = results.features;
 					var isACS = false;
 					var fieldCount = Object.keys(features[0].attributes).length;
@@ -1227,8 +1222,8 @@
 					// Get the configuration
 					var aggValues = {};
 					var duplicates = {};
-					
-					$.each(fields, function(index, field) {
+
+					$.each(fields, function (index, field) {
 						var attribute = sumAttributes[field.fieldName];
 						var attrValue = Number(attribute);
 						var oldFieldName = field.fieldName;
@@ -1280,16 +1275,11 @@
 							if (field.percentOfField === '' || field.percentOfField === undefined) {
 								aggValues[field.fieldName].percentValueFormatted = '-';
 							} else if (field.percentOfField !== undefined) {
-								var percentOf = Number(sumAttributes[field.percentOfField]);
+								var percentOf = Number(sumAttributes[field.percentOfField]);								
 								aggValues[field.fieldName].percentValue = attrValue / percentOf * 100;
-								aggValues[field.fieldName].percentValueFormatted =
-									magNumberFormatter.formatValue(attrValue / percentOf * 100) + '%';
-								if (
-									aggValues[field.fieldName].percentValueFormatted.indexOf('.') > -1 &&
-									aggValues[field.fieldName].percentValueFormatted.length === 3
-								) {
-									aggValues[field.fieldName].percentValueFormatted =
-										'0' + aggValues[field.fieldName].percentValueFormatted;
+								aggValues[field.fieldName].percentValueFormatted = magNumberFormatter.formatValue((attrValue / percentOf * 100)) + '%';
+								if (aggValues[field.fieldName].percentValueFormatted.indexOf('.') > -1 && aggValues[field.fieldName].percentValueFormatted.length === 3) {
+									aggValues[field.fieldName].percentValueFormatted = '0' + aggValues[field.fieldName].percentValueFormatted;
 								}
 							}
 							if (field.densityAreaField !== '' || field.densityAreaField !== undefined) {
@@ -1312,7 +1302,7 @@
 					self.aggACSValuesArray = [];
 					self.aggValuesACSGroupedByChartCategory = {};
 					self.aggValuesGroupedByFieldCategory = {};
-					$.each(aggValues, function(index, item) {
+					$.each(aggValues, function (index, item) {
 						self.aggACSValuesArray.push(aggValues[item.fieldName]);
 						// Chart Categories
 						if (item.chartCategory !== '' && item.chartCategory !== undefined) {
@@ -1378,8 +1368,7 @@
 						var tab = tabStrip.select();
 						if (tab[0]) {
 							if (
-								tab[0].textContent === 'Census 2010 Charts' ||
-								tab[0].textContent === 'ACS 2016 Charts'
+								tab[0].textContent === 'Census 2010 Charts' || tab[0].textContent === 'ACS 2016 Charts'
 							) {
 								self.reloadChart();
 							}
@@ -1431,7 +1420,7 @@
 						var attributes = features[0].attributes;
 						if (features.length > 1) {
 							for (var i = 1; i < features.length; i++) {
-								Object.keys(attributes).forEach(function(key) {
+								Object.keys(attributes).forEach(function (key) {
 									attributes[key] += features[i].attributes[key];
 								});
 							}
@@ -1441,8 +1430,7 @@
 						var totalBlockCount = attributes['TOT_BLOCKGROUP_COUNT'];
 						var age65Plus = attributes['AGE65TO74'] + attributes['AGE75TO84'] + attributes['AGE85PLUS']
 
-						var dataSrc = [
-							{
+						var dataSrc = [{
 								Category: 'Population Base',
 								Footnote: '',
 								Total: totalPop,
@@ -1460,8 +1448,7 @@
 								NumberOfBlocks: attributes['AFFECTED_MINORITY_POP_COUNT'],
 								PercentOfBlocks: attributes['AFFECTED_MINORITY_POP_COUNT'] / totalBlockCount,
 								AffectedPopulation: attributes['AFFECTED_MINORITY_POP'],
-								PercentAffectedCaptured:
-									attributes['AFFECTED_MINORITY_POP'] / attributes['MINORITY_POP']
+								PercentAffectedCaptured: attributes['AFFECTED_MINORITY_POP'] / attributes['MINORITY_POP']
 							},
 							{
 								Category: 'Age 65+',
@@ -1481,8 +1468,7 @@
 								NumberOfBlocks: attributes['AFFECTED_INCOME_BELOW_POVERTY_COUNT'],
 								PercentOfBlocks: attributes['AFFECTED_INCOME_BELOW_POVERTY_COUNT'] / totalBlockCount,
 								AffectedPopulation: attributes['AFFECTED_INCOME_BELOW_POVERTY'],
-								PercentAffectedCaptured:
-									attributes['AFFECTED_INCOME_BELOW_POVERTY'] / attributes['INCOME_BELOW_POVERTY']
+								PercentAffectedCaptured: attributes['AFFECTED_INCOME_BELOW_POVERTY'] / attributes['INCOME_BELOW_POVERTY']
 							},
 							{
 								Category: 'Population with a Disability',
@@ -1502,8 +1488,7 @@
 								NumberOfBlocks: attributes['AFFECTED_LIMITED_ENG_PROF_COUNT'],
 								PercentOfBlocks: attributes['AFFECTED_LIMITED_ENG_PROF_COUNT'] / totalBlockCount,
 								AffectedPopulation: attributes['AFFECTED_LIMITED_ENG_PROF'],
-								PercentAffectedCaptured:
-									attributes['AFFECTED_LIMITED_ENG_PROF'] / attributes['LIMITED_ENG_PROF']
+								PercentAffectedCaptured: attributes['AFFECTED_LIMITED_ENG_PROF'] / attributes['LIMITED_ENG_PROF']
 							}
 						];
 
@@ -1522,12 +1507,10 @@
 								data: dataSrc
 							},
 							//height: 200,
-							columns: [
-								{
+							columns: [{
 									title: 'Population and Households',
 									width: '235px',
-									columns: [
-										{
+									columns: [{
 											field: 'Category',
 											template: '#:Category#', //<sup>#:Footnote#</sup>
 											title: 'Category',
@@ -1550,8 +1533,7 @@
 								{
 									title: 'Census Block Groups',
 									width: '325px',
-									columns: [
-										{
+									columns: [{
 											field: 'NumberOfBlocks',
 											title: 'Number of block groups >= Area Percentage',
 											width: '90px',
@@ -1585,11 +1567,11 @@
 				};
 
 				/**
-                 * Initiate query for contents of comparison combo box.
-                 *
-                 * @method reloadCompareComboBox
-                 */
-				self.reloadCompareComboBox = function(type) {
+				 * Initiate query for contents of comparison combo box.
+				 *
+				 * @method reloadCompareComboBox
+				 */
+				self.reloadCompareComboBox = function (type) {
 					var compareComboBoxInput = $('#demCompareComboBox');
 					var compareComboBoxObj = compareComboBoxInput.data('kendoComboBox');
 
@@ -1606,23 +1588,21 @@
 							self.placeListQueryFault,
 							null,
 							whereClause,
-							false,
-							[ outFields ],
-							[ outFields ],
+							false, [outFields], [outFields],
 							true
 						);
 					}
 				};
 
 				/**
-                 * Totals all of the attributes and returns them in an array
-                 *
-                 * @param features - returned array of features from esri query
-                 */
-				self.summarizeAttributes = function(features) {
+				 * Totals all of the attributes and returns them in an array
+				 *
+				 * @param features - returned array of features from esri query
+				 */
+				self.summarizeAttributes = function (features) {
 					// Summarize the features
 					var sumAttributes = {};
-					$.each(features, function(index, feature) {
+					$.each(features, function (index, feature) {
 						for (var attribute in feature.attributes) {
 							if (attribute in sumAttributes) {
 								var val = sumAttributes[attribute];
@@ -1639,12 +1619,12 @@
 				};
 
 				/**
-                 * Fired when user clicks the comparison check box.
-                 *
-                 * @event click
-                 * @param e - event arguments
-                 */
-				self.useCompareClicked = function(sender) {
+				 * Fired when user clicks the comparison check box.
+				 *
+				 * @event click
+				 * @param e - event arguments
+				 */
+				self.useCompareClicked = function (sender) {
 					var compareComboBoxInput = $('#demCensusCompareComboBox');
 					var compareComboBoxObj = compareComboBoxInput.data('kendoComboBox');
 					var kendoGrid = $('#demCensusDataGrid').data('kendoGrid');
@@ -1671,8 +1651,7 @@
 							self.placeListQueryFault,
 							null,
 							whereClause,
-							false,
-							[ outFields ],
+							false, [outFields],
 							null,
 							true
 						);
@@ -1709,20 +1688,20 @@
 				};
 
 				/**
-                 * Callback method for errors returned by place query.
-                 *
-                 * @method placeListQueryFault
-                 * @param {Error} error - error object
-                 */
-				self.placeListQueryFault = function(error) {
+				 * Callback method for errors returned by place query.
+				 *
+				 * @method placeListQueryFault
+				 * @param {Error} error - error object
+				 */
+				self.placeListQueryFault = function (error) {
 					console.log(error.message);
 				};
 
 				/**
-                 * Callback method for results returned by place query.
-                 * @param {FeatureSet} results - feature set returned by query.
-                 */
-				self.placeCensusListQueryHandler = function(results) {
+				 * Callback method for results returned by place query.
+				 * @param {FeatureSet} results - feature set returned by query.
+				 */
+				self.placeCensusListQueryHandler = function (results) {
 					var features = results.features;
 
 					// Create array of names
@@ -1731,7 +1710,7 @@
 					nameArray.push({
 						Name: ' Compare with...'
 					});
-					$.each(features, function(index, feature) {
+					$.each(features, function (index, feature) {
 						var name = feature.attributes[placeField];
 						nameArray.push({
 							Name: name
@@ -1758,8 +1737,7 @@
 						compareComboBoxObj.wrapper.remove();
 					}
 					dc.create(
-						'input',
-						{
+						'input', {
 							id: 'demCensusCompareComboBox'
 						},
 						'demCensusUseCompLabel',
@@ -1779,10 +1757,10 @@
 				};
 
 				/**
-                 * Callback method for results returned by place query.
-                 * @param {FeatureSet} results - feature set returned by query.
-                 */
-				self.placeACSListQueryHandler = function(results) {
+				 * Callback method for results returned by place query.
+				 * @param {FeatureSet} results - feature set returned by query.
+				 */
+				self.placeACSListQueryHandler = function (results) {
 					var features = results.features;
 
 					// Create array of names
@@ -1791,7 +1769,7 @@
 					nameArray.push({
 						Name: ' Compare with...'
 					});
-					$.each(features, function(index, feature) {
+					$.each(features, function (index, feature) {
 						var name = feature.attributes[placeField];
 						nameArray.push({
 							Name: name
@@ -1818,8 +1796,7 @@
 						compareComboBoxObj.wrapper.remove();
 					}
 					dc.create(
-						'input',
-						{
+						'input', {
 							id: 'demACSCompareComboBox'
 						},
 						'demACSUseCompLabel',
@@ -1839,12 +1816,12 @@
 				};
 
 				/**
-                 * Fired when users selects a comparison name from the combo box.
-                 *
-                 * @event select
-                 * @param e - event arguments
-                 */
-				self.compareNameSelected = function(e) {
+				 * Fired when users selects a comparison name from the combo box.
+				 *
+				 * @event select
+				 * @param e - event arguments
+				 */
+				self.compareNameSelected = function (e) {
 					var senderID = e.sender.element.prop('id');
 					var handler = self.placeCensusQueryHelper;
 					var type = 'census';
@@ -1867,22 +1844,22 @@
 				};
 
 				/**
-                 * Callback method for errors returned by place comparison query.
-                 *
-                 * @method placeQueryFault
-                 * @param {Error} error - error object
-                 */
-				self.placeQueryFault = function(error) {
+				 * Callback method for errors returned by place comparison query.
+				 *
+				 * @method placeQueryFault
+				 * @param {Error} error - error object
+				 */
+				self.placeQueryFault = function (error) {
 					console.log(error.message);
 				};
 
 				/**
-                 * Callback method for results returned by place comparison query.
-                 *
-                 * @method placeCensusQueryHelper
-                 * @param {FeatureSet} results - feature set returned by query.
-                 */
-				self.placeCensusQueryHelper = function(results) {
+				 * Callback method for results returned by place comparison query.
+				 *
+				 * @method placeCensusQueryHelper
+				 * @param {FeatureSet} results - feature set returned by query.
+				 */
+				self.placeCensusQueryHelper = function (results) {
 					var features = results.features;
 					self.compareFeature = features[0]; // There should only be one feature returned from query
 
@@ -1898,12 +1875,12 @@
 				};
 
 				/**
-                 * Callback method for results returned by place comparison query.
-                 *
-                 * @method placeQueryHelper
-                 * @param {FeatureSet} results - feature set returned by query.
-                 */
-				self.placeACSQueryHelper = function(results) {
+				 * Callback method for results returned by place comparison query.
+				 *
+				 * @method placeQueryHelper
+				 * @param {FeatureSet} results - feature set returned by query.
+				 */
+				self.placeACSQueryHelper = function (results) {
 					var features = results.features;
 					self.compareFeature = features[0]; // There should only be one feature returned from query
 
@@ -1919,11 +1896,11 @@
 				};
 
 				/**
-                 * Add the comparison values to the aggregated values of the current community or Selected Block Groups.
-                 *
-                 * @method addCompareValues
-                 */
-				self.addCompareValues = function(type) {
+				 * Add the comparison values to the aggregated values of the current community or Selected Block Groups.
+				 *
+				 * @method addCompareValues
+				 */
+				self.addCompareValues = function (type) {
 					if (self.compareFeature === null) {
 						return;
 					}
@@ -1935,7 +1912,7 @@
 					}
 
 					// Iterate through existing values to add the comparison properties
-					$.each(dataSource, function(index, item) {
+					$.each(dataSource, function (index, item) {
 						var fieldValue = self.compareFeature.attributes[item.fieldName];
 						item.compareValue = fieldValue;
 						item.compareValueFormatted = magNumberFormatter.formatValue(fieldValue);
@@ -1988,12 +1965,12 @@
 				};
 
 				/**
-                 * Fired when user selects an item in the chart category list view
-                 *
-                 * @event change
-                 * @param e - event arguments
-                 */
-				self.onChartListSelectionChanged = function() {
+				 * Fired when user selects an item in the chart category list view
+				 *
+				 * @event change
+				 * @param e - event arguments
+				 */
+				self.onChartListSelectionChanged = function () {
 					self.selectedCategoryObj = this.select();
 
 					self.groupedItems =
@@ -2038,11 +2015,11 @@
 				};
 
 				/**
-                 * Reload the current chart.
-                 *
-                 * @method reloadChart
-                 */
-				self.reloadChart = function() {
+				 * Reload the current chart.
+				 *
+				 * @method reloadChart
+				 */
+				self.reloadChart = function () {
 					var chartListDivObj1 = $('#demCensusChartList');
 					var kendoListView1 = chartListDivObj1.data('kendoListView');
 
@@ -2092,12 +2069,12 @@
 				};
 
 				/**
-                 * Create Kendo chart.
-                 * Uses self.groupedItems as dataSource
-                 *
-                 * @method createChart
-                 */
-				self.createChart = function(type, animation) {
+				 * Create Kendo chart.
+				 * Uses self.groupedItems as dataSource
+				 *
+				 * @method createChart
+				 */
+				self.createChart = function (type, animation) {
 					// Create the div element for the chart
 					var legendVisible = false;
 					var chartObj;
@@ -2125,8 +2102,7 @@
 
 					if (type === 'census') {
 						dc.create(
-							'div',
-							{
+							'div', {
 								id: 'demCensusChartArea'
 							},
 							'demCensusChartAreaPane',
@@ -2136,8 +2112,7 @@
 						legendVisible = self.legendCensusVisible;
 					} else {
 						dc.create(
-							'div',
-							{
+							'div', {
 								id: 'demACSChartArea'
 							},
 							'demACSChartAreaPane',
@@ -2171,7 +2146,7 @@
 					var series1 = [];
 					var filteredItems = [];
 
-					$.each(self.groupedItems, function(i, item) {
+					$.each(self.groupedItems, function (i, item) {
 						//filtering out zero values
 						if (item.fieldValue !== 0) {
 							filteredItems.push(item);
@@ -2220,16 +2195,14 @@
 										color: 'white'
 									}
 								},
-								series: [
-									{
-										name: self.groupedItems[0].chartName,
-										type: self.groupedItems[0].chartType,
-										field: 'fieldValue',
-										categoryField: 'fieldAlias',
-										padding: padding
-										//labels: {template: "#=category#"}
-									}
-								],
+								series: [{
+									name: self.groupedItems[0].chartName,
+									type: self.groupedItems[0].chartType,
+									field: 'fieldValue',
+									categoryField: 'fieldAlias',
+									padding: padding
+									//labels: {template: "#=category#"}
+								}],
 								transitions: animation,
 								seriesDefaults: {
 									labels: {
@@ -2303,19 +2276,19 @@
 				};
 
 				/**
-                 * This method is intended to dynamically resize the chart based on the size of it's parent and sibling contents.
-                 * It was not working as expected, so it has been essentially reduced to setting a static height.
-                 *
-                 * @method sizeGrid
-                 * @param {string} selector - id of the div element representing the grid.
-                 */
-				self.sizeGrid = function(selector) {
+				 * This method is intended to dynamically resize the chart based on the size of it's parent and sibling contents.
+				 * It was not working as expected, so it has been essentially reduced to setting a static height.
+				 *
+				 * @method sizeGrid
+				 * @param {string} selector - id of the div element representing the grid.
+				 */
+				self.sizeGrid = function (selector) {
 					var gridElement = $(selector),
 						newHeight = 270,
 						otherElements = gridElement.children().not('.k-grid-content'),
 						otherElementsHeight = 0;
 
-					otherElements.each(function() {
+					otherElements.each(function () {
 						otherElementsHeight += $(this).outerHeight();
 					});
 
@@ -2332,12 +2305,12 @@
 				};
 
 				/**
-                 * Create the Summary Report div element and Kendo-ize it as a Grid.
-                 * Uses self.aggValuesArray as dataSource.
-                 *
-                 * @method createKendoGrid
-                 */
-				self.createKendoGrid = function(type) {
+				 * Create the Summary Report div element and Kendo-ize it as a Grid.
+				 * Uses self.aggValuesArray as dataSource.
+				 *
+				 * @method createKendoGrid
+				 */
+				self.createKendoGrid = function (type) {
 					var dataGridName = 'demACSDataGrid';
 					var demoOptionsRowName = 'demACSSummaryOptionsRow';
 					var dataSource = self.aggACSValuesArray;
@@ -2355,7 +2328,7 @@
 						}
 					}
 
-					$.each(dataSource, function(i, value) {
+					$.each(dataSource, function (i, value) {
 						if (value['fieldType'] === 'Currency') {
 							value['fieldValueFormatted'] = '$ ' + magNumberFormatter.formatValue(value['fieldValue']);
 						} else if (value['fieldType'] === 'Rate') {
@@ -2366,8 +2339,7 @@
 
 					// Create the div element for the grid
 					dc.create(
-						'div',
-						{
+						'div', {
 							id: dataGridName,
 							style: 'margin: 5px 0 0 0; font-size: small; ' + visibility
 						},
@@ -2379,11 +2351,9 @@
 					$('#' + dataGridName).kendoGrid({
 						dataSource: {
 							data: dataSource,
-							group: [
-								{
-									field: 'fieldGroup'
-								}
-							],
+							group: [{
+								field: 'fieldGroup'
+							}],
 							sort: {
 								field: 'fieldRowSort',
 								dir: 'asc'
@@ -2394,8 +2364,7 @@
 						sortable: false,
 						resizable: true,
 						columnMenu: false,
-						columns: [
-							{
+						columns: [{
 								field: 'fieldGroup',
 								title: 'Category',
 								hidden: true,
@@ -2417,19 +2386,19 @@
 							}
 							//{field: "densityValueFormatted", title: "Per Sq Mile", format: "{0:n1}"}
 						],
-						dataBound: function(e) {
+						dataBound: function (e) {
 							//if (this.wrapper[0].id !== "demCensusDataGrid") {
 							var rowCollection = e.sender.tbody[0].children;
 							var data = e.sender._data;
 							var realRows = [];
 
-							$.each(data, function(i, el) {
-								var foundElement = $('td').filter(function() {
+							$.each(data, function (i, el) {
+								var foundElement = $('td').filter(function () {
 									return $(this).text() === el.tableHeader;
 								});
 								var finalElement = foundElement;
 								if (foundElement.length > 1) {
-									$.each(foundElement, function(i, row) {
+									$.each(foundElement, function (i, row) {
 										if ($(row)[0].previousSibling) {
 											if ($(row)[0].previousSibling.innerText.indexOf(el.fieldCategory) !== -1) {
 												finalElement = $(row);
@@ -2474,7 +2443,7 @@
 								}
 							});
 							var grid = $('#' + this.wrapper[0].id).data('kendoGrid');
-							grid.tbody.find('tr.k-grouping-row').each(function(index) {
+							grid.tbody.find('tr.k-grouping-row').each(function (index) {
 								grid.collapseGroup(this);
 							});
 							$('.gridGroupToggle').val('expand').html('Expand All');
@@ -2485,12 +2454,12 @@
 				};
 
 				/**
-                 * Create the Summary Report div element and Kendo-ize it as a Grid with comparison columns.
-                 * Uses self.aggValuesArray as dataSource.
-                 *
-                 * @method createKendoGrid
-                 */
-				self.createKendoGridWithCompare = function(type) {
+				 * Create the Summary Report div element and Kendo-ize it as a Grid with comparison columns.
+				 * Uses self.aggValuesArray as dataSource.
+				 *
+				 * @method createKendoGrid
+				 */
+				self.createKendoGridWithCompare = function (type) {
 					var dataGridName = 'demACSDataGrid';
 					var demoOptionsRowName = 'demACSSummaryOptionsRow';
 					var dataSource = self.aggACSValuesArray;
@@ -2502,7 +2471,7 @@
 						dataSource = self.aggCensusValuesArray;
 					}
 
-					$.each(dataSource, function(i, value) {
+					$.each(dataSource, function (i, value) {
 						if (value['fieldType'] === 'Currency') {
 							value['compareValueFormatted'] =
 								'$ ' + magNumberFormatter.formatValue(value['compareValue']);
@@ -2514,8 +2483,7 @@
 
 					// Create the div element for the grid
 					dc.create(
-						'div',
-						{
+						'div', {
 							id: dataGridName,
 							style: 'margin: 5px 0 0 0; font-size: small;'
 						},
@@ -2541,8 +2509,7 @@
 						sortable: false,
 						resizable: true,
 						columnMenu: false,
-						columns: [
-							{
+						columns: [{
 								field: 'fieldGroup',
 								title: 'Category',
 								hidden: true,
@@ -2574,19 +2541,19 @@
 							}
 							//{field: "compareDensityValueFormatted",title: "Per Sq Mile", format: "{0:n1}"}
 						],
-						dataBound: function(e) {
+						dataBound: function (e) {
 							if (this.wrapper[0].id !== 'demCensusDataGrid') {
 								// get the index of the UnitsInStock cell
 								var rowCollection = e.sender.tbody[0].children;
 								var data = e.sender._data;
 								var realRows = [];
 
-								$.each(rowCollection, function(i, row) {
+								$.each(rowCollection, function (i, row) {
 									if (row.className !== 'k-grouping-row') {
 										realRows.push(row);
 									}
 								});
-								$.each(realRows, function(i, row) {
+								$.each(realRows, function (i, row) {
 									if (data[i]) {
 										if (data[i]['fieldCategory'] === 'Occupation') {
 											if (data[i].parentField === '' || data[i].fieldName === 'ProtectiveServ') {
@@ -2609,21 +2576,21 @@
 						.first()
 						.prepend(
 							"<tr><th></th><th></th><th class='colT' scope='colgroup' colspan='2'>" +
-								self.communityName +
-								"</th><th class='colT' scope='colgroup' colspan='2'>" +
-								self.compareToName +
-								'</th></tr>'
+							self.communityName +
+							"</th><th class='colT' scope='colgroup' colspan='2'>" +
+							self.compareToName +
+							'</th></tr>'
 						);
 
 					self.sizeGrid('#' + dataGridName);
 				};
 
 				/**
-                 * Exports the kendo grid to excel.  See (http://demos.telerik.com/kendo-ui/grid/excel-export) for more info
-                 *
-                 * @method exportToExcel
-                 */
-				self.exportToExcel = function(sender) {
+				 * Exports the kendo grid to excel.  See (http://demos.telerik.com/kendo-ui/grid/excel-export) for more info
+				 *
+				 * @method exportToExcel
+				 */
+				self.exportToExcel = function (sender) {
 					var exportButtonId = sender.currentTarget.id;
 					var grid;
 					var fileName;
@@ -2688,7 +2655,7 @@
 							self.communityName + ' - ' + self.compareToName + ' Comparative Demographic Report';
 					}
 
-					grid.bind('excelExport', function(e) {
+					grid.bind('excelExport', function (e) {
 						var rows = e.workbook.sheets[0].rows;
 						var columns = e.workbook.sheets[0].columns;
 						columns[1].width = 290;
@@ -2697,9 +2664,9 @@
 							exportButtonId !== 'demACSExportSelFeatResults' &&
 							exportButtonId !== 'title6ExportResults'
 						) {
-							$.each(rows, function(i, row) {
+							$.each(rows, function (i, row) {
 								if (row.type === 'header') {
-									$.each(row.cells, function(i, cell) {
+									$.each(row.cells, function (i, cell) {
 										cell.background = '#8DB4E2';
 										cell.bold = true;
 										cell.color = '#000';
@@ -2711,7 +2678,7 @@
 									row.cells[0].bold = true;
 								} else {
 									if (exportButtonId !== 'demCensusExportResults') {
-										$.each(acsFieldsConfig.fields, function(j, el) {
+										$.each(acsFieldsConfig.fields, function (j, el) {
 											if (el.tableHeader === row.cells[1].value) {
 												switch (el.indentLevel) {
 													case 1:
@@ -2737,13 +2704,13 @@
 													row.cells[0].value = row.cells[1].value;
 													row.cells[0].colSpan = 2;
 													row.cells.splice(1, 1);
-													$.each(row.cells, function(i, cell) {
+													$.each(row.cells, function (i, cell) {
 														cell.background = '#8DB4E2';
 														cell.italic = true;
 														cell.bold = true;
 													});
 												} else if (el.universeField === 2) {
-													$.each(row.cells, function(i, cell) {
+													$.each(row.cells, function (i, cell) {
 														if (i > 0) {
 															cell.background = '#D9D9D9';
 															cell.bold = true;
@@ -2770,55 +2737,48 @@
 						e.workbook.sheets[0]['frozenRows'] = 2;
 
 						var headerRow = {
-							cells: [
-								{
-									background: '#000',
-									colSpan: colSpan,
-									color: '#fff',
-									rowSpan: 1,
-									fontSize: 14,
-									value: headerValue,
-									hAlign: 'center'
-								}
-							],
+							cells: [{
+								background: '#000',
+								colSpan: colSpan,
+								color: '#fff',
+								rowSpan: 1,
+								fontSize: 14,
+								value: headerValue,
+								hAlign: 'center'
+							}],
 							height: 30,
 							headerRow: 'added'
 						};
 
 						var sourceRow = {
-							cells: [
-								{
-									background: '#000',
-									colSpan: colSpan,
-									color: '#fff',
-									rowSpan: 1,
-									fontSize: 11,
-									value: sourceLabel,
-									hAlign: 'left',
-									wrap: true
-								}
-							]
+							cells: [{
+								background: '#000',
+								colSpan: colSpan,
+								color: '#fff',
+								rowSpan: 1,
+								fontSize: 11,
+								value: sourceLabel,
+								hAlign: 'left',
+								wrap: true
+							}]
 						};
 
 						var footerRow = {
-							cells: [
-								{
-									background: '#d3d3d3',
-									colSpan: colSpan,
-									color: '#000',
-									rowSpan: rowSpan,
-									fontSize: 8,
-									value: appConfig.legalDisclaimer,
-									hAlign: 'center',
-									wrap: true
-								}
-							]
+							cells: [{
+								background: '#d3d3d3',
+								colSpan: colSpan,
+								color: '#000',
+								rowSpan: rowSpan,
+								fontSize: 8,
+								value: appConfig.legalDisclaimer,
+								hAlign: 'center',
+								wrap: true
+							}]
 						};
 						var compareRow = null;
 						if (self.compareFeature !== null) {
 							compareRow = {
-								cells: [
-									{
+								cells: [{
 										background: '#fff'
 									},
 									{
@@ -2869,104 +2829,36 @@
 					grid.unbind('excelExport');
 				};
 
-				self.exportPDFReport = function() {
-					var parameterString = '';
-					var newWindow;
-					// if (self.compareFeature) {
-					//     if (self.communityName === "Selected Block Groups") {
-					//         var ObjectIdArray = "";
-					//         for (var i = 0; i < self.selectedFeatures.length; i++) {
-					//             ObjectIdArray += self.selectedFeatures[i].attributes.OBJECTID + ",";
-					//         }
-					//         parameterString = "StateInteractive";
-					//         localStorage.OBJECTID = ObjectIdArray;
-					//     } else {
-					//         parameterString = self.communityName;
-					//     }
-					//     self.reportURL = encodeURI(demographicConfig.exportPDFCompareReportUrl + "?city1=" + parameterString + "&?city2=" + self.compareToName);
-					//     newWindow = window.open(self.reportURL, "_new");
-					// } else {
-					if (self.communityName.indexOf('County') > -1) {
-						self.reportURL = encodeURI(
-							demographicConfig.exportPDFReportUrl + '?county=' + self.communityName
-						);
-						newWindow = window.open(self.reportURL, '_new');
-					} else if (self.communityName.indexOf('Legislative') > -1) {
-						self.reportURL = encodeURI(
-							demographicConfig.exportPDFReportUrl + '?legislative=' + self.communityName
-						);
-						newWindow = window.open(self.reportURL, '_new');
-					} else if (self.communityName.indexOf('Congressional') > -1) {
-						self.reportURL = encodeURI(
-							demographicConfig.exportPDFReportUrl + '?congressional=' + self.communityName
-						);
-						newWindow = window.open(self.reportURL, '_new');
-					} else if (self.communityName.indexOf('Supervisor') > -1) {
-						self.reportURL = encodeURI(
-							demographicConfig.exportPDFReportUrl + '?supervisor=' + self.communityName
-						);
-						newWindow = window.open(self.reportURL, '_new');
-					} else if (self.communityName.indexOf('District') > -1) {
-						self.reportURL = encodeURI(
-							demographicConfig.exportPDFReportUrl + '?council=' + self.communityName
-						);
-						newWindow = window.open(self.reportURL, '_new');
-					} else if (
-						self.communityName.indexOf('Governments') > -1 ||
-						self.communityName.indexOf('COG') > -1 ||
-						self.communityName.indexOf('MPO') > -1
-					) {
-						self.reportURL = encodeURI(demographicConfig.exportPDFReportUrl + '?cog=' + self.communityName);
-						newWindow = window.open(self.reportURL, '_new');
-					} else if (self.communityName === 'Selected Block Groups') {
-						var PDFIDArray = '';
-
+				self.exportPDFReport = function () {
+					if (self.communityName === "Selected Block Groups") {
+						var ObjectIdArray = "";
 						for (var i = 0; i < self.selectedFeatures.length; i++) {
-							if ((i !== self.selectedFeatures.length) & (self.selectedFeatures.length !== 1)) {
-								PDFIDArray += self.selectedFeatures[i].attributes.PDFID + ',';
-							} else {
-								PDFIDArray += self.selectedFeatures[i].attributes.PDFID;
-							}
+							ObjectIdArray += self.selectedFeatures[i].attributes.OBJECTID + ",";
 						}
-						localStorage.statePDFID = PDFIDArray;
-						self.reportURL = encodeURI(demographicConfig.exportPDFReportUrl + '?StateInteractive');
-						newWindow = window.open(self.reportURL, '_new');
-					} else if (self.communityName === 'Arizona') {
-						self.reportURL = encodeURI(
-							demographicConfig.exportPDFReportUrl + '?state=' + self.communityName
-						);
-						newWindow = window.open(self.reportURL, '_new');
-					} else if (self.communityName.length === 5 && !isNaN(parseInt(self.communityName))) {
-						self.reportURL = encodeURI(
-							demographicConfig.exportPDFReportUrl + '?zipCode=' + self.communityName
-						);
-						newWindow = window.open(self.reportURL, '_new');
-					} else {
-						self.reportURL = encodeURI(
-							demographicConfig.exportPDFReportUrl + '?city=' + self.communityName
-						);
-						newWindow = window.open(self.reportURL, '_new');
+						localStorage.OBJECTID = ObjectIdArray;
 					}
-					// }
+
+					self.reportURL = encodeURI(demographicConfig.exportPDFReportUrl + '?' + self.reportConfigItem.exportPDFParameter + '=' + self.communityName);
+					window.open(self.reportURL, '_new');
 				};
 
 				/**
-                 * Callback method for errors returned by the print export.
-                 *
-                 * @method printMapError
-                 * @param {Error} error - error object
-                 */
-				self.printMapError = function(error) {
+				 * Callback method for errors returned by the print export.
+				 *
+				 * @method printMapError
+				 * @param {Error} error - error object
+				 */
+				self.printMapError = function (error) {
 					console.log(error.message);
 				};
 
 				/**
-                 * Create an iFrame, if it does not already exist, for downloading files.
-                 *
-                 * @method downloadURL
-                 * @param {string} url - url to the document to be downloaded.
-                 */
-				self.downloadURL = function(url) {
+				 * Create an iFrame, if it does not already exist, for downloading files.
+				 *
+				 * @method downloadURL
+				 * @param {string} url - url to the document to be downloaded.
+				 */
+				self.downloadURL = function (url) {
 					var hiddenIFrameID = 'hiddenDownloader',
 						iframe = document.getElementById(hiddenIFrameID);
 					if (iframe === null) {
@@ -2979,13 +2871,12 @@
 				};
 
 				/**
-                 * Simply resets comparison combo boxes
-                 *
-                 * @method resetComparisonDropdowns
-                 */
-				self.resetComparisonDropdowns = function() {
-					var resetObject = [
-						{
+				 * Simply resets comparison combo boxes
+				 *
+				 * @method resetComparisonDropdowns
+				 */
+				self.resetComparisonDropdowns = function () {
+					var resetObject = [{
 							combobox: '#demCensusCompareComboBox',
 							grid: '#demCensusDataGrid',
 							checkbox: '#demCensusUseComp',
@@ -3005,15 +2896,14 @@
 						test.wrapper.remove();
 					}
 
-					$.each(resetObject, function(i, value) {
+					$.each(resetObject, function (i, value) {
 						$(value.checkbox).prop('checked', false);
 						var compareComboBoxInput = $(value.comboBox);
 						var compareComboBoxObj = compareComboBoxInput.data('kendoComboBox');
 						if (compareComboBoxObj !== null && compareComboBoxObj !== undefined) {
 							compareComboBoxObj.destroy();
 							compareComboBoxObj.wrapper.remove();
-						} else {
-						}
+						} else {}
 						var kendoGrid = $(value.grid).data('kendoGrid');
 						if (kendoGrid !== undefined && kendoGrid !== null) {
 							kendoGrid.element.remove();

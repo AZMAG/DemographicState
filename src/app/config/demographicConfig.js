@@ -8,8 +8,8 @@
             var demographicConfig = new function() {
                 var self = this;
 
-                self.exportPDFCompareReportUrl = "http://mag1113/services/demographics/CompareReport.html";
-                self.exportPDFReportUrl = "http://mag1113/services/demographics/Reports.html";
+                self.exportPDFCompareReportUrl = "http://geo.azmag.gov/services/demographics2016/CompareReport.html";
+                self.exportPDFReportUrl = "http://geo.azmag.gov/services/demographics2016/Reports.html";
                 self.viewReportUrl = "http://localhost/MAG/MAGDemographicsReports/DemographicChartsReport.html";
 
                 self.CompareOperators = {
@@ -72,7 +72,7 @@
                         ShortName: "County",
                         Type: "string"
                     }, {
-                        FieldName: "ZIP_CODE",
+                        FieldName: "ZIPCODE",
                         Name: "Zip Code",
                         ShortName: "Zip Code",
                         Type: "string"
@@ -272,6 +272,7 @@
 
                 self.reports = {
                     stateSummary: {
+                        exportPDFParameter: "state",
                         name: "Demographic Summary",
                         layerName: "State",
                         whereClause: "NAME = 'Arizona'",
@@ -283,6 +284,7 @@
                         populateDropDown: false
                     },
                     countySummary: {
+                        exportPDFParameter: "county",
                         name: "Demographic Summary",
                         layerName: "Counties",
                         whereClause: "1 = 1",
@@ -293,6 +295,7 @@
                         dropdown: "#countyComboBox"
                     },
                     cogSummary: {
+                        exportPDFParameter: "cog",
                         name: "Demographic Summary",
                         layerName: "Cogs_Mpos",
                         compareCensusUrl: appConfig.mainURL + "/13",
@@ -304,6 +307,7 @@
                         dropdown: "#cogComboBox"
                     },
                     placeSummary: {
+                        exportPDFParameter: "city",
                         name: "Demographic Summary",
                         layerName: "Places",
                         whereClause: "1 = 1",
@@ -314,6 +318,7 @@
                         dropdown: "#placeComboBox"
                     },
                     legislativeSummary: {
+                        exportPDFParameter: "legislative",
                         name: "Demographic Summary",
                         layerName: "Legislative_Districts",
                         whereClause: "1 = 1",
@@ -324,6 +329,7 @@
                         dropdown: "#legislativeComboBox"
                     },
                     congressionalSummary: {
+                        exportPDFParameter: "congressional",
                         name: "Demographic Summary",
                         layerName: "Congressional_Districts",
                         whereClause: "1 = 1",
@@ -334,6 +340,7 @@
                         dropdown: "#congressionalComboBox"
                     },
                     supervisorSummary: {
+                        exportPDFParameter: "supervisor",
                         name: "Demographic Summary",
                         layerName: "SupervisorDistricts",
                         whereClause: "1 = 1",
@@ -344,6 +351,7 @@
                         dropdown: "#supervisorComboBox"
                     },
                     councilDistrictSummary: {
+                        exportPDFParameter: "council",
                         name: "Demographic Summary",
                         layerName: "CityDistricts",
                         whereClause: "1 = 1",
@@ -354,16 +362,18 @@
                         dropdown: "#councilDistrictComboBox"
                     },
                     zipCodeSummary: {
+                        exportPDFParameter: "zipCode",
                         name: "Demographic Summary",
                         layerName: "Zip_Codes",
                         whereClause: "1 = 1",
                         compareWhereClause: "1 = 1",
-                        comparePlaceField: "ZIP_CODE",
-                        summaryField: "ZIP_CODE",
-                        sortField: "ZIP_CODE",
+                        comparePlaceField: "ZIPCODE",
+                        summaryField: "ZIPCODE",
+                        sortField: "ZIPCODE",
                         dropdown: "#zipCodeComboBox"
                     },
                     blockGroups: {
+                        exportPDFParameter: "interactive",
                         name: "Demographic Summary",
                         layerName: "Block_Groups",
                         whereClause: "1 = 1",

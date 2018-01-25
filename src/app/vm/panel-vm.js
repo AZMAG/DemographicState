@@ -183,7 +183,7 @@
                     var attributes = results.features[0].attributes;
                     if (attributes["PLACE"]) {
                         configItem = demographicConfig.reports.placeSummary;
-                    } else if (attributes["ZIP_CODE"]) {
+                    } else if (attributes["ZIPCODE"]) {
                         configItem = demographicConfig.reports.zipCodeSummary;
                     } else if (attributes["SLDIST_NAME"]) {
                         configItem = demographicConfig.reports.legislativeSummary;
