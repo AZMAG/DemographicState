@@ -684,8 +684,6 @@
 					win.open();
 					windowIsOpen = true;
 
-					self.resetComparisonDropdowns();
-
 					// hide loading gif when window opens. vw
 					esri.hide(dom.byId('loading'));
 
@@ -1005,7 +1003,7 @@
 							//tabStrip.select(0);
 						}
 					}
-					self.resetComparisonDropdowns();
+					// self.resetComparisonDropdowns();
 
 					// Summarize the features
 					var sumAttributes = self.summarizeAttributes(features);
@@ -1214,7 +1212,7 @@
 							mapModel.setMapExtent(zoomExtent);
 						}
 					}
-					self.resetComparisonDropdowns();
+					// self.resetComparisonDropdowns();
 
 					// Summarize the features
 					var sumAttributes = self.summarizeAttributes(features);

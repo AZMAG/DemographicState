@@ -380,7 +380,7 @@
                         compareCensusUrl: appConfig.mainURL + "/11",
                         compareACSUrl: appConfig.mainURL + "/1",
                         compareWhereClause: "1 = 1",
-                        comparePlaceField: "NAME",
+                        comparePlaceField: "Name",
                         summaryField: "OBJECTID",
                         sortField: "OBJECTID",
                         populateDropDown: false

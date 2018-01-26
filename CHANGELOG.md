@@ -27,6 +27,7 @@ And constructed with the following guidelines:
 * Added Use Statewide Legend checkbox.  Fixed a bug that was making the legend refresh twice.
 * Updated the Advanced Query Window to point to relative urls from demographic config.
 * Added an alert that prevents a user from submitting a 0 results advanced query.
+* Fixed bug in which the ACS data tab was sometimes being removed.
 
 ## Version 3.2.0 | 01/18/2018
 

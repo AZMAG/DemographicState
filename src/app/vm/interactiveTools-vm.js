@@ -259,7 +259,7 @@
                     $("#demACSDataGrid").hide();
                     //$("#demTabStrip").css("visibility", "hidden");
                     $("#reportLoading").show();
-
+                    demographicVM.resetComparisonDropdowns();
                     var censusUrl = demographicConfig.reports.blockGroups.censusRestUrl;
                     var censusCallback = demographicVM.interactiveSelectionQueryHandler;
                     var acsUrl = demographicConfig.reports.blockGroups.ACSRestUrl;
