@@ -11,6 +11,7 @@
             "dojo",
             "dojo/dom-construct",
             "dojo/topic",
+            "app/config/acsFieldsConfig",
             "app/config/cbrConfig",
             "app/vm/colorRamp-vm",
             "app/helpers/magNumberFormatter",
@@ -34,7 +35,7 @@
             "esri/tasks/GenerateRendererTask",
             "esri/layers/LayerDrawingOptions"
         ],
-        function(dj, dc, tp, conf, cRamp, magNum, custBreak, helpView, helpVM, view, layerDelegate, legend, bookmarkDelegate, mapModel, Color, SimpleMarkerSymbol, SimpleFillSymbol, SimpleLineSymbol, ClassBreaksRenderer, ClassBreaksDefinition, GenerateRendererParameters, GenerateRendererTask, LayerDrawingOptions) {
+        function (dj, dc, tp, acsFieldsConfig, conf, cRamp, magNum, custBreak, helpView, helpVM, view, layerDelegate, legend, bookmarkDelegate, mapModel, Color, SimpleMarkerSymbol, SimpleFillSymbol, SimpleLineSymbol, ClassBreaksRenderer, ClassBreaksDefinition, GenerateRendererParameters, GenerateRendererTask, LayerDrawingOptions) {
 
             var CBRVM = new function() {
 
@@ -518,8 +519,10 @@
                             var layer = mapModel.mapInstance.getLayer("blockGroups");
                             var breaksCount = self.CurrentRamp.length;
                             var arr = [];
+
                             $.each(results.features, function(index, feature) {
-                                arr.push(feature.attributes[classDef.classificationField]);
+                                var fieldVal = feature.attributes[classDef.classificationField];
+                                arr.push(fieldVal);
                             });
                             var series = new geostats();
                             series.setSerie(arr);
@@ -539,6 +542,9 @@
                             });
                             colorRampOnly = false;
                             self.applyRenderer(renderer);
+                        }
+                        else {
+                            console.error("The field " + classDef.classificationField + " doesn't exist in your block groups layer.");
                         }
                     }
 

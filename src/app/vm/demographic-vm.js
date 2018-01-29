@@ -1356,6 +1356,10 @@
 
 					var tabStrip = $('#demTabStrip').data('kendoTabStrip');
 
+
+
+
+
 					// Reset comparison if community has changed
 					if (self.commChanged) {
 						// Clear the comparison checkbox

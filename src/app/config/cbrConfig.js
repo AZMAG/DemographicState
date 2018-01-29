@@ -243,7 +243,7 @@
                                         "DefaultColorRamp": "YlGn",
                                         "DefaultColorScheme": "Sequential",
                                         "Description": "",
-                                        "FieldName": "PCT_AGE_21PLUS",
+                                        "FieldName": "PCT_AGE21PLUS",
                                         "Type": "percent",
                                         "AsPercentages": true,
                                         "Placeholder": 100000000
@@ -256,7 +256,7 @@
                                         "DefaultColorRamp": "YlGn",
                                         "DefaultColorScheme": "Sequential",
                                         "Description": "",
-                                        "FieldName": "PCT_AGE_62PLUS",
+                                        "FieldName": "PCT_AGE62PLUS",
                                         "Type": "percent",
                                         "AsPercentages": true,
                                         "Placeholder": 100000000
@@ -269,7 +269,7 @@
                                         "DefaultColorRamp": "YlGn",
                                         "DefaultColorScheme": "Sequential",
                                         "Description": "",
-                                        "FieldName": "PCT_AGE_65PLUS",
+                                        "FieldName": "PCT_AGE65PLUS",
                                         "Type": "percent",
                                         "AsPercentages": true,
                                         "Placeholder": 100000000
@@ -967,7 +967,6 @@
                                     "Description": null,
                                     "FieldName": "TOTAL_HOUSING_UNITS",
                                     "Type": "number",
-                                    // "AsPercentages": "TRUE",
                                     "Placeholder": 100000000
                                 }, {
                                     "NodeType": "map",
@@ -980,7 +979,6 @@
                                     "Description": null,
                                     "FieldName": "MEDIAN_VALUE",
                                     "Type": "number",
-                                    // "AsPercentages": "TRUE",
                                     "Placeholder": 100000000
                                 }, {
                                     "NodeType": "map",
@@ -993,7 +991,6 @@
                                     "Description": null,
                                     "FieldName": "MEDIAN_GROSS_RENT",
                                     "Type": "number",
-                                    // "AsPercentages": "TRUE",
                                     "Placeholder": 100000000
                                 }, {
                                     "NodeType": "map",
