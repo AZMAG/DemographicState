@@ -86,9 +86,13 @@
                  */
                 self.openWindow = function() {
                     //var shareURL = window.location.origin + window.location.pathname + bookmarkDelegate.buildMapQueryString();
+                    
                     var shareURL = self.baseURL + bookmarkDelegate.buildMapQueryString();
 
                     bookmarkDelegate.minifyURL(shareURL, self.changeShareLinks);
+                    
+
+
                     self.changeShareLinks(shareURL);
                     var win = $("#shareWindowDiv").data("kendoWindow");
                     win.restore();
@@ -201,7 +205,7 @@
                             IN.parse();
                         }
                     } else {
-                        $.getScript("http://platform.linkedin.com/in.js");
+                        $.getScript("https://platform.linkedin.com/in.js");
                     }
                 };
 
@@ -222,7 +226,7 @@
                     var facebookIframeSrc = $(facebookIframe).attr("src");
                     var indexOfHref = facebookIframeSrc.indexOf("href=");
                     var urlToReplace = facebookIframeSrc.substr(indexOfHref + 5, facebookIframeSrc.indexOf("&", indexOfHref) - indexOfHref - 5);
-                    $(facebookIframe).attr("src", facebookIframeSrc.replace(urlToReplace, encodeURIComponent(minimizedURL)));
+                    $(facebookIframe).attr("src", facebookIframeSrc.replace(urlToReplace, minimizedURL));
                     //Twitter
                     $("script#twitter-wjs").remove();
                     var twitterDiv = $("div#twitter");
@@ -243,6 +247,7 @@
                     var emailDiv = $("div#email");
                     $(emailDiv).empty();
                     var emailStructure = '<a href="mailto:?subject=MAG Statewide Demographics Map Viewer&body=%0A%0ACheck out this website.%0A%0AMAG Statewide Demographics Map Viewer - #MAGmaps%0A' + replaceToken + '" title="MAG|Projections"><img id="mailicon" src="app/resources/img/mail-icon.png"></a>';
+
                     $(emailDiv).html(emailStructure.replace(replaceToken, minimizedURL));
 
                     self.initTwitter(document, "script", "twitter-wjs");
@@ -250,6 +255,7 @@
                     self.initGooglePlus();
 
                     self.initLinkedin();
+
                 };
 
             }; //end socialVM
