@@ -324,7 +324,7 @@
                     self.legend.startup();
 
                     dom.byId("legendTitle_{value}".replace(/{value}/gi, self.mapID)).innerHTML = self.mapTheme().ShortName;
-                    dom.byId("dataSource_{value}".replace(/{value}/gi, self.mapID)).innerHTML = self.mapTheme().Source;
+                    dom.byId("dataSource_{value}".replace(/{value}/gi, self.mapID)).innerHTML = appConfig.LegendSource;
 
                     //create transparency slider
                     $("#slider_{value}".replace(/{value}/gi, self.mapID)).kendoSlider({
