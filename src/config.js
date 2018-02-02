@@ -35,15 +35,15 @@ var appConfig = new function() {
 
     this.Version = "v3.0.6 | 04/14/2017";
     this.LegendSource = "American Community Survey 2012-2016 5yr";
-    this.jasonemail = "http://www.azmag.gov/Contact/4788?s=geo.azmag.gov/maps/azdemographics&n=Jason%20Howard&popUp=true";
+    this.jasonemail = "https://www.azmag.gov/Contact/4788?s=geo.azmag.gov/maps/azdemographics&n=Jason%20Howard&popUp=true";
 
-    this.ArcGISInstanceURL = "http://geo.azmag.gov/gismag/rest";
+    this.ArcGISInstanceURL = "https://geo.azmag.gov/gismag/rest";
     //this.exportWebMapUrl = "http://geo.azmag.gov/gismag/rest/services/Utilities/PrintingTools/GPServer/Export%20Web%20Map%20Task";  // Generic Print Service
-    this.exportWebMapUrl = "http://geo.azmag.gov/gismag/rest/services/gp/stateDemo/GPServer/Export%20Web%20Map"; // Custom Print Service
+    this.exportWebMapUrl = "https://geo.azmag.gov/gismag/rest/services/gp/stateDemo/GPServer/Export%20Web%20Map"; // Custom Print Service
     this.webServicePasscode = "sun sand dry heat grand canyon";
 
-    this.mainURL = "http://geo.azmag.gov/gismag/rest/services/maps/DemographicState2016/MapServer";
-    this.siteUrl = "http://geo.azmag.gov/maps/azdemographics/?";
+    this.mainURL = "https://geo.azmag.gov/gismag/rest/services/maps/DemographicState2016/MapServer";
+    this.siteUrl = "https://geo.azmag.gov/maps/azdemographics/?";
 
     // Search Service URLs
     this.geoCoderService = "//geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer";

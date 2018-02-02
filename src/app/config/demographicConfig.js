@@ -8,9 +8,9 @@
             var demographicConfig = new function() {
                 var self = this;
 
-                self.exportPDFCompareReportUrl = "http://geo.azmag.gov/services/demographics2016/CompareReport.html";
-                self.exportPDFReportUrl = "http://geo.azmag.gov/services/demographics2016/Reports.html";
-                self.viewReportUrl = "http://localhost/MAG/MAGDemographicsReports/DemographicChartsReport.html";
+                self.exportPDFCompareReportUrl = "https://geo.azmag.gov/services/demographics2016/CompareReport.html";
+                self.exportPDFReportUrl = "https://geo.azmag.gov/services/demographics2016/Reports.html";
+                self.viewReportUrl = "https://localhost/MAG/MAGDemographicsReports/DemographicChartsReport.html";
 
                 self.CompareOperators = {
                     string: [{
