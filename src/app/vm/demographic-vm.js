@@ -398,7 +398,7 @@
 					var helpButton = chartWindow.wrapper.find('.k-i-help');
 					helpButton.click(function () {
 						var tabStrip = $('#demTabStrip').data('kendoTabStrip');
-						var tab = tabStrip.select();
+						var tab = tabStrip.select();					
 
 						if (tab[0].textContent === 'ACS 2016 Charts') {
 							helpVM.openWindow(ACSChartHelpView);
@@ -415,6 +415,7 @@
 						} else if (tab[0].textContent === 'Title VI Data') {
 							helpVM.openWindow(Title6HelpView);
 						}
+						$(".helpType").html(self.reportConfigItem.layerName);
 					});
 
 					/**
