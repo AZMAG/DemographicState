@@ -2601,6 +2601,7 @@
 					var colSpan;
 					var rowSpan;
 					var sourceLabel = appConfig.sourceLabel;
+					var disclaimer = appConfig.legalACSDisclaimer;
 
 					if (exportButtonId === 'demACSExportResults') {
 						//Summary report export button clicked
@@ -2616,6 +2617,7 @@
 						}
 					} else if (exportButtonId === 'demCensusExportResults') {
 						grid = $('#demCensusDataGrid').data('kendoGrid');
+						disclaimer = appConfig.legalCensusDisclaimer;
 						headerValue = self.communityName + ' Census 2010 Data';
 						fileName = self.communityName + '.xlsx';
 						sourceLabel = appConfig.sourceLabel2;
@@ -2634,6 +2636,7 @@
 						sourceLabel = appConfig.sourceLabel2;
 						colSpan = 40;
 						rowSpan = 6;
+						disclaimer = appConfig.legalCensusDisclaimer;
 					} else if (exportButtonId === 'demACSExportSelFeatResults') {
 						//Block group export clicked
 						grid = $('#demACSFeatGrid').data('kendoGrid');
@@ -2771,9 +2774,9 @@
 								background: '#d3d3d3',
 								colSpan: colSpan,
 								color: '#000',
-								rowSpan: rowSpan,
+								rowSpan: disclaimer == appConfig.legalCensusDisclaimer ? Math.floor(rowSpan * .6) : rowSpan,
 								fontSize: 8,
-								value: appConfig.legalDisclaimer,
+								value: disclaimer,
 								hAlign: 'center',
 								wrap: true
 							}]
