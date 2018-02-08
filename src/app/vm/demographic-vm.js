@@ -415,7 +415,7 @@
 						} else if (tab[0].textContent === 'Title VI Data') {
 							helpVM.openWindow(Title6HelpView);
 						}
-						$(".helpType").html(self.reportConfigItem.layerName);
+						$(".helpType").html(self.reportConfigItem.helpItem);
 					});
 
 					/**

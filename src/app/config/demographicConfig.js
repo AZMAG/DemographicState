@@ -274,6 +274,7 @@
                     stateSummary: {
                         exportPDFParameter: "state",
                         name: "Demographic Summary",
+                        helpItem: "State",
                         layerName: "State",
                         whereClause: "NAME = 'Arizona'",
                         compareCensusUrl: appConfig.mainURL + "/13",
@@ -287,6 +288,7 @@
                         exportPDFParameter: "county",
                         name: "Demographic Summary",
                         layerName: "Counties",
+                        helpItem: "County",
                         whereClause: "1 = 1",
                         compareWhereClause: "1 = 1",
                         comparePlaceField: "NAME",
@@ -297,6 +299,7 @@
                     cogSummary: {
                         exportPDFParameter: "cog",
                         name: "Demographic Summary",
+                        helpItem: "Cog or Mpo",
                         layerName: "Cogs_Mpos",
                         compareCensusUrl: appConfig.mainURL + "/13",
                         compareACSUrl: appConfig.mainURL + "/3",
@@ -309,6 +312,7 @@
                     placeSummary: {
                         exportPDFParameter: "city",
                         name: "Demographic Summary",
+                        helpItem: "Place",
                         layerName: "Places",
                         whereClause: "1 = 1",
                         compareWhereClause: "1 = 1",
@@ -320,6 +324,7 @@
                     legislativeSummary: {
                         exportPDFParameter: "legislative",
                         name: "Demographic Summary",
+                        helpItem: "Legislative District",
                         layerName: "Legislative_Districts",
                         whereClause: "1 = 1",
                         compareWhereClause: "1 = 1",
@@ -331,6 +336,7 @@
                     congressionalSummary: {
                         exportPDFParameter: "congressional",
                         name: "Demographic Summary",
+                        helpItem: "Congressional District",
                         layerName: "Congressional_Districts",
                         whereClause: "1 = 1",
                         compareWhereClause: "1 = 1",
@@ -342,6 +348,7 @@
                     supervisorSummary: {
                         exportPDFParameter: "supervisor",
                         name: "Demographic Summary",
+                        helpItem: "Supervisor District",
                         layerName: "SupervisorDistricts",
                         whereClause: "1 = 1",
                         compareWhereClause: "1 = 1",
@@ -353,6 +360,7 @@
                     councilDistrictSummary: {
                         exportPDFParameter: "council",
                         name: "Demographic Summary",
+                        helpItem: "Council District",
                         layerName: "CityDistricts",
                         whereClause: "1 = 1",
                         compareWhereClause: "1 = 1",
@@ -364,6 +372,7 @@
                     zipCodeSummary: {
                         exportPDFParameter: "zipCode",
                         name: "Demographic Summary",
+                        helpItem: "Zip Code",
                         layerName: "Zip_Codes",
                         whereClause: "1 = 1",
                         compareWhereClause: "1 = 1",
@@ -375,6 +384,7 @@
                     blockGroups: {
                         exportPDFParameter: "interactive",
                         name: "Demographic Summary",
+                        helpItem: "Block Group(s)",
                         layerName: "Block_Groups",
                         whereClause: "1 = 1",
                         compareCensusUrl: appConfig.mainURL + "/11",
