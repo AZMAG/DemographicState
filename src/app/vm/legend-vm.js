@@ -276,10 +276,13 @@
                     self.legend.startup();
                 }
 
+                
+
                 //Thematic Legend
                 self.mapLoaded = function (map) {
 
                     if (map.id === mapModel.baseMapInstance.id) {
+                        self.setupLegend();
                         if (!self.legendInitialized) {
 
                             // dom.byId("legendTitle").innerHTML = self.legendMapTitle;
@@ -305,7 +308,8 @@
                         });
 
                     }
-                    self.setupLegend();
+                    
+                    
                 };
 
                 self.updateLegend = function () {

@@ -286,7 +286,7 @@
                         "<div id='legendTitle_{value}' class='legendTitle'></div><p class='sliderInfo'>Transparency Slider</p>" +
                         "<div id='sliderDiv_{value}' class='legendSliderDiv'><input id='slider_{value}' class='balSlider'/></div>" +
                         "<div id='legendDiv_{value}'></div>" +
-                        "<div class='legal'>Data Source:&nbsp;<span id='dataSource_{value}'></span></div></div></li>" +
+                        "<div class='legal'>Data Source:&nbsp;<span class='mapFrameDataSource' id='dataSource_{value}'></span></div></div></li>" +
                         "<li>Map Layers" +
                         "<ul id='layerOptionPanelBar_{value}'>" +
                         "<li class='panelBarLi'><input " + layersTOC[0].checked + " class='layerOptionCbx' map='" + self.mapID + "' value=" + layersTOC[0].id + " id='" + self.mapID + "chk1' type='checkbox'><label class='mapLayerLabel' for='" + self.mapID + "chk1'>" + layersTOC[0].title + "</label></li>" +
@@ -571,7 +571,8 @@
                         });
                     } else {
                         self.isSelected = false;
-                        $("#" + "mapFrameTitlePanel_{value}".replace(/{value}/gi, self.mapID)).removeClass("selected");
+                        $("#mapFrameTitlePanel_" + self.mapID).removeClass("selected");
+                        // $("#" + "mapFrameTitlePanel_{value}".replace(/{value}/gi, self.mapID)).removeClass("selected");
                     }
                 }; //end selectedMapChanged
 

@@ -85,6 +85,7 @@
                 @param {object} mapInitData - initialization data from the URL querystring if provided.
                 **/
                 self.addNewMap = function(mapInitData) {
+                    $(".mapFrameDataSource").html(self.sourceInfo);
                     if (self.mapVMs.length < 4) {
                         var centerPnt = mapModel.baseMapInstance.extent.getCenter();
                         var newMapVM;
