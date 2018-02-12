@@ -4,7 +4,7 @@
  * @class legend-vm
  */
 
-(function() {
+(function () {
 
     "use strict";
 
@@ -22,9 +22,9 @@
             "app/helpers/bookmark-delegate"
         ],
 
-        function(dc, dom, tp, Legend, mapModel, conf, helpView, helpVM, legendview, magNumberFormatter, bookmarkDelegate) {
+        function (dc, dom, tp, Legend, mapModel, conf, helpView, helpVM, legendview, magNumberFormatter, bookmarkDelegate) {
 
-            var LegendVM = new function() {
+            var LegendVM = new function () {
 
                 /**
                  * Store reference to module this object.
@@ -72,7 +72,7 @@
                  *
                  * @method init
                  */
-                self.init = function(initializationData) {
+                self.init = function (initializationData) {
                     //dc.place(legendview, "map", "after");
                     dc.place(legendview, "mapContainer", "after");
 
@@ -81,10 +81,10 @@
                     tp.subscribe("addTOCLayers", self.addTOCLayers);
                     tp.subscribe("MapRenderUpdated", self.updateLegend);
                     tp.subscribe("NewMapThemeSelected", self.updateLegendTitle);
-                    tp.subscribe("legendStateO", function() {
+                    tp.subscribe("legendStateO", function () {
                         self.openWindow();
                     });
-                    tp.subscribe("legendStateC", function() {
+                    tp.subscribe("legendStateC", function () {
                         self.closeWindow();
                     });
                     tp.subscribe("BaseMapOpacityChanged", self.updateSliderOpacity);
@@ -112,12 +112,14 @@
                     }).data("kendoPanelBar");
 
                     var helpButton = legendWindow.wrapper.find(".k-i-help");
-                    helpButton.click(function() {
+                    helpButton.click(function () {
                         helpVM.openWindow(helpView);
                     });
 
                     // Now initialize the map
                     mapModel.createLayers(mapModel.mapInstance, initializationData);
+
+                    self.sourceInfo = appConfig.LegendSource;
 
                 }; //end init
                 //****************************************************************
@@ -126,7 +128,7 @@
 
                 @method openWindow
                 **/
-                self.openWindow = function() {
+                self.openWindow = function () {
                     var win = $("#legendWindowDiv").data("kendoWindow");
                     win.restore();
                     win.open();
@@ -137,21 +139,21 @@
                     });
                 };
 
-                self.closeWindow = function() {
+                self.closeWindow = function () {
                     var win = $("#legendWindowDiv").data("kendoWindow");
                     win.close();
                 };
 
                 //removes selected state from Advanced Map Options Panel vw
-                self.onCollapse = function(e) {
+                self.onCollapse = function (e) {
                     $(e.item).children().removeClass("k-state-selected");
                 };
-                self.onExpand = function(e) {
+                self.onExpand = function (e) {
                     $(e.item).children().removeClass("k-state-selected");
                 };
 
                 // change window location when window resized
-                self.winResize = function() {
+                self.winResize = function () {
                     self.winWidth = document.documentElement.clientWidth;
                     self.winHeight = document.documentElement.clientHeight;
 
@@ -162,16 +164,17 @@
                 };
 
                 var resizeTimer;
-                $(window).resize(function() {
+                $(window).resize(function () {
                     clearTimeout(resizeTimer);
                     resizeTimer = setTimeout(self.winResize, 200);
                 });
 
-                self.addTOCLayers = function(layersToAdd) { //add layer options here...
+                self.addTOCLayers = function (layersToAdd) { //add layer options here...
                     if (mapModel.mapInstance.id === mapModel.baseMapInstance.id) {
                         $("#layersList").empty();
                         var initialOpacity = (mapModel.initializationData === undefined) ? 0.8 : mapModel.initializationData.maps[0].mapOpacity;
-                        $.each(layersToAdd, function(index, layer) {
+
+                        $.each(layersToAdd, function (index, layer) {
                             var liId = "li" + index;
                             dc.create("li", {
                                 id: liId
@@ -209,12 +212,13 @@
                             }
                         });
 
+
                         $("#slider").kendoSlider({
-                            change: function(e) {
+                            change: function (e) {
                                 var sLayer = mapModel.baseMapInstance.getLayer("blockGroups");
                                 sLayer.setOpacity(e.value);
                             },
-                            slide: function(e) {
+                            slide: function (e) {
                                 var sLayer = mapModel.baseMapInstance.getLayer("blockGroups");
                                 sLayer.setOpacity(e.value);
                             },
@@ -227,226 +231,61 @@
                             value: initialOpacity
                         }).data("kendoSlider");
                     }
+
                 };
 
-                self.updateLegendLayers = function(layerId) {
+                self.updateLegendLayers = function (layerId) {
                     var layer = mapModel.mapInstance.getLayer(layerId);
                     var baseLayer = mapModel.mapInstance.getLayer("esriBasemap");
                     (layer.visible) ? layer.hide(): layer.show();
 
-                    //self.cleanupLegends();
-
                     if (layer.id === "esriImagery") {
                         if (layer.visible === true) {
                             baseLayer.hide();
-                        } else { baseLayer.show(); }
-                    }
-
-                    if (layer.id === "countyBoundaries") {
-                        if (layer.visible === true) {
-                            if (self.countyLegend) {
-                                self.countyLegend.destroy();
-                            }
-                            self.CountyLegend();
-                            bookmarkDelegate.legendLayerOptions.remove("c" + layerId);
                         } else {
-                            bookmarkDelegate.legendLayerOptions.push("c" + layerId);
-                            if (self.countyLegend) {
-                                self.countyLegend.destroy();
-                            }
-                        }
-                    } else if (layer.id === "congressionalDistricts") {
-                        if (layer.visible === true) {
-                            if (self.congressionalLegend) {
-                                self.congressionalLegend.destroy();
-                            }
-                            self.CongressionalLegend();
-                            bookmarkDelegate.legendLayerOptions.remove("c" + layerId);
-                        } else {
-                            bookmarkDelegate.legendLayerOptions.push("c" + layerId);
-                            if (self.congressionalLegend) {
-                                self.congressionalLegend.destroy();
-                            }
-                        }
-                    } else if (layer.id === "legislativeDistricts") {
-                        if (layer.visible === true) {
-                            if (self.legislativeLegend) {
-                                self.legislativeLegend.destroy();
-                            }
-                            self.LegislativeLegend();
-                            bookmarkDelegate.legendLayerOptions.remove("c" + layerId);
-                        } else {
-                            bookmarkDelegate.legendLayerOptions.push("c" + layerId);
-                            if (self.legislativeLegend) {
-                                self.legislativeLegend.destroy();
-                            }
-                        }
-                    } else if (layer.id === "councilDistricts") {
-                        if (layer.visible === true) {
-                            if (self.councilLegend) {
-                                self.councilLegend.destroy();
-                            }
-                            self.CouncilLegend();
-                            bookmarkDelegate.legendLayerOptions.remove("c" + layerId);
-                        } else {
-                            bookmarkDelegate.legendLayerOptions.push("c" + layerId);
-                            if (self.councilLegend) {
-                                self.councilLegend.destroy();
-                            }
-                        }
-                    }else if (layer.id === "supervisorDistricts") {
-                        if (layer.visible === true) {
-                            if (self.supervisorLegend) {
-                                self.supervisorLegend.destroy();
-                            }
-                            self.SupervisorLegend();
-                            bookmarkDelegate.legendLayerOptions.remove("c" + layerId);
-                        } else {
-                            bookmarkDelegate.legendLayerOptions.push("c" + layerId);
-                            if (self.supervisorLegend) {
-                                self.supervisorLegend.destroy();
-                            }
-                        }
-                    } else if (layer.id === "cogBoundaries") {
-                        if (layer.visible === true) {
-                            if (self.cogLegend) {
-                                self.cogLegend.destroy();
-                            }
-                            if (self.countyLegend) {
-                                self.countyLegend.destroy();
-                            }
-                            self.CogLegend();
-                            self.CountyLegend();
-                            var countyId = "countyBoundaries";
-                            var countyLayer = mapModel.mapInstance.getLayer(countyId);
-                            countyLayer.show();
-                            dom.byId("c" + countyId).checked = true;
-                            bookmarkDelegate.legendLayerOptions.remove("c" + layerId);
-                        } else {
-                            bookmarkDelegate.legendLayerOptions.push("c" + layerId);
-                            if (self.cogLegend) {
-                                self.cogLegend.destroy();
-                            }
+                            baseLayer.show();
                         }
                     }
                     tp.publish("BaseLayersUpdated");
                 };
 
-                self.onCheckBoxClick = function(e) {
+                self.onCheckBoxClick = function (e) {
                     var layerId = e.currentTarget.id.substr(1);
                     self.updateLegendLayers(layerId);
                 };
 
-                //County Legend
-                self.CountyLegend = function() {
-                    var insertElement = "legendDiv";
-                    self.countyLegend = new Legend({
-                        map: mapModel.mapInstance,
-                        layerInfos: [{
-                            layer: mapModel.mapInstance.getLayer("countyBoundaries"),
-                            title: "County Boundaries"
-                        }],
-                        autoUpdate: true
-                    }, dc.create("div", {
-                        id: "legendDiv3"
-                    }, insertElement, "after"));
-                    self.countyLegend.startup();
-                };
+                self.setupLegend = function () {
+                    var lInfos = [];
+                    for (var i = 0; i < appConfig.layerInfo.length; i++) {
+                        var conf = appConfig.layerInfo[i];
+                        if (conf.showLegend !== false) {
+                            var infoObj = {
+                                layer: mapModel.mapInstance.getLayer(conf.id),
+                                title: conf.title
+                            }
+                            lInfos.push(infoObj);
+                        }
+                    }
 
-                //Congressional Legend
-                self.CongressionalLegend = function() {
-                    var insertElement = "legendDiv";
-                    self.congressionalLegend = new Legend({
+                    self.legend = new Legend({
                         map: mapModel.mapInstance,
-                        layerInfos: [{
-                            layer: mapModel.mapInstance.getLayer("congressionalDistricts"),
-                            title: "Congressional Districts"
-                        }],
+                        layerInfos: lInfos,
                         autoUpdate: true
-                    }, dc.create("div", {
-                        id: "legendDiv4"
-                    }, insertElement, "after"));
-                    self.congressionalLegend.startup();
-                };
+                    }, "legendDiv");
 
-                //Place Legend
-                self.LegislativeLegend = function() {
-                    var insertElement = "legendDiv";
-                    self.legislativeLegend = new Legend({
-                        map: mapModel.mapInstance,
-                        layerInfos: [{
-                            layer: mapModel.mapInstance.getLayer("legislativeDistricts"),
-                            title: "Legislative Districts"
-                        }],
-                        autoUpdate: true
-                    }, dc.create("div", {
-                        id: "legendDiv5"
-                    }, insertElement, "after"));
-                    self.legislativeLegend.startup();
-                };
-
-                self.CouncilLegend = function() {
-                    var insertElement = "legendDiv";
-                    self.councilLegend = new Legend({
-                        map: mapModel.mapInstance,
-                        layerInfos: [{
-                            layer: mapModel.mapInstance.getLayer("councilDistricts"),
-                            title: "Council Districts"
-                        }],
-                        autoUpdate: true
-                    }, dc.create("div", {
-                        id: "legendDiv1156"
-                    }, insertElement, "after"));
-                    self.councilLegend.startup();
-                };
-
-                self.SupervisorLegend = function() {
-                    var insertElement = "legendDiv";
-                    self.supervisorLegend = new Legend({
-                        map: mapModel.mapInstance,
-                        layerInfos: [{
-                            layer: mapModel.mapInstance.getLayer("supervisorDistricts"),
-                            title: "Supervisor Districts"
-                        }],
-                        autoUpdate: true
-                    }, dc.create("div", {
-                        id: "legendDiv10"
-                    }, insertElement, "after"));
-                    self.supervisorLegend.startup();
-                };
-
-                self.CogLegend = function() {
-                    var insertElement = "legendDiv";
-                    self.cogLegend = new Legend({
-                        map: mapModel.mapInstance,
-                        layerInfos: [{
-                            layer: mapModel.mapInstance.getLayer("cogBoundaries"),
-                            title: "COG / MPO boundaries"
-                        }],
-                        autoUpdate: false
-                    }, dc.create("div", {
-                        id: "legendDiv6"
-                    }, insertElement, "after"));
-                    self.cogLegend.startup();
-                };
+                    self.legend.startup();
+                }
 
                 //Thematic Legend
-                self.mapLoaded = function(map) {
+                self.mapLoaded = function (map) {
+
                     if (map.id === mapModel.baseMapInstance.id) {
                         if (!self.legendInitialized) {
-                            self.legend = new Legend({
-                                map: map,
-                                layerInfos: [{
-                                    layer: map.getLayer("blockGroups"),
-                                    title: self.legendMapTitle
-                                }]
-                            }, "legendDiv");
-                            self.legend.startup();
-                            dom.byId("legendTitle").innerHTML = self.legendMapTitle;
+
+                            // dom.byId("legendTitle").innerHTML = self.legendMapTitle;
                             // dom.byId("title2").innerHTML = self.legendMapTitle;
                             dom.byId("dataSource").innerHTML = self.sourceInfo;
                             self.legendInitialized = true;
-                            // self.legend.refresh();
                         }
                     }
 
@@ -454,7 +293,7 @@
 
                         var initData = mapModel.GetMapInitDataByID(map.id);
 
-                        $.each(initData.layers, function(i, initLayer) {
+                        $.each(initData.layers, function (i, initLayer) {
                             var layer = map.getLayer(initLayer);
                             layer.visible = true;
                             //self.updateLegendByMapId(map.id);
@@ -464,27 +303,22 @@
                                 baseLayer.hide();
                             }
                         });
+
                     }
+                    self.setupLegend();
                 };
 
-                self.updateLegend = function() {
+                self.updateLegend = function () {
                     if (mapModel.mapInstance.id === mapModel.baseMapInstance.id) {
-                        self.legend.refresh([{
-                            layer: mapModel.mapInstance.getLayer("blockGroups"),
-                            title: self.legendMapTitle
-                        }]);
-
                         dom.byId("legendTitle").innerHTML = self.legendMapTitle;
-                        // dom.byId("title2").innerHTML = "&nbsp;-&nbsp;&nbsp;" + self.legendMapTitle;
                         dom.byId("dataSource").innerHTML = self.sourceInfo;
                     }
+                    self.legend.refresh();
                 };
 
-                self.updateLegendTitle = function(dataItem) {
+                self.updateLegendTitle = function (dataItem) {
                     if (mapModel.mapInstance.id === mapModel.baseMapInstance.id) {
                         self.legendMapTitle = dataItem.ShortName;
-                        self.sourceInfo = appConfig.LegendSource;
-                        // self.sourceInfo = dataItem.Source;
                     }
                 };
 
@@ -494,7 +328,7 @@
                 @method updateSliderOpacity
                 @param {double} opacity - value of layer transparency to update slider to match.
                 **/
-                self.updateSliderOpacity = function(opacity) {
+                self.updateSliderOpacity = function (opacity) {
                     this.legend.refresh();
                 }; //end updateSliderOpacity
 

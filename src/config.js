@@ -62,6 +62,7 @@ var appConfig = new function() {
         opacity: 1,
         visible: false,
         showTOC: true,
+        showLegend: true,
         link: false
     }, {
         drawOrder: 2,
@@ -183,7 +184,8 @@ var appConfig = new function() {
         type: "tile",
         url: "http://server.arcgisonline.com/arcgis/rest/services/Reference/World_Transportation/MapServer",
         visible: true,
-        showTOC: true
+        showTOC: true,
+        showLegend: false
     }, {
         drawOrder: 8,
         id: "blockGroups",
@@ -207,7 +209,8 @@ var appConfig = new function() {
         url: "http://server.arcgisonline.com/arcgis/rest/services/Canvas/World_Light_Gray_Base/MapServer",
         visible: true,
         isBasemap: false,
-        showTOC: false
+        showTOC: false,
+        showLegend: false
     }, {
         drawOrder: 10,
         id: "esriImagery",
@@ -216,7 +219,8 @@ var appConfig = new function() {
         url: "http://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer",
         isBasemap: true,
         visible: false,
-        showTOC: true
+        showTOC: true,
+        showLegend: false
     }];
 
     // function toObject(arr) {

@@ -1224,13 +1224,24 @@ input.mapTitle {
     width: 300px;
     display: none;
 }
-
-#legendDiv .esriLegendServiceLabel {
+#legendDiv_blockGroups .esriLegendServiceLabel{
     display: none;
 }
 
-.esriLegendLayerLabel {
+#legendDiv_blockGroups .esriLegendLayerLabel {
     display: none;
+}
+
+#legendDiv_censusTracts_23 .esriLegendServiceLabel {
+    display: none;
+}
+
+#legendDiv_censusTracts_23 .esriLegendLayerLabel {
+    display: none;
+}
+
+#legendDiv_censusTracts_24{
+    display: none !important;
 }
 
 #organizer2 {
@@ -1239,7 +1250,6 @@ input.mapTitle {
     margin: 0 auto;
     padding: 0px 0 0 0;
 }
-
 
 /* ==========================================
 **** warning-view.html styles ****

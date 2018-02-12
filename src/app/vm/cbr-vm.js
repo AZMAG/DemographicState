@@ -563,9 +563,6 @@
                 @method applyRenderer
                 **/
                 self.applyRenderer = function(renderer) {
-                    // console.log("Apply Renderer Called");
-                    // console.log(legend);
-
                     for (var i = 0; i < self.CurrentRamp.length; i++) {
                         renderer.infos[i].symbol.color = dojo.colorFromRgb(self.CurrentRamp[i]);
                     }
@@ -586,14 +583,13 @@
                     var dataItem = self.toc.dataItem(self.toc.select());
                     renderer.asPercent = dataItem.AsPercentages;
                     self.currentRenderer = renderer;
-
-                   
                     
                     if (self.classMethodList.dataItem().Value === "custom") {
                         tp.publish("ClassificationMethodChanged", self.currentRenderer);
                     } else {
                         self.redrawThematicLayer();
                     }
+                    tp.publish("MapRenderUpdated");
                 };
 
                 /**
@@ -629,8 +625,8 @@
                         thematicLayer.setLayerDrawingOptions(layerOptions);
                         thematicLayer.visible = true;
                         thematicLayer.refresh();
-                        tp.publish("MapRenderUpdated");
                     }
+                    tp.publish("MapRenderUpdated");
                 };
 
                 /**
