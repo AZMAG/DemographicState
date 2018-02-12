@@ -137,8 +137,11 @@
                     printTemplate.format = selectedFormat;
 
                     // these refer to named text elements in the mxd, sb
+                    var thematicMap = cbrVm.toc.dataItem(cbrVm.toc.select());
+                    var parent = cbrVm.toc.parent(cbrVm.toc.select());
+                    
                     var customLayoutElements = [{
-                        "txtLegendHeader": thematicMap.Name + " \n<_BOL> " + appConfig.LegendSource + "</_BOL>"
+                        "txtLegendHeader": cbrVm.toc.text(parent) + ' - ' + thematicMap.Name + " \n<_BOL> " + appConfig.LegendSource + "</_BOL>"
                     }, {
                         "txtComments": notesText
                     }];
@@ -205,7 +208,8 @@
                 self.openWindow = function() {
                     // set the title to the currently selected map
                     var thematicMap = cbrVm.toc.dataItem(cbrVm.toc.select());
-                    $("#mapTitle").val(thematicMap.Name);
+                    var parent = cbrVm.toc.parent(cbrVm.toc.select());
+                    $("#mapTitle").val(cbrVm.toc.text(parent) + ' - ' + thematicMap.Name);
 
                     if ($("#map2").is(":visible")) {
                         $("#printLabel").show();
