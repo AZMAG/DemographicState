@@ -203,7 +203,7 @@
                     var nameArray = [];
 
                     if (!configItem) {
-                        console.log(attributes)
+                        console.error("There was an error matching the button clicked to the config item", attributes);
                     }
 
                     var fieldName = configItem.summaryField;
