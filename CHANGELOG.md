@@ -16,6 +16,24 @@ And constructed with the following guidelines:
 3. **PATCH** version when you make backwards-compatible bug fixes and misc changes **bumps only the patch**
 
 ***************************************************************************************************************
+
+## Version 3.2.2 | 02/15/2018
+* Update Title VI data to only appear in areas that include  > 5000 Total Population.
+* Made print label longer
+* Oops, my legendvm refactoring broke the multiple map frames feature.  This is the fix.
+* Add Error log if config item doesn't match up correctly
+* Refactored Legend code to make much simpler going forward.
+* Update Help view
+* Updated legal disclaimer for census tabs.
+* Updated the buffer selection to prevent the error if a user enters 0 in the distance box.  Also added a max of 10,000 to the distance box.
+* Update Data Source for Advanced Query Help
+* Fixed issues with summary report help items
+* Fixed typo.  Debbie found this.
+* Changing resources to https
+* Fixed bug in which datasource becomes undefined in multiple map frames
+* Refactored ExportToPDF function and updated PDF links.
+* Updated some verbage and fields for the title 6 data.
+
 ## Version 3.2.1 | 01/18/2018
 
 * Fixed the help contact popup window.
