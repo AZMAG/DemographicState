@@ -1411,14 +1411,14 @@
 					//$("#demTabStrip").css("visibility", "visible");
 					$('#reportLoading').hide();
 					if (
-						self.reportType === 'cog' ||
+						(self.reportType === 'cog' ||
 						self.reportType == 'county' ||
 						self.reportType == 'place' ||
 						self.reportType == 'legislative' ||
 						self.reportType == 'congressional' ||
 						self.reportType == 'zipCode' ||
 						self.reportType == 'supervisor' ||
-						self.reportType == 'councilDistrict'
+						self.reportType == 'councilDistrict') && features[0].attributes['TOTAL_POP'] > 5000
 					) {
 						var attributes = features[0].attributes;
 						if (features.length > 1) {

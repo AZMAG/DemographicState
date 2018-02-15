@@ -309,7 +309,9 @@
                         $choiceDiv.show();
                         self.hideChoices(selector);
                         self.hideLayers(layerID);
-                        layer.show();
+                        if (layer) {
+                            layer.show();
+                        }
                         self.boxChecked(layerID, true);
 
                         if (type === "cog") {
@@ -318,7 +320,9 @@
 
                     } else {
                         $choiceDiv.hide();
-                        layer.hide();
+                        if (layer) {
+                            layer.hide();    
+                        }
                         self.boxChecked(layerID, false);
                         if (type === "cog") {
                             self.cogLayers();
@@ -331,7 +335,10 @@
                  * @return {[type]}         [description]
                  */
                 self.boxChecked = function(layerID, checked) {
-                    dom.byId("c" + layerID).checked = checked;
+                    var cbox = dom.byId("c" + layerID);
+                    if (cbox) {
+                        cbox.checked = checked;    
+                    }
                 };
                 /**
                  * COG/MPO summary report info
