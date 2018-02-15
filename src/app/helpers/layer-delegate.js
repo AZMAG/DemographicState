@@ -62,7 +62,8 @@ var queryCountGlobal;
                  * @param {string[]} orderByFields - [OPTIONAL] array of fields to order the results by.
                  * @param {boolean} distinct - [OPTIONAL] whether or not to return only distinct values.
                  **/
-                query: function(url, callback, errback, geometry, where, returnGeometry, outFields, orderByFields, distinct) {
+                query: function(url, callback, errback, geometry, where, returnGeometry, outFields, orderByFields, distinct, num, start) {
+
                     //Setup default values
                     outFields = (typeof outFields === "undefined") ? ["*"] : outFields;
                     where = (typeof where === "undefined") ? "1=1" : where;
@@ -70,6 +71,9 @@ var queryCountGlobal;
                     returnGeometry = (typeof returnGeometry === "undefined") ? false : returnGeometry;
                     distinct = (typeof distinct === "undefined") ? false : distinct;
                     orderByFields = (typeof orderByFields === "undefined") ? [] : orderByFields;
+                    num = (typeof num === "undefined") ? undefined : num;
+                    start = (typeof start === "undefined") ? undefined : start;
+
 
                     //Create new query
                     if (url.indexOf("?") === -1) {
@@ -89,14 +93,24 @@ var queryCountGlobal;
                     query.returnIdsOnly = false;
                     query.maxAllowableOffset = 0.1;
                     query.returnDistinctValues = distinct;
-
-                    // added to count features. vw
-                    qt.executeForCount(query, function(count) {
-                        queryCountGlobal = count;
-                    });
+                    if (num !== undefined && start !== undefined) {
+                        query.num = num;
+                        query.start = start;
+                    }
 
                     //Execute query and return results to callback function
                     qt.execute(query, callback, errback);
+
+                    var countQuery = new Query();
+                    countQuery.geometry = geometry;
+                    countQuery.where = where;
+                    countQuery.returnGeometry = returnGeometry;
+                    countQuery.outFields = outFields;
+
+                    // added to count features. vw
+                    qt.executeForCount(countQuery, function(count) {
+                        queryCountGlobal = (count);
+                    });
                 },
 
                 // added to verify query without running vw

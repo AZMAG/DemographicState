@@ -8,11 +8,9 @@
             var demographicConfig = new function() {
                 var self = this;
 
-                self.exportPDFCompareReportUrl = "http://geo.azmag.gov/services/Demographics2015/CompareReport.html";
-                self.exportPDFReportUrl = "http://geo.azmag.gov/services/Demographics2015/reports.html";
-
-                self.viewReportUrl = "http://localhost/MAG/MAGDemographicsReports/DemographicChartsReport.html";
-                self.ACS2015byBlockGroup = appConfig.layerInfo[8].url;
+                self.exportPDFCompareReportUrl = "http://geo.azmag.gov/services/demographics2016/CompareReport.html";
+                self.exportPDFReportUrl = "http://geo.azmag.gov/services/demographics2016/Reports.html";
+                self.viewReportUrl = "https://localhost/MAG/MAGDemographicsReports/DemographicChartsReport.html";
 
                 self.CompareOperators = {
                     string: [{
@@ -74,7 +72,7 @@
                         ShortName: "County",
                         Type: "string"
                     }, {
-                        FieldName: "ZIP_CODE",
+                        FieldName: "ZIPCODE",
                         Name: "Zip Code",
                         ShortName: "Zip Code",
                         Type: "string"
@@ -274,124 +272,127 @@
 
                 self.reports = {
                     stateSummary: {
+                        exportPDFParameter: "state",
                         name: "Demographic Summary",
-                        censusRestUrl: self.ACS2015byBlockGroup + "/10",
-                        ACSRestUrl: self.ACS2015byBlockGroup + "/3",
+                        helpItem: "State",
+                        layerName: "State",
                         whereClause: "NAME = 'Arizona'",
-                        compareCensusUrl: self.ACS2015byBlockGroup + "/10",
-                        compareACSUrl: self.ACS2015byBlockGroup + "/3",
+                        compareCensusUrl: appConfig.mainURL + "/13",
+                        compareACSUrl: appConfig.mainURL + "/3",
                         compareWhereClause: "1 = 1",
                         comparePlaceField: "NAME",
                         summaryField: "NAME",
-                        isTimeVaryingData: false,
-                        source: "American Community Survey 2011-2015 5yr",
                         populateDropDown: false
                     },
-
                     countySummary: {
+                        exportPDFParameter: "county",
                         name: "Demographic Summary",
-                        censusRestUrl: self.ACS2015byBlockGroup + "/10",
-                        ACSRestUrl: self.ACS2015byBlockGroup + "/3",
-                        whereClause: "NAME <> 'Arizona'",
-                        compareCensusUrl: self.ACS2015byBlockGroup + "/10",
-                        compareACSUrl: self.ACS2015byBlockGroup + "/3",
+                        layerName: "Counties",
+                        helpItem: "County",
+                        whereClause: "1 = 1",
                         compareWhereClause: "1 = 1",
                         comparePlaceField: "NAME",
                         summaryField: "NAME",
                         sortField: "NAME",
-                        isTimeVaryingData: false,
-                        source: "American Community Survey 2011-2015 5yr",
                         dropdown: "#countyComboBox"
                     },
-
                     cogSummary: {
+                        exportPDFParameter: "cog",
                         name: "Demographic Summary",
-                        censusRestUrl: self.ACS2015byBlockGroup + "/9",
-                        ACSRestUrl: self.ACS2015byBlockGroup + "/2",
-                        compareCensusUrl: self.ACS2015byBlockGroup + "/8",
-                        compareACSUrl: self.ACS2015byBlockGroup + "/1",
+                        helpItem: "Cog or Mpo",
+                        layerName: "Cogs_Mpos",
+                        compareCensusUrl: appConfig.mainURL + "/13",
+                        compareACSUrl: appConfig.mainURL + "/3",
                         compareWhereClause: "1 = 1",
                         comparePlaceField: "NAME",
                         summaryField: "NAME",
                         sortField: "NAME",
-                        isTimeVaryingData: false,
-                        source: "American Community Survey 2011-2015 5yr",
                         dropdown: "#cogComboBox"
                     },
-
                     placeSummary: {
+                        exportPDFParameter: "city",
                         name: "Demographic Summary",
-                        censusRestUrl: self.ACS2015byBlockGroup + "/8",
-                        ACSRestUrl: self.ACS2015byBlockGroup + "/1",
+                        helpItem: "Place",
+                        layerName: "Places",
                         whereClause: "1 = 1",
-                        compareCensusUrl: self.ACS2015byBlockGroup + "/8",
-                        compareACSUrl: self.ACS2015byBlockGroup + "/1",
                         compareWhereClause: "1 = 1",
-                        comparePlaceField: "NAME",
-                        summaryField: "NAME",
-                        sortField: "NAME",
-                        isTimeVaryingData: false,
-                        source: "American Community Survey 2011-2015 5yr",
+                        comparePlaceField: "Name",
+                        summaryField: "Name",
+                        sortField: "Name",
                         dropdown: "#placeComboBox"
                     },
                     legislativeSummary: {
+                        exportPDFParameter: "legislative",
                         name: "Demographic Summary",
-                        censusRestUrl: self.ACS2015byBlockGroup + "/11",
-                        ACSRestUrl: self.ACS2015byBlockGroup + "/4",
+                        helpItem: "Legislative District",
+                        layerName: "Legislative_Districts",
                         whereClause: "1 = 1",
-                        compareCensusUrl: self.ACS2015byBlockGroup + "/11",
-                        compareACSUrl: self.ACS2015byBlockGroup + "/4",
                         compareWhereClause: "1 = 1",
                         comparePlaceField: "SLDIST_NAME",
                         summaryField: "SLDIST_NAME",
                         sortField: "SLDISTID",
-                        isTimeVaryingData: false,
-                        source: "American Community Survey 2011-2015 5yr",
                         dropdown: "#legislativeComboBox"
                     },
                     congressionalSummary: {
+                        exportPDFParameter: "congressional",
                         name: "Demographic Summary",
-                        censusRestUrl: self.ACS2015byBlockGroup + "/12",
-                        ACSRestUrl: self.ACS2015byBlockGroup + "/5",
+                        helpItem: "Congressional District",
+                        layerName: "Congressional_Districts",
                         whereClause: "1 = 1",
-                        compareCensusUrl: self.ACS2015byBlockGroup + "/12",
-                        compareACSUrl: self.ACS2015byBlockGroup + "/5",
                         compareWhereClause: "1 = 1",
                         comparePlaceField: "CDIST_NAME",
                         summaryField: "CDIST_NAME",
                         sortField: "CDIST_NAME",
-                        isTimeVaryingData: false,
-                        source: "American Community Survey 2011-2015 5yr",
                         dropdown: "#congressionalComboBox"
                     },
-                    zipCodeSummary: {
+                    supervisorSummary: {
+                        exportPDFParameter: "supervisor",
                         name: "Demographic Summary",
-                        censusRestUrl: self.ACS2015byBlockGroup + "/13",
-                        ACSRestUrl: self.ACS2015byBlockGroup + "/6",
+                        helpItem: "Supervisor District",
+                        layerName: "SupervisorDistricts",
                         whereClause: "1 = 1",
-                        compareCensusUrl: self.ACS2015byBlockGroup + "/13",
-                        compareACSUrl: self.ACS2015byBlockGroup + "/6",
+                        compareWhereClause: "1 = 1",
+                        comparePlaceField: "SuperDistName",
+                        summaryField: "SuperDistName",
+                        sortField: "SuperDistName",
+                        dropdown: "#supervisorComboBox"
+                    },
+                    councilDistrictSummary: {
+                        exportPDFParameter: "council",
+                        name: "Demographic Summary",
+                        helpItem: "Council District",
+                        layerName: "CityDistricts",
+                        whereClause: "1 = 1",
+                        compareWhereClause: "1 = 1",
+                        comparePlaceField: "CityDistrictName",
+                        summaryField: "CityDistrictName",
+                        sortField: "CityDistrictName",
+                        dropdown: "#councilDistrictComboBox"
+                    },
+                    zipCodeSummary: {
+                        exportPDFParameter: "zipCode",
+                        name: "Demographic Summary",
+                        helpItem: "Zip Code",
+                        layerName: "Zip_Codes",
+                        whereClause: "1 = 1",
                         compareWhereClause: "1 = 1",
                         comparePlaceField: "ZIPCODE",
                         summaryField: "ZIPCODE",
                         sortField: "ZIPCODE",
-                        isTimeVaryingData: false,
-                        source: "American Community Survey 2011-2015 5yr",
                         dropdown: "#zipCodeComboBox"
                     },
-                    censusTracts: {
+                    blockGroups: {
+                        exportPDFParameter: "interactive",
                         name: "Demographic Summary",
-                        censusRestUrl: self.ACS2015byBlockGroup + "/7",
-                        ACSRestUrl: self.ACS2015byBlockGroup + "/0",
+                        helpItem: "Block Group(s)",
+                        layerName: "Block_Groups",
                         whereClause: "1 = 1",
-                        compareCensusUrl: self.ACS2015byBlockGroup + "/7",
-                        compareACSUrl: self.ACS2015byBlockGroup + "/1",
+                        compareCensusUrl: appConfig.mainURL + "/11",
+                        compareACSUrl: appConfig.mainURL + "/1",
                         compareWhereClause: "1 = 1",
-                        comparePlaceField: "NAME",
+                        comparePlaceField: "Name",
                         summaryField: "OBJECTID",
                         sortField: "OBJECTID",
-                        isTimeVaryingData: false,
-                        source: "American Community Survey 2011-2015 5yr",
                         populateDropDown: false
                     }
                 };

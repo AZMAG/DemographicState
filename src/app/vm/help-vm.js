@@ -88,7 +88,7 @@
                     win.content(content);
                     win.center();
                     win.open();
-
+                    ga('send', 'event', 'Click', 'Opened Window', 'Help Window');
                     // added for tabs in main window help. vw
                     $("#tabstrip").kendoTabStrip({
                         animation: {

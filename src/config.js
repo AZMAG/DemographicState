@@ -33,53 +33,44 @@
 
 var appConfig = new function() {
 
-    this.Version = "v3.1.1 | 06/21/2017";
+    this.Version = "v3.0.6 | 04/14/2017";
+    this.LegendSource = "American Community Survey 2012-2016 5yr";
+    this.jasonemail = "https://www.azmag.gov/Contact/4788?s=geo.azmag.gov/maps/azdemographics&n=Jason%20Howard&popUp=true";
 
-    this.jasonemail = "https://www.azmag.gov/EmailPages/JasonHoward.asp";
-
-    this.ArcGISInstanceURL = "http://geo.azmag.gov/gismag/rest";
+    this.ArcGISInstanceURL = "https://geo.azmag.gov/gismag/rest";
     //this.exportWebMapUrl = "http://geo.azmag.gov/gismag/rest/services/Utilities/PrintingTools/GPServer/Export%20Web%20Map%20Task";  // Generic Print Service
-    this.exportWebMapUrl = "http://geo.azmag.gov/gismag/rest/services/gp/stateDemo/GPServer/Export%20Web%20Map"; // Custom Print Service
+    this.exportWebMapUrl = "https://geo.azmag.gov/gismag/rest/services/gp/stateDemo/GPServer/Export%20Web%20Map"; // Custom Print Service
     this.webServicePasscode = "sun sand dry heat grand canyon";
 
-    this.mainURL = "http://geo.azmag.gov/gismag/rest/services/maps/DemographicState2015/MapServer";
-    this.siteUrl = "http://geo.azmag.gov/maps/azdemographics/?";
+    this.mainURL = "https://geo.azmag.gov/gismag/rest/services/maps/DemographicState2016/MapServer";
+    this.siteUrl = "https://geo.azmag.gov/maps/azdemographics/?";
 
     // Search Service URLs
     this.geoCoderService = "//geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer";
-    this.countyService = this.mainURL + "/3";
-    this.cogService = this.mainURL + "/2";
-    this.placeService = this.mainURL + "/1";
-    this.legislativeService = this.mainURL + "/4";
-    this.congressionalService = this.mainURL + "/5";
-    this.zipCodeService = this.mainURL + "/6";
-    this.tractService = this.mainURL + "/17";
-    this.SchoolsService = this.mainURL + "/19";
+    this.tractService = this.mainURL + "/23";
+    this.SchoolsService = this.mainURL + "/25";
 
     this.layerInfo = [{
-        layerNum: 0,
-        drawOrder:  0,
+        drawOrder: 0,
         id: "censusTracts",
         title: "Census Tracts",
         type: "dynamic",
         url: this.mainURL,
-        queryUrl: this.mainURL + "/18",
+        queryUrl: this.mainURL + "/24",
         queryWhere: "1=1",
-        layers: [17, 18],
+        layers: [23, 24],
         opacity: 1,
         visible: false,
         showTOC: true,
+        showLegend: true,
         link: false
     }, {
-        layerNum: 1,
-        drawOrder:  2,
+        drawOrder: 2,
         id: "cogBoundaries",
+        layerName: "Cogs_Mpos",
         title: "COG / MPO Boundaries",
         type: "feature",
-        url: this.mainURL + "/2",
-        queryUrl: this.mainURL + "/2",
         queryWhere: "1=1",
-        layers: [2],
         opacity: 0.7,
         visible: false,
         selectable: true,
@@ -88,15 +79,12 @@ var appConfig = new function() {
         showTOC: true,
         link: true
     }, {
-        layerNum: 2,
-        drawOrder:  1,
+        drawOrder: 1,
         id: "countyBoundaries",
         title: "County Boundaries",
+        layerName: "Counties",
         type: "feature",
-        url: this.mainURL + "/16",
-        queryUrl: this.mainURL + "/16",
         queryWhere: "1=1",
-        layers: [16],
         opacity: 0.8,
         visible: true,
         selectable: true,
@@ -105,15 +93,12 @@ var appConfig = new function() {
         showTOC: true,
         link: true
     }, {
-        layerNum: 3,
-        drawOrder:  3,
+        drawOrder: 3,
+        layerName: "Congressional_Districts",
         id: "congressionalDistricts",
         title: "Congressional Districts",
         type: "feature",
-        url: this.mainURL + "/5",
-        queryUrl: this.mainURL + "/5",
         queryWhere: "1=1",
-        layers: [5],
         opacity: 1,
         visible: false,
         selectable: true,
@@ -122,15 +107,12 @@ var appConfig = new function() {
         showTOC: true,
         link: true
     }, {
-        layerNum: 4,
-        drawOrder:  4,
+        drawOrder: 4,
+        layerName: "Legislative_Districts",
         id: "legislativeDistricts",
         title: "Legislative Districts",
         type: "feature",
-        url: this.mainURL + "/4",
-        queryUrl: this.mainURL + "/4",
         queryWhere: "1=1",
-        layers: [4],
         opacity: 1,
         visible: false,
         selectable: true,
@@ -139,15 +121,12 @@ var appConfig = new function() {
         showTOC: true,
         link: true
     }, {
-        layerNum: 5,
-        drawOrder:  5,
+        drawOrder: 5,
+        layerName: "Zip_Codes",
         id: "zipCodes",
         title: "ZIP Codes",
         type: "feature",
-        url: this.mainURL + "/6",
-        queryUrl: this.mainURL + "/6",
         queryWhere: "1=1",
-        layers: [6],
         opacity: 1,
         visible: false,
         selectable: true,
@@ -156,15 +135,13 @@ var appConfig = new function() {
         showTOC: true,
         link: true
     }, {
-        layerNum: 6,
-        drawOrder:  6,
+        drawOrder: 6,
         id: "districts",
         title: "Unified School Districts",
+        url: this.mainURL + "/25",
+        queryUrl: this.mainURL + "/25",
         type: "feature",
-        url: this.mainURL + "/19",
-        queryUrl: this.mainURL + "/19",
         queryWhere: "1=1",
-        layers: [19],
         opacity: 1,
         visible: false,
         selectable: true,
@@ -173,19 +150,46 @@ var appConfig = new function() {
         showTOC: true,
         link: false
     }, {
-        layerNum: 7,
-        drawOrder:  7,
+        drawOrder: 7,
+        layerName: "SupervisorDistricts",
+        id: "supervisorDistricts",
+        title: "Supervisor Districts",
+        type: "feature",
+        queryWhere: "1=1",
+        opacity: 1,
+        visible: false,
+        selectable: true,
+        outFields: ["*"],
+        filters: [],
+        showTOC: true,
+        link: false
+    }, {
+        drawOrder: 7,
+        layerName: "CityDistricts",
+        id: "councilDistricts",
+        title: "Council Districts",
+        type: "feature",
+        queryWhere: "1=1",
+        opacity: 1,
+        visible: false,
+        selectable: true,
+        outFields: ["*"],
+        filters: [],
+        showTOC: true,
+        link: false
+    }, {
+        drawOrder: 7,
         id: "esriReference",
         title: "Streets",
         type: "tile",
         url: "http://server.arcgisonline.com/arcgis/rest/services/Reference/World_Transportation/MapServer",
         visible: true,
-        showTOC: true
+        showTOC: true,
+        showLegend: false
     }, {
-        layerNum: 8,
-        drawOrder:  8,
-        id: "ACS2015byBlockGroup",
-        title: "American Community Survey by Block Group, 2011-2015 5yr",
+        drawOrder: 8,
+        id: "blockGroups",
+        title: "American Community Survey by Block Group, 2012-2016 5yr",
         type: "dynamic",
         url: this.mainURL,
         layers: [0],
@@ -195,8 +199,7 @@ var appConfig = new function() {
         link: false,
         populateDropDown: false
     }, {
-        layerNum: 9,
-        drawOrder:  9,
+        drawOrder: 9,
         id: "esriBasemap",
         title: "Terrain",
         type: "tile",
@@ -206,18 +209,29 @@ var appConfig = new function() {
         url: "http://server.arcgisonline.com/arcgis/rest/services/Canvas/World_Light_Gray_Base/MapServer",
         visible: true,
         isBasemap: false,
-        showTOC: false
+        showTOC: false,
+        showLegend: false
     }, {
-        layerNum: 10,
-        drawOrder:  10,
+        drawOrder: 10,
         id: "esriImagery",
         title: "Imagery",
         type: "tile",
         url: "http://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer",
         isBasemap: true,
         visible: false,
-        showTOC: true
+        showTOC: true,
+        showLegend: false
     }];
+
+    // function toObject(arr) {
+    //     var rv = {};
+    //     for (var i = 0; i < arr.length; ++i)
+    //         rv[arr[i].id] = arr[i];
+    //     return rv;
+    // }
+
+
+    // this.layerInfoObj = toObject(this.layerInfo);
     // End layerInfo
 
     this.initExtent = {
@@ -235,36 +249,34 @@ var appConfig = new function() {
     //from colorbrewer 2.0 qualitative HEX Set3
     //this.seriesColors = ["#8DD3C7", "#FFFFB3", "#BEBADA", "#FB8072", "#80B1D3", "#FDB462", "#B3DE69", "#FCCDE5", "#D9D9D9", "#BC80BD", "#CCEBC5", "#FFED6F"];
 
-    this.bubbleColors = [
-        {
-            category: "MgBizFin",
-            color: "#A6CEE3"
-        }, {
-            category: "CompEngSci",
-            color: "#1F78B4"
-        }, {
-            category: "EduLegComArtMedia",
-            color: "#B2DF8A"
-        }, {
-            category: "HealthTechnical",
-            color: "#33A02C"
-        }, {
-            category: "ServiceOcc",
-            color: "#FB9A99"
-        }, {
-            category: "ProtectiveServ",
-            color: "#E31A1C"
-        }, {
-            category: "SalesOfficeOcc",
-            color: "#FDBF6F"
-        }, {
-            category: "NatResources",
-            color: "#FF7F00"
-        }, {
-            category: "ProdTransMaterial",
-            color: "#CAB2D6"
-        }
-    ];
+    this.bubbleColors = [{
+        category: "MgBizFin",
+        color: "#A6CEE3"
+    }, {
+        category: "CompEngSci",
+        color: "#1F78B4"
+    }, {
+        category: "EduLegComArtMedia",
+        color: "#B2DF8A"
+    }, {
+        category: "HealthTechnical",
+        color: "#33A02C"
+    }, {
+        category: "ServiceOcc",
+        color: "#FB9A99"
+    }, {
+        category: "ProtectiveServ",
+        color: "#E31A1C"
+    }, {
+        category: "SalesOfficeOcc",
+        color: "#FDBF6F"
+    }, {
+        category: "NatResources",
+        color: "#FF7F00"
+    }, {
+        category: "ProdTransMaterial",
+        color: "#CAB2D6"
+    }];
 
     this.URLMinimizer = {
 
@@ -324,10 +336,11 @@ var appConfig = new function() {
 
     this.textSymbolFontSizes = [8, 9, 10, 11, 12, 14, 16, 18, 20, 24, 30, 50];
 
-    this.sourceLabel = "Source: United States Census Bureau, American Community Survey 2011-2015 5yr Estimates";
+    this.sourceLabel = "Source: United States Census Bureau, American Community Survey 2012-2016 5yr Estimates";
 
     this.sourceLabel2 = "Source: United States Census Bureau, 2010 Decennial Census";
 
-    this.legalDisclaimer = 'Source: U.S. Census Bureau, 2011-2015 American Community Survey (ACS) 5-Year Estimates. ACS data are based on a sample and are subject to sampling variability.  The degree of uncertainty for an estimate is represented through the use of a margin of error (MOE).  In addition to sampling variability, the ACS estimates are subject to nonsampling error. The MOE and effect of nonsampling error is not represented in these tables. Supporting documentation on subject definitions, data accuracy, and statistical testing can be found on the American Community Survey website (www.census.gov/acs) in the Data and Documentation section. Sample size and data quality measures (including coverage rates, allocation rates, and response rates) can be found on the American Community Survey website (www.census.gov/acs) in the Methodology section.  The MOE for individual data elements can be found on the American FactFinder website (factfinder2.census.gov).  Note: Although the ACS produces population, demographic and housing unit estimates, the 2010 Census provides the official counts of the population and housing units for the nation, states, counties, cities and towns.  Prepared by: Maricopa Association of Governments, www.azmag.gov, (602) 254-6300';
+    this.legalACSDisclaimer = 'Source: U.S. Census Bureau, 2012-2016 American Community Survey (ACS) 5-Year Estimates. ACS data are based on a sample and are subject to sampling variability.  The degree of uncertainty for an estimate is represented through the use of a margin of error (MOE).  In addition to sampling variability, the ACS estimates are subject to nonsampling error. The MOE and effect of nonsampling error is not represented in these tables. Supporting documentation on subject definitions, data accuracy, and statistical testing can be found on the American Community Survey website (www.census.gov/acs) in the Data and Documentation section. Sample size and data quality measures (including coverage rates, allocation rates, and response rates) can be found on the American Community Survey website (www.census.gov/acs) in the Methodology section.  The MOE for individual data elements can be found on the American FactFinder website (factfinder2.census.gov).  Note: Although the ACS produces population, demographic and housing unit estimates, the 2010 Census provides the official counts of the population and housing units for the nation, states, counties, cities and towns.  Prepared by: Maricopa Association of Governments, www.azmag.gov, (602) 254-6300';
 
+    this.legalCensusDisclaimer = 'Source: United States Census Bureau, 2010 Decennial Census. Census data are based on a sample and are subject to sampling variability.  The degree of uncertainty for an estimate is represented through the use of a margin of error (MOE).  In addition to sampling variability, the Census data are subject to nonsampling error. The MOE and effect of nonsampling error is not represented in these tables. Supporting documentation on subject definitions, data accuracy, and statistical testing can be found on the US Census Bureau website (www.census.gov) in the Data and Documentation section.  Prepared by: Maricopa Association of Governments, www.azmag.gov, (602) 254-6300';
 }; //End Config

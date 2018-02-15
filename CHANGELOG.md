@@ -17,6 +17,43 @@ And constructed with the following guidelines:
 
 ***************************************************************************************************************
 
+## Version 3.2.2 | 02/15/2018
+* Update Title VI data to only appear in areas that include  > 5000 Total Population.
+* Made print label longer
+* Oops, my legendvm refactoring broke the multiple map frames feature.  This is the fix.
+* Add Error log if config item doesn't match up correctly
+* Refactored Legend code to make much simpler going forward.
+* Update Help view
+* Updated legal disclaimer for census tabs.
+* Updated the buffer selection to prevent the error if a user enters 0 in the distance box.  Also added a max of 10,000 to the distance box.
+* Update Data Source for Advanced Query Help
+* Fixed issues with summary report help items
+* Fixed typo.  Debbie found this.
+* Changing resources to https
+* Fixed bug in which datasource becomes undefined in multiple map frames
+* Refactored ExportToPDF function and updated PDF links.
+* Updated some verbage and fields for the title 6 data.
+
+## Version 3.2.1 | 01/18/2018
+
+* Fixed the help contact popup window.
+* Fixed the field duplication issue for all summary reports.
+* Fixed the search functionality.  Added new report types to the search.
+* Updated the popups for supervisor and city council districts.
+* Reduced the opacity to make it easier to see the colors beneath the selection graphic.
+* Updated help windows to include supervisor and council district verbage.
+* Added Use Statewide Legend checkbox.  Fixed a bug that was making the legend refresh twice.
+* Updated the Advanced Query Window to point to relative urls from demographic config.
+* Added an alert that prevents a user from submitting a 0 results advanced query.
+* Fixed bug in which the ACS data tab was sometimes being removed.
+
+## Version 3.2.0 | 01/18/2018
+
+* Added Supervisor Districts to Reports and layers
+* Added City Council Districts to Reports and layers
+* Refactored config layers to use the "layerName" property to match the rest endpoint layer instead of having the index hardcoded.
+* Switched the Generate Renderer task to the client using the geostats library instead of the Generate Renderer GP tool.  This will increase speed and allow for dynamic renderering.
+
 ## Version 3.1.0 | 05/23/2017
 
 * file changes only!

@@ -225,6 +225,7 @@ pip-log.txt
 # Dependency directory
 node_modules
 bower_components
+.vscode
 
  # workspace files are user-specific don't track
  *.sublime-workspace

@@ -52,7 +52,7 @@
                             var parts = fixedStrNum.split(".");
                             if (valueToFormat < 1 && valueToFormat > -1) {
                                 if (parts[1] === "0") {
-                                    return "0";
+                                    return valueToFormat.toFixed(1);
                                 } else {
                                     return "." + parts[1];
                                 }

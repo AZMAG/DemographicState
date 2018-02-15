@@ -174,6 +174,7 @@
                     // Create the buffer distance text box
                     $("#bufferDistance").kendoNumericTextBox({
                         min: 0,
+                        max: 10000,
                         format: "#.#",
                         value: interactiveToolConfig.defaultBufferValue ? interactiveToolConfig.defaultBufferValue : 1
                     });
@@ -259,16 +260,16 @@
                     $("#demACSDataGrid").hide();
                     //$("#demTabStrip").css("visibility", "hidden");
                     $("#reportLoading").show();
-
-                    var censusUrl = demographicConfig.reports.censusTracts.censusRestUrl;
+                    demographicVM.resetComparisonDropdowns();
+                    var censusUrl = demographicConfig.reports.blockGroups.censusRestUrl;
                     var censusCallback = demographicVM.interactiveSelectionQueryHandler;
-                    var acsUrl = demographicConfig.reports.censusTracts.ACSRestUrl;
+                    var acsUrl = demographicConfig.reports.blockGroups.ACSRestUrl;
                     var acsCallback = demographicVM.interactiveSelectionQueryHandler;
                     var bufferGeometry = dojo.byId("bufferSelection").checked;
+                    var distance = dojo.byId("bufferDistance").value;
 
-                    if (bufferGeometry) {
+                    if (bufferGeometry && distance !== "0") {
                         var unit = dojo.byId("bufferUnit").value;
-                        var distance = dojo.byId("bufferDistance").value;
 
                         //buffer the geometry
                         layerDelegate.bufferQuery(distance, unit, evt.geometry).then(function(geometries) {
