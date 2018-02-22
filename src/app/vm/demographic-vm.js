@@ -1165,7 +1165,7 @@
 
 					// Create the summary grid
 					var kendoGrid = $(gridName).data('kendoGrid');
-					if (kendoGrid !== null) {
+					if (kendoGrid) {
 						kendoGrid.element.remove();
 						kendoGrid.destroy();
 					}
@@ -1383,7 +1383,7 @@
 
 					// Create the summary grid
 					var kendoGrid = $(gridName).data('kendoGrid');
-					if (kendoGrid !== null) {
+					if (kendoGrid) {
 						kendoGrid.element.remove();
 						kendoGrid.destroy();
 					}
