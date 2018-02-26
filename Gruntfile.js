@@ -141,6 +141,12 @@ module.exports = function(grunt) {
         clean: {
             build: {
                 src: ["dist/"]
+            },
+            cleanjs: {
+                src: ["dist/js/*.js", "!dist/js/master.min.js"]
+            },
+            cleancss: {
+                src: ["dist/app/resources/css/*.css", "!dist/app/resources/css/concat.min.css"]
             }
         },
 
@@ -153,27 +159,17 @@ module.exports = function(grunt) {
             }
         },
 
-        watch: {
-            html: {
-                files: ["index.html"],
-                tasks: ["htmlhint"]
-            },
-            css: {
-                files: ["app/resources/css/main.css"],
-                tasks: ["csslint"]
-            },
-            js: {
-                files: ["config.js", "app/vm/*.js", "app/config/*.js", "app/helpers/*.js", "app/models/*.js", "app/vm/*.js"],
-                tasks: ["jshint"]
+        toggleComments: {
+            customOptions: {
+                options: {
+                    removeCommands: false
+                },
+                files: {
+                    "dist/index.html": "src/index.html"
+                }
             }
         },
 
-        versioncheck: {
-            options: {
-                skip: ["semver", "npm", "lodash"],
-                hideUpToDate: false
-            }
-        },
 
         replace: {
             update_Meta: {
@@ -182,7 +178,7 @@ module.exports = function(grunt) {
                 overwrite: true, // overwrite matched source files
                 replacements: [{
                     // html pages
-                    from: /(<meta name="revision-date" content=")[0-9]{2}\/[0-9]{2}\/[0-9]{4}(">)/g,
+                    from: /(<meta name="revision-date" content=")[0-9]{4}-[0-9]{2}-[0-9]{2}(">)/g,
                     to: '<meta name="revision-date" content="' + '<%= pkg.date %>' + '">',
                 }, {
                     // html pages
@@ -190,7 +186,7 @@ module.exports = function(grunt) {
                     to: '<meta name="version" content="' + '<%= pkg.version %>' + '">',
                 }, {
                     // config.js
-                    from: /(v)([0-9]+)(?:\.([0-9]+))(?:\.([0-9]+))( \| )[0-9]{2}\/[0-9]{2}\/[0-9]{4}/g,
+                    from: /(v)([0-9]+)(?:\.([0-9]+))(?:\.([0-9]+))( \| )[0-9]{4}-[0-9]{2}-[0-9]{2}/g,
                     to: 'v' + '<%= pkg.version %>' + ' | ' + '<%= pkg.date %>',
                 }, {
                     // humans.txt
@@ -198,15 +194,15 @@ module.exports = function(grunt) {
                     to: "Version: " + '<%= pkg.version %>',
                 }, {
                     // humans.txt
-                    from: /(Last updated\: )[0-9]{2}\/[0-9]{2}\/[0-9]{4}/g,
+                    from: /(Last updated\: )[0-9]{4}-[0-9]{2}-[0-9]{2}/g,
                     to: "Last updated: " + '<%= pkg.date %>',
                 }, {
                     // README.md
-                    from: /(### `version )([0-9]+)(?:\.([0-9]+))(?:\.([0-9]+))/g,
-                    to: "#### `version " + '<%= pkg.version %>',
+                    from: /(### version )([0-9]+)(?:\.([0-9]+))(?:\.([0-9]+))/g,
+                    to: "### version " + '<%= pkg.version %>',
                 }, {
                     // README.md
-                    from: /(`Updated: )[0-9]{2}\/[0-9]{2}\/[0-9]{4}/g,
+                    from: /(`Updated: )[0-9]{4}-[0-9]{2}-[0-9]{2}/g,
                     to: "`Updated: " + '<%= pkg.date %>',
                 }, {
                     // main.css
@@ -233,7 +229,7 @@ module.exports = function(grunt) {
     grunt.registerTask("update", ["replace"]);
 
     // grunt.registerTask("build", ["replace", "cssmin", "concat"]);
-    grunt.registerTask("build", ["clean", "replace", "copy", "cssmin", "concat"]);
+    grunt.registerTask("build", ["clean:build", "replace", "copy", "toggleComments", "cssmin", "concat", "clean:cleancss"]);
 
     // the default task can be run just by typing "grunt" on the command line
     grunt.registerTask("default", []);

@@ -324,6 +324,7 @@
                     self.legend.startup();
 
                     dom.byId("legendTitle_{value}".replace(/{value}/gi, self.mapID)).innerHTML = self.mapTheme().ShortName;
+
                     dom.byId("dataSource_{value}".replace(/{value}/gi, self.mapID)).innerHTML = appConfig.LegendSource;
 
                     //create transparency slider
@@ -515,7 +516,6 @@
                         if (self.legend !== null) {
                             dom.byId("mapFrameTitle_{value}".replace(/{value}/gi, self.mapID)).innerHTML = self.mapTheme().ShortName;
                             dom.byId("legendTitle_{value}".replace(/{value}/gi, self.mapID)).innerHTML = self.mapTheme().ShortName;
-                            dom.byId("dataSource_{value}".replace(/{value}/gi, self.mapID)).innerHTML = self.mapTheme().Source;
                         }
                         //if map loaded - enable slider, update legend, add opacity changed event
                         if (self.map.loaded) {
