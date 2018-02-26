@@ -20,9 +20,11 @@
             "app/vm/help-vm",
             "app/vm/demographic-vm",
             "app/config/demographicConfig",
-            "app/config/cbrConfig"
+            "app/config/cbrConfig",
+            'app/vm/alert2-vm',
+            'dojo/text!app/views/alert2-view.html'
         ],
-        function(dj, dc, dom, tp, Query, QueryTask, view, layerDelegate, helpView, helpVM, demographicVM, demographicConfig, cbrConfig) {
+        function(dj, dc, dom, tp, Query, QueryTask, view, layerDelegate, helpView, helpVM, demographicVM, demographicConfig, cbrConfig, alertVM, alertView) {
 
             var QBVM = new function() {
 
@@ -33,6 +35,8 @@
                  * @type {Array}
                  */
                 var tempFields = [];
+
+                var resultCount;
 
                 /**
                  Title for the module's window
@@ -75,10 +79,12 @@
 
                 self.dataItemSelected = null;
 
-                self.layerACSUrl = appConfig.mainURL + "/0";
+                // console.log(demographicConfig.reports);
 
-                self.layerCensusUrl = appConfig.mainURL + "/7";
+                // self.layerACSUrl = appConfig.mainURL + "/0";
+                // self.layerCensusUrl = appConfig.mainURL + "/7";
 
+                
 
                 /**
                  * This id value should match up with the unique id binding handlers.
@@ -118,6 +124,9 @@
                  **/
                 self.init = function(relatedElement, relation) {
                     var node = dc.place(view, relatedElement, relation);
+
+                    self.layerACSUrl = demographicConfig.reports.blockGroups.ACSRestUrl;
+                    self.layerCensusUrl = demographicConfig.reports.blockGroups.censusRestUrl;
                     // ko.applyBindings(self, node);
 
                     var qbWindow2 = $("#qbWindow2").kendoWindow({
@@ -153,6 +162,8 @@
                 self.openWindow = function() {
                     //reinit window
                     self.init("display", "after");
+
+                    ga('send', 'event', 'Click', 'Opened Window', 'Advanced Query Window');
 
                     $("#runQuery").click(self.runQuery);
                     $("#cancelQuery").click(self.closeWindow);
@@ -420,27 +431,33 @@
                  @method runQuery
                  **/
                 self.runQuery = function() {
-                    var queryString = self.buildQueryString();
 
-                    self.acsCallback = function(results) {
-                        var censusQueryString = "GEOID in(";
-                        $.each(results.features, function(i, feature) {
-                            var geoId = feature.attributes.GEOID10;
-                            censusQueryString += "'" + geoId + "'" + ", ";
-                        });
-                        censusQueryString = censusQueryString.slice(0, -2) + ")";
+                    if (resultCount === 0) {
+                        alertVM.openWindow(alertView);
+                    }
+                    else {
+                        var queryString = self.buildQueryString();
 
-                        self.censusCallback = function(censusResults) {
-                            demographicVM.interactiveSelectionQueryHandler(censusResults);
-                            demographicVM.interactiveSelectionQueryHandler(results);
+                        self.acsCallback = function(results) {
+                            var censusQueryString = "GEOID in(";
+                            $.each(results.features, function(i, feature) {
+                                var geoId = feature.attributes.GEOID10;
+                                censusQueryString += "'" + geoId + "'" + ", ";
+                            });
+                            censusQueryString = censusQueryString.slice(0, -2) + ")";
+
+                            self.censusCallback = function(censusResults) {
+                                demographicVM.interactiveSelectionQueryHandler(censusResults);
+                                demographicVM.interactiveSelectionQueryHandler(results);
+                            };
+
+                            layerDelegate.query(self.layerCensusUrl, self.censusCallback, demographicVM.interactiveSelectionQueryFault, undefined, censusQueryString, true);
                         };
 
-                        layerDelegate.query(self.layerCensusUrl, self.censusCallback, demographicVM.interactiveSelectionQueryFault, undefined, censusQueryString, true);
-                    };
-
-                    layerDelegate.query(self.layerACSUrl, self.acsCallback, demographicVM.interactiveSelectionQueryFault, undefined, queryString, true);
-                    esri.show(dojo.byId("loading"));
-                    self.closeWindow();
+                        layerDelegate.query(self.layerACSUrl, self.acsCallback, demographicVM.interactiveSelectionQueryFault, undefined, queryString, true);
+                        esri.show(dojo.byId("loading"));
+                        self.closeWindow();
+                    }
                 };
 
                 self.populateStringDropdowns = function(results) {
@@ -538,6 +555,7 @@
                 self.verifyCallback = function(count) {
                     $("#fCount1").text(count);
                     $("#fCountSpan").show();
+                    resultCount = count;
                 };
             };
             return QBVM;

@@ -4,7 +4,6 @@
  *
  * @module main
  */
-
 define([
         "app/models/map-model",
         "app/vm/mapContainer-vm",
@@ -30,7 +29,9 @@ define([
         "app/vm/alert2-vm",
         "app/vm/legal-vm",
         "app/vm/search-vm",
-        "app/vm/subscribe-vm"
+        "app/vm/subscribe-vm",
+        "app/config/demographicConfig",
+        "app/config/searchConfig"
     ],
 
     function(
@@ -58,78 +59,103 @@ define([
         alert2VM,
         legalVM,
         searchVM,
-        subscribeVM
+        subscribeVM,
+        demographicConfig,
+        searchConfig
     ) {
-        mapModel.initialize();
+        $.get(appConfig.mainURL + "/?f=json", function(data) {
+            $.each(JSON.parse(data).layers, function(key, layer) {
+                Object.keys(demographicConfig.reports).forEach(function(confName) {
+                    var conf = demographicConfig.reports[confName];
+                    if ('Census10_' + conf.layerName === layer.name) {
+                        conf["censusRestUrl"] = appConfig.mainURL + '/' + layer.id;
+                    } else if ('ACS_' + conf.layerName === layer.name) {
+                        conf["ACSRestUrl"] = appConfig.mainURL + '/' + layer.id;
+                    }
+                });
+                for (var i = 0; i < appConfig.layerInfo.length; i++) {
+                    var confObj = appConfig.layerInfo[i];
+                    if ('ACS_' + confObj.layerName === layer.name) {
+                        confObj["url"] = appConfig.mainURL + '/' + layer.id;
+                        confObj["queryUrl"] = appConfig.mainURL + '/' + layer.id;
+                        confObj["layers"] = [layer.id];
+                    }
+                }
+            });
+            searchConfig.init();            
 
-        mapContainerVM.init();
+            mapModel.initialize();
 
-        panelVM.init();
-        kendo.bind($("#reportLauncher"), panelVM);
+            mapContainerVM.init();
 
-        helpVM.init();
-        kendo.bind($("#helpWindow"), helpVM);
+            panelVM.init();
+            kendo.bind($("#reportLauncher"), panelVM);
 
-        subscribeVM.init();
-        kendo.bind($("#subscribeWindow"), subscribeVM);
+            helpVM.init();
+            kendo.bind($("#helpWindow"), helpVM);
 
-        demographicVM.init();
-        kendo.bind($("#demographicView"), demographicVM);
+            subscribeVM.init();
+            kendo.bind($("#subscribeWindow"), subscribeVM);
 
-        legendVM.init();
-        kendo.bind($("#legendDiv"), legendVM);
+            demographicVM.init();
+            kendo.bind($("#demographicView"), demographicVM);
 
-        markupToolsVM.init("display", "after");
+            legendVM.init();
+            kendo.bind($("#legendDiv"), legendVM);
 
-        printVM.init();
-        kendo.bind($("#printWindow"), printVM);
+            markupToolsVM.init("display", "after");
 
-        socialVM.init();
-        kendo.bind($("#shareWindowDiv"), socialVM);
+            printVM.init();
+            kendo.bind($("#printWindow"), printVM);
 
-        alert1VM.init();
-        kendo.bind($("#alert1Window"), alert1VM);
+            socialVM.init();
+            kendo.bind($("#shareWindowDiv"), socialVM);
 
-        alert2VM.init();
-        kendo.bind($("#alert2Window"), alert2VM);
+            alert1VM.init();
+            kendo.bind($("#alert1Window"), alert1VM);
 
-        legalVM.init();
-        kendo.bind($("legalWindow"), legalVM);
+            alert2VM.init();
+            kendo.bind($("#alert2Window"), alert2VM);
 
-        contactVM.init();
-        kendo.bind($("contactsWindowDiv"), contactVM);
+            legalVM.init();
+            kendo.bind($("legalWindow"), legalVM);
 
-        cbrVM.init("display", "after");
+            contactVM.init();
+            kendo.bind($("contactsWindowDiv"), contactVM);
 
-        searchVM.init("titlebar", "after");
-        kendo.bind($("#searchView"), searchVM);
+            cbrVM.init("display", "after");
 
-        cbrlBarVM.init("titlebar", "after");
-        kendo.bind($("#cbrlaunchbar"), cbrlBarVM);
+            searchVM.init("titlebar", "after");
+            kendo.bind($("#searchView"), searchVM);
 
-        legendBarVM.init("titlebar", "after");
-        kendo.bind($("#leglaunchbar"), legendBarVM);
+            cbrlBarVM.init("titlebar", "after");
+            kendo.bind($("#cbrlaunchbar"), cbrlBarVM);
 
-        panelBarVM.init("titlebar", "after");
-        kendo.bind($("#rplaunchbar"), panelBarVM);
+            legendBarVM.init("titlebar", "after");
+            kendo.bind($("#leglaunchbar"), legendBarVM);
 
-        markupToolsBarVM.init("titlebar", "after");
-        kendo.bind($("#mtlaunchbar"), markupToolsBarVM);
+            panelBarVM.init("titlebar", "after");
+            kendo.bind($("#rplaunchbar"), panelBarVM);
 
-        printLaunchVM.init("titlebar", "after");
-        kendo.bind($("#printlaunchbar"), printLaunchVM);
+            markupToolsBarVM.init("titlebar", "after");
+            kendo.bind($("#mtlaunchbar"), markupToolsBarVM);
 
-        socialLaunchVM.init("titlebar", "after");
-        kendo.bind($("#sharelaunchbar"), socialLaunchVM);
+            printLaunchVM.init("titlebar", "after");
+            kendo.bind($("#printlaunchbar"), printLaunchVM);
 
-        helpLaunchVM.init("titlebar", "after");
-        kendo.bind($("#helplaunchbar"), helpLaunchVM);
+            socialLaunchVM.init("titlebar", "after");
+            kendo.bind($("#sharelaunchbar"), socialLaunchVM);
 
-        contactLaunchVM.init("titlebar", "after");
-        kendo.bind($("#contactLaunchbar"), contactLaunchVM);
+            helpLaunchVM.init("titlebar", "after");
+            kendo.bind($("#helplaunchbar"), helpLaunchVM);
 
-        interactiveToolsVM.init();
-        kendo.bind($("#pnlInteractiveDiv"), interactiveToolsVM);
+            contactLaunchVM.init("titlebar", "after");
+            kendo.bind($("#contactLaunchbar"), contactLaunchVM);
+
+            interactiveToolsVM.init();
+            kendo.bind($("#pnlInteractiveDiv"), interactiveToolsVM);
+        });
+
 
     }
 );

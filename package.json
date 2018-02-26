@@ -14,36 +14,50 @@
     "2010",
     "American Community Survey",
     "ACS",
-    "2011-2015",
+    "2012-2016",
     "5 year",
     "ESRI",
     "#MAGmaps"
   ],
   "main": "index.js",
   "homepage": "http://geo.azmag.gov/maps/azdemographics/",
-  "author": "Vern Wolfley <vwolfley@azmag.gov>",
-  "contributors": [{
-    "name": "Vern Wolfley",
-    "email": "vwolfley@azmag.gov"
-  }, {
-    "name": "Jack Fairfield",
-    "email": "jfairfield@azmag.gov"
-  }],
+  "author": "MAG Information Services (http://www.azmag.gov/Information_Services/default.asp)",
+  "contributors": [
+    {
+      "name": "Vern Wolfley",
+      "email": "vwolfley@azmag.gov"
+    },
+    {
+      "name": "Jack Fairfield",
+      "email": "jfairfield@azmag.gov"
+    }
+  ],
+  "repository": [
+    {
+      "type": "git",
+      "url": "https://github.com/AZMAG/map-DemographicState"
+    },
+    {
+      "type": "git",
+      "url": "I:/Projects/Git_repos/demoState-app.git"
+    }
+  ],
   "private": true,
   "dependencies": {},
   "devDependencies": {
     "grunt": "1.0.1",
-    "grunt-contrib-copy": "1.0.0",
-    "grunt-contrib-clean": "1.1.0",
-    "grunt-contrib-concat": "1.0.1",
-    "grunt-contrib-csslint": "2.0.0",
-    "grunt-contrib-cssmin": "2.2.0",
-    "grunt-contrib-jshint": "1.1.0",
-    "grunt-contrib-uglify": "3.0.0",
-    "grunt-contrib-watch": "1.0.0",
-    "grunt-text-replace": "0.4.0",
-    "grunt-version-check": "0.3.7",
-    "jshint-stylish-ex": "0.2.0",
+    "grunt-comment-toggler": "^0.2.2",
+    "grunt-contrib-copy": "^1.0.0",
+    "grunt-contrib-clean": "^1.1.0",
+    "grunt-contrib-concat": "^1.0.1",
+    "grunt-contrib-csslint": "^2.0.0",
+    "grunt-contrib-cssmin": "^2.2.0",
+    "grunt-contrib-jshint": "^1.1.0",
+    "grunt-contrib-uglify": "^3.0.0",
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-text-replace": "^0.4.0",
+    "grunt-version-check": "^0.3.7",
+    "jshint-stylish-ex": "^0.2.0",
     "lodash": "4.17.4",
     "matchdep": "1.0.1",
     "normalize.css": ">=7.0.0"

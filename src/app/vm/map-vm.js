@@ -286,7 +286,7 @@
                         "<div id='legendTitle_{value}' class='legendTitle'></div><p class='sliderInfo'>Transparency Slider</p>" +
                         "<div id='sliderDiv_{value}' class='legendSliderDiv'><input id='slider_{value}' class='balSlider'/></div>" +
                         "<div id='legendDiv_{value}'></div>" +
-                        "<div class='legal'>Data Source:&nbsp;<span id='dataSource_{value}'></span></div></div></li>" +
+                        "<div class='legal'>Data Source:&nbsp;<span class='mapFrameDataSource' id='dataSource_{value}'></span></div></div></li>" +
                         "<li>Map Layers" +
                         "<ul id='layerOptionPanelBar_{value}'>" +
                         "<li class='panelBarLi'><input " + layersTOC[0].checked + " class='layerOptionCbx' map='" + self.mapID + "' value=" + layersTOC[0].id + " id='" + self.mapID + "chk1' type='checkbox'><label class='mapLayerLabel' for='" + self.mapID + "chk1'>" + layersTOC[0].title + "</label></li>" +
@@ -316,7 +316,7 @@
                     self.legend = new Legend({
                         map: params.map,
                         layerInfos: [{
-                            layer: self.mapTheme().Service ? params.map.getLayer(self.mapTheme().Service) : params.map.getLayer("ACS2015byBlockGroup"),
+                            layer: self.mapTheme().Service ? params.map.getLayer(self.mapTheme().Service) : params.map.getLayer("blockGroups"),
                             title: self.mapTheme().ShortName
                         }]
                     }, "legendDiv_{value}".replace(/{value}/gi, self.mapID));
@@ -324,7 +324,7 @@
                     self.legend.startup();
 
                     dom.byId("legendTitle_{value}".replace(/{value}/gi, self.mapID)).innerHTML = self.mapTheme().ShortName;
-                    dom.byId("dataSource_{value}".replace(/{value}/gi, self.mapID)).innerHTML = self.mapTheme().Source;
+                    dom.byId("dataSource_{value}".replace(/{value}/gi, self.mapID)).innerHTML = appConfig.LegendSource;
 
                     //create transparency slider
                     $("#slider_{value}".replace(/{value}/gi, self.mapID)).kendoSlider({
@@ -561,7 +561,7 @@
                     if (map.id === self.mapID && map.loaded) {
                         self.isSelected = true;
                         $("#" + "mapFrameTitlePanel_{value}".replace(/{value}/gi, self.mapID)).addClass("selected");
-                        topic.publish("SelectedMapChagned.UpdateTOC", {
+                        topic.publish("SelectedMapChanged.UpdateTOC", {
                             mapName: self.mapTheme().ShortName,
                             renderer: self.renderer(),
                             colorRamp: self.mapColorRamp(),
@@ -571,7 +571,8 @@
                         });
                     } else {
                         self.isSelected = false;
-                        $("#" + "mapFrameTitlePanel_{value}".replace(/{value}/gi, self.mapID)).removeClass("selected");
+                        $("#mapFrameTitlePanel_" + self.mapID).removeClass("selected");
+                        // $("#" + "mapFrameTitlePanel_{value}".replace(/{value}/gi, self.mapID)).removeClass("selected");
                     }
                 }; //end selectedMapChanged
 

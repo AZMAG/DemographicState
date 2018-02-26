@@ -63,9 +63,7 @@
                         });
                     }
                     this.mapExtent(infoList[0].Extent.toJson());
-                    //console.log(this.mapInfoList());
                     var queryString = this.buildMapQueryString();
-                    // console.log(queryString);
                 },
 
                 /**
@@ -74,18 +72,16 @@
                 @method buildMapQueryString
                 **/
                 buildMapQueryString: function() {
-
                     var queryString = "data={\"maps\":[";
+                    var dataString = "";
                     for (var i = 0; i < this.mapInfoList().length; i++) {
-                        queryString = queryString + JSON.stringify(this.mapInfoList()[i]);
+                        dataString = dataString + JSON.stringify(this.mapInfoList()[i]);
                         if (i !== this.mapInfoList().length - 1) {
-                            queryString = queryString + ",";
+                            dataString = dataString + ",";
                         }
                     }
-                    //queryString = queryString + "],\"LO\":" + JSON.stringify(this.legendLayerOptions()) + ",\"E\":" + JSON.stringify(this.mapExtent()) + "}";
-                    queryString = queryString + "],\"E\":" + JSON.stringify(this.mapExtent()) + "}";
-                    //console.log(queryString);
-                    return "?" + queryString;
+                    dataString = dataString + "],\"E\":" + JSON.stringify(this.mapExtent()) + "}";
+                    return queryString + encodeURIComponent(dataString);
                 },
 
                 /**
@@ -120,15 +116,13 @@
                 @param {function} callback - This function is executed when the AJAX call is completed.
                 **/
                 minifyURL: function(bigurl, callback) {
-                    // console.log(bigurl);
                     $.getJSON("http://api.bitly.com/v3/shorten?callback=?", {
-                            format: "json",
-                            apiKey: appConfig.URLMinimizer.apiKey,
-                            login: appConfig.URLMinimizer.login,
-                            longUrl: bigurl
-                        },
-                        function(response) {
-                            //console.log(response.data.url);
+                        format: "json",
+                        apiKey: appConfig.URLMinimizer.apiKey,
+                        login: appConfig.URLMinimizer.login,
+                        longUrl: bigurl
+                    },
+                        function (response) {
                             callback(response.data.url);
                         }
                     );

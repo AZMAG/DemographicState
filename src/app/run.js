@@ -17,7 +17,7 @@ function init() {
         ],
 
         function(parser) {
-            parser.parse();
+            // parser.parse();
         }
     );
 }

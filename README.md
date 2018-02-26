@@ -3,27 +3,29 @@
 State Demographics map viewer for selected census info for Arizona
 
 [![GitHub issues](https://img.shields.io/github/issues/AZMAG/map-DemographicState.svg)](https://github.com/AZMAG/map-DemographicState/issues)
+[![GitHub version](https://badge.fury.io/gh/AZMAG%2Fmap-DemographicState.svg)](https://badge.fury.io/gh/AZMAG%2Fmap-DemographicState)
 [![dependencies](https://david-dm.org/AZMAG/map-DemographicState.png)](https://david-dm.org/AZMAG/map-DemographicState)
 [![devDependency Status](https://david-dm.org/AZMAG/map-DemographicState/dev-status.png)](https://david-dm.org/AZMAG/map-DemographicState)
 [![Semver](http://img.shields.io/SemVer/2.0.0.png)](http://semver.org/spec/v2.0.0.html)
 [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
 [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![Website](https://img.shields.io/website-up-down-green-red/http/shields.io.svg?label=my-website)](http://geo.azmag.gov/maps/azdemographics/)
 
 ***********************************************************************************************************
 
-The State Demographic Map Viewer is one of the Maricopa Association of Governments interactive mapping and analysis sites, showing selected population and housing data.  The viewer allows you to graphically view selected population and housing data for all Census block groups for the State of Arizona.  The viewer provides interactive mapping and reporting tools to allow exploration of data from Census 2010 and the American Community Survey (ACS) 2011-2015.
+The State Demographic Map Viewer is one of the Maricopa Association of Governments interactive mapping and analysis sites, showing selected population and housing data.  The viewer allows you to graphically view selected population and housing data for all Census block groups for the State of Arizona.  The viewer provides interactive mapping and reporting tools to allow exploration of data from Census 2010 and the American Community Survey (ACS) 2012-2016.
 
-Use this site to explore Explore data from Census 2010 and American Community Survey (ACS) 2011-2015.
+Use this site to explore Explore data from Census 2010 and American Community Survey (ACS) 2012-2016.
 
 This web app viewer was developed by MAG staff for MAG member agencies and the public using ESRI's JavaScript API.
 
 ## Keywords
 
-`Demographics` `Census` `2010` `American Community Survey` `ACS` `2011-2015` `5yr` `Counties` `State` `Arizona` `Maps` `MAG` `ESRI` `#MAGmaps`
+`Demographics` `Census` `2010` `American Community Survey` `ACS` `2012-2016` `5yr` `Counties` `State` `Arizona` `Maps` `MAG` `ESRI` `#MAGmaps`
 
 ## Version
 
-###### `version 3.1.1` ###
+### version 3.1.1 ###
 
  `Updated: 06/21/2017`
 
@@ -43,9 +45,9 @@ And constructed with the following guidelines:
 
 `Maricopa Association of Governments (MAG) and the MAG member agencies`
 
-## Site URL's
+## Site URL
 
-* [http://geo.azmag.gov/maps/azdemographics/](http://geo.azmag.gov/maps/azdemographics/)
+* [AZ State Demographics](http://geo.azmag.gov/maps/azdemographics/)
 
 ## Documentation
 
@@ -54,6 +56,12 @@ A detailed list of the changes and fixes in each version update can be found in 
 * [CHANGELOG](CHANGELOG.md)
 
 ## Resources
+
+## Examples
+
+## Dependencies
+
+* [git-labelmaker](https://github.com/himynameisdave/git-labelmaker?utm_source=hashnode.com)
 
 ## Legal Disclaimer
 
@@ -74,12 +82,7 @@ Please acknowledge the Maricopa Association of Governments (MAG) GIS as the sour
 
 Code released under the MIT license.
 
+A copy of the license is available in the repository's `LICENSE` file.
+
 * [LICENSE](LICENSE)
 
-Copyright (c) 2017 Maricopa Association of Governments
-
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.

@@ -107,8 +107,8 @@
                     });
 
                     self.hideChoices();
-
                     qbVM.init("display", "after");
+
 
                     $.each(demographicConfig.reports, function(i, configItem) {
                         if (configItem.populateDropDown !== false) {
@@ -181,7 +181,7 @@
                 self.dropDownQueryHandler = function(results) {
                     var configItem;
                     var attributes = results.features[0].attributes;
-                    if (attributes["PLACE_TYPE"]) {
+                    if (attributes["PLACE"]) {
                         configItem = demographicConfig.reports.placeSummary;
                     } else if (attributes["ZIPCODE"]) {
                         configItem = demographicConfig.reports.zipCodeSummary;
@@ -193,10 +193,19 @@
                         configItem = demographicConfig.reports.cogSummary;
                     } else if (attributes["COUNTYFP"]) {
                         configItem = demographicConfig.reports.countySummary;
+                    } else if (attributes["DistNum"]) {
+                        configItem = demographicConfig.reports.supervisorSummary;
+                    } else if (attributes["CityDistrictName"]) {
+                        configItem = demographicConfig.reports.councilDistrictSummary;
                     }
 
                     var features = results.features;
                     var nameArray = [];
+
+                    if (!configItem) {
+                        console.error("There was an error matching the button clicked to the config item", attributes);
+                    }
+
                     var fieldName = configItem.summaryField;
                     var sortField = configItem.sortField;
                     var dropdownSelector = configItem.dropdown;
@@ -276,6 +285,14 @@
                             type = "cog";
                             layerID = "cogBoundaries";
                             break;
+                        case "launchSupervisorSummaryWin":
+                            type = "supervisor";
+                            layerID = "supervisorDistricts";
+                            break;
+                        case "launchCouncilDistrictSummaryWin":
+                            type = "councilDistrict";
+                            layerID = "councilDistricts";
+                            break;
                     }
                     var layer;
                     if (layerID !== null) {
@@ -283,6 +300,7 @@
                     } else {
                         layer = null;
                     }
+                    
 
                     var selector = "#" + type + "ChoiceDiv";
                     var $choiceDiv = $(selector);
@@ -291,17 +309,10 @@
                         $choiceDiv.show();
                         self.hideChoices(selector);
                         self.hideLayers(layerID);
-
-                        if (layer !== null && layer.visible !== true && type !== "cog") {
-                            self.boxChecked(layerID);
-                            self.legendUpdate(layerID);
+                        if (layer) {
+                            layer.show();
                         }
-
-                        var cogDOM = dom.byId("legendDiv6");
-                        if (cogDOM !== null && type !== "cog") {
-                             // console.log("TRUE");
-                             $("#legendDiv6").hide();
-                        }
+                        self.boxChecked(layerID, true);
 
                         if (type === "cog") {
                             self.cogLayers(open);
@@ -309,12 +320,10 @@
 
                     } else {
                         $choiceDiv.hide();
-
-                        if (layerID !== null && type !== "cog") {
-                            self.legendUpdate(layerID);
-                            self.boxChecked(layerID);
+                        if (layer) {
+                            layer.hide();    
                         }
-
+                        self.boxChecked(layerID, false);
                         if (type === "cog") {
                             self.cogLayers();
                         }
@@ -325,12 +334,10 @@
                  * @param  {String} layerID [description]
                  * @return {[type]}         [description]
                  */
-                self.boxChecked = function(layerID) {
-                    var checkMark = dom.byId("c" + layerID).checked;
-                    if (checkMark !== true) {
-                        checkMark = dom.byId("c" + layerID).checked = true;
-                    } else {
-                        checkMark = dom.byId("c" + layerID).checked = false;
+                self.boxChecked = function(layerID, checked) {
+                    var cbox = dom.byId("c" + layerID);
+                    if (cbox) {
+                        cbox.checked = checked;    
                     }
                 };
                 /**
@@ -368,7 +375,7 @@
                  * @return {[type]}        [description]
                  */
                 self.hideChoices = function(choice) {
-                    var choiceDivs = ["#countyChoiceDiv", "#placeChoiceDiv", "#legislativeChoiceDiv", "#congressionalChoiceDiv", "#zipCodeChoiceDiv", "#cogChoiceDiv"];
+                    var choiceDivs = ["#countyChoiceDiv", "#placeChoiceDiv", "#legislativeChoiceDiv", "#congressionalChoiceDiv", "#zipCodeChoiceDiv", "#cogChoiceDiv", "#supervisorChoiceDiv", "#councilDistrictChoiceDiv"];
                     $.each(choiceDivs, function(i, divID) {
                         if (divID !== choice) {
                             $(divID).hide();
@@ -381,7 +388,7 @@
                  * @return {[type]}         [description]
                  */
                 self.hideLayers = function(layerID) {
-                    var layerIds = ["countyBoundaries", "congressionalDistricts", "legislativeDistricts", "zipCodes", "cogBoundaries"];
+                    var layerIds = ["countyBoundaries", "congressionalDistricts", "legislativeDistricts", "zipCodes", "cogBoundaries", "supervisorDistricts", "councilDistricts"];
                     $.each(layerIds, function(i, item) {
                         if (layerID !== item) {
                             var layer = mapModel.mapInstance.getLayer(item);
@@ -397,14 +404,14 @@
                  * @param  {String} layerID [description]
                  * @return {[type]}         [description]
                  */
-                self.legendUpdate = function(layerID) {
-                    var layerIds = ["countyBoundaries", "congressionalDistricts", "legislativeDistricts", "zipCodes", "cogBoundaries"];
-                    $.each(layerIds, function(i, item) {
-                        if (layerID === item) {
-                            legendVM.updateLegendLayers(item);
-                        }
-                    });
-                };
+                // self.legendUpdate = function(layerID) {
+                //     var layerIds = ["countyBoundaries", "congressionalDistricts", "legislativeDistricts", "zipCodes", "cogBoundaries", "supervisorDistricts", "councilDistricts"];
+                //     $.each(layerIds, function(i, item) {
+                //         if (layerID === item) {
+                //             legendVM.updateLegendLayers(item);
+                //         }
+                //     });
+                // };
 
                 /**
                  * Get the selected county name and call open method on demographicVM.
@@ -419,7 +426,7 @@
                     // Get the selected name
                     var selectedName = $("#" + comboBox).data("kendoComboBox").dataItem();
                     var param = selectedName.Name;
-
+                    ga('send', 'event', 'Click', 'Opened Window', 'Summary Window: ' + param);
                     // Open the window
                     demographicVM.openWindow(param, type);
                 };
@@ -434,7 +441,7 @@
                     demographicVM.openWindow("Arizona", "state");
                     self.hideChoices();
                     self.hideLayers();
-                    self.legendUpdate();
+                    // self.legendUpdate();
                 };
 
                 /**
@@ -445,7 +452,7 @@
                 self.displayInteractiveDiv = function() {
                     var div = $("#demInteractiveDiv");
                     if (div.length === 0) {
-                        interactiveToolsVM.insertAfter("demInteractiveDiv", "launchInteractiveSummaryDiv", demographicVM.interactiveCensusSelectionQueryHandler, demographicVM.interactiveSelectionQueryFault, demographicConfig.reports.censusTracts.ACSRestUrl);
+                        interactiveToolsVM.insertAfter("demInteractiveDiv", "launchInteractiveSummaryDiv", demographicVM.interactiveCensusSelectionQueryHandler, demographicVM.interactiveSelectionQueryFault, demographicConfig.reports.blockGroups.ACSRestUrl);
                         self.hideChoices("#demInteractiveDiv");
                         self.hideLayers("");
                     } else {

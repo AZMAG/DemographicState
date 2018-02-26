@@ -1,4 +1,5 @@
 <div id="title6HeaderRow" class="reportTabPageOptionRow">
+    Interpolation Used, <a class='interHelp link'>Click here</a> for more details
     <span class="reportExportSpan"><span>Export Results:</span>
     <button id="title6ExportResults" type="button" data-bind="click: exportToExcel">
         <img src="app/resources/img/i_excel.png" class="exportButtonImage">
@@ -7,17 +8,17 @@
 </div>
 <br>
 <div id="title6Grid"></div>
-<ul id="footnotePanelBar" class="legal">
+<ul style="display:none;" id="footnotePanelBar" class="legal">
     <li>Notes
         <!-- <ul> -->
         <div id="footnoteText" style="background-color: #4d4d4d; padding:10px; height:200px; overflow: scroll; font-size: 15px;">
             <p class='legal'><sup>a</sup> Minority includes total population less White (Non Hispanic).</p>
-            <p class='legal'><sup>b</sup> Percent of the population for whom poverty status is determined does not include institutionalized persons or persons under 5 years of age. Total population in the MPO area for whom poverty status is determined is <span id="povPopFootnote" style="all: unset;"></span>. Data from 2015 ACS 5-Year estimates (Table B17001)</p>
-            <p class='legal'><sup>c</sup> Disability status from the 2015 ACS 5-year estimates. All percentages are based on Census Blocks that match as close as possible to the MPO area, see note 'f'. Disability status is determined for the civilian noninstitutionalized population based on six types of difficulty: hearing, vision, cognitive, ambulatory, self-care, and independent living difficulty. (Table B18101)</p>
+            <p class='legal'><sup>b</sup> Percent of the population for whom poverty status is determined does not include institutionalized persons or persons under 5 years of age. Total population in the MPO area for whom poverty status is determined is <span id="povPopFootnote" style="all: unset;"></span>. Data from 2016 ACS 5-Year estimates (Table B17001)</p>
+            <p class='legal'><sup>c</sup> Disability status from the 2016 ACS 5-year estimates. All percentages are based on Census Blocks that match as close as possible to the MPO area, see note 'f'. Disability status is determined for the civilian noninstitutionalized population based on six types of difficulty: hearing, vision, cognitive, ambulatory, self-care, and independent living difficulty. (Table B18101)</p>
             <!-- <p class='legal'><sup></sup> For Limited English Proficient (LEP) persons, the Federal guidance (Federal Transit Administration Circular 4702.1B) notes that DOT has adopted the DOJ's Safe Harbor Provision. This Provision stipulates that the targeted minimum number of recipients regarding the translation of written materials for LEP populations is five percent or 1,000 persons, whichever is less, of the total population of persons eligible to be served. Thus for determining the number of affected Census Blocks and affected population, 5% is used as the guideline rather than the MPO percentage.</p> -->
-            <p class='legal'><sup>d</sup> The guidance for Limited English Proficiency (LEP) for DOT recipients refers to persons age 5 years and over who speak english less than "very well." See <a class="link" href="http://www.lep.gov/guidance/guidance_Fed_Guidance.html">http://www.lep.gov/guidance/guidance_Fed_Guidance.html</a> Data from 2015 ACS 5-Year estimates (Table B16005). 2015 estimate of total persons age 5 years and over for the defined geography is <span class="pop5PlusFootnote" style="all: unset;"></span>.</p>
+            <p class='legal'><sup>d</sup> The guidance for Limited English Proficiency (LEP) for DOT recipients refers to persons age 5 years and over who speak english less than "very well." See <a class="link" href="http://www.lep.gov/guidance/guidance_Fed_Guidance.html">http://www.lep.gov/guidance/guidance_Fed_Guidance.html</a> Data from 2016 ACS 5-Year estimates (Table B16005). 2016 estimate of total persons age 5 years and over for the defined geography is <span class="pop5PlusFootnote" style="all: unset;"></span>.</p>
             <p class='legal'><sup>e</sup> Affected population is the total of people that fall into the specified category for all Census blocks that have greater than or equal to the percentage for the MPO area (as defined by the Census geography, see note f).</p>
-            <p class='legal'><sup>f</sup> The data used in this analysis are generated using an enhanced method of interpolation based on the ACS 2015 block groups and using the 2010 Census block data.  In order to approximate the population, housing and workforce data for these custom areas, the following enhanced method was used:
+            <p class='legal'><sup>f</sup> The data used in this analysis are generated using an enhanced method of interpolation based on the ACS 2016 block groups and using the 2010 Census block data.  In order to approximate the population, housing and workforce data for these custom areas, the following enhanced method was used:
                 <ul class='legal'>
                     <li>The counts are redistributed to a more detailed geography (Census Block Group data or Census Tracts), that better nests within the MPO boundaries. </li>
                     <li>The counts are proportionally redistributed to blocks based on the Census 2010 counts for population, households or housing units.</li>

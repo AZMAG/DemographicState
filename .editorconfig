@@ -1,0 +1,38 @@
+# This file is for unifying the coding style for different editors and IDEs.
+# More information at http://EditorConfig.org
+
+# No .editorconfig files above the root directory
+root = true
+
+[*]
+charset = utf-8
+insert_final_newline = true
+trim_trailing_whitespace = true
+end_of_line = lf
+max_line_length = null
+
+[*.{css,html,js}]
+indent_style = space
+indent_size = 4
+
+# Markdown files
+# Use 4 spaces for indentation
+[*.md]
+indent_style = space
+indent_size = 4
+trim_trailing_whitespace = false
+
+# The indent size used in the `package.json` file cannot be changed
+# https://github.com/npm/npm/pull/3180#issuecomment-16336516
+[{.jshintrc,*.json,*.yml}]
+indent_size = 2
+indent_style = space
+
+# Python Styles
+# Use 4 spaces for indentation
+[*.py]
+indent_style = space
+indent_size = 4
+
+[{*.txt}]
+end_of_line = crlf
