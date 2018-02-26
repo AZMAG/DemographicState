@@ -182,7 +182,7 @@ module.exports = function(grunt) {
                 overwrite: true, // overwrite matched source files
                 replacements: [{
                     // html pages
-                    from: /(<meta name="revision-date" content=")[0-9]{2}\/[0-9]{2}\/[0-9]{4}(">)/g,
+                    from: /(<meta name="revision-date" content=")[0-9]{4}-[0-9]{2}-[0-9]{2}(">)/g,
                     to: '<meta name="revision-date" content="' + '<%= pkg.date %>' + '">',
                 }, {
                     // html pages
@@ -190,7 +190,7 @@ module.exports = function(grunt) {
                     to: '<meta name="version" content="' + '<%= pkg.version %>' + '">',
                 }, {
                     // config.js
-                    from: /(v)([0-9]+)(?:\.([0-9]+))(?:\.([0-9]+))( \| )[0-9]{2}\/[0-9]{2}\/[0-9]{4}/g,
+                    from: /(v)([0-9]+)(?:\.([0-9]+))(?:\.([0-9]+))( \| )[0-9]{4}-[0-9]{2}-[0-9]{2}/g,
                     to: 'v' + '<%= pkg.version %>' + ' | ' + '<%= pkg.date %>',
                 }, {
                     // humans.txt
@@ -198,15 +198,15 @@ module.exports = function(grunt) {
                     to: "Version: " + '<%= pkg.version %>',
                 }, {
                     // humans.txt
-                    from: /(Last updated\: )[0-9]{2}\/[0-9]{2}\/[0-9]{4}/g,
+                    from: /(Last updated\: )[0-9]{4}-[0-9]{2}-[0-9]{2}/g,
                     to: "Last updated: " + '<%= pkg.date %>',
                 }, {
                     // README.md
-                    from: /(### `version )([0-9]+)(?:\.([0-9]+))(?:\.([0-9]+))/g,
-                    to: "#### `version " + '<%= pkg.version %>',
+                    from: /(### version )([0-9]+)(?:\.([0-9]+))(?:\.([0-9]+))/g,
+                    to: "### version " + '<%= pkg.version %>',
                 }, {
                     // README.md
-                    from: /(`Updated: )[0-9]{2}\/[0-9]{2}\/[0-9]{4}/g,
+                    from: /(`Updated: )[0-9]{4}-[0-9]{2}-[0-9]{2}/g,
                     to: "`Updated: " + '<%= pkg.date %>',
                 }, {
                     // main.css

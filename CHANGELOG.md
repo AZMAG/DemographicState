@@ -17,7 +17,13 @@ And constructed with the following guidelines:
 
 ***************************************************************************************************************
 
-## Version 3.2.2 | 02/15/2018
+## Version 3.2.3 | 2018-02-26
+
+# fixed bug in data query found in training class
+# updated grunt files
+
+## Version 3.2.2 | 2018-02-15
+
 * Update Title VI data to only appear in areas that include  > 5000 Total Population.
 * Made print label longer
 * Oops, my legendvm refactoring broke the multiple map frames feature.  This is the fix.
@@ -34,7 +40,7 @@ And constructed with the following guidelines:
 * Refactored ExportToPDF function and updated PDF links.
 * Updated some verbage and fields for the title 6 data.
 
-## Version 3.2.1 | 01/18/2018
+## Version 3.2.1 | 2018-01-18
 
 * Fixed the help contact popup window.
 * Fixed the field duplication issue for all summary reports.
@@ -47,14 +53,14 @@ And constructed with the following guidelines:
 * Added an alert that prevents a user from submitting a 0 results advanced query.
 * Fixed bug in which the ACS data tab was sometimes being removed.
 
-## Version 3.2.0 | 01/18/2018
+## Version 3.2.0 | 2018-01-18
 
 * Added Supervisor Districts to Reports and layers
 * Added City Council Districts to Reports and layers
 * Refactored config layers to use the "layerName" property to match the rest endpoint layer instead of having the index hardcoded.
 * Switched the Generate Renderer task to the client using the geostats library instead of the Generate Renderer GP tool.  This will increase speed and allow for dynamic renderering.
 
-## Version 3.1.0 | 05/23/2017
+## Version 3.1.0 | 2017-05-23
 
 * file changes only!
 * NO code changes!
