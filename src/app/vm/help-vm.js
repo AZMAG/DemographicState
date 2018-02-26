@@ -101,6 +101,7 @@
                     // adds version number and date to main help menu
                     // configured in main config file
                     $("#version").html(appConfig.Version);
+                    $(".copyright").html(appConfig.copyright);
 
                     $("#EmailList").bind("click", function() {
                         subscribeVM.openWindow(subscribeView);

@@ -2,25 +2,27 @@
 <html class="no-js">
 
 <head>
-    <script type="text/javascript">
+    <!-- comments:uncomment-block html -->
+    <!-- <script type="text/javascript">
         if (window.location.protocol !== 'https:') {
             window.location = 'https://' + window.location.hostname + window.location.pathname + window.location.hash;
         }
-    </script>
+    </script> -->
+    <!-- endcomments -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=9, IE=10">
     <!-- <meta http-equiv="X-UA-Compatible" content="IE=edge"> -->
     <title>Arizona Demographics</title>
     <meta name="description" content="A map viewer showing demographic data State of Arizona.  #MAGmaps">
-    <meta name="keywords" content="Demographics, Census, 2010, American Community Survey, ACS, 2011-2015, 5yr, Counties, State, Arizona, Maps, MAG, ESRI, #MAGmaps">
+    <meta name="keywords" content="Demographics, Census, 2010, American Community Survey, ACS, 2012-2016, 5yr, Counties, State, Arizona, Maps, MAG, ESRI, #MAGmaps">
     <meta name="subject" content="Demographic data for State of Arizona">
     <meta name="author" content="Maricopa Association of Governments">
     <link type="text/plain" rel="author" href="http://geo.azmag.gov/maps/azdemographics/humans.txt">
     <meta name="contact" content="www.azmag.gov">
     <meta name="url" content="http://geo.azmag.gov/maps/azdemographics/">
-    <meta name="creation-date" content="10/21/2014">
-    <meta name="revision-date" content="06/21/2017">
-    <meta name="version" content="3.1.1">
+    <meta name="creation-date" content="2014-10-21">
+    <meta name="revision-date" content="2018-02-26">
+    <meta name="version" content="3.2.3">
     <!-- Apple-Specific Meta Tags -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -60,9 +62,13 @@
     <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2017.1.223/styles/kendo.common.min.css" />
     <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2017.1.223/styles/kendo.black.min.css" />
     <!-- Application CSS -->
+    <!-- comments:comment html -->
     <link rel="stylesheet" href="app/resources/css/normalize.css">
     <link rel="stylesheet" href="app/resources/css/main.css">
+    <!-- endcomments -->
+    <!-- comments:uncomment html -->
     <!-- <link rel="stylesheet" type="text/css" href="app/resources/css/concat.min.css"> -->
+    <!-- endcomments -->
     <!-- prevent cache -->
     <!--  removed once App goes into production -->
     <!-- comments:comment html -->
@@ -82,7 +88,7 @@
     <!-- ========================================================================================================================== -->
     <!-- Google Analytics -->
     <!-- comments:uncomment-block html -->
-    <script>
+    <!-- <script>
         (function(b, o, i, l, e, r) {
             b.GoogleAnalyticsObject = l;
             b[l] || (b[l] =
@@ -97,7 +103,7 @@
         }(window, document, "script", "ga"));
         ga("create", "UA-29422512-1");
         ga("send", "pageview");
-    </script>
+    </script> -->
     <!-- endcomments -->
     <!-- /Google Analytics -->
 </head>
@@ -140,7 +146,7 @@
             setTimeout(function() {
                 $("#load").fadeOut();
             }, 500);
-            
+
         }
 
     }

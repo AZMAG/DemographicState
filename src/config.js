@@ -33,7 +33,8 @@
 
 var appConfig = new function() {
 
-    this.Version = "v3.0.6 | 04/14/2017";
+    this.Version = "v3.2.3 | 2018-02-26";
+    this.copyright = "2018";
     this.LegendSource = "American Community Survey 2012-2016 5yr";
     this.jasonemail = "https://www.azmag.gov/Contact/4788?s=geo.azmag.gov/maps/azdemographics&n=Jason%20Howard&popUp=true";
 
