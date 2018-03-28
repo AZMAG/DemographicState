@@ -55,7 +55,8 @@
                                     "DefaultColorRamp": "YlGn",
                                     "DefaultColorScheme": "Sequential",
                                     "Description": "",
-                                    "FieldName": "PCT_UNDER5",
+                                    "FieldName": "UNDER5",
+                                    "NormalizeField": "TOTAL_POP",
                                     "Type": "percent",
                                     "AsPercentages": true,
                                     "Placeholder": 100000000
@@ -69,7 +70,8 @@
                                     "DefaultColorScheme": "Sequential",
                                     "Description": "",
                                     "Source": "test",
-                                    "FieldName": "PCT_AGE5TO9",
+                                    "FieldName": "AGE5TO9",
+                                    "NormalizeField": "TOTAL_POP",
                                     "Type": "percent",
                                     "AsPercentages": true,
                                     "Placeholder": 100000000
@@ -82,7 +84,8 @@
                                     "DefaultColorRamp": "YlGn",
                                     "DefaultColorScheme": "Sequential",
                                     "Description": "",
-                                    "FieldName": "PCT_AGE10TO14",
+                                    "FieldName": "AGE10TO14",
+                                    "NormalizeField": "TOTAL_POP",
                                     "Type": "percent",
                                     "AsPercentages": true,
                                     "Placeholder": 100000000
@@ -95,7 +98,8 @@
                                     "DefaultColorRamp": "YlGn",
                                     "DefaultColorScheme": "Sequential",
                                     "Description": "",
-                                    "FieldName": "PCT_AGE15TO19",
+                                    "FieldName": "AGE15TO19",
+                                    "NormalizeField": "TOTAL_POP",
                                     "Type": "percent",
                                     "AsPercentages": true,
                                     "Placeholder": 100000000
@@ -108,7 +112,8 @@
                                     "DefaultColorRamp": "YlGn",
                                     "DefaultColorScheme": "Sequential",
                                     "Description": "",
-                                    "FieldName": "PCT_AGE20TO24",
+                                    "FieldName": "AGE20TO24",
+                                    "NormalizeField": "TOTAL_POP",
                                     "Type": "percent",
                                     "AsPercentages": true,
                                     "Placeholder": 100000000
@@ -121,7 +126,8 @@
                                     "DefaultColorRamp": "YlGn",
                                     "DefaultColorScheme": "Sequential",
                                     "Description": "",
-                                    "FieldName": "PCT_AGE25TO34",
+                                    "FieldName": "AGE25TO34",
+                                    "NormalizeField": "TOTAL_POP",
                                     "Type": "percent",
                                     "AsPercentages": true,
                                     "Placeholder": 100000000
@@ -134,7 +140,8 @@
                                     "DefaultColorRamp": "YlGn",
                                     "DefaultColorScheme": "Sequential",
                                     "Description": "",
-                                    "FieldName": "PCT_AGE35TO44",
+                                    "FieldName": "AGE35TO44",
+                                    "NormalizeField": "TOTAL_POP",
                                     "Type": "percent",
                                     "AsPercentages": true,
                                     "Placeholder": 100000000
@@ -147,7 +154,8 @@
                                     "DefaultColorRamp": "YlGn",
                                     "DefaultColorScheme": "Sequential",
                                     "Description": "",
-                                    "FieldName": "PCT_AGE45TO54",
+                                    "FieldName": "AGE45TO54",
+                                    "NormalizeField": "TOTAL_POP",
                                     "Type": "percent",
                                     "AsPercentages": true,
                                     "Placeholder": 100000000
@@ -160,7 +168,8 @@
                                     "DefaultColorRamp": "YlGn",
                                     "DefaultColorScheme": "Sequential",
                                     "Description": "",
-                                    "FieldName": "PCT_AGE55TO59",
+                                    "FieldName": "AGE55TO59",
+                                    "NormalizeField": "TOTAL_POP",
                                     "Type": "percent",
                                     "AsPercentages": true,
                                     "Placeholder": 100000000
@@ -173,7 +182,8 @@
                                     "DefaultColorRamp": "YlGn",
                                     "DefaultColorScheme": "Sequential",
                                     "Description": "",
-                                    "FieldName": "PCT_AGE60TO64",
+                                    "FieldName": "AGE60TO64",
+                                    "NormalizeField": "TOTAL_POP",
                                     "Type": "percent",
                                     "AsPercentages": true,
                                     "Placeholder": 100000000
@@ -186,7 +196,8 @@
                                     "DefaultColorRamp": "YlGn",
                                     "DefaultColorScheme": "Sequential",
                                     "Description": "",
-                                    "FieldName": "PCT_AGE65TO74",
+                                    "FieldName": "AGE65TO74",
+                                    "NormalizeField": "TOTAL_POP",
                                     "Type": "percent",
                                     "AsPercentages": true,
                                     "Placeholder": 100000000
@@ -199,7 +210,8 @@
                                     "DefaultColorRamp": "YlGn",
                                     "DefaultColorScheme": "Sequential",
                                     "Description": "",
-                                    "FieldName": "PCT_AGE75TO84",
+                                    "FieldName": "AGE75TO84",
+                                    "NormalizeField": "TOTAL_POP",
                                     "Type": "percent",
                                     "AsPercentages": true,
                                     "Placeholder": 100000000
@@ -212,7 +224,8 @@
                                     "DefaultColorRamp": "YlGn",
                                     "DefaultColorScheme": "Sequential",
                                     "Description": "",
-                                    "FieldName": "PCT_AGE85PLUS",
+                                    "FieldName": "AGE85PLUS",
+                                    "NormalizeField": "TOTAL_POP",
                                     "Type": "percent",
                                     "AsPercentages": true,
                                     "Placeholder": 100000000
@@ -230,7 +243,8 @@
                                         "DefaultColorRamp": "YlGn",
                                         "DefaultColorScheme": "Sequential",
                                         "Description": "",
-                                        "FieldName": "PCT_AGE18PLUS",
+                                        "FieldName": "AGE18PLUS",
+                                        "NormalizeField": "TOTAL_POP",
                                         "Type": "percent",
                                         "AsPercentages": true,
                                         "Placeholder": 100000000
@@ -243,7 +257,8 @@
                                         "DefaultColorRamp": "YlGn",
                                         "DefaultColorScheme": "Sequential",
                                         "Description": "",
-                                        "FieldName": "PCT_AGE21PLUS",
+                                        "FieldName": "AGE21PLUS",
+                                        "NormalizeField": "TOTAL_POP",
                                         "Type": "percent",
                                         "AsPercentages": true,
                                         "Placeholder": 100000000
@@ -256,7 +271,8 @@
                                         "DefaultColorRamp": "YlGn",
                                         "DefaultColorScheme": "Sequential",
                                         "Description": "",
-                                        "FieldName": "PCT_AGE62PLUS",
+                                        "FieldName": "AGE62PLUS",
+                                        "NormalizeField": "TOTAL_POP",
                                         "Type": "percent",
                                         "AsPercentages": true,
                                         "Placeholder": 100000000
@@ -269,7 +285,8 @@
                                         "DefaultColorRamp": "YlGn",
                                         "DefaultColorScheme": "Sequential",
                                         "Description": "",
-                                        "FieldName": "PCT_AGE65PLUS",
+                                        "FieldName": "AGE65PLUS",
+                                        "NormalizeField": "TOTAL_POP",
                                         "Type": "percent",
                                         "AsPercentages": true,
                                         "Placeholder": 100000000
@@ -290,7 +307,8 @@
                                     "DefaultColorRamp": "GnBu",
                                     "DefaultColorScheme": "Sequential",
                                     "Description": "",
-                                    "FieldName": "PCT_HISPANIC",
+                                    "FieldName": "HISPANIC",
+                                    "NormalizeField": "TOTAL_POP",
                                     "AsPercentages": true,
                                     "Type": "percent"
                                 }, {
@@ -302,7 +320,8 @@
                                     "DefaultColorRamp": "YlGnBu",
                                     "DefaultColorScheme": "Sequential",
                                     "Description": "",
-                                    "FieldName": "PCT_WHITE_NON_HISPANIC",
+                                    "FieldName": "WHITE_NON_HISPANIC",
+                                    "NormalizeField": "TOTAL_POP",
                                     "AsPercentages": true,
                                     "Type": "percent"
                                 }, {
@@ -314,7 +333,8 @@
                                     "DefaultColorRamp": "YlGnBu",
                                     "DefaultColorScheme": "Sequential",
                                     "Description": "",
-                                    "FieldName": "PCT_BLACK_NON_HISPANIC",
+                                    "FieldName": "BLACK_NON_HISPANIC",
+                                    "NormalizeField": "TOTAL_POP",
                                     "AsPercentages": true,
                                     "Type": "percent"
                                 }, {
@@ -326,7 +346,8 @@
                                     "DefaultColorRamp": "YlGnBu",
                                     "DefaultColorScheme": "Sequential",
                                     "Description": "",
-                                    "FieldName": "PCT_ASIAN_NON_HISPANIC",
+                                    "FieldName": "ASIAN_NON_HISPANIC",
+                                    "NormalizeField": "TOTAL_POP",
                                     "AsPercentages": true,
                                     "Type": "percent"
                                 }, {
@@ -338,7 +359,8 @@
                                     "DefaultColorRamp": "YlGnBu",
                                     "DefaultColorScheme": "Sequential",
                                     "Description": "",
-                                    "FieldName": "PCT_NATIVE_NON_HISPANIC",
+                                    "FieldName": "NATIVE_NON_HISPANIC",
+                                    "NormalizeField": "TOTAL_POP",
                                     "AsPercentages": true,
                                     "Type": "percent"
                                 }, {
@@ -350,7 +372,8 @@
                                     "DefaultColorRamp": "YlGnBu",
                                     "DefaultColorScheme": "Sequential",
                                     "Description": "",
-                                    "FieldName": "PCT_PACIFIC_NON_HISPANIC",
+                                    "FieldName": "PACIFIC_NON_HISPANIC",
+                                    "NormalizeField": "TOTAL_POP",
                                     "AsPercentages": true,
                                     "Type": "percent"
                                 }, {
@@ -362,7 +385,8 @@
                                     "DefaultColorRamp": "YlGnBu",
                                     "DefaultColorScheme": "Sequential",
                                     "Description": "",
-                                    "FieldName": "PCT_TWO_OR_MORE_NON_HISPANIC",
+                                    "FieldName": "TWO_OR_MORE_NON_HISPANIC",
+                                    "NormalizeField": "TOTAL_POP",
                                     "AsPercentages": true,
                                     "Type": "percent"
                                 }, {
@@ -374,7 +398,8 @@
                                     "DefaultColorRamp": "YlGnBu",
                                     "DefaultColorScheme": "Sequential",
                                     "Description": "",
-                                    "FieldName": "PCT_OTHER_NON_HISPANIC",
+                                    "FieldName": "OTHER_NON_HISPANIC",
+                                    "NormalizeField": "TOTAL_POP",
                                     "AsPercentages": true,
                                     "Type": "percent"
                                 }]
@@ -393,7 +418,8 @@
                                     "DefaultColorRamp": "PuBu",
                                     "DefaultColorScheme": "Sequential",
                                     "Description": "",
-                                    "FieldName": "PCT_LT9GRADE",
+                                    "FieldName": "LT9GRADE",
+                                    "NormalizeField": "AGE25PLUS",
                                     "AsPercentages": true,
                                     "Type": "percent"
                                 }, {
@@ -405,7 +431,8 @@
                                     "DefaultColorRamp": "PuBu",
                                     "DefaultColorScheme": "Sequential",
                                     "Description": "",
-                                    "FieldName": "PCT_NOHSDIPLOMA",
+                                    "FieldName": "NOHSDIPLOMA",
+                                    "NormalizeField": "AGE25PLUS",
                                     "AsPercentages": true,
                                     "Type": "percent"
                                 }, {
@@ -417,7 +444,8 @@
                                     "DefaultColorRamp": "PuBu",
                                     "DefaultColorScheme": "Sequential",
                                     "Description": "",
-                                    "FieldName": "PCT_HSGRAD",
+                                    "FieldName": "HSGRAD",
+                                    "NormalizeField": "AGE25PLUS",
                                     "AsPercentages": true,
                                     "Type": "percent"
                                 }, {
@@ -429,7 +457,8 @@
                                     "DefaultColorRamp": "PuBu",
                                     "DefaultColorScheme": "Sequential",
                                     "Description": "",
-                                    "FieldName": "PCT_SOMECOLLEGE",
+                                    "FieldName": "SOMECOLLEGE",
+                                    "NormalizeField": "AGE25PLUS",
                                     "AsPercentages": true,
                                     "Type": "percent"
                                 }, {
@@ -441,7 +470,8 @@
                                     "DefaultColorRamp": "PuBu",
                                     "DefaultColorScheme": "Sequential",
                                     "Description": "",
-                                    "FieldName": "PCT_ASSOCIATES",
+                                    "FieldName": "ASSOCIATES",
+                                    "NormalizeField": "AGE25PLUS",
                                     "AsPercentages": true,
                                     "Type": "percent"
                                 }, {
@@ -453,7 +483,8 @@
                                     "DefaultColorRamp": "PuBu",
                                     "DefaultColorScheme": "Sequential",
                                     "Description": "",
-                                    "FieldName": "PCT_BACHELORS",
+                                    "FieldName": "BACHELORS",
+                                    "NormalizeField": "AGE25PLUS",
                                     "AsPercentages": true,
                                     "Type": "percent"
                                 }, {
@@ -465,7 +496,8 @@
                                     "DefaultColorRamp": "PuBu",
                                     "DefaultColorScheme": "Sequential",
                                     "Description": "",
-                                    "FieldName": "PCT_GRADPROF",
+                                    "FieldName": "GRADPROF",
+                                    "NormalizeField": "AGE25PLUS",
                                     "AsPercentages": true,
                                     "Type": "percent"
                                 }]
@@ -484,7 +516,8 @@
                                     "DefaultColorRamp": "PuBu",
                                     "DefaultColorScheme": "Sequential",
                                     "Description": "",
-                                    "FieldName": "PCT_LIMITED_ENG_PROF",
+                                    "FieldName": "LIMITED_ENG_PROF",
+                                    "NormalizeField": "AGE5PLUS",
                                     "AsPercentages": true,
                                     "Type": "percent",
                                     "Placeholder": 100000000
@@ -504,7 +537,8 @@
                                     "DefaultColorRamp": "PuBuGn",
                                     "DefaultColorScheme": "Sequential",
                                     "Description": "",
-                                    "FieldName": "PCT_VETERANS",
+                                    "FieldName": "VETERANS",
+                                    "NormalizeField": "CIV_POP_18PLUS",
                                     "AsPercentages": true,
                                     "Type": "percent",
                                     "Placeholder": 100000000
@@ -548,7 +582,8 @@
                                     "DefaultColorRamp": "PuBuGn",
                                     "DefaultColorScheme": "Sequential",
                                     "Description": "",
-                                    "FieldName": "PCT_FAMILY_HOUSEHOLDS",
+                                    "FieldName": "FAMILY_HOUSEHOLDS",
+                                    "NormalizeField": "TOTAL_HOUSEHOLDS",
                                     "Type": "percent",
                                     "AsPercentages": true,
                                     "Placeholder": 100000000
@@ -561,7 +596,8 @@
                                     "DefaultColorRamp": "PuBuGn",
                                     "DefaultColorScheme": "Sequential",
                                     "Description": "",
-                                    "FieldName": "PCT_NON_FAMILY_HOUSEHOLDS",
+                                    "FieldName": "NON_FAMILY_HOUSEHOLDS",
+                                    "NormalizeField": "TOTAL_HOUSEHOLDS",
                                     "Type": "percent",
                                     "AsPercentages": true,
                                     "Placeholder": 100000000
@@ -593,7 +629,8 @@
                                     "DefaultColorRamp": "PuBuGn",
                                     "DefaultColorScheme": "Sequential",
                                     "Description": "",
-                                    "FieldName": "PCT_HH_LESS_THAN_10K",
+                                    "FieldName": "HH_LESS_THAN_10K",
+                                    "NormalizeField": "TOTAL_HOUSEHOLDS",
                                     "Type": "percent",
                                     "AsPercentages": true,
                                     "Placeholder": 100000000
@@ -606,7 +643,8 @@
                                     "DefaultColorRamp": "PuBuGn",
                                     "DefaultColorScheme": "Sequential",
                                     "Description": "",
-                                    "FieldName": "PCT_HH_10K_TO_14K",
+                                    "FieldName": "HH_10K_TO_14K",
+                                    "NormalizeField": "TOTAL_HOUSEHOLDS",
                                     "Type": "percent",
                                     "AsPercentages": true,
                                     "Placeholder": 100000000
@@ -619,7 +657,8 @@
                                     "DefaultColorRamp": "PuBuGn",
                                     "DefaultColorScheme": "Sequential",
                                     "Description": "",
-                                    "FieldName": "PCT_HH_15K_TO_24K",
+                                    "FieldName": "HH_15K_TO_24K",
+                                    "NormalizeField": "TOTAL_HOUSEHOLDS",
                                     "Type": "percent",
                                     "AsPercentages": true,
                                     "Placeholder": 100000000
@@ -632,7 +671,8 @@
                                     "DefaultColorRamp": "PuBuGn",
                                     "DefaultColorScheme": "Sequential",
                                     "Description": "",
-                                    "FieldName": "PCT_HH_25K_TO_34K",
+                                    "FieldName": "HH_25K_TO_34K",
+                                    "NormalizeField": "TOTAL_HOUSEHOLDS",
                                     "Type": "percent",
                                     "AsPercentages": true,
                                     "Placeholder": 100000000
@@ -645,7 +685,8 @@
                                     "DefaultColorRamp": "PuBuGn",
                                     "DefaultColorScheme": "Sequential",
                                     "Description": "",
-                                    "FieldName": "PCT_HH_35K_TO_49K",
+                                    "FieldName": "HH_35K_TO_49K",
+                                    "NormalizeField": "TOTAL_HOUSEHOLDS",
                                     "Type": "percent",
                                     "AsPercentages": true,
                                     "Placeholder": 100000000
@@ -658,7 +699,8 @@
                                     "DefaultColorRamp": "PuBuGn",
                                     "DefaultColorScheme": "Sequential",
                                     "Description": "",
-                                    "FieldName": "PCT_HH_50K_TO_74K",
+                                    "FieldName": "HH_50K_TO_74K",
+                                    "NormalizeField": "TOTAL_HOUSEHOLDS",
                                     "Type": "percent",
                                     "AsPercentages": true,
                                     "Placeholder": 100000000
@@ -671,7 +713,8 @@
                                     "DefaultColorRamp": "PuBuGn",
                                     "DefaultColorScheme": "Sequential",
                                     "Description": "",
-                                    "FieldName": "PCT_HH_75K_TO_99K",
+                                    "FieldName": "HH_75K_TO_99K",
+                                    "NormalizeField": "TOTAL_HOUSEHOLDS",
                                     "Type": "percent",
                                     "AsPercentages": true,
                                     "Placeholder": 100000000
@@ -684,7 +727,8 @@
                                     "DefaultColorRamp": "PuBuGn",
                                     "DefaultColorScheme": "Sequential",
                                     "Description": "",
-                                    "FieldName": "PCT_HH_100K_TO_149K",
+                                    "FieldName": "HH_100K_TO_149K",
+                                    "NormalizeField": "TOTAL_HOUSEHOLDS",
                                     "Type": "percent",
                                     "AsPercentages": true,
                                     "Placeholder": 100000000
@@ -697,7 +741,8 @@
                                     "DefaultColorRamp": "PuBuGn",
                                     "DefaultColorScheme": "Sequential",
                                     "Description": "",
-                                    "FieldName": "PCT_HH_150K_TO_199K",
+                                    "FieldName": "HH_150K_TO_199K",
+                                    "NormalizeField": "TOTAL_HOUSEHOLDS",
                                     "Type": "percent",
                                     "AsPercentages": true,
                                     "Placeholder": 100000000
@@ -710,7 +755,8 @@
                                     "DefaultColorRamp": "PuBuGn",
                                     "DefaultColorScheme": "Sequential",
                                     "Description": "",
-                                    "FieldName": "PCT_HH_200K_PLUS",
+                                    "FieldName": "HH_200K_PLUS",
+                                    "NormalizeField": "TOTAL_HOUSEHOLDS",
                                     "Type": "percent",
                                     "AsPercentages": true,
                                     "Placeholder": 100000000
@@ -730,7 +776,8 @@
                                     "DefaultColorRamp": "PuBuGn",
                                     "DefaultColorScheme": "Sequential",
                                     "Description": "",
-                                    "FieldName": "PCT_FAM_INCOME_BELOW_POVERTY",
+                                    "FieldName": "FAM_INCOME_BELOW_POVERTY",
+                                    "NormalizeField": "TOTAL_FAMILIES",
                                     "AsPercentages": true,
                                     "Type": "percent",
                                     "Placeholder": 100000000
@@ -748,7 +795,8 @@
                                         "DefaultColorRamp": "PuBuGn",
                                         "DefaultColorScheme": "Sequential",
                                         "Description": "",
-                                        "FieldName": "PCT_INCOME_BELOW_POVERTY",
+                                        "FieldName": "INCOME_BELOW_POVERTY",
+                                        "NormalizeField": "POP_FOR_POVERTY",
                                         "AsPercentages": true,
                                         "Type": "percent",
                                         "Placeholder": 100000000
@@ -761,7 +809,8 @@
                                         "DefaultColorRamp": "PuBuGn",
                                         "DefaultColorScheme": "Sequential",
                                         "Description": "",
-                                        "FieldName": "PCT_INCOME_BELOW_150PCT_POVERTY",
+                                        "FieldName": "INCOME_BELOW_150PCT_POVERTY",
+                                        "NormalizeField": "POP_FOR_POVERTY",
                                         "Type": "percent",
                                         "AsPercentages": true,
                                         "Placeholder": 100000000
@@ -774,7 +823,8 @@
                                         "DefaultColorRamp": "PuBuGn",
                                         "DefaultColorScheme": "Sequential",
                                         "Description": "",
-                                        "FieldName": "PCT_INCOME_BELOW_200PCT_POVERTY",
+                                        "FieldName": "INCOME_BELOW_200PCT_POVERTY",
+                                        "NormalizeField": "POP_FOR_POVERTY",
                                         "Type": "percent",
                                         "AsPercentages": true,
                                         "Placeholder": 100000000
@@ -795,7 +845,8 @@
                                     "DefaultColorRamp": "PuBuGn",
                                     "DefaultColorScheme": "Sequential",
                                     "Description": "",
-                                    "FieldName": "PCT_DROVE_ALONE",
+                                    "FieldName": "DROVE_ALONE",
+                                    "NormalizeField": "TOT_WORKERS_16PLUS",
                                     "Type": "percent",
                                     "AsPercentages": "TRUE",
                                     "Placeholder": 100000000
@@ -808,7 +859,8 @@
                                     "DefaultColorRamp": "PuBuGn",
                                     "DefaultColorScheme": "Sequential",
                                     "Description": "",
-                                    "FieldName": "PCT_CARPOOLED",
+                                    "FieldName": "CARPOOLED",
+                                    "NormalizeField": "TOT_WORKERS_16PLUS",
                                     "Type": "percent",
                                     "AsPercentages": "TRUE",
                                     "Placeholder": 100000000
@@ -821,7 +873,8 @@
                                     "DefaultColorRamp": "PuBuGn",
                                     "DefaultColorScheme": "Sequential",
                                     "Description": "",
-                                    "FieldName": "PCT_PUBLIC_TRANSPORTATION",
+                                    "FieldName": "PUBLIC_TRANSPORTATION",
+                                    "NormalizeField": "TOT_WORKERS_16PLUS",
                                     "Type": "percent",
                                     "AsPercentages": "TRUE",
                                     "Placeholder": 100000000
@@ -834,7 +887,8 @@
                                     "DefaultColorRamp": "PuBuGn",
                                     "DefaultColorScheme": "Sequential",
                                     "Description": "",
-                                    "FieldName": "PCT_BICYCLE",
+                                    "FieldName": "BICYCLE",
+                                    "NormalizeField": "TOT_WORKERS_16PLUS",
                                     "Type": "percent",
                                     "AsPercentages": "TRUE",
                                     "Placeholder": 100000000
@@ -847,7 +901,8 @@
                                     "DefaultColorRamp": "PuBuGn",
                                     "DefaultColorScheme": "Sequential",
                                     "Description": "",
-                                    "FieldName": "PCT_WALKED",
+                                    "FieldName": "WALKED",
+                                    "NormalizeField": "TOT_WORKERS_16PLUS",
                                     "Type": "percent",
                                     "AsPercentages": "TRUE",
                                     "Placeholder": 100000000
@@ -860,7 +915,8 @@
                                     "DefaultColorRamp": "PuBuGn",
                                     "DefaultColorScheme": "Sequential",
                                     "Description": "",
-                                    "FieldName": "PCT_TAXI_MOTORCYCLE_OR_OTHER",
+                                    "FieldName": "TAXI_MOTORCYCLE_OR_OTHER",
+                                    "NormalizeField": "TOT_WORKERS_16PLUS",
                                     "Type": "percent",
                                     "AsPercentages": "TRUE",
                                     "Placeholder": 100000000
@@ -873,7 +929,8 @@
                                     "DefaultColorRamp": "PuBuGn",
                                     "DefaultColorScheme": "Sequential",
                                     "Description": "",
-                                    "FieldName": "PCT_WORKED_FROM_HOME",
+                                    "FieldName": "WORKED_FROM_HOME",
+                                    "NormalizeField": "TOT_WORKERS_16PLUS",
                                     "Type": "percent",
                                     "AsPercentages": "TRUE",
                                     "Placeholder": 100000000
@@ -893,7 +950,8 @@
                                     "DefaultColorRamp": "OrRd",
                                     "DefaultColorScheme": "Sequential",
                                     "Description": null,
-                                    "FieldName": "PCT_MGBIZSCIART",
+                                    "FieldName": "MGBIZSCIART",
+                                    "NormalizeField": "CIVILIAN_EMPLOYED_16_PLUS",
                                     "Type": "percent",
                                     "AsPercentages": "TRUE",
                                     "Placeholder": 100000000
@@ -906,7 +964,8 @@
                                     "DefaultColorRamp": "OrRd",
                                     "DefaultColorScheme": "Sequential",
                                     "Description": null,
-                                    "FieldName": "PCT_SERVICEOCC",
+                                    "FieldName": "SERVICEOCC",
+                                    "NormalizeField": "CIVILIAN_EMPLOYED_16_PLUS",
                                     "Type": "percent",
                                     "AsPercentages": "TRUE",
                                     "Placeholder": 100000000
@@ -919,7 +978,8 @@
                                     "DefaultColorRamp": "OrRd",
                                     "DefaultColorScheme": "Sequential",
                                     "Description": null,
-                                    "FieldName": "PCT_SALESOFFICEOCC",
+                                    "FieldName": "SALESOFFICEOCC",
+                                    "NormalizeField": "CIVILIAN_EMPLOYED_16_PLUS",
                                     "Type": "percent",
                                     "AsPercentages": "TRUE",
                                     "Placeholder": 100000000
@@ -932,7 +992,8 @@
                                     "DefaultColorRamp": "OrRd",
                                     "DefaultColorScheme": "Sequential",
                                     "Description": null,
-                                    "FieldName": "PCT_NATRESOURCES",
+                                    "FieldName": "NATRESOURCES",
+                                    "NormalizeField": "CIVILIAN_EMPLOYED_16_PLUS",
                                     "Type": "percent",
                                     "AsPercentages": "TRUE",
                                     "Placeholder": 100000000
@@ -945,7 +1006,8 @@
                                     "DefaultColorRamp": "OrRd",
                                     "DefaultColorScheme": "Sequential",
                                     "Description": null,
-                                    "FieldName": "PCT_PRODTRANSMATERIAL",
+                                    "FieldName": "PRODTRANSMATERIAL",
+                                    "NormalizeField": "CIVILIAN_EMPLOYED_16_PLUS",
                                     "Type": "percent",
                                     "AsPercentages": "TRUE",
                                     "Placeholder": 100000000
@@ -1001,7 +1063,8 @@
                                     "DefaultColorRamp": "OrRd",
                                     "DefaultColorScheme": "Sequential",
                                     "Description": null,
-                                    "FieldName": "PCT_OCCUPIED_HU",
+                                    "FieldName": "OCCUPIED_HU",
+                                    "NormalizeField": "TOTHU_FOR_OCPNCYVCNCY",
                                     "AsPercentages": true,
                                     "Type": "percent",
                                     "Placeholder": 100000000
@@ -1014,7 +1077,8 @@
                                     "DefaultColorRamp": "OrRd",
                                     "DefaultColorScheme": "Sequential",
                                     "Description": null,
-                                    "FieldName": "PCT_VACANT_HU",
+                                    "FieldName": "VACANT_HU",
+                                    "NormalizeField": "TOTHU_FOR_OCPNCYVCNCY",
                                     "AsPercentages": true,
                                     "Type": "percent",
                                     "Placeholder": 100000000
@@ -1027,7 +1091,8 @@
                                     "DefaultColorRamp": "OrRd",
                                     "DefaultColorScheme": "Sequential",
                                     "Description": null,
-                                    "FieldName": "PCT_RENTER_OCCUPIED_HU",
+                                    "FieldName": "RENTER_OCCUPIED_HU",
+                                    "NormalizeField": "TOTHU_FOR_OCPNCYVCNCY",
                                     "AsPercentages": true,
                                     "Type": "percent",
                                     "Placeholder": 100000000
@@ -1047,7 +1112,8 @@
                                     "DefaultColorRamp": "OrRd",
                                     "DefaultColorScheme": "Sequential",
                                     "Description": null,
-                                    "FieldName": "PCT_NO_VEHICLE",
+                                    "FieldName": "NO_VEHICLE",
+                                    "NormalizeField": "TOTAL_OCCUPIED_HU",
                                     "Type": "percent",
                                     "AsPercentages": "TRUE",
                                     "Placeholder": 100000000
@@ -1060,7 +1126,8 @@
                                     "DefaultColorRamp": "OrRd",
                                     "DefaultColorScheme": "Sequential",
                                     "Description": null,
-                                    "FieldName": "PCT_ONE_VEHICLE",
+                                    "FieldName": "ONE_VEHICLE",
+                                    "NormalizeField": "TOTAL_OCCUPIED_HU",
                                     "Type": "percent",
                                     "AsPercentages": "TRUE",
                                     "Placeholder": 100000000
@@ -1073,7 +1140,8 @@
                                     "DefaultColorRamp": "OrRd",
                                     "DefaultColorScheme": "Sequential",
                                     "Description": null,
-                                    "FieldName": "PCT_TWO_VEHICLES",
+                                    "FieldName": "TWO_VEHICLES",
+                                    "NormalizeField": "TOTAL_OCCUPIED_HU",
                                     "Type": "percent",
                                     "AsPercentages": "TRUE",
                                     "Placeholder": 100000000
@@ -1086,7 +1154,8 @@
                                     "DefaultColorRamp": "OrRd",
                                     "DefaultColorScheme": "Sequential",
                                     "Description": null,
-                                    "FieldName": "PCT_THREE_PLUS_VEHICLES",
+                                    "FieldName": "THREE_PLUS_VEHICLES",
+                                    "NormalizeField": "TOTAL_OCCUPIED_HU",
                                     "Type": "percent",
                                     "AsPercentages": "TRUE",
                                     "Placeholder": 100000000
@@ -1095,6 +1164,7 @@
 
                         ];
                     };
+                window.cbrTest = cbrConfig.thematicMaps;
                     return cbrConfig;
                 });
         }());
