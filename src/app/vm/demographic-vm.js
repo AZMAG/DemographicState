@@ -1544,7 +1544,7 @@
 										},
 										{
 											field: 'PercentOfBlocks',
-											title: '% Blocks',
+											title: '% Block Groups',
 											format: '{0:p1}',
 											width: '65px'
 										},
