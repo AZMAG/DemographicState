@@ -314,7 +314,7 @@
                 };
                 self.onExpand = function (e) {
                     var headerTitle = $(e.item).find(".k-header")[0].innerText;
-                    ga('send', 'event', 'Click', "Expanded ", headerTitle);
+                    // ga('send', 'event', 'Click', "Expanded ", headerTitle);
                     $(e.item).children().removeClass("k-state-selected");
                 };
 

@@ -426,7 +426,7 @@
                     // Get the selected name
                     var selectedName = $("#" + comboBox).data("kendoComboBox").dataItem();
                     var param = selectedName.Name;
-                    ga('send', 'event', 'Click', 'Opened Window', 'Summary Window: ' + param);
+                    // ga('send', 'event', 'Click', 'Opened Window', 'Summary Window: ' + param);
                     // Open the window
                     demographicVM.openWindow(param, type);
                 };
