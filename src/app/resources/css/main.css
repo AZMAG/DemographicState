@@ -8,11 +8,9 @@
  * Licensed under MIT
  * ======================================================================== */
 
-
 /*! ==========================================
  *  @main.css | version | 3.0.6 | MIT License
  *  ========================================== */
-
 
 /*
  * HTML5 Boilerplate | version | 4.3.0 | MIT License | http://h5bp.com/
@@ -21,7 +19,6 @@
  * Credit left inline and big thanks to Nicolas Gallagher, Jonathan Neal,
  * Kroc Camen, and the H5BP dev community and team.
  */
-
 
 /* ==========================================================================
    Base styles: opinionated defaults
@@ -48,7 +45,6 @@ textarea {
     color: #FFFFFF;
 }
 
-
 /*
  * Remove text-shadow in selection highlight: h5bp.com/i
  * These selection rule sets have to be separate.
@@ -65,7 +61,6 @@ textarea {
     text-shadow: none;
 }
 
-
 /*
  * A better looking default horizontal rule
  */
@@ -77,7 +72,6 @@ hr {
     border-top: 1px solid #cccccc;
     padding: 0;
 }
-
 
 /*
  * Remove the gap between images, videos, audio and canvas and the bottom of
@@ -91,7 +85,6 @@ video {
     vertical-align: middle;
 }
 
-
 /*
  * Remove default fieldset styles.
  */
@@ -102,7 +95,6 @@ fieldset {
     padding: 0;
 }
 
-
 /*
  * Allow only vertical resizing of textareas.
  */
@@ -110,7 +102,6 @@ fieldset {
 textarea {
     resize: vertical;
 }
-
 
 /* ==========================================================================
    Browse Happy prompt
@@ -122,7 +113,6 @@ textarea {
     color: #000000;
     padding: 0.2em 0;
 }
-
 
 /* ==========================================================================
    Author's custom styles
@@ -260,11 +250,9 @@ button:hover {
     left: 20px;
 }
 
-
 /*.k-widget .k-colorpalette{
     width: 150px !important;
 }*/
-
 
 /* for interactive tool tooltips*/
 
@@ -274,7 +262,6 @@ button:hover {
     border-color: transparent !important;
     text-align: center;
 }
-
 
 /* ==========================================
 **** Custom Controls Styles ****
@@ -337,7 +324,6 @@ button:hover {
     left: 20px;
 }
 
-
 /* Search Widget */
 
 #search {
@@ -391,7 +377,6 @@ span.searchIcon.esriIconZoom {
     top: 35%;
     left: 51%;
 }
-
 
 /* ==========================================
 **** Header Customs Styles ****
@@ -460,7 +445,6 @@ li.tb {
     margin: 0px;
 }
 
-
 /*
 *** navagation button styles
 */
@@ -499,7 +483,6 @@ li.tb {
     float: right;
 }
 
-
 /*
  * Social Buttons
  */
@@ -528,7 +511,6 @@ li.tb {
     min-height: 20px !important;
     min-width: 100px !important;
 }
-
 
 /* ==========================================
 **** Query Window styles ****
@@ -637,7 +619,6 @@ li.tb {
     float: left;
 }
 
-
 /* ==========================================
 **** panel-view.html Window styles ****
 ============================================= */
@@ -684,7 +665,6 @@ li.tb {
     font-size: .80em !important;
     background-color: #0066cc;
 }
-
 
 /* ==========================================
 **** Help-view.html Window styles ****
@@ -744,7 +724,6 @@ li.tb {
     padding-bottom: 5px;
 }
 
-
 /* ==========================================
 **** print-view.html Window styles ****
 ============================================= */
@@ -765,7 +744,6 @@ input.mapTitle {
 .mapTitle {
     color: #000000;
 }
-
 
 /* ==========================================
 **** contacts-view.html Window styles ****
@@ -794,7 +772,6 @@ input.mapTitle {
     width: 270px;
     font-size: 0.9em;
 }
-
 
 /* ==========================================
 **** Custom Kendow Window styles ****
@@ -883,7 +860,6 @@ input.mapTitle {
 .cb {
     background-color: #000000;
 }
-
 
 /* ==========================================
 **** cbr-view.html styles ****
@@ -999,7 +975,6 @@ input.mapTitle {
     margin: 2px 0 2px 15px !important;
 }
 
-
 /* ==========================================
 **** classBreaks-view.html styles ****
 ============================================= */
@@ -1007,7 +982,6 @@ input.mapTitle {
 #classBreakSliders {
     height: 60px;
 }
-
 
 /* ==========================================
 **** colorRamp-view.html styles ****
@@ -1067,7 +1041,6 @@ input.mapTitle {
     text-decoration: none;
 }
 
-
 /* ==========================================
 **** demographic-view.html styles ****
 ============================================= */
@@ -1087,7 +1060,6 @@ input.mapTitle {
     border-color: transparent;
     background-color: transparent;
 }
-
 
 /*#demTabStrip-3 .reportTabPageOptionRow, #demTabStrip-2 .reportTabPageOptionRow {
     height: 15px;
@@ -1161,7 +1133,6 @@ input.mapTitle {
     width: 80px;
 }
 
-
 /* ==========================================
 **** selectedFeaturesTabPage-view.html styles ****
 ============================================= */
@@ -1181,7 +1152,6 @@ input.mapTitle {
     padding-left: 30px;
     padding-right: 12px;
 }
-
 
 /* ==========================================
 **** legend-view.html styles ****
@@ -1224,7 +1194,8 @@ input.mapTitle {
     width: 300px;
     display: none;
 }
-#legendDiv_blockGroups .esriLegendServiceLabel{
+
+#legendDiv_blockGroups .esriLegendServiceLabel {
     display: none;
 }
 
@@ -1240,7 +1211,7 @@ input.mapTitle {
     display: none;
 }
 
-#legendDiv_censusTracts_24{
+#legendDiv_censusTracts_24 {
     display: none !important;
 }
 
@@ -1286,7 +1257,6 @@ input.mapTitle {
     text-align: center;
 }
 
-
 /* ==========================================
 **** Popup styles ****
 ============================================= */
@@ -1302,7 +1272,6 @@ input.mapTitle {
 .esriPopup .titleButton.prev {
     right: 50px;
 }
-
 
 /* ==========================================
 **** Custom scrollbar CSS styles ****
@@ -1323,11 +1292,9 @@ input.mapTitle {
     -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
 }
 
-
 /* ==========================================================================
    Helper classes
    ========================================================================== */
-
 
 /*
  * Image replacement
@@ -1348,7 +1315,6 @@ input.mapTitle {
     height: 150%;
 }
 
-
 /*
  * Hide from both screenreaders and browsers: h5bp.com/u
  */
@@ -1357,7 +1323,6 @@ input.mapTitle {
     display: none !important;
     visibility: hidden;
 }
-
 
 /*
  * Hide only visually, but have it available for screenreaders: h5bp.com/v
@@ -1374,7 +1339,6 @@ input.mapTitle {
     width: 1px;
 }
 
-
 /*
  * Extends the .visuallyhidden class to allow the element to be focusable
  * when navigated to via the keyboard: h5bp.com/p
@@ -1390,7 +1354,6 @@ input.mapTitle {
     width: auto;
 }
 
-
 /*
  * Hide visually and from screenreaders, but maintain layout
  */
@@ -1398,7 +1361,6 @@ input.mapTitle {
 .invisible {
     visibility: hidden;
 }
-
 
 /*
  * Clearfix: contain floats
@@ -1424,7 +1386,6 @@ input.mapTitle {
     clear: both;
 }
 
-
 /*
  * For IE 6/7 only
  * Include this rule to trigger hasLayout and contain floats.
@@ -1434,16 +1395,13 @@ input.mapTitle {
     *zoom: 1;
 }
 
-
 /* ==========================================================================
    EXAMPLE Media Queries for Responsive Design.
    These examples override the primary ('mobile first') styles.
    Modify as content requires.
    ========================================================================== */
 
-
 /*** Tablets (iPad) ***/
-
 
 /*@media only screen and (min-device-width : 768px) and (max-device-width : 1024px)*/
 
@@ -1451,16 +1409,13 @@ input.mapTitle {
     /* Style adjustments for viewports that meet the condition */
 }
 
-
 /*** Mobile (iPhone) ***/
-
 
 /*@media only screen and (min-device-width : 320px) and (max-device-width : 480px)*/
 
 @media only screen and (min-width: 320px) and (max-width: 480px) {
     /* Style adjustments for viewports that meet the condition */
 }
-
 
 /* Large devices (desktops, less than 1200px) */
 
@@ -1520,7 +1475,6 @@ input.mapTitle {
         font-size: .95em;
     }
 }
-
 
 /* Medium devices (desktops, less than 1024px) */
 
@@ -1602,7 +1556,6 @@ input.mapTitle {
         height: 200px;
     }
 }
-
 
 /* Small devices (tablets, less than 768px) */
 
@@ -1688,7 +1641,6 @@ input.mapTitle {
         height: 190px;
     }
 }
-
 
 /* Small devices (phones, less than 668px) */
 
@@ -1791,7 +1743,6 @@ input.mapTitle {
     /* Style adjustments for high resolution devices */
 }
 
-
 /* ==========================================================================
    Print styles.
    Inlined to avoid required HTTP connection: h5bp.com/r
@@ -1854,7 +1805,6 @@ input.mapTitle {
         page-break-after: avoid;
     }
 }
-
 
 /*Markup Tools Styling*/
 
@@ -1966,15 +1916,17 @@ circle:hover {
     max-height: 400px;
     overflow: auto;
 }
-.esriLegendMsg{
-    display:none;
+
+.esriLegendMsg {
+    display: none;
 }
-#demTabStrip > .k-tabstrip-items
-{
+
+#demTabStrip>.k-tabstrip-items {
     overflow-x: auto;
     overflow-y: hidden;
     white-space: nowrap;
 }
+
 #dynamicRendererLabel {
     vertical-align: middle;
     font-size: 12px;
@@ -1982,4 +1934,8 @@ circle:hover {
 
 #dynamicRenderer {
     vertical-align: middle;
+}
+
+#queryButtonGroup {
+    float:right;
 }
