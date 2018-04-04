@@ -266,6 +266,13 @@
                             lInfos.push(infoObj);
                         }
                     }
+                    var legendExists = $("#legendDiv").length === 1;
+                    var sliderExists = $("#sliderDiv").length === 1;
+
+                    if (!legendExists) {
+                        $("#sliderDiv").after("<div id='legendDiv'></div>");
+                        $("#legend").show();
+                    }
 
                     self.legend = new Legend({
                         map: mapModel.mapInstance,
@@ -317,6 +324,8 @@
                         dom.byId("legendTitle").innerHTML = self.legendMapTitle;
                         dom.byId("dataSource").innerHTML = self.sourceInfo;
                     }
+                    self.legend.destroy();
+                    self.setupLegend();
                     self.legend.refresh();
                 };
 

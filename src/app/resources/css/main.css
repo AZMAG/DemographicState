@@ -1939,3 +1939,7 @@ circle:hover {
 #queryButtonGroup {
     float:right;
 }
+
+#legend {
+    display:none;
+}
