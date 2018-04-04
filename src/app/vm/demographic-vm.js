@@ -860,7 +860,7 @@
 				 * @method gridRowHover
 				 */
 				self.gridRowHover = function () {
-					$('.k-grid table tbody tr').hover(function () {
+					$('#demACSFeatGrid.k-grid table tbody tr').hover(function () {
 						var thisObj = $(this);
 
 						// Highlight the row
@@ -905,7 +905,7 @@
 								tab[0].textContent === 'Census 2010 Data'
 							) {
 								$('#demSource').html(
-									'Source: United States Census Bureau, 2010 Decennial Census (Interpolation used, see help for more details.) '
+									'Source: United States Census Bureau, 2010 Decennial Census (Aggregated Census Block Data)'
 								);
 							} else {
 								$('#demSource').html(
