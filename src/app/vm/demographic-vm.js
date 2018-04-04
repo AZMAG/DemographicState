@@ -1358,10 +1358,6 @@
 
 					var tabStrip = $('#demTabStrip').data('kendoTabStrip');
 
-
-
-
-
 					// Reset comparison if community has changed
 					if (self.commChanged) {
 						// Clear the comparison checkbox
@@ -1618,6 +1614,7 @@
 								}
 							}
 						}
+						sumAttributes["Non-Hispanic"] = sumAttributes["TOTAL_POP"] - sumAttributes["HISPANIC"];
 					});
 					return sumAttributes;
 				};
@@ -2437,8 +2434,13 @@
 										'font-weight': 'bold',
 										'font-size': '11.5px'
 									});
-									nextSib.empty();
-									finalSib.empty();
+									
+									if (nextSib[0].innerText === "-"){
+										nextSib.empty();
+									}
+									if (finalSib[0].innerText === "-") {
+										finalSib.empty();
+									}
 								} else if (el.universeField === 0) {
 									parentElement.css({
 										'font-weight': 'normal',
