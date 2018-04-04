@@ -917,7 +917,8 @@
 							$('#footNotes').html('');
 							if (
 								tab[0].textContent === 'Census 2010 Charts' ||
-								tab[0].textContent === 'Census 2010 Data'
+								tab[0].textContent === 'Census 2010 Data' ||
+								tab[0].textContent === 'Census Block Groups'
 							) {
 								$('#demSource').html(appConfig.sourceLabel2);
 							} else {
