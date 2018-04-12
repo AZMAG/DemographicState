@@ -871,9 +871,7 @@
 						var objID = Number(objectId);
 						// console.log(mapModel.getGraphics().graphics);
 						$.each(mapModel.getGraphics().graphics, function (index, graphic) {
-							if (graphic.attributes === undefined) {
-								// do nothing!!
-							} else {
+							if (graphic.attributes) {
 								if (graphic.attributes.OBJECTID === objID) {
 									var color = 'cyan';
 									if (thisObj.hasClass('k-state-hover')) {

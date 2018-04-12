@@ -56,7 +56,7 @@
                     win.restore();
                     win.center();
                     win.open();
-                    ga('send', 'event', 'Click', 'Opened Window', 'Contact Window');
+                    // ga('send', 'event', 'Click', 'Opened Window', 'Contact Window');
                 };
 
                 self.closeWindow = function() {

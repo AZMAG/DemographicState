@@ -276,7 +276,7 @@
 
                             var displayFeatures = function(results) {
                                 //add originally selected feature to the map
-                                mapModel.addGraphics(results.features, "yellow", true);
+                                // mapModel.addGraphics(results.features, "yellow", true);
 
                                 var selectionSymbol = null;
                                 var selectionGraphic = null;
