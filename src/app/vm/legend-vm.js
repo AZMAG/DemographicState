@@ -237,6 +237,13 @@
                 self.updateLegendLayers = function (layerId) {
                     var layer = mapModel.mapInstance.getLayer(layerId);
                     var baseLayer = mapModel.mapInstance.getLayer("esriBasemap");
+
+                    if (!layer.visible) {
+                        // <!-- comments:uncomment // -->
+                        // ga('send', 'event', 'Click', 'Layer Activated', layer.title);
+                        // <!-- endcomments -->
+                    }
+
                     (layer.visible) ? layer.hide(): layer.show();
 
                     if (layer.id === "esriImagery") {
@@ -283,7 +290,7 @@
                     self.legend.startup();
                 }
 
-                
+
 
                 //Thematic Legend
                 self.mapLoaded = function (map) {
@@ -315,8 +322,8 @@
                         });
 
                     }
-                    
-                    
+
+
                 };
 
                 self.updateLegend = function () {

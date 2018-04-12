@@ -165,7 +165,19 @@ module.exports = function(grunt) {
                     removeCommands: false
                 },
                 files: {
-                    "dist/index.html": "src/index.html"
+                    "dist/index.html": "dist/index.html",
+                    "dist/app/vm/cbr-vm.js": "dist/app/vm/cbr-vm.js",
+                    "dist/app/vm/colorRamp-vm.js": "dist/app/vm/colorRamp-vm.js",
+                    "dist/app/vm/contact-vm.js": "dist/app/vm/contact-vm.js",
+                    "dist/app/vm/help-vm.js": "dist/app/vm/help-vm.js",
+                    "dist/app/vm/interactiveTools-vm.js": "dist/app/vm/interactiveTools-vm.js",
+                    "dist/app/vm/legend-vm.js": "dist/app/vm/legend-vm.js",
+                    "dist/app/vm/mapContainer-vm.js": "dist/app/vm/mapContainer-vm.js",
+                    "dist/app/vm/markupTools-vm.js": "dist/app/vm/markupTools-vm.js",
+                    "dist/app/vm/panel-vm.js": "dist/app/vm/panel-vm.js",
+                    "dist/app/vm/print-vm.js": "dist/app/vm/print-vm.js",
+                    "dist/app/vm/queryBuilder-vm.js": "dist/app/vm/queryBuilder-vm.js",
+                    "dist/app/vm/social-vm.js": "dist/app/vm/social-vm.js"
                 }
             }
         },

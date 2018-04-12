@@ -163,7 +163,9 @@
                     //reinit window
                     self.init("display", "after");
 
+                    // <!-- comments:uncomment // -->
                     // ga('send', 'event', 'Click', 'Opened Window', 'Advanced Query Window');
+                    // <!-- endcomments -->
 
                     $("#runQuery").click(self.runQuery);
                     $("#cancelQuery").click(self.closeWindow);

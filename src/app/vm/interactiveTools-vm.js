@@ -267,6 +267,15 @@
                     var acsCallback = demographicVM.interactiveSelectionQueryHandler;
                     var bufferGeometry = dojo.byId("bufferSelection").checked;
                     var distance = dojo.byId("bufferDistance").value;
+                    var bufferVerbiage = " buffer used.";
+
+                    if (!bufferGeometry) {
+                        bufferVerbiage = "no buffer used.";
+                    }
+
+                    // <!-- comments:uncomment // -->
+                    // ga('send', 'event', 'Click', 'Custom Summary', 'Used custom summary' + bufferVerbiage);
+                    // <!-- endcomments -->
 
                     if (bufferGeometry && distance !== "0") {
                         var unit = dojo.byId("bufferUnit").value;
@@ -327,8 +336,6 @@
                     } else {
                         layerDelegate.query(censusUrl, censusCallback, qryErrback, evt.geometry, undefined, true);
                         layerDelegate.query(acsUrl, acsCallback, qryErrback, evt.geometry, undefined, true);
-
-
 
                         var selectionSymbol = null;
                         var selectionGraphic = null;

@@ -88,7 +88,11 @@
                     win.content(content);
                     win.center();
                     win.open();
+                    
+                    // <!-- comments:uncomment // -->
                     // ga('send', 'event', 'Click', 'Opened Window', 'Help Window');
+                    // <!-- endcomments -->
+
                     // added for tabs in main window help. vw
                     $("#tabstrip").kendoTabStrip({
                         animation: {

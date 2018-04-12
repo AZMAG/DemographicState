@@ -3,7 +3,7 @@
  *
  * @class print-vm
  */
-(function() {
+(function () {
 
     "use strict";
 
@@ -25,9 +25,9 @@
             "app/vm/cbr-vm",
             "esri/tasks/LegendLayer"
         ],
-        function(dj, dc, tp, PrintTask, PrintTemplate, PrintParameters, esriRequest, esriConfig, arrayUtils, helpView, helpVM, view, legendVM, mapModel, cbrVm, LegendLayer) {
+        function (dj, dc, tp, PrintTask, PrintTemplate, PrintParameters, esriRequest, esriConfig, arrayUtils, helpView, helpVM, view, legendVM, mapModel, cbrVm, LegendLayer) {
 
-            var printVM = new function() {
+            var printVM = new function () {
 
                 var self = this;
 
@@ -40,13 +40,13 @@
                 self.progressDots = null;
                 self.progressText = null;
 
-                self.init = function(relatedElement, relation, map) {
+                self.init = function (relatedElement, relation, map) {
                     dc.place(view, "mapContainer", "after");
 
-                    tp.subscribe("printStateO", function() {
+                    tp.subscribe("printStateO", function () {
                         self.openWindow();
                     });
-                    tp.subscribe("printStateC", function() {
+                    tp.subscribe("printStateC", function () {
                         self.closeWindow();
                     });
 
@@ -61,12 +61,15 @@
                     }).data("kendoWindow");
 
                     var helpButton = printWindow.wrapper.find(".k-i-help");
-                    helpButton.click(function() {
+                    helpButton.click(function () {
                         helpVM.openWindow(helpView);
                     });
 
                     // wire the print execution to the button
-                    $("#executeMapPrint").click(function() {
+                    $("#executeMapPrint").click(function () {
+                        // <!-- comments:uncomment // -->
+                        // ga('send', 'event', 'Click', 'Print button', 'Clicked Print Button');
+                        // <!-- endcomments -->
                         self.executePrintTask();
                     });
 
@@ -85,12 +88,12 @@
                 }; //end init
 
                 // get print templates from the export web map task
-                self.handlePrintInfo = function(resp) {
+                self.handlePrintInfo = function (resp) {
 
                     var layoutTemplate, templateNames, mapOnlyIndex, templates, formatChoices;
 
                     // get the list templates, remove the MAP_ONLY template, and populate the drop-down
-                    layoutTemplate = arrayUtils.filter(resp.parameters, function(param, idx) {
+                    layoutTemplate = arrayUtils.filter(resp.parameters, function (param, idx) {
                         return param.name === "Layout_Template";
                     });
 
@@ -112,13 +115,13 @@
                 };
 
                 // i guess this is a generic error handler?
-                self.handleError = function(err) {
+                self.handleError = function (err) {
                     // console.log("Something broke: ", err);
                     // var hi = 1;
                 };
 
                 // handles the print execution
-                self.executePrintTask = function() {
+                self.executePrintTask = function () {
                     // fetch values from the UI
                     var titleText = $("#mapTitle").val();
                     var notesText = $("#mapNotes").val();
@@ -139,7 +142,7 @@
                     // these refer to named text elements in the mxd, sb
                     var thematicMap = cbrVm.toc.dataItem(cbrVm.toc.select());
                     var parent = cbrVm.toc.parent(cbrVm.toc.select());
-                    
+
                     var customLayoutElements = [{
                         "txtLegendHeader": cbrVm.toc.text(parent) + ' - ' + thematicMap.Name + " \n<_BOL> " + appConfig.LegendSource + "</_BOL>"
                     }, {
@@ -186,7 +189,7 @@
 
 
                 // handler when print task executes successively
-                self.printComplete = function(result) {
+                self.printComplete = function (result) {
                     clearInterval(self.progressInterval);
                     $("#mapPrintProgress").html("<br><a class='link' target='_blank' href='" + result.url + "'>Map export complete, click here to view</a>");
                     $("#executeMapPrint").show();
@@ -194,7 +197,7 @@
                 };
 
                 // handler when print task returns an error
-                self.printFailed = function(e) {
+                self.printFailed = function (e) {
                     clearInterval(self.progressInterval);
                     $("#executeMapPrint").show();
                     $("#mapPrintProgress").html("<br><p>problem with print!, code:" + e.code + " message: " + e.message + "</p>");
@@ -205,7 +208,7 @@
 
                 @method openWindow
                 **/
-                self.openWindow = function() {
+                self.openWindow = function () {
                     // set the title to the currently selected map
                     var thematicMap = cbrVm.toc.dataItem(cbrVm.toc.select());
                     var parent = cbrVm.toc.parent(cbrVm.toc.select());
@@ -213,27 +216,28 @@
 
                     if ($("#map2").is(":visible")) {
                         $("#printLabel").show();
-                    }
-                    else {
+                    } else {
                         $("#printLabel").hide();
                     }
-
 
                     // show the window
                     var win = $("#printWindow").data("kendoWindow");
                     win.restore();
                     win.center();
                     win.open();
-                    ga('send', 'event', 'Click', 'Opened Window', 'Print Window');
+
+                    // <!-- comments:uncomment // -->
+                    // ga('send', 'event', 'Click', 'Opened Window', 'Print Window');
+                    // <!-- endcomments -->
                 };
 
-                self.closeWindow = function() {
+                self.closeWindow = function () {
                     var win = $("#printWindow").data("kendoWindow");
                     win.close();
                 };
 
                 // used to indicate progress
-                self.showProgressWithDots = function() {
+                self.showProgressWithDots = function () {
 
                     if (self.progressDots <= 4) {
                         self.progressText += ".";
@@ -254,31 +258,30 @@
 
     );
 
-            function myCallbackFunction(ioArgs) {
+    function myCallbackFunction(ioArgs) {
 
-                if (ioArgs.url.indexOf("submit") > -1) {
+        if (ioArgs.url.indexOf("submit") > -1) {
 
-                    //Store webmapAsJson request in the variable
-                    var jsontxt = ioArgs.content.Web_Map_as_JSON;
+            //Store webmapAsJson request in the variable
+            var jsontxt = ioArgs.content.Web_Map_as_JSON;
 
-                    //Create a Json object
-                    var tempObj = JSON.parse(jsontxt);
+            //Create a Json object
+            var tempObj = JSON.parse(jsontxt);
 
-                    tempObj.operationalLayers[1].layers[0].name = "";
+            tempObj.operationalLayers[1].layers[0].name = "";
 
-                    //Convert Json object to string
-                    var modjson = JSON.stringify(tempObj);
+            //Convert Json object to string
+            var modjson = JSON.stringify(tempObj);
 
-                    //assign the string back to WebMapAsJson
-                    ioArgs.content.Web_Map_as_JSON = modjson;
+            //assign the string back to WebMapAsJson
+            ioArgs.content.Web_Map_as_JSON = modjson;
 
-                    // don't forget to return ioArgs.
-                    return ioArgs;
+            // don't forget to return ioArgs.
+            return ioArgs;
 
-                    //console.log(tempObj.operationalLayers[1].layers[0].name);
-                }
-                else {
-                    return ioArgs;
-                }
-            }
+            //console.log(tempObj.operationalLayers[1].layers[0].name);
+        } else {
+            return ioArgs;
+        }
+    }
 }());

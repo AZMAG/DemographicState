@@ -314,7 +314,11 @@
                 };
                 self.onExpand = function (e) {
                     var headerTitle = $(e.item).find(".k-header")[0].innerText;
+
+                    // <!-- comments:uncomment // -->
                     // ga('send', 'event', 'Click', "Expanded ", headerTitle);
+                    // <!-- endcomments -->
+
                     $(e.item).children().removeClass("k-state-selected");
                 };
 
@@ -531,7 +535,7 @@
                                 }
                                 if (pushVal) {
                                     arr.push(pushVal);
-                                } else{
+                                } else {
                                     arr.push(0);
                                 }
                             });
@@ -663,6 +667,11 @@
                 **/
                 self.classMethodChange = function () {
                     var classMethod = self.classMethodList.dataItem().Value;
+
+                    // <!-- comments:uncomment // -->
+                    // ga('send', 'event', 'Click', 'Class Method Change', classMethod);
+                    // <!-- endcomments -->
+
                     if (classMethod === "custom") {
                         tp.publish("ClassificationMethodChanged", self.currentRenderer);
                     } else {
@@ -700,6 +709,13 @@
                     //    self.toc.select(self.toc.findByText(mapInitializationData.selectedMap.ShortName));
                     //}
                     dataItem = self.toc.dataItem(self.toc.select());
+
+                    if (dataItem.Name !== "Total Population") {
+                        // <!-- comments:uncomment // -->
+                        // ga('send', 'event', 'Click', 'Chose Map', dataItem.Name);
+                        // <!-- endcomments -->
+                    }
+
                     if (dataItem) {
 
                         //bookmarkDelegate.currentMap(dataItem);
@@ -762,6 +778,11 @@
                 **/
                 self.breaksCountSelected = function (e) {
                     var dataItem = self.breaksCountList.dataItem(e.node);
+
+                    // <!-- comments:uncomment // -->
+                    // ga('send', 'event', 'Click', 'Update number of Class Breaks', '' + dataItem);
+                    // <!-- endcomments -->
+
                     tp.publish("SetNumBreaks", dataItem);
                 };
 

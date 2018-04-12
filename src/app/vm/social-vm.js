@@ -90,14 +90,15 @@
                     var shareURL = self.baseURL + bookmarkDelegate.buildMapQueryString();
 
                     bookmarkDelegate.minifyURL(shareURL, self.changeShareLinks);
-                    
-
 
                     self.changeShareLinks(shareURL);
                     var win = $("#shareWindowDiv").data("kendoWindow");
                     win.restore();
                     win.open();
-                    ga('send', 'event', 'Click', 'Opened Window', 'Share Window');
+
+                    // <!-- comments:uncomment // -->
+                    // ga('send', 'event', 'Click', 'Opened Window', 'Share Window');
+                    // <!-- endcomments -->
                 };
 
                 self.closeWindow = function() {

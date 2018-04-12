@@ -4,7 +4,7 @@
  * @class mapContainer-vm
  */
 
-(function() {
+(function () {
 
     "use strict";
 
@@ -19,8 +19,8 @@
             "app/vm/map-vm",
             "app/helpers/bookmark-delegate"
         ],
-        function(dc, da, lang, ds, topic, view, mapModel, mapVM, bookmarkDelegate) {
-            var MapContainerVM = new function() {
+        function (dc, da, lang, ds, topic, view, mapModel, mapVM, bookmarkDelegate) {
+            var MapContainerVM = new function () {
 
                 /**
                  * Store reference to module this object.
@@ -39,7 +39,7 @@
                  *
                  * @method init
                  */
-                self.init = function() {
+                self.init = function () {
                     dc.place(view, "display", "first");
 
                     topic.subscribe("AddNewMap", self.addNewMap);
@@ -84,7 +84,12 @@
                 @method addNewMap
                 @param {object} mapInitData - initialization data from the URL querystring if provided.
                 **/
-                self.addNewMap = function(mapInitData) {
+                self.addNewMap = function (mapInitData) {
+
+                    // <!-- comments:uncomment // -->
+                    // ga('send', 'event', 'Click', 'Map Frame', 'Added new map Frame');
+                    // <!-- endcomments -->
+
                     $(".mapFrameDataSource").html(self.sourceInfo);
                     if (self.mapVMs.length < 4) {
                         var centerPnt = mapModel.baseMapInstance.extent.getCenter();
@@ -178,9 +183,9 @@
 
                 @method mapLoaded
                 **/
-                self.mapLoaded = function() {
+                self.mapLoaded = function () {
                     if (mapModel.initializing && self.initializationData && self.mapVMs.length < self.initializationData.maps.length) {
-                        setTimeout(function() {
+                        setTimeout(function () {
                             var mapInitData = self.initializationData.maps[self.mapVMs.length];
                             mapInitData.extent = self.initializationData.E;
                             self.addNewMap(mapInitData);
@@ -195,7 +200,7 @@
 
                 @method removeMap
                 **/
-                self.removeMap = function() {
+                self.removeMap = function () {
                     if (self.mapVMs.length > 1) {
                         switch (self.mapVMs.length) {
                             case 2:
@@ -204,7 +209,7 @@
 
                                 //Ensures legend is updated to first map legend
                                 var lis = document.getElementById("layerOptionPanelBar_map1").getElementsByTagName("li");
-                                $.each(lis, function(i, li) {
+                                $.each(lis, function (i, li) {
                                     var checkbox = li.getElementsByTagName("input")[0];
                                     var checkbox2 = $("#c" + checkbox.value);
                                     if (checkbox.checked !== checkbox2.is(":checked")) {
@@ -241,7 +246,7 @@
                  *
                  * @method updateAddRemoveButtons
                  */
-                self.updateAddRemoveButtons = function() {
+                self.updateAddRemoveButtons = function () {
                     // update displaying the button to remove a map
                     if (self.mapVMs.length > 1) {
                         topic.publish("UpdateRemoveAMapButton", {
@@ -268,7 +273,7 @@
                     }
                 }; //end updateAddRemoveButtons
 
-                self.handleMapInfoUpdated = function(value) {
+                self.handleMapInfoUpdated = function (value) {
                     var mapInfoList = [];
                     for (var i = 0; i < self.mapVMs.length; i++) {
                         var mapInfo = self.mapVMs[i].getMapBookmarkInfo();

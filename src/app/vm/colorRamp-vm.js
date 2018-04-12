@@ -189,6 +189,11 @@
                     var rampIndex = parseInt(element.substring(7));
                     var curr = self.schemeTypeSelector.dataItem();
                     self.Current.Ramp = curr.ColorRamps[rampIndex].Name;
+
+                    // <!-- comments:uncomment // -->
+                    // ga('send', 'event', 'Click', 'Changed color Scheme', '' + self.Current.Ramp);
+                    // <!-- endcomments -->
+
                     self.broadcastCurrentRamp();
                     self.broadcastRampBreakOptions();
                     self.closeWindow();

@@ -16,7 +16,7 @@ And constructed with the following guidelines:
 3. **PATCH** version when you make backwards-compatible bug fixes and misc changes **bumps only the patch**
 
 ***************************************************************************************************************
-## Version 3.2.3 | 2018-04-12
+## Version 3.2.4 | 2018-04-12
 
 * Removed yellow selection graphic
 * Update logo link to new website
@@ -32,6 +32,7 @@ And constructed with the following guidelines:
 * Updated legal Census Disclaimer
 * Updated cbr config to include normalization fields.  This allows the percentto be calculated on the fly.
 * Updated Demographic Config PDF Links to https to prevent issue with pdf exports.
+* Added some google analytics events.  Updated the gruntfile to remove comments.
 
 ## Version 3.2.3 | 2018-02-26
 
