@@ -16,11 +16,27 @@ And constructed with the following guidelines:
 3. **PATCH** version when you make backwards-compatible bug fixes and misc changes **bumps only the patch**
 
 ***************************************************************************************************************
+## Version 3.2.3 | 2018-04-12
+
+* Removed yellow selection graphic
+* Update logo link to new website
+* Update SVMPO Contact info
+* Add Non-Hispanic to the acs report.
+* Fixed the query builder with percents.
+* Update Verbiage in Query Builder Help window.
+* Update verbiage in Census tabs for non standard geometries.
+* Fixed the legend loading issue in which the block groups legend would sometimes not show the class breaks correctly.  It works every time now.
+* Updated custom summary to correct data source when user activates the "Census Block Groups" tab.
+* Move Run Query and Cancel buttons to bottom right of Query Window.  Remove unnecessary queryBuilder Two view.
+* Update column header in Title VI Data Tab
+* Updated legal Census Disclaimer
+* Updated cbr config to include normalization fields.  This allows the percentto be calculated on the fly.
+* Updated Demographic Config PDF Links to https to prevent issue with pdf exports.
 
 ## Version 3.2.3 | 2018-02-26
 
-# fixed bug in data query found in training class
-# updated grunt files
+* fixed bug in data query found in training class
+* updated grunt files
 
 ## Version 3.2.2 | 2018-02-15
 
