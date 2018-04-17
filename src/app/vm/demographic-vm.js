@@ -2413,6 +2413,9 @@
 								}
 								finalElement.css('padding-left', indent + 'px');
 
+								$(finalElement).next().css('text-align', 'right');
+								$(finalElement).next().next().css('text-align', 'right');
+
 								var parentElement = $(finalElement[0].parentElement);
 
 								if (el.universeField === 1) {
@@ -2715,6 +2718,9 @@
 														cell.background = '#8DB4E2';
 														cell.italic = true;
 														cell.bold = true;
+														if (i > 0) {
+															cell.textAlign = "right";
+														}
 													});
 												} else if (el.universeField === 2) {
 													$.each(row.cells, function (i, cell) {
@@ -2724,6 +2730,13 @@
 														}
 														if (i > 1) {
 															cell.value = '';
+															cell.textAlign = "right";
+														}
+													});
+												} else {
+													$.each(row.cells, function (i, cell) {
+														if (i > 1) {
+															cell.textAlign = "right";
 														}
 													});
 												}
