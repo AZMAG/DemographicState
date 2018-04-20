@@ -82,7 +82,7 @@ define([
                     }
                 }
             });
-            searchConfig.init();            
+            searchConfig.init();
 
             mapModel.initialize();
 
@@ -125,32 +125,32 @@ define([
 
             cbrVM.init("display", "after");
 
-            searchVM.init("titlebar", "after");
-            kendo.bind($("#searchView"), searchVM);
+            contactLaunchVM.init("menu-bar");
+            kendo.bind($("#contactLaunchbar"), contactLaunchVM);
 
-            cbrlBarVM.init("titlebar", "after");
-            kendo.bind($("#cbrlaunchbar"), cbrlBarVM);
-
-            legendBarVM.init("titlebar", "after");
-            kendo.bind($("#leglaunchbar"), legendBarVM);
-
-            panelBarVM.init("titlebar", "after");
-            kendo.bind($("#rplaunchbar"), panelBarVM);
-
-            markupToolsBarVM.init("titlebar", "after");
-            kendo.bind($("#mtlaunchbar"), markupToolsBarVM);
-
-            printLaunchVM.init("titlebar", "after");
-            kendo.bind($("#printlaunchbar"), printLaunchVM);
-
-            socialLaunchVM.init("titlebar", "after");
-            kendo.bind($("#sharelaunchbar"), socialLaunchVM);
-
-            helpLaunchVM.init("titlebar", "after");
+            helpLaunchVM.init("menu-bar");
             kendo.bind($("#helplaunchbar"), helpLaunchVM);
 
-            contactLaunchVM.init("titlebar", "after");
-            kendo.bind($("#contactLaunchbar"), contactLaunchVM);
+            socialLaunchVM.init("menu-bar");
+            kendo.bind($("#sharelaunchbar"), socialLaunchVM);
+
+            printLaunchVM.init("menu-bar");
+            kendo.bind($("#printlaunchbar"), printLaunchVM);
+
+            markupToolsBarVM.init("menu-bar");
+            kendo.bind($("#mtlaunchbar"), markupToolsBarVM);
+
+            panelBarVM.init("menu-bar");
+            kendo.bind($("#rplaunchbar"), panelBarVM);
+
+            legendBarVM.init("menu-bar");
+            kendo.bind($("#leglaunchbar"), legendBarVM);
+
+            cbrlBarVM.init("menu-bar");
+            kendo.bind($("#cbrlaunchbar"), cbrlBarVM);
+
+            searchVM.init("menu-bar");
+            kendo.bind($("#searchView"), searchVM);
 
             interactiveToolsVM.init();
             kendo.bind($("#pnlInteractiveDiv"), interactiveToolsVM);
