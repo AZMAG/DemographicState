@@ -237,6 +237,13 @@
                 self.updateLegendLayers = function (layerId) {
                     var layer = mapModel.mapInstance.getLayer(layerId);
                     var baseLayer = mapModel.mapInstance.getLayer("esriBasemap");
+
+                    if (!layer.visible) {
+                        // <!-- comments:uncomment // -->
+                        // ga('send', 'event', 'Click', 'Layer Activated', layer.title);
+                        // <!-- endcomments -->
+                    }
+
                     (layer.visible) ? layer.hide(): layer.show();
 
                     if (layer.id === "esriImagery") {
@@ -266,6 +273,13 @@
                             lInfos.push(infoObj);
                         }
                     }
+                    var legendExists = $("#legendDiv").length === 1;
+                    var sliderExists = $("#sliderDiv").length === 1;
+
+                    if (!legendExists) {
+                        $("#sliderDiv").after("<div id='legendDiv'></div>");
+                        $("#legend").show();
+                    }
 
                     self.legend = new Legend({
                         map: mapModel.mapInstance,
@@ -276,7 +290,7 @@
                     self.legend.startup();
                 }
 
-                
+
 
                 //Thematic Legend
                 self.mapLoaded = function (map) {
@@ -308,8 +322,8 @@
                         });
 
                     }
-                    
-                    
+
+
                 };
 
                 self.updateLegend = function () {
@@ -317,6 +331,8 @@
                         dom.byId("legendTitle").innerHTML = self.legendMapTitle;
                         dom.byId("dataSource").innerHTML = self.sourceInfo;
                     }
+                    self.legend.destroy();
+                    self.setupLegend();
                     self.legend.refresh();
                 };
 

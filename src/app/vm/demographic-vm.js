@@ -860,7 +860,7 @@
 				 * @method gridRowHover
 				 */
 				self.gridRowHover = function () {
-					$('.k-grid table tbody tr').hover(function () {
+					$('#demACSFeatGrid.k-grid table tbody tr').hover(function () {
 						var thisObj = $(this);
 
 						// Highlight the row
@@ -871,9 +871,7 @@
 						var objID = Number(objectId);
 						// console.log(mapModel.getGraphics().graphics);
 						$.each(mapModel.getGraphics().graphics, function (index, graphic) {
-							if (graphic.attributes === undefined) {
-								// do nothing!!
-							} else {
+							if (graphic.attributes) {
 								if (graphic.attributes.OBJECTID === objID) {
 									var color = 'cyan';
 									if (thisObj.hasClass('k-state-hover')) {
@@ -905,7 +903,7 @@
 								tab[0].textContent === 'Census 2010 Data'
 							) {
 								$('#demSource').html(
-									'Source: United States Census Bureau, 2010 Decennial Census (Interpolation used, see help for more details.) '
+									'Source: United States Census Bureau, 2010 Decennial Census (Aggregated Census Block Data)'
 								);
 							} else {
 								$('#demSource').html(
@@ -917,7 +915,8 @@
 							$('#footNotes').html('');
 							if (
 								tab[0].textContent === 'Census 2010 Charts' ||
-								tab[0].textContent === 'Census 2010 Data'
+								tab[0].textContent === 'Census 2010 Data' ||
+								tab[0].textContent === 'Census Block Groups'
 							) {
 								$('#demSource').html(appConfig.sourceLabel2);
 							} else {
@@ -1357,10 +1356,6 @@
 
 					var tabStrip = $('#demTabStrip').data('kendoTabStrip');
 
-
-
-
-
 					// Reset comparison if community has changed
 					if (self.commChanged) {
 						// Clear the comparison checkbox
@@ -1544,7 +1539,7 @@
 										},
 										{
 											field: 'PercentOfBlocks',
-											title: '% Blocks',
+											title: '% Block Groups',
 											format: '{0:p1}',
 											width: '65px'
 										},
@@ -1617,6 +1612,7 @@
 								}
 							}
 						}
+						sumAttributes["Non-Hispanic"] = sumAttributes["TOTAL_POP"] - sumAttributes["HISPANIC"];
 					});
 					return sumAttributes;
 				};
@@ -2417,6 +2413,9 @@
 								}
 								finalElement.css('padding-left', indent + 'px');
 
+								$(finalElement).next().css('text-align', 'right');
+								$(finalElement).next().next().css('text-align', 'right');
+
 								var parentElement = $(finalElement[0].parentElement);
 
 								if (el.universeField === 1) {
@@ -2436,8 +2435,13 @@
 										'font-weight': 'bold',
 										'font-size': '11.5px'
 									});
-									nextSib.empty();
-									finalSib.empty();
+									
+									if (nextSib[0].innerText === "-"){
+										nextSib.empty();
+									}
+									if (finalSib[0].innerText === "-") {
+										finalSib.empty();
+									}
 								} else if (el.universeField === 0) {
 									parentElement.css({
 										'font-weight': 'normal',
@@ -2714,6 +2718,9 @@
 														cell.background = '#8DB4E2';
 														cell.italic = true;
 														cell.bold = true;
+														if (i > 0) {
+															cell.textAlign = "right";
+														}
 													});
 												} else if (el.universeField === 2) {
 													$.each(row.cells, function (i, cell) {
@@ -2723,6 +2730,13 @@
 														}
 														if (i > 1) {
 															cell.value = '';
+															cell.textAlign = "right";
+														}
+													});
+												} else {
+													$.each(row.cells, function (i, cell) {
+														if (i > 1) {
+															cell.textAlign = "right";
 														}
 													});
 												}

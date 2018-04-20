@@ -163,7 +163,9 @@
                     //reinit window
                     self.init("display", "after");
 
-                    ga('send', 'event', 'Click', 'Opened Window', 'Advanced Query Window');
+                    // <!-- comments:uncomment // -->
+                    // ga('send', 'event', 'Click', 'Opened Window', 'Advanced Query Window');
+                    // <!-- endcomments -->
 
                     $("#runQuery").click(self.runQuery);
                     $("#cancelQuery").click(self.closeWindow);
@@ -323,6 +325,10 @@
                         var queryItem = {};
 
                         if (dataItem.Type === "number" || dataItem.Type === "percent") {
+                            if (dataItem.Type === "percent") {
+                                dataItem.FieldName = "((" + dataItem.FieldName + " / " + dataItem.NormalizeField + ") * 100)";
+                            }
+
                             target.append("<div class='demo-section k-header' id='" + dataItem.uid + count + "'>" + "<input class='hiddenFld' type='hidden' value='" + dataItem.Type + "' placeholder='" + dataItem.Placeholder + "'>" +
                                 "<span class='queryItem'>" + dataItem.ShortName + ": </span>" + '<span class="inputBoxes"><select class="operatorDDL" id="operatorDDL' + count + '"></select><input class="style1" placeholder="min">' +
                                 '</input><input placeholder="max" class="style1"></input><button class="removeRowBtn">Remove</button><button class="clearRowBtn">Clear</button></span>' +
@@ -492,7 +498,6 @@
                             var max = self.queryItems[i].maxVal;
                             var inputValue = 0;
                             if (inputBoxes.length > 1) {
-
                                 if (inputBoxes[0].value) {
                                     min = inputBoxes[0].value.replace(/,/g, "");
                                     if (self.queryItems[i].type === "percent") {
@@ -505,6 +510,7 @@
                                         max = max.replace("%", "");
                                     }
                                 }
+
                                 if (i !== (self.queryItems.length - 1)) {
                                     queryString += "(" + fieldName + " >= " + min + " AND  " + fieldName + " <= " + max + ") " + join + " ";
                                 } else {
@@ -514,11 +520,19 @@
                                 if (inputBoxes[0]) {
                                     if (inputBoxes[0].value) {
                                         inputValue = inputBoxes[0].value.replace(/,/g, "");
+
                                         if (self.queryItems[i].type === "percent") {
                                             inputValue = inputValue.replace("%", "");
                                             //inputValue = (inputValue/100);
                                         }
                                     }
+                                    
+                                    if (self.queryItems[i].type === "number"){
+                                        if (inputValue === 0){
+                                            inputValue = 0.0001;
+                                        }
+                                    }
+
                                     if (i !== (self.queryItems.length - 1)) {
                                         queryString += "(" + fieldName + " " + operator + " " + inputValue + ") " + join + " ";
                                     } else {
@@ -538,7 +552,6 @@
                     if (queryString === "" || queryString.indexOf("null") > -1) {
                         queryString = "1=1";
                     }
-
                     return queryString;
                 };
 

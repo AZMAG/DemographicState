@@ -443,8 +443,6 @@
 									outFields: info.outFields,
 									infoTemplate: featureTemplate
 								});
-
-								break;
 						}
 
 						layer.tocIndex = i;

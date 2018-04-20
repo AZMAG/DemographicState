@@ -435,7 +435,7 @@
                         "groupID": "<span class='myHiddenClass'>03</span>Race and Ethnicity",
                         "chartCategory": "",
                         "chartType": "",
-                        "canSum": "",
+                        "canSum": true,
                         "parentField": "",
                         "percentOfField": "TOTAL_POP"
                     },

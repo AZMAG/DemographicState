@@ -90,14 +90,15 @@
                     var shareURL = self.baseURL + bookmarkDelegate.buildMapQueryString();
 
                     bookmarkDelegate.minifyURL(shareURL, self.changeShareLinks);
-                    
-
 
                     self.changeShareLinks(shareURL);
                     var win = $("#shareWindowDiv").data("kendoWindow");
                     win.restore();
                     win.open();
-                    ga('send', 'event', 'Click', 'Opened Window', 'Share Window');
+
+                    // <!-- comments:uncomment // -->
+                    // ga('send', 'event', 'Click', 'Opened Window', 'Share Window');
+                    // <!-- endcomments -->
                 };
 
                 self.closeWindow = function() {
@@ -246,7 +247,7 @@
                     //Email
                     var emailDiv = $("div#email");
                     $(emailDiv).empty();
-                    var emailStructure = '<a href="mailto:?subject=MAG Statewide Demographics Map Viewer&body=%0A%0ACheck out this website.%0A%0AMAG Statewide Demographics Map Viewer - #MAGmaps%0A' + replaceToken + '" title="MAG|Projections"><img id="mailicon" src="app/resources/img/mail-icon.png"></a>';
+                    var emailStructure = '<a href="mailto:?subject=MAG Statewide Demographics Map Viewer&body=%0A%0ACheck out this website.%0A%0AMAG Statewide Demographics Map Viewer - #MAGmaps%0A' + replaceToken + '" title="MAG|Demographics"><img id="mailicon" src="app/resources/img/mail-icon.png"></a>';
 
                     $(emailDiv).html(emailStructure.replace(replaceToken, minimizedURL));
 
