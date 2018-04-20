@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Search Tool
  *
  * @class search-vm
@@ -46,7 +46,7 @@
                  * @method init
                  */
                 self.init = function() {
-                    dc.place(view, "titlebar", "after");
+                    dc.place(view, "menu-bar");
 
                     var s = new Search({
                         enableLabel: false,

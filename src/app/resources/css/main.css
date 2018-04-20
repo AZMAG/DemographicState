@@ -393,7 +393,7 @@ span.searchIcon.esriIconZoom {
 
 #titlebar {
     position: absolute;
-    height: 100%;
+    /* height: 100%; */
 }
 
 #titlebar h1,
@@ -415,13 +415,18 @@ h2 {
     padding-bottom: 13.25px;
 }
 
+#menu-bar {
+    position: initial;
+    float: right;
+}
+
 .bar {
     font-size: 35px;
 }
 
 #magLogo {
-    width: 144px;
-    padding: 15px 2px 15px 2px;
+    width: 120px;
+    padding: 0 10px;
 }
 
 .magLogo {
@@ -1431,9 +1436,12 @@ input.mapTitle {
         padding-top: 15.5px;
         padding-bottom: 15.5px;
     }
+    #menu-bar {
+        font-size: 90%;
+    }
     #magLogo {
-        width: 140px;
-        padding: 14.5px 5px 14.5px 10px;
+        width: 115px;
+        padding: 0 10px;
     }
     .magLogo {
         max-width: 95%;
@@ -1488,6 +1496,9 @@ input.mapTitle {
         font-size: .85em;
         padding: 5px 0 2px 0;
     }
+    #menu-bar {
+        font-size: 80%;
+    }
     /*li.ti1 {
         display: list-item;
         width: 175px;
@@ -1507,8 +1518,8 @@ input.mapTitle {
         padding: 0;
     }*/
     #magLogo {
-        width: 130px;
-        padding: 15.5px 5px 15.5px 10px;
+        width: 110px;
+        padding: 0 10px;
     }
     .magLogo {
         max-width: 95%;
@@ -1569,6 +1580,9 @@ input.mapTitle {
         font-size: .75em;
         padding: 5px 0 2px 0px;
     }
+    #menu-bar {
+        font-size: 70%;
+    }
     /*li.ti1 {
         display: list-item;
         width: 210px;
@@ -1592,8 +1606,8 @@ input.mapTitle {
         display: none;
     }
     #magLogo {
-        width: 120px;
-        padding: 16px 5px 16px 10px;
+        width: 105px;
+        padding: 0 10px;
     }
     .magLogo {
         max-width: 95%;
@@ -1662,6 +1676,9 @@ input.mapTitle {
     #title2 {
         font-size: .70em;
         padding: 5px 0 2px 0px;
+    }
+    #menu-bar {
+        font-size: 50%;
     }
     li.tb:first-child,
     li.bar {
