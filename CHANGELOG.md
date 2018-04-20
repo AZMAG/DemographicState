@@ -32,6 +32,8 @@ And constructed with the following guidelines:
 
 ## Version 3.2.4 | 2018-04-20
 
+* updated css for header and menu bars
+* update logo
 * Removed yellow selection graphic
 * Update logo link to new website
 * Update SVMPO Contact info
