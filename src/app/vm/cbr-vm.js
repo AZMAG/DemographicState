@@ -580,6 +580,7 @@
                     if (!classDef.normalizationField) {
                         outFields = [classDef.classificationField];
                     }
+
                     if (dynamic) {
                         layerDelegate.query(url, processResults, processResults, extent, classDef.classificationField + " IS NOT NULL", false, outFields, null, false, null, null);
                     } else {
@@ -734,13 +735,12 @@
                     //}
                     dataItem = self.toc.dataItem(self.toc.select());
 
-                    if (dataItem.Name !== "Total Population") {
-                        // <!-- comments:uncomment // -->
-                        // ga('send', 'event', 'Click', 'Chose Map', dataItem.Name);
-                        // <!-- endcomments -->
-                    }
-
                     if (dataItem) {
+                        if (dataItem.Name !== "Total Population") {
+                            // <!-- comments:uncomment // -->
+                            // ga('send', 'event', 'Click', 'Chose Map', dataItem.Name);
+                            // <!-- endcomments -->
+                        }
 
                         //bookmarkDelegate.currentMap(dataItem);
 
