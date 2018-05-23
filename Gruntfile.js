@@ -227,6 +227,16 @@ module.exports = function(grunt) {
 
     });
 
+    grunt.registerTask("GetClassBreaks", function () {
+        require('./src/app/resources/js/generateClassBreaks.js')(grunt, this.async, {
+            inputLocation: "./src/app/config/cbrConfig.json",
+            geoStatsPath: "./geostats.min.js",
+            mainUrl: "https://geo.azmag.gov/gismag/rest/services/maps/DemographicState2016/MapServer",
+            outputLocation: "./src/app/config/cbrConfig.json"
+        });
+    });
+
+
     // this would be run by typing "grunt test" on the command line
     // grunt.registerTask("test", ["uglify", "cssmin", "concat"]);
 
