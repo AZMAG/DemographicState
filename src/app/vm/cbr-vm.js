@@ -520,34 +520,6 @@
                 };
 
                 self.generateRenderer = function (classDef, url, dynamic) {
-                    var thematicMap = self.toc.dataItem(self.toc.select());
-                    var layer = mapModel.mapInstance.getLayer("blockGroups");
-                    var breaksCount = self.CurrentRamp.length;
-
-                    var breakValues = [];
-                    // console.log(classDef);
-
-                    if (classDef.classificationMethod === "natural-breaks") {
-                        breakValues = thematicMap.breaks["Jenks" + breaksCount];
-                    } else if (classDef.classificationMethod === "equal-interval") {
-                        breakValues = thematicMap.breaks["EqInterval" + breaksCount];
-                    } else if (classDef.classificationMethod === "quantile") {
-                        breakValues = thematicMap.breaks["Quantile" + breaksCount];
-                    }
-
-                    var renderer = new ClassBreaksRenderer(null, classDef.classificationField);
-
-                    $.each(self.CurrentRamp, function (i, colorArray) {
-                        var min = breakValues[i];
-                        var max = breakValues[i + 1];
-                        renderer.addBreak(min, max, new SimpleFillSymbol().setColor(new Color(colorArray)));
-                    });
-
-                    colorRampOnly = false;
-                    self.applyRenderer(renderer);
-
-
-
                     function processResults(results) {
                         if (results.features) {
                             var layer = mapModel.mapInstance.getLayer("blockGroups");
@@ -574,7 +546,6 @@
                             series.setSerie(arr);
 
                             var breakValues = [];
-
 
                             if (classDef.classificationMethod === "natural-breaks") {
                                 breakValues = series.getClassJenks(breaksCount);
@@ -609,8 +580,34 @@
                     if (!classDef.normalizationField) {
                         outFields = [classDef.classificationField];
                     }
+                    if (dynamic) {
+                        layerDelegate.query(url, processResults, processResults, extent, classDef.classificationField + " IS NOT NULL", false, outFields, null, false, null, null);
+                    } else {
+                        var thematicMap = self.toc.dataItem(self.toc.select());
+                        var layer = mapModel.mapInstance.getLayer("blockGroups");
+                        var breaksCount = self.CurrentRamp.length;
 
-                    // layerDelegate.query(url, processResults, processResults, extent, classDef.classificationField + " IS NOT NULL", false, outFields, null, false, null, null);
+                        var breakValues = [];
+
+                        if (classDef.classificationMethod === "natural-breaks") {
+                            breakValues = thematicMap.breaks["Jenks" + breaksCount];
+                        } else if (classDef.classificationMethod === "equal-interval") {
+                            breakValues = thematicMap.breaks["EqInterval" + breaksCount];
+                        } else if (classDef.classificationMethod === "quantile") {
+                            breakValues = thematicMap.breaks["Quantile" + breaksCount];
+                        }
+
+                        var renderer = new ClassBreaksRenderer(null, classDef.classificationField);
+
+                        $.each(self.CurrentRamp, function (i, colorArray) {
+                            var min = breakValues[i];
+                            var max = breakValues[i + 1];
+                            renderer.addBreak(min, max, new SimpleFillSymbol().setColor(new Color(colorArray)));
+                        });
+
+                        colorRampOnly = false;
+                        self.applyRenderer(renderer);
+                    }
                 }
 
                 /**
