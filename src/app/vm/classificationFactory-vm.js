@@ -11,13 +11,12 @@
             "dojo",
             "dojo/dom-construct",
             "dojo/topic",
-            "app/config/cbrConfig",
             "app/helpers/magNumberFormatter",
             "dojo/text!app/views/classBreaksHelp-view.html",
             "app/vm/help-vm",
             "dojo/text!app/views/classBreaks-view.html"
         ],
-        function(dj, dc, tp, conf, magNum, helpView, helpVM, view) {
+        function(dj, dc, tp, magNum, helpView, helpVM, view) {
 
             var ClassificationFactoryVM = new function() {
 
