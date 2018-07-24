@@ -50,21 +50,24 @@
     <meta itemprop="description" contant="A map viewer showing demographic data for State of Arizona.  #MAGmaps">
     <meta itemprop="image" content="http://geo.azmag.gov/maps/azdemographics/resources/img/shareImg.png">
     <!-- Fav and touch icons -->
-    <link rel="apple-touch-icon" type="image/png" sizes="144x144" href="app/resources/img/shareImg.png">
-    <link rel="apple-touch-icon" type="image/png" sizes="114x114" href="app/resources/img/magicon_114.png">
-    <link rel="apple-touch-icon" type="image/png" sizes="72x72" href="app/resources/img/magicon_72.png">
-    <link rel="apple-touch-icon" type="image/png" sizes="57x57" href="app/resources/img/magicon_57.png">
-    <link rel="shortcut icon" type="image-favorites-icon" href="app/resources/img/magfavicon.png">
+    <link rel="apple-touch-icon" type="image/png" sizes="144x144" href="img/shareImg.png">
+    <link rel="apple-touch-icon" type="image/png" sizes="114x114" href="img/magicon_114.png">
+    <link rel="apple-touch-icon" type="image/png" sizes="72x72" href="img/magicon_72.png">
+    <link rel="apple-touch-icon" type="image/png" sizes="57x57" href="img/magicon_57.png">
+    <link rel="shortcut icon" type="image-favorites-icon" href="img/magfavicon.png">
     <!-- ESRI javaScript API CSS -->
-    <link rel="stylesheet" href="https://js.arcgis.com/3.19/dijit/themes/claro/claro.css">
-    <link rel="stylesheet" href="https://js.arcgis.com/3.19/esri/css/esri.css">
+    <link rel="stylesheet" href="https://js.arcgis.com/4.8/esri/css/main.css">
     <!-- Kendo UI CSS-->
-    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2017.1.223/styles/kendo.common.min.css" />
-    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2017.1.223/styles/kendo.black.min.css" />
+    <!-- <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2018.2.620/styles/kendo.common.min.css" />
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2018.2.620/styles/kendo.black.min.css" /> -->
+    <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2018.2.620/styles/kendo.common-bootstrap.min.css">
+    <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2018.2.620/styles/kendo.bootstrap.min.css">
     <!-- Application CSS -->
     <!-- comments:comment html -->
-    <link rel="stylesheet" href="app/resources/css/normalize.css">
-    <link rel="stylesheet" href="app/resources/css/main.css">
+    <link rel="stylesheet" rel="preload" as="style" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" rel="preload" as="style" href="https://js.arcgis.com/4.7/esri/themes/dark/main.css">
+    <link rel="stylesheet" href="css/main.css">
     <!-- endcomments -->
     <!-- comments:uncomment html -->
     <!-- <link rel="stylesheet" type="text/css" href="app/resources/css/concat.min.css"> -->
@@ -76,10 +79,7 @@
     <meta http-equiv="expires" content="0">
     <meta http-equiv="pragma" content="no-cache">
     <!-- endcomments -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/2.2.0/knockout-min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
-    <script src="app/resources/js/geostats.min.js"></script>
-    <script type="text/javascript" src="app/vm/utilities.js"></script>
+    <!-- <script src="app/resources/js/geostats.min.js"></script> -->
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
@@ -109,80 +109,315 @@
 </head>
 
 <body class="claro">
+    <div style="display:none">
+        <div id="aboutWidget" role="button" title="About" data-toggle="modal" data-target="#modalSplash" aria-haspopup="true" class="esri-widget--button esri-widget esri-component">
+            <span title="About" class="glyphicon glyphicon-info-sign esri-icon"></span>
+        </div>
+        <div id="printWidget" role="button" data-toggle="modal" title="Print" data-target="#modalPrint" aria-haspopup="true" class=" esri-widget--button esri-widget esri-component">
+            <span title="Print" class="glyphicon glyphicon-print esri-icon"></span>
+        </div>
+    </div>
     <!--[if lt IE 8]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-    <div id="load">
+    <!-- <div id="load">
         <div id="loadingBox">
             <h2>Loading Viewer...</h2>
             <br>
-            <img src="app/resources/img/LoadingRubicsCube.gif">
+            <img src="img/LoadingRubicsCube.gif">
+        </div>
+    </div> -->
+    <div id="colorRampModal" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Update Color Scheme</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="rampType">Choose the Nature of your data:</label>
+                            <select class="form-control" id="rampType">
+                                <option data-id="sequential">Sequential</option>
+                                <option data-id="diverging">Diverging</option>
+                            </select>
+                        </div>
+                    </form>
+                    <p>Click a color below to update the color scheme for the map.</p>
+                    <div id="selectionRamps">
+                        <div id="sequentialRamps"></div>
+                        <div style="display:none" id="divergingRamps"></div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    <div id="borderContainer" data-dojo-type="dijit.layout.BorderContainer" data-dojo-props="design:" headline ", gutters:false">
-        <header id="header" data-dojo-type="dijit.layout.ContentPane" data-dojo-props="region:" top ", gutters:false">
-            <div id="titlebar">
-                <ul class="tb">
-                    <li class="tb">
-                        <a role="navigation" title="Arizona Councils of Governments" href="https://www.azmag.gov/AZ-COGs-and-MPOs" target="_blank">
-                            <img id="magLogo" class="magLogo" alt="MAG Homepage" src="app/resources/img/az_COGs-MPOs-LOGO_white.png">
+
+    <div id="summaryReport">
+        <div id="sumReportTabStrip">
+            <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" data-toggle="pill" href="#acsGridTab" role="tab" aria-controls="acsGridTab" aria-selected="true">ACS 2016 Data</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="pill" href="#acsChartsTab" role="tab" aria-controls="acsChartsTab" aria-selected="false">ACS 2016 Charts</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="pill" href="#censusGridTab" role="tab" aria-controls="censusGridTab" aria-selected="false">Census 2010 Data</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="pill" href="#censusChartsTab" role="tab" aria-controls="censusChartsTab" aria-selected="false">Census Charts</a>
+                </li>
+            </ul>
+            <div class="tab-content" id="pills-tabContent">
+                <div class="tab-pane fade show active" id="acsGridTab" role="tabpanel" aria-labelledby="acsGridTab">
+                    <div id="acsGrid"></div>
+                    <div class="sourceLabel"></div>
+                </div>
+
+                <div class="tab-pane fade" id="acsChartsTab" role="tabpanel" aria-labelledby="acsChartsTab">
+                    <div id="acsCharts">
+                        <div class="chartArea"></div>
+                        <div class="chartList"></div>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="censusGridTab" role="tabpanel" aria-labelledby="censusGridTab">
+                    <div id="censusGrid"></div>
+                    census data
+                </div>
+
+                <div class="tab-pane fade" id="censusChartsTab" role="tabpanel" aria-labelledby="censusChartsTab">
+                    <div id="censusCharts"></div>
+                    census charts
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="wrapper">
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                <div class="smallLogo">
+                    <img title="MAG Interactive Bikeways" width="65" src="img\bike-icon_152x152.png" alt="Bikemap Icon">
+                </div>
+            </div>
+            <ul class="list-unstyled components">
+                <li class="legendToggleLI" panel-target="legend">
+                    <a href="#">
+                        <i class="fas fa-th-list"></i>
+                        <span class="liLabel">Legend</span>
+                    </a>
+                    <label class="switch">
+                        <input class="legendToggle" type="checkbox" checked>
+                        <span class="slider round"></span>
+                    </label>
+                    <span class="arrow-left"></span>
+                </li>
+                <li panel-target="maps">
+                    <a href="#">
+                        <i class="fas fa-map"></i>
+                        <span class="liLabel">Maps</span>
+                    </a>
+                    <span class="arrow-left"></span>
+                </li>
+                <li panel-target="reports">
+                    <a href="#">
+                        <i class="fas fa-clipboard"></i>
+                        <span class="liLabel">Reports</span>
+                    </a>
+                    <span class="arrow-left"></span>
+                </li>
+                <li panel-target="about">
+                    <a href="#">
+                        <i class="fas fa-info-circle"></i>
+                        <span class="liLabel">About</span>
+                    </a>
+                    <span class="arrow-left"></span>
+                </li>
+                <li panel-target="help">
+                    <a href="#">
+                        <i class="fas fa-question"></i>
+                        <span class="liLabel">Help</span>
+                    </a>
+                    <span class="arrow-left"></span>
+                </li>
+            </ul>
+        </nav>
+        <div style="display:block !important;" id="content">
+            <div class="panelDiv" panel-id="layers">
+                <div class="panelHeader">
+                    <span class="panelHeaderText">Additional Layers</span>
+                    <a class="closePanel" href="#">
+                        <i class="glyphicon glyphicon-remove"></i>
+                    </a>
+                </div>
+                <span style="margin-top: 10px; font-weight: bold; margin-bottom: 10px;">Select any of the items from the list below to add to the map.</span>
+                <div id="layerList"></div>
+            </div>
+            <div class="panelDiv" panel-id="about">
+                test
+            </div>
+            <div class="panelDiv" panel-id="maps">
+                <h4>Choose a Map:</h4>
+                <div id="mapsList"></div>
+                <hr>
+                <form>
+                    <div class="flexCenter">
+                        <label for="classBreaksCount">Number of Data Classes</label>
+                        <select style="flex: 1; margin-left: 25px;" class="form-control" id="classBreaksCount">
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                            <option>6</option>
+                            <option>7</option>
+                            <option>8</option>
+                            <option>9</option>
+                        </select>
+                    </div>
+                    <div class="flexCenter">
+                        <label for="classType">Classification Type</label>
+                        <select style="flex: 1; margin-left: 25px;" class="form-control" id="classType">
+                            <option value="Jenks">Natural Breaks</option>
+                            <option value="EqInterval">Equal Interval</option>
+                            <option value="Quantile">Quantile</option>
+                            <option>Custom</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        Click to change color scheme
+                        <div id="colorRamp"></div>
+                    </div>
+                </form>
+            </div>
+            <div class="panelDiv" style="display:block" panel-id="reports">
+                <div id="reportArea">
+                    <form id="reportForm">
+                        <div class="flexCenter">
+                            <label for="reportType">Type of Report:</label>
+                            <select style="flex: 1; margin-left: 25px;" class="form-control" id="reportType"></select>
+                        </div>
+                        <div class="flexCenter">
+                            <label for="specificReport">Choose Report</label>
+                            <select style="flex: 1; margin-left: 25px;" class="form-control" id="specificReport"> </select>
+                        </div>
+                        <button class="btn btn-submit">submit</button>
+                    </form>
+                    <div id="tempAttr"></div>
+                </div>
+            </div>
+
+            <div class="panelDiv" panel-id="help"></div>
+        </div>
+        <div id="container">
+            <div id="viewDiv"></div>
+            <div id="bottomBar">
+                <ul class="list-unstyled components">
+                    <li class="legendToggleLI" panel-target="legend">
+                        <a href="#">
+                            <i class="fas fa-th-list"></i>
+                            Legend
                         </a>
+                        <!-- <label class="switch">
+                                <input class="legendToggle" type="checkbox" checked>
+                                <span class="slider round"></span>
+                            </label> -->
+                        <span class="arrow-left"></span>
                     </li>
-                    <li class="tb bar">|</li>
-                    <li class="tb ti1">
-                        <h1 id="title1">State Demographic Viewer</h1>
+                    <li panel-target="maps">
+                        <a href="#">
+                            <i class="fas fa-check-square"></i>
+                            Maps
+                        </a>
+                        <span class="arrow-left"></span>
+                    </li>
+                    <li panel-target="reports">
+                        <a href="#">
+                            <i class="fas fa-check-clipboard"></i>
+                            Reports
+                        </a>
+                        <span class="arrow-left"></span>
+                    </li>
+                    <li panel-target="about">
+                        <a href="#">
+                            <i class="fas fa-info-circle"></i>
+                            About
+                        </a>
+                        <span class="arrow-left"></span>
+                    </li>
+
+                    <li panel-target="help">
+                        <a href="#">
+                            <i class="fas fa-question"></i>
+                            Help
+                        </a>
+                        <span class="arrow-left"></span>
                     </li>
                 </ul>
             </div>
-            <div id="menu-bar"></div>
-        </header>
-        <!-- All dynamic content gets added either into or after this div. -->
-        <div id="display" data-dojo-type="dijit.layout.ContentPane" data-dojo-props="region:'center'">
         </div>
     </div>
+
     <script type="text/javascript">
-    document.onreadystatechange = function() {
-        var state = document.readyState
-        if (state == 'complete') {
-            setTimeout(function() {
-                $("#load").fadeOut();
-            }, 500);
-
-        }
-
-    }
+        // document.onreadystatechange = function () {
+        //     var state = document.readyState
+        //     if (state == 'complete') {
+        //         setTimeout(function () {
+        //             $("#load").fadeOut();
+        //         }, 500);
+        //     }
+        // }
 
     </script>
     <!-- /borderContainer -->
     <!-- *** JavaScript *** -->
     <!-- =================================================================================================== -->
     <!-- Kendo UI -->
-    <script src="https://kendo.cdn.telerik.com/2017.1.223/js/jquery.min.js"></script>
-    <script src="https://kendo.cdn.telerik.com/2017.1.223/js/jszip.min.js"></script>
-    <script src="https://kendo.cdn.telerik.com/2017.1.223/js/kendo.all.min.js"></script>
-    <!-- Make sure Dojo can find our code, app folder and vendor code. -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2018.2.620/js/jszip.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2018.2.620/js/kendo.all.min.js"></script>
+
     <script>
-    var dojoConfig = {
-        packages: [{
-            name: "app",
-            location: location.pathname.replace(/\/[^/]+$/, "/") + "app"
-        }]
-    }
+        var dojoConfig = {
+            packages: [{
+                name: "app",
+                location: location.pathname.replace(/\/[^/]+$/, "/") + "app"
+            }],
+            has: {
+                "esri-featurelayer-webgl": 1,
+                "config-deferredInstrumentation": 1
+            }
+        }
+        var app = {};
 
     </script>
     <!-- Global script definitions. -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.4.1/d3.min.js"></script>
-    <script src="https://js.arcgis.com/3.19/"></script>
-    <script src="config.js"></script>
-    <script src="app/run.js"></script>
-    <!-- Call the init method on run.js, which, in turn, will load main.js. -->
-    <script>
-    require(["esri/map", "dojo/domReady!"], init)
+    <script src="resources/js/draggable.js"></script>
+    <script src="https://js.arcgis.com/4.8/"></script>
 
-    </script>
-    <script type="text/plain" id="strength">
-        return 100;
-    </script>
+    <script src="js/config/config.js"></script>
+    <script src="js/config/mapsConfig.js"></script>
+    <script src="js/config/colorRampConfig.js"></script>
+    <script src="js/config/acsFieldsConfig.js"></script>
+    <script src="js/config/censusFieldsConfig.js"></script>
+
+    <script src="js/main.js"></script>
+    <script src="js/maps.js"></script>
+    <script src="js/reports.js"></script>
+    <script src="js/layer.js"></script>
+    <script src="js/cbr.js"></script>
+    <script src="js/sidebar.js"></script>
+    <script src="js/widgets.js"></script>
 </body>
 
 </html>
