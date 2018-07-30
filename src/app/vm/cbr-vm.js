@@ -586,7 +586,11 @@
                     } else {
                         var thematicMap = self.toc.dataItem(self.toc.select());
                         var layer = mapModel.mapInstance.getLayer("blockGroups");
-                        var breaksCount = self.CurrentRamp.length;
+                        var breaksCount = 5;
+
+                        if (self.CurrentRamp && self.CurrentRamp.length) {
+                            breaksCount = self.CurrentRamp.length;
+                        }
 
                         var breakValues = [];
 
@@ -618,38 +622,41 @@
                 @method applyRenderer
                 **/
                 self.applyRenderer = function (renderer) {
-                    for (var i = 0; i < self.CurrentRamp.length; i++) {
-                        renderer.infos[i].symbol.color = dojo.colorFromRgb(self.CurrentRamp[i]);
-                    }
+                    if (self.CurrentRamp && self.CurrentRamp.length) {
 
-                    if (self.initCustomBreaks) {
-                        for (var i = 0; i < self.initCustomBreaks.length; i++) {
-                            renderer.infos[i].minValue = self.initCustomBreaks[i][0];
-                            renderer.infos[i].maxValue = self.initCustomBreaks[i][1];
-                            renderer.infos[i].classMaxValue = self.initCustomBreaks[i][1];
+                        for (var i = 0; i < self.CurrentRamp.length; i++) {
+                            renderer.infos[i].symbol.color = dojo.colorFromRgb(self.CurrentRamp[i]);
                         }
 
-                        self.initCustomBreaks = null;
-                    }
+                        if (self.initCustomBreaks) {
+                            for (var i = 0; i < self.initCustomBreaks.length; i++) {
+                                renderer.infos[i].minValue = self.initCustomBreaks[i][0];
+                                renderer.infos[i].maxValue = self.initCustomBreaks[i][1];
+                                renderer.infos[i].classMaxValue = self.initCustomBreaks[i][1];
+                            }
 
-                    // note: this applies symbology for No Data class, does not work with normalization
-                    renderer.defaultSymbol = self.simpleFillSymbol;
-                    renderer.defaultLabel = "No Data";
-                    var dataItem = self.toc.dataItem(self.toc.select());
+                            self.initCustomBreaks = null;
+                        }
 
-                    if (dataItem.hasOwnProperty("NormalizeField")) {
-                        renderer.normalizationField = dataItem.NormalizeField;
-                        renderer.normalizationType = "field";
-                    }
-                    renderer.asPercent = dataItem.AsPercentages;
-                    self.currentRenderer = renderer;
+                        // note: this applies symbology for No Data class, does not work with normalization
+                        renderer.defaultSymbol = self.simpleFillSymbol;
+                        renderer.defaultLabel = "No Data";
+                        var dataItem = self.toc.dataItem(self.toc.select());
 
-                    if (self.classMethodList.dataItem().Value === "custom") {
-                        tp.publish("ClassificationMethodChanged", self.currentRenderer);
-                    } else {
-                        self.redrawThematicLayer();
+                        if (dataItem.hasOwnProperty("NormalizeField")) {
+                            renderer.normalizationField = dataItem.NormalizeField;
+                            renderer.normalizationType = "field";
+                        }
+                        renderer.asPercent = dataItem.AsPercentages;
+                        self.currentRenderer = renderer;
+
+                        if (self.classMethodList.dataItem().Value === "custom") {
+                            tp.publish("ClassificationMethodChanged", self.currentRenderer);
+                        } else {
+                            self.redrawThematicLayer();
+                        }
+                        tp.publish("MapRenderUpdated");
                     }
-                    tp.publish("MapRenderUpdated");
                 };
 
                 /**
