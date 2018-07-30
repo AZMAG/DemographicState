@@ -20,11 +20,10 @@
             "app/vm/help-vm",
             "app/vm/demographic-vm",
             "app/config/demographicConfig",
-            "app/config/cbrConfig",
             'app/vm/alert2-vm',
             'dojo/text!app/views/alert2-view.html'
         ],
-        function(dj, dc, dom, tp, Query, QueryTask, view, layerDelegate, helpView, helpVM, demographicVM, demographicConfig, cbrConfig, alertVM, alertView) {
+        function(dj, dc, dom, tp, Query, QueryTask, view, layerDelegate, helpView, helpVM, demographicVM, demographicConfig, alertVM, alertView) {
 
             var QBVM = new function() {
 

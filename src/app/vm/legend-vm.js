@@ -14,7 +14,6 @@
             "dojo/topic",
             "esri/dijit/Legend",
             "app/models/map-model",
-            "app/config/cbrConfig",
             "dojo/text!app/views/legendHelp-view.html",
             "app/vm/help-vm",
             "dojo/text!app/views/legend-view.html",
@@ -22,7 +21,7 @@
             "app/helpers/bookmark-delegate"
         ],
 
-        function (dc, dom, tp, Legend, mapModel, conf, helpView, helpVM, legendview, magNumberFormatter, bookmarkDelegate) {
+        function (dc, dom, tp, Legend, mapModel, helpView, helpVM, legendview, magNumberFormatter, bookmarkDelegate) {
 
             var LegendVM = new function () {
 
