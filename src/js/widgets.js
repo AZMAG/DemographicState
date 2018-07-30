@@ -6,26 +6,26 @@ require(["esri/widgets/Home", "esri/Basemap", "esri/widgets/LayerList", "esri/wi
             });
             app.view.ui.add(home, "bottom-right");
 
-            var layerList = new LayerList({
-                view: app.view,
-                statusIndicatorsVisible: false,
-                listItemCreatedFunction: function (event) {
-                    const item = event.item;
-                    console.log(item);
-                    item.panel = {
-                        content: "legend",
-                        open: false
-                    };
+            // var layerList = new LayerList({
+            //     view: app.view,
+            //     statusIndicatorsVisible: false,
+            //     listItemCreatedFunction: function (event) {
+            //         const item = event.item;
+            //         console.log(item);
+            //         item.panel = {
+            //             content: "legend",
+            //             open: false
+            //         };
 
-                }
-            });
+            //     }
+            // });
 
-            app.view.ui.add(layerList, "top-right");
+            // app.view.ui.add(layerList, "top-right");
 
-            // var legend = new Legend({
-            //     view: app.view
-            // })
-            // app.view.ui.add(legend, "top-right");
+            var legend = new Legend({
+                view: app.view
+            })
+            app.view.ui.add(legend, "top-right");
 
             //About Widget
             // app.view.ui.add("aboutWidget", "bottom-right");
@@ -34,12 +34,12 @@ require(["esri/widgets/Home", "esri/Basemap", "esri/widgets/LayerList", "esri/wi
             // app.view.ui.add("printWidget", "top-left");
 
             //Basemap Toggle
-            var layer = new TileLayer({
+            var satLayer = new TileLayer({
                 url: "https://services.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer"
             });
 
             var base = new Basemap({
-                baseLayers: [layer],
+                baseLayers: [satLayer],
                 title: "Aerial",
                 id: "testBasemap",
                 thumbnailUrl: "https://js.arcgis.com/4.5/esri/images/basemap/hybrid.jpg"

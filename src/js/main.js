@@ -1,11 +1,10 @@
 require([
         "esri/Map",
         "esri/views/MapView",
-        "esri/widgets/BasemapToggle",
         "dojo/topic",
         "dojo/domReady!"
     ],
-    function (Map, MapView, BasemapToggle, tp) {
+    function (Map, MapView, tp) {
 
         app.map = new Map({
             basemap: "gray"

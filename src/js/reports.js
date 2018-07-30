@@ -10,7 +10,9 @@ require([
             var html = '';
             for (let i = 0; i < app.config.layers.length; i++) {
                 const layer = app.config.layers[i];
-                html += `<option data-layer-id="${layer.id}">${layer.title}</option>`;
+                if (layer.showReport) {
+                    html += `<option data-layer-id="${layer.id}">${layer.title}</option>`;
+                }
             }
             $("#reportType").html(html);
             $summaryReport.kendoWindow({
@@ -93,79 +95,15 @@ require([
             gfxLayer.add(graphic);
         }
 
-        function CreateCharts(src, id) {
-            var $chartContainer = $("#" + id);
-            console.log($chartContainer)
-            var $chartArea = $chartContainer.find(".chartArea");
-            var $chartList = $chartContainer.find(".chartList");
-
-            console.log(src);
-
-            var categories = [];
-
-            for (let i = 0; i < src.length; i++) {
-                const category = src[i].chartCategory;
-                if (category && category !== "" && categories.indexOf(category) > -1) {
-                    categories.push({
-                        chartCategory: category
-                    });
-                }
+        function CreateKendoGrid(src, id) {
+            var $grid = $('#' + id);
+            if ($grid && $grid.data("kendoGrid")) {
+                $grid.data("kendoGrid").destroy();
+                $grid.empty();
             }
 
-
-            console.log($chartList)
-            $chartList.kendoListView({
-                dataSource: {
-                    data: categories
-                },
-                selectable: 'single',
-                template: `
-                <div class="chartCategoryBtn">
-                    <div class="k-button button">#:chartCategory#</div>
-                </div>
-                `
-            })
-
-        }
-
-        function CreateKendoGrid(src, id) {
-
-
-            // if (type === 'census') {
-            //     dataGridName = 'demCensusDataGrid';
-            //     demoOptionsRowName = 'demCensusSummaryOptionsRow';
-            //     dataSource = self.aggCensusValuesArray;
-            //     visibility = '';
-            //     if (dataSource[3] && dataSource[2] && dataSource[17]) {
-            //         dataSource[3].fieldValueFormatted = dataSource[2].fieldValueFormatted;
-            //         dataSource[17].fieldValueFormatted = dataSource[2].fieldValueFormatted;
-            //         dataSource[25].fieldValueFormatted = dataSource[2].fieldValueFormatted;
-            //     }
-            // }
-
-            // $.each(dataSource, function (i, value) {
-            //     if (value['fieldType'] === 'Currency') {
-            //         value['fieldValueFormatted'] = '$ ' + value['fieldValue'];
-            //     } else if (value['fieldType'] === 'Rate') {
-            //         value['percentValueFormatted'] = value['fieldValue'] + '%';
-            //         value['fieldValueFormatted'] = '-';
-            //     }
-            // });
-
-            console.log(src)
-
-            // Create the div element for the grid
-            // dc.create(
-            //     'div', {
-            //         id: dataGridName,
-            //         style: 'margin: 5px 0 0 0; font-size: small; ' + visibility
-            //     },
-            //     demoOptionsRowName,
-            //     'after'
-            // );
-
             // Kendo-ize
-            $('#' + id).kendoGrid({
+            $grid.kendoGrid({
                 dataSource: {
                     data: src,
                     group: [{

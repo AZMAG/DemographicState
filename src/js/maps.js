@@ -40,6 +40,7 @@ require([
 
         $mapsList.append(GetMapsHTML(app.mapsConfig));
 
+
         $mapsList.find(".mapSubItemList").first().show().find(".mapItem").first().addClass("activeMapItem");
         $mapsList.find(".fa-caret-right").first().toggleClass("fa-caret-right fa-caret-down");
 
@@ -81,7 +82,7 @@ require([
         });
 
         function GetColorRamp(type, rampKey, numBreaks) {
-            var ramps = GetRampsByNumAndType(type, numBreaks);
+            const ramps = GetRampsByNumAndType(type, numBreaks);
             return ramps[rampKey];
         }
 
@@ -91,8 +92,8 @@ require([
             let returnRamps = {};
 
             Object.keys(allRamps).forEach(function (rampKey) {
-                var ramp = allRamps[rampKey];
-                var filteredRamp = [];
+                let ramp = allRamps[rampKey];
+                let filteredRamp = [];
 
                 Object.keys(ramp).forEach(function (letterKey) {
                     if (classBreakSet.indexOf(letterKey) > -1) {
@@ -114,12 +115,12 @@ require([
         }
 
         function GetRampsHTMLByType(type) {
-            var rampsHtml = ''
+            let rampsHtml = ''
             let numBreaks = $classBreaksCount.val();
             let ramps = GetRampsByNumAndType(type, numBreaks);
 
             Object.keys(ramps).forEach(function (key) {
-                var ramp = ramps[key];
+                const ramp = ramps[key];
                 let html = ColorRampToHTML(ramp, key, type);
                 rampsHtml += html;
             });

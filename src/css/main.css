@@ -761,12 +761,16 @@ label:hover,
 
 .chartArea {
     flex: 4;
-    background-color: red;
+    /* background-color: red; */
 }
 
 .chartList {
     flex: 1;
-    background-color: blue;
+    /* background-color: blue; */
+}
+
+.chartCategoryBtn {
+    width: 100%;
 }
 
 .mapSubItemList {

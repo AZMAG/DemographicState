@@ -45,6 +45,8 @@ app.config = {
     mainUrl: "https://geo.azmag.gov/gismag/rest/services/maps/DemographicState2016/MapServer",
     siteUrl: "https://geo.azmag.gov/maps/azdemographics/?",
 
+    seriesColors: ["#A6CEE3", "#1F78B4", "#B2DF8A", "#33A02C", "#FB9A99", "#E31A1C", "#FDBF6F", "#FF7F00", "#CAB2D6", "#6A3D9A", "#FFFF99", "#B15928"],
+
     layers: [{
         drawOrder: 0,
         id: "censusTracts",
@@ -55,6 +57,7 @@ app.config = {
         layers: [23, 24],
         opacity: 1,
         visible: false,
+        showReport: false,
         showTOC: true,
         showLegend: true,
         link: false
@@ -67,6 +70,7 @@ app.config = {
         queryWhere: "1=1",
         opacity: 0.7,
         visible: false,
+        showReport: true,
         selectable: true,
         outFields: ["*"],
         showTOC: true,
@@ -80,6 +84,7 @@ app.config = {
         queryWhere: "1=1",
         opacity: 0.8,
         visible: true,
+        showReport: true,
         selectable: true,
         outFields: ["*"],
         showTOC: true,
@@ -93,6 +98,7 @@ app.config = {
         queryWhere: "1=1",
         opacity: 1,
         visible: false,
+        showReport: true,
         selectable: true,
         outFields: ["*"],
         showTOC: true,
@@ -106,6 +112,7 @@ app.config = {
         queryWhere: "1=1",
         opacity: 1,
         visible: false,
+        showReport: true,
         selectable: true,
         outFields: ["*"],
         showTOC: true,
@@ -119,6 +126,7 @@ app.config = {
         queryWhere: "1=1",
         opacity: 1,
         visible: false,
+        showReport: true,
         selectable: true,
         outFields: ["*"],
         showTOC: true,
@@ -132,6 +140,7 @@ app.config = {
         queryWhere: "1=1",
         opacity: 1,
         visible: false,
+        showReport: true,
         selectable: true,
         outFields: ["*"],
         showTOC: true,
@@ -145,6 +154,7 @@ app.config = {
         queryWhere: "1=1",
         opacity: 1,
         visible: false,
+        showReport: true,
         selectable: true,
         outFields: ["*"],
         showTOC: true,
@@ -158,6 +168,7 @@ app.config = {
         queryWhere: "1=1",
         opacity: 1,
         visible: false,
+        showReport: true,
         selectable: true,
         outFields: ["*"],
         showTOC: true,
@@ -169,6 +180,7 @@ app.config = {
         type: "tile",
         url: "http://server.arcgisonline.com/arcgis/rest/services/Reference/World_Transportation/MapServer",
         visible: true,
+        showReport: false,
         showTOC: true,
         showLegend: false
     }, {
@@ -179,9 +191,9 @@ app.config = {
         layerName: "Block_Groups",
         opacity: 0.8,
         visible: true,
+        showReport: false,
         showTOC: false,
-        link: false,
-        populateDropDown: false
+        link: false
     }],
 
     initExtent: {
