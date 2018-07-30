@@ -844,7 +844,6 @@
                 **/
                 self.updateColorRamp = function (newRamp) {
                     self.CurrentRamp = newRamp;
-                    var colorChangeOnly = self.currentRenderer && self.CurrentRamp && (self.CurrentRamp.length === self.currentRenderer.infos.length);
                     dc.destroy("rampPad");
                     dc.place("<div id=\"rampPad\" style=\"padding: 2px\"><div id=\"curColRamp\" title=\"Pick a color scheme\" style=\"width: 250px\"></div></div>", "breaksControl");
                     var tileSize = 280 / newRamp.length;
@@ -859,14 +858,7 @@
                     self.breaksCountList.select(function (dataItem) {
                         return dataItem == newRamp.length;
                     });
-                    if (colorRampOnly) {
-                        for (var i = 0; i < self.CurrentRamp.length; i++) {
-                            self.currentRenderer.infos[i].symbol.color = dojo.colorFromRgb(self.CurrentRamp[i]);
-                        }
-                        self.redrawThematicLayer();
-                    } else {
-                        self.updateRenderer();
-                    }
+                    self.updateRenderer();
                 };
 
             }; //end CBRVM
