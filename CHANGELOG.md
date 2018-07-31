@@ -30,7 +30,7 @@ And constructed with the following guidelines:
 
 ***************************************************
 
-## Version 3.2.4 | 2018-07-31
+## Version 3.2.5 | 2018-07-31
 
 * fixed issue with multiple map frames
 * added class breaks cache to improve map performance
@@ -51,9 +51,9 @@ And constructed with the following guidelines:
 * Move Run Query and Cancel buttons to bottom right of Query Window.  Remove unnecessary queryBuilder Two view.
 * Update column header in Title VI Data Tab
 * Updated legal Census Disclaimer
-* Updated cbr config to include normalization fields.  This allows the percentto be calculated on the fly.
+* Updated cbr config to include normalization fields.  This allows the percent to be calculated on the fly.
 * Updated Demographic Config PDF Links to https to prevent issue with pdf exports.
-* Added some google analytics events.  Updated the gruntfile to remove comments.
+* Added some Google analytics events.  Updated the grunt-file to remove comments.
 
 ## Version 3.2.3 | 2018-02-26
 

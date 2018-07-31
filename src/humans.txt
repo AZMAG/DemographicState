@@ -72,8 +72,8 @@
 # SITE
     Site Name: Demographic Maps Viewer
     Site URL: http://http://geo.azmag.gov/maps/azdemographics/
-    Version: 3.2.4
-	Last updated: 2018-04-20
+    Version: 3.2.5
+	Last updated: 2018-07-31
     Creation Date: 2014-10-21
 	Language: English
 	Doctype: HTML5
