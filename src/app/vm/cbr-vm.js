@@ -82,7 +82,7 @@
                 @param {object} initializationData - the initialization data for the map.
                 **/
                 self.init = function (relatedElement, relation, initializationData) {
-                    $.getJSON("../src/app/config/cbrConfig.json", function (data) {
+                    $.getJSON("app/config/cbrConfig.json", function (data) {
                         window.cbrConfig = {};
                         window.cbrConfig.thematicMaps = data;
 
