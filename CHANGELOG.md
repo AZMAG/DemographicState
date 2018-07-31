@@ -30,6 +30,11 @@ And constructed with the following guidelines:
 
 ***************************************************
 
+## Version 3.2.4 | 2018-07-31
+
+* fixed issue with multiple map frames
+* added class breaks cache to improve map performance
+
 ## Version 3.2.4 | 2018-04-20
 
 * updated css for header and menu bars
