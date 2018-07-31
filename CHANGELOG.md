@@ -32,6 +32,7 @@ And constructed with the following guidelines:
 
 ## Version 3.2.5 | 2018-07-31
 
+* fixed config reference in cbr-vm
 * fixed issue with multiple map frames
 * added class breaks cache to improve map performance
 
