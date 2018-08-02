@@ -5,7 +5,7 @@
  */
 
 
-(function() {
+(function () {
     "use strict";
 
     define([
@@ -14,7 +14,7 @@
             "app/models/map-model"
         ],
 
-        function(lang, topic, MapModel) {
+        function (lang, topic, MapModel) {
 
             var BookmarkDelegate = {
 
@@ -33,7 +33,7 @@
                 @method mapInfoUpdated
                 @param [object] infoList - array of objects representing the settings of all of the maps in the application
                 **/
-                mapInfoUpdated: function(infoList) {
+                mapInfoUpdated: function (infoList) {
                     //console.log(infoList);
                     this.mapInfoList.removeAll();
                     for (var i = 0; i < infoList.length; i++) {
@@ -71,7 +71,7 @@
 
                 @method buildMapQueryString
                 **/
-                buildMapQueryString: function() {
+                buildMapQueryString: function () {
                     var queryString = "data={\"maps\":[";
                     var dataString = "";
                     for (var i = 0; i < this.mapInfoList().length; i++) {
@@ -90,7 +90,7 @@
                 @method mapInfoUpdated
                 @param {string} queryString - The querystring on the current URL. If it is not provided then the function will use the window object to get the querystring if any is present.
                 **/
-                getQueryStringMapDataObj: function(queryString) {
+                getQueryStringMapDataObj: function (queryString) {
                     var url = (queryString) ? queryString : window.location.toString();
                     var savedMapObj;
                     if (url.indexOf("?") > -1) { //querystring present
@@ -115,13 +115,13 @@
                 @param {string} bigurl - The application URL with the bookmarking data.
                 @param {function} callback - This function is executed when the AJAX call is completed.
                 **/
-                minifyURL: function(bigurl, callback) {
-                    $.getJSON("http://api.bitly.com/v3/shorten?callback=?", {
-                        format: "json",
-                        apiKey: appConfig.URLMinimizer.apiKey,
-                        login: appConfig.URLMinimizer.login,
-                        longUrl: bigurl
-                    },
+                minifyURL: function (bigurl, callback) {
+                    $.getJSON("https://api-ssl.bitly.com/v3/shorten?callback=?", {
+                            format: "json",
+                            apiKey: appConfig.URLMinimizer.apiKey,
+                            login: appConfig.URLMinimizer.login,
+                            longUrl: bigurl
+                        },
                         function (response) {
                             callback(response.data.url);
                         }
@@ -133,7 +133,7 @@
 
                 @method appendBookmarkDataToCurrentURL
                 **/
-                appendBookmarkDataToCurrentURL: function() {
+                appendBookmarkDataToCurrentURL: function () {
                     window.location.search = this.buildMapQueryString(true);
                 }
 
