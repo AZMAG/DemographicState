@@ -1,38 +1,4 @@
-/**
- *  layerInfo:
- *       id = layer unique identifier
- *       title = display title as used in the interface
- *       category = layer category - displayed at top of each layer group
- *       url = layer url
- *       type = [dynamic | tile | wms] - type of layer definition
- *       historical = [true | false] - True if the layer is a historical layer
- *       version = (WMS only) WMS version number
- *       visible = [true | false] default layer visibility
- *       isBasemap = [true | false] layer is considered a basemap (displayed in basemap control)
- *       query = url used for query operations
- *       queryWhere = default where clause used for query operations
- *       layers = array of layer indicies (from MXD) activated when layer is checked "on"
- *       selectable = [true | false] layer is available in sketch dropdown list
- *       layerDefFields = array of fields used for definition query text inputs
- *           - type = ['list'] type of input
- *           - label = label displayed to the user
- *           - fields = array of fields used in query where clause (ex: {name: 'FIELDNAME', numeric:[true|false]} )
- *           - list = array of dropdown list items (ex: {"id": 0, "OCEAN": 'AL', "YEAR": 2012, "DEPRESSION": 18, "LABEL": 'Sandy'})
- *               - Must have property entry for each object in fields array.  'label' property is reserved for display to user
- *           - numeric = [true | false] indicates whether field is numeric or not
- *       opacity = default layer opacity
- *       token = token used for secure service access
- *       filters = array of layer filters / sublayers
- *           - category = filter category (title displayed for each group)
- *           - type = [exp | layer]
- *           - name = label displayed next to filter checkbox
- *           - layers = array of layer indicies (MXD) associated with checkbox
- *           - expression = definition expression associated with filter
- *           - visible = default selection / visibility of filter
- **/
-
 app.config = {
-
     Version: "v3.2.4 | 2018-04-20",
     copyright: "2018",
 
@@ -81,6 +47,9 @@ app.config = {
         title: "County Boundaries",
         layerName: "Counties",
         type: "feature",
+        popup: {
+            title: "sdafsdf"
+        },
         queryWhere: "1=1",
         opacity: 0.8,
         visible: true,

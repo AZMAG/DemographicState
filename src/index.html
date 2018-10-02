@@ -56,7 +56,7 @@
     <link rel="apple-touch-icon" type="image/png" sizes="57x57" href="img/magicon_57.png">
     <link rel="shortcut icon" type="image-favorites-icon" href="img/magfavicon.png">
     <!-- ESRI javaScript API CSS -->
-    <link rel="stylesheet" href="https://js.arcgis.com/4.8/esri/css/main.css">
+    <link rel="stylesheet" href="https://js.arcgis.com/4.9/esri/css/main.css">
     <!-- Kendo UI CSS-->
     <!-- <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2018.2.620/styles/kendo.common.min.css" />
     <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2018.2.620/styles/kendo.black.min.css" /> -->
@@ -110,10 +110,12 @@
 
 <body class="claro">
     <div style="display:none">
-        <div id="aboutWidget" role="button" title="About" data-toggle="modal" data-target="#modalSplash" aria-haspopup="true" class="esri-widget--button esri-widget esri-component">
+        <div id="aboutWidget" role="button" title="About" data-toggle="modal" data-target="#modalSplash" aria-haspopup="true"
+            class="esri-widget--button esri-widget esri-component">
             <span title="About" class="glyphicon glyphicon-info-sign esri-icon"></span>
         </div>
-        <div id="printWidget" role="button" data-toggle="modal" title="Print" data-target="#modalPrint" aria-haspopup="true" class=" esri-widget--button esri-widget esri-component">
+        <div id="printWidget" role="button" data-toggle="modal" title="Print" data-target="#modalPrint" aria-haspopup="true"
+            class=" esri-widget--button esri-widget esri-component">
             <span title="Print" class="glyphicon glyphicon-print esri-icon"></span>
         </div>
     </div>
@@ -160,19 +162,23 @@
         <div id="sumReportTabStrip">
             <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                 <li class="nav-item">
-                    <a class="nav-link active" data-toggle="pill" href="#acsGridTab" role="tab" aria-controls="acsGridTab" aria-selected="true">ACS 2016 Data</a>
+                    <a class="nav-link active" data-toggle="pill" href="#acsGridTab" role="tab" aria-controls="acsGridTab"
+                        aria-selected="true">ACS 2016 Data</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" data-toggle="pill" href="#acsChartsTab" role="tab" aria-controls="acsChartsTab" aria-selected="false">ACS 2016 Charts</a>
+                    <a class="nav-link" data-toggle="pill" href="#acsChartsTab" role="tab" aria-controls="acsChartsTab"
+                        aria-selected="false">ACS 2016 Charts</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" data-toggle="pill" href="#censusGridTab" role="tab" aria-controls="censusGridTab" aria-selected="false">Census 2010 Data</a>
+                    <a class="nav-link" data-toggle="pill" href="#censusGridTab" role="tab" aria-controls="censusGridTab"
+                        aria-selected="false">Census 2010 Data</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" data-toggle="pill" href="#censusChartsTab" role="tab" aria-controls="censusChartsTab" aria-selected="false">Census Charts</a>
+                    <a class="nav-link" data-toggle="pill" href="#censusChartsTab" role="tab" aria-controls="censusChartsTab"
+                        aria-selected="false">Census Charts</a>
                 </li>
             </ul>
             <div class="tab-content" id="pills-tabContent">
@@ -183,8 +189,8 @@
 
                 <div class="tab-pane fade" id="acsChartsTab" role="tabpanel" aria-labelledby="acsChartsTab">
                     <div id="acsCharts">
-                        <div class="chartArea"></div>
-                        <div class="chartList"></div>
+                        <div class="chartsArea"></div>
+                        <div class="chartsList"></div>
                     </div>
                 </div>
 
@@ -207,7 +213,7 @@
         <nav id="sidebar">
             <div class="sidebar-header">
                 <div class="smallLogo">
-                    <img title="MAG Interactive Bikeways" width="65" src="img\bike-icon_152x152.png" alt="Bikemap Icon">
+                    <img title="MAG Interactive Bikeways" width="65" src="./resources/img/AZ-COG-MPO-logo.jpg" alt="AZ Demographics Icon">
                 </div>
             </div>
             <ul class="list-unstyled components">
@@ -260,7 +266,8 @@
                         <i class="glyphicon glyphicon-remove"></i>
                     </a>
                 </div>
-                <span style="margin-top: 10px; font-weight: bold; margin-bottom: 10px;">Select any of the items from the list below to add to the map.</span>
+                <span style="margin-top: 10px; font-weight: bold; margin-bottom: 10px;">Select any of the items from
+                    the list below to add to the map.</span>
                 <div id="layerList"></div>
             </div>
             <div class="panelDiv" panel-id="about">
@@ -268,6 +275,7 @@
             </div>
             <div class="panelDiv" panel-id="maps">
                 <h4>Choose a Map:</h4>
+                <!-- <button id="mapsListToggle" data-status="expand">Expand All</button> -->
                 <div id="mapsList"></div>
                 <hr>
                 <form>
@@ -307,7 +315,8 @@
                         </div>
                         <div class="flexCenter">
                             <label for="specificReport">Choose Report</label>
-                            <select style="flex: 1; margin-left: 25px;" class="form-control" id="specificReport"> </select>
+                            <select style="flex: 1; margin-left: 25px;" class="form-control" id="specificReport">
+                            </select>
                         </div>
                         <button class="btn btn-submit">submit</button>
                     </form>
@@ -403,8 +412,10 @@
     </script>
     <!-- Global script definitions. -->
     <script src="resources/js/draggable.js"></script>
-    <script src="https://js.arcgis.com/4.8/"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
+    <script src="https://js.arcgis.com/4.9/"></script>
 
+    <script src="js/utilities.js"></script>
     <script src="js/config/config.js"></script>
     <script src="js/config/mapsConfig.js"></script>
     <script src="js/config/colorRampConfig.js"></script>

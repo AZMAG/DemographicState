@@ -71,8 +71,7 @@ require([
                 id: "gfxLayer"
             });
             app.map.add(gfxLayer);
+
             tp.publish("layers-added");
         }
-
-
     });

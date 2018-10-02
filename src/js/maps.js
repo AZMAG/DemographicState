@@ -23,7 +23,7 @@ require([
                 if (conf.items) {
                     rtnHTML +=
                         `
-                        <div style="display:flex; align-items: center;">
+                        <div class="categoryItem">
                             <span class="expandBtn"><i class="fas fa-caret-right"></i></span>
                             <span>${conf.Name}</span>
                         </div>
@@ -40,14 +40,61 @@ require([
 
         $mapsList.append(GetMapsHTML(app.mapsConfig));
 
-
         $mapsList.find(".mapSubItemList").first().show().find(".mapItem").first().addClass("activeMapItem");
         $mapsList.find(".fa-caret-right").first().toggleClass("fa-caret-right fa-caret-down");
 
-        $mapsList.find(".expandBtn").click(function () {
-            $(this).parent().next().toggle();
-            let $icon = $(this).find("i");
-            $icon.toggleClass("fa-caret-right fa-caret-down");
+        // $mapsList.find(".expandBtn").click(function () {
+        //     $(this).parent().next().toggle();
+        //     let $icon = $(this).find("i");
+        //     $icon.toggleClass("fa-caret-right fa-caret-down");
+        // });
+
+        $("#mapsListToggle").click(function () {
+            var btnStatus = $(this).data("status");
+
+            if (btnStatus === "expand") {
+                $(this).text("Collapse All");
+                $(this).data("status", "collapse");
+                $mapsList.find(".mapSubItemList").show()
+                $mapsList.find(".fa-caret-right").removeClass("fa-caret-right").addClass("fa-caret-down");
+            } else {
+                $(this).text("Expand All");
+                $(this).data("status", "expand");
+                $mapsList.find(".mapSubItemList").hide()
+                $mapsList.find(".fa-caret-down").removeClass("fa-caret-down").addClass("fa-caret-right");
+            }
+        })
+
+        $mapsList.find(".categoryItem").click(function () {
+            let $clickedSubList = $(this).next();
+            let isVisible = $clickedSubList.is(":visible");
+
+            let hasParent = $(this).closest(".mapSubItemList");
+
+            if (hasParent.length === 0) {
+                console.log(hasParent);
+
+                // Resets all other categories
+                // $mapsList.find(".categoryItem").css("background-color", "");
+                $mapsList.find(".mapSubItemList").slideUp(50);
+                $mapsList.find(".fa-caret-down").removeClass("fa-caret-down").addClass("fa-caret-right");
+            } else {
+                if (!isVisible) {
+                    $clickedSubList.slideDown(100);
+                    let $icon = $(this).find("i");
+                    $icon.toggleClass("fa-caret-right fa-caret-down");
+                } else {
+
+                }
+            }
+
+            if (!isVisible) {
+                $clickedSubList.slideDown(100);
+                let $icon = $(this).find("i");
+                $icon.toggleClass("fa-caret-right fa-caret-down");
+            }
+
+            // $(this).css("background-color", "blue");
         });
 
         $mapsList.find(".mapItem").click(function () {
