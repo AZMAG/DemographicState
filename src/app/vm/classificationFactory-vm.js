@@ -3,7 +3,7 @@
  *
  * @class ClassificationFactory
  */
-(function() {
+(function () {
 
     "use strict";
 
@@ -16,9 +16,9 @@
             "app/vm/help-vm",
             "dojo/text!app/views/classBreaks-view.html"
         ],
-        function(dj, dc, tp, magNum, helpView, helpVM, view) {
+        function (dj, dc, tp, magNum, helpView, helpVM, view) {
 
-            var ClassificationFactoryVM = new function() {
+            var ClassificationFactoryVM = new function () {
 
                 var self = this;
 
@@ -53,7 +53,7 @@
                 @param {string} relatedElement - name of the element to attach the module window to.
                 @param {string} relation - relationship of the window to the relatedElement.
                 **/
-                self.init = function(relatedElement, relation, loadInitCustomBreaks) {
+                self.init = function (relatedElement, relation, loadInitCustomBreaks) {
                     dc.place(view, relatedElement, relation);
 
                     var colRampWindow = $("#classDefWindow").kendoWindow({
@@ -68,7 +68,7 @@
                     }).data("kendoWindow");
 
                     var helpButton = colRampWindow.wrapper.find(".k-i-help");
-                    helpButton.click(function() {
+                    helpButton.click(function () {
                         helpVM.openWindow(helpView);
                     });
 
@@ -93,7 +93,7 @@
                 @method applyBreaks
                 @param {event} e - click event data.
                 **/
-                self.applyBreaks = function() {
+                self.applyBreaks = function () {
                     tp.publish("CustomBreaksUpdated", null);
                     self.closeWindow();
                 };
@@ -103,7 +103,7 @@
 
                 @method openWindow
                 **/
-                self.openWindow = function() {
+                self.openWindow = function () {
                     var win = $("#classDefWindow").data("kendoWindow");
                     win.restore();
                     win.center();
@@ -116,7 +116,7 @@
 
                 @method closeWindow
                 **/
-                self.closeWindow = function() {
+                self.closeWindow = function () {
                     var win = $("#classDefWindow").data("kendoWindow");
                     win.close();
                 };
@@ -127,7 +127,7 @@
                 @method ClassificationMethodChanged
                 @param {ClassBreaksRenderer} renderer - The new updated renderer
                 **/
-                self.ClassificationMethodChanged = function(renderer) {
+                self.ClassificationMethodChanged = function (renderer) {
                     self.Renderer = renderer;
                     if (!self.loadInitialCustomBreaks) {
                         self.openWindow();
@@ -136,12 +136,12 @@
                     }
                 };
 
-                self.drawClassBreakTooltip = function(e) {
+                self.drawClassBreakTooltip = function (e) {
                     var breakIdx = e.target[0].previousSibling.id.substring(6);
                     return "<input id=\"ttip" + breakIdx + "\" ></input>";
                 };
 
-                self.populateClassBreakTooltip = function() {
+                self.populateClassBreakTooltip = function () {
                     var me = this.content[0].firstChild.id;
                     var myIndex = parseInt(me.substring(4));
                     var numSettings = {
@@ -161,7 +161,7 @@
                     );
                 };
 
-                self.spinnerChange = function(e) {
+                self.spinnerChange = function (e) {
                     var numIndex = parseInt(e.sender.element[0].id.substring(4));
                     var boxObject = $("#" + e.sender.element[0].id).data("kendoNumericTextBox");
                     var actualValue = boxObject.value();
@@ -176,7 +176,7 @@
 
                 @method RedrawSliders
                 **/
-                self.RedrawSliders = function() {
+                self.RedrawSliders = function () {
                     self.redrawingSliders = true;
                     dc.empty("classBreakSliders");
                     var windowWidth = $("#classBreakSliders")[0].clientWidth - (self.Renderer.infos.length - 1) * 7;
@@ -188,7 +188,7 @@
                         var currDiv = "cbPane" + j;
                         dc.place("<div id=\"" + currDiv + "\" style=\"text-align:center; line-height:58px; white-space: nowrap\" ></div>", "classBreakSliders", "last");
                         $("#" + currDiv).kendoTooltip({
-                            content: function(e) {
+                            content: function (e) {
                                 return e.target[0].textLabel;
                             }
                         });
@@ -214,7 +214,7 @@
                 @method updateRangeSliders
                 @param {event} e - event data
                 **/
-                self.updateRangeSliders = function(e) {
+                self.updateRangeSliders = function (e) {
                     var panes = e.sender.options.panes;
                     if (!self.redrawingSliders) {
                         for (var i = 1; i < self.Renderer.infos.length; i++) {
@@ -232,8 +232,8 @@
                         var start;
                         var end;
                         if (self.Renderer.asPercent) {
-                            start = Math.round(self.Renderer.infos[j].minValue);
-                            end = Math.round(self.Renderer.infos[j].maxValue) + "%";
+                            start = Math.round(self.Renderer.infos[j].minValue * 100);
+                            end = Math.round(self.Renderer.infos[j].maxValue * 100) + "%";
                         } else {
                             start = magNum.formatValue(Math.round(self.Renderer.infos[j].minValue));
                             end = magNum.formatValue(Math.round(self.Renderer.infos[j].maxValue));
