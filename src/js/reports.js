@@ -29,10 +29,20 @@ require([
             });
         }
 
+        function hideReportLayers() {
+            app.config.layers.forEach(function (conf) {
+                const layer = app.map.findLayerById(conf.id);
+                if (layer && conf.showReport) {
+                    layer.visible = false;
+                }
+            })
+        }
+
         $("#reportType").change(function () {
             var layerId = $(this).find(":selected").data("layer-id");
             let layer = app.map.findLayerById(layerId);
             let sumField = layer.displayField;
+            hideReportLayers()
             layer.visible = true;
 
             const q = {
@@ -60,26 +70,17 @@ require([
 
             let q = {
                 objectIds: [Number(OBJECTID)],
-                returnGeometry: true
+                returnGeometry: true,
+                outFields: ["*"]
             }
-            app.view.whenLayerView(layer).then(function (lyrView) {
-                lyrView.queryFeatures(q).then(function (res) {
-                    if (res.features && res.features.length > 0) {
-                        OpenReportWindow(res);
-                    } else {
-                        console.error("No matching features for: " + q);
-                    }
-                });
+
+            layer.queryFeatures(q).then(function (res) {
+                if (res.features && res.features.length > 0) {
+                    OpenReportWindow(res);
+                } else {
+                    console.error("No matching features for: " + q);
+                }
             });
-
-            // layer.queryFeatures(q).then(function (res) {
-            //     if (res.features && res.features.length > 0) {
-
-            //         OpenReportWindow(res);
-            //     } else {
-            //         console.error("No matching features for: " + q);
-            //     }
-            // });
         })
 
         function AddHighlightGraphic(graphic) {

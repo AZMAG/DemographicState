@@ -30,6 +30,10 @@ p {
     color: #999;
 }
 
+.esri-view .esri-view-surface--inset-outline:focus::after {
+    outline: none;
+}
+
 a,
 a:hover,
 a:focus {
@@ -598,7 +602,7 @@ label:hover,
 
 .panelDiv {
     padding: 5px;
-    max-width: 27vw;
+    width: 27vw;
     display: none;
 }
 
@@ -731,6 +735,7 @@ label:hover,
 .flexCenter {
     display: flex;
     align-items: center;
+    padding: 5px;
 }
 
 .cRamp {
@@ -739,7 +744,7 @@ label:hover,
 }
 
 .colorRampSquare {
-    height: 30px;
+    height: 23px;
     flex: 1;
 }
 

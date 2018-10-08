@@ -68,29 +68,24 @@ require([
         $mapsList.find(".categoryItem").click(function () {
             let $clickedSubList = $(this).next();
             let isVisible = $clickedSubList.is(":visible");
-
             let hasParent = $(this).closest(".mapSubItemList");
+            let $icon = $(this).find("i");
 
             if (hasParent.length === 0) {
-                console.log(hasParent);
-
                 // Resets all other categories
                 // $mapsList.find(".categoryItem").css("background-color", "");
-                $mapsList.find(".mapSubItemList").slideUp(50);
+
+                $mapsList.find(".mapSubItemList").slideUp();
                 $mapsList.find(".fa-caret-down").removeClass("fa-caret-down").addClass("fa-caret-right");
             } else {
-                if (!isVisible) {
-                    $clickedSubList.slideDown(100);
-                    let $icon = $(this).find("i");
-                    $icon.toggleClass("fa-caret-right fa-caret-down");
-                } else {
-
+                if (isVisible) {
+                    $clickedSubList.slideUp();
+                    $icon.toggleClass("fa-caret-down fa-caret-right");
                 }
             }
 
             if (!isVisible) {
-                $clickedSubList.slideDown(100);
-                let $icon = $(this).find("i");
+                $clickedSubList.slideDown();
                 $icon.toggleClass("fa-caret-right fa-caret-down");
             }
 
