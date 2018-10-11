@@ -3,30 +3,34 @@ require([
         "dojo/domReady!"
     ],
     function (tp) {
-        tp.subscribe("map-loaded", initReports);
+        tp.subscribe("layers-added", initReports);
         var $summaryReport = $("#summaryReport");
 
         function initReports() {
             var html = '';
             for (let i = 0; i < app.config.layers.length; i++) {
                 const layer = app.config.layers[i];
+
                 if (layer.showReport) {
                     html += `<option data-layer-id="${layer.id}">${layer.title}</option>`;
                 }
             }
             $("#reportType").html(html);
-            $summaryReport.show();
-            $summaryReport.kendoWindow({
-                visible: false,
-                actions: [
-                    "Close"
-                ],
-                width: "50vw",
-                close: function (e) {
-                    let gfxLayer = app.map.findLayerById("gfxLayer");
-                    gfxLayer.removeAll();
-                }
-            });
+            var initReportID = "cogBoundaries";
+            updateReportDDL(app.map.findLayerById(initReportID), app.config.layerDef[initReportID]);
+
+            // $summaryReport.show();
+            // $summaryReport.kendoWindow({
+            //     visible: false,
+            //     actions: [
+            //         "Close"
+            //     ],
+            //     width: "50vw",
+            //     close: function (e) {
+            //         let gfxLayer = app.map.findLayerById("gfxLayer");
+            //         gfxLayer.removeAll();
+            //     }
+            // });
         }
 
         function hideReportLayers() {
@@ -38,11 +42,11 @@ require([
             })
         }
 
-        $("#reportType").change(function () {
-            var layerId = $(this).find(":selected").data("layer-id");
-            let layer = app.map.findLayerById(layerId);
-            let sumField = layer.displayField;
-            hideReportLayers()
+        function updateReportDDL(layer, conf) {
+            let sumField = conf.displayField || layer.displayField;
+            console.log(layer);
+
+            hideReportLayers();
             layer.visible = true;
 
             const q = {
@@ -54,16 +58,26 @@ require([
             }
 
             layer.queryFeatures(q).then(function (res) {
+                console.log(res);
+
                 $("#specificReport").html('');
                 for (let i = 0; i < res.features.length; i++) {
                     const feature = res.features[i];
                     $("#specificReport").append(`<option data-object-id="${feature.attributes["OBJECTID"]}">${feature.attributes[sumField]}</option>`);
                 }
             })
+        }
+
+
+        $("#reportType").change(function () {
+            var layerId = $(this).find(":selected").data("layer-id");
+            let layer = app.map.findLayerById(layerId);
+            updateReportDDL(layer, app.config.layerDef[layerId]);
         })
 
         $("#reportForm").submit(function (e) {
             e.preventDefault();
+            $("#summaryReport").css("visibility", "hidden");
             var layerId = $("#reportType").find(":selected").data("layer-id");
             let layer = app.map.findLayerById(layerId);
             let OBJECTID = $("#specificReport").find(":selected").data("object-id");
@@ -103,114 +117,96 @@ require([
         }
 
         function CreateChart(ops) {
-            ops.element.html("<canvas id='myChart'></canvas>");
-            var ctx = document.getElementById("myChart").getContext('2d');
-            var chart = new Chart(ctx, {
-                // The type of chart we want to create
-                type: 'bar',
-
-                // The data for our dataset
-                data: {
-                    labels: ops.data.map(a => a.fieldAlias),
-                    datasets: [{
-                        data: ops.data.map(a => a.fieldValue),
-                        backgroundColor: ["#A6CEE3", "#1F78B4", "#B2DF8A", "#33A02C", "#FB9A99", "#E31A1C", "#FDBF6F", "#FF7F00", "#CAB2D6", "#6A3D9A", "#FFFF99", "#B15928"]
-                    }]
-                },
-
-                // Configuration options go here
-                options: {}
-            });
-            console.log(ops);
+            // console.log(ops);
             if (ops.data.length) {
-                // return ops.element
-                //     .kendoChart({
-                //         dataSource: {
-                //             data: ops.data
-                //         },
+                return ops.element
+                    .kendoChart({
+                        dataSource: {
+                            data: ops.data
+                        },
 
-                //         //change color of charts vw
-                //         // seriesColors: appConfig.seriesColors,
+                        //change color of charts vw
+                        // seriesColors: appConfig.seriesColors,
 
-                //         legend: {
-                //             // visible: legendVisible,
-                //             position: 'bottom',
-                //             // offsetX: 15,
-                //             // offsetY: -80,
-                //             margin: {
-                //                 left: 0,
-                //                 right: 10
-                //             },
-                //             labels: {
-                //                 color: 'white'
-                //             }
-                //         },
-                //         series: [{
-                //             // name: self.groupedItems[0].chartName,
-                //             // type: self.groupedItems[0].chartType,
-                //             field: 'fieldValue',
-                //             categoryField: 'fieldAlias',
-                //             // padding: padding
-                //         }],
-                //         // transitions: animation,
-                //         seriesDefaults: {
-                //             labels: {
-                //                 // visible: showLabels,
-                //                 position: 'outsideEnd',
-                //                 background: '#4D4D4D',
-                //                 format: '{0:n}',
-                //                 color: 'white',
-                //                 // template: '#= wrapText(category) #'
-                //             },
-                //             tooltip: {
-                //                 visible: true,
-                //                 color: 'black',
-                //                 // template: templateString
-                //             }
-                //         },
-                //         plotArea: {
-                //             margin: {
-                //                 right: 30
-                //             }
-                //         },
-                //         chartArea: {
-                //             background: '#4D4D4D',
-                //             margin: {
-                //                 left: 15,
-                //                 top: 5,
-                //                 right: 15
-                //             }
-                //         },
-                //         categoryAxis: {
-                //             //title: { text: "test"},
-                //             field: 'fieldAlias',
-                //             color: 'white',
-                //             labels: {
-                //                 visible: true,
-                //                 rotation: 0,
-                //                 // template: '#= wrapText(value) #'
-                //             },
-                //             majorGridLines: {
-                //                 visible: false
-                //             },
-                //             line: {
-                //                 visible: false
-                //             }
-                //         },
-                //         valueAxis: {
-                //             //title: { text: "test"},
-                //             color: 'white',
-                //             labels: {
-                //                 // template: valueAxisTemplate
-                //             },
-                //             title: {
-                //                 text: '*Values shown in thousands',
-                //                 font: '10px Arial,Helvetica,sans-serif',
-                //                 // visible: largeValue
-                //             }
-                //         }
-                //     })
-                //     .data('kendoChart');
+                        legend: {
+                            // visible: legendVisible,
+                            position: 'bottom',
+                            // offsetX: 15,
+                            // offsetY: -80,
+                            margin: {
+                                left: 0,
+                                right: 10
+                            },
+                            labels: {
+                                color: 'white'
+                            }
+                        },
+                        series: [{
+                            // name: self.groupedItems[0].chartName,
+                            // type: self.groupedItems[0].chartType,
+                            field: 'fieldValue',
+                            categoryField: 'fieldAlias',
+                            // padding: padding
+                        }],
+                        // transitions: animation,
+                        seriesDefaults: {
+                            labels: {
+                                // visible: showLabels,
+                                position: 'outsideEnd',
+                                background: '#4D4D4D',
+                                format: '{0:n}',
+                                color: 'white',
+                                // template: '#= wrapText(category) #'
+                            },
+                            tooltip: {
+                                visible: true,
+                                color: 'black',
+                                // template: templateString
+                            }
+                        },
+                        plotArea: {
+                            margin: {
+                                right: 30
+                            }
+                        },
+                        chartArea: {
+                            background: '#4D4D4D',
+                            margin: {
+                                left: 15,
+                                top: 5,
+                                right: 15
+                            }
+                        },
+                        categoryAxis: {
+                            //title: { text: "test"},
+                            field: 'fieldAlias',
+                            color: 'white',
+                            labels: {
+                                visible: true,
+                                rotation: 0,
+                                // template: '#= wrapText(value) #'
+                            },
+                            majorGridLines: {
+                                visible: false
+                            },
+                            line: {
+                                visible: false
+                            }
+                        },
+                        valueAxis: {
+                            //title: { text: "test"},
+                            color: 'white',
+                            labels: {
+                                // template: valueAxisTemplate
+                            },
+                            title: {
+                                text: '*Values shown in thousands',
+                                font: '10px Arial,Helvetica,sans-serif',
+                                // visible: largeValue
+                            }
+                        }
+                    })
+                    .data('kendoChart');
             } else {
                 ops.element.html("No data available for this chart.")
             }
@@ -294,7 +290,7 @@ require([
                     {
                         field: 'tableHeader',
                         title: 'Topic',
-                        width: '350px'
+                        width: '300px'
                     },
                     {
                         field: 'fieldValueFormatted',
@@ -346,7 +342,8 @@ require([
                                 'background-color': universeColor,
                                 'font-weight': 'bold',
                                 'font-style': 'italic',
-                                'font-size': '12px'
+                                'font-size': '12px',
+                                'color': 'white'
                             });
                         } else if (el.universeField === 2) {
                             var universeColor = '#808080';
@@ -355,7 +352,8 @@ require([
                             parentElement.css({
                                 'background-color': universeColor,
                                 'font-weight': 'bold',
-                                'font-size': '11.5px'
+                                'font-size': '11.5px',
+                                'color': 'white'
                             });
 
                             if (nextSib[0].innerText === "-") {
@@ -383,6 +381,7 @@ require([
 
         function OpenReportWindow(res) {
             console.log(res)
+
             let features = res.features;
             let displayName = res.displayFieldName;
             let feature = features[0];
@@ -395,10 +394,10 @@ require([
             //Zoom to highlighted graphic, but expand to give some context.
             app.view.goTo(features[0].geometry.extent.expand(3));
 
-            var win = $summaryReport.data("kendoWindow");
-            win.title(attr[displayName]);
-            win.center();
-            win.open();
+            // var win = $summaryReport.data("kendoWindow");
+            // win.title(attr[displayName]);
+            // win.center();
+            // win.open();
 
             var valsDef = {};
             var vals = [];
@@ -473,6 +472,7 @@ require([
             }
             CreateKendoGrid(vals, "acsGrid");
             CreateCharts(vals, "acsCharts");
+            $("#summaryReport").css("visibility", "visible");
         }
     }
 )

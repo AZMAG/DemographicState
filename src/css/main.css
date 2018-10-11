@@ -823,7 +823,7 @@ label:hover,
 }
 
 #summaryReport {
-    display: none;
+    visibility: hidden;
 }
 
 #collapseBtnContainer {

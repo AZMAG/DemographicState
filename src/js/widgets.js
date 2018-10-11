@@ -1,5 +1,5 @@
-require(["esri/widgets/Home", "esri/Basemap", "esri/widgets/LayerList", "esri/widgets/BasemapToggle", "esri/layers/TileLayer", "esri/widgets/Legend", "esri/widgets/Locate", "dojo/topic"],
-    function (Home, Basemap, LayerList, BasemapToggle, TileLayer, Legend, Locate, tp) {
+require(["esri/widgets/Home", "esri/Basemap", "esri/widgets/LayerList", "esri/widgets/Zoom", "esri/widgets/BasemapToggle", "esri/layers/TileLayer", "esri/widgets/Legend", "esri/widgets/Locate", "dojo/topic"],
+    function (Home, Basemap, LayerList, Zoom, BasemapToggle, TileLayer, Legend, Locate, tp) {
         tp.subscribe("map-loaded", function () {
             var home = new Home({
                 view: app.view
@@ -54,7 +54,10 @@ require(["esri/widgets/Home", "esri/Basemap", "esri/widgets/LayerList", "esri/wi
             app.view.ui.add(toggle, "bottom-right");
 
             //Zoom Widget
-            app.view.ui.move("zoom", "bottom-right");
+            var zoom = new Zoom({
+                view: app.view
+            });
+            app.view.ui.add(zoom, "bottom-right");
 
             //Locate Widget
             var locateBtn = new Locate({

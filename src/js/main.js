@@ -20,7 +20,7 @@ require([
                 snapToZoom: false
             },
             ui: {
-                components: ["zoom"]
+                components: []
             }
         });
 
@@ -35,6 +35,7 @@ require([
                         } else if ('ACS_' + conf.layerName === layer.name) {
                             conf["ACSIndex"] = layer.id;
                         }
+                        app.config.layerDef[conf.id] = conf;
                     }
                 }
                 tp.publish("map-loaded");
