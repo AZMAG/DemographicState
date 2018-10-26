@@ -211,52 +211,49 @@ a.article:hover,
     display: none;
 }
 
+.slidecontainer {
+    text-align: center;
+}
+
 .slider {
-    position: absolute;
-    cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #ccc;
-    -webkit-transition: .4s;
-    transition: .4s;
+    -webkit-appearance: none;
+    width: 80%;
+    height: 10px;
+    border-radius: 5px;
+    background: #d3d3d3;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
 }
 
-.slider:before {
-    position: absolute;
-    content: "";
-    height: 18.352px;
-    width: 18.352px;
-    bottom: 2.75px;
-    left: 4px;
-    background-color: white;
-    -webkit-transition: .4s;
-    transition: .4s;
-}
-
-input:checked+.slider {
-    background-color: var(--secondaryColor);
-}
-
-input:focus+.slider {
-    box-shadow: 0 0 1px var(--secondaryColor);
-}
-
-input:checked+.slider:before {
-    -webkit-transform: translateX(16px);
-    -ms-transform: translateX(16px);
-    transform: translateX(16px);
-}
-
-/* Rounded sliders */
-
-.slider.round {
-    border-radius: 14px;
-}
-
-.slider.round:before {
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 15px;
+    height: 15px;
     border-radius: 50%;
+    background: #4CAF50;
+    cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: #4CAF50;
+    cursor: pointer;
+}
+
+.esri-legend__service {
+    padding: 12px 15px;
+    word-wrap: break-word;
+    border-bottom: none;
+    padding-bottom: 0px;
+}
+
+#sliderLabel {
+    width: 8%;
 }
 
 html,
@@ -469,6 +466,8 @@ label:hover,
     padding-right: 10px;
     padding-bottom: 5px;
     border-top: 1px solid #c2c0c0;
+    background-color: white;
+    color: black;
 }
 
 .legendDiv:first-of-type {
@@ -476,6 +475,10 @@ label:hover,
 }
 
 .hiddenLegend {
+    display: none;
+}
+
+.esri-legend__message {
     display: none;
 }
 

@@ -16,8 +16,8 @@ require([
                 }
             }
             $("#reportType").html(html);
-            var initReportID = "cogBoundaries";
-            updateReportDDL(app.map.findLayerById(initReportID), app.config.layerDef[initReportID]);
+            // var initReportID = "cogBoundaries";
+            // updateReportDDL(app.map.findLayerById(initReportID), app.config.layerDef[initReportID]);
 
             // $summaryReport.show();
             // $summaryReport.kendoWindow({

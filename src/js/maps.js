@@ -180,6 +180,7 @@ require([
 
             let breaks = conf.breaks[breaksType + numBreaks];
             let colorRamp = GetColorRamp(type, rampKey, numBreaks);
+
             UpdateColorRampControl(colorRamp, rampKey, type);
 
             for (let i = 0; i < breaks.length - 1; i++) {
@@ -218,6 +219,7 @@ require([
             };
             let layer = app.map.findLayerById("blockGroups").findSublayerById(0);
             layer.renderer = renderer;
+            tp.publish('BlockGroupRendererUpdated', renderer);
         }
 
         function ColorRampToHTML(ramp, rampKey, rampType) {

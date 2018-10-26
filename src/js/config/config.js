@@ -16,6 +16,7 @@ app.config = {
     // {
 
     //     drawOrder: 0,
+    legend: true,
     //     id: "censusTracts",
     //     title: "Census Tracts",
     //     type: "feature",
@@ -31,6 +32,7 @@ app.config = {
     // },
     layers: [{
             drawOrder: 2,
+            legend: true,
             id: "cogBoundaries",
             layerName: "Cogs_Mpos",
             title: "COG / MPO Boundaries",
@@ -46,6 +48,7 @@ app.config = {
             link: true
         }, {
             drawOrder: 1,
+            legend: true,
             id: "countyBoundaries",
             title: "County Boundaries",
             layerName: "Counties",
@@ -64,6 +67,7 @@ app.config = {
             link: true
         }, {
             drawOrder: 3,
+            legend: true,
             layerName: "Congressional_Districts",
             displayField: "NAME",
             id: "congressionalDistricts",
@@ -79,6 +83,7 @@ app.config = {
             link: true
         }, {
             drawOrder: 4,
+            legend: true,
             layerName: "Legislative_Districts",
             id: "legislativeDistricts",
             title: "Legislative Districts",
@@ -94,6 +99,7 @@ app.config = {
             link: true
         }, {
             drawOrder: 5,
+            legend: true,
             layerName: "Zip_Codes",
             id: "zipCodes",
             title: "ZIP Codes",
@@ -110,6 +116,7 @@ app.config = {
         },
         //  {
         //     drawOrder: 6,
+        // legend: true,
         //     id: "districts",
         //     title: "Unified School Districts",
         //     url: this.mainUrl + "/25",
@@ -125,6 +132,7 @@ app.config = {
         // }, 
         {
             drawOrder: 7,
+            legend: true,
             layerName: "SupervisorDistricts",
             id: "supervisorDistricts",
             title: "Supervisor Districts",
@@ -160,9 +168,10 @@ app.config = {
             visible: true,
             showReport: false,
             showTOC: true,
-            showLegend: false
+            legend: false
         }, {
             drawOrder: 8,
+            legend: true,
             id: "blockGroups",
             title: "American Community Survey by Block Group, 2012-2016 5yr",
             type: "image",

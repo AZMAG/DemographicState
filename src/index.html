@@ -17,9 +17,9 @@
     <meta name="keywords" content="Demographics, Census, 2010, American Community Survey, ACS, 2012-2016, 5yr, Counties, State, Arizona, Maps, MAG, ESRI, #MAGmaps">
     <meta name="subject" content="Demographic data for State of Arizona">
     <meta name="author" content="Maricopa Association of Governments">
-    <link type="text/plain" rel="author" href="http://geo.azmag.gov/maps/azdemographics/humans.txt">
+    <link type="text/plain" rel="author" href="https://geo.azmag.gov/maps/azdemographics/humans.txt">
     <meta name="contact" content="www.azmag.gov">
-    <meta name="url" content="http://geo.azmag.gov/maps/azdemographics/">
+    <meta name="url" content="https://geo.azmag.gov/maps/azdemographics/">
     <meta name="creation-date" content="2014-10-21">
     <meta name="revision-date" content="2018-04-20">
     <meta name="version" content="3.2.4">
@@ -30,8 +30,8 @@
     <!-- OpenGraph Meta Tags fb-->
     <meta property="og:title" content="Arizona Demographic Maps Viewer">
     <meta property="og:site_name" content="Arizona Demographics">
-    <meta property="og:image" content="http://geo.azmag.gov/maps/azdemographics/app/resources/img/shareImg.png">
-    <meta property="og:url" content="http://geo.azmag.gov/maps/azdemographics/">
+    <meta property="og:image" content="https://geo.azmag.gov/maps/azdemographics/app/resources/img/shareImg.png">
+    <meta property="og:url" content="https://geo.azmag.gov/maps/azdemographics/">
     <meta property="og:type" content="website">
     <meta property="og:description" content="A map viewer showing demographic data for State of Arizona.  #MAGmaps">
     <meta property="fb:app_id" content="237366436641850">
@@ -40,15 +40,15 @@
     <meta property="place:location:region" content="AZ">
     <!-- Twitter Cards -->
     <meta name="twitter:card" contant="summary">
-    <meta name="twitter:url" content="http://geo.azmag.gov/maps/azdemographics/">
+    <meta name="twitter:url" content="https://geo.azmag.gov/maps/azdemographics/">
     <meta name="twitter:title" content="Arizona Demographic Maps Viewer">
     <meta name="twitter:description" content="A map viewer showing demographic data for State of Arizona.  #MAGmaps">
-    <meta name="twitter:image" content="http://geo.azmag.gov/maps/azdemographics/resources/img/shareImg.png">
+    <meta name="twitter:image" content="https://geo.azmag.gov/maps/azdemographics/resources/img/shareImg.png">
     <meta name="twitter:creator" content="@MAGregion">
     <!-- Google+ -->
     <meta itemprop="name" content="MAG Demographic Maps Viewer">
     <meta itemprop="description" contant="A map viewer showing demographic data for State of Arizona.  #MAGmaps">
-    <meta itemprop="image" content="http://geo.azmag.gov/maps/azdemographics/resources/img/shareImg.png">
+    <meta itemprop="image" content="https://geo.azmag.gov/maps/azdemographics/resources/img/shareImg.png">
     <!-- Fav and touch icons -->
     <link rel="apple-touch-icon" type="image/png" sizes="144x144" href="img/shareImg.png">
     <link rel="apple-touch-icon" type="image/png" sizes="114x114" href="img/magicon_114.png">
@@ -60,8 +60,8 @@
     <!-- Kendo UI CSS-->
     <!-- <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2018.2.620/styles/kendo.common.min.css" />
     <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2018.2.620/styles/kendo.black.min.css" /> -->
-    <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2018.2.620/styles/kendo.common-bootstrap.min.css">
-    <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2018.2.620/styles/kendo.bootstrap.min.css">
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2018.2.620/styles/kendo.common-bootstrap.min.css">
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2018.2.620/styles/kendo.bootstrap.min.css">
     <!-- Application CSS -->
     <!-- comments:comment html -->
     <link rel="stylesheet" rel="preload" as="style" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
@@ -157,6 +157,47 @@
             </div>
         </div>
     </div>
+    <div class="customWidget" id="legend">
+        <div title="Click and drag to move window" id="legendHeader">
+            <span>Legend</span>
+            <span id="legendGrip">
+                <i class="fas fa-grip-vertical"></i>
+            </span>
+        </div>
+        <div id="blockGroupLegend"></div>
+        <div id="legendDiv"></div>
+    </div>
+    <div id="basemapToggle" class="customWidget esri-component esri-widget-button esri-widget" role="button" tabindex="0"
+        aria-label="Satellite" title="Satellite">
+        <span class="esri-icon">
+            <img src="./resources/img/widgetIcons/Imagery-Map-View-Icon.png" alt="">
+        </span>
+        <span class="esri-icon-font-fallback-text">Toggle Basemap</span>
+    </div>
+    <div id="locateWidget" class="customWidget esri-component esri-widget-button esri-widget" role="button" tabindex="0"
+        aria-label="Find my Location" title="Find my Location">
+        <span class="esri-icon">
+            <i style="margin-top: 8px;" class="fas fa-map-marker-alt"></i>
+        </span>
+        <span class="esri-icon-font-fallback-text">Find my Location</span>
+    </div>
+    <div id="homeWidget" class="customWidget esri-component esri-widget-button esri-widget" role="button" tabindex="0"
+        aria-label="Default map view" title="Default map view">
+        <span class="esri-icon">
+            <i style="margin-top: 8px;" class="fas fa-home"></i>
+        </span>
+        <span class="esri-icon-font-fallback-text">Default map view</span>
+    </div>
+    <div id="zoomWidget" class="customWidget esri-component esri-zoom esri-widget">
+        <div data-id="In" class="esri-widget-button esri-widget esri-interactive" role="button" tabindex="0" title="Zoom In">
+            <i class="esri-icon fas fa-plus"></i>
+            <span class="esri-icon-font-fallback-text">Zoom In</span>
+        </div>
+        <div data-id="Out" class="esri-widget-button esri-widget esri-interactive" role="button" tabindex="0" title="Zoom Out">
+            <i class="esri-icon fas fa-minus"></i>
+            <span class="esri-icon-font-fallback-text">Zoom Out</span>
+        </div>
+    </div>
 
     <!-- <div id="summaryReport">
         <div id="sumReportTabStrip">
@@ -222,11 +263,11 @@
                         <i class="fas fa-th-list"></i>
                         <span class="liLabel">Legend</span>
                     </a>
-                    <label class="switch">
+                    <!-- <label class="switch">
                         <input class="legendToggle" type="checkbox" checked>
                         <span class="slider round"></span>
                     </label>
-                    <span class="arrow-left"></span>
+                    <span class="arrow-left"></span> -->
                 </li>
                 <li panel-target="maps">
                     <a href="#">
@@ -239,6 +280,13 @@
                     <a href="#">
                         <i class="fas fa-clipboard"></i>
                         <span class="liLabel">Reports</span>
+                    </a>
+                    <span class="arrow-left"></span>
+                </li>
+                <li panel-target="layers">
+                    <a href="#">
+                        <i class="fas fa-check-square"></i>
+                        <span class="liLabel">Layers</span>
                     </a>
                     <span class="arrow-left"></span>
                 </li>
@@ -258,7 +306,8 @@
                 </li>
             </ul>
         </nav>
-        <div style="display:block !important;" id="content">
+        <!-- style="display:block !important;" -->
+        <div id="content">
             <div class="panelDiv" panel-id="layers">
                 <div class="panelHeader">
                     <span class="panelHeaderText">Additional Layers</span>
@@ -430,7 +479,7 @@
                     </li>
                     <li panel-target="reports">
                         <a href="#">
-                            <i class="fas fa-check-clipboard"></i>
+                            <i class="fas fa-clipboard"></i>
                             Reports
                         </a>
                         <span class="arrow-left"></span>
@@ -492,7 +541,6 @@
     </script>
     <!-- Global script definitions. -->
     <script src="resources/js/draggable.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
     <script src="https://js.arcgis.com/4.9/"></script>
 
     <script src="js/utilities.js"></script>
@@ -502,8 +550,17 @@
     <script src="js/config/acsFieldsConfig.js"></script>
     <script src="js/config/censusFieldsConfig.js"></script>
 
+
+    <!-- Including Widget Files -->
+    <script src="js/widgets/legend.js"></script>
+    <script src="js/widgets/zoom.js"></script>
+    <script src="js/widgets/home.js"></script>
+    <script src="js/widgets/locate.js"></script>
+    <script src="js/widgets/basemapToggle.js"></script>
+
     <script src="js/main.js"></script>
     <script src="js/maps.js"></script>
+    <script src="js/layerlist.js"></script>
     <script src="js/reports.js"></script>
     <script src="js/layer.js"></script>
     <script src="js/cbr.js"></script>
