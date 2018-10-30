@@ -217,7 +217,7 @@ a.article:hover,
 
 .slider {
     -webkit-appearance: none;
-    width: 80%;
+    width: 70%;
     height: 10px;
     border-radius: 5px;
     background: #d3d3d3;
@@ -246,7 +246,7 @@ a.article:hover,
 }
 
 .esri-legend__service {
-    padding: 12px 15px;
+    padding: 0px 15px;
     word-wrap: break-word;
     border-bottom: none;
     padding-bottom: 0px;
@@ -254,6 +254,7 @@ a.article:hover,
 
 #sliderLabel {
     width: 8%;
+    margin-left: 3px;
 }
 
 html,
@@ -450,6 +451,7 @@ label:hover,
     height: 50px;
     background-color: var(--mainColor);
     color: var(--textColor);
+    cursor: move;
 }
 
 #legendHeader span {
@@ -458,7 +460,7 @@ label:hover,
     font-size: 15px;
 }
 
-.legendDiv {
+/* .legendDiv {
     display: flex;
     padding: 2px;
     font-size: 12px;
@@ -470,12 +472,42 @@ label:hover,
     color: black;
 }
 
+
+
 .legendDiv:first-of-type {
     border-top: none;
+} */
+
+#legendDiv {
+    background: white;
+    color: black;
+    padding-top: 10px;
+    max-height: 60vh;
+    width: 240px;
 }
+
+#legend {
+    /* padding: 10px; */
+    display: none;
+    background-color: white;
+    color: black;
+}
+
+.esri-legend__layer-cell {
+    padding: 1px 0;
+}
+
+.esri-legend__layer-cell--info {
+    padding-left: 7px;
+}
+
 
 .hiddenLegend {
     display: none;
+}
+
+.esri-widget__heading .esri-legend__service-label {
+    font-size: 13px;
 }
 
 .esri-legend__message {
@@ -540,13 +572,6 @@ label:hover,
 
 #sidebar .arrow-left {
     margin-top: -55px;
-}
-
-#legend {
-    /* padding: 10px; */
-    display: none;
-    background-color: white;
-    color: black;
 }
 
 .close-thick:after {

@@ -72,6 +72,18 @@ require([
             });
             app.map.add(gfxLayer);
 
-            tp.publish("layers-added");
+            //For now.... I'm waiting until the block groups layer is finished to publish the layers-added event.
+            //This should prevent the legend from trying to load to early.
+            //It Should probably be fixed at some point
+            let bgLayer = app.map.findLayerById('blockGroups');
+            var once = false;
+            app.view.whenLayerView(bgLayer).then(function (lyrView) {
+                lyrView.watch("updating", function (value) {
+                    if (!value && !once) {
+                        tp.publish("layers-added");
+                        once = true;
+                    }
+                })
+            });
         }
     });

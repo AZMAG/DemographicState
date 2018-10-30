@@ -4,13 +4,14 @@ require([
         'dojo/domReady!'
     ],
     function (Legend, tp) {
-        tp.subscribe("map-loaded", function () {
+        tp.subscribe("layers-added", function () {
+
+            // TODO: Make Sure the dom gets correctly cached for this file.
 
             //Legend
             let legend = $('#legend');
             app.view.ui.add('legend', 'top-right');
 
-            $(".customWidget").show();
             if (window.innerWidth < 800) {
                 $("#legend").hide();
                 // $(".legendToggle").removeAttr('checked');
@@ -20,11 +21,10 @@ require([
             //Have to do this otherwise it makes the block group legend go to the bottom when other items are checked
 
             var blockGroupsLayer = app.map.findLayerById("blockGroups");
-            console.log(blockGroupsLayer.loaded);
 
             new Legend({
                 view: app.view,
-                container: 'legend',
+                container: 'legendDiv',
                 layerInfos: [{
                     title: app.config.layerDef["blockGroups"].title,
                     layer: blockGroupsLayer
@@ -33,14 +33,13 @@ require([
 
 
             //Add Slider
-            legend.append(`
+            $("#legendDiv").append(`
                 <div class="slidecontainer">
                     <span style="padding: 8px;">Transparency</span>
                     <input type="range" min="0" max="1" value=".8" step=".05" class="round slider" id="slider">
                     <span id="sliderLabel">80%</span>
                 </div>
                 <hr>
-                <br>
             `)
             $("#slider").on("input", function () {
                 blockGroupsLayer.opacity = this.value;
@@ -62,10 +61,9 @@ require([
 
             new Legend({
                 view: app.view,
-                container: 'legend',
+                container: 'legendDiv',
                 layerInfos: layerInfos
             })
-
 
             $("#legend").draggable({
                 handle: "#legendHeader",
@@ -73,5 +71,7 @@ require([
                 containment: "#container",
                 cursor: "move"
             });
+
+            $(".customWidget").show();
         });
     })
