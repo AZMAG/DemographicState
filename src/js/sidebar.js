@@ -1,18 +1,21 @@
+//This file includes all of the code and logic for controlling the side/bottom navigation bar
+
 $(function () {
 
     let $sidebar = $('#sidebar');
     let $sidebarCollapse = $('#sidebarCollapse');
 
-    $('.sidebarCollapse').on('click', function () {
-        $sidebar.toggleClass('active');
-        $sidebarCollapse.toggleClass('active');
-    });
 
     let $links = $('.components li');
     let $arrows = $('.arrow-left');
     let $panelDivs = $('.panelDiv');
     let $content = $('#content');
     let $legendToggle = $('.legendToggle');
+
+    $('.sidebarCollapse').on('click', function () {
+        $sidebar.toggleClass('active');
+        $sidebarCollapse.toggleClass('active');
+    });
 
     let loadedLayers = ["layers"];
 

@@ -1,3 +1,5 @@
+//This file should include logic on initialization of?????
+
 require([
         "dojo/topic",
         "dojo/domReady!"
