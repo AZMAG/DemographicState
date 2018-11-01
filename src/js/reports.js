@@ -1,8 +1,7 @@
 //This file should include logic on initialization of?????
 
 require([
-        "dojo/topic",
-        "dojo/domReady!"
+        "dojo/topic"
     ],
     function (tp) {
         tp.subscribe("layers-added", initReports);

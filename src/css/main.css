@@ -20,6 +20,7 @@ body {
     font-family: 'Poppins', sans-serif;
     background: #fafafa;
     height: 100%;
+    overflow: hidden !important;
 }
 
 p {
@@ -262,7 +263,6 @@ body,
 #container {
     padding: 0;
     margin: 0;
-    overflow-x: hidden !important;
 }
 
 #container {
@@ -501,6 +501,36 @@ label:hover,
     padding-left: 7px;
 }
 
+#drawClearBtn {
+    display: none;
+}
+
+#drawAddBtn {
+    display: none;
+}
+
+#drawInstructions {
+    display: flex;
+    justify-content: space-between;
+}
+
+#drawingTooltip {
+    width: 150px;
+    display: none;
+    position: absolute;
+    background-color: black;
+    color: white;
+    padding: 5px 10px;
+    border: 1px solid gray;
+    z-index: 10;
+    border-radius: 10px;
+    font-size: 11px;
+}
+
+.flexContainer {
+    display: flex;
+    align-items: center;
+}
 
 .hiddenLegend {
     display: none;
@@ -528,6 +558,16 @@ label:hover,
 
 #layerList img {
     vertical-align: middle;
+}
+
+.pickerLabel {
+    margin-right: 5px;
+    flex: 1;
+}
+
+.verticalFlex {
+    display: flex;
+    flex-direction: column;
 }
 
 ::-webkit-scrollbar {

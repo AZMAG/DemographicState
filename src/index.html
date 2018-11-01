@@ -197,6 +197,16 @@
             <span class="esri-icon-font-fallback-text">Zoom Out</span>
         </div>
     </div>
+    <div id="drawWidget" class="customWidget esri-component esri-zoom esri-widget">
+        <div id="draw-polygon" class="esri-widget-button esri-widget esri-interactive" role="button" tabindex="0" title="Drawing Tools">
+            <i class="esri-icon fas fa-draw-polygon"></i>
+            <span class="esri-icon-font-fallback-text">Draw</span>
+        </div>
+    </div>
+
+    <div id="drawingTooltip">
+        Click and drag anywhere on the map to start drawing.
+    </div>
 
     <!-- <div id="summaryReport">
         <div id="sumReportTabStrip">
@@ -523,7 +533,6 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="https://kendo.cdn.telerik.com/2018.2.620/js/jszip.min.js"></script>
     <script src="https://kendo.cdn.telerik.com/2018.2.620/js/kendo.all.min.js"></script>
-
     <script>
         var dojoConfig = {
             packages: [{
@@ -556,6 +565,7 @@
     <script src="js/widgets/home.js"></script>
     <script src="js/widgets/locate.js"></script>
     <script src="js/widgets/basemapToggle.js"></script>
+    <script src="js/widgets/drawing.js"></script>
 
     <script src="js/main.js"></script>
     <script src="js/maps.js"></script>
