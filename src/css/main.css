@@ -288,6 +288,10 @@ body,
     color: var(--textColor);
 }
 
+.gridToolbar {
+    text-align: right;
+}
+
 #bottomBar ul {
     display: flex;
     align-items: center;

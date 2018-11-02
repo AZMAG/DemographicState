@@ -60,8 +60,8 @@
     <!-- Kendo UI CSS-->
     <!-- <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2018.2.620/styles/kendo.common.min.css" />
     <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2018.2.620/styles/kendo.black.min.css" /> -->
-    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2018.2.620/styles/kendo.common-bootstrap.min.css">
-    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2018.2.620/styles/kendo.bootstrap.min.css">
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2018.3.1017/styles/kendo.common-bootstrap.min.css">
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2018.3.1017/styles/kendo.bootstrap.min.css">
     <!-- Application CSS -->
     <!-- comments:comment html -->
     <link rel="stylesheet" rel="preload" as="style" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
@@ -316,7 +316,7 @@
             </ul>
         </nav>
         <!-- style="display:block !important;" -->
-        <div id="content">
+        <div id="content" style="display:block !important;">
             <div class="panelDiv" panel-id="layers">
                 <div class="panelHeader">
                     <span class="panelHeaderText">Additional Layers</span>
@@ -531,8 +531,8 @@
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    <script src="https://kendo.cdn.telerik.com/2018.2.620/js/jszip.min.js"></script>
-    <script src="https://kendo.cdn.telerik.com/2018.2.620/js/kendo.all.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2018.3.1017/js/jszip.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2018.3.1017/js/kendo.all.min.js"></script>
     <script>
         var dojoConfig = {
             packages: [{
@@ -570,7 +570,10 @@
     <script src="js/main.js"></script>
     <script src="js/maps.js"></script>
     <script src="js/layerlist.js"></script>
-    <script src="js/reports.js"></script>
+
+    <script src="js/reports/exportToExcel.js"></script>
+    <script src="js/reports/reports.js"></script>
+
     <script src="js/layer.js"></script>
     <script src="js/cbr.js"></script>
     <script src="js/sidebar.js"></script>

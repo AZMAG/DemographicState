@@ -266,6 +266,14 @@ require([
 
             // Kendo-ize
             $grid.kendoGrid({
+                toolbar: [{
+                    template: `
+                        <div class="gridToolbar">
+                            <button class="btn btn-sm gridGroupToggle" id="expandBtn">Expand All</button>
+                            <button class="btn btn-sm" id="exportToExcelBtn">Export to Excel</button>
+                        </div>
+                    `
+                }],
                 dataSource: {
                     data: src,
                     group: [{
@@ -375,13 +383,40 @@ require([
                         grid.collapseGroup(this);
                     });
                     $('.gridGroupToggle').val('expand').html('Expand All');
+                    $('.gridGroupToggle').click(function (e) {
+                        $.each($('.k-grid'), function (i, val) {
+                            if ($(val).is(':visible')) {
+                                var grid = $(val).data('kendoGrid');
+                                if (e.target.value === 'collapse') {
+                                    e.target.value = 'expand';
+                                    $(e.target).html('Expand All');
+                                    grid.tbody.find('tr.k-grouping-row').each(function (index) {
+                                        grid.collapseGroup(this);
+                                    });
+                                } else {
+                                    e.target.value = 'collapse';
+                                    $(e.target).html('Collapse All');
+                                    grid.tbody.find('tr.k-grouping-row').each(function (index) {
+                                        grid.expandGroup(this);
+                                    });
+                                }
+                            }
+                        });
+                    });
+
+                    $("#exportToExcelBtn").click(function () {
+                        tp.publish("excel-export", {
+                            data: data,
+                            e: e,
+                            grid: grid
+                        });
+                    });
                 }
             });
         }
 
 
         function OpenReportWindow(res) {
-            console.log(res)
 
             let features = res.features;
             let displayName = res.displayFieldName;
@@ -393,12 +428,7 @@ require([
             AddHighlightGraphic(feature);
 
             //Zoom to highlighted graphic, but expand to give some context.
-            app.view.goTo(features[0].geometry.extent.expand(3));
-
-            // var win = $summaryReport.data("kendoWindow");
-            // win.title(attr[displayName]);
-            // win.center();
-            // win.open();
+            app.view.goTo(features[0].geometry.extent.expand(1.5));
 
             var valsDef = {};
             var vals = [];
