@@ -9,8 +9,8 @@ function exportToExcel(params) {
     let grid = params.grid;
     let selectedReport = $("#specificReport").find(":selected").text();
     let fileName = selectedReport + '_Demographic_Report.xlsx';
-    let sourceLabel = app.config.legalACSDisclaimer;
-    let disclaimer;
+    let sourceLabel = app.config.sourceLabel;
+    let disclaimer = app.config.legalACSDisclaimer;
 
     let colSpan = 4;
     let rowSpan = 11;
@@ -22,7 +22,6 @@ function exportToExcel(params) {
         columns[1].width = 290;
 
         $.each(rows, function (i, row) {
-            // console.log(row);
             if (row.type === 'header') {
                 $.each(row.cells, function (i, cell) {
                     cell.background = '#8DB4E2';
@@ -35,11 +34,7 @@ function exportToExcel(params) {
                 row.cells[0].color = '#fff';
                 row.cells[0].bold = true;
             } else {
-                // console.log(row);
                 $.each(app.acsFieldsConfig, function (j, el) {
-
-                    console.log(row.cells[1]);
-
                     if (el.tableHeader === row.cells[1].value) {
                         let indent = {
                             0: '',
@@ -127,49 +122,17 @@ function exportToExcel(params) {
                 background: '#d3d3d3',
                 colSpan: colSpan,
                 color: '#000',
-                rowSpan: disclaimer == app.config.legalCensusDisclaimer ? Math.floor(rowSpan * .6) : rowSpan,
+                rowSpan: disclaimer == app.config.legalACSDisclaimer ? Math.floor(rowSpan * .6) : rowSpan,
                 fontSize: 8,
                 value: disclaimer,
                 hAlign: 'center',
                 wrap: true
             }]
         };
-        let compareRow = null;
-        if (self.compareFeature !== null) {
-            compareRow = {
-                cells: [{
-                        background: '#fff'
-                    },
-                    {
-                        background: '#fff'
-                    },
-                    {
-                        background: '#fff',
-                        color: '#000',
-                        fontSize: 12,
-                        colSpan: 2,
-                        value: selectedReport,
-                        hAlign: 'center',
-                        wrap: true
-                    },
-                    {
-                        background: '#fff',
-                        color: '#000',
-                        fontSize: 12,
-                        value: self.compareToName,
-                        colSpan: 2,
-                        hAlign: 'center',
-                        wrap: true
-                    }
-                ]
-            };
-        }
 
         if (rows[0].headerRow !== 'added') {
             //Add custom header row
             rows.unshift(headerRow);
-            //console.log(compareRow);
-
             rows.push(sourceRow);
             rows.push(footerRow);
         }

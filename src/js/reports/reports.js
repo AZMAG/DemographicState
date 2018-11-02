@@ -45,7 +45,6 @@ require([
 
         function updateReportDDL(layer, conf) {
             let sumField = conf.displayField || layer.displayField;
-            console.log(layer);
 
             hideReportLayers();
             layer.visible = true;
@@ -59,7 +58,6 @@ require([
             }
 
             layer.queryFeatures(q).then(function (res) {
-                console.log(res);
 
                 $("#specificReport").html('');
                 for (let i = 0; i < res.features.length; i++) {
@@ -258,19 +256,22 @@ require([
 
 
         function CreateKendoGrid(src, id) {
+
             var $grid = $('#' + id);
             if ($grid && $grid.data("kendoGrid")) {
                 $grid.data("kendoGrid").destroy();
                 $grid.empty();
             }
+            const expandHTML = 'Expand Topics<i style="margin-left: 5px;" class="fa fa-expand" aria-hidden="true"></i>';
+            const collapseHTML = 'Collapse Topics<i style="margin-left: 5px;" class="fa fa-compress" aria-hidden="true"></i>';
 
             // Kendo-ize
             $grid.kendoGrid({
                 toolbar: [{
                     template: `
                         <div class="gridToolbar">
-                            <button class="btn btn-sm gridGroupToggle" id="expandBtn">Expand All</button>
-                            <button class="btn btn-sm" id="exportToExcelBtn">Export to Excel</button>
+                            <button class="btn btn-sm gridGroupToggle" id="expandBtn">${expandHTML}</button>
+                            <button class="btn btn-sm" id="exportToExcelBtn">Export to Excel<i style="margin-left: 5px;" class="fa fa-table" aria-hidden="true"></i></button>
                         </div>
                     `
                 }],
@@ -382,20 +383,19 @@ require([
                     grid.tbody.find('tr.k-grouping-row').each(function (index) {
                         grid.collapseGroup(this);
                     });
-                    $('.gridGroupToggle').val('expand').html('Expand All');
                     $('.gridGroupToggle').click(function (e) {
                         $.each($('.k-grid'), function (i, val) {
                             if ($(val).is(':visible')) {
                                 var grid = $(val).data('kendoGrid');
                                 if (e.target.value === 'collapse') {
                                     e.target.value = 'expand';
-                                    $(e.target).html('Expand All');
+                                    $(e.target).html(expandHTML);
                                     grid.tbody.find('tr.k-grouping-row').each(function (index) {
                                         grid.collapseGroup(this);
                                     });
                                 } else {
                                     e.target.value = 'collapse';
-                                    $(e.target).html('Collapse All');
+                                    $(e.target).html(collapseHTML);
                                     grid.tbody.find('tr.k-grouping-row').each(function (index) {
                                         grid.expandGroup(this);
                                     });

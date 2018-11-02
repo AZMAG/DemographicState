@@ -16,7 +16,7 @@ app.config = {
     // {
 
     //     drawOrder: 0,
-    legend: true,
+    //     legend: true,
     //     id: "censusTracts",
     //     title: "Census Tracts",
     //     type: "feature",
@@ -52,10 +52,10 @@ app.config = {
             id: "countyBoundaries",
             title: "County Boundaries",
             layerName: "Counties",
-            displayField: "Name",
+            displayField: "NAME",
             type: "feature",
             popup: {
-                title: "{Name}"
+                title: "{NAME}"
             },
             queryWhere: "1=1",
             opacity: 0.8,
