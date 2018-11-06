@@ -171,6 +171,7 @@ require([
 
         function UpdateMapRenderer() {
             let cbInfos = [];
+
             let conf = GetSelectedConfig() || configLookup[0];
 
             let numBreaks = $classBreaksCount.val() || 5;
