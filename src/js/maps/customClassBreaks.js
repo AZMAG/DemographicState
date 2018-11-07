@@ -9,4 +9,8 @@ require([
         let $rampType = $("#rampType");
         let $classBreaksCount = $("#classBreaksCount");
         let $colorRampModal = $("#colorRampModal");
+        let $sequentialRamps = $("#sequentialRamps");
+        let $divergingRamps = $("#divergingRamps");
+
+
     })

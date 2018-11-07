@@ -11,6 +11,10 @@ app.config = {
     mainUrl: "https://geo.azmag.gov/gismag/rest/services/maps/DemographicState2016/MapServer",
     siteUrl: "https://geo.azmag.gov/maps/azdemographics/?",
 
+    DefaultColorRamp: "GnBu",
+    DefaultColorScheme: "Sequential",
+    DefaultNumberOfClassBreaks: 5,
+
     seriesColors: ["#A6CEE3", "#1F78B4", "#B2DF8A", "#33A02C", "#FB9A99", "#E31A1C", "#FDBF6F", "#FF7F00", "#CAB2D6", "#6A3D9A", "#FFFF99", "#B15928"],
     layerDef: {},
     // {
