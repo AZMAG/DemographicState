@@ -7,21 +7,16 @@ require([
         let $customClassBreaksModal = $("#customClassBreaksModal");
         let $classBreakSliders = $("#classBreakSliders");
         let $classBreakSliderTooltips = $("#classBreakSliderTooltips");
+        let $classBreaksCount = $("#classBreaksCount");
         let sliders = [];
         let maxVal = 0;
         const minLabelSize = 13;
-
-        tp.subscribe("BlockGroupRendererUpdated", function () {
-            console.log("test");
-
-            setupSliders();
-            setupCharts();
-        });
 
         function setupSliders() {
             const lyr = app.map.findLayerById("blockGroups");
             const rend = lyr.sublayers.getItemAt(0).renderer;
             const infos = rend.classBreakInfos;
+
             maxVal = infos[infos.length - 1].maxValue;
 
             let sliderHeight = $classBreakSliders.height() - (infos.length - 1) * 7;
@@ -29,6 +24,27 @@ require([
             //Clear out old class break sliders
             $classBreakSliders.html('');
             $classBreakSliderTooltips.html('');
+
+            let cbrCount = $classBreaksCount.val();
+
+            if (infos.length != cbrCount) {
+
+                // let conf = app.GetActiveMapData();
+
+                // let breaks = conf.breaks[`EqInterval${cbrCount}`];
+
+                // //Get color ramp info
+                // let rampKey = $colorRamp.find(".cRamp").data("id") || app.config.DefaultColorRamp;
+                // let type = $colorRamp.find(".cRamp").data("type") || app.config.DefaultColorScheme;
+
+                // //Get a color ramp using above data
+                // let colorRamp = app.GetColorRamp(type, rampKey, numBreaks);
+
+                // app.GetCurrentBreaks(breaks, colorRamp);
+
+                // console.log(infos);
+
+            }
 
             //Loop through class breaks and calculate pane size
             const panes = [];
@@ -44,12 +60,12 @@ require([
                     paneSize: paneSize
                 })
 
-                let minLabel = Math.round(info.minValue).toLocaleString('en-US');
-                let maxLabel = Math.round(info.maxValue).toLocaleString('en-US');
+                let minLabel = app.numLabel(info.minValue);
+                let maxLabel = app.numLabel(info.maxValue);
 
                 if (info.label.includes("%")) {
-                    minLabel = `${(Math.round(info.minValue * 1000) / 10).toLocaleString('en-US')}%`;
-                    maxLabel = `${(Math.round(info.maxValue * 1000) / 10).toLocaleString('en-US')}%`;
+                    minLabel = `${app.pctLabel(info.minValue)}%`;
+                    maxLabel = `${app.pctLabel(info.maxValue)}}%`;
                 }
 
                 if (i === infos.length - 1) {
@@ -76,7 +92,6 @@ require([
                 `)
 
                 $classBreakSliders.find("#cbPane" + i).data("info", info);
-
 
                 const newPane = {
                     size: paneSize + "px",
@@ -130,16 +145,27 @@ require([
                     let $nextInnerLabel = $nextPane.find(".paneLabel");
 
                     // update tooltip on left side of sliders
-
                     // Update inner label
                     if (prevInfo.label.includes("%")) {
-                        $prevInnerLabel.html(`${(Math.round(prevMin*1000)/10).toLocaleString('en-US')}% - ${(Math.round(prevMax*1000)/10).toLocaleString('en-US')}%`);
-                        $nextInnerLabel.html(`${(Math.round(nextMin*1000)/10).toLocaleString('en-US')}% - ${(Math.round(nextMax*1000)/10).toLocaleString('en-US')}%`);
-                        $prevTooltip.html(`${(Math.round(prevMin * 1000) / 10).toLocaleString('en-US')}%`);
+                        const newPrevLabel = `${app.pctLabel(prevMin)}% - ${app.pctLabel(prevMax)}%`;
+                        prevInfo.label = newPrevLabel;
+                        $prevInnerLabel.html(newPrevLabel);
+
+                        const newNextLabel = `${app.pctLabel(nextMin)}% - ${app.pctLabel(nextMax)}%`;
+                        nextInfo.label = newNextLabel;
+                        $nextInnerLabel.html(newNextLabel);
+
+                        $prevTooltip.html(`${app.pctLabel(prevMin)}%`);
                     } else {
-                        $prevInnerLabel.html(`${Math.round(prevMin).toLocaleString('en-US')} - ${Math.round(prevMax).toLocaleString('en-US')}`);
-                        $nextInnerLabel.html(`${Math.round(nextMin).toLocaleString('en-US')} - ${Math.round(nextMax).toLocaleString('en-US')}`);
-                        $prevTooltip.html(Math.round(prevMin).toLocaleString('en-US'));
+                        const newPrevLabel = `${app.numLabel(prevMin)} - ${app.numLabel(prevMax)}`;
+                        $prevInnerLabel.html(newPrevLabel);
+                        prevInfo.label = newPrevLabel;
+
+                        const newNextLabel = `${app.numLabel(nextMin)} - ${app.numLabel(nextMax)}`;
+                        $nextInnerLabel.html(newNextLabel);
+                        nextInfo.label = newNextLabel;
+
+                        $prevTooltip.html(app.numLabel(prevMin));
                     }
 
                     //Update infos for next time...
@@ -167,19 +193,7 @@ require([
             }
         }
 
-        $("#customClassBreaksButton").click(function () {
-            // app.customClassBreaksVal =
-            let classBreaks = [];
-            $classBreakSliders.find(".cbPane").each(function (i, val) {
-                let dataInfo = $(val).data('info');
-                classBreaks.push(dataInfo);
-            });
-            tp.publish("customClassBreaks-selected", classBreaks.reverse());
-            $customClassBreaksModal.modal('hide');
-        })
-
-
-
+        //Sets up gray charts next to custom class breaks
         function setupCharts() {
             let numberOfCharts = 20;
             let totalHeight = $classBreakSliders.height() + 2;
@@ -209,7 +223,6 @@ require([
                     let binInterval = maxVal / numberOfCharts;
                     // console.log(conf);
                     res.features.forEach(row => {
-
                         let binNum = Math.floor(row.attributes[conf.FieldName] / binInterval);
                         if (conf.NormalizeField) {
                             binNum = Math.floor((row.attributes[conf.FieldName] / row.attributes[conf.NormalizeField]) / binInterval);
@@ -240,6 +253,17 @@ require([
             }
         }
 
+        $("#customClassBreaksButton").click(function () {
+            let classBreaks = [];
+            $classBreakSliders.find(".cbPane").each(function (i, val) {
+                let dataInfo = $(val).data('info');
+                classBreaks.push(dataInfo);
+            });
+            tp.publish("customClassBreaks-selected", classBreaks.reverse());
+            $customClassBreaksModal.modal('hide');
+        })
+
+
         tp.subscribe("layers-added", CbrParamChanged);
         tp.subscribe("map-selected", CbrParamChanged);
         tp.subscribe("classType-change", CbrParamChanged);
@@ -253,5 +277,4 @@ require([
                 setupCharts();
             }
         }
-
     })
