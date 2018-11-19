@@ -3,116 +3,122 @@ require([
         "dojo/domReady!"
     ],
     function (tp) {
+        tp.subscribe("layers-added", function () {
+            let $customClassBreaksModal = $("#customClassBreaksModal");
+            let $classBreakSliders = $("#classBreakSliders");
+            let $classBreakSliderTooltips = $("#classBreakSliderTooltips");
+            let $classBreaksCount = $("#classBreaksCount");
+            let sliders = [];
+            let maxVal = 0;
+            const minLabelSize = 13;
+            const lyr = app.map.findLayerById("blockGroups").sublayers.getItemAt(0);
 
-        let $customClassBreaksModal = $("#customClassBreaksModal");
-        let $classBreakSliders = $("#classBreakSliders");
-        let $classBreakSliderTooltips = $("#classBreakSliderTooltips");
-        let $classBreaksCount = $("#classBreaksCount");
-        let sliders = [];
-        let maxVal = 0;
-        const minLabelSize = 13;
-
-        function setupSliders() {
-            const lyr = app.map.findLayerById("blockGroups");
-            const rend = lyr.sublayers.getItemAt(0).renderer;
-            const infos = rend.classBreakInfos;
-
-            maxVal = infos[infos.length - 1].maxValue;
-
-            let sliderHeight = $classBreakSliders.height() - (infos.length - 1) * 7;
-
-            //Clear out old class break sliders
-            $classBreakSliders.html('');
-            $classBreakSliderTooltips.html('');
-
-            let cbrCount = $classBreaksCount.val();
-
-            if (infos.length != cbrCount) {
-
-                // let conf = app.GetActiveMapData();
-
-                // let breaks = conf.breaks[`EqInterval${cbrCount}`];
-
-                // //Get color ramp info
-                // let rampKey = $colorRamp.find(".cRamp").data("id") || app.config.DefaultColorRamp;
-                // let type = $colorRamp.find(".cRamp").data("type") || app.config.DefaultColorScheme;
-
-                // //Get a color ramp using above data
-                // let colorRamp = app.GetColorRamp(type, rampKey, numBreaks);
-
-                // app.GetCurrentBreaks(breaks, colorRamp);
-
-                // console.log(infos);
-
+            function CbrParamChanged() {
+                let type = $("#classType").val();
+                if (type == 'Custom') {
+                    $customClassBreaksModal.modal('show');
+                    SetupSplitter();
+                    SetupCharts();
+                }
             }
 
-            //Loop through class breaks and calculate pane size
-            const panes = [];
-            for (let i = infos.length - 1; i >= 0; i--) {
-                const info = infos[i];
-                const clr = info.symbol.color;
-                const pct = (info.maxValue - info.minValue) / maxVal;
-                const paneSize = Math.floor(sliderHeight * pct);
+            function SetupSplitter(custom) {
+                const rend = lyr.renderer;
+                let infos = custom || rend.classBreakInfos;
+                let data = app.GetCurrentMapsParams();
+                let sliderHeight = $classBreakSliders.height() - (infos.length - 1) * 7;
+                maxVal = infos[infos.length - 1].maxValue;
 
-                sliders.push({
-                    info: info,
-                    clr: clr,
-                    paneSize: paneSize
-                })
-
-                let minLabel = app.numLabel(info.minValue);
-                let maxLabel = app.numLabel(info.maxValue);
-
-                if (info.label.includes("%")) {
-                    minLabel = `${app.pctLabel(info.minValue)}%`;
-                    maxLabel = `${app.pctLabel(info.maxValue)}}%`;
+                if (data.classType === 'Custom' && !custom) {
+                    let cbrCount = $classBreaksCount.val();
+                    let breaks = data.conf.breaks['Jenks' + cbrCount];
+                    infos = app.GetCurrentBreaks(breaks, data.colorRamp);
                 }
 
-                if (i === infos.length - 1) {
-                    $classBreakSliderTooltips.append(`
-                    <div style="margin-top: 3px;" id="sliderTooltip${i+1}" class="sliderTooltip">${maxLabel}</div>
+                //Clear out old class break sliders
+                $classBreakSliders.html('');
+                $classBreakSliderTooltips.html('');
+
+                const panes = [];
+                for (let i = infos.length - 1; i >= 0; i--) {
+                    const info = infos[i];
+                    const clr = info.symbol.color;
+                    const pct = (info.maxValue - info.minValue) / maxVal;
+                    const paneSize = Math.floor(sliderHeight * pct);
+
+                    sliders.push({
+                        info: info,
+                        clr: clr,
+                        size: paneSize
+                    })
+
+                    let minLabel = app.numLabel(info.minValue);
+                    let maxLabel = app.numLabel(info.maxValue);
+
+                    if (info.label.includes("%")) {
+                        minLabel = `${app.pctLabel(info.minValue)}%`;
+                        maxLabel = `${app.pctLabel(info.maxValue)}%`;
+                    }
+
+                    if (i === infos.length - 1) {
+                        $classBreakSliderTooltips.append(`
+                    <div data-value="${info.maxValue}" style="margin-top: 3px;" id="sliderTooltip${i+1}" class="sliderTooltip">${maxLabel}</div>
                     `);
-                }
-                //Add Tooltip
-                $classBreakSliderTooltips.append(`
-                <div class="sliderTooltip" id="sliderTooltip${i}" style="margin-top: ${paneSize - 10}px">${minLabel}</div>
-                `);
-
-                let showLabel = 'none';
-                if (paneSize > minLabelSize) {
-                    showLabel = 'inline-block';
-                }
-
-                //Add pane
-                $classBreakSliders.append(`
-                    <div class="cbPane" id="cbPane${i}" 
-                    style="display: flex; background-color:rgba(${clr.r},${clr.g},${clr.b},${lyr.opacity});">
-                    <div class="paneLabel" style="display: ${showLabel}; margin: auto; font-size: 10.5px;">${info.label}</div>
+                    }
+                    //Add Tooltip
+                    $classBreakSliderTooltips.append(`
+                    <div data-value="${info.minValue}" class="sliderTooltip" id="sliderTooltip${i}" style="margin-top: ${paneSize - 10}px">
+                        <span class="sliderTooltipInnerLabel">${minLabel}</span>
+                        <input style="display:none;" class="sliderTooltipInput k-textbox" >
                     </div>
-                `)
+                    `);
 
-                $classBreakSliders.find("#cbPane" + i).data("info", info);
+                    let showLabel = 'none';
+                    if (paneSize > minLabelSize) {
+                        showLabel = 'inline-block';
+                    }
 
-                const newPane = {
-                    size: paneSize + "px",
-                    resizable: true,
-                    idx: i,
-                    scrollable: false
+                    //Add pane
+                    $classBreakSliders.append(`
+                        <div class="cbPane" id="cbPane${i}" 
+                        style="display: flex; background-color:rgba(${clr.r},${clr.g},${clr.b},${lyr.opacity});">
+                        <div class="paneLabel" style="display: ${showLabel}; margin: auto; font-size: 10.5px;">${info.label}</div>
+                        </div>
+                    `)
+
+                    $classBreakSliders.find("#cbPane" + i).data("info", info);
+
+                    const newPane = {
+                        size: paneSize + "px",
+                        resizable: true,
+                        idx: i,
+                        scrollable: false
+                    }
+                    panes.push(newPane);
                 }
-                panes.push(newPane);
+
+                let splitter = $classBreakSliders.data("kendoSplitter");
+                if (splitter) {
+                    splitter.destroy();
+                }
+
+                $classBreakSliders.kendoSplitter({
+                    orientation: "vertical",
+                    panes: panes,
+                    resize: UpdateRangeSliders
+                });
             }
 
-            $classBreakSliders.kendoSplitter({
-                orientation: "vertical",
-                panes: panes,
-                resize: updateRangeSliders
-            });
+            //This really just updates the tooltips?
+            function UpdateRangeSliders(e) {
 
-            function updateRangeSliders() {
-                if (this.resizing) {
+                let resize = e.resizing || e.sender.resizing;
+
+                if (resize && resize.previousPane && resize.nextPane) {
+
                     //Get Jquery elements for panes involved
-                    let $prevPane = $(this.resizing.previousPane);
-                    let $nextPane = $(this.resizing.nextPane);
+                    let $prevPane = $(resize.previousPane);
+                    let $nextPane = $(resize.nextPane);
 
                     let prevInfo = $prevPane.data("info");
                     let nextInfo = $nextPane.data("info");
@@ -155,7 +161,8 @@ require([
                         nextInfo.label = newNextLabel;
                         $nextInnerLabel.html(newNextLabel);
 
-                        $prevTooltip.html(`${app.pctLabel(prevMin)}%`);
+                        $prevTooltip.html(`<span class="sliderTooltipInnerLabel">${app.pctLabel(prevMin)}%</span>
+                        <input style="display:none;" class="sliderTooltipInput k-textbox" >`);
                     } else {
                         const newPrevLabel = `${app.numLabel(prevMin)} - ${app.numLabel(prevMax)}`;
                         $prevInnerLabel.html(newPrevLabel);
@@ -165,7 +172,8 @@ require([
                         $nextInnerLabel.html(newNextLabel);
                         nextInfo.label = newNextLabel;
 
-                        $prevTooltip.html(app.numLabel(prevMin));
+                        $prevTooltip.html(`<span class="sliderTooltipInnerLabel">${app.numLabel(prevMin)}</span>
+                        <input style="display:none;" class="sliderTooltipInput k-textbox" >`);
                     }
 
                     //Update infos for next time...
@@ -191,90 +199,182 @@ require([
                     }
                 }
             }
-        }
 
-        //Sets up gray charts next to custom class breaks
-        function setupCharts() {
-            let numberOfCharts = 20;
-            let totalHeight = $classBreakSliders.height() + 2;
-            let chartHeight = totalHeight / numberOfCharts;
+            //Sets up gray charts next to custom class breaks
+            function SetupCharts() {
+                let numberOfCharts = 50;
+                let totalHeight = $classBreakSliders.height() + 2;
+                let chartHeight = totalHeight / numberOfCharts;
 
-            //Gets active map item    
-            let $activeItem = $("#mapsList").find(".activeMapItem");
-            if ($activeItem) {
-                //Pull jquery data object from active map item
-                let conf = $activeItem.data("mapsConfig");
-                const lyr = app.map.findLayerById("blockGroups").sublayers.getItemAt(0);
-                let $classBreakCharts = $("#classBreakCharts");
-                $classBreakCharts.html('');
-                let dataBins = {};
-                let wFactor = .2;
-                let q = {
-                    where: "1=1",
-                    outFields: [conf.FieldName],
-                    returnGeometry: false
-                }
-
-                if (conf.NormalizeField) {
-                    q.outFields.push(conf.NormalizeField);
-                }
-
-                lyr.queryFeatures(q).then(function (res) {
-                    let binInterval = maxVal / numberOfCharts;
-                    // console.log(conf);
-                    res.features.forEach(row => {
-                        let binNum = Math.floor(row.attributes[conf.FieldName] / binInterval);
-                        if (conf.NormalizeField) {
-                            binNum = Math.floor((row.attributes[conf.FieldName] / row.attributes[conf.NormalizeField]) / binInterval);
-                        }
-
-                        if (dataBins[binNum]) {
-                            dataBins[binNum]++;
-                        } else {
-                            dataBins[binNum] = 1;
-                        }
-                    });
-
-                    for (let i = numberOfCharts - 1; i >= 0; i--) {
-                        let count = dataBins[i] || 0;
-                        let w = Math.floor(count * wFactor);
-
-                        //Adding a high limit to the width of the chart.
-                        //This should probably be refactored at some point.
-                        if (w > 300) {
-                            w = 300;
-                        }
-                        $classBreakCharts.append(`
-                        <div class="classBreakChart" style="font-size:10px;height:${chartHeight}px; width: ${w}px;"></div>
-                        `)
-                        // ${count}
+                //Gets active map item    
+                let $activeItem = $("#mapsList").find(".activeMapItem");
+                if ($activeItem) {
+                    //Pull jquery data object from active map item
+                    let conf = $activeItem.data("mapsConfig");
+                    let $classBreakCharts = $("#classBreakCharts");
+                    $classBreakCharts.html('');
+                    let dataBins = {};
+                    let wFactor = .4;
+                    let q = {
+                        where: "1=1",
+                        outFields: [conf.FieldName],
+                        returnGeometry: false,
+                        orderByFields: [conf.FieldName + " DESC"]
                     }
+
+                    if (conf.NormalizeField) {
+                        q.outFields.push(conf.NormalizeField);
+                    }
+
+                    lyr.queryFeatures(q).then(function (res) {
+                        let maxVal = res.features[0].attributes[conf.FieldName];
+                        if (conf.NormalizeField) {
+                            maxVal = maxVal / res.features[0].attributes[conf.NormalizeField];
+                        }
+
+                        let binInterval = maxVal / numberOfCharts;
+                        res.features.forEach(row => {
+                            let binNum = Math.floor(row.attributes[conf.FieldName] / binInterval);
+                            if (conf.NormalizeField) {
+                                binNum = Math.floor((row.attributes[conf.FieldName] / row.attributes[conf.NormalizeField]) / binInterval);
+                            }
+
+                            if (dataBins[binNum]) {
+                                dataBins[binNum]++;
+                            } else {
+                                dataBins[binNum] = 1;
+                            }
+                        });
+
+                        for (let i = numberOfCharts - 1; i >= 0; i--) {
+                            let count = dataBins[i] || 0;
+                            let w = Math.floor(count * wFactor);
+
+                            //Adding a high limit to the width of the chart.
+                            //This should probably be refactored at some point.
+                            if (w > 300) {
+                                w = 300;
+                            }
+                            $classBreakCharts.append(`
+                        <div data-chart-id="chart${i}" class="classBreakChart"
+                        style="font-size:10px;height:${chartHeight}px; width: ${w}px;" 
+                        data-toggle="tooltip" data-placement="right" title="${count}">
+                        </div>
+                        `)
+                        }
+                        //activate bootstrap tooltip
+                        $classBreakCharts.find('.classBreakChart').tooltip();
+                    })
+
+
+                }
+                $classBreakSliderTooltips.on("click", ".sliderTooltip", function () {
+                    let $sliderTooltip = $(this);
+                    let $label = $sliderTooltip.find("span.sliderTooltipInnerLabel");
+                    $label.hide();
+                    let $sliderTooltipInput = $sliderTooltip.find(".sliderTooltipInput");
+                    let val = $sliderTooltip.data("value");
+                    $sliderTooltipInput.show();
+                    $sliderTooltipInput.val(val);
+                    $sliderTooltipInput.focus();
+
+                    $sliderTooltipInput.on('focusout', TooltipEditComplete)
+
+                    function TooltipEditComplete() {
+                        let $input = $(this);
+                        $input.hide();
+                        let newVal = $input.val();
+
+                        let $prevTooltip = $sliderTooltip.prev(".sliderTooltip");
+                        let $nextTooltip = $sliderTooltip.next(".sliderTooltip");
+
+                        let nextVal = $nextTooltip.data("value");
+                        let prevVal = $prevTooltip.data("value");
+
+                        if (newVal >= prevVal) {
+                            newVal = prevVal - 1;
+                        } else if (newVal <= nextVal) {
+                            newVal = nextVal + 1;
+                        }
+
+                        //update label
+                        $label.html(newVal);
+
+                        //Update dataval
+                        $sliderTooltip.data("value", newVal);
+
+                        //Update input for next edit
+                        $input.val(newVal);
+
+                        //Show label again
+                        $label.show();
+
+                        //Update panel info values
+                        //Gets slider number value
+                        let sliderId = $sliderTooltip.attr('id').replace(/^\D+/g, '');
+
+                        let $prevPane = $(`#cbPane${sliderId-1}`);
+                        let $nextPane = $(`#cbPane${sliderId}`);
+
+                        let prevInfo = $prevPane.data("info");
+                        let nextInfo = $nextPane.data("info");
+
+                        prevInfo.maxValue = Number(newVal);
+                        nextInfo.minValue = Number(newVal);
+
+                        $prevPane.data("info", prevInfo);
+                        $nextPane.data("info", nextInfo);
+
+                        SetupSplitter(app.GetCustomBreaks());
+
+                        //Call Update Range Sliders
+                        UpdateRangeSliders({
+                            resizing: {
+                                previousPane: $(`#cbPane${sliderId}`),
+                                nextPane: $(`#cbPane${sliderId-1}`)
+                            }
+                        })
+                    }
+
+                    //This ensures that a user doesn't enter a non-numeric character into the input
+                    $sliderTooltipInput.keydown(function (e) {
+                        //https://stackoverflow.com/questions/995183/how-to-allow-only-numeric-0-9-in-html-inputbox-using-jquery
+                        if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110]) !== -1 ||
+                            // Allow: Ctrl+A, Command+A
+                            (e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) ||
+                            // Allow: home, end, left, right, down, up
+                            (e.keyCode >= 35 && e.keyCode <= 40)) {
+                            // let it happen, don't do anything
+                            return;
+                        }
+                        // Ensure that it is a number and stop the keypress
+                        if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+                            e.preventDefault();
+                        }
+                    })
+
                 })
             }
-        }
-
-        $("#customClassBreaksButton").click(function () {
-            let classBreaks = [];
-            $classBreakSliders.find(".cbPane").each(function (i, val) {
-                let dataInfo = $(val).data('info');
-                classBreaks.push(dataInfo);
-            });
-            tp.publish("customClassBreaks-selected", classBreaks.reverse());
-            $customClassBreaksModal.modal('hide');
-        })
 
 
-        tp.subscribe("layers-added", CbrParamChanged);
-        tp.subscribe("map-selected", CbrParamChanged);
-        tp.subscribe("classType-change", CbrParamChanged);
-        tp.subscribe("classBreaksCount-change", CbrParamChanged);
 
-        function CbrParamChanged() {
-            let type = $("#classType").val();
-            if (type == 'Custom') {
-                $customClassBreaksModal.modal('show');
-                setupSliders();
-                setupCharts();
+            app.GetCustomBreaks = function () {
+                let classBreaks = [];
+                $classBreakSliders.find(".cbPane").each(function (i, val) {
+                    let dataInfo = $(val).data('info');
+                    classBreaks.push(dataInfo);
+                });
+                return classBreaks.reverse();
             }
-        }
+            $("#customClassBreaksButton").click(function () {
+                tp.publish("customClassBreaks-selected");
+                $customClassBreaksModal.modal('hide');
+            })
+
+
+            tp.subscribe("layers-added", CbrParamChanged);
+            tp.subscribe("map-selected", CbrParamChanged);
+            tp.subscribe("classType-change", CbrParamChanged);
+            tp.subscribe("classBreaksCount-change", CbrParamChanged);
+        })
     })

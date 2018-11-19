@@ -10,7 +10,17 @@ require([
 
         app.GetColorRamp = function (type, rampKey, numBreaks) {
             const ramps = app.GetRampsByNumAndType(type, numBreaks);
-            return ramps[rampKey];
+            let ramp = ramps[rampKey];
+            let rtnRamp = [];
+            for (let i = 0; i < ramp.length; i++) {
+                const clr = ramp[i];
+                rtnRamp.push({
+                    r: clr[0],
+                    g: clr[1],
+                    b: clr[2]
+                })
+            }
+            return rtnRamp;
         }
 
         app.GetRampsByNumAndType = function (type, numBreaks) {
@@ -35,8 +45,12 @@ require([
         app.ColorRampToHTML = function (ramp, rampKey, rampType) {
             let html = `<div data-type="${rampType}" data-id="${rampKey}" class="cRamp">`;
             for (let i = 0; i < ramp.length; i++) {
-                const rampColor = ramp[i];
-                html += `<div style="background-color:rgb(${rampColor})" class="colorRampSquare"></div>`
+                let clr = ramp[i];
+                if (clr.r && clr.g && clr.b) {
+                    clr = `${clr.r}, ${clr.g}, ${clr.b}`;
+                }
+
+                html += `<div style="background-color:rgb(${clr})" class="colorRampSquare"></div>`
             }
             return html += "</div>";
         }
@@ -55,13 +69,21 @@ require([
             let cbrCount = $classBreaksCount.val();
             let classType = $classType.val();
             let breaks = conf.breaks[classType + cbrCount];
+            let cbInfos = [];
 
+            //Get color ramp info
             let rampKey = $colorRamp.find(".cRamp").data("id") || app.config.DefaultColorRamp;
             let type = $colorRamp.find(".cRamp").data("type") || app.config.DefaultColorScheme;
-            //Get color ramp info
 
             //Get a color ramp using above data
             let colorRamp = app.GetColorRamp(type, rampKey, cbrCount);
+
+
+            if (classType === 'Custom') {
+                cbInfos = app.GetCustomBreaks();
+            } else {
+                cbInfos = app.GetCurrentBreaks(breaks, colorRamp);
+            }
 
             return {
                 conf: conf,
@@ -69,7 +91,8 @@ require([
                 rampKey: rampKey,
                 type: type,
                 colorRamp: colorRamp,
-                cbInfos: app.GetCurrentBreaks(breaks, colorRamp)
+                cbInfos: cbInfos,
+                classType: classType
             }
         }
 

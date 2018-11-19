@@ -417,6 +417,14 @@ a[aria-expanded="true"] {
     background-color: rgb(170, 170, 170, .8);
 }
 
+.classBreakChart:hover {
+    background-color: black;
+}
+
+.sliderTooltipInput {
+    width: 40px;
+}
+
 .k-splitbar.k-splitbar-draggable-vertical:after {
     position: absolute;
     top: 30%;
