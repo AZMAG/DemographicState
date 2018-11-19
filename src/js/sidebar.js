@@ -21,10 +21,22 @@ $(function () {
 
     $links.on('click', function (e) {
         let target = $(this).attr('panel-target');
+        // <!-- comments:uncomment // -->
+        // ga("send", "event", "Click", "Panel Opened", target);
+        // <!-- endcomments -->
+        $("#viewDiv").css("visibility", "visible");
+        $("#container").css("flex", "1");
         if (target === 'legend') {
             toggleLegend();
+        } else if (target === 'share') {
+            if ($content.is(":visible") && window.outerWidth < 780) {
+                $("#container").css("flex", "none");
+                $("#viewDiv").css("visibility", "hidden");
+            }
         } else {
+
             let isActive = $(this).hasClass('active');
+
             $links.removeClass('active');
             $arrows.hide();
             $panelDivs.hide();
@@ -32,16 +44,24 @@ $(function () {
             if (isActive) {
                 $content.hide();
             } else {
+                $(".shareWidget").popover('hide');
                 $content.show();
-                $(this).addClass('active');
-                $(this).find('.arrow-left').show();
+                var $allLinks = $(`[panel-target=${target}]`);
+
+                $allLinks.addClass('active');
+                $allLinks.find('.arrow-left').show();
+
+                if (window.outerWidth < 780) {
+                    $("#viewDiv").css("visibility", "hidden");
+                    $("#container").css("flex", "none");
+                }
 
                 if (loadedLayers.indexOf(target) === -1) {
                     $(`div[panel-id="${target}"]`).load(`views/${target}.html`);
                     loadedLayers.push(target);
                 }
 
-                $(`div[panel-id=${target}`).fadeIn(400);
+                $(`div[panel-id=${target}]`).fadeIn(400);
             }
         }
     });
