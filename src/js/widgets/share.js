@@ -1,4 +1,3 @@
-//Share
 let $share = $(".shareWidget");
 
 var baseUrl = 'https://twitter.com/intent/tweet';
@@ -47,14 +46,6 @@ $share.attr('data-content', `
 $share.popover({
     html: true
 });
-
-// $('body').on('hidden.bs.popover', function (e) {
-//     console.log(e);
-//     if ($(e.target).data("")) {
-
-//     }
-//     $(e.target).data("bs.popover").inState.click = false;
-// });
 
 ! function (d, s, id) {
     var js, fjs = d.getElementsByTagName(s)[0],

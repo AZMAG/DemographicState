@@ -62,11 +62,14 @@
     <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2018.2.620/styles/kendo.black.min.css" /> -->
     <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2018.3.1017/styles/kendo.common-bootstrap.min.css">
     <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2018.3.1017/styles/kendo.bootstrap.min.css">
+
     <!-- Application CSS -->
     <!-- comments:comment html -->
     <link rel="stylesheet" rel="preload" as="style" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
     <!-- <link rel="stylesheet" rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" /> -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+    <!-- <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.1.3/cyborg/bootstrap.min.css" rel="stylesheet" integrity="sha384-4DAPMwiyOJv/C/LvTiUsW5ueiD7EsaAhwUKO0Llp+fWzT40XrmAbayhVP00bAJVa" crossorigin="anonymous"> -->
+
     <link rel="stylesheet" rel="preload" as="style" href="https://js.arcgis.com/4.7/esri/themes/dark/main.css">
     <link rel="stylesheet" href="css/main.css">
     <!-- endcomments -->
@@ -234,63 +237,11 @@
     <div id="drawingTooltip">
         Click and drag anywhere on the map to start drawing.
     </div>
-
-    <!-- <div id="summaryReport">
-        <div id="sumReportTabStrip">
-            <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-                <li class="nav-item">
-                    <a class="nav-link active" data-toggle="pill" href="#acsGridTab" role="tab" aria-controls="acsGridTab"
-                        aria-selected="true">ACS 2016 Data</a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" data-toggle="pill" href="#acsChartsTab" role="tab" aria-controls="acsChartsTab"
-                        aria-selected="false">ACS 2016 Charts</a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" data-toggle="pill" href="#censusGridTab" role="tab" aria-controls="censusGridTab"
-                        aria-selected="false">Census 2010 Data</a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" data-toggle="pill" href="#censusChartsTab" role="tab" aria-controls="censusChartsTab"
-                        aria-selected="false">Census Charts</a>
-                </li>
-            </ul>
-            <div class="tab-content" id="pills-tabContent">
-                <div class="tab-pane fade show active" id="acsGridTab" role="tabpanel" aria-labelledby="acsGridTab">
-                    <div id="acsGrid"></div>
-                    <div class="sourceLabel"></div>
-                </div>
-
-                <div class="tab-pane fade" id="acsChartsTab" role="tabpanel" aria-labelledby="acsChartsTab">
-                    <div id="acsCharts">
-                        <div class="chartsArea"></div>
-                        <div class="chartsList"></div>
-                    </div>
-                </div>
-
-                <div class="tab-pane fade" id="censusGridTab" role="tabpanel" aria-labelledby="censusGridTab">
-                    <div id="censusGrid"></div>
-                    census data
-                </div>
-
-                <div class="tab-pane fade" id="censusChartsTab" role="tabpanel" aria-labelledby="censusChartsTab">
-                    <div id="censusCharts"></div>
-                    census charts
-                </div>
-            </div>
-        </div>
-
-    </div> -->
-
-
     <div class="wrapper">
         <nav id="sidebar">
             <div class="sidebar-header">
                 <div class="smallLogo">
-                    <img title="MAG Interactive Bikeways" width="65" src="./resources/img/AZ-COG-MPO-logo.jpg" alt="AZ Demographics Icon">
+                    <img title="MAG Interactive Bikeways" width="65" src="./resources/img/COG_MPO_Logo.png" alt="AZ Demographics Icon">
                 </div>
             </div>
             <ul class="list-unstyled components">
@@ -341,7 +292,7 @@
                     <span class="arrow-left"></span>
                 </li>
                 <li panel-target="share">
-                    <a class="shareWidget" data-placement="auto" data-toggle="popover" data-trigger="click" tabindex="0"
+                    <a class="shareWidget" data-placement="top" data-toggle="popover" data-trigger="click" tabindex="0"
                         aria-label="Share this page!" title="Share this page">
                         <i class="fas fa-share-alt"></i>
                         Share
@@ -365,8 +316,13 @@
             <div class="panelDiv" panel-id="about">
                 test
             </div>
-            <div class="panelDiv" style="display:block" panel-id="maps">
-                <h4>Choose a Map:</h4>
+            <div class="panelDiv" panel-id="maps">
+                <div class="panelHeader">
+                    <span class="panelHeaderText">Choose a Map:</span>
+                    <a class="closePanel" href="#">
+                        <i class="glyphicon glyphicon-remove"></i>
+                    </a>
+                </div>
                 <!-- <button id="mapsListToggle" data-status="expand">Expand All</button> -->
                 <div id="mapsList"></div>
                 <hr>
@@ -398,32 +354,85 @@
                     </div>
                 </form>
             </div>
-            <div class="panelDiv" panel-id="reports">
+            <div class="panelDiv" style="display:block" panel-id="reports">
                 <div id="reportArea">
-                    <h4>Existing Geography:</h4>
-                    <form id="reportForm">
-                        <div class="flexCenter">
-                            <label for="reportType">Type of Report:</label>
-                            <select style="flex: 1; margin-left: 25px;" class="form-control" id="reportType"></select>
+                    <div class="panelHeader">
+                        <span class="panelHeaderText">Generate a report:</span>
+                        <a class="closePanel" href="#">
+                            <i class="glyphicon glyphicon-remove"></i>
+                        </a>
+                    </div>
+                    <div id="cardContainer">
+                        <div class="card" style="width: 90%;">
+                            <div class="card-body">
+                                <h5 class="card-title">Standard Reports</h5>
+                                <p class="card-text">Open a demographic report for any Jurisdiction, County, COG/MPO,
+                                    Zip Code, Congressional Districts, County Supervisor Districts, or City Council
+                                    Districts.
+                                </p>
+                                <button data-report-form-id="standardReports" href="#" class="btn reportBtn btn-primary">
+                                    <i class="fa fa-file-alt fa-3x"></i><br><span>Open Report</span>
+                                </button>
+                            </div>
                         </div>
-                        <div class="flexCenter">
-                            <label for="specificReport">Choose Report</label>
-                            <select style="flex: 1; margin-left: 25px;" class="form-control" id="specificReport">
-                            </select>
+
+                        <div class="card" style="width: 90%;">
+                            <div class="card-body">
+                                <h5 class="card-title">Custom Geography</h5>
+                                <p class="card-text">Create a report based on user selected block groups.</p>
+                                <button data-report-form-id="customGeographyReports" href="#" class="btn reportBtn btn-primary">
+                                    <i class="fa fa-draw-polygon fa-3x"></i><br>
+                                    <span>Open Report</span>
+                                </button>
+                            </div>
                         </div>
-                        <button class="btn btn-submit">submit</button>
-                    </form>
-                    <!-- <hr>
-                    <h4>Custom Geography:</h4>
-                    <form id="interactiveForm">
-                        <div class="flexCenter">
-                            <label></label>
-                            <button class="btn"><img src="./resources/img/CustomSummaryIcons/i_draw_freepoly.png" alt=""></button>
-                            <button class="btn"><img src="./resources/img/CustomSummaryIcons/i_draw_point.png" alt=""></button>
+
+                        <div class="card" style="width: 90%;">
+                            <div class="card-body">
+                                <h5 class="card-title">Advanced Selection</h5>
+                                <p class="card-text">Create a report by selecting block groups with certain attributes.</p>
+                                <button data-report-form-id="advancedReports" href="#" class="btn reportBtn btn-primary">
+                                    <i class="fas fa-database fa-3x"></i><br>
+                                    <span>Open Report</span>
+                                </button>
+                            </div>
                         </div>
-                        <button class="btn btn-submit">submit</button>
-                    </form> -->
-                    <hr>
+                    </div>
+                    <div id="standardReports" class="reportFormArea">
+                        <button class="btn returnBtn"><i class="fas fa-angle-double-left"></i> Back</button>
+                        <form id="reportForm">
+                            <div class="flexCenter">
+                                <label for="reportType">Type of Report:</label>
+                                <select style="flex: 1; margin-left: 25px;" class="form-control" id="reportType"></select>
+                            </div>
+                            <div class="flexCenter">
+                                <label for="specificReport">Choose Report</label>
+                                <select style="flex: 1; margin-left: 25px;" class="form-control" id="specificReport">
+                                </select>
+                            </div>
+                            <button class="btn btn-submit">submit</button>
+                        </form>
+                    </div>
+                    <div id="customGeographyReports" class="reportFormArea">
+                        <button class="btn returnBtn"><i class="fas fa-angle-double-left"></i> Back</button>
+                        <br>
+                        <h4>Custom Geography:</h4>
+                        <form id="interactiveForm">
+                            <div class="flexCenter">
+                                <label></label>
+                                <button class="btn"><img src="./resources/img/CustomSummaryIcons/i_draw_freepoly.png"
+                                        alt=""></button>
+                                <button class="btn"><img src="./resources/img/CustomSummaryIcons/i_draw_point.png" alt=""></button>
+                            </div>
+                            <button class="btn btn-submit">submit</button>
+                        </form>
+                    </div>
+                    <div id="advancedReports" class="reportFormArea">
+                        <button class="btn returnBtn"><i class="fas fa-angle-double-left"></i> Back</button>
+                        <br>
+                        Advanced reports
+                    </div>
+
                     <div id="summaryReport">
                         <div id="sumReportTabStrip">
                             <div class="container">
@@ -456,7 +465,8 @@
                                         <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                             <label class="btn btn-secondary btn-sm active">
                                                 <input type="radio" name="options" id="option1" autocomplete="off"
-                                                    checked> ACS 2016
+                                                    checked>
+                                                ACS 2016
                                             </label>
                                             <label class="btn btn-secondary btn-sm">
                                                 <input type="radio" name="options" id="option2" autocomplete="off">
@@ -621,6 +631,7 @@
 
     <script src="js/reports/exportToExcel.js"></script>
     <script src="js/reports/reports.js"></script>
+    <script src="js/reports/standardReports.js"></script>
 
     <script src="js/layer.js"></script>
     <script src="js/cbr.js"></script>

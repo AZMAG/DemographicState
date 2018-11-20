@@ -342,8 +342,8 @@ a[aria-expanded="true"] {
 
 .shareLinks a {
     cursor: pointer;
-    height: 33px;
-    width: 33px;
+    height: 40px;
+    width: 40px;
     display: inline-flex;
 }
 
@@ -364,9 +364,7 @@ a[aria-expanded="true"] {
 
 .shareLinks em {
     margin: auto;
-    color: white;
-    margin-left: -18px;
-    margin-top: -8px;
+    color: #fff;
     font-size: 18px;
 }
 
@@ -393,6 +391,30 @@ a[aria-expanded="true"] {
 #basemapToggle img {
     width: 27px;
     margin-top: 10px;
+}
+
+.reportBtn {
+    /* flex: 1; */
+    margin: 10px;
+}
+
+.returnBtn {
+    margin: 5px;
+}
+
+.reportFormArea {
+    display: none;
+}
+
+#cardContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 5px;
+}
+
+.cardContainer .card {
+    margin: 2px 0px;
 }
 
 #viewDiv {
@@ -736,8 +758,8 @@ label:hover,
 
 .panelHeaderText {
     padding: 15px;
-    padding-right: 0px;
-    font-weight: bold;
+    padding-right: 0;
+    font-weight: 700;
     font-size: 15px;
 }
 
@@ -1122,7 +1144,10 @@ label:hover,
     }
 
     #sidebar ul li a {
+        display: block;
         padding: 20px 10px;
+        text-align: center;
+        font-size: .85em;
     }
 
     #sidebar ul li a span {

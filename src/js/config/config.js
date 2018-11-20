@@ -139,7 +139,7 @@ app.config = {
             legend: true,
             layerName: "SupervisorDistricts",
             id: "supervisorDistricts",
-            title: "Supervisor Districts",
+            title: "County Supervisor Districts",
             type: "feature",
             queryWhere: "1=1",
             opacity: 1,
