@@ -59,7 +59,8 @@ app.config = {
             displayField: "NAME",
             type: "feature",
             popup: {
-                title: "{NAME}"
+                title: "{NAME}",
+                content: "{TOTAL_POP}"
             },
             queryWhere: "1=1",
             opacity: 0.8,

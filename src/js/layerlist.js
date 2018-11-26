@@ -5,7 +5,10 @@ require(['dojo/topic'], function (tp) {
         var arr = legendLayers.sort((a, b) => a.legend.sort - b.legend.sort);
         for (var i = 0; i < arr.length; i++) {
             var conf = arr[i];
-            $layerList.append(getCheckBoxHTML(conf));
+
+            if (conf.id !== "blockGroups") {
+                $layerList.append(getCheckBoxHTML(conf));
+            }
         }
         $layerList.find(".checkbox-div").click(toggleLayerItem);
     });

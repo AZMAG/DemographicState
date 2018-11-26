@@ -399,18 +399,19 @@
                         </div>
                     </div>
                     <div id="standardReports" class="reportFormArea">
-                        <button class="btn returnBtn"><i class="fas fa-angle-double-left"></i> Back</button>
                         <form id="reportForm">
-                            <div class="flexCenter">
+                            <div class="form-group">
                                 <label for="reportType">Type of Report:</label>
-                                <select style="flex: 1; margin-left: 25px;" class="form-control" id="reportType"></select>
+                                <select class="form-control" id="reportType"></select>
+                                <small class="form-text text-muted">Choose the type of geography for the report.</small>
                             </div>
-                            <div class="flexCenter">
-                                <label for="specificReport">Choose Report</label>
-                                <select style="flex: 1; margin-left: 25px;" class="form-control" id="specificReport">
+                            <div id="specificReportDiv" class="form-group">
+                                <label for="specificReport">Choose Report:</label>
+                                <select class="form-control" id="specificReport">
                                 </select>
+                                <small class="form-text text-muted">Choose the specific report to generate.</small>
                             </div>
-                            <button class="btn btn-submit">submit</button>
+                            <button id="standardBtnSubmit" type="submit" class="btn btn-primary">Submit</button>
                         </form>
                     </div>
                     <div id="customGeographyReports" class="reportFormArea">
@@ -430,10 +431,40 @@
                     <div id="advancedReports" class="reportFormArea">
                         <button class="btn returnBtn"><i class="fas fa-angle-double-left"></i> Back</button>
                         <br>
-                        Advanced reports
+                        <span id="info"></span>
+                        <div class="queryContainer">
+                            <div id="treeViewContainer">
+                                <div style="text-align:center">
+                                    <h4>Fields</h4>
+                                    <h6>Drag or double click these fields to the query window to add a row to the
+                                        query.</h6>
+                                </div>
+                                <div id="treeView" style="white-space: normal;"></div>
+                            </div>
+                            <div style="text-align:center">
+                                <h4>Query</h4>
+                                <h6>Each row filters the selection of block groups. Counts and percentages are per
+                                    block group.</h6>
+                            </div>
+                            <div id="target">
+                                <h4 id="dropPrompt" style="color:black;">Drop here</h4>
+                            </div>
+                        </div>
+                        <span id="queryButtonGroup">
+                            <button id="runQuery" class="queryButtons" type="button" title="Run Query">Run Query</button>
+                            <button id="cancelQuery" class="queryButtons" type="button" title="Cancel Query">Cancel</button>
+                        </span>
+                        <div id="fCountSpan" class="queryResultCount k-header resultBanner">Number of selected block
+                            groups:&nbsp;
+                            <span id="fCount1"></span>
+                        </div>
                     </div>
-
+                    <div id="reportLoader"><img src="./resources/img/Loading.gif" alt="Loading"></div>
                     <div id="summaryReport">
+                        <div class="flexCenter">
+                            <button class="btn returnBtn"><i class="fas fa-angle-double-left"></i> Back</button>
+                            <div id="summaryReportHeader"></div>
+                        </div>
                         <div id="sumReportTabStrip">
                             <div class="container">
                                 <div class="row">
@@ -464,12 +495,13 @@
                                     <div class="col-sm">
                                         <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                             <label class="btn btn-secondary btn-sm active">
-                                                <input type="radio" name="options" id="option1" autocomplete="off"
-                                                    checked>
+                                                <input data-val="acs" type="radio" class="dataSrcToggle" name="options"
+                                                    autocomplete="off" checked>
                                                 ACS 2016
                                             </label>
                                             <label class="btn btn-secondary btn-sm">
-                                                <input type="radio" name="options" id="option2" autocomplete="off">
+                                                <input data-val="census2010" type="radio" class="dataSrcToggle" name="options"
+                                                    autocomplete="off">
                                                 Census 2010
                                             </label>
                                         </div>
@@ -629,9 +661,11 @@
     <script src="js/main.js"></script>
     <script src="js/layerlist.js"></script>
 
+    <!-- Include Report Files -->
     <script src="js/reports/exportToExcel.js"></script>
     <script src="js/reports/reports.js"></script>
     <script src="js/reports/standardReports.js"></script>
+    <script src="js/reports/advancedQueryReports.js"></script>
 
     <script src="js/layer.js"></script>
     <script src="js/cbr.js"></script>

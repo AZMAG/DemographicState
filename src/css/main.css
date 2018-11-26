@@ -958,15 +958,13 @@ label:hover,
 }
 
 #acsCharts {
-    display: flex;
+    /* display: flex; */
     height: 500px;
 }
 
 .chartsArea {
     flex: 1;
 }
-
-.chartsList {}
 
 .chartCategoryBtn {
     width: 100%;
@@ -1019,7 +1017,45 @@ label:hover,
 }
 
 #summaryReport {
-    visibility: hidden;
+    display: none;
+}
+
+#summaryReportHeader {
+    background-color: gray;
+    color: white;
+    margin: 5px;
+    border-radius: 5px;
+    padding: 3px;
+    text-align: center;
+    font-weight: bold;
+    flex: 1;
+}
+
+#reportLoader {
+    display: none;
+    align-items: center;
+}
+
+#reportLoader img {
+    padding-top: 10px;
+    height: 40px;
+    margin: auto;
+}
+
+#specificReportDiv {
+    display: none;
+}
+
+#standardBtnSubmit {
+    display: none;
+}
+
+#reportForm {
+    display: flex;
+    flex-direction: column;
+    border: solid #e9e9ea;
+    border-width: .2rem;
+    padding: .9rem;
 }
 
 #collapseBtnContainer {
@@ -1084,6 +1120,109 @@ label:hover,
 .popover {
     color: black;
     width: 90vw;
+}
+
+.queryContainer {
+    margin: 5px;
+    overflow-y: auto;
+}
+
+.queryHeader {
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.queryHeader th {
+    height: 30px;
+    line-height: 30px;
+}
+
+.queryButtons {
+    padding: 4px 12px;
+}
+
+.queryPic {
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+    height: 225px;
+    width: 446.25px;
+}
+
+.queryItem {
+    margin-left: 3%;
+    line-height: 50px;
+}
+
+.inputBoxes {
+    float: right;
+    margin-right: 1%;
+    margin-top: 14px;
+    margin-bottom: 10px;
+    color: black;
+}
+
+.joinDDLClass {
+    width: 80px;
+    margin-left: 40%;
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+
+.operatorDDL {
+    margin-right: 10px;
+    width: 130px;
+}
+
+.removeRowBtn {
+    margin-left: 10px;
+}
+
+.strMultiselect {
+    width: 90px;
+}
+
+#dropPrompt {
+    color: black;
+    margin-left: 40%;
+    margin-right: 35%;
+    margin-top: 21%;
+    /*border: 1px solid black;*/
+    padding: 10px;
+    font-size: 18px;
+}
+
+#value {
+    text-align: center;
+    font-size: .95em;
+}
+
+#runQuery {
+    background-color: #137721;
+}
+
+#treeView {
+    max-height: 350px;
+}
+
+#target {
+    float: left;
+    width: 660px;
+    height: 312px;
+    border: 3px solid black;
+    border-radius: 3px;
+    max-height: 312px;
+    overflow: auto;
+}
+
+.style1 {
+    width: 60px;
+    margin-left: 5px;
+}
+
+#treeViewContainer {
+    width: 300px;
+    float: left;
 }
 
 /* ---------------------------------------------------
