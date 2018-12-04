@@ -30,6 +30,10 @@ And constructed with the following guidelines:
 
 ***************************************************
 
+## Version 4.0.0 | 2018-12-04
+* Complete rewrite of code in 4.x
+* Migrated code from bikeways viewer and from existing demographics viewer as possible
+
 ## Version 3.2.4 | 2018-04-20
 
 * updated css for header and menu bars
