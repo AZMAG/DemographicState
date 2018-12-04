@@ -292,6 +292,20 @@ body,
     text-align: right;
 }
 
+/* #gridTarget {
+    border-style: none;
+} */
+
+#title6Grid td,
+#title6Grid th {
+    font-size: 11px;
+    white-space: normal;
+}
+
+#title6Grid {
+    display: none;
+}
+
 #bottomBar ul {
     display: flex;
     align-items: center;
@@ -400,6 +414,7 @@ a[aria-expanded="true"] {
 
 .returnBtn {
     margin: 5px;
+    display: none;
 }
 
 .reportFormArea {
@@ -1029,6 +1044,7 @@ label:hover,
     text-align: center;
     font-weight: bold;
     flex: 1;
+    display: none;
 }
 
 #reportLoader {
@@ -1048,6 +1064,30 @@ label:hover,
 
 #standardBtnSubmit {
     display: none;
+}
+
+#bufferOptions {
+    display: none;
+}
+
+#interactiveForm {
+    background-color: #f1f1f1;
+    border-radius: 5px;
+    padding: 10px;
+    border: 2px solid gainsboro;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+
+.customSummaryButton {
+    margin-right: 10px;
+}
+
+.customSummaryButton.active {
+    background-color: darkgray;
+}
+
+.customSummaryButton img {
+    width: 25px;
 }
 
 #reportForm {

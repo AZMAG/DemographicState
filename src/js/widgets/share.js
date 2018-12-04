@@ -39,13 +39,19 @@ $share.attr('data-content', `
                         </a>
                     </li>
                 </ul>
+                <input style="width: 90%;" value="geo.azmag.gov/maps/test/"><button id="shareLinkCopy">Copy Share Link</button>
             </div>
         </div>
         `);
 
+$('body').on('click', "#shareLinkCopy", function () {
+    alert("Link copied to clipboard");
+});
+
 $share.popover({
     html: true
 });
+
 
 ! function (d, s, id) {
     var js, fjs = d.getElementsByTagName(s)[0],

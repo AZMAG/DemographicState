@@ -1,8 +1,7 @@
 require([
-        "dojo/topic",
-        "esri/tasks/QueryTask"
+        "dojo/topic"
     ],
-    function (tp, QueryTask) {
+    function (tp) {
         tp.subscribe("layers-added", initReports);
 
         function initReports() {
@@ -33,8 +32,8 @@ require([
         function updateReportDDL(layer, conf) {
             let sumField = conf.displayField || layer.displayField;
 
-            hideReportLayers();
-            layer.visible = true;
+            // hideReportLayers();
+            // layer.visible = true;
 
             const q = {
                 where: "1=1",
@@ -73,30 +72,6 @@ require([
             $("#reportType").val("default");
         }
 
-        async function GetData(conf, geoid) {
-            let q = {
-                returnGeometry: true,
-                outFields: ["*"],
-                where: `GEOID10 = '${geoid}'`
-            }
-
-            let qt = new QueryTask({
-                url: app.config.mainUrl + "/" + conf.ACSIndex
-            });
-            let acsPromise = qt.execute(q);
-
-            qt.url = app.config.mainUrl + "/" + conf.censusIndex;
-            q.where = `GEOID = '${geoid}'`;
-            q.returnGeometry = false;
-
-            let censusPromise = qt.execute(q);
-
-            return {
-                acsData: await acsPromise,
-                censusData: await censusPromise
-            }
-        }
-
         $("#reportForm").submit(function (e) {
             $("#reportLoader").css("display", "flex");
             e.preventDefault();
@@ -106,14 +81,9 @@ require([
             let GEOID = $("#specificReport").find(":selected").data("geo-id");
             let OBJECTID = $("#specificReport").find(":selected").data("object-id");
 
-            GetData(conf, GEOID).then(function (data) {
+            app.GetData(conf, GEOID).then(function (data) {
                 if (data) {
                     tp.publish("open-report-window", data.acsData, app.acsFieldsConfig);
-                    app.selectedReport = {
-                        conf: conf,
-                        acsData: data.acsData,
-                        censusData: data.censusData
-                    }
                 } else {
                     console.error("No matching features for: " + q);
                 }

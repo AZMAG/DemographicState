@@ -1,15 +1,20 @@
 //This file should include logic on initialization of?????
 
 require([
-        "dojo/topic"
+        "dojo/topic",
+        "esri/tasks/QueryTask"
     ],
-    function (tp) {
+    function (tp, QueryTask) {
         var $summaryReport = $("#summaryReport");
 
         $(".returnBtn").click(function () {
             $(".reportFormArea").hide();
             $("#cardContainer").show();
+            $(this).hide();
             $("#summaryReport").css("display", "none");
+            //Clear Graphics
+            let gfxLayer = app.map.findLayerById("gfxLayer");
+            gfxLayer.removeAll();
         })
 
         $(".reportBtn").click(function () {
@@ -17,6 +22,7 @@ require([
             $(".reportFormArea").hide();
             $("#cardContainer").hide();
             $(`#${val}`).show();
+            $(".returnBtn").show();
             $("#summaryReport").css("display", "none");
             $("#reportForm").show();
         });
@@ -38,10 +44,11 @@ require([
             let feature = features[0];
             let attr = feature.attributes;
 
-            let $header = $("#summaryReport").find("#summaryReportHeader");
+            let $header = $("#summaryReportHeader");
             $header.html(`${attr[displayName]} Demographics Report`);
+            $header.show();
 
-            let $sumReportTabStrip = $("#sumReportTabStrip");
+            // let $sumReportTabStrip = $("#sumReportTabStrip");
 
             if (feature.geometry) {
                 AddHighlightGraphic(feature);
@@ -118,10 +125,150 @@ require([
                 }
                 fld.fieldName = oldFieldName;
             }
-            CreateKendoGrid(vals, "acsGrid");
-            tp.publish("create-charts", vals, "acsCharts");
-            // CreateCharts(vals, "acsCharts");
+
+            tp.publish("create-grid", vals, "gridTarget")
+            tp.publish("create-charts", vals, "chartsTarget");
+
+            if (attr['AFFECTED_DISABILITY_COUNT']) {
+                SetupTitle6Grid(attr);
+            } else {
+                $('#title6Grid').html('');
+            }
             $("#summaryReport").show();
+        }
+
+        function SetupTitle6Grid(attr) {
+
+            $("#title6Toggle").click(function () {
+                $('#title6Grid').toggle();
+                $(this).toggleClass("k-i-expand k-i-collapse");
+            })
+
+            var fivePlus = attr['TOTAL_POP'] - attr['UNDER5'];
+            var totalPop = attr['TOTAL_POP'];
+            var totalBlockCount = attr['TOT_BLOCKGROUP_COUNT'];
+            var age65Plus = attr['AGE65TO74'] + attr['AGE75TO84'] + attr['AGE85PLUS']
+
+            var dataSrc = [{
+                    Category: 'Population Base',
+                    Footnote: '',
+                    Total: totalPop,
+                    Percent: 'N/A',
+                    NumberOfBlocks: totalBlockCount,
+                    PercentOfBlocks: totalBlockCount / totalBlockCount,
+                    AffectedPopulation: 'N/A',
+                    PercentAffectedCaptured: 'N/A'
+                },
+                {
+                    Category: 'Minority',
+                    Footnote: 'a',
+                    Total: attr['MINORITY_POP'],
+                    Percent: attr['MINORITY_POP'] / totalPop,
+                    NumberOfBlocks: attr['AFFECTED_MINORITY_POP_COUNT'],
+                    PercentOfBlocks: attr['AFFECTED_MINORITY_POP_COUNT'] / totalBlockCount,
+                    AffectedPopulation: attr['AFFECTED_MINORITY_POP'],
+                    PercentAffectedCaptured: attr['AFFECTED_MINORITY_POP'] / attr['MINORITY_POP']
+                },
+                {
+                    Category: 'Age 65+',
+                    Footnote: '',
+                    Total: age65Plus,
+                    Percent: age65Plus / totalPop,
+                    NumberOfBlocks: attr['AFFECTED_AGE65PLUS_COUNT'],
+                    PercentOfBlocks: attr['AFFECTED_AGE65PLUS_COUNT'] / totalBlockCount,
+                    AffectedPopulation: attr['AFFECTED_AGE65PLUS'],
+                    PercentAffectedCaptured: attr['AFFECTED_AGE65PLUS'] / age65Plus
+                },
+                {
+                    Category: 'Below Poverty Level',
+                    Footnote: 'b',
+                    Total: attr['INCOME_BELOW_POVERTY'],
+                    Percent: attr['INCOME_BELOW_POVERTY'] / attr['POP_FOR_POVERTY'],
+                    NumberOfBlocks: attr['AFFECTED_INCOME_BELOW_POVERTY_COUNT'],
+                    PercentOfBlocks: attr['AFFECTED_INCOME_BELOW_POVERTY_COUNT'] / totalBlockCount,
+                    AffectedPopulation: attr['AFFECTED_INCOME_BELOW_POVERTY'],
+                    PercentAffectedCaptured: attr['AFFECTED_INCOME_BELOW_POVERTY'] / attr['INCOME_BELOW_POVERTY']
+                },
+                {
+                    Category: 'Population with a Disability',
+                    Footnote: 'c',
+                    Total: attr['DISABILITY'],
+                    Percent: attr['DISABILITY'] / attr['CIV_NON_INST_POP'],
+                    NumberOfBlocks: attr['AFFECTED_DISABILITY_COUNT'],
+                    PercentOfBlocks: attr['AFFECTED_DISABILITY_COUNT'] / totalBlockCount,
+                    AffectedPopulation: attr['AFFECTED_DISABILITY'],
+                    PercentAffectedCaptured: attr['AFFECTED_DISABILITY'] / attr['DISABILITY']
+                },
+                {
+                    Category: 'Limited English Proficient Persons (LEP)',
+                    Footnote: 'd',
+                    Total: attr['LIMITED_ENG_PROF'],
+                    Percent: attr['LIMITED_ENG_PROF'] / fivePlus,
+                    NumberOfBlocks: attr['AFFECTED_LIMITED_ENG_PROF_COUNT'],
+                    PercentOfBlocks: attr['AFFECTED_LIMITED_ENG_PROF_COUNT'] / totalBlockCount,
+                    AffectedPopulation: attr['AFFECTED_LIMITED_ENG_PROF'],
+                    PercentAffectedCaptured: attr['AFFECTED_LIMITED_ENG_PROF'] / attr['LIMITED_ENG_PROF']
+                }
+            ];
+            $('#title6Grid').kendoGrid({
+                dataSource: {
+                    data: dataSrc
+                },
+                //height: 200,
+                columns: [{
+                        title: 'Population and Households',
+                        width: '235px',
+                        columns: [{
+                                field: 'Category',
+                                template: '#:Category#', //<sup>#:Footnote#</sup>
+                                title: 'Category',
+                                width: '95px'
+                            },
+                            {
+                                field: 'Total',
+                                title: 'Total',
+                                width: '80px',
+                                format: '{0:n0}'
+                            },
+                            {
+                                field: 'Percent',
+                                title: 'Percent',
+                                format: '{0:p1}',
+                                width: '60px'
+                            }
+                        ]
+                    },
+                    {
+                        title: 'Census Block Groups',
+                        width: '325px',
+                        columns: [{
+                                field: 'NumberOfBlocks',
+                                title: 'Number of block groups >= Area Percentage',
+                                width: '90px',
+                                format: '{0:n0}'
+                            },
+                            {
+                                field: 'PercentOfBlocks',
+                                title: '% Block Groups',
+                                format: '{0:p1}',
+                                width: '65px'
+                            },
+                            {
+                                field: 'AffectedPopulation',
+                                title: 'Affected Population',
+                                width: '75px',
+                                format: '{0:n0}'
+                            },
+                            {
+                                field: 'PercentAffectedCaptured',
+                                title: '% of Affected Population Captured in Census Block Groups',
+                                width: '95px',
+                                format: '{0:p1}'
+                            }
+                        ]
+                    }
+                ]
+            });
         }
 
         function CreateKendoGrid(src, id) {
@@ -285,6 +432,7 @@ require([
         }
         tp.subscribe("open-report-window", OpenReportWindow);
         tp.subscribe("create-charts", CreateCharts);
+        tp.subscribe("create-grid", CreateKendoGrid);
 
         function CreateChart(ops) {
             // console.log(ops);
@@ -354,7 +502,9 @@ require([
                             color: 'white',
                             labels: {
                                 visible: true,
-                                rotation: 0,
+                                rotation: {
+                                    angle: 45
+                                },
                                 // template: '#= wrapText(value) #'
                             },
                             majorGridLines: {
@@ -388,7 +538,7 @@ require([
             var categories = {};
             var $target = $("#" + target);
 
-            var $chartsList = $target.find(".chartsList");
+            var $chartsList = $target.find("#chartsList");
             var $chartsArea = $target.find(".chartsArea");
 
             $chartsArea.html('');
@@ -403,13 +553,16 @@ require([
                         categories[row.chartCategory]["data"].push(row);
                     } else {
                         categories[row.chartCategory]["data"] = [row];
-                        $chartsList.append(`<button>${row.chartCategory}</button><br>`);
+                        // $chartsList.append(`<button type="button" class="btn btn-secondary">${row.chartCategory}</button><br>`);
+                        $chartsList.append(`<option>${row.chartCategory}</option>`);
                     }
                 }
             })
 
-            $chartsList.find("button").click(function () {
-                var category = $(this).text();
+            // $chartsList.find("button").click(function () {
+            $chartsList.on('change', function () {
+                var category = $(this).find(":selected").text();
+
                 var chart = $chartsArea.data('kendoChart');
 
                 if (chart !== null && chart !== undefined) {
@@ -424,6 +577,10 @@ require([
                     data: chartData.data
                 });
             })
+
+            $chartsList.find("option").first().prop("selected", "selected")
+            $chartsList.find("option").first().change();
+
         }
 
         function AddHighlightGraphic(graphic) {
@@ -450,6 +607,42 @@ require([
                 app.view.goTo(graphic.geometry.extent.expand(1.5));
             }
 
+        }
+        dataCache = {};
+
+        app.GetData = async function (conf, geoid) {
+
+            if (dataCache[conf.id + geoid]) {
+                app.selectedReport = dataCache[conf.id + geoid];
+                return app.selectedReport;
+            }
+
+            let q = {
+                returnGeometry: true,
+                outFields: ["*"],
+                where: `GEOID10 = '${geoid}'`
+            }
+
+            let qt = new QueryTask({
+                url: app.config.mainUrl + "/" + conf.ACSIndex
+            });
+            let acsPromise = qt.execute(q);
+
+            qt.url = app.config.mainUrl + "/" + conf.censusIndex;
+            q.where = `GEOID = '${geoid}'`;
+            q.returnGeometry = false;
+
+            let censusPromise = qt.execute(q);
+
+            app.selectedReport = {
+                conf: conf,
+                acsData: await acsPromise,
+                censusData: await censusPromise
+            }
+
+            dataCache[conf.id + geoid] = app.selectedReport;
+
+            return app.selectedReport;
         }
     }
 )
