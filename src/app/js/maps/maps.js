@@ -1,11 +1,39 @@
+alert("asdfasdf")
 require([
-        "esri/layers/FeatureLayer",
-        "esri/layers/MapImageLayer",
-        "esri/layers/GraphicsLayer",
-        "esri/PopupTemplate",
-        "dojo/topic",
-    ],
-    function (FeatureLayer, MapImageLayer, GraphicsLayer, PopupTemplate, tp) {
+    "esri/Map",
+    "esri/views/MapView",
+
+    "esri/layers/FeatureLayer",
+    "esri/layers/MapImageLayer",
+    "esri/layers/GraphicsLayer",
+    "esri/PopupTemplate",
+    "dojo/topic",
+    "dojo/domReady!"
+],
+    function (Map, MapView, FeatureLayer, MapImageLayer,
+        GraphicsLayer, PopupTemplate, tp) {
+
+        app.map = new Map({
+            basemap: "gray"
+        });
+
+        app.view = new MapView({
+            container: "viewDiv",
+            map: app.map,
+            extent: app.config.initExtent,
+            constraints: {
+                rotationEnabled: false,
+                minZoom: 7,
+                snapToZoom: false
+            },
+            ui: {
+                components: []
+            }
+        });
+
+        app.view.when(function () {
+            tp.publish("map-loaded");
+        })
 
         tp.subscribe("map-loaded", addLayers);
 
@@ -86,4 +114,4 @@ require([
                 })
             });
         }
-    });
+    })
