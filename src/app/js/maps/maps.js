@@ -1,4 +1,3 @@
-alert("asdfasdf")
 require([
     "esri/Map",
     "esri/views/MapView",
@@ -102,7 +101,7 @@ require([
 
             //For now.... I'm waiting until the block groups layer is finished to publish the layers-added event.
             //This should prevent the legend from trying to load to early.
-            //It Should probably be fixed at some point
+            //It Should probably be refactored at some point
             let bgLayer = app.map.findLayerById('blockGroups');
             var once = false;
             app.view.whenLayerView(bgLayer).then(function (lyrView) {

@@ -642,61 +642,10 @@
         </div>
     </div>
 
-    <script type="text/javascript">
-        // document.onreadystatechange = function () {
-        //     var state = document.readyState
-        //     if (state == 'complete') {
-        //         setTimeout(function () {
-        //             $("#load").fadeOut();
-        //         }, 500);
-        //     }
-        // }
-
-    </script>
-    <!-- /borderContainer -->
     <!-- *** JavaScript *** -->
     <!-- =================================================================================================== -->
-    <!-- Kendo UI -->
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
-    <script src="https://kendo.cdn.telerik.com/2018.3.1017/js/jszip.min.js"></script>
-    <script src="https://kendo.cdn.telerik.com/2018.3.1017/js/kendo.all.min.js"></script>
-
-
-    <!-- Global script definitions. -->
-
-
-    <!-- <script src="js/utilities.js"></script>
-    <script src="js/config/config.js"></script>
-    <script src="js/config/mapsConfig.js"></script>
-    <script src="js/config/colorRampConfig.js"></script>
-    <script src="js/config/acsFieldsConfig.js"></script>
-    <script src="js/config/censusFieldsConfig.js"></script> -->
-
-
-    <!-- Including Widget Files -->
-    <!-- <script src="js/widgets/legend.js"></script>
-    <script src="js/widgets/zoom.js"></script>
-    <script src="js/widgets/home.js"></script>
-    <script src="js/widgets/locate.js"></script>
-    <script src="js/widgets/basemapToggle.js"></script>
-    <script src="js/widgets/drawing.js"></script>
-    <script src="js/widgets/share.js"></script> -->
-
-    <!-- Include Files by Panel -->
-    <!-- <script src="app/js/maps/cbr.js"></script>
-    <script src="app/js/maps/cbr.js"></script>
-    <script src="app/js/maps/cbr.js"></script>
-    <script src="app/js/maps/cbr.js"></script>
-    <script src="app/js/maps/cbr.js"></script>
-    <script src="app/js/maps/cbr.js"></script>
-    <script src="app/js/maps/cbr.js"></script> -->
-
-
     <script>
         var app = {};
-
         var dojoConfig = {
             async: true,
             packages: [{
@@ -704,24 +653,53 @@
                 location: location.pathname.replace(/\/[^/]+$/, "") + "./app/js"
             }]
         };
-
     </script>
+
+    <!-- Vendor  -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2018.3.1017/js/jszip.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2018.3.1017/js/kendo.all.min.js"></script>
     <script src="app/vendor/js/draggable.js"></script>
     <script src="https://js.arcgis.com/4.9/"></script>
 
-    <script src="app/js/main.js"></script>
-    <!-- <script src="js/layerlist.js"></script> -->
+    <!-- Including Config Files -->
+    <script src="app/js/utilities.js"></script>
+    <script src="app/js/config/config.js"></script>
+    <script src="app/js/config/mapsConfig.js"></script>
+    <script src="app/js/config/colorRampConfig.js"></script>
+    <script src="app/js/config/acsFieldsConfig.js"></script>
+    <script src="app/js/config/censusFieldsConfig.js"></script>
+
+    <!-- Including Widget Files -->
+    <script src="app/js/widgets/legend.js"></script>
+    <script src="app/js/widgets/zoom.js"></script>
+    <script src="app/js/widgets/home.js"></script>
+    <script src="app/js/widgets/locate.js"></script>
+    <script src="app/js/widgets/basemapToggle.js"></script>
+    <script src="app/js/widgets/drawing.js"></script>
+    <script src="app/js/widgets/share.js"></script>
+
+    <!-- Include maps files -->
+    <script src="app/js/maps/cbr.js"></script>
+    <script src="app/js/maps/colorRamps.js"></script>
+    <script src="app/js/maps/customClassBreaks.js"></script>
+    <script src="app/js/maps/maps-panel.js"></script>
+    <script src="app/js/maps/maps-utils.js"></script>
+    <script src="app/js/maps/maps.js"></script>
 
     <!-- Include Report Files -->
-    <!-- <script src="js/reports/exportToExcel.js"></script>
-    <script src="js/reports/reports.js"></script>
-    <script src="js/reports/standardReports.js"></script>
-    <script src="js/reports/advancedQueryReports.js"></script>
-    <script src="js/reports/customGeographyReports.js"></script> -->
+    <script src="app/js/reports/exportToExcel.js"></script>
+    <script src="app/js/reports/reports.js"></script>
+    <script src="app/js/reports/standardReports.js"></script>
+    <script src="app/js/reports/advancedQueryReports.js"></script>
+    <script src="app/js/reports/customGeographyReports.js"></script>
 
-    <!-- <script src="js/layer.js"></script>
-    <script src="js/cbr.js"></script>
-    <script src="js/sidebar.js"></script> -->
+    <!-- Including any other Misc JS Files -->
+    <script src="app/js/main.js"></script>
+    <script src="app/js/layerlist.js"></script>
+    <script src="app/js/sidebar.js"></script>
 </body>
 
 </html>
