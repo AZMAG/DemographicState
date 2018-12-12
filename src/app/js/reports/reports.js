@@ -6,37 +6,42 @@ require([
     ],
     function (tp, QueryTask) {
         var $summaryReport = $("#summaryReport");
+        tp.subscribe("panel-loaded", function (panel) {
+            if (panel === "reports") {
+                let $reportArea = $("#reportArea");
+                $reportArea.on("click", ".returnBtn", function () {
+                    $(".reportFormArea").hide();
+                    $("#cardContainer").show();
+                    $(this).hide();
+                    $("#summaryReport").css("display", "none");
 
-        $(".returnBtn").click(function () {
-            $(".reportFormArea").hide();
-            $("#cardContainer").show();
-            $(this).hide();
-            $("#summaryReport").css("display", "none");
-            //Clear Graphics
-            let gfxLayer = app.map.findLayerById("gfxLayer");
-            gfxLayer.removeAll();
-        })
+                    //Clear Graphics
+                    let gfxLayer = app.map.findLayerById("gfxLayer");
+                    gfxLayer.removeAll();
+                })
 
-        $(".reportBtn").click(function () {
-            let val = $(this).data("report-form-id");
-            $(".reportFormArea").hide();
-            $("#cardContainer").hide();
-            $(`#${val}`).show();
-            $(".returnBtn").show();
-            $("#summaryReport").css("display", "none");
-            $("#reportForm").show();
-        });
+                $reportArea.on("click", ".reportBtn", function () {
+                    let val = $(this).data("report-form-id");
+                    $(".reportFormArea").hide();
+                    $("#cardContainer").hide();
+                    $(`#${val}`).show();
+                    $(".returnBtn").show();
+                    $("#summaryReport").css("display", "none");
+                    $("#reportForm").show();
+                });
 
-        $('.dataSrcToggle').change(function () {
-            let dataSrc = $(this).data('val');
-            let d = app.selectedReport;
+                $reportArea.on(".dataSrcToggle", "change", function () {
+                    let dataSrc = $(this).data('val');
+                    let d = app.selectedReport;
 
-            if (dataSrc === 'acs') {
-                OpenReportWindow(d.acsData, app.acsFieldsConfig);
-            } else {
-                OpenReportWindow(d.censusData, app.censusFieldsConfig);
+                    if (dataSrc === 'acs') {
+                        OpenReportWindow(d.acsData, app.acsFieldsConfig);
+                    } else {
+                        OpenReportWindow(d.censusData, app.censusFieldsConfig);
+                    }
+                });
             }
-        });
+        })
 
         function OpenReportWindow(res, fields) {
             let features = res.features;
@@ -44,6 +49,7 @@ require([
             let feature = features[0];
             let attr = feature.attributes;
 
+            $reportArea = $("#reportArea");
             let $header = $("#summaryReportHeader");
             $header.html(`${attr[displayName]} Demographics Report`);
             $header.show();

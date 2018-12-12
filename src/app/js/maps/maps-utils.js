@@ -127,7 +127,11 @@ require([
                     maxValue: max,
                     symbol: {
                         type: "simple-fill",
-                        color: colorRamp[i]
+                        color: colorRamp[i],
+                        outline: {
+                            color: [0, 0, 0, 0.1],
+                            width: .5
+                        }
                     },
                     label: `${minLabel} - ${maxLabel}`
                 })

@@ -300,22 +300,9 @@
                 </li>
             </ul>
         </nav>
-        <!-- style="display:block !important;" -->
         <div id="content">
-            <div class="panelDiv" panel-id="layers">
-                <div class="panelHeader">
-                    <span class="panelHeaderText">Additional Layers</span>
-                    <a class="closePanel" href="#">
-                        <i class="glyphicon glyphicon-remove"></i>
-                    </a>
-                </div>
-                <span style="margin-top: 10px; font-weight: bold; margin-bottom: 10px;">Select any of the items from
-                    the list below to add to the map.</span>
-                <div id="layerList"></div>
-            </div>
-            <div class="panelDiv" panel-id="about">
-                test
-            </div>
+            <div class="panelDiv" panel-id="layers"></div>
+            <div class="panelDiv" panel-id="about"></div>
             <div class="panelDiv" panel-id="maps">
                 <div class="panelHeader">
                     <span class="panelHeaderText">Choose a Map:</span>
@@ -354,236 +341,7 @@
                     </div>
                 </form>
             </div>
-            <div class="panelDiv" style="display:block" panel-id="reports">
-                <div id="reportArea">
-                    <div class="panelHeader">
-                        <span class="panelHeaderText">Generate a report:</span>
-                        <a class="closePanel" href="#">
-                            <i class="glyphicon glyphicon-remove"></i>
-                        </a>
-                    </div>
-                    <button class="btn returnBtn"><i class="fas fa-angle-double-left"></i> Back</button>
-                    <div id="cardContainer">
-                        <div class="card" style="width: 90%;">
-                            <div class="card-body">
-                                <h5 class="card-title">Standard Reports</h5>
-                                <p class="card-text">Open a demographic report for any Jurisdiction, County, COG/MPO,
-                                    Zip Code, Congressional Districts, County Supervisor Districts, or City Council
-                                    Districts.
-                                </p>
-                                <button data-report-form-id="standardReports" href="#" class="btn reportBtn btn-primary">
-                                    <i class="fa fa-file-alt fa-3x"></i><br><span>Open Report</span>
-                                </button>
-                            </div>
-                        </div>
-
-                        <div class="card" style="width: 90%;">
-                            <div class="card-body">
-                                <h5 class="card-title">Custom Geography</h5>
-                                <p class="card-text">Create a report based on user selected block groups.</p>
-                                <button data-report-form-id="customGeographyReports" href="#" class="btn reportBtn btn-primary">
-                                    <i class="fa fa-draw-polygon fa-3x"></i><br>
-                                    <span>Open Report</span>
-                                </button>
-                            </div>
-                        </div>
-
-                        <div class="card" style="width: 90%;">
-                            <div class="card-body">
-                                <h5 class="card-title">Advanced Selection</h5>
-                                <p class="card-text">Create a report by selecting block groups with certain attributes.</p>
-                                <button data-report-form-id="advancedReports" href="#" class="btn reportBtn btn-primary">
-                                    <i class="fas fa-database fa-3x"></i><br>
-                                    <span>Open Report</span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="standardReports" class="reportFormArea">
-                        <div class="flexCenter">
-                            <div id="summaryReportHeader"></div>
-                        </div>
-                        <form id="reportForm">
-                            <div class="form-group">
-                                <label for="reportType">Type of Report:</label>
-                                <select class="form-control" id="reportType"></select>
-                                <small class="form-text text-muted">Choose the type of geography for the report.</small>
-                            </div>
-                            <div id="specificReportDiv" class="form-group">
-                                <label for="specificReport">Choose Report:</label>
-                                <select class="form-control" id="specificReport">
-                                </select>
-                                <small class="form-text text-muted">Choose the specific report to generate.</small>
-                            </div>
-                            <button id="standardBtnSubmit" type="submit" class="btn btn-primary">Submit</button>
-                        </form>
-                    </div>
-                    <div id="customGeographyReports" class="reportFormArea">
-
-                        <br>
-                        <form id="interactiveForm">
-                            <h6>Identify a:</h6>
-                            <div>
-                                <div class="form-group">
-                                    <button data-val="polygon" class="btn customSummaryButton">
-                                        <img src="app/images/CustomSummaryIcons/i_draw_freepoly.png" alt="">
-                                    </button>
-                                    <span>Freehand Area of Interest</span>
-                                </div>
-                                <div class="form-group">
-                                    <button data-val="rectangle" class="btn customSummaryButton">
-                                        <img src="app/images/CustomSummaryIcons/i_draw_rect.png" alt="">
-                                    </button>
-                                    <span>Area of Interest</span>
-                                </div>
-                                <div class="form-group">
-                                    <button data-val="point" class="btn customSummaryButton">
-                                        <img src="app/images/CustomSummaryIcons/i_draw_point.png" alt="">
-                                    </button>
-                                    <span>Point of Interest</span>
-                                </div>
-                                <div class="form-group">
-                                    <button data-val="polyline" class="btn customSummaryButton">
-                                        <img src="app/images/CustomSummaryIcons/i_draw_line.png" alt="">
-                                    </button>
-                                    <span>Corridor of Interest</span>
-                                </div>
-                            </div>
-
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input" name="useBuffer" id="useBuffer">
-                                <label for="useBuffer" class="form-check-label">Use a buffer</label>
-                            </div>
-
-                            <div class="form-check">
-                                <input type="checkbox" checked class="form-check-input" name="useZoom" id="useZoom">
-                                <label for="useZoom" class="form-check-label">Zoom to Selection</label>
-                            </div>
-
-                            <div id="bufferOptions">
-                                <input type="text" placeholder="Radius">
-                                <label for="unit">Units</label>
-                                <select name="unit" id="unit">
-                                    <option value="miles">Miles</option>
-                                    <option value="feet">Feet</option>
-                                    <option value="meters">Meters</option>
-                                    <option value=""></option>
-                                </select>
-                            </div>
-                        </form>
-                    </div>
-                    <div id="advancedReports" class="reportFormArea">
-                        <span id="info"></span>
-                        <div class="queryContainer">
-                            <div id="treeViewContainer">
-                                <div style="text-align:center">
-                                    <h4>Fields</h4>
-                                    <h6>Drag or double click these fields to the query window to add a row to the
-                                        query.</h6>
-                                </div>
-                                <div id="treeView" style="white-space: normal;"></div>
-                            </div>
-                            <div style="text-align:center">
-                                <h4>Query</h4>
-                                <h6>Each row filters the selection of block groups. Counts and percentages are per
-                                    block group.</h6>
-                            </div>
-                            <div id="target">
-                                <h4 id="dropPrompt" style="color:black;">Drop here</h4>
-                            </div>
-                        </div>
-                        <span id="queryButtonGroup">
-                            <button id="runQuery" class="queryButtons" type="button" title="Run Query">Run Query</button>
-                            <button id="cancelQuery" class="queryButtons" type="button" title="Cancel Query">Cancel</button>
-                        </span>
-                        <div id="fCountSpan" class="queryResultCount k-header resultBanner">Number of selected block
-                            groups:&nbsp;
-                            <span id="fCount1"></span>
-                        </div>
-                    </div>
-                    <div id="reportLoader"><img src="app/images/Loading.gif" alt="Loading"></div>
-                    <div id="summaryReport">
-                        <div id="sumReportTabStrip">
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-sm">
-                                        <ul class="nav nav-tabs mb-3" id="tabs-tab" role="tablist">
-                                            <li class="nav-item">
-                                                <a class="nav-link active" data-toggle="tab" href="#gridTab" role="tab"
-                                                    aria-controls="gridTab" aria-selected="true">Data</a>
-                                            </li>
-
-                                            <li class="nav-item">
-                                                <a class="nav-link" data-toggle="tab" href="#chartsTab" role="tab"
-                                                    aria-controls="chartsTab" aria-selected="false">Charts</a>
-                                            </li>
-
-                                            <!-- <li class="nav-item">
-                                                <a class="nav-link" data-toggle="tab" href="#censusGridTab" role="tab"
-                                                    aria-controls="censusGridTab" aria-selected="false">Census 2010 Data</a>
-                                            </li>
-            
-                                            <li class="nav-item">
-                                                <a class="nav-link" data-toggle="tab" href="#censusChartsTab" role="tab"
-                                                    aria-controls="censusChartsTab" aria-selected="false">Census Charts</a>
-                                            </li> -->
-                                        </ul>
-                                    </div>
-                                    <span class="legal">Data Source</span>
-                                    <div class="col-sm">
-                                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                                            <label class="btn btn-secondary btn-sm active">
-                                                <input data-val="acs" type="radio" class="dataSrcToggle" name="options"
-                                                    autocomplete="off" checked>
-                                                ACS 2016
-                                            </label>
-                                            <label class="btn btn-secondary btn-sm">
-                                                <input data-val="census2010" type="radio" class="dataSrcToggle" name="options"
-                                                    autocomplete="off">
-                                                Census 2010
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tab-content" id="pills-tabContent">
-                                <div class="tab-pane fade show active" id="gridTab" role="tabpanel" aria-labelledby="gridTab">
-                                    <div id="gridTarget"></div>
-                                    <hr>
-                                    <div id="title6Area">
-                                        <p class="k-reset"><a id="title6Toggle" class="k-icon k-i-expand" href="#"
-                                                tabindex="-1" aria-label="Expand"></a>Title
-                                            6 Data</p>
-                                        <div id="title6Grid"></div>
-                                    </div>
-                                    <div class="sourceLabel"></div>
-                                </div>
-
-                                <div class="tab-pane fade" id="chartsTab" role="tabpanel" aria-labelledby="chartsTab">
-                                    <div id="chartsTarget">
-                                        <div class="chartsArea"></div>
-                                        <div class="form-group">
-                                            <!-- <label for="chartsList">Type of Chart:</label> -->
-                                            <br>
-                                            <select class="form-control" id="chartsList">
-                                            </select>
-                                            <small class="form-text text-muted">Choose the type of chart for the
-                                                report.</small>
-                                        </div>
-                                        <!-- <select name="chartsList" id="chartsList">
-
-                                        </select> -->
-                                        <div role="group" aria-label="Charts List" class="btn-group-vertical chartsList"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                    <div id="tempAttr"></div>
-                </div>
-            </div>
-
+            <div class="panelDiv" style="display:block" panel-id="reports"></div>
             <div class="panelDiv" panel-id="help"></div>
         </div>
         <div id="container">
@@ -653,6 +411,7 @@
                 location: location.pathname.replace(/\/[^/]+$/, "") + "./app/js"
             }]
         };
+
     </script>
 
     <!-- Vendor  -->
@@ -665,40 +424,40 @@
     <script src="https://js.arcgis.com/4.9/"></script>
 
     <!-- Including Config Files -->
-    <!-- <script src="app/js/utilities.js"></script>
+    <script src="app/js/utilities.js"></script>
     <script src="app/js/config/config.js"></script>
     <script src="app/js/config/mapsConfig.js"></script>
     <script src="app/js/config/colorRampConfig.js"></script>
     <script src="app/js/config/acsFieldsConfig.js"></script>
-    <script src="app/js/config/censusFieldsConfig.js"></script> -->
+    <script src="app/js/config/censusFieldsConfig.js"></script>
 
     <!-- Including Widget Files -->
-    <!-- <script src="app/js/widgets/legend.js"></script>
+    <script src="app/js/widgets/legend.js"></script>
     <script src="app/js/widgets/zoom.js"></script>
     <script src="app/js/widgets/home.js"></script>
     <script src="app/js/widgets/locate.js"></script>
     <script src="app/js/widgets/basemapToggle.js"></script>
     <script src="app/js/widgets/drawing.js"></script>
-    <script src="app/js/widgets/share.js"></script> -->
+    <script src="app/js/widgets/share.js"></script>
 
     <!-- Include maps files -->
-    <!-- <script src="app/js/maps/cbr.js"></script>
+    <script src="app/js/maps/cbr.js"></script>
     <script src="app/js/maps/colorRamps.js"></script>
     <script src="app/js/maps/customClassBreaks.js"></script>
     <script src="app/js/maps/maps-panel.js"></script>
     <script src="app/js/maps/maps-utils.js"></script>
-    <script src="app/js/maps/maps.js"></script> -->
+    <script src="app/js/maps/maps.js"></script>
 
     <!-- Include Report Files -->
-    <!-- <script src="app/js/reports/exportToExcel.js"></script>
+    <script src="app/js/reports/exportToExcel.js"></script>
     <script src="app/js/reports/reports.js"></script>
     <script src="app/js/reports/standardReports.js"></script>
     <script src="app/js/reports/advancedQueryReports.js"></script>
-    <script src="app/js/reports/customGeographyReports.js"></script> -->
+    <script src="app/js/reports/customGeographyReports.js"></script>
 
     <!-- Including any other Misc JS Files -->
-    <!-- <script src="app/js/layerlist.js"></script>
-    <script src="app/js/sidebar.js"></script> -->
+    <script src="app/js/layerlist.js"></script>
+    <script src="app/js/sidebar.js"></script>
 
     <!-- Load startup js script -->
     <script src="app/js/main.js"></script>
