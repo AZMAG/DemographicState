@@ -1,4 +1,4 @@
-![](http://geo.azmag.gov/maps/readonaz/app/resources/img/maglogo_black.png)
+![](http://geo.azmag.gov/maps/docs/img/maglogo_black.png)
 # MAG State Demographics Map Viewer
 State Demographics map viewer for selected census info for Arizona
 
