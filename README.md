@@ -9,7 +9,7 @@
    </a>
   </span>
   <span>
-  <a href="https://geo.azmag.gov/maps/landmarks/">
+  <a href="https://geo.azmag.gov/maps/azdemographics/">
     <img
       alt="Neigborhood Explorer"
       src="https://maps.azmag.gov/images/viewer-icons/icon_statewide-demographics.png"
