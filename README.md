@@ -21,6 +21,7 @@
 
 # MAG State Demographics Map Viewer
 
+State Demographics map viewer for selected census info for Arizona
 
 [![GitHub version](https://badge.fury.io/gh/AZMAG/map-Demographic-Statewide.svg)](https://badge.fury.io/gh/AZMAG/map-Demographic-Statewide)
 [![GitHub issues](https://img.shields.io/github/issues/AZMAG/map-Demographic-Statewide.svg)](https://github.com/AZMAG/map-Demographic-Statewide/issues)
@@ -30,8 +31,6 @@
 [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
 [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![Website](https://img.shields.io/website-up-down-green-red/http/shields.io.svg?label=my-website)](http://geo.azmag.gov/maps/azdemographics/)
-
-State Demographics map viewer for selected census info for Arizona
 
 The State Demographic Map Viewer is one of the Maricopa Association of Governments interactive mapping and analysis sites, showing selected population and housing data.  The viewer allows you to graphically view selected population and housing data for all Census block groups for the State of Arizona.  The viewer provides interactive mapping and reporting tools to allow exploration of data from Census 2010 and the American Community Survey (ACS) 2012-2016.
 
