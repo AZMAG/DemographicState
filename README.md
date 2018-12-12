@@ -18,7 +18,9 @@
   </a>
   </span>
 </div>
+
 # MAG State Demographics Map Viewer
+
 
 [![GitHub version](https://badge.fury.io/gh/AZMAG/map-Demographic-Statewide.svg)](https://badge.fury.io/gh/AZMAG/map-Demographic-Statewide)
 [![GitHub issues](https://img.shields.io/github/issues/AZMAG/map-Demographic-Statewide.svg)](https://github.com/AZMAG/map-Demographic-Statewide/issues)
