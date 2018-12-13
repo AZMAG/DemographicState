@@ -23,7 +23,7 @@
 
 State Demographics map viewer for selected census info for Arizona
 
-[![GitHub version](https://badge.fury.io/gh/AZMAG/map-Demographic-Statewide.svg)](https://badge.fury.io/gh/AZMAG/map-Demographic-Statewide)
+[![GitHub version](https://badge.fury.io/gh/AZMAG%2map-Demographic-Statewide.svg)](https://badge.fury.io/gh/AZMAG%2map-Demographic-Statewide)
 [![GitHub issues](https://img.shields.io/github/issues/AZMAG/map-Demographic-Statewide.svg)](https://github.com/AZMAG/map-Demographic-Statewide/issues)
 [![dependencies](https://david-dm.org/AZMAG/map-Demographic-Statewide.png)](https://david-dm.org/AZMAG/map-Demographic-Statewide)
 [![devDependency Status](https://david-dm.org/AZMAG/map-Demographic-Statewide/dev-status.png)](https://david-dm.org/AZMAG/map-Demographic-Statewide)
