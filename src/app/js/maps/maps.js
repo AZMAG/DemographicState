@@ -1,14 +1,14 @@
 require([
-    "esri/Map",
-    "esri/views/MapView",
+        "esri/Map",
+        "esri/views/MapView",
 
-    "esri/layers/FeatureLayer",
-    "esri/layers/MapImageLayer",
-    "esri/layers/GraphicsLayer",
-    "esri/PopupTemplate",
-    "dojo/topic",
-    "dojo/domReady!"
-],
+        "esri/layers/FeatureLayer",
+        "esri/layers/MapImageLayer",
+        "esri/layers/GraphicsLayer",
+        "esri/PopupTemplate",
+        "dojo/topic",
+        "dojo/domReady!"
+    ],
     function (Map, MapView, FeatureLayer, MapImageLayer,
         GraphicsLayer, PopupTemplate, tp) {
 
@@ -105,8 +105,10 @@ require([
             let bgLayer = app.map.findLayerById('blockGroups');
             var once = false;
             app.view.whenLayerView(bgLayer).then(function (lyrView) {
+
                 lyrView.watch("updating", function (value) {
                     if (!value && !once) {
+                        // app.blockGroupLyrView = lyrView;
                         tp.publish("layers-added");
                         once = true;
                     }

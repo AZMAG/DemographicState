@@ -11,6 +11,8 @@ app.config = {
     mainUrl: "https://geo.azmag.gov/gismag/rest/services/maps/DemographicState2016/MapServer",
     siteUrl: "https://geo.azmag.gov/maps/azdemographics/?",
 
+    googleCivicInfoApiKey: "AIzaSyCicS2bzJk_ptthYD2nSu4tIPfjGYmxU1U",
+
     DefaultColorRamp: "GnBu",
     DefaultColorScheme: "Sequential",
     DefaultNumberOfClassBreaks: 5,
@@ -84,6 +86,10 @@ app.config = {
             showReport: true,
             selectable: true,
             outFields: ["*"],
+            popup: {
+                title: "Congressional District",
+                content: "{NAME:app.congressDistrictPopup}"
+            },
             showTOC: true,
             link: true
         }, {
@@ -153,6 +159,7 @@ app.config = {
         }, {
             drawOrder: 7,
             layerName: "CityDistricts",
+            googleCivicId: "/place:phoenix/council_district:",
             id: "councilDistricts",
             title: "Council Districts",
             type: "feature",

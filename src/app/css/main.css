@@ -428,8 +428,13 @@ a[aria-expanded="true"] {
     margin-top: 5px;
 }
 
-.cardContainer .card {
-    margin: 2px 0px;
+#cardContainer .card {
+    margin: 5px
+}
+
+#cardContainer .card:hover {
+    cursor: pointer;
+    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
 }
 
 #viewDiv {
@@ -781,6 +786,7 @@ label:hover,
 .closePanel {
     padding: 5px;
     float: right;
+    margin-right: 5px;
 }
 
 .esri-icon {

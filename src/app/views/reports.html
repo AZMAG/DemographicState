@@ -2,41 +2,30 @@
     <div class="panelHeader">
         <span class="panelHeaderText">Generate a report:</span>
         <a class="closePanel" href="#">
-            <i class="glyphicon glyphicon-remove"></i>
+            <i class="fas fa-times"></i>
         </a>
     </div>
     <button class="btn returnBtn"><i class="fas fa-angle-double-left"></i> Back</button>
     <div id="cardContainer">
-        <div class="card" style="width: 90%;">
+        <div data-report-form-id="standardReports" class="card" style="width: 90%;">
             <div class="card-body">
                 <h5 class="card-title">Standard Reports</h5>
                 <p class="card-text">Open a demographic report for any Jurisdiction, County, COG/MPO,
                     Zip Code, Congressional Districts, County Supervisor Districts, or City Council
                     Districts.
                 </p>
-                <button data-report-form-id="standardReports" href="#" class="btn reportBtn btn-primary">
-                    <i class="fa fa-file-alt fa-3x"></i><br><span>Open Report</span>
-                </button>
             </div>
         </div>
-        <div class="card" style="width: 90%;">
+        <div data-report-form-id="customGeographyReports" class="card" style="width: 90%;">
             <div class="card-body">
                 <h5 class="card-title">Custom Geography</h5>
                 <p class="card-text">Create a report based on user selected block groups.</p>
-                <button data-report-form-id="customGeographyReports" href="#" class="btn reportBtn btn-primary">
-                    <i class="fa fa-draw-polygon fa-3x"></i><br>
-                    <span>Open Report</span>
-                </button>
             </div>
         </div>
-        <div class="card" style="width: 90%;">
+        <div data-report-form-id="advancedReports" class="card" style="width: 90%;">
             <div class="card-body">
                 <h5 class="card-title">Advanced Selection</h5>
                 <p class="card-text">Create a report by selecting block groups with certain attributes.</p>
-                <button data-report-form-id="advancedReports" href="#" class="btn reportBtn btn-primary">
-                    <i class="fas fa-database fa-3x"></i><br>
-                    <span>Open Report</span>
-                </button>
             </div>
         </div>
     </div>

@@ -56,7 +56,7 @@
     <link rel="apple-touch-icon" type="image/png" sizes="57x57" href="img/magicon_57.png">
     <link rel="shortcut icon" type="image-favorites-icon" href="img/magfavicon.png"> -->
     <!-- ESRI javaScript API CSS -->
-    <link rel="stylesheet" href="https://js.arcgis.com/4.9/esri/css/main.css">
+    <link rel="stylesheet" href="https://js.arcgis.com/4.10/esri/css/main.css">
     <!-- Kendo UI CSS-->
     <!-- <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2018.2.620/styles/kendo.common.min.css" />
     <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2018.2.620/styles/kendo.black.min.css" /> -->
@@ -70,7 +70,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
     <!-- <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.1.3/cyborg/bootstrap.min.css" rel="stylesheet" integrity="sha384-4DAPMwiyOJv/C/LvTiUsW5ueiD7EsaAhwUKO0Llp+fWzT40XrmAbayhVP00bAJVa" crossorigin="anonymous"> -->
 
-    <link rel="stylesheet" rel="preload" as="style" href="https://js.arcgis.com/4.7/esri/themes/dark/main.css">
+    <link rel="stylesheet" rel="preload" as="style" href="https://js.arcgis.com/4.10/esri/themes/dark/main.css">
     <link rel="stylesheet" href="app/css/main.css">
     <!-- endcomments -->
     <!-- comments:uncomment html -->
@@ -113,26 +113,6 @@
 </head>
 
 <body class="claro">
-    <div style="display:none">
-        <div id="aboutWidget" role="button" title="About" data-toggle="modal" data-target="#modalSplash" aria-haspopup="true"
-            class="esri-widget--button esri-widget esri-component">
-            <span title="About" class="glyphicon glyphicon-info-sign esri-icon"></span>
-        </div>
-        <div id="printWidget" role="button" data-toggle="modal" title="Print" data-target="#modalPrint" aria-haspopup="true"
-            class=" esri-widget--button esri-widget esri-component">
-            <span title="Print" class="glyphicon glyphicon-print esri-icon"></span>
-        </div>
-    </div>
-    <!--[if lt IE 8]>
-            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-        <![endif]-->
-    <!-- <div id="load">
-        <div id="loadingBox">
-            <h2>Loading Viewer...</h2>
-            <br>
-            <img src="img/LoadingRubicsCube.gif">
-        </div>
-    </div> -->
     <div id="colorRampModal" class="modal" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -196,21 +176,21 @@
         </div>
         <div id="legendDiv"></div>
     </div>
-    <div id="basemapToggle" class="customWidget esri-component esri-widget-button esri-widget" role="button" tabindex="0"
+    <div id="basemapToggle" class="customWidget esri-component esri-widget--button esri-widget" role="button" tabindex="0"
         aria-label="Satellite" title="Satellite">
         <span class="esri-icon">
             <img src="app/images/widgetIcons/Imagery-Map-View-Icon.png" alt="">
         </span>
         <span class="esri-icon-font-fallback-text">Toggle Basemap</span>
     </div>
-    <div id="locateWidget" class="customWidget esri-component esri-widget-button esri-widget" role="button" tabindex="0"
+    <div id="locateWidget" class="customWidget esri-component esri-widget--button esri-widget" role="button" tabindex="0"
         aria-label="Find my Location" title="Find my Location">
         <span class="esri-icon">
             <i style="margin-top: 8px;" class="fas fa-map-marker-alt"></i>
         </span>
         <span class="esri-icon-font-fallback-text">Find my Location</span>
     </div>
-    <div id="homeWidget" class="customWidget esri-component esri-widget-button esri-widget" role="button" tabindex="0"
+    <div id="homeWidget" class="customWidget esri-component esri-widget--button esri-widget" role="button" tabindex="0"
         aria-label="Default map view" title="Default map view">
         <span class="esri-icon">
             <i style="margin-top: 8px;" class="fas fa-home"></i>
@@ -218,17 +198,18 @@
         <span class="esri-icon-font-fallback-text">Default map view</span>
     </div>
     <div id="zoomWidget" class="customWidget esri-component esri-zoom esri-widget">
-        <div data-id="In" class="esri-widget-button esri-widget esri-interactive" role="button" tabindex="0" title="Zoom In">
+        <div data-id="In" class="esri-widget--button esri-widget esri-interactive" role="button" tabindex="0" title="Zoom In">
             <i class="esri-icon fas fa-plus"></i>
             <span class="esri-icon-font-fallback-text">Zoom In</span>
         </div>
-        <div data-id="Out" class="esri-widget-button esri-widget esri-interactive" role="button" tabindex="0" title="Zoom Out">
+        <div data-id="Out" class="esri-widget--button esri-widget esri-interactive" role="button" tabindex="0" title="Zoom Out">
             <i class="esri-icon fas fa-minus"></i>
             <span class="esri-icon-font-fallback-text">Zoom Out</span>
         </div>
     </div>
     <div id="drawWidget" class="customWidget esri-component esri-zoom esri-widget">
-        <div id="draw-polygon" class="esri-widget-button esri-widget esri-interactive" role="button" tabindex="0" title="Drawing Tools">
+        <div id="draw-polygon" class="esri-widget--button esri-widget esri-interactive" role="button" tabindex="0"
+            title="Drawing Tools">
             <i class="esri-icon fas fa-draw-polygon"></i>
             <span class="esri-icon-font-fallback-text">Draw</span>
         </div>
@@ -307,7 +288,7 @@
                 <div class="panelHeader">
                     <span class="panelHeaderText">Choose a Map:</span>
                     <a class="closePanel" href="#">
-                        <i class="glyphicon glyphicon-remove"></i>
+                        <i class="fas fa-times"></i>
                     </a>
                 </div>
                 <!-- <button id="mapsListToggle" data-status="expand">Expand All</button> -->
@@ -421,7 +402,7 @@
     <script src="https://kendo.cdn.telerik.com/2018.3.1017/js/jszip.min.js"></script>
     <script src="https://kendo.cdn.telerik.com/2018.3.1017/js/kendo.all.min.js"></script>
     <script src="app/vendor/js/draggable.js"></script>
-    <script src="https://js.arcgis.com/4.9/"></script>
+    <script src="https://js.arcgis.com/4.10/"></script>
 
     <!-- Including Config Files -->
     <script src="app/js/utilities.js"></script>

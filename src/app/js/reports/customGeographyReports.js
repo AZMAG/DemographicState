@@ -23,7 +23,6 @@ require([
                 });
 
                 $customSummaryButton.click(function (e) {
-                    console.log(e);
 
                     $customSummaryButton.removeClass("active");
                     $(this).addClass("active");
@@ -31,8 +30,6 @@ require([
 
                     // create() will return a reference to an instance of PolygonDrawAction
                     let action = draw.create(type);
-                    console.log(`Started drawing ${type}`);
-
 
                     //Creates a tooltip to give user instructions on drawing
                     $("#viewDiv").mousemove(function (e) {
@@ -71,29 +68,33 @@ require([
                         polygon: {
                             color: [0, 0, 0, .3],
                             symbolType: "simple-fill",
-                            geometryType: "polygon"
+                            geometryType: "polygon",
+                            style: "solid"
                         },
                         multipoint: {
                             color: [0, 0, 0, .3],
                             symbolType: "simple-fill",
-                            geometryType: "polygon"
+                            geometryType: "polygon",
+                            style: "solid"
                         },
                         polyline: {
                             color: "red",
                             symbolType: "simple-line",
-                            geometryType: "polyline"
+                            geometryType: "polyline",
+                            style: "solid"
                         },
                         point: {
                             color: "red",
                             symbolType: "simple-marker",
-                            geometryType: "point"
+                            geometryType: "point",
+                            style: "circle"
                         }
                     }
 
                     let symb = {
                         type: symbolLU[type].symbolType,
                         color: symbolLU[type].color,
-                        style: "solid",
+                        style: symbolLU[type].style,
                         width: 2,
                         outline: {
                             color: "red",
@@ -139,9 +140,36 @@ require([
             }
 
             function ProcessSelection(gfx) {
-                console.log(gfx);
+                const q = {
+                    geometry: gfx.geometry,
+                    returnGeometry: true,
+                    outFields: ["*"]
+                }
 
+                let bgLayer = app.map.findLayerById('blockGroups').sublayers.getItemAt(0);
+
+                bgLayer.queryFeatures(q).then((res) => {
+                    let data = {};
+
+                    res.features.forEach((feature) => {
+                        let attr = feature.attributes;
+                        Object.keys(attr).forEach((key) => {
+                            if (data[key]) {
+                                data[key] += attr[key];
+                            } else {
+                                data[key] = attr[key];
+                            }
+                        })
+                    })
+
+                    tp.publish("open-report-window", {
+                        features: [{
+                            attributes: data
+                        }]
+                    }, app.acsFieldsConfig);
+
+                    $(".reportFormArea").hide();
+                })
             }
-
         });
     })

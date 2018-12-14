@@ -9,6 +9,7 @@ require([
         tp.subscribe("panel-loaded", function (panel) {
             if (panel === "reports") {
                 let $reportArea = $("#reportArea");
+
                 $reportArea.on("click", ".returnBtn", function () {
                     $(".reportFormArea").hide();
                     $("#cardContainer").show();
@@ -20,7 +21,7 @@ require([
                     gfxLayer.removeAll();
                 })
 
-                $reportArea.on("click", ".reportBtn", function () {
+                $reportArea.on("click", ".card", function () {
                     let val = $(this).data("report-form-id");
                     $(".reportFormArea").hide();
                     $("#cardContainer").hide();
@@ -57,7 +58,7 @@ require([
             // let $sumReportTabStrip = $("#sumReportTabStrip");
 
             if (feature.geometry) {
-                AddHighlightGraphic(feature);
+                app.AddHighlightGraphic(feature);
             }
 
             var valsDef = {};
@@ -589,31 +590,6 @@ require([
 
         }
 
-        function AddHighlightGraphic(graphic) {
-            let gfxLayer = app.map.findLayerById("gfxLayer");
-
-            if (gfxLayer.graphics && gfxLayer.graphics.items.length > 0) {} else {
-                gfxLayer.removeAll();
-
-                var tempGraphic = $.extend({}, graphic);
-
-                tempGraphic.symbol = {
-                    type: "simple-fill",
-                    color: [0, 255, 255, .5],
-                    opacity: .5,
-                    outline: {
-                        color: "cyan",
-                        width: "3"
-                    }
-                };
-
-                gfxLayer.add(tempGraphic);
-
-                //Zoom to highlighted graphic, but expand to give some context.
-                app.view.goTo(graphic.geometry.extent.expand(1.5));
-            }
-
-        }
         dataCache = {};
 
         app.GetData = async function (conf, geoid) {
