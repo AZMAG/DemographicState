@@ -49,7 +49,6 @@ app.config = {
             visible: false,
             showReport: true,
             selectable: true,
-            outFields: ["*"],
             showTOC: true,
             link: true
         }, {
@@ -60,22 +59,21 @@ app.config = {
             layerName: "Counties",
             displayField: "NAME",
             type: "feature",
-            popup: {
-                title: "{NAME}",
-                content: "{TOTAL_POP}"
-            },
             queryWhere: "1=1",
             opacity: 0.8,
             visible: true,
             showReport: true,
             selectable: true,
-            outFields: ["*"],
             showTOC: true,
             link: true
         }, {
             drawOrder: 3,
             legend: true,
             layerName: "Congressional_Districts",
+            googleCivic: {
+                id: "/cd:",
+                valueField: "CD115FP"
+            },
             displayField: "NAME",
             id: "congressionalDistricts",
             title: "Congressional Districts",
@@ -85,11 +83,6 @@ app.config = {
             visible: false,
             showReport: true,
             selectable: true,
-            outFields: ["*"],
-            popup: {
-                title: "Congressional District",
-                content: "{NAME:app.congressDistrictPopup}"
-            },
             showTOC: true,
             link: true
         }, {
@@ -105,7 +98,6 @@ app.config = {
             visible: false,
             showReport: true,
             selectable: true,
-            outFields: ["*"],
             showTOC: true,
             link: true
         }, {
@@ -121,7 +113,6 @@ app.config = {
             visible: false,
             showReport: true,
             selectable: true,
-            outFields: ["*"],
             showTOC: true,
             link: true
         },
@@ -137,7 +128,7 @@ app.config = {
         //     visible: false,
         //     showReport: true,
         //     selectable: true,
-        //     outFields: ["*"],
+
         //     showTOC: true,
         //     link: false
         // }, 
@@ -145,6 +136,10 @@ app.config = {
             drawOrder: 7,
             legend: true,
             layerName: "SupervisorDistricts",
+            // googleCivic: {
+            //     id: "/place:phoenix/council_district:",
+            //     valueField: "NAME"
+            // },
             id: "supervisorDistricts",
             title: "County Supervisor Districts",
             type: "feature",
@@ -153,13 +148,15 @@ app.config = {
             visible: false,
             showReport: true,
             selectable: true,
-            outFields: ["*"],
             showTOC: true,
             link: false
         }, {
             drawOrder: 7,
             layerName: "CityDistricts",
-            googleCivicId: "/place:phoenix/council_district:",
+            googleCivic: {
+                id: "/place:phoenix/council_district:",
+                valueField: "NAME"
+            },
             id: "councilDistricts",
             title: "Council Districts",
             type: "feature",
@@ -168,7 +165,6 @@ app.config = {
             visible: false,
             showReport: true,
             selectable: true,
-            outFields: ["*"],
             showTOC: true,
             link: false
         }, {

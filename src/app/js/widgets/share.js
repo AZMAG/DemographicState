@@ -13,7 +13,7 @@ $share.attr('data-content', `
             <div class="shareLinks">
                 <ul>
                     <li>
-                        <a id="EMshareButton" href="mailto:?subject=MAG Bikeways&amp;body=%0A%0ACheck out this website.%0A%0AMAG Bikeways - #MAGmaps%0Ahttps://geo.azmag.gov/maps/bikemap"
+                        <a id="EMshareButton" href="mailto:?subject=MAG Bikeways&amp;body=%0A%0ACheck out this website.%0A%0AMAG Bikeways - %23MAGmaps%0Ahttps://geo.azmag.gov/maps/bikemap"
                             title="MAG|Bikeways">
                             <em class="fa fa-envelope"></em>
                         </a>

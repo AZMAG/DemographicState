@@ -28,13 +28,16 @@ function rgbToHex(r, g, b) {
     return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
 }
 
-app.congressDistrictPopup = function (key, data, val) {
+app.congressDistrictPopup = function (googleCivic) {
+    console.log(app.view.popup, googleCivic);
 
-    console.log(key, data, val);
-    GetRepresentativeInfo("place:phoenix").then((data) => {
+    let selectedValue = app.view.popup.selectedFeature.attributes[googleCivic.valueField].replace(/^0+/, '');
+    // console.log(selectedValue);
+
+    GetRepresentativeInfo(googleCivic.id + selectedValue).then((data) => {
         console.log(data);
-
     })
+    return 'test';
     // ocd-division/country:us/state:az/place:peoria
 
 }

@@ -1,8 +1,8 @@
 //This file includes all of the code and logic for controlling the side/bottom navigation bar
 require([
-    "dojo/topic",
-    "dojo/domReady!"
-],
+        "dojo/topic",
+        "dojo/domReady!"
+    ],
     function (tp) {
 
         let $sidebar = $('#sidebar');
@@ -76,6 +76,8 @@ require([
         });
 
         $('#content').on('click', '.closePanel', function () {
+            $("#viewDiv").css("visibility", "visible");
+            $("#container").css("flex", 1);
             $links.removeClass('active');
             $arrows.hide();
             $panelDivs.hide();

@@ -38,18 +38,20 @@ require([
 
         function addLayers() {
             var layersToAdd = [];
-            for (var i = 0; i < app.config.layers.length; i++) {
-                var layer = app.config.layers[i];
+            app.config.layers.forEach(layer => {
                 var layerToAdd;
                 var url = app.config.mainUrl;
                 if (layer.type === "feature") {
-                    if (layer.popup) {
-                        var popupTemplate = new PopupTemplate({
-                            title: layer.popup.title,
-                            content: layer.popup.content,
-                            actions: layer.popup.actions
-                        });
-                    }
+                    let popupTemplate = new PopupTemplate({
+                        title: layer.title + '<div style="display:none">{*}</div>',
+                        content: function () {
+                            if (layer.googleCivic) {
+                                app.congressDistrictPopup(layer.googleCivic);
+                            }
+                            return `<div id="googleCivicTarget"></div>{NAME}`;
+                        }
+                    })
+
                     if (layer.url) {
                         url = layer.url;
                     }
@@ -60,7 +62,7 @@ require([
                         definitionExpression: layer.definitionExpression,
                         layerId: layer.ACSIndex,
                         visible: layer.visible,
-                        popupTemplate: popupTemplate,
+                        popupTemplate: popupTemplate, //layer.popup ? popupTemplate : undefined,
                         outFields: layer.outFields || ["*"],
                         opacity: layer.opacity
                     });
@@ -86,7 +88,7 @@ require([
                     layersToAdd.push(layerToAdd);
                     layerToAdd["sortOrder"] = layer.drawOrder;
                 }
-            }
+            });
 
             layersToAdd.sort(function (a, b) {
                 return b.sortOrder - a.sortOrder;

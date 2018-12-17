@@ -165,6 +165,11 @@ ul.CTAs a {
     margin-bottom: 5px;
 }
 
+.disabled {
+    background-color: lightgrey !important;
+    pointer-events: none;
+}
+
 a.download {
     background: #fff;
     color: var(--mainColor);
@@ -263,6 +268,12 @@ body,
 #container {
     padding: 0;
     margin: 0;
+    overflow-x: hidden !important;
+    overflow-y: hidden;
+}
+
+.nav>li>a {
+    padding: 10px 10px;
 }
 
 #container {
@@ -341,7 +352,8 @@ body,
 
 #bottomBar ul li a:hover {
     color: var(--hoverText);
-    background: var(--hoverColor)
+    background: var(--hoverColor);
+    cursor: pointer;
 }
 
 #bottomBar ul li.active>a,
@@ -402,6 +414,11 @@ a[aria-expanded="true"] {
     background: #DB4437;
 }
 
+.esri-view .esri-view-surface--inset-outline:focus::after {
+    /* flex: 1; */
+    outline: none;
+}
+
 #basemapToggle img {
     width: 27px;
     margin-top: 10px;
@@ -432,6 +449,14 @@ a[aria-expanded="true"] {
     margin: 5px
 }
 
+#cardContainer .cardIcon {
+    flex: 1;
+}
+
+#cardContainer .card-text {
+    flex: 4;
+}
+
 #cardContainer .card:hover {
     cursor: pointer;
     box-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
@@ -459,6 +484,20 @@ a[aria-expanded="true"] {
     background-color: lightgray;
 }
 
+#contactHeader {
+    background: var(--mainColor);
+    color: var(--textColor);
+}
+
+.popover-title {
+    background: var(--mainColor);
+    color: var(--textColor);
+}
+
+.esri-view-width-xlarge .esri-popup__main-container {
+    width: 375px;
+}
+
 .esri-ui .esri-popup {
     border-radius: 4px;
 }
@@ -467,6 +506,23 @@ a[aria-expanded="true"] {
     background: white;
     color: #333;
     border-radius: 4px;
+}
+
+.esri-popup__header {
+    background: var(--mainColor);
+    color: var(--textColor);
+}
+
+.esri-popup__header-buttons .esri-popup__icon {
+    color: white;
+}
+
+.esri-feature {
+    margin-top: 5px;
+}
+
+.esri-popup__icon:hover {
+    color: lightgray;
 }
 
 .esri-popup__content a {
@@ -556,6 +612,7 @@ label:hover,
 #layerList .layerLabel {
     margin-left: 5%;
     font-size: 14px;
+    flex: 1;
 }
 
 #layerList .regular-checkbox {
@@ -819,7 +876,7 @@ label:hover,
 
 .panelDiv {
     padding: 5px;
-    width: 27vw;
+    max-width: 27vw;
     display: none;
 }
 
@@ -1166,6 +1223,7 @@ label:hover,
 .popover {
     color: black;
     width: 90vw;
+    pointer-events: none;
 }
 
 .queryContainer {
@@ -1274,6 +1332,15 @@ label:hover,
 /* ---------------------------------------------------
     MEDIAQUERIES
 ----------------------------------------------------- */
+/* ---------------------------------------------------
+    MEDIAQUERIES
+----------------------------------------------------- */
+
+@media (max-width: 1300px) {
+    .panelDiv {
+        max-width: 39vw;
+    }
+}
 
 @media (max-width: 900px) {
     #content {
@@ -1285,17 +1352,32 @@ label:hover,
     }
 }
 
+@media (max-width: 350px) {
+    .nav>li>a {
+        padding: 10px 5px;
+    }
+}
+
 @media (max-width: 768px) {
+    .shareLinks a {
+        margin: 2px;
+    }
+
+    .shareLinks em {
+        margin-left: -27px;
+        margin-top: -4px;
+    }
+
+    #aboutTitle {
+        font-size: 12px;
+    }
+
     .iconTooltip {
         display: none !important;
     }
 
     .arrow-left {
         display: none !important;
-    }
-
-    #content {
-        height: 91vh;
     }
 
     #bottomBar {
@@ -1329,10 +1411,7 @@ label:hover,
     }
 
     #sidebar ul li a {
-        display: block;
         padding: 20px 10px;
-        text-align: center;
-        font-size: .85em;
     }
 
     #sidebar ul li a span {
