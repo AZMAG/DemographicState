@@ -23,14 +23,15 @@
 
 State Demographics map viewer for selected census info for Arizona
 
+[![Website](https://img.shields.io/website-up-down-green-red/http/shields.io.svg?label=my-website)](http://geo.azmag.gov/maps/azdemographics/)
 [![GitHub version](https://badge.fury.io/gh/AZMAG%2map-Demographic-Statewide.svg)](https://badge.fury.io/gh/AZMAG%2map-Demographic-Statewide)
 [![GitHub issues](https://img.shields.io/github/issues/AZMAG/map-Demographic-Statewide.svg)](https://github.com/AZMAG/map-Demographic-Statewide/issues)
 [![dependencies](https://david-dm.org/AZMAG/map-Demographic-Statewide.png)](https://david-dm.org/AZMAG/map-Demographic-Statewide)
 [![devDependency Status](https://david-dm.org/AZMAG/map-Demographic-Statewide/dev-status.png)](https://david-dm.org/AZMAG/map-Demographic-Statewide)
 [![Semver](http://img.shields.io/SemVer/2.0.0.png)](http://semver.org/spec/v2.0.0.html)
-[![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
+[![Built with Grunt](http://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
 [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-[![Website](https://img.shields.io/website-up-down-green-red/http/shields.io.svg?label=my-website)](http://geo.azmag.gov/maps/azdemographics/)
+
 
 The State Demographic Map Viewer is one of the Maricopa Association of Governments interactive mapping and analysis sites, showing selected population and housing data.  The viewer allows you to graphically view selected population and housing data for all Census block groups for the State of Arizona.  The viewer provides interactive mapping and reporting tools to allow exploration of data from Census 2010 and the American Community Survey (ACS) 2012-2016.
 
