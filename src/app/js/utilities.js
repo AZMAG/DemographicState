@@ -28,23 +28,18 @@ function rgbToHex(r, g, b) {
     return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
 }
 
-app.congressDistrictPopup = function (googleCivic) {
-    console.log(app.view.popup, googleCivic);
-
-    let selectedValue = app.view.popup.selectedFeature.attributes[googleCivic.valueField].replace(/^0+/, '');
-    // console.log(selectedValue);
+app.googleCivicData = function (googleCivic) {
+    let selectedValue = app.view.popup.selectedFeature.attributes["googleID"];
 
     GetRepresentativeInfo(googleCivic.id + selectedValue).then((data) => {
         console.log(data);
     })
     return 'test';
-    // ocd-division/country:us/state:az/place:peoria
-
 }
 
 const representativeCache = {};
 async function GetRepresentativeInfo(id) {
-    let url = `https://content.googleapis.com/civicinfo/v2/representatives/ocd-division%2Fcountry%3Aus%2Fstate%3Aaz%2F${encodeURIComponent(id)}?recursive=false&key=${app.config.googleCivicInfoApiKey}`;
+    let url = `https://content.googleapis.com/civicinfo/v2/representatives/${encodeURIComponent(id)}?recursive=false&key=${app.config.googleCivicInfoApiKey}`;
     if (representativeCache[id]) {
         return representativeCache[id];
     }
@@ -57,9 +52,6 @@ async function GetRepresentativeInfo(id) {
 }
 
 app.AddHighlightGraphic = function (graphic) {
-
-    console.log(graphic);
-
 
     let gfxLayer = app.map.findLayerById("gfxLayer");
 

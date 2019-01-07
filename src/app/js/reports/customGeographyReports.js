@@ -121,7 +121,7 @@ require([
                         $drawingTooltip.hide();
                         $drawingTooltip.html('Click and drag anywhere on the map to start drawing.');
                         $customSummaryButton.removeClass("active");
-                        ProcessSelection(graphic)
+                        ProcessSelection(graphic);
                         // app.GetData(app.config.layerDef["countyBoundaries"], '04005').then(function (data) {
                         //     tp.publish("open-report-window", data.acsData, app.acsFieldsConfig);
                         //     $customGeographyReports.hide();

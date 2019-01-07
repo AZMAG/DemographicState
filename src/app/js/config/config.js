@@ -70,10 +70,7 @@ app.config = {
             drawOrder: 3,
             legend: true,
             layerName: "Congressional_Districts",
-            googleCivic: {
-                id: "/cd:",
-                valueField: "CD115FP"
-            },
+            googleCivic: true,
             displayField: "NAME",
             id: "congressionalDistricts",
             title: "Congressional Districts",
@@ -136,10 +133,6 @@ app.config = {
             drawOrder: 7,
             legend: true,
             layerName: "SupervisorDistricts",
-            // googleCivic: {
-            //     id: "/place:phoenix/council_district:",
-            //     valueField: "NAME"
-            // },
             id: "supervisorDistricts",
             title: "County Supervisor Districts",
             type: "feature",
@@ -153,10 +146,7 @@ app.config = {
         }, {
             drawOrder: 7,
             layerName: "CityDistricts",
-            googleCivic: {
-                id: "/place:phoenix/council_district:",
-                valueField: "NAME"
-            },
+            googleCivic: true,
             id: "councilDistricts",
             title: "Council Districts",
             type: "feature",

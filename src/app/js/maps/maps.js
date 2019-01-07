@@ -46,7 +46,7 @@ require([
                         title: layer.title + '<div style="display:none">{*}</div>',
                         content: function () {
                             if (layer.googleCivic) {
-                                app.congressDistrictPopup(layer.googleCivic);
+                                app.googleCivicData(layer.googleCivic);
                             }
                             return `<div id="googleCivicTarget"></div>{NAME}`;
                         }

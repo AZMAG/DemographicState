@@ -1223,7 +1223,6 @@ label:hover,
 .popover {
     color: black;
     width: 90vw;
-    pointer-events: none;
 }
 
 .queryContainer {
@@ -1329,9 +1328,14 @@ label:hover,
     float: left;
 }
 
-/* ---------------------------------------------------
-    MEDIAQUERIES
------------------------------------------------------ */
+.esri-widget--button {
+    background-color: black;
+}
+
+.esri-widget--button:hover {
+    background-color: #6e6e6e;
+}
+
 /* ---------------------------------------------------
     MEDIAQUERIES
 ----------------------------------------------------- */
