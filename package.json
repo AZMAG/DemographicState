@@ -39,7 +39,9 @@
     }
   ],
   "private": true,
-  "dependencies": {},
+  "dependencies": {
+    "arcgis-js-api": "^4.9.3"
+  },
   "devDependencies": {
     "grunt": "^1.0.3",
     "grunt-comment-toggler": "^0.2.2",

@@ -1,0 +1,289 @@
+<div id="reportArea">
+    <div class="panelHeader">
+        <span class="panelHeaderText">Generate a report:</span>
+        <a class="closePanel" href="#"> <i class="fas fa-times"></i> </a>
+    </div>
+    <div class="panelSubHeader">
+        <button class="btn returnBtn"><i class="fas fa-angle-double-left"></i> Back</button>
+        <div id="summaryReportHeader"></div>
+    </div>
+
+    <div id="cardContainer">
+        <div data-report-form-id="standardReports" class="card" style="width: 90%;">
+            <div class="card-body">
+                <h5 class="card-title">Standard Reports</h5>
+                <div class="flexCenter">
+                    <i class="fas fa-table fa-3x cardIcon"></i>
+                    <p class="card-text">
+                        Open a demographic report for any Jurisdiction, County, COG/MPO, Zip Code, Congressional
+                        Districts, County Supervisor Districts, or City Council Districts.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div data-report-form-id="customGeographyReports" class="card" style="width: 90%;">
+            <div class="card-body">
+                <h5 class="card-title">Custom Geography</h5>
+
+                <div class="flexCenter">
+                    <i class="fas fa-draw-polygon fa-3x cardIcon"></i>
+                    <p class="card-text">Create a report based on user selected block groups.</p>
+                </div>
+            </div>
+        </div>
+        <div data-report-form-id="advancedReports" class="card" style="width: 90%;">
+            <div class="card-body">
+                <h5 class="card-title">Advanced Selection</h5>
+                <div class="flexCenter">
+                    <i class="fas fa-search-location fa-3x cardIcon"></i>
+                    <p class="card-text">Create a report by selecting block groups with certain attributes.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="standardReports" class="reportFormArea">
+        <!-- <div class="flexCenter"></div> -->
+        <form id="reportForm">
+            <div class="form-group">
+                <label for="reportType">Type of Report:</label>
+                <select class="form-control" id="reportType"></select>
+                <small class="form-text text-muted">Choose the type of geography for the report.</small>
+            </div>
+            <div id="specificReportDiv" class="form-group">
+                <label for="specificReport">Choose Report:</label>
+                <select class="form-control" id="specificReport"> </select>
+                <small class="form-text text-muted">Choose the specific report to generate.</small>
+            </div>
+            <button id="standardBtnSubmit" type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+    <div id="customGeographyReports" class="reportFormArea">
+        <form id="interactiveForm">
+            <h6>Identify a:</h6>
+            <div>
+                <div class="form-group">
+                    <button data-val="polygon" class="btn customSummaryButton">
+                        <img src="app/images/CustomSummaryIcons/i_draw_freepoly.png" alt="" />
+                    </button>
+                    <span>Freehand Area of Interest</span>
+                </div>
+                <div class="form-group">
+                    <button data-val="multipoint" class="btn customSummaryButton">
+                        <img src="app/images/CustomSummaryIcons/i_draw_rect.png" alt="" />
+                    </button>
+                    <span>Area of Interest</span>
+                </div>
+                <div class="form-group">
+                    <button data-val="point" class="btn customSummaryButton">
+                        <img src="app/images/CustomSummaryIcons/i_draw_point.png" alt="" />
+                    </button>
+                    <span>Point of Interest</span>
+                </div>
+                <div class="form-group">
+                    <button data-val="polyline" class="btn customSummaryButton">
+                        <img src="app/images/CustomSummaryIcons/i_draw_line.png" alt="" />
+                    </button>
+                    <span>Corridor of Interest</span>
+                </div>
+            </div>
+
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" name="useBuffer" id="useBuffer" />
+                <label for="useBuffer" class="form-check-label">Use a buffer</label>
+            </div>
+
+            <div class="form-check">
+                <input type="checkbox" checked class="form-check-input" name="useZoom" id="useZoom" />
+                <label for="useZoom" class="form-check-label">Zoom to Selection</label>
+            </div>
+
+            <div id="bufferOptions">
+                <input type="text" placeholder="Radius" /> <label for="unit">Units</label>
+                <select name="unit" id="unit">
+                    <option value="miles">Miles</option>
+                    <option value="feet">Feet</option>
+                    <option value="meters">Meters</option>
+                    <option value=""></option>
+                </select>
+            </div>
+        </form>
+    </div>
+    <div id="advancedReports" class="reportFormArea">
+        <span id="info"></span>
+        <!-- <div class="queryContainer">
+            <div id="treeViewContainer">
+                <div style="text-align:center">
+                    <h4>Fields</h4>
+                    <h6>Drag or double click these fields to the query window to add a row to the
+                        query.</h6>
+                </div>
+                <div id="treeView" style="white-space: normal;"></div>
+            </div>
+            <div style="text-align:center">
+                <h4>Query</h4>
+                <h6>Each row filters the selection of block groups. Counts and percentages are per
+                    block group.</h6>
+            </div>
+            <div id="target">
+                <h4 id="dropPrompt" style="color:black;">Drop here</h4>
+            </div>
+        </div> -->
+        <!-- <span id="queryButtonGroup">
+            <button id="runQuery" class="queryButtons" type="button" title="Run Query">Run Query</button>
+            <button id="cancelQuery" class="queryButtons" type="button" title="Cancel Query">Cancel</button>
+        </span>
+        <div id="fCountSpan" class="queryResultCount k-header resultBanner">Number of selected block
+            groups:&nbsp;
+            <span id="fCount1"></span>
+        </div> -->
+    </div>
+    <div id="reportLoader"><img src="app/images/Loading.gif" alt="Loading" /></div>
+    <div id="summaryReport">
+        <div id="sumReportTabStrip">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm">
+                        <ul class="nav nav-tabs mb-3" id="tabs-tab" role="tablist">
+                            <li class="nav-item">
+                                <a
+                                    class="nav-link active"
+                                    data-toggle="tab"
+                                    href="#gridTab"
+                                    role="tab"
+                                    aria-controls="gridTab"
+                                    aria-selected="true"
+                                    >Data</a
+                                >
+                            </li>
+
+                            <li class="nav-item">
+                                <a
+                                    class="nav-link"
+                                    data-toggle="tab"
+                                    href="#chartsTab"
+                                    role="tab"
+                                    aria-controls="chartsTab"
+                                    aria-selected="false"
+                                    >Charts</a
+                                >
+                            </li>
+
+                            <!-- <li class="nav-item">
+                                        <a class="nav-link" data-toggle="tab" href="#censusGridTab" role="tab"
+                                            aria-controls="censusGridTab" aria-selected="false">Census 2010 Data</a>
+                                    </li>
+    
+                                    <li class="nav-item">
+                                        <a class="nav-link" data-toggle="tab" href="#censusChartsTab" role="tab"
+                                            aria-controls="censusChartsTab" aria-selected="false">Census Charts</a>
+                                    </li> -->
+                        </ul>
+                    </div>
+                    <span class="legal">Data Source</span>
+                    <div class="col-sm">
+                        <div id="selector" class="btn-group">
+                            <button type="button" data-val="acs" class="dataSrcToggle btn btn-secondary btn-sm active">
+                                ACS 2017
+                            </button>
+                            <button data-val="census2010" type="button" class="dataSrcToggle btn btn-secondary btn-sm">
+                                Census 2010
+                            </button>
+                        </div>
+                        <!-- <div
+                            class="btn-group btn-group-toggle"
+                            data-toggle="buttons"
+                        >
+                            <label class="btn btn-secondary btn-sm active">
+                                <input
+                                    data-val="acs"
+                                    type="radio"
+                                    class="dataSrcToggle"
+                                    name="options"
+                                    autocomplete="off"
+                                    checked
+                                />
+                                ACS 2016
+                            </label>
+                            <label class="btn btn-secondary btn-sm">
+                                <input
+                                    data-val="census2010"
+                                    type="radio"
+                                    class="dataSrcToggle"
+                                    name="options"
+                                    autocomplete="off"
+                                />
+                                Census 2010
+                            </label>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+            <div class="tab-content" id="pills-tabContent">
+                <div class="tab-pane fade show active" id="gridTab" role="tabpanel" aria-labelledby="gridTab">
+                    <div id="gridTarget"></div>
+                    <hr />
+                    <div id="title6Area">
+                        <p class="k-reset">
+                            <a
+                                id="title6Toggle"
+                                class="k-icon k-i-expand"
+                                href="#"
+                                tabindex="-1"
+                                aria-label="Expand"
+                            ></a
+                            >Title 6 Data
+                        </p>
+                        <div id="title6Grid"></div>
+                    </div>
+                    <div class="sourceLabel"></div>
+                </div>
+
+                <div class="tab-pane fade" id="chartsTab" role="tabpanel" aria-labelledby="chartsTab">
+                    <div id="chartsTarget">
+                        <div class="form-group">
+                            <select class="form-control" id="chartsList"></select>
+                            <small class="form-text text-muted">Choose the data metric.</small>
+                        </div>
+                        <div class="form-group">
+                            <select class="form-control" id="chartsType">
+                                <option value="area">area</option>
+                                <option value="bar">bar</option>
+                                <!-- <option value="bubble">bubble</option> -->
+                                <!-- <option value="bullet">bullet</option> -->
+                                <!-- <option value="candlestick">candlestick</option> -->
+                                <option selected value="column">column</option>
+                                <option value="donut">donut</option>
+                                <option value="funnel">funnel</option>
+                                <!-- <option value="horizontalWaterfall">horizontalWaterfall</option> -->
+                                <option value="line">line</option>
+                                <!-- <option value="ohlc">ohlc</option> -->
+                                <option value="pie">pie</option>
+                                <!-- <option value="polarArea">polarArea</option>
+                                <option value="polarLine">polarLine</option>
+                                <option value="polarScatter">polarScatter</option>
+                                <option value="radarArea">radarArea</option>
+                                <option value="radarColumn">radarColumn</option>
+                                <option value="radarLine">radarLine</option>
+                                <option value="rangeArea">rangeArea</option>
+                                <option value="rangeBar">rangeBar</option>
+                                <option value="rangeColumn">rangeColumn</option>
+                                <option value="scatter">scatter</option>
+                                <option value="scatterLine">scatterLine</option>
+                                <option value="verticalArea">verticalArea</option>
+                                <option value="verticalBoxPlot">verticalBoxPlot</option>
+                                <option value="verticalBullet">verticalBullet</option>
+                                <option value="verticalLine">verticalLine</option>
+                                <option value="verticalRangeArea">verticalRangeArea</option> -->
+                                <option value="waterfall">waterfall</option>
+                            </select>
+                            <small class="form-text text-muted">Choose the chart type.</small>
+                        </div>
+                        <div class="chartsArea"></div>
+                        <div role="group" aria-label="Charts List" class="btn-group-vertical chartsList"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="tempAttr"></div>
+</div>

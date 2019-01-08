@@ -30,12 +30,9 @@ And constructed with the following guidelines:
 
 ***************************************************
 
-## Version 3.2.5 | 2018-08-01
-
-* fixed config reference in cbr-vm
-* fixed issue with multiple map frames
-* added class breaks cache to improve map performance
-* fixed Bitly link
+## Version 4.0.0 | 2018-12-04
+* Complete rewrite of code in 4.x
+* Migrated code from bikeways viewer and from existing demographics viewer as possible
 
 ## Version 3.2.4 | 2018-04-20
 

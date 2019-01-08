@@ -1,0 +1,39 @@
+<div class="panelHeader">
+    <span class="panelHeaderText">Choose a Map:</span>
+    <a class="closePanel" href="#">
+        <i class="fas fa-times"></i>
+    </a>
+</div>
+<!-- <button id="mapsListToggle" data-status="expand">Expand All</button> -->
+<div id="mapsList"></div>
+<hr>
+<form>
+    <div class="flexCenter">
+        <label for="classBreaksCount">Number of Data Classes</label>
+        <select style="flex: 1; margin-left: 25px;" class="form-control" id="classBreaksCount">
+            <option>3</option>
+            <option>4</option>
+            <option selected="selected">5</option>
+            <option>6</option>
+            <option>7</option>
+            <option>8</option>
+            <option>9</option>
+        </select>
+    </div>
+    <div class="flexCenter">
+        <label for="classType">Classification Type</label>
+        <select style="flex: 1; margin-left: 25px;" class="form-control" id="classType">
+            <option value="Jenks">Natural Breaks</option>
+            <option value="EqInterval">Equal Interval</option>
+            <option value="Quantile">Quantile</option>
+            <option>Custom</option>
+        </select>
+    </div>
+    <div class="form-group">
+        Click to change color scheme
+        <div id="colorRamp"></div>
+    </div>
+</form>
+</div>
+<div class="panelDiv" style="display:block" panel-id="reports"></div>
+<div class="panelDiv" panel-id="help"></div>
