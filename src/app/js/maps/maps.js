@@ -1,20 +1,21 @@
+"use strict";
 require([
-    'esri/Map',
-    'esri/views/MapView',
+    "esri/Map",
+    "esri/views/MapView",
 
-    'esri/layers/FeatureLayer',
-    'esri/layers/MapImageLayer',
-    'esri/layers/GraphicsLayer',
-    'esri/PopupTemplate',
-    'dojo/topic',
-    'dojo/domReady!'
+    "esri/layers/FeatureLayer",
+    "esri/layers/MapImageLayer",
+    "esri/layers/GraphicsLayer",
+    "esri/PopupTemplate",
+    "dojo/topic",
+    "dojo/domReady!"
 ], function(Map, MapView, FeatureLayer, MapImageLayer, GraphicsLayer, PopupTemplate, tp) {
     app.map = new Map({
-        basemap: 'gray'
+        basemap: "gray"
     });
 
     app.view = new MapView({
-        container: 'viewDiv',
+        container: "viewDiv",
         map: app.map,
         extent: app.config.initExtent,
         constraints: {
@@ -28,17 +29,17 @@ require([
     });
 
     app.view.when(function() {
-        tp.publish('map-loaded');
+        tp.publish("map-loaded");
     });
 
-    tp.subscribe('map-loaded', addLayers);
+    tp.subscribe("map-loaded", addLayers);
 
     function addLayers() {
         var layersToAdd = [];
         app.config.layers.forEach(layer => {
             var layerToAdd;
             var url = app.config.mainUrl;
-            if (layer.type === 'feature') {
+            if (layer.type === "feature") {
                 let popupTemplate = new PopupTemplate({
                     title: layer.title + '<div style="display:none">{*}</div>',
                     content: function() {
@@ -54,16 +55,16 @@ require([
                 }
                 layerToAdd = new FeatureLayer({
                     id: layer.id,
-                    url: url + '/' + layer.ACSIndex,
+                    url: url + "/" + layer.ACSIndex,
                     title: layer.title,
                     definitionExpression: layer.definitionExpression,
                     layerId: layer.ACSIndex,
                     visible: layer.visible,
                     popupTemplate: popupTemplate, //layer.popup ? popupTemplate : undefined,
-                    outFields: layer.outFields || ['*'],
+                    outFields: layer.outFields || ["*"],
                     opacity: layer.opacity
                 });
-            } else if (layer.type === 'image') {
+            } else if (layer.type === "image") {
                 if (layer.url) {
                     url = layer.url;
                 }
@@ -75,17 +76,15 @@ require([
                     visible: layer.visible,
                     labelsVisible: false,
                     labelingInfo: [{}],
-                    sublayers: [
-                        {
-                            id: layer.ACSIndex,
-                            opacity: 1
-                        }
-                    ]
+                    sublayers: [{
+                        id: layer.ACSIndex,
+                        opacity: 1
+                    }]
                 });
             }
             if (layerToAdd) {
                 layersToAdd.push(layerToAdd);
-                layerToAdd['sortOrder'] = layer.drawOrder;
+                layerToAdd["sortOrder"] = layer.drawOrder;
             }
         });
 
@@ -96,20 +95,20 @@ require([
         app.map.layers.addMany(layersToAdd);
 
         var gfxLayer = new GraphicsLayer({
-            id: 'gfxLayer'
+            id: "gfxLayer"
         });
         app.map.add(gfxLayer);
 
         //For now.... I'm waiting until the block groups layer is finished to publish the layers-added event.
         //TODO: This should prevent the legend from trying to load to early.
         //It Should probably be refactored at some point
-        let bgLayer = app.map.findLayerById('blockGroups');
+        let bgLayer = app.map.findLayerById("blockGroups");
         var once = false;
         app.view.whenLayerView(bgLayer).then(function(lyrView) {
-            lyrView.watch('updating', function(value) {
+            lyrView.watch("updating", function(value) {
                 if (!value && !once) {
                     // app.blockGroupLyrView = lyrView;
-                    tp.publish('layers-added');
+                    tp.publish("layers-added");
                     once = true;
                 }
             });

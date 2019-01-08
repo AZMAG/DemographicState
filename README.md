@@ -55,15 +55,15 @@ And constructed with the following guidelines:
 2. **MINOR** version when you add functionality in a backwards-compatible manner **bumps the minor** resets patch
 3. **PATCH** version when you make backwards-compatible bug fixes and misc changes **bumps only the patch**
 
-### version 3.2.5 ###
+### version | 3.2.5 ###
 
- `Updated: 2018-07-31`
+    Updated | 2018-07-31
 
- `Created: 2014-10-21`
+    Created | 2014-10-21
 
 ## Credits
 
-`Maricopa Association of Governments (MAG) and the MAG member agencies`
+    Maricopa Association of Governments (MAG) and the MAG member agencies
 
 ## Site URL
 
@@ -77,7 +77,11 @@ A detailed list of the changes and fixes in each version update can be found in 
 
 ## Resources
 
+* [American Fact Finder](https://factfinder.census.gov/faces/nav/jsf/pages/index.xhtml/)
+
 ## Examples
+
+* [Census Data Mapper](https://datamapper.geo.census.gov/map.html/)
 
 ## Dependencies
 

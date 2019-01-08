@@ -1,63 +1,69 @@
 {
-  "name": "Demographics-State-App",
-  "version": "3.2.5",
-  "date": "2018-07-31",
-  "copyright": "2018",
-  "description": "MAG State Demographic Viewer",
-  "keywords": [
-    "Demographics",
-    "MAG",
-    "maps",
-    "state",
-    "Arizona",
-    "census",
-    "2010",
-    "American Community Survey",
-    "ACS",
-    "2012-2016",
-    "5 year",
-    "ESRI",
-    "#MAGmaps"
-  ],
-  "main": "index.js",
-  "homepage": "http://geo.azmag.gov/maps/azdemographics/",
-  "author": "MAG Information Services (http://www.azmag.gov/Information_Services/default.asp)",
-  "contributors": [
-    {
-      "name": "Vern Wolfley",
-      "email": "vwolfley@azmag.gov"
+    "name": "Demographics-State-App",
+    "version": "4.0.0",
+    "date": "2019-07-31",
+    "copyright": "2019",
+    "description": "MAG State Demographic Viewer",
+    "keywords": [
+        "Demographics",
+        "data",
+        "statistics",
+        "census",
+        "2010",
+        "American Community Survey",
+        "ACS",
+        "2012-2016",
+        "5 year",
+        "MAG",
+        "maps",
+        "state",
+        "Arizona",
+        "ESRI",
+        "#MAGmaps"
+    ],
+    "main": "index.js",
+    "homepage": "http://geo.azmag.gov/maps/azdemographics/",
+    "author": "MAG Regional Analytics Devision (http://www.azmag.gov/About-Us/Divisions/Regional-Analytics-Division/)",
+    "contributors": [
+        {
+            "name": "Vern Wolfley",
+            "email": "vwolfley@azmag.gov"
+        },
+        {
+            "name": "Jack Fairfield",
+            "email": "jfairfield@azmag.gov"
+        }
+    ],
+    "repository": [
+        {
+            "type": "git",
+            "url": "https://github.com/AZMAG/map-DemographicState"
+        }
+    ],
+    "private": true,
+    "dependencies": {
+        "arcgis-js-api": "^4.10.1"
     },
-    {
-      "name": "Jack Fairfield",
-      "email": "jfairfield@azmag.gov"
-    }
-  ],
-  "repository": [
-    {
-      "type": "git",
-      "url": "https://github.com/AZMAG/map-DemographicState"
-    }
-  ],
-  "private": true,
-  "dependencies": {
-    "arcgis-js-api": "^4.9.3"
-  },
-  "devDependencies": {
-    "grunt": "^1.0.3",
-    "grunt-comment-toggler": "^0.2.2",
-    "grunt-contrib-clean": "^1.1.0",
-    "grunt-contrib-concat": "^1.0.1",
-    "grunt-contrib-copy": "^1.0.0",
-    "grunt-contrib-csslint": "^2.0.0",
-    "grunt-contrib-cssmin": "^2.2.0",
-    "grunt-contrib-jshint": "^1.1.0",
-    "grunt-contrib-uglify": "^3.0.0",
-    "grunt-text-replace": "^0.4.0",
-    "jshint-stylish-ex": "^0.2.0",
-    "lodash": "^4.17.11",
-    "matchdep": "1.0.1",
-    "normalize.css": ">=7.0.0",
-    "request": "^2.87.0"
-  },
-  "license": "MIT"
+    "devDependencies": {
+        "@babel/core": "^7.2.2",
+        "@babel/preset-env": "^7.2.3",
+        "grunt": "^1.0.3",
+        "grunt-babel": "^8.0.0",
+        "grunt-comment-toggler": "^0.2.2",
+        "grunt-contrib-clean": "^2.0.0",
+        "grunt-contrib-concat": "^1.0.1",
+        "grunt-contrib-copy": "^1.0.0",
+        "grunt-contrib-csslint": "^2.0.0",
+        "grunt-contrib-cssmin": "^3.0.0",
+        "grunt-contrib-htmlmin": "^3.0.0",
+        "grunt-contrib-jshint": "^2.0.0",
+        "grunt-contrib-uglify": "^4.0.0",
+        "grunt-text-replace": "^0.4.0",
+        "jshint-stylish-ex": "^0.2.0",
+        "lodash": "^4.17.11",
+        "matchdep": "^2.0.0",
+        "normalize.css": ">=8.0.1",
+        "request": "^2.88.0"
+    },
+    "license": "MIT"
 }

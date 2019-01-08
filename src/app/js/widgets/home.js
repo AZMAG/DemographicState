@@ -1,19 +1,20 @@
+"use strict";
 require([
-        'esri/widgets/Home/HomeViewModel',
-        'dojo/topic',
-        'dojo/domReady!'
+        "esri/widgets/Home/HomeViewModel",
+        "dojo/topic",
+        "dojo/domReady!"
     ],
-    function (HomeViewModel, tp) {
-        tp.subscribe("map-loaded", function () {
+    function(HomeViewModel, tp) {
+        tp.subscribe("map-loaded", function() {
             const homeId = "homeWidget";
             let homeVM = new HomeViewModel({
                 view: app.view
             });
 
-            app.view.ui.add(homeId, 'bottom-right');
+            app.view.ui.add(homeId, "bottom-right");
 
-            $("#" + homeId).click(function () {
+            $("#" + homeId).click(function() {
                 homeVM.go();
             });
-        })
-    })
+        });
+    });

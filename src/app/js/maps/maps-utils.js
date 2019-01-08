@@ -1,14 +1,15 @@
+"use strict";
 require([
         "dojo/topic",
         "dojo/domReady!"
     ],
-    function (tp) {
+    function(tp) {
         let $mapsList = $("#mapsList");
         let $colorRamp = $("#colorRamp");
         let $classBreaksCount = $("#classBreaksCount");
         let $classType = $("#classType");
 
-        app.GetColorRamp = function (type, rampKey, numBreaks) {
+        app.GetColorRamp = function(type, rampKey, numBreaks) {
             const ramps = app.GetRampsByNumAndType(type, numBreaks);
             let ramp = ramps[rampKey];
             let rtnRamp = [];
@@ -18,21 +19,21 @@ require([
                     r: clr[0],
                     g: clr[1],
                     b: clr[2]
-                })
+                });
             }
             return rtnRamp;
-        }
+        };
 
-        app.GetRampsByNumAndType = function (type, numBreaks) {
+        app.GetRampsByNumAndType = function(type, numBreaks) {
             let classBreakSet = app.colorRampConfig[type]["ClassBreakSets"][numBreaks];
             let allRamps = app.colorRampConfig[type]["ColorRamps"];
             let returnRamps = {};
 
-            Object.keys(allRamps).forEach(function (rampKey) {
+            Object.keys(allRamps).forEach(function(rampKey) {
                 let ramp = allRamps[rampKey];
                 let filteredRamp = [];
 
-                Object.keys(ramp).forEach(function (letterKey) {
+                Object.keys(ramp).forEach(function(letterKey) {
                     if (classBreakSet.indexOf(letterKey) > -1) {
                         filteredRamp.push(ramp[letterKey]);
                     }
@@ -40,9 +41,9 @@ require([
                 returnRamps[rampKey] = filteredRamp;
             });
             return returnRamps;
-        }
+        };
 
-        app.ColorRampToHTML = function (ramp, rampKey, rampType) {
+        app.ColorRampToHTML = function(ramp, rampKey, rampType) {
             let html = `<div data-type="${rampType}" data-id="${rampKey}" class="cRamp">`;
             for (let i = 0; i < ramp.length; i++) {
                 let clr = ramp[i];
@@ -50,21 +51,21 @@ require([
                     clr = `${clr.r}, ${clr.g}, ${clr.b}`;
                 }
 
-                html += `<div style="background-color:rgb(${clr})" class="colorRampSquare"></div>`
+                html += `<div style="background-color:rgb(${clr})" class="colorRampSquare"></div>`;
             }
             return html += "</div>";
-        }
+        };
 
-        app.GetActiveMapData = function () {
-            //Gets active map item    
+        app.GetActiveMapData = function() {
+            //Gets active map item
             let $activeItem = $mapsList.find(".activeMapItem");
             if ($activeItem) {
                 //Pull jquery data object from active map item
                 return $activeItem.data("mapsConfig");
             }
-        }
+        };
 
-        app.GetCurrentMapsParams = function () {
+        app.GetCurrentMapsParams = function() {
             let conf = app.GetActiveMapData();
             let cbrCount = $classBreaksCount.val();
             let classType = $classType.val();
@@ -79,7 +80,7 @@ require([
             let colorRamp = app.GetColorRamp(type, rampKey, cbrCount);
 
 
-            if (classType === 'Custom') {
+            if (classType === "Custom") {
                 cbInfos = app.GetCustomBreaks();
             } else {
                 cbInfos = app.GetCurrentBreaks(breaks, colorRamp);
@@ -93,18 +94,18 @@ require([
                 colorRamp: colorRamp,
                 cbInfos: cbInfos,
                 classType: classType
-            }
-        }
+            };
+        };
 
-        app.pctLabel = function (val) {
-            return (Math.round(val * 1000) / 10).toLocaleString('en-US');
-        }
+        app.pctLabel = function(val) {
+            return (Math.round(val * 1000) / 10).toLocaleString("en-US");
+        };
 
-        app.numLabel = function (val) {
-            return Math.round(val).toLocaleString('en-US');
-        }
+        app.numLabel = function(val) {
+            return Math.round(val).toLocaleString("en-US");
+        };
 
-        app.GetCurrentBreaks = function (breaks, colorRamp) {
+        app.GetCurrentBreaks = function(breaks, colorRamp) {
             const rtnData = [];
             let conf = app.GetActiveMapData();
             for (let i = 0; i < breaks.length - 1; i++) {
@@ -118,8 +119,8 @@ require([
                     minLabel = Math.round(minLabel * 1000) / 10 + "%";
                     maxLabel = Math.round(maxLabel * 1000) / 10 + "%";
                 } else if (conf.Type === "number") {
-                    minLabel = Math.round(minLabel).toLocaleString('en-US');
-                    maxLabel = Math.round(maxLabel).toLocaleString('en-US');
+                    minLabel = Math.round(minLabel).toLocaleString("en-US");
+                    maxLabel = Math.round(maxLabel).toLocaleString("en-US");
                 }
 
                 rtnData.push({
@@ -130,13 +131,13 @@ require([
                         color: colorRamp[i],
                         outline: {
                             color: [0, 0, 0, 0.1],
-                            width: .5
+                            width: 0.5
                         }
                     },
                     label: `${minLabel} - ${maxLabel}`
-                })
+                });
             }
             return rtnData;
-        }
+        };
     }
-)
+);

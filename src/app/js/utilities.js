@@ -1,5 +1,5 @@
 //This file should include miscellaneous repeatable functions used in multiple places in the code.
-
+"use strict";
 Number.prototype.MagFormat = function() {
     return this.toFixed(1);
 };
@@ -12,31 +12,30 @@ function hexToRgb(hex) {
     });
 
     var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-    return result
-        ? {
-              r: parseInt(result[1], 16),
-              g: parseInt(result[2], 16),
-              b: parseInt(result[3], 16)
-          }
-        : null;
+    return result ? {
+            r: parseInt(result[1], 16),
+            g: parseInt(result[2], 16),
+            b: parseInt(result[3], 16)
+        } :
+        null;
 }
 
 function componentToHex(c) {
     var hex = c.toString(16);
-    return hex.length == 1 ? '0' + hex : hex;
+    return hex.length === 1 ? "0" + hex : hex;
 }
 
 function rgbToHex(r, g, b) {
-    return '#' + componentToHex(r) + componentToHex(g) + componentToHex(b);
+    return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
 }
 
 app.googleCivicData = function(googleCivic) {
-    let selectedValue = app.view.popup.selectedFeature.attributes['googleID'];
+    let selectedValue = app.view.popup.selectedFeature.attributes["googleID"];
 
     GetRepresentativeInfo(googleCivic.id + selectedValue).then(data => {
         console.log(data);
     });
-    return 'test';
+    return "test";
 };
 
 const representativeCache = {};
@@ -59,32 +58,32 @@ app.AddHighlightGraphics = function(graphics) {
     console.log(graphics);
 
     // app.view.graphics.add(graphics[0]);
-    let gfxLayer = app.map.findLayerById('gfxLayer');
+    let gfxLayer = app.map.findLayerById("gfxLayer");
     gfxLayer.addMany(graphics);
 };
 
 app.AddHighlightGraphic = function(graphic) {
-    let gfxLayer = app.map.findLayerById('gfxLayer');
+    let gfxLayer = app.map.findLayerById("gfxLayer");
     console.log(graphic);
 
     if (gfxLayer.graphics && gfxLayer.graphics.items.length > 0) {
-        console.log('asdf');
+        console.log("asdf");
     } else {
         // gfxLayer.removeAll();
 
         var tempGraphic = $.extend({}, graphic);
 
         tempGraphic.symbol = {
-            type: 'simple-fill',
+            type: "simple-fill",
             color: [0, 255, 255, 0.5],
             opacity: 0.5,
             outline: {
-                color: 'cyan',
-                width: '3'
+                color: "cyan",
+                width: "3"
             }
         };
         console.log(tempGraphic);
-        require(['esri/Graphic'], function(Graphic) {
+        require(["esri/Graphic"], function(Graphic) {
             var gfx = new Graphic({
                 geometry: tempGraphic.geometry,
                 symbol: tempGraphic.symbol

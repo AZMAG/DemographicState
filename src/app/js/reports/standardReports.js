@@ -1,9 +1,10 @@
+"use strict";
 require([
         "dojo/topic"
     ],
-    function (tp) {
+    function(tp) {
         // tp.subscribe("layers-added", initReports);
-        tp.subscribe("panel-loaded", function (panel) {
+        tp.subscribe("panel-loaded", function(panel) {
             if (panel === "reports") {
                 initReports();
 
@@ -16,20 +17,20 @@ require([
                         }
                     }
                     $("#reportType").html(html);
-                    $("#reportType option").each(function (i, el) {
+                    $("#reportType option").each(function(i, el) {
                         let id = $(el).data("id");
                         $(el).data("conf", app.config.layers[id]);
-                    })
+                    });
 
                 }
 
                 function hideReportLayers() {
-                    app.config.layers.forEach(function (conf) {
+                    app.config.layers.forEach(function(conf) {
                         const layer = app.map.findLayerById(conf.id);
                         if (layer && conf.showReport) {
                             layer.visible = false;
                         }
-                    })
+                    });
                 }
 
                 function updateReportDDL(layer, conf) {
@@ -44,18 +45,18 @@ require([
                         returnGeometry: false,
                         distinct: true,
                         orderByFields: [sumField]
-                    }
+                    };
 
-                    layer.queryFeatures(q).then(function (res) {
-                        $("#specificReport").html('');
+                    layer.queryFeatures(q).then(function(res) {
+                        $("#specificReport").html("");
                         for (let i = 0; i < res.features.length; i++) {
                             const feature = res.features[i];
                             $("#specificReport").append(`<option data-geo-id="${feature.attributes["GEOID10"]}" data-object-id="${feature.attributes["OBJECTID"]}">${feature.attributes[sumField]}</option>`);
                         }
-                    })
+                    });
                 }
 
-                $("#reportType").change(function () {
+                $("#reportType").change(function() {
                     let $selectedItem = $(this).find(":selected");
                     let text = $selectedItem.text();
                     if (text !== "Select a Type") {
@@ -67,7 +68,7 @@ require([
                     } else {
                         ResetForm();
                     }
-                })
+                });
 
                 function ResetForm() {
                     $("#specificReportDiv").hide();
@@ -75,7 +76,7 @@ require([
                     $("#reportType").val("default");
                 }
 
-                $("#reportForm").submit(function (e) {
+                $("#reportForm").submit(function(e) {
                     $("#reportLoader").css("display", "flex");
                     e.preventDefault();
                     $("#summaryReport").hide();
@@ -84,7 +85,7 @@ require([
                     let GEOID = $("#specificReport").find(":selected").data("geo-id");
                     let OBJECTID = $("#specificReport").find(":selected").data("object-id");
 
-                    app.GetData(conf, GEOID).then(function (data) {
+                    app.GetData(conf, GEOID).then(function(data) {
                         if (data) {
                             tp.publish("open-report-window", data.acsData, app.acsFieldsConfig);
                         } else {
@@ -93,8 +94,8 @@ require([
                         $("#reportForm").hide();
                         ResetForm();
                         $("#reportLoader").hide();
-                    })
-                })
+                    });
+                });
             }
-        })
-    })
+        });
+    });
