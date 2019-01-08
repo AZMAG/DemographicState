@@ -61,7 +61,7 @@ module.exports = function(grunt) {
                 jshintrc: true,
                 reporter: require("jshint-stylish-ex")
             },
-            src: ["Gruntfile.js", "src/app/js/*.js", "src/app/js/maps/*.js", "src/app/js/reports/*.js", "src/app/js/widgets/*.js"],
+            src: ["Gruntfile.js", "src/app/js/*.js", "src/app/js/config/*.js", "src/app/js/maps/*.js", "src/app/js/reports/*.js", "src/app/js/widgets/*.js"],
         },
 
         babel: {
@@ -69,12 +69,44 @@ module.exports = function(grunt) {
                 sourceMaps: false,
                 presets: ["@babel/preset-env"]
             },
-            dist: {
+            dist1: {
                 files: [{
                     expand: true,
-                    cwd: "src/app/js",
+                    cwd: "src/app/js/",
                     src: ["*.js"],
-                    dest: "dist/app/js"
+                    dest: "dist/app/js/"
+                }]
+            },
+            dist2: {
+                files: [{
+                    expand: true,
+                    cwd: "src/app/js/widgets",
+                    src: ["*.js"],
+                    dest: "dist/app/js/widgets"
+                }]
+            },
+            dist3: {
+                files: [{
+                    expand: true,
+                    cwd: "src/app/js/reports",
+                    src: ["*.js"],
+                    dest: "dist/app/js/reports"
+                }]
+            },
+            dist4: {
+                files: [{
+                    expand: true,
+                    cwd: "src/app/js/maps",
+                    src: ["*.js"],
+                    dest: "dist/app/js/maps"
+                }]
+            },
+            dist5: {
+                files: [{
+                    expand: true,
+                    cwd: "src/app/js/config",
+                    src: ["*.js"],
+                    dest: "dist/app/js/config"
                 }]
             }
         },
@@ -253,8 +285,10 @@ module.exports = function(grunt) {
 
     grunt.registerTask("update", ["replace"]);
 
+    grunt.registerTask("x", ["babel"]);
+
     // grunt.registerTask("build", ["replace", "cssmin", "concat"]);
-    grunt.registerTask("build", ["clean:build", "replace", "copy", "toggleComments", "cssmin", "concat", "clean:cleancss"]);
+    grunt.registerTask("build", ["clean:build", "replace", "copy", "toggleComments", "babel", "uglify", "htmlmin", "cssmin", "concat", "clean:cleancss"]);
 
     // the default task can be run just by typing "grunt" on the command line
     grunt.registerTask("default", []);

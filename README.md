@@ -57,7 +57,7 @@ And constructed with the following guidelines:
 
 ### version | 3.2.5 ###
 
-    Updated | 2018-07-31
+    Updated | 2019-07-31
 
     Created | 2014-10-21
 
