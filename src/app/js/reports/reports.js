@@ -1,16 +1,17 @@
 //This file should include logic on initialization of?????
 
 require(['dojo/topic', 'esri/tasks/QueryTask'], function(tp, QueryTask) {
-    var $summaryReport = $('#summaryReport');
     tp.subscribe('panel-loaded', function(panel) {
         if (panel === 'reports') {
             let $reportArea = $('#reportArea');
+            let $subHeaderTitle = $('#summaryReportHeader');
 
             $reportArea.on('click', '.returnBtn', function() {
                 $('.reportFormArea').hide();
                 $('#cardContainer').show();
                 $(this).hide();
                 $('#summaryReport').css('display', 'none');
+                $subHeaderTitle.hide();
 
                 //Clear Graphics
                 let gfxLayer = app.map.findLayerById('gfxLayer');
@@ -27,7 +28,14 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function(tp, QueryTask) {
                 $('#reportForm').show();
             });
 
-            $reportArea.on('.dataSrcToggle', 'change', function() {
+            $reportArea.on('click', '.dataSrcToggle', function() {
+                //This seems hacky..  It removes the active class from the other buttons
+                //https://stackoverflow.com/questions/9262827/twitter-bootstrap-onclick-event-on-buttons-radio
+                $(this)
+                    .addClass('active')
+                    .siblings()
+                    .removeClass('active');
+
                 let dataSrc = $(this).data('val');
                 let d = app.selectedReport;
 
@@ -41,15 +49,24 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function(tp, QueryTask) {
     });
 
     function OpenReportWindow(res, fields) {
+        $reportArea = $('#reportArea');
+
         let features = res.features;
         let displayName = res.displayFieldName;
         let feature = features[0];
         let attr = feature.attributes;
+        let type = $reportArea.find('.dataSrcToggle.active').data('val');
+        let title = attr[displayName] || 'Selected Block Groups';
 
-        $reportArea = $('#reportArea');
+        $reportArea.find('a[data-toggle="tab"]').on('shown.bs.tab', function(e) {
+            $('.chartsArea')
+                .data('kendoChart')
+                .resize();
+        });
+
         let $header = $('#summaryReportHeader');
-        $header.html(`${attr[displayName]} Demographics Report`);
-        $header.show();
+        $header.html(`${title} Report`);
+        $header.css('display', 'Flex');
 
         // let $sumReportTabStrip = $("#sumReportTabStrip");
 
@@ -105,37 +122,24 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function(tp, QueryTask) {
                     valsDef[fld.fieldName].fieldValue = '-';
                     valsDef[fld.fieldName].fieldValueFormatted = '-';
                 }
-                if (
-                    fld.percentOfField === '' ||
-                    fld.percentOfField === undefined
-                ) {
+                if (fld.percentOfField === '' || fld.percentOfField === undefined) {
                     valsDef[fld.fieldName].percentValueFormatted = '-';
                 } else if (fld.percentOfField !== undefined) {
                     var percentOf = Number(attr[fld.percentOfField]);
-                    valsDef[fld.fieldName].percentValue =
-                        (val / percentOf) * 100;
-                    valsDef[fld.fieldName].percentValueFormatted =
-                        ((val / percentOf) * 100).MagFormat() + '%';
+                    valsDef[fld.fieldName].percentValue = (val / percentOf) * 100;
+                    valsDef[fld.fieldName].percentValueFormatted = ((val / percentOf) * 100).MagFormat() + '%';
                     if (
-                        valsDef[fld.fieldName].percentValueFormatted.indexOf(
-                            '.'
-                        ) > -1 &&
-                        valsDef[fld.fieldName].percentValueFormatted.length ===
-                            3
+                        valsDef[fld.fieldName].percentValueFormatted.indexOf('.') > -1 &&
+                        valsDef[fld.fieldName].percentValueFormatted.length === 3
                     ) {
                         valsDef[fld.fieldName].percentValueFormatted =
                             '0' + valsDef[fld.fieldName].percentValueFormatted;
                     }
                 }
-                if (
-                    fld.densityAreaField !== '' ||
-                    fld.densityAreaField !== undefined
-                ) {
+                if (fld.densityAreaField !== '' || fld.densityAreaField !== undefined) {
                     var densityArea = Number(attr[fld.densityAreaField]);
                     valsDef[fld.fieldName].densityValue = val / densityArea;
-                    valsDef[fld.fieldName].densityValueFormatted = (
-                        val / densityArea
-                    ).MagFormat();
+                    valsDef[fld.fieldName].densityValueFormatted = (val / densityArea).MagFormat();
                 }
 
                 if (valsDef[fld.fieldName].percentValueFormatted === 'NaN%') {
@@ -166,8 +170,7 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function(tp, QueryTask) {
         var fivePlus = attr['TOTAL_POP'] - attr['UNDER5'];
         var totalPop = attr['TOTAL_POP'];
         var totalBlockCount = attr['TOT_BLOCKGROUP_COUNT'];
-        var age65Plus =
-            attr['AGE65TO74'] + attr['AGE75TO84'] + attr['AGE85PLUS'];
+        var age65Plus = attr['AGE65TO74'] + attr['AGE75TO84'] + attr['AGE85PLUS'];
 
         var dataSrc = [
             {
@@ -186,11 +189,9 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function(tp, QueryTask) {
                 Total: attr['MINORITY_POP'],
                 Percent: attr['MINORITY_POP'] / totalPop,
                 NumberOfBlocks: attr['AFFECTED_MINORITY_POP_COUNT'],
-                PercentOfBlocks:
-                    attr['AFFECTED_MINORITY_POP_COUNT'] / totalBlockCount,
+                PercentOfBlocks: attr['AFFECTED_MINORITY_POP_COUNT'] / totalBlockCount,
                 AffectedPopulation: attr['AFFECTED_MINORITY_POP'],
-                PercentAffectedCaptured:
-                    attr['AFFECTED_MINORITY_POP'] / attr['MINORITY_POP']
+                PercentAffectedCaptured: attr['AFFECTED_MINORITY_POP'] / attr['MINORITY_POP']
             },
             {
                 Category: 'Age 65+',
@@ -198,8 +199,7 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function(tp, QueryTask) {
                 Total: age65Plus,
                 Percent: age65Plus / totalPop,
                 NumberOfBlocks: attr['AFFECTED_AGE65PLUS_COUNT'],
-                PercentOfBlocks:
-                    attr['AFFECTED_AGE65PLUS_COUNT'] / totalBlockCount,
+                PercentOfBlocks: attr['AFFECTED_AGE65PLUS_COUNT'] / totalBlockCount,
                 AffectedPopulation: attr['AFFECTED_AGE65PLUS'],
                 PercentAffectedCaptured: attr['AFFECTED_AGE65PLUS'] / age65Plus
             },
@@ -209,13 +209,9 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function(tp, QueryTask) {
                 Total: attr['INCOME_BELOW_POVERTY'],
                 Percent: attr['INCOME_BELOW_POVERTY'] / attr['POP_FOR_POVERTY'],
                 NumberOfBlocks: attr['AFFECTED_INCOME_BELOW_POVERTY_COUNT'],
-                PercentOfBlocks:
-                    attr['AFFECTED_INCOME_BELOW_POVERTY_COUNT'] /
-                    totalBlockCount,
+                PercentOfBlocks: attr['AFFECTED_INCOME_BELOW_POVERTY_COUNT'] / totalBlockCount,
                 AffectedPopulation: attr['AFFECTED_INCOME_BELOW_POVERTY'],
-                PercentAffectedCaptured:
-                    attr['AFFECTED_INCOME_BELOW_POVERTY'] /
-                    attr['INCOME_BELOW_POVERTY']
+                PercentAffectedCaptured: attr['AFFECTED_INCOME_BELOW_POVERTY'] / attr['INCOME_BELOW_POVERTY']
             },
             {
                 Category: 'Population with a Disability',
@@ -223,11 +219,9 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function(tp, QueryTask) {
                 Total: attr['DISABILITY'],
                 Percent: attr['DISABILITY'] / attr['CIV_NON_INST_POP'],
                 NumberOfBlocks: attr['AFFECTED_DISABILITY_COUNT'],
-                PercentOfBlocks:
-                    attr['AFFECTED_DISABILITY_COUNT'] / totalBlockCount,
+                PercentOfBlocks: attr['AFFECTED_DISABILITY_COUNT'] / totalBlockCount,
                 AffectedPopulation: attr['AFFECTED_DISABILITY'],
-                PercentAffectedCaptured:
-                    attr['AFFECTED_DISABILITY'] / attr['DISABILITY']
+                PercentAffectedCaptured: attr['AFFECTED_DISABILITY'] / attr['DISABILITY']
             },
             {
                 Category: 'Limited English Proficient Persons (LEP)',
@@ -235,11 +229,9 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function(tp, QueryTask) {
                 Total: attr['LIMITED_ENG_PROF'],
                 Percent: attr['LIMITED_ENG_PROF'] / fivePlus,
                 NumberOfBlocks: attr['AFFECTED_LIMITED_ENG_PROF_COUNT'],
-                PercentOfBlocks:
-                    attr['AFFECTED_LIMITED_ENG_PROF_COUNT'] / totalBlockCount,
+                PercentOfBlocks: attr['AFFECTED_LIMITED_ENG_PROF_COUNT'] / totalBlockCount,
                 AffectedPopulation: attr['AFFECTED_LIMITED_ENG_PROF'],
-                PercentAffectedCaptured:
-                    attr['AFFECTED_LIMITED_ENG_PROF'] / attr['LIMITED_ENG_PROF']
+                PercentAffectedCaptured: attr['AFFECTED_LIMITED_ENG_PROF'] / attr['LIMITED_ENG_PROF']
             }
         ];
 
@@ -297,8 +289,7 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function(tp, QueryTask) {
                         },
                         {
                             field: 'PercentAffectedCaptured',
-                            title:
-                                '% of Affected Population Captured in Census Block Groups',
+                            title: '% of Affected Population Captured in Census Block Groups',
                             width: '95px',
                             format: '{0:p1}'
                         }
@@ -314,8 +305,7 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function(tp, QueryTask) {
             $grid.data('kendoGrid').destroy();
             $grid.empty();
         }
-        const expandHTML =
-            'Expand Topics<i style="margin-left: 5px;" class="fa fa-expand" aria-hidden="true"></i>';
+        const expandHTML = 'Expand Topics<i style="margin-left: 5px;" class="fa fa-expand" aria-hidden="true"></i>';
         const collapseHTML =
             'Collapse Topics<i style="margin-left: 5px;" class="fa fa-compress" aria-hidden="true"></i>';
 
@@ -386,11 +376,7 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function(tp, QueryTask) {
                     if (foundElement.length > 1) {
                         $.each(foundElement, function(i, row) {
                             if ($(row)[0].previousSibling) {
-                                if (
-                                    $(row)[0].previousSibling.innerText.indexOf(
-                                        el.fieldCategory
-                                    ) !== -1
-                                ) {
+                                if ($(row)[0].previousSibling.innerText.indexOf(el.fieldCategory) !== -1) {
                                     finalElement = $(row);
                                 }
                             }
@@ -458,19 +444,15 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function(tp, QueryTask) {
                             if (e.currentTarget.value === 'collapse') {
                                 e.currentTarget.value = 'expand';
                                 $(e.currentTarget).html(expandHTML);
-                                grid.tbody
-                                    .find('tr.k-grouping-row')
-                                    .each(function(index) {
-                                        grid.collapseGroup(this);
-                                    });
+                                grid.tbody.find('tr.k-grouping-row').each(function(index) {
+                                    grid.collapseGroup(this);
+                                });
                             } else {
                                 e.currentTarget.value = 'collapse';
                                 $(e.currentTarget).html(collapseHTML);
-                                grid.tbody
-                                    .find('tr.k-grouping-row')
-                                    .each(function(index) {
-                                        grid.expandGroup(this);
-                                    });
+                                grid.tbody.find('tr.k-grouping-row').each(function(index) {
+                                    grid.expandGroup(this);
+                                });
                             }
                         }
                     });
@@ -498,11 +480,11 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function(tp, QueryTask) {
                     dataSource: {
                         data: ops.data
                     },
-
-                    //change color of charts vw
-                    // seriesColors: config.seriesColors,
                     seriesColors: app.config.seriesColors,
-
+                    // seriesDefaults: {
+                    //     type: 'line',
+                    //     style: 'smooth'
+                    // },
                     legend: {
                         // visible: legendVisible,
                         position: 'bottom',
@@ -521,7 +503,8 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function(tp, QueryTask) {
                             // name: self.groupedItems[0].chartName,
                             // type: self.groupedItems[0].chartType,
                             field: 'fieldValue',
-                            categoryField: 'fieldAlias'
+                            categoryField: 'fieldAlias',
+                            type: ops.type
                             // padding: padding
                         }
                     ],
@@ -597,6 +580,7 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function(tp, QueryTask) {
         var $target = $('#' + target);
 
         var $chartsList = $target.find('#chartsList');
+        var $chartsType = $target.find('#chartsType');
         var $chartsArea = $target.find('.chartsArea');
 
         $chartsArea.html('');
@@ -617,31 +601,42 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function(tp, QueryTask) {
             }
         });
 
-        // $chartsList.find("button").click(function () {
-        $chartsList.on('change', function() {
-            var category = $(this)
-                .find(':selected')
-                .text();
+        $chartsList.on('change', ChartOptionChanged);
+        $chartsType.on('change', ChartOptionChanged);
 
+        function ChartOptionChanged() {
+            ClearCurrentChart();
+            let ops = GetChartOptions();
+            CreateChart(ops);
+        }
+
+        function ClearCurrentChart() {
             var chart = $chartsArea.data('kendoChart');
-
             if (chart !== null && chart !== undefined) {
                 chart.destroy();
                 chart.element.html('');
             }
-            var chartData = categories[category];
+        }
 
-            CreateChart({
+        function GetChartOptions() {
+            var category = $chartsList.find(':selected').text();
+            var type = $chartsType.find(':selected').val();
+            var chartData = categories[category];
+            // console.log(category, type);
+
+            return {
                 element: $chartsArea,
                 category: category,
-                data: chartData.data
-            });
-        });
+                data: chartData.data,
+                type: type
+            };
+        }
 
         $chartsList
             .find('option')
             .first()
             .prop('selected', 'selected');
+
         $chartsList
             .find('option')
             .first()

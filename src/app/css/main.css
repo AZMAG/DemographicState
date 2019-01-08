@@ -841,6 +841,10 @@ label:hover,
     top: 5px;
 }
 
+.panelSubHeader {
+    display: flex;
+}
+
 .panelHeaderText {
     padding: 15px;
     padding-right: 0;
@@ -1017,7 +1021,6 @@ label:hover,
 .flexCenter {
     display: flex;
     align-items: center;
-    padding: 5px;
 }
 
 .cRamp {
@@ -1114,6 +1117,8 @@ label:hover,
     text-align: center;
     font-weight: bold;
     flex: 1;
+    justify-content: center;
+    align-items: center;
     display: none;
 }
 
@@ -1141,11 +1146,11 @@ label:hover,
 }
 
 #interactiveForm {
-    background-color: #f1f1f1;
-    border-radius: 5px;
-    padding: 10px;
-    border: 2px solid gainsboro;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    display: flex;
+    flex-direction: column;
+    border: solid #e9e9ea;
+    border-width: 0.2rem;
+    padding: 0.9rem;
 }
 
 .customSummaryButton {
