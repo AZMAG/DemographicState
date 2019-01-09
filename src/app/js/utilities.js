@@ -53,6 +53,40 @@ app.numberWithCommas = function(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 };
 
+app.chartTooltip = function(value, category) {
+    return `${app.numberWithCommas(value)} <br> ${category}`;
+};
+
+app.valueAxisTemplate = function(value) {
+    return app.numberWithCommas(value);
+};
+
+app.wrapText = function(value) {
+    var wrapLength = 12;
+    var returnLabel = '';
+    var lineLength = 0;
+
+    if (value.length >= wrapLength) {
+        var wordsList = value.split(' ');
+        $.each(wordsList, function(index, word) {
+            var separator = ' ';
+            if (lineLength >= wrapLength) {
+                separator = '\n';
+                lineLength = 0;
+            }
+            returnLabel += separator + word;
+            lineLength += word.length;
+        });
+    } else {
+        returnLabel = value;
+    }
+    return returnLabel;
+};
+
+app.showInThousands = function(value) {
+    console.log(value);
+};
+
 app.AddHighlightGraphics = function(features) {
     require(['esri/Graphic'], function(Graphic) {
         let gfx = [];

@@ -1072,6 +1072,14 @@ label:hover,
     flex: 1;
 }
 
+#chartsTarget {
+    display: flex;
+    flex-direction: column;
+    border: solid #e9e9ea;
+    border-width: 0.2rem;
+    padding: 0.9rem;
+}
+
 .chartCategoryBtn {
     width: 100%;
 }

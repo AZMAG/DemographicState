@@ -586,7 +586,7 @@ app.acsFieldsConfig = [
         rowID: 39,
         groupID: "<span class='myHiddenClass'>04</span>Educational Attainment",
         chartCategory: 'Educational Attainment',
-        chartType: 'column',
+        chartType: 'bar',
         canSum: true,
         parentField: '',
         percentOfField: 'AGE25PLUS'
@@ -602,7 +602,7 @@ app.acsFieldsConfig = [
         rowID: 40,
         groupID: "<span class='myHiddenClass'>04</span>Educational Attainment",
         chartCategory: 'Educational Attainment',
-        chartType: 'column',
+        chartType: 'bar',
         canSum: true,
         parentField: '',
         percentOfField: 'AGE25PLUS'
@@ -618,7 +618,7 @@ app.acsFieldsConfig = [
         rowID: 41,
         groupID: "<span class='myHiddenClass'>04</span>Educational Attainment",
         chartCategory: 'Educational Attainment',
-        chartType: 'column',
+        chartType: 'bar',
         canSum: true,
         parentField: '',
         percentOfField: 'AGE25PLUS'
@@ -634,7 +634,7 @@ app.acsFieldsConfig = [
         rowID: 42,
         groupID: "<span class='myHiddenClass'>04</span>Educational Attainment",
         chartCategory: 'Educational Attainment',
-        chartType: 'column',
+        chartType: 'bar',
         canSum: true,
         parentField: '',
         percentOfField: 'AGE25PLUS'
@@ -650,7 +650,7 @@ app.acsFieldsConfig = [
         rowID: 43,
         groupID: "<span class='myHiddenClass'>04</span>Educational Attainment",
         chartCategory: 'Educational Attainment',
-        chartType: 'column',
+        chartType: 'bar',
         canSum: true,
         parentField: '',
         percentOfField: 'AGE25PLUS'
@@ -666,7 +666,7 @@ app.acsFieldsConfig = [
         rowID: 44,
         groupID: "<span class='myHiddenClass'>04</span>Educational Attainment",
         chartCategory: 'Educational Attainment',
-        chartType: 'column',
+        chartType: 'bar',
         canSum: true,
         parentField: '',
         percentOfField: 'AGE25PLUS'
@@ -682,7 +682,7 @@ app.acsFieldsConfig = [
         rowID: 45,
         groupID: "<span class='myHiddenClass'>04</span>Educational Attainment",
         chartCategory: 'Educational Attainment',
-        chartType: 'column',
+        chartType: 'bar',
         canSum: true,
         parentField: '',
         percentOfField: 'AGE25PLUS'
@@ -1338,7 +1338,7 @@ app.acsFieldsConfig = [
         rowID: 86,
         groupID: "<span class='myHiddenClass'>09</span>Poverty Status in the Past 12 Months",
         chartCategory: 'Poverty',
-        chartType: 'column',
+        chartType: 'bar',
         canSum: true,
         parentField: '',
         percentOfField: 'POP_FOR_POVERTY'
@@ -1354,7 +1354,7 @@ app.acsFieldsConfig = [
         rowID: 87,
         groupID: "<span class='myHiddenClass'>09</span>Poverty Status in the Past 12 Months",
         chartCategory: 'Poverty',
-        chartType: 'column',
+        chartType: 'bar',
         canSum: true,
         parentField: '',
         percentOfField: 'POP_FOR_POVERTY'
@@ -1370,7 +1370,7 @@ app.acsFieldsConfig = [
         rowID: 88,
         groupID: "<span class='myHiddenClass'>09</span>Poverty Status in the Past 12 Months",
         chartCategory: 'Poverty',
-        chartType: 'column',
+        chartType: 'bar',
         canSum: true,
         parentField: '',
         percentOfField: 'POP_FOR_POVERTY'

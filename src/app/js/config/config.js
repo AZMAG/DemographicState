@@ -17,20 +17,6 @@ app.config = {
     DefaultColorScheme: 'Sequential',
     DefaultNumberOfClassBreaks: 5,
 
-    seriesColors: [
-        '#A6CEE3',
-        '#1F78B4',
-        '#B2DF8A',
-        '#33A02C',
-        '#FB9A99',
-        '#E31A1C',
-        '#FDBF6F',
-        '#FF7F00',
-        '#CAB2D6',
-        '#6A3D9A',
-        '#FFFF99',
-        '#B15928'
-    ],
     layerDef: {},
     // {
 
@@ -215,18 +201,18 @@ app.config = {
 
     //from colorbrewer 2.0 qualitative HEX Paired
     seriesColors: [
-        '#A6CEE3',
-        '#1F78B4',
-        '#B2DF8A',
-        '#33A02C',
-        '#FB9A99',
-        '#E31A1C',
-        '#FDBF6F',
-        '#FF7F00',
-        '#CAB2D6',
-        '#6A3D9A',
-        '#FFFF99',
-        '#B15928'
+        '#1f78b4',
+        '#a6cee3',
+        '#b2df8a',
+        '#33a02c',
+        '#fb9a99',
+        '#e31a1c',
+        '#fdbf6f',
+        '#ff7f00',
+        '#cab2d6',
+        '#6a3d9a',
+        '#ffff99',
+        '#b15928'
     ],
 
     URLMinimizer: {
