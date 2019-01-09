@@ -5,15 +5,16 @@ require(['dojo/topic', 'esri/views/2d/draw/Draw', 'esri/Graphic', 'esri/geometry
     geometryEngine
 ) {
     tp.subscribe('panel-loaded', function(panel) {
-        if (panel === 'reports') {
-            let $customGeographyReports = $('#customGeographyReports');
-            let $bufferCheckbox = $('#useBuffer');
-            let $bufferOptions = $('#bufferOptions');
-            let $customSummaryButton = $('.customSummaryButton');
-            let $drawingTooltip = $('#drawingTooltip');
-            let $bufferSize = $bufferOptions.find('#bufferSize');
-            let $bufferUnit = $bufferOptions.find('#bufferUnit');
+        let $customGeographyReports = $('#customGeographyReports');
+        let $bufferCheckbox = $('#useBuffer');
+        let $bufferOptions = $('#bufferOptions');
+        let $customSummaryButton = $('.customSummaryButton');
+        let $drawingTooltip = $('#drawingTooltip');
+        let $bufferSize = $bufferOptions.find('#bufferSize');
+        let $bufferUnit = $bufferOptions.find('#bufferUnit');
+        let $loadingSpinner = $('.loading-container');
 
+        if (panel === 'reports') {
             let draw = new Draw({
                 view: app.view
             });
@@ -29,8 +30,6 @@ require(['dojo/topic', 'esri/views/2d/draw/Draw', 'esri/Graphic', 'esri/geometry
 
                 // create() will return a reference to an instance of PolygonDrawAction
                 let action = draw.create(type);
-
-                console.log(type);
 
                 //Creates a tooltip to give user instructions on drawing
                 $('#viewDiv').mousemove(function(e) {
@@ -186,6 +185,9 @@ require(['dojo/topic', 'esri/views/2d/draw/Draw', 'esri/Graphic', 'esri/geometry
 
             let bgLayer = app.map.findLayerById('blockGroups').sublayers.getItemAt(0);
 
+            //Start the loading spinner
+            $loadingSpinner.css('display', 'flex');
+
             bgLayer.queryFeatures(q).then(res => {
                 let data = {};
 
@@ -201,6 +203,7 @@ require(['dojo/topic', 'esri/views/2d/draw/Draw', 'esri/Graphic', 'esri/geometry
                         }
                     });
                 });
+                $loadingSpinner.css('display', 'none');
 
                 tp.publish(
                     'open-report-window',
