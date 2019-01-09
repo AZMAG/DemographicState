@@ -32,16 +32,15 @@ State Demographics map viewer for selected census info for Arizona
 [![Built with Grunt](http://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
 [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
+The State Demographic Map Viewer is one of the Maricopa Association of Governments interactive mapping and analysis sites, showing selected population and housing data. The viewer allows you to graphically view selected population and housing data for all Census block groups for the State of Arizona. The viewer provides interactive mapping and reporting tools to allow exploration of data from Census 2010 and the American Community Survey (ACS) 2013-2017.
 
-The State Demographic Map Viewer is one of the Maricopa Association of Governments interactive mapping and analysis sites, showing selected population and housing data.  The viewer allows you to graphically view selected population and housing data for all Census block groups for the State of Arizona.  The viewer provides interactive mapping and reporting tools to allow exploration of data from Census 2010 and the American Community Survey (ACS) 2012-2016.
-
-Use this site to explore Explore data from Census 2010 and American Community Survey (ACS) 2012-2016.
+Use this site to explore Explore data from Census 2010 and American Community Survey (ACS) 2013-2017.
 
 This web app viewer was developed by MAG staff for MAG member agencies and the public using ESRI's JavaScript API.
 
 ## Keywords
 
-`Demographics` `Census` `2010` `American Community Survey` `ACS` `2012-2016` `5yr` `Counties` `State` `Arizona` `Maps` `MAG` `ESRI` `#MAGmaps`
+`Demographics` `Census` `2010` `American Community Survey` `ACS` `2013-2017` `5yr` `Counties` `State` `Arizona` `Maps` `MAG` `ESRI` `#MAGmaps`
 
 ## Version
 
@@ -55,11 +54,11 @@ And constructed with the following guidelines:
 2. **MINOR** version when you add functionality in a backwards-compatible manner **bumps the minor** resets patch
 3. **PATCH** version when you make backwards-compatible bug fixes and misc changes **bumps only the patch**
 
-### version 3.2.5 ###
+### version 3.2.5
 
- `Updated: 2018-07-31`
+`Updated: 2018-07-31`
 
- `Created: 2014-10-21`
+`Created: 2014-10-21`
 
 ## Credits
 
@@ -67,13 +66,13 @@ And constructed with the following guidelines:
 
 ## Site URL
 
-* [Arizona Demographics](http://geo.azmag.gov/maps/azdemographics/)
+-   [Arizona Demographics](http://geo.azmag.gov/maps/azdemographics/)
 
 ## Documentation
 
 A detailed list of the changes and fixes in each version update can be found in the CHANGELOG.md.
 
-* [CHANGELOG](CHANGELOG.md)
+-   [CHANGELOG](CHANGELOG.md)
 
 ## Resources
 
@@ -81,7 +80,7 @@ A detailed list of the changes and fixes in each version update can be found in 
 
 ## Dependencies
 
-* [git-labelmaker](https://github.com/himynameisdave/git-labelmaker?utm_source=hashnode.com)
+-   [git-labelmaker](https://github.com/himynameisdave/git-labelmaker?utm_source=hashnode.com)
 
 ## Legal Disclaimer
 
@@ -104,5 +103,4 @@ Code released under the MIT license.
 
 A copy of the license is available in the repository's `LICENSE` file.
 
-* [LICENSE](LICENSE)
-
+-   [LICENSE](LICENSE)

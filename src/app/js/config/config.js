@@ -2,7 +2,7 @@ app.config = {
     Version: 'v3.2.4 | 2018-04-20',
     copyright: '2018',
 
-    LegendSource: 'American Community Survey 2012-2016 5yr',
+    LegendSource: 'American Community Survey 2013-2017 5yr',
     emailLink: 'https://www.azmag.gov/Contact/4788?s=geo.azmag.gov/maps/azdemographics&n=Jason%20Howard&popUp=true',
 
     ArcGISInstanceURL: 'https://geo.azmag.gov/gismag/rest',
@@ -192,7 +192,7 @@ app.config = {
             drawOrder: 8,
             legend: true,
             id: 'blockGroups',
-            title: 'American Community Survey by Block Group, 2012-2016 5yr',
+            title: 'American Community Survey by Block Group, 2013-2017 5yr',
             type: 'image',
             layerName: 'Block_Groups',
             opacity: 0.8,
@@ -310,12 +310,12 @@ app.config = {
 
     textSymbolFontSizes: [8, 9, 10, 11, 12, 14, 16, 18, 20, 24, 30, 50],
 
-    sourceLabel: 'Source: United States Census Bureau, American Community Survey 2012-2016 5yr Estimates',
+    sourceLabel: 'Source: United States Census Bureau, American Community Survey 2013-2017 5yr Estimates',
 
     sourceLabel2: 'Source: United States Census Bureau, 2010 Decennial Census',
 
     legalACSDisclaimer:
-        'Source: U.S. Census Bureau, 2012-2016 American Community Survey (ACS) 5-Year Estimates. ACS data are based on a sample and are subject to sampling variability.  The degree of uncertainty for an estimate is represented through the use of a margin of error (MOE).  In addition to sampling variability, the ACS estimates are subject to nonsampling error. The MOE and effect of nonsampling error is not represented in these tables. Supporting documentation on subject definitions, data accuracy, and statistical testing can be found on the American Community Survey website (www.census.gov/acs) in the Data and Documentation section. Sample size and data quality measures (including coverage rates, allocation rates, and response rates) can be found on the American Community Survey website (www.census.gov/acs) in the Methodology section.  The MOE for individual data elements can be found on the American FactFinder website (factfinder2.census.gov).  Note: Although the ACS produces population, demographic and housing unit estimates, the 2010 Census provides the official counts of the population and housing units for the nation, states, counties, cities and towns.  Prepared by: Maricopa Association of Governments, www.azmag.gov, (602) 254-6300',
+        'Source: U.S. Census Bureau, 2013-2017 American Community Survey (ACS) 5-Year Estimates. ACS data are based on a sample and are subject to sampling variability.  The degree of uncertainty for an estimate is represented through the use of a margin of error (MOE).  In addition to sampling variability, the ACS estimates are subject to nonsampling error. The MOE and effect of nonsampling error is not represented in these tables. Supporting documentation on subject definitions, data accuracy, and statistical testing can be found on the American Community Survey website (www.census.gov/acs) in the Data and Documentation section. Sample size and data quality measures (including coverage rates, allocation rates, and response rates) can be found on the American Community Survey website (www.census.gov/acs) in the Methodology section.  The MOE for individual data elements can be found on the American FactFinder website (factfinder2.census.gov).  Note: Although the ACS produces population, demographic and housing unit estimates, the 2010 Census provides the official counts of the population and housing units for the nation, states, counties, cities and towns.  Prepared by: Maricopa Association of Governments, www.azmag.gov, (602) 254-6300',
 
     legalCensusDisclaimer:
         'Source: United States Census Bureau, 2010 Decennial Census. Additional information about the 2010 Decennial Cenuss can be found on the US Census Bureau website at www.census.gov/2010census. Prepared by: Maricopa Association of Governments, www.azmag.gov, (602) 254-6300'
