@@ -3,78 +3,60 @@ require(['dojo/topic'], function(tp) {
     function CreateChart(ops) {
         // console.log(ops);
         if (ops.data.length) {
+            let total = 0;
+            if (ops.type === 'pie') {
+                console.log(ops.data);
+            }
+            console.log(app.config.seriesColors);
+
             return ops.element
                 .kendoChart({
                     dataSource: {
                         data: ops.data
                     },
                     seriesColors: app.config.seriesColors,
-                    // seriesDefaults: {
-                    //     type: 'line',
-                    //     style: 'smooth'
-                    // },
                     legend: {
-                        // visible: legendVisible,
                         position: 'bottom',
-                        // offsetX: 15,
-                        // offsetY: -80,
-                        margin: {
-                            left: 0,
-                            right: 10
-                        },
                         labels: {
                             color: 'black'
                         }
                     },
                     series: [
                         {
-                            // name: self.groupedItems[0].chartName,
-                            // type: self.groupedItems[0].chartType,
                             field: 'fieldValue',
                             categoryField: 'fieldAlias',
-                            type: ops.type
-                            // padding: padding
+                            type: ops.type,
+                            gap: 0.5
                         }
                     ],
-                    // transitions: animation,
                     seriesDefaults: {
                         labels: {
-                            // visible: showLabels,
                             position: 'outsideEnd',
                             background: '#4D4D4D',
                             format: '{0:n}',
-                            color: 'black'
-                            // template: '#= wrapText(category) #'
+                            color: 'black',
+                            template: '#= kendo.format("{0:P}", percentage) #'
+                            // visible: true
                         },
                         tooltip: {
                             visible: true,
-                            color: 'white'
-                            // template: templateString
-                        }
-                    },
-                    plotArea: {
-                        margin: {
-                            // right: 30
+                            // color: 'white',
+                            template:
+                                '#= app.chartTooltip(value, category) # <br> #= kendo.format("{0:P}", percentage) #'
                         }
                     },
                     chartArea: {
                         background: '#fafafa'
-                        // margin: {
-                        //     left: 15,
-                        //     top: 5,
-                        //     right: 15
-                        // }
                     },
                     categoryAxis: {
-                        //title: { text: "test"},
                         field: 'fieldAlias',
                         color: 'black',
                         labels: {
                             visible: true,
                             rotation: {
                                 angle: ops.type === 'column' ? 45 : 0
-                            }
-                            // template: '#= wrapText(value) #'
+                            },
+                            template: '#= app.wrapText(value) #'
                         },
                         majorGridLines: {
                             visible: false
@@ -84,15 +66,10 @@ require(['dojo/topic'], function(tp) {
                         }
                     },
                     valueAxis: {
-                        //title: { text: "test"},
                         color: 'black',
                         labels: {
-                            // template: valueAxisTemplate
-                        },
-                        title: {
-                            text: '*Values shown in thousands',
-                            font: '10px Arial,Helvetica,sans-serif'
-                            // visible: largeValue
+                            template: '#= app.valueAxisTemplate(value) #',
+                            step: 2
                         }
                     }
                 })
@@ -148,8 +125,8 @@ require(['dojo/topic'], function(tp) {
         }
 
         function GetChartOptions() {
-            var category = $chartsList.find(':selected').text();
-            var chartData = categories[category];
+            let category = $chartsList.find(':selected').text();
+            let chartData = categories[category];
 
             return {
                 element: $chartsArea,

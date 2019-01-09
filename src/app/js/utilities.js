@@ -57,9 +57,68 @@ async function GetRepresentativeInfo(id) {
 app.AddHighlightGraphics = function(graphics) {
     console.log(graphics);
 
+<<<<<<< HEAD
     // app.view.graphics.add(graphics[0]);
     let gfxLayer = app.map.findLayerById("gfxLayer");
     gfxLayer.addMany(graphics);
+=======
+app.chartTooltip = function(value, category) {
+    return `${app.numberWithCommas(value)} <br> ${category}`;
+};
+
+app.valueAxisTemplate = function(value) {
+    return app.numberWithCommas(value);
+};
+
+app.wrapText = function(value) {
+    var wrapLength = 12;
+    var returnLabel = '';
+    var lineLength = 0;
+
+    if (value.length >= wrapLength) {
+        var wordsList = value.split(' ');
+        $.each(wordsList, function(index, word) {
+            var separator = ' ';
+            if (lineLength >= wrapLength) {
+                separator = '\n';
+                lineLength = 0;
+            }
+            returnLabel += separator + word;
+            lineLength += word.length;
+        });
+    } else {
+        returnLabel = value;
+    }
+    return returnLabel;
+};
+
+app.showInThousands = function(value) {
+    console.log(value);
+};
+
+app.AddHighlightGraphics = function(features) {
+    require(['esri/Graphic'], function(Graphic) {
+        let gfx = [];
+        for (let i = 0; i < features.length; i++) {
+            const feature = features[i];
+            let g = new Graphic({
+                geometry: feature.geometry,
+                symbol: {
+                    type: 'simple-fill',
+                    color: [0, 255, 255, 0.5],
+                    opacity: 0.5,
+                    outline: {
+                        color: 'cyan',
+                        width: '3'
+                    }
+                }
+            });
+            gfx.push(g);
+        }
+        let gfxLayer = app.map.findLayerById('gfxLayer');
+        gfxLayer.addMany(gfx);
+    });
+>>>>>>> c5c88ccb8e1157b4b76aa52f331ecb20dd024dbf
 };
 
 app.AddHighlightGraphic = function(graphic) {
