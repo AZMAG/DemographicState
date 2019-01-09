@@ -73,7 +73,6 @@ require([
                     $(`div[panel-id=${target}]`).fadeIn(400);
 
                 }
-
             }
         });
 
