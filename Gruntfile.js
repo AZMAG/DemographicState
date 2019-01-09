@@ -157,8 +157,8 @@ module.exports = function(grunt) {
                     banner: '/* <%= pkg.name %> - v<%= pkg.version %> | <%= grunt.template.today("mm-dd-yyyy") %> */'
                 },
                 files: {
-                    "dist/app/resources/css/main.min.css": ["src/app/resources/css/main.css"],
-                    "dist/app/resources/css/normalize.min.css": ["src/app/resources/css/normalize.css"]
+                    "dist/app/css/normalize.min.css": ["src/app/css/normalize.css"],
+                    "dist/app/css/main.min.css": ["src/app/css/main.css"]
                 }
             }
         },
@@ -169,8 +169,8 @@ module.exports = function(grunt) {
                 banner: "<%= bannercss %>\n"
             },
             dist: {
-                src: ["dist/app/resources/css/normalize.min.css", "dist/app/resources/css/main.min.css"],
-                dest: "dist/app/resources/css/concat.min.css"
+                src: ["dist/app/css/normalize.min.css", "dist/app/css/main.min.css"],
+                dest: "dist/app/css/concat.min.css"
             }
         },
 
@@ -182,7 +182,7 @@ module.exports = function(grunt) {
                 src: ["dist/js/*.js", "!dist/js/master.min.js"]
             },
             cleancss: {
-                src: ["dist/app/resources/css/*.css", "!dist/app/resources/css/concat.min.css"]
+                src: ["dist/app/css/*.css", "!dist/app/css/concat.min.css"]
             }
         },
 
@@ -220,21 +220,24 @@ module.exports = function(grunt) {
 
         replace: {
             update_Meta: {
-                src: ["src/index.html", "src/config.js", "src/humans.txt", "src/app/resources/css/main.css", "README.md"], // source files array
-                // src: ["README.md"], // source files array
+                src: ["src/index.html", "src/humans.txt", "README.md", "LICENSE", "src/LICENSE", "src/app/css/main.css", "src/app/js/config/config.js"],
                 overwrite: true, // overwrite matched source files
                 replacements: [{
                     // html pages
-                    from: /(<meta name="revision-date" content=")[0-9]{4}-[0-9]{2}-[0-9]{2}(">)/g,
-                    to: '<meta name="revision-date" content="' + "<%= pkg.date %>" + '">',
+                    from: /(<meta name="revision-date" content=")[0-9]{4}-[0-9]{2}-[0-9]{2}/g,
+                    to: '<meta name="revision-date" content="' + "<%= pkg.date %>",
                 }, {
                     // html pages
-                    from: /(<meta name="version" content=")([0-9]+)(?:\.([0-9]+))(?:\.([0-9]+))(">)/g,
-                    to: '<meta name="version" content="' + "<%= pkg.version %>" + '">',
+                    from: /(<meta name="version" content=")([0-9]+)(?:\.([0-9]+))(?:\.([0-9]+))/g,
+                    to: '<meta name="version" content="' + "<%= pkg.version %>",
                 }, {
                     // config.js
                     from: /(v)([0-9]+)(?:\.([0-9]+))(?:\.([0-9]+))( \| )[0-9]{4}-[0-9]{2}-[0-9]{2}/g,
                     to: "v" + "<%= pkg.version %>" + " | " + "<%= pkg.date %>",
+                }, {
+                    // config.js
+                    from: /(copyright\: ')([0-9]{4})(')/g,
+                    to: "copyright: '" + "<%= pkg.copyright %>" + "'",
                 }, {
                     // humans.txt
                     from: /(Version\: )([0-9]+)(?:\.([0-9]+))(?:\.([0-9]+))/g,
@@ -245,16 +248,20 @@ module.exports = function(grunt) {
                     to: "Last updated: " + "<%= pkg.date %>",
                 }, {
                     // README.md
-                    from: /(### version \|)([0-9]+)(?:\.([0-9]+))(?:\.([0-9]+))/g,
+                    from: /(### version \| )([0-9]+)(?:\.([0-9]+))(?:\.([0-9]+))/g,
                     to: "### version | " + "<%= pkg.version %>",
                 }, {
                     // README.md
                     from: /(Updated \| )[0-9]{4}-[0-9]{2}-[0-9]{2}/g,
                     to: "Updated \| " + "<%= pkg.date %>",
                 }, {
-                    // main.css
-                    from: /(main.css)( \| )(@version)( \| )([0-9]+)(?:\.([0-9]+))(?:\.([0-9]+))/g,
-                    to: "main.css | @version |" + " <%= pkg.version %>",
+                    // main.css - /*! main.css v8.0.1 | MIT License | github.com/AZMAG/map-Demographic-Statewide */
+                    from: /(\/\*! main.css v)([0-9]+)(?:\.([0-9]+))(?:\.([0-9]+))/g,
+                    to: "/*! main.css v" + "<%= pkg.version %>",
+                }, {
+                    // LICENSE
+                    from: /(Copyright \(c\) )([0-9]{4})/g,
+                    to: "Copyright (c) " + "<%= pkg.copyright %>",
                 }]
             }
         }

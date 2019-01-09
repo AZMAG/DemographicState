@@ -632,7 +632,7 @@ require(["dojo/topic", "esri/tasks/QueryTask"], function(tp, QueryTask) {
             .change();
     }
 
-    dataCache = {};
+    var dataCache = {};
 
     app.GetData = async function(conf, geoid) {
         if (dataCache[conf.id + geoid]) {

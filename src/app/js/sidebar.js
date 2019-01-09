@@ -52,6 +52,9 @@ require([
                     $content.show();
                     var $allLinks = $(`[panel-target=${target}]`);
 
+                    // add version and date to about.html, changed in config.js
+                    $(".version").text(app.config.version);
+
                     $allLinks.addClass("active");
                     $allLinks.find(".arrow-left").show();
 
@@ -68,7 +71,9 @@ require([
                     }
 
                     $(`div[panel-id=${target}]`).fadeIn(400);
+
                 }
+
             }
         });
 
@@ -93,4 +98,5 @@ require([
             $("#legend").fadeToggle();
             $legendToggle.prop("checked", !$legendToggle.prop("checked"));
         }
-    });
+    }
+);
