@@ -103,7 +103,7 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function(tp, QueryTask) {
                     fieldType: fld.fieldType,
                     fieldClass: fld.class,
                     fieldValue: Number(val),
-                    fieldValueFormatted: Number(val),
+                    fieldValueFormatted: app.numberWithCommas(Number(val).toFixed(1)).replace('.0', ''),
                     chartCategory: fld.chartCategory,
                     chartType: fld.chartType,
                     chartName: fld.chartCategory,
@@ -355,8 +355,8 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function(tp, QueryTask) {
                 },
                 {
                     field: 'fieldValueFormatted',
-                    title: 'Estimate',
-                    format: '{0:n0}'
+                    title: 'Estimate'
+                    // format: '{0:n0}'
                 },
                 {
                     field: 'percentValueFormatted',

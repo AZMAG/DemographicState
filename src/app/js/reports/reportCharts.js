@@ -54,16 +54,16 @@ require(['dojo/topic'], function(tp) {
                     },
                     plotArea: {
                         margin: {
-                            right: 30
+                            // right: 30
                         }
                     },
                     chartArea: {
-                        background: '#fafafa',
-                        margin: {
-                            left: 15,
-                            top: 5,
-                            right: 15
-                        }
+                        background: '#fafafa'
+                        // margin: {
+                        //     left: 15,
+                        //     top: 5,
+                        //     right: 15
+                        // }
                     },
                     categoryAxis: {
                         //title: { text: "test"},
@@ -72,7 +72,7 @@ require(['dojo/topic'], function(tp) {
                         labels: {
                             visible: true,
                             rotation: {
-                                angle: 45
+                                angle: ops.type === 'column' ? 45 : 0
                             }
                             // template: '#= wrapText(value) #'
                         },
