@@ -6,17 +6,27 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function(tp, QueryTask) {
             let $reportArea = $('#reportArea');
             let $subHeaderTitle = $('#summaryReportHeader');
 
-            $reportArea.on('click', '.returnBtn', function() {
+            function resetReportForm() {
                 $('.reportFormArea').hide();
                 $('#cardContainer').show();
-                $(this).hide();
+                $('.returnBtn').hide();
                 $('#summaryReport').css('display', 'none');
                 $subHeaderTitle.hide();
+            }
 
-                //Clear Graphics
-                let gfxLayer = app.map.findLayerById('gfxLayer');
-                gfxLayer.removeAll();
-                app.view.graphics.removeAll();
+            tp.subscribe('panel-shown', function(panel) {
+                resetReportForm();
+                app.clearDrawnGraphics();
+            });
+
+            tp.subscribe('panel-hidden', function(panel) {
+                resetReportForm();
+                app.clearDrawnGraphics();
+            });
+
+            $reportArea.on('click', '.returnBtn', function() {
+                resetReportForm();
+                app.clearDrawnGraphics();
             });
 
             $reportArea.on('click', '.card', function() {

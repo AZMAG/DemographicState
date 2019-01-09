@@ -91,6 +91,9 @@ require(['dojo/topic'], function(tp) {
                     .data('object-id');
 
                 app.GetData(conf, GEOID).then(function(data) {
+                    app.AddHighlightGraphics(data.acsData.features);
+                    app.view.goTo(data.acsData.features[0].geometry.extent.expand(1.5));
+
                     if (data) {
                         tp.publish('open-report-window', data.acsData, app.acsFieldsConfig);
                     } else {

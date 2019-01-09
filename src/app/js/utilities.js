@@ -49,6 +49,12 @@ async function GetRepresentativeInfo(id) {
     });
 }
 
+app.clearDrawnGraphics = function() {
+    let gfxLayer = app.map.findLayerById('gfxLayer');
+    gfxLayer.removeAll();
+    app.view.graphics.removeAll();
+};
+
 app.numberWithCommas = function(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 };
@@ -131,11 +137,9 @@ app.AddHighlightGraphic = function(graphic) {
                 width: '3'
             }
         };
-        console.log(tempGraphic);
 
         gfxLayer.add(tempGraphic);
 
         //Zoom to highlighted graphic, but expand to give some context.
-        // app.view.goTo(graphic.geometry.extent.expand(1.5));
     }
 };
