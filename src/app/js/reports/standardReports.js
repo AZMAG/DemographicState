@@ -29,7 +29,7 @@ require(['dojo/topic'], function(tp) {
             }
 
             function updateReportDDL(layer, conf) {
-                let sumField = conf.displayField || layer.displayField;
+                let sumField = 'NAME';
 
                 // hideReportLayers();
                 // layer.visible = true;

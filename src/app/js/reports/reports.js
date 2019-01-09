@@ -64,11 +64,10 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function(tp, QueryTask) {
         $reportArea = $('#reportArea');
 
         let features = res.features;
-        let displayName = res.displayFieldName;
         let feature = features[0];
         let attr = feature.attributes;
         let type = $reportArea.find('.dataSrcToggle.active').data('val');
-        let title = attr[displayName] || 'Selected Block Groups';
+        let title = attr['NAME'] || 'Selected Block Groups';
 
         $reportArea.find('a[data-toggle="tab"]').on('shown.bs.tab', function(e) {
             $('.chartsArea')

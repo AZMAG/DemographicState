@@ -85,13 +85,13 @@ require([
             }
             if (layerToAdd) {
                 layersToAdd.push(layerToAdd);
-                layerToAdd['sortOrder'] = layer.drawOrder;
+                // layerToAdd['sortOrder'] = layer.drawOrder;
             }
         });
 
-        layersToAdd.sort(function(a, b) {
-            return b.sortOrder - a.sortOrder;
-        });
+        // layersToAdd.sort(function(a, b) {
+        //     return b.sortOrder - a.sortOrder;
+        // });
 
         app.map.layers.addMany(layersToAdd);
 
