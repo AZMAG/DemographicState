@@ -3,15 +3,12 @@ app.config = {
     copyright: '2018',
 
     LegendSource: 'American Community Survey 2012-2016 5yr',
-    emailLink:
-        'https://www.azmag.gov/Contact/4788?s=geo.azmag.gov/maps/azdemographics&n=Jason%20Howard&popUp=true',
+    emailLink: 'https://www.azmag.gov/Contact/4788?s=geo.azmag.gov/maps/azdemographics&n=Jason%20Howard&popUp=true',
 
     ArcGISInstanceURL: 'https://geo.azmag.gov/gismag/rest',
-    exportWebMapUrl:
-        'https://geo.azmag.gov/gismag/rest/services/gp/stateDemo/GPServer/Export%20Web%20Map',
+    exportWebMapUrl: 'https://geo.azmag.gov/gismag/rest/services/gp/stateDemo/GPServer/Export%20Web%20Map',
 
-    mainUrl:
-        'https://geo.azmag.gov/gismag/rest/services/maps/DemographicState2016/MapServer',
+    mainUrl: 'https://geo.azmag.gov/gismag/rest/services/maps/DemographicState2017/MapServer',
     siteUrl: 'https://geo.azmag.gov/maps/azdemographics/?',
 
     googleCivicInfoApiKey: 'AIzaSyCicS2bzJk_ptthYD2nSu4tIPfjGYmxU1U',
@@ -185,8 +182,7 @@ app.config = {
             id: 'esriReference',
             title: 'Streets',
             type: 'tile',
-            url:
-                'http://server.arcgisonline.com/arcgis/rest/services/Reference/World_Transportation/MapServer',
+            url: 'http://server.arcgisonline.com/arcgis/rest/services/Reference/World_Transportation/MapServer',
             visible: true,
             showReport: false,
             showTOC: true,
@@ -314,8 +310,7 @@ app.config = {
 
     textSymbolFontSizes: [8, 9, 10, 11, 12, 14, 16, 18, 20, 24, 30, 50],
 
-    sourceLabel:
-        'Source: United States Census Bureau, American Community Survey 2012-2016 5yr Estimates',
+    sourceLabel: 'Source: United States Census Bureau, American Community Survey 2012-2016 5yr Estimates',
 
     sourceLabel2: 'Source: United States Census Bureau, 2010 Decennial Census',
 

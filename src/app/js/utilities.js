@@ -12,13 +12,7 @@ function hexToRgb(hex) {
     });
 
     var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-    return result
-        ? {
-              r: parseInt(result[1], 16),
-              g: parseInt(result[2], 16),
-              b: parseInt(result[3], 16)
-          }
-        : null;
+    return result ? { r: parseInt(result[1], 16), g: parseInt(result[2], 16), b: parseInt(result[3], 16) } : null;
 }
 
 function componentToHex(c) {
@@ -55,12 +49,28 @@ async function GetRepresentativeInfo(id) {
     });
 }
 
-app.AddHighlightGraphics = function(graphics) {
-    console.log(graphics);
-
-    // app.view.graphics.add(graphics[0]);
-    let gfxLayer = app.map.findLayerById('gfxLayer');
-    gfxLayer.addMany(graphics);
+app.AddHighlightGraphics = function(features) {
+    require(['esri/Graphic'], function(Graphic) {
+        let gfx = [];
+        for (let i = 0; i < features.length; i++) {
+            const feature = features[i];
+            let g = new Graphic({
+                geometry: feature.geometry,
+                symbol: {
+                    type: 'simple-fill',
+                    color: [0, 255, 255, 0.5],
+                    opacity: 0.5,
+                    outline: {
+                        color: 'cyan',
+                        width: '3'
+                    }
+                }
+            });
+            gfx.push(g);
+        }
+        let gfxLayer = app.map.findLayerById('gfxLayer');
+        gfxLayer.addMany(gfx);
+    });
 };
 
 app.AddHighlightGraphic = function(graphic) {
@@ -84,14 +94,6 @@ app.AddHighlightGraphic = function(graphic) {
             }
         };
         console.log(tempGraphic);
-        require(['esri/Graphic'], function(Graphic) {
-            var gfx = new Graphic({
-                geometry: tempGraphic.geometry,
-                symbol: tempGraphic.symbol
-            });
-            gfxLayer.add(gfx);
-            console.log(gfx);
-        });
 
         gfxLayer.add(tempGraphic);
 

@@ -65,14 +65,14 @@
                     <button data-val="polygon" class="btn customSummaryButton">
                         <img src="app/images/CustomSummaryIcons/i_draw_freepoly.png" alt="" />
                     </button>
-                    <span>Freehand Area of Interest</span>
+                    <span>Area of Interest</span>
                 </div>
-                <div class="form-group">
+                <!-- <div class="form-group">
                     <button data-val="multipoint" class="btn customSummaryButton">
                         <img src="app/images/CustomSummaryIcons/i_draw_rect.png" alt="" />
                     </button>
                     <span>Area of Interest</span>
-                </div>
+                </div> -->
                 <div class="form-group">
                     <button data-val="point" class="btn customSummaryButton">
                         <img src="app/images/CustomSummaryIcons/i_draw_point.png" alt="" />
@@ -98,12 +98,12 @@
             </div>
 
             <div id="bufferOptions">
-                <input type="text" placeholder="Radius" /> <label for="unit">Units</label>
-                <select name="unit" id="unit">
+                <input id="bufferSize" value="1" min="0" max="10000" step=".01" type="number" placeholder="Radius" />
+                <label for="bufferUnit">Units</label>
+                <select style="width: auto;" class="form-control" name="bufferUnit" id="bufferUnit">
                     <option value="miles">Miles</option>
                     <option value="feet">Feet</option>
                     <option value="meters">Meters</option>
-                    <option value=""></option>
                 </select>
             </div>
         </form>

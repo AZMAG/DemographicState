@@ -1,4 +1,9 @@
-require(['dojo/topic', 'esri/views/2d/draw/Draw', 'esri/Graphic'], function(tp, Draw, Graphic) {
+require(['dojo/topic', 'esri/views/2d/draw/Draw', 'esri/Graphic', 'esri/geometry/geometryEngine'], function(
+    tp,
+    Draw,
+    Graphic,
+    geometryEngine
+) {
     tp.subscribe('panel-loaded', function(panel) {
         if (panel === 'reports') {
             let $customGeographyReports = $('#customGeographyReports');
@@ -6,6 +11,8 @@ require(['dojo/topic', 'esri/views/2d/draw/Draw', 'esri/Graphic'], function(tp, 
             let $bufferOptions = $('#bufferOptions');
             let $customSummaryButton = $('.customSummaryButton');
             let $drawingTooltip = $('#drawingTooltip');
+            let $bufferSize = $bufferOptions.find('#bufferSize');
+            let $bufferUnit = $bufferOptions.find('#bufferUnit');
 
             let draw = new Draw({
                 view: app.view
@@ -22,6 +29,8 @@ require(['dojo/topic', 'esri/views/2d/draw/Draw', 'esri/Graphic'], function(tp, 
 
                 // create() will return a reference to an instance of PolygonDrawAction
                 let action = draw.create(type);
+
+                console.log(type);
 
                 //Creates a tooltip to give user instructions on drawing
                 $('#viewDiv').mousemove(function(e) {
@@ -91,6 +100,7 @@ require(['dojo/topic', 'esri/views/2d/draw/Draw', 'esri/Graphic'], function(tp, 
                     color: symbolLU[type].color,
                     style: symbolLU[type].style,
                     width: 2,
+                    size: 4,
                     outline: {
                         color: 'red',
                         width: 2
@@ -110,13 +120,42 @@ require(['dojo/topic', 'esri/views/2d/draw/Draw', 'esri/Graphic'], function(tp, 
                     symbol: symb
                 });
 
+                let buffGfx = null;
+
+                let buffer = $bufferCheckbox.is(':checked');
+
+                if (buffer) {
+                    console.log($bufferSize.val(), $bufferUnit.val());
+
+                    let buffered = geometryEngine.buffer(graphic.geometry, $bufferSize.val(), $bufferUnit.val());
+                    buffGfx = new Graphic({
+                        geometry: buffered,
+                        symbol: {
+                            type: 'simple-fill',
+                            color: [0, 0, 0, 0],
+                            outline: {
+                                style: 'dot',
+                                color: 'black',
+                                width: 2
+                            }
+                        }
+                    });
+                    app.view.graphics.add(buffGfx);
+                }
+
                 if (e.type === 'draw-complete') {
                     $('#viewDiv').off('mousemove');
 
                     $drawingTooltip.hide();
                     $drawingTooltip.html('Click and drag anywhere on the map to start drawing.');
                     $customSummaryButton.removeClass('active');
-                    ProcessSelection(graphic);
+
+                    if (buffGfx) {
+                        ProcessSelection(buffGfx);
+                    } else {
+                        ProcessSelection(graphic);
+                    }
+
                     // app.GetData(app.config.layerDef["countyBoundaries"], '04005').then(function (data) {
                     //     tp.publish("open-report-window", data.acsData, app.acsFieldsConfig);
                     //     $customGeographyReports.hide();
@@ -134,12 +173,7 @@ require(['dojo/topic', 'esri/views/2d/draw/Draw', 'esri/Graphic'], function(tp, 
         }
 
         function HighlightSelection(original, selected) {
-            console.log(original, selected);
-            // app.AddHighlightGraphics(selected.features);
-            for (let i = 0; i < selected.features.length; i++) {
-                const feature = selected.features[i];
-                app.AddHighlightGraphic(feature);
-            }
+            app.AddHighlightGraphics(selected.features);
         }
 
         function ProcessSelection(gfx) {

@@ -16,6 +16,7 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function(tp, QueryTask) {
                 //Clear Graphics
                 let gfxLayer = app.map.findLayerById('gfxLayer');
                 gfxLayer.removeAll();
+                app.view.graphics.removeAll();
             });
 
             $reportArea.on('click', '.card', function() {
@@ -37,6 +38,7 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function(tp, QueryTask) {
                     .removeClass('active');
 
                 let dataSrc = $(this).data('val');
+
                 let d = app.selectedReport;
 
                 if (dataSrc === 'acs') {
@@ -495,7 +497,7 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function(tp, QueryTask) {
                             right: 10
                         },
                         labels: {
-                            color: 'white'
+                            color: 'black'
                         }
                     },
                     series: [
@@ -515,12 +517,12 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function(tp, QueryTask) {
                             position: 'outsideEnd',
                             background: '#4D4D4D',
                             format: '{0:n}',
-                            color: 'white'
+                            color: 'black'
                             // template: '#= wrapText(category) #'
                         },
                         tooltip: {
                             visible: true,
-                            color: 'black'
+                            color: 'white'
                             // template: templateString
                         }
                     },
@@ -530,7 +532,7 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function(tp, QueryTask) {
                         }
                     },
                     chartArea: {
-                        background: '#4D4D4D',
+                        // background: '#4D4D4D',
                         margin: {
                             left: 15,
                             top: 5,
@@ -540,7 +542,7 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function(tp, QueryTask) {
                     categoryAxis: {
                         //title: { text: "test"},
                         field: 'fieldAlias',
-                        color: 'white',
+                        color: 'black',
                         labels: {
                             visible: true,
                             rotation: {
@@ -557,7 +559,7 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function(tp, QueryTask) {
                     },
                     valueAxis: {
                         //title: { text: "test"},
-                        color: 'white',
+                        color: 'black',
                         labels: {
                             // template: valueAxisTemplate
                         },
@@ -577,6 +579,7 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function(tp, QueryTask) {
     function CreateCharts(data, target) {
         //Filter list
         var categories = {};
+
         var $target = $('#' + target);
 
         var $chartsList = $target.find('#chartsList');
@@ -601,8 +604,8 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function(tp, QueryTask) {
             }
         });
 
-        $chartsList.on('change', ChartOptionChanged);
-        $chartsType.on('change', ChartOptionChanged);
+        $chartsList.off('change').on('change', ChartOptionChanged);
+        $chartsType.off('change').on('change', ChartOptionChanged);
 
         function ChartOptionChanged() {
             ClearCurrentChart();
@@ -623,6 +626,7 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function(tp, QueryTask) {
             var type = $chartsType.find(':selected').val();
             var chartData = categories[category];
             // console.log(category, type);
+            console.log(categories);
 
             return {
                 element: $chartsArea,
@@ -654,7 +658,7 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function(tp, QueryTask) {
         let q = {
             returnGeometry: true,
             outFields: ['*'],
-            where: `GEOID10 = '${geoid}'`
+            where: `GEOID = '${geoid}'`
         };
 
         let qt = new QueryTask({
