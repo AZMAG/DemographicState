@@ -124,8 +124,6 @@ require(['dojo/topic', 'esri/views/2d/draw/Draw', 'esri/Graphic', 'esri/geometry
                 let buffer = $bufferCheckbox.is(':checked');
 
                 if (buffer) {
-                    console.log($bufferSize.val(), $bufferUnit.val());
-
                     let buffered = geometryEngine.buffer(graphic.geometry, $bufferSize.val(), $bufferUnit.val());
                     buffGfx = new Graphic({
                         geometry: buffered,
@@ -175,6 +173,15 @@ require(['dojo/topic', 'esri/views/2d/draw/Draw', 'esri/Graphic', 'esri/geometry
             app.AddHighlightGraphics(selected.features);
         }
 
+        console.log(app.acsFieldsConfig);
+
+        let summableFields = [];
+        app.acsFieldsConfig.forEach(conf => {
+            if (conf.canSum) {
+                summableFields.push(conf.fieldName);
+            }
+        });
+
         function ProcessSelection(gfx) {
             const q = {
                 geometry: gfx.geometry,
@@ -196,10 +203,12 @@ require(['dojo/topic', 'esri/views/2d/draw/Draw', 'esri/Graphic', 'esri/geometry
                 res.features.forEach(feature => {
                     let attr = feature.attributes;
                     Object.keys(attr).forEach(key => {
-                        if (data[key]) {
-                            data[key] += attr[key];
-                        } else {
-                            data[key] = attr[key];
+                        if (summableFields.indexOf(key) > -1) {
+                            if (data[key]) {
+                                data[key] += attr[key];
+                            } else {
+                                data[key] = attr[key];
+                            }
                         }
                     });
                 });
