@@ -496,6 +496,11 @@ a[aria-expanded='true'] {
     color: var(--textColor);
 }
 
+.rep-pic {
+    border-radius: 50%;
+    height: 80px;
+}
+
 .popover-title {
     background: var(--mainColor);
     color: var(--textColor);

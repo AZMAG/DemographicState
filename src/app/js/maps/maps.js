@@ -19,8 +19,7 @@ require([
         extent: app.config.initExtent,
         constraints: {
             rotationEnabled: false,
-            minZoom: 7,
-            snapToZoom: false
+            minZoom: 7
         },
         ui: {
             components: []
@@ -39,15 +38,7 @@ require([
             var layerToAdd;
             var url = app.config.mainUrl;
             if (layer.type === 'feature') {
-                let popupTemplate = new PopupTemplate({
-                    title: layer.title + '<div style="display:none">{*}</div>',
-                    content: function() {
-                        if (layer.googleCivic) {
-                            app.googleCivicData(layer.googleCivic);
-                        }
-                        return `<div id="googleCivicTarget"></div>{NAME}`;
-                    }
-                });
+                let popupTemplate = new PopupTemplate();
 
                 if (layer.url) {
                     url = layer.url;
@@ -59,7 +50,15 @@ require([
                     definitionExpression: layer.definitionExpression,
                     layerId: layer.ACSIndex,
                     visible: layer.visible,
-                    popupTemplate: popupTemplate, //layer.popup ? popupTemplate : undefined,
+                    popupTemplate: {
+                        title: layer.title + '<div style="display:none">{*}</div>',
+                        content: function() {
+                            return `
+                            {NAME:app.PopupFormat}
+                            <div id="googleCivicAPITarget"></div>
+                            `;
+                        }
+                    },
                     outFields: layer.outFields || ['*'],
                     opacity: layer.opacity
                 });

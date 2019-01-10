@@ -12,6 +12,12 @@ app.config = {
     siteUrl: 'https://geo.azmag.gov/maps/azdemographics/?',
 
     googleCivicInfoApiKey: 'AIzaSyCicS2bzJk_ptthYD2nSu4tIPfjGYmxU1U',
+    googleCivicOffices: [
+        'Mayor',
+        'Supervisors District',
+        'United States House of Representatives',
+        'Council, District'
+    ],
 
     DefaultColorRamp: 'GnBu',
     DefaultColorScheme: 'Sequential',
@@ -28,8 +34,7 @@ app.config = {
             opacity: 0.8,
             visible: true,
             showReport: false,
-            showTOC: false,
-            url: ''
+            showTOC: false
         },
         {
             legend: false,
@@ -52,8 +57,7 @@ app.config = {
             opacity: 1,
             visible: false,
             showReport: true,
-            showTOC: true,
-            url: ''
+            showTOC: true
         },
         {
             legend: true,
@@ -64,8 +68,7 @@ app.config = {
             opacity: 1,
             visible: false,
             showReport: true,
-            showTOC: true,
-            url: ''
+            showTOC: true
         },
         {
             legend: true,
@@ -76,8 +79,7 @@ app.config = {
             opacity: 1,
             visible: false,
             showReport: true,
-            showTOC: true,
-            url: ''
+            showTOC: true
         },
         {
             legend: true,
@@ -88,8 +90,7 @@ app.config = {
             opacity: 1,
             visible: false,
             showReport: true,
-            showTOC: true,
-            url: ''
+            showTOC: true
         },
         {
             legend: true,
@@ -100,8 +101,7 @@ app.config = {
             opacity: 1,
             visible: false,
             showReport: true,
-            showTOC: true,
-            url: ''
+            showTOC: true
         },
         {
             legend: true,
@@ -112,8 +112,7 @@ app.config = {
             opacity: 0.8,
             visible: true,
             showReport: true,
-            showTOC: true,
-            url: ''
+            showTOC: true
         },
         {
             legend: true,
@@ -124,8 +123,7 @@ app.config = {
             opacity: 0.7,
             visible: false,
             showReport: true,
-            showTOC: true,
-            url: ''
+            showTOC: true
         },
         {
             legend: true,
@@ -136,8 +134,7 @@ app.config = {
             opacity: 0.8,
             visible: false,
             showReport: true,
-            showTOC: true,
-            url: ''
+            showTOC: true
         },
         {
             legend: true,
@@ -148,8 +145,7 @@ app.config = {
             opacity: 0.08,
             visible: false,
             showReport: true,
-            showTOC: true,
-            url: ''
+            showTOC: true
         },
         {
             legend: true,
@@ -160,8 +156,7 @@ app.config = {
             opacity: 0.08,
             visible: false,
             showReport: true,
-            showTOC: true,
-            url: ''
+            showTOC: true
         }
     ],
 

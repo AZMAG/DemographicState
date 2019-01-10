@@ -234,6 +234,7 @@
         <div id="zoomWidget" class="customWidget esri-component esri-zoom esri-widget">
             <div
                 data-id="In"
+                id="zoomInBtn"
                 class="esri-widget--button esri-widget esri-interactive"
                 role="button"
                 tabindex="0"
@@ -243,7 +244,8 @@
             </div>
             <div
                 data-id="Out"
-                class="esri-widget--button esri-widget esri-interactive"
+                id="zoomOutBtn"
+                class="esri-widget--button esri-widget esri-interactive disabled"
                 role="button"
                 tabindex="0"
                 title="Zoom Out"
@@ -382,6 +384,11 @@
                         </li>
                         <li panel-target="reports">
                             <a href="#"> <i class="fas fa-clipboard"></i> Reports </a> <span class="arrow-left"></span>
+                        </li>
+
+                        <li panel-target="layers">
+                            <a href="#"> <i class="fas fa-check-square"></i> Layers </a>
+                            <span class="arrow-left"></span>
                         </li>
                         <li panel-target="about">
                             <a href="#"> <i class="fas fa-info-circle"></i> About </a> <span class="arrow-left"></span>

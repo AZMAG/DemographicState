@@ -173,8 +173,6 @@ require(['dojo/topic', 'esri/views/2d/draw/Draw', 'esri/Graphic', 'esri/geometry
             app.AddHighlightGraphics(selected.features);
         }
 
-        console.log(app.acsFieldsConfig);
-
         let summableFields = [];
         app.acsFieldsConfig.forEach(conf => {
             if (conf.canSum) {

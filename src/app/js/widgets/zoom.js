@@ -7,13 +7,22 @@ require(['esri/widgets/Zoom/ZoomViewModel', 'dojo/topic', 'dojo/domReady!'], fun
         });
         app.view.ui.add(zoomId, 'bottom-right');
 
-        $('#' + zoomId).on('click', '.esri-widget--button', function() {
+        let $zoomArea = $('#' + zoomId);
+        $zoomArea.on('click', '.esri-widget--button', function() {
             const direction = $(this).data('id');
-
             if (direction === 'In') {
                 zoomVM.zoomIn();
             } else {
                 zoomVM.zoomOut();
+            }
+        });
+
+        let $zoomOutBtn = $zoomArea.find('#zoomOutBtn');
+        app.view.watch('zoom', function(zoom) {
+            if (zoom === 7) {
+                $zoomOutBtn.addClass('disabled');
+            } else {
+                $zoomOutBtn.removeClass('disabled');
             }
         });
     });
