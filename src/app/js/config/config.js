@@ -50,6 +50,17 @@ app.config = {
         },
         {
             legend: true,
+            id: 'censusTracts',
+            layerName: 'Tracts',
+            title: 'Census Tracts',
+            type: 'feature',
+            opacity: 1,
+            visible: false,
+            showReport: true,
+            showTOC: true
+        },
+        {
+            legend: true,
             id: 'councilDistricts',
             layerName: 'CityDistricts',
             title: 'Council Districts',
@@ -75,6 +86,39 @@ app.config = {
             id: 'zipCodes',
             layerName: 'Zip_Codes',
             title: 'ZIP Codes',
+            type: 'feature',
+            opacity: 1,
+            visible: false,
+            showReport: true,
+            showTOC: true
+        },
+        {
+            legend: true,
+            id: 'schoolDistElementary',
+            layerName: 'SchoolDist_Elementary',
+            title: 'Elementary School Districts',
+            type: 'feature',
+            opacity: 1,
+            visible: false,
+            showReport: true,
+            showTOC: true
+        },
+        {
+            legend: true,
+            id: 'schoolDistSecondary',
+            layerName: 'SchoolDist_Secondary',
+            title: 'Secondary School Districtss',
+            type: 'feature',
+            opacity: 1,
+            visible: false,
+            showReport: true,
+            showTOC: true
+        },
+        {
+            legend: true,
+            id: 'schoolDistUnified',
+            layerName: 'SchoolDist_Unified',
+            title: 'Unified School Districts',
             type: 'feature',
             opacity: 1,
             visible: false,
@@ -121,6 +165,28 @@ app.config = {
             title: 'COG / MPO Boundaries',
             type: 'feature',
             opacity: 0.7,
+            visible: false,
+            showReport: true,
+            showTOC: true
+        },
+        {
+            legend: true,
+            id: 'cogs',
+            layerName: 'Cogs',
+            title: 'Council of Governments',
+            type: 'feature',
+            opacity: 1,
+            visible: false,
+            showReport: true,
+            showTOC: true
+        },
+        {
+            legend: true,
+            id: 'mpos',
+            layerName: 'Mpos',
+            title: 'Metropolitan Planning Organizations',
+            type: 'feature',
+            opacity: 1,
             visible: false,
             showReport: true,
             showTOC: true

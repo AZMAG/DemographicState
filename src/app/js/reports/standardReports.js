@@ -104,7 +104,7 @@ require(['dojo/topic'], function(tp) {
 
                     ResetForm();
                     $('#reportLoader').hide();
-                    tp.publish('toggle-panel', 'reports');
+                    // tp.publish('toggle-panel', 'reports');
                 });
             }
         }
