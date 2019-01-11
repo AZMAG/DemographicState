@@ -1,11 +1,13 @@
+"use strict";
 require([
         "dojo/topic"
     ],
-    function (tp) {
+    function(tp) {
         tp.subscribe("layers-added", InitAdvancedQuery);
 
         function InitAdvancedQuery() {
 
         }
 
-    })
+    }
+);

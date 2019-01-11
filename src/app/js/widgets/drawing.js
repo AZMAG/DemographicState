@@ -1,16 +1,14 @@
-    require([
+"use strict";
+require([
         "esri/views/2d/draw/Draw",
         "esri/Graphic",
         "dojo/topic"
-    ], function (
-        Draw,
-        Graphic,
-        tp
-    ) {
+    ],
+    function(Draw, Graphic, tp) {
         let $drawWidget = $("#drawWidget");
         let $drawingTooltip = $('#drawingTooltip');
 
-        tp.subscribe("map-loaded", function () {
+        tp.subscribe("map-loaded", function() {
             // add the button for drawing polygons underneath zoom buttons
             app.view.ui.add($drawWidget[0], "bottom-right");
 
@@ -36,7 +34,7 @@
                         <div class="slidecontainer">
                             <span style="padding: 2px;">Transparency</span>
                             <input id="gfxSlider" type="range" min="0" max="1" value=".8" step=".05" class="round slider">
-                            
+
                         </div>
                         <button id='drawClearBtn' class='btn btn-sm'>Clear  <i class="fas fa-trash-alt"></i></button>
                         <button id='drawAddBtn' class='btn btn-sm'>New  <i class="fas fa-plus"></i></button>
@@ -110,7 +108,7 @@
                     var action = draw.create("polygon");
 
                     //Creates a tooltip to give user instructions on drawing
-                    $("#viewDiv").mousemove(function (e) {
+                    $("#viewDiv").mousemove(function(e) {
                         $drawingTooltip.css('left', e.pageX + 10).css('top', e.pageY + 10).css('display', 'block');
                     });
 
@@ -131,13 +129,13 @@
             }
 
 
-            $("body").on("click", "#drawClearBtn", function () {
+            $("body").on("click", "#drawClearBtn", function() {
                 app.view.graphics.removeAll();
                 $(this).hide();
                 $("#drawAddBtn").show();
             })
 
-            $("body").on("click", "#drawAddBtn", function () {
+            $("body").on("click", "#drawAddBtn", function() {
                 panelOpen = false;
                 StartDrawing();
             })
@@ -187,4 +185,5 @@
                 app.view.graphics.add(graphic);
             }
         });
-    });
+    }
+);

@@ -1,9 +1,10 @@
+"use strict";
 require([
         "dojo/topic",
         "dojo/domReady!"
     ],
-    function (tp) {
-        tp.subscribe("layers-added", function () {
+    function(tp) {
+        tp.subscribe("layers-added", function() {
             let $customClassBreaksModal = $("#customClassBreaksModal");
             let $classBreakSliders = $("#classBreakSliders");
             let $classBreakSliderTooltips = $("#classBreakSliderTooltips");
@@ -80,7 +81,7 @@ require([
 
                     //Add pane
                     $classBreakSliders.append(`
-                        <div class="cbPane" id="cbPane${i}" 
+                        <div class="cbPane" id="cbPane${i}"
                         style="display: flex; background-color:rgba(${clr.r},${clr.g},${clr.b},${lyr.opacity});">
                         <div class="paneLabel" style="display: ${showLabel}; margin: auto; font-size: 10.5px;">${info.label}</div>
                         </div>
@@ -206,7 +207,7 @@ require([
                 let totalHeight = $classBreakSliders.height() + 2;
                 let chartHeight = totalHeight / numberOfCharts;
 
-                //Gets active map item    
+                //Gets active map item
                 let $activeItem = $("#mapsList").find(".activeMapItem");
                 if ($activeItem) {
                     //Pull jquery data object from active map item
@@ -226,7 +227,7 @@ require([
                         q.outFields.push(conf.NormalizeField);
                     }
 
-                    lyr.queryFeatures(q).then(function (res) {
+                    lyr.queryFeatures(q).then(function(res) {
                         let maxVal = res.features[0].attributes[conf.FieldName];
                         if (conf.NormalizeField) {
                             maxVal = maxVal / res.features[0].attributes[conf.NormalizeField];
@@ -257,7 +258,7 @@ require([
                             }
                             $classBreakCharts.append(`
                         <div data-chart-id="chart${i}" class="classBreakChart"
-                        style="font-size:10px;height:${chartHeight}px; width: ${w}px;" 
+                        style="font-size:10px;height:${chartHeight}px; width: ${w}px;"
                         data-toggle="tooltip" data-placement="right" title="${count}">
                         </div>
                         `)
@@ -268,7 +269,7 @@ require([
 
 
                 }
-                $classBreakSliderTooltips.on("click", ".sliderTooltip", function () {
+                $classBreakSliderTooltips.on("click", ".sliderTooltip", function() {
                     let $sliderTooltip = $(this);
                     let $label = $sliderTooltip.find("span.sliderTooltipInnerLabel");
                     $label.hide();
@@ -337,7 +338,7 @@ require([
                     }
 
                     //This ensures that a user doesn't enter a non-numeric character into the input
-                    $sliderTooltipInput.keydown(function (e) {
+                    $sliderTooltipInput.keydown(function(e) {
                         //https://stackoverflow.com/questions/995183/how-to-allow-only-numeric-0-9-in-html-inputbox-using-jquery
                         if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110]) !== -1 ||
                             // Allow: Ctrl+A, Command+A
@@ -358,15 +359,15 @@ require([
 
 
 
-            app.GetCustomBreaks = function () {
+            app.GetCustomBreaks = function() {
                 let classBreaks = [];
-                $classBreakSliders.find(".cbPane").each(function (i, val) {
+                $classBreakSliders.find(".cbPane").each(function(i, val) {
                     let dataInfo = $(val).data('info');
                     classBreaks.push(dataInfo);
                 });
                 return classBreaks.reverse();
             }
-            $("#customClassBreaksButton").click(function () {
+            $("#customClassBreaksButton").click(function() {
                 tp.publish("customClassBreaks-selected");
                 $customClassBreaksModal.modal('hide');
             })
@@ -377,4 +378,5 @@ require([
             tp.subscribe("classType-change", CbrParamChanged);
             tp.subscribe("classBreaksCount-change", CbrParamChanged);
         })
-    })
+    }
+);

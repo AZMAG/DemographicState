@@ -1,6 +1,6 @@
 app.config = {
-    Version: 'v3.2.4 | 2018-04-20',
-    copyright: '2018',
+    Version: 'v4.0.0 | 2019-01-09',
+    copyright: '2019',
 
     LegendSource: 'American Community Survey 2013-2017 5yr',
     emailLink: 'https://www.azmag.gov/Contact/4788?s=geo.azmag.gov/maps/azdemographics&n=Jason%20Howard&popUp=true',
