@@ -1,5 +1,5 @@
 //This file should include miscellaneous repeatable functions used in multiple places in the code.
-
+"use strict";
 Number.prototype.MagFormat = function() {
     return this.toFixed(1);
 };

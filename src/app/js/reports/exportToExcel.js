@@ -1,9 +1,11 @@
+"use strict";
 require([
         "dojo/topic"
     ],
-    function (tp) {
+    function(tp) {
         tp.subscribe("excel-export", exportToExcel);
-    })
+    }
+);
 
 function exportToExcel(params) {
     let grid = params.grid;
@@ -15,15 +17,15 @@ function exportToExcel(params) {
     let colSpan = 4;
     let rowSpan = 11;
 
-    grid.bind("excelExport", function (e) {
+    grid.bind("excelExport", function(e) {
         let rows = e.workbook.sheets[0].rows;
         let columns = e.workbook.sheets[0].columns;
 
         columns[1].width = 290;
 
-        $.each(rows, function (i, row) {
+        $.each(rows, function(i, row) {
             if (row.type === 'header') {
-                $.each(row.cells, function (i, cell) {
+                $.each(row.cells, function(i, cell) {
                     cell.background = '#8DB4E2';
                     cell.bold = true;
                     cell.color = '#000';
@@ -34,7 +36,7 @@ function exportToExcel(params) {
                 row.cells[0].color = '#fff';
                 row.cells[0].bold = true;
             } else {
-                $.each(app.acsFieldsConfig, function (j, el) {
+                $.each(app.acsFieldsConfig, function(j, el) {
                     if (el.tableHeader === row.cells[1].value) {
                         let indent = {
                             0: '',
@@ -49,7 +51,7 @@ function exportToExcel(params) {
                             row.cells[0].value = row.cells[1].value;
                             row.cells[0].colSpan = 2;
                             row.cells.splice(1, 1);
-                            $.each(row.cells, function (i, cell) {
+                            $.each(row.cells, function(i, cell) {
                                 cell.background = '#8DB4E2';
                                 cell.italic = true;
                                 cell.bold = true;
@@ -58,7 +60,7 @@ function exportToExcel(params) {
                                 }
                             });
                         } else if (el.universeField === 2) {
-                            $.each(row.cells, function (i, cell) {
+                            $.each(row.cells, function(i, cell) {
                                 if (i > 0) {
                                     cell.background = '#D9D9D9';
                                     cell.bold = true;
@@ -69,7 +71,7 @@ function exportToExcel(params) {
                                 }
                             });
                         } else {
-                            $.each(row.cells, function (i, cell) {
+                            $.each(row.cells, function(i, cell) {
                                 if (i > 1) {
                                     cell.textAlign = "right";
                                 }
