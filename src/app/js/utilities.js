@@ -115,8 +115,6 @@ app.AddHighlightGraphic = function(graphic) {
     if (gfxLayer.graphics && gfxLayer.graphics.items.length > 0) {
         console.log('asdf');
     } else {
-        // gfxLayer.removeAll();
-
         var tempGraphic = $.extend({}, graphic);
 
         tempGraphic.symbol = {
@@ -130,15 +128,39 @@ app.AddHighlightGraphic = function(graphic) {
         };
 
         gfxLayer.add(tempGraphic);
-
-        //Zoom to highlighted graphic, but expand to give some context.
     }
 };
+
+app.summarizeFeatures = function(res) {
+    if (!app.summableFields) {
+        app.summableFields = [];
+        app.acsFieldsConfig.forEach(conf => {
+            if (conf.canSum) {
+                app.summableFields.push(conf.fieldName);
+            }
+        });
+    }
+
+    let data = {};
+    res.features.forEach(feature => {
+        let attr = feature.attributes;
+        Object.keys(attr).forEach(key => {
+            if (app.summableFields.indexOf(key) > -1) {
+                if (data[key]) {
+                    data[key] += attr[key];
+                } else {
+                    data[key] = attr[key];
+                }
+            }
+        });
+    });
+
+    return data;
+};
+
 app.PopupFormat = function(value, key, data) {
     if (data['googleID']) {
         GetRepresentativeInfo(data['googleID']).then(function(data) {
-            console.log(data);
-
             if (data.offices) {
                 let mainRep;
                 data.offices.forEach(office => {

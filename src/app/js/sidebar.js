@@ -14,14 +14,10 @@ require(['dojo/topic', 'dojo/domReady!'], function(tp) {
         $sidebarCollapse.toggleClass('active');
     });
 
+    tp.subscribe('toggle-panel', TogglePanel);
+
     let loadedLayers = [];
-
-    $links.on('click', function(e) {
-        let target = $(this).attr('panel-target');
-
-        // <!-- comments:uncomment // -->
-        // ga("send", "event", "Click", "Panel Opened", target);
-        // <!-- endcomments -->
+    function TogglePanel(target) {
         $('#viewDiv').css('visibility', 'visible');
         $('#container').css('flex', '1');
         if (target === 'legend') {
@@ -65,6 +61,15 @@ require(['dojo/topic', 'dojo/domReady!'], function(tp) {
                 $(`div[panel-id=${target}]`).fadeIn(400);
             }
         }
+    }
+
+    $links.on('click', function(e) {
+        let target = $(this).attr('panel-target');
+
+        // <!-- comments:uncomment // -->
+        // ga("send", "event", "Click", "Panel Opened", target);
+        // <!-- endcomments -->
+        TogglePanel(target);
     });
 
     $legendToggle.click(function(e) {

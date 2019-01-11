@@ -75,6 +75,8 @@ require(['dojo/topic'], function(tp) {
                 $('#reportType').val('default');
             }
 
+            tp.subscribe('openReport-by-geoid', OpenReportByGEOID);
+
             $('#reportForm').submit(function(e) {
                 $('#reportLoader').css('display', 'flex');
                 e.preventDefault();
@@ -82,14 +84,13 @@ require(['dojo/topic'], function(tp) {
                 let conf = $('#reportType')
                     .find(':selected')
                     .data('conf');
-                let layer = app.map.findLayerById(conf.id);
                 let GEOID = $('#specificReport')
                     .find(':selected')
                     .data('geo-id');
-                let OBJECTID = $('#specificReport')
-                    .find(':selected')
-                    .data('object-id');
+                OpenReportByGEOID(conf, GEOID);
+            });
 
+            function OpenReportByGEOID(conf, GEOID) {
                 app.GetData(conf, GEOID).then(function(data) {
                     app.AddHighlightGraphics(data.acsData.features);
                     app.view.goTo(data.acsData.features[0].geometry.extent.expand(1.5));
@@ -100,10 +101,12 @@ require(['dojo/topic'], function(tp) {
                         console.error('No matching features for: ' + q);
                     }
                     $('#reportForm').hide();
+
                     ResetForm();
                     $('#reportLoader').hide();
+                    tp.publish('toggle-panel', 'reports');
                 });
-            });
+            }
         }
     });
 });

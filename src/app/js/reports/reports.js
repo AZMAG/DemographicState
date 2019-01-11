@@ -484,16 +484,19 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function(tp, QueryTask) {
 
     dataCache = {};
 
-    app.GetData = async function(conf, geoid) {
-        if (dataCache[conf.id + geoid]) {
-            app.selectedReport = dataCache[conf.id + geoid];
-            return app.selectedReport;
+    app.GetData = async function(conf, geoid, geo) {
+        if (conf.id !== 'blockGroups') {
+            if (dataCache[conf.id + geoid]) {
+                app.selectedReport = dataCache[conf.id + geoid];
+                return app.selectedReport;
+            }
         }
 
         let q = {
             returnGeometry: true,
             outFields: ['*'],
-            where: `GEOID = '${geoid}'`
+            where: geoid ? `GEOID = '${geoid}'` : '1=1',
+            geometry: geo ? geo : null
         };
 
         let qt = new QueryTask({
@@ -502,7 +505,6 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function(tp, QueryTask) {
         let acsPromise = qt.execute(q);
 
         qt.url = app.config.mainUrl + '/' + conf.censusIndex;
-        q.where = `GEOID = '${geoid}'`;
         q.returnGeometry = false;
 
         let censusPromise = qt.execute(q);
@@ -515,6 +517,6 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function(tp, QueryTask) {
 
         dataCache[conf.id + geoid] = app.selectedReport;
 
-        return app.selectedReport;
+        return $.extend({}, app.selectedReport);
     };
 });

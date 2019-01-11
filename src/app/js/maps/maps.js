@@ -28,6 +28,15 @@ require([
 
     app.view.when(function() {
         tp.publish('map-loaded');
+        app.view.popup.on('trigger-action', function(e) {
+            if (e.action.id === 'open-report') {
+                let f = e.target.selectedFeature;
+                let geoid = f.attributes['GEOID'];
+                let layerId = f.layer.id;
+                let conf = app.config.layerDef[layerId];
+                tp.publish('openReport-by-geoid', conf, geoid);
+            }
+        });
     });
 
     tp.subscribe('map-loaded', addLayers);
@@ -57,7 +66,14 @@ require([
                             {NAME:app.PopupFormat}
                             <div id="googleCivicAPITarget"></div>
                             `;
-                        }
+                        },
+                        actions: [
+                            {
+                                title: 'Open Report',
+                                id: 'open-report',
+                                className: 'esri-icon-table'
+                            }
+                        ]
                     },
                     outFields: layer.outFields || ['*'],
                     opacity: layer.opacity

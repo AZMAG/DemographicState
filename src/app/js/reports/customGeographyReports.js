@@ -152,11 +152,6 @@ require(['dojo/topic', 'esri/views/2d/draw/Draw', 'esri/Graphic', 'esri/geometry
                     } else {
                         ProcessSelection(graphic);
                     }
-
-                    // app.GetData(app.config.layerDef["countyBoundaries"], '04005').then(function (data) {
-                    //     tp.publish("open-report-window", data.acsData, app.acsFieldsConfig);
-                    //     $customGeographyReports.hide();
-                    // })
                 } else {
                     $('#drawClearBtn').hide();
                 }
@@ -169,61 +164,34 @@ require(['dojo/topic', 'esri/views/2d/draw/Draw', 'esri/Graphic', 'esri/geometry
             }
         }
 
-        function HighlightSelection(original, selected) {
-            app.AddHighlightGraphics(selected.features);
-        }
-
-        let summableFields = [];
-        app.acsFieldsConfig.forEach(conf => {
-            if (conf.canSum) {
-                summableFields.push(conf.fieldName);
-            }
-        });
-
         function ProcessSelection(gfx) {
-            const q = {
-                geometry: gfx.geometry,
-                returnGeometry: true,
-                outFields: ['*'],
-                outSpatialReference: 102100
-            };
-
-            let bgLayer = app.map.findLayerById('blockGroups').sublayers.getItemAt(0);
-
             //Start the loading spinner
             $loadingSpinner.css('display', 'flex');
 
-            bgLayer.queryFeatures(q).then(res => {
-                let data = {};
+            app.GetData(app.config.layerDef['blockGroups'], null, gfx.geometry).then(function(data) {
+                var acsdata = app.summarizeFeatures(data.acsData);
+                var censusdata = app.summarizeFeatures(data.censusData);
 
-                HighlightSelection(gfx, res);
-
-                res.features.forEach(feature => {
-                    let attr = feature.attributes;
-                    Object.keys(attr).forEach(key => {
-                        if (summableFields.indexOf(key) > -1) {
-                            if (data[key]) {
-                                data[key] += attr[key];
-                            } else {
-                                data[key] = attr[key];
-                            }
+                app.selectedReport.acsData = {
+                    features: [
+                        {
+                            attributes: acsdata
                         }
-                    });
-                });
+                    ]
+                };
+
+                app.selectedReport.censusData = {
+                    features: [
+                        {
+                            attributes: censusdata
+                        }
+                    ]
+                };
+
+                tp.publish('open-report-window', app.selectedReport.acsData, app.acsFieldsConfig);
+                $customGeographyReports.hide();
+                app.AddHighlightGraphics(data.acsData.features);
                 $loadingSpinner.css('display', 'none');
-
-                tp.publish(
-                    'open-report-window',
-                    {
-                        features: [
-                            {
-                                attributes: data
-                            }
-                        ]
-                    },
-                    app.acsFieldsConfig
-                );
-
                 $('.reportFormArea').hide();
             });
         }
