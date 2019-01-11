@@ -1,0 +1,27 @@
+{
+    "boss": true,
+    "bitwise": true,
+    "camelcase": false,
+    "curly": true,
+    "eqeqeq": true,
+    "eqnull": true,
+    "forin": true,
+    "immed": true,
+    "indent": 4,
+    "latedef": true,
+    "newcap": true,
+    "noarg": true,
+    "nonew": true,
+    "quotmark": "double",
+    "strict": true,
+    "undef": true,
+    "unused": true,
+
+    "esnext": true,
+    "sub": true,
+
+    "browser": true,
+    "node": true,
+    "dojo": true,
+    "jquery": true
+}

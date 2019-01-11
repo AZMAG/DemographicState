@@ -1,3 +1,4 @@
+'use strict';
 require(['dojo/topic'], function(tp) {
     // tp.subscribe("layers-added", initReports);
     tp.subscribe('panel-loaded', function(panel) {
@@ -104,7 +105,7 @@ require(['dojo/topic'], function(tp) {
 
                     ResetForm();
                     $('#reportLoader').hide();
-                    // tp.publish('toggle-panel', 'reports');
+                    tp.publish('toggle-panel', 'reports');
                 });
             }
         }

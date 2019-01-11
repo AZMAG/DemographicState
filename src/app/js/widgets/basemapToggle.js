@@ -1,10 +1,11 @@
+"use strict";
 require([
         'esri/widgets/BasemapToggle/BasemapToggleViewModel',
         'dojo/topic',
         'dojo/domReady!'
     ],
-    function (BasemapToggleViewModel, tp) {
-        tp.subscribe("map-loaded", function () {
+    function(BasemapToggleViewModel, tp) {
+        tp.subscribe("map-loaded", function() {
 
             //Basemap
             const basemapId = "basemapToggle";
@@ -17,7 +18,7 @@ require([
             app.view.ui.add(basemapId, 'bottom-right');
             let toggled = true;
 
-            $("#" + basemapId).click(function () {
+            $("#" + basemapId).click(function() {
                 if (toggled) {
                     $(this).attr("title", "Map");
                 } else {
@@ -26,5 +27,6 @@ require([
                 toggled = !toggled;
                 toggleVM.toggle();
             });
-        })
-    })
+        });
+    }
+);
