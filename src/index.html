@@ -214,11 +214,27 @@
             <i class="esri-icon fas fa-minus"></i>
             <span class="esri-icon-font-fallback-text">Zoom Out</span>
         </div>
-    </div>
-    <div id="drawWidget" class="customWidget esri-component esri-zoom esri-widget">
-        <div id="draw-polygon" class="esri-widget--button esri-widget esri-interactive" role="button" tabindex="0" title="Drawing Tools">
-            <i class="esri-icon fas fa-draw-polygon"></i>
-            <span class="esri-icon-font-fallback-text">Draw</span>
+        <div id="zoomWidget" class="customWidget esri-component esri-zoom esri-widget">
+            <div
+                data-id="In"
+                id="zoomInBtn"
+                class="esri-widget--button esri-widget esri-interactive"
+                role="button"
+                tabindex="0"
+                title="Zoom In"
+            >
+                <i class="esri-icon fas fa-plus"></i> <span class="esri-icon-font-fallback-text">Zoom In</span>
+            </div>
+            <div
+                data-id="Out"
+                id="zoomOutBtn"
+                class="esri-widget--button esri-widget esri-interactive disabled"
+                role="button"
+                tabindex="0"
+                title="Zoom Out"
+            >
+                <i class="esri-icon fas fa-minus"></i> <span class="esri-icon-font-fallback-text">Zoom Out</span>
+            </div>
         </div>
     </div>
     <div id="drawingTooltip">
@@ -354,34 +370,28 @@
                                 <input class="legendToggle" type="checkbox" checked>
                                 <span class="slider round"></span>
                             </label> -->
-                        <span class="arrow-left"></span>
-                    </li>
-                    <li panel-target="maps">
-                        <a href="#">
-                                <i class="fas fa-check-square"></i> Maps
-                            </a>
-                        <span class="arrow-left"></span>
-                    </li>
-                    <li panel-target="reports">
-                        <a href="#">
-                                <i class="fas fa-clipboard"></i> Reports
-                            </a>
-                        <span class="arrow-left"></span>
-                    </li>
-                    <li panel-target="about">
-                        <a href="#">
-                                <i class="fas fa-info-circle"></i> About
-                            </a>
-                        <span class="arrow-left"></span>
-                    </li>
-                    <li panel-target="help">
-                        <a href="#">
-                                <i class="fas fa-question"></i> Help
-                            </a>
-                        <span class="arrow-left"></span>
-                    </li>
-                    <li panel-target="share">
-                        <a
+                            <span class="arrow-left"></span>
+                        </li>
+                        <li panel-target="maps">
+                            <a href="#"> <i class="fas fa-check-square"></i> Maps </a> <span class="arrow-left"></span>
+                        </li>
+                        <li panel-target="reports">
+                            <a href="#"> <i class="fas fa-clipboard"></i> Reports </a> <span class="arrow-left"></span>
+                        </li>
+
+                        <li panel-target="layers">
+                            <a href="#"> <i class="fas fa-check-square"></i> Layers </a>
+                            <span class="arrow-left"></span>
+                        </li>
+                        <li panel-target="about">
+                            <a href="#"> <i class="fas fa-info-circle"></i> About </a> <span class="arrow-left"></span>
+                        </li>
+
+                        <li panel-target="help">
+                            <a href="#"> <i class="fas fa-question"></i> Help </a> <span class="arrow-left"></span>
+                        </li>
+                        <li panel-target="share">
+                            <a
                                 class="shareWidget"
                                 data-placement="auto"
                                 data-toggle="popover"

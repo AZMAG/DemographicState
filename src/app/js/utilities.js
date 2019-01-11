@@ -54,8 +54,15 @@ async function GetRepresentativeInfo(id) {
     });
 }
 
-app.AddHighlightGraphics = function(graphics) {
-        console.log(graphics);
+app.clearDrawnGraphics = function() {
+    let gfxLayer = app.map.findLayerById('gfxLayer');
+    gfxLayer.removeAll();
+    app.view.graphics.removeAll();
+};
+
+app.numberWithCommas = function(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+};
 
         app.chartTooltip = function(value, category) {
             return `${app.numberWithCommas(value)} <br> ${category}`;
@@ -151,3 +158,48 @@ app.AddHighlightGraphics = function(graphics) {
                 // app.view.goTo(graphic.geometry.extent.expand(1.5));
             }
         };
+
+        gfxLayer.add(tempGraphic);
+
+        //Zoom to highlighted graphic, but expand to give some context.
+    }
+};
+app.PopupFormat = function(value, key, data) {
+    if (data['googleID']) {
+        GetRepresentativeInfo(data['googleID']).then(function(data) {
+            console.log(data);
+
+            if (data.offices) {
+                let mainRep;
+                data.offices.forEach(office => {
+                    let isKeyOffice = false;
+                    app.config.googleCivicOffices.forEach(function(conf) {
+                        if (office.name.indexOf(conf) > -1) {
+                            isKeyOffice = true;
+                        }
+                    });
+
+                    if (isKeyOffice) {
+                        if (data.officials && office.officialIndices) {
+                            mainRep = data.officials[office.officialIndices[0]];
+                            mainRep['office'] = office.name;
+                        }
+                    }
+                });
+                if (mainRep) {
+                    $('#googleCivicAPITarget').html(
+                        `<div class="flexCenter"><img class="rep-pic" src="${mainRep.photoUrl}" alt="">
+                            <div>
+                            <span>${mainRep.office}</span>: <span>${mainRep.name}</span>
+                            </div>
+                        </div>`
+                    );
+                }
+            }
+        });
+    }
+    return `${data['NAME']}`;
+};
+
+// {"name":"Craig L. Brown","address":[{"line1":"1015 Fair Street,","city":"Prescott","state":"AZ","zip":"86305"}],"party":"Republican","phones":["(928) 771-3207"],"urls":["http://www.yavapai.us/district4/"],"photoUrl":"http://www.yavapai.us/Portals/3/BrownCraig.png?ver=2015-12-23-094233-330","emails":["web.bos.district4@yavapai.us"],"office":"Board of Supervisors District 4"}
+

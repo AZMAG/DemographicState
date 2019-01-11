@@ -33,8 +33,9 @@ require([
                     });
                 }
 
-                function updateReportDDL(layer, conf) {
-                    let sumField = conf.displayField || layer.displayField;
+
+            function updateReportDDL(layer, conf) {
+                let sumField = 'NAME';
 
                     // hideReportLayers();
                     // layer.visible = true;
@@ -95,6 +96,7 @@ require([
                         ResetForm();
                         $("#reportLoader").hide();
                     });
+
                 });
             }
         });

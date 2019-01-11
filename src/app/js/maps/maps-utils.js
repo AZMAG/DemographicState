@@ -76,9 +76,9 @@ require([
             let rampKey = $colorRamp.find(".cRamp").data("id") || app.config.DefaultColorRamp;
             let type = $colorRamp.find(".cRamp").data("type") || app.config.DefaultColorScheme;
 
-            //Get a color ramp using above data
-            let colorRamp = app.GetColorRamp(type, rampKey, cbrCount);
-
+        Object.keys(allRamps).forEach(function(rampKey) {
+            let ramp = allRamps[rampKey];
+            let filteredRamp = [];
 
             if (classType === "Custom") {
                 cbInfos = app.GetCustomBreaks();
@@ -141,3 +141,4 @@ require([
         };
     }
 );
+

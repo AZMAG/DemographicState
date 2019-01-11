@@ -1,4 +1,5 @@
 //This file should include logic on initialization of?????
+
 "use strict";
 require(["dojo/topic", "esri/tasks/QueryTask"], function(tp, QueryTask) {
     tp.subscribe("panel-loaded", function(panel) {
@@ -12,10 +13,22 @@ require(["dojo/topic", "esri/tasks/QueryTask"], function(tp, QueryTask) {
                 $(this).hide();
                 $("#summaryReport").css("display", "none");
                 $subHeaderTitle.hide();
+            }
 
-                //Clear Graphics
-                let gfxLayer = app.map.findLayerById("gfxLayer");
-                gfxLayer.removeAll();
+            tp.subscribe('panel-shown', function(panel) {
+                resetReportForm();
+                app.clearDrawnGraphics();
+            });
+
+
+            tp.subscribe('panel-hidden', function(panel) {
+                resetReportForm();
+                app.clearDrawnGraphics();
+            });
+
+            $reportArea.on('click', '.returnBtn', function() {
+                resetReportForm();
+                app.clearDrawnGraphics();
             });
 
             $reportArea.on("click", ".card", function() {
@@ -52,7 +65,6 @@ require(["dojo/topic", "esri/tasks/QueryTask"], function(tp, QueryTask) {
         $reportArea = $("#reportArea");
 
         let features = res.features;
-        let displayName = res.displayFieldName;
         let feature = features[0];
         let attr = feature.attributes;
         let type = $reportArea.find(".dataSrcToggle.active").data("val");

@@ -1,4 +1,5 @@
 //This file includes all of the code and logic for controlling the side/bottom navigation bar
+
 "use strict";
 require([
         "dojo/topic",
@@ -38,7 +39,10 @@ require([
                     $("#viewDiv").css("visibility", "hidden");
                 }
             } else {
-
+                tp.publish('panel-shown', target);
+                $('.shareWidget').popover('hide');
+                $content.show();
+                var $allLinks = $(`[panel-target=${target}]`);
                 let isActive = $(this).hasClass("active");
 
                 $links.removeClass("active");
@@ -73,8 +77,11 @@ require([
                     $(`div[panel-id=${target}]`).fadeIn(400);
 
                 }
+
+                $(`div[panel-id=${target}]`).fadeIn(400);
             }
-        });
+        }
+    });
 
         $legendToggle.click(function(e) {
             return false;
@@ -99,3 +106,4 @@ require([
         }
     }
 );
+

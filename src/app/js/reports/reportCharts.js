@@ -1,14 +1,7 @@
 require(['dojo/topic'], function(tp) {
     tp.subscribe('create-charts', CreateCharts);
     function CreateChart(ops) {
-        // console.log(ops);
         if (ops.data.length) {
-            let total = 0;
-            if (ops.type === 'pie') {
-                console.log(ops.data);
-            }
-            console.log(app.config.seriesColors);
-
             return ops.element
                 .kendoChart({
                     dataSource: {
