@@ -1,21 +1,26 @@
-require(['dojo/topic'], function (tp) {
-    tp.subscribe("panel-loaded", function (panel) {
-        if (panel === "layers") {
-            var $layerList = $("#layerList");
-            var legendLayers = app.config.layers.filter(conf => conf.legend && !conf.legend.group);
-            var arr = legendLayers.sort((a, b) => a.legend.sort - b.legend.sort);
-            for (var i = 0; i < arr.length; i++) {
-                var conf = arr[i];
+"use strict";
+require([
+        "dojo/topic"
+    ],
+    function(tp) {
+        tp.subscribe("panel-loaded", function(panel) {
+            if (panel === "layers") {
+                var $layerList = $("#layerList");
+                var legendLayers = app.config.layers.filter(conf => conf.legend && !conf.legend.group);
+                var arr = legendLayers.sort((a, b) => a.legend.sort - b.legend.sort);
+                for (var i = 0; i < arr.length; i++) {
+                    var conf = arr[i];
 
-                if (conf.id !== "blockGroups") {
-                    $layerList.append(getCheckBoxHTML(conf));
+                    if (conf.id !== "blockGroups") {
+                        $layerList.append(getCheckBoxHTML(conf));
+                    }
                 }
+                $layerList.find(".checkbox-div").click(toggleLayerItem);
             }
-            $layerList.find(".checkbox-div").click(toggleLayerItem);
-        }
-    });
+        });
 
-})
+    }
+);
 
 function toggleLayerItem(e) {
 
@@ -23,7 +28,7 @@ function toggleLayerItem(e) {
     let $cbox = $(this).find(".big-checkbox");
     $cbox.prop("checked", !$cbox.prop("checked"));
 
-    let layerId = $cbox.data('layer-id');
+    let layerId = $cbox.data("layer-id");
 
     //Toggle Layer
     let layer = app.map.findLayerById(layerId);
@@ -54,14 +59,14 @@ function getCheckBoxHTML(conf) {
     return `
             <div>
                 <div class="checkbox-div">
-                    <input type="checkbox" id="c-${c.id}" ${c.visible ? 'checked' : ''} data-layer-id="${c.id}" class="regular-checkbox big-checkbox" />
+                    <input type="checkbox" id="c-${c.id}" ${c.visible ? "checked" : ""} data-layer-id="${c.id}" class="regular-checkbox big-checkbox" />
                     <label></label>
                     <label class="layerLabel">${c.title}</label>
                     <a
                     style="height: 25px;"
                     tabindex="0"
                     role="button"
-                    data-html="true" 
+                    data-html="true"
                     data-toggle="popover"
                     data-placement="auto"
                     data-trigger="hover"
@@ -70,5 +75,5 @@ function getCheckBoxHTML(conf) {
                     </a>
                 </div>
             </div>
-            `
+            `;
 }

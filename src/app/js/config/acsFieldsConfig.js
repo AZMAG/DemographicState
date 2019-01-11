@@ -1,5 +1,4 @@
-app.acsFieldsConfig = [
-    {
+app.acsFieldsConfig = [{
         fieldName: 'TOTAL_POP',
         fieldAlias: 'Total Population',
         fieldType: 'Number',
@@ -2639,4 +2638,4 @@ app.acsFieldsConfig = [
         parentField: '',
         percentOfField: ''
     }
-];
+]
