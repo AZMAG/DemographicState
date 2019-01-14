@@ -17,7 +17,9 @@ require(['dojo/topic', 'dojo/domReady!'], function(tp) {
     tp.subscribe('toggle-panel', TogglePanel);
 
     let loadedLayers = [];
-    function TogglePanel(target) {
+    function TogglePanel(target, e) {
+        console.log(target, e);
+
         $('#viewDiv').css('visibility', 'visible');
         $('#container').css('flex', '1');
         if (target === 'legend') {
@@ -28,7 +30,7 @@ require(['dojo/topic', 'dojo/domReady!'], function(tp) {
                 $('#viewDiv').css('visibility', 'hidden');
             }
         } else {
-            let isActive = $(this).hasClass('active');
+            let isActive = $(e).hasClass('active');
             $links.removeClass('active');
             $arrows.hide();
             $panelDivs.hide();
@@ -38,7 +40,7 @@ require(['dojo/topic', 'dojo/domReady!'], function(tp) {
                 $content.hide();
                 tp.publish('panel-hidden', target);
             } else {
-                tp.publish('panel-shown', target);
+                // tp.publish('panel-shown', target);
                 $('.shareWidget').popover('hide');
                 $content.show();
                 var $allLinks = $(`[panel-target=${target}]`);
@@ -69,7 +71,7 @@ require(['dojo/topic', 'dojo/domReady!'], function(tp) {
         // <!-- comments:uncomment // -->
         // ga("send", "event", "Click", "Panel Opened", target);
         // <!-- endcomments -->
-        TogglePanel(target);
+        TogglePanel(target, this);
     });
 
     $legendToggle.click(function(e) {

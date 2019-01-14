@@ -16,12 +16,12 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function(tp, QueryTask) {
 
             tp.subscribe('panel-shown', function(panel) {
                 resetReportForm();
-                app.clearDrawnGraphics();
+                // app.clearDrawnGraphics();
             });
 
             tp.subscribe('panel-hidden', function(panel) {
                 resetReportForm();
-                app.clearDrawnGraphics();
+                // app.clearDrawnGraphics();
             });
 
             $reportArea.on('click', '.returnBtn', function() {

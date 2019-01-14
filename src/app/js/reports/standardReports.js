@@ -91,6 +91,7 @@ require(['dojo/topic'], function(tp) {
             });
 
             function OpenReportByGEOID(conf, GEOID) {
+                tp.publish('toggle-panel', 'reports');
                 app.GetData(conf, GEOID).then(function(data) {
                     app.AddHighlightGraphics(data.acsData.features);
                     app.view.goTo(data.acsData.features[0].geometry.extent.expand(1.5));
@@ -101,10 +102,10 @@ require(['dojo/topic'], function(tp) {
                         console.error('No matching features for: ' + q);
                     }
                     $('#reportForm').hide();
+                    // console.log('reseting form');
 
                     ResetForm();
                     $('#reportLoader').hide();
-                    // tp.publish('toggle-panel', 'reports');
                 });
             }
         }
