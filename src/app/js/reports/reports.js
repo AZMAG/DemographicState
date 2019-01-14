@@ -8,7 +8,7 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function(tp, QueryTask) {
 
             function resetReportForm() {
                 $('.reportFormArea').hide();
-                $('#cardContainer').show();
+                $('#cardContainer').css('display', 'flex');
                 $('.returnBtn').hide();
                 $('#summaryReport').css('display', 'none');
                 $subHeaderTitle.hide();

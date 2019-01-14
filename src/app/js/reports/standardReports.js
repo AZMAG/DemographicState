@@ -69,14 +69,6 @@ require(['dojo/topic'], function(tp) {
                 }
             });
 
-            function ResetForm() {
-                $('#specificReportDiv').hide();
-                $('#standardBtnSubmit').hide();
-                $('#reportType').val('default');
-            }
-
-            tp.subscribe('openReport-by-geoid', OpenReportByGEOID);
-
             $('#reportForm').submit(function(e) {
                 $('#reportLoader').css('display', 'flex');
                 e.preventDefault();
@@ -89,25 +81,29 @@ require(['dojo/topic'], function(tp) {
                     .data('geo-id');
                 OpenReportByGEOID(conf, GEOID);
             });
-
-            function OpenReportByGEOID(conf, GEOID) {
-                tp.publish('toggle-panel', 'reports');
-                app.GetData(conf, GEOID).then(function(data) {
-                    app.AddHighlightGraphics(data.acsData.features);
-                    app.view.goTo(data.acsData.features[0].geometry.extent.expand(1.5));
-
-                    if (data) {
-                        tp.publish('open-report-window', data.acsData, app.acsFieldsConfig);
-                    } else {
-                        console.error('No matching features for: ' + q);
-                    }
-                    $('#reportForm').hide();
-                    // console.log('reseting form');
-
-                    ResetForm();
-                    $('#reportLoader').hide();
-                });
-            }
         }
     });
+    function ResetForm() {
+        $('#specificReportDiv').hide();
+        $('#standardBtnSubmit').hide();
+        $('#reportType').val('default');
+    }
+    tp.subscribe('openReport-by-geoid', OpenReportByGEOID);
+    function OpenReportByGEOID(conf, GEOID) {
+        app.GetData(conf, GEOID).then(function(data) {
+            app.AddHighlightGraphics(data.acsData.features);
+            app.view.goTo(data.acsData.features[0].geometry.extent.expand(1.5));
+
+            if (data) {
+                tp.publish('open-report-window', data.acsData, app.acsFieldsConfig);
+            } else {
+                console.error('No matching features for: ' + q);
+            }
+            $('#reportForm').hide();
+            ResetForm();
+            $('#cardContainer').hide();
+            $('.returnBtn').show();
+            $('#reportLoader').hide();
+        });
+    }
 });

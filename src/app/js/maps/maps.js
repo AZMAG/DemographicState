@@ -30,10 +30,12 @@ require([
         tp.publish('map-loaded');
         app.view.popup.on('trigger-action', function(e) {
             if (e.action.id === 'open-report') {
+                tp.publish('toggle-panel', 'reports');
                 let f = e.target.selectedFeature;
                 let geoid = f.attributes['GEOID'];
                 let layerId = f.layer.id;
                 let conf = app.config.layerDef[layerId];
+
                 tp.publish('openReport-by-geoid', conf, geoid);
             }
         });
