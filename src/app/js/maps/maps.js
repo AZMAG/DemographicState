@@ -49,8 +49,6 @@ require([
             var layerToAdd;
             var url = app.config.mainUrl;
             if (layer.type === 'feature') {
-                let popupTemplate = new PopupTemplate();
-
                 if (layer.url) {
                     url = layer.url;
                 }

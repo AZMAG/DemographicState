@@ -29,29 +29,43 @@ require(['dojo/topic'], function(tp) {
             }
 
             function updateReportDDL(layer, conf) {
-                let sumField = 'NAME';
+                let displayField = 'NAME';
+                console.log(layer, conf);
 
                 // hideReportLayers();
                 // layer.visible = true;
 
+                let optionalFields = conf.displayFields || [displayField];
+                let outFields = ['OBJECTID', 'GEOID'].concat(optionalFields);
+                console.log(outFields);
+
                 const q = {
                     where: '1=1',
-                    outFields: ['OBJECTID', 'GEOID', sumField],
+                    outFields: outFields,
                     returnGeometry: false,
                     distinct: true,
-                    orderByFields: [sumField]
+                    orderByFields: optionalFields
                 };
 
                 layer.queryFeatures(q).then(function(res) {
                     $('#specificReport').html('');
+
                     for (let i = 0; i < res.features.length; i++) {
                         const feature = res.features[i];
+                        const attr = feature.attributes;
+
+                        let displayTemplate = '';
+                        optionalFields.forEach(function(field) {
+                            displayTemplate += attr[field] + ' - ';
+                        });
+
                         $('#specificReport').append(
-                            `<option data-geo-id="${feature.attributes['GEOID']}" data-object-id="${
-                                feature.attributes['OBJECTID']
-                            }">${feature.attributes[sumField]}</option>`
+                            `<option data-geo-id="${attr['GEOID']}" data-object-id="${
+                                attr['OBJECTID']
+                            }">${displayTemplate.slice(0, -3)}</option>`
                         );
                     }
+                    $('#specificReport').combobox();
                 });
             }
 
@@ -70,7 +84,6 @@ require(['dojo/topic'], function(tp) {
             });
 
             $('#reportForm').submit(function(e) {
-                $('#reportLoader').css('display', 'flex');
                 e.preventDefault();
                 $('#summaryReport').hide();
                 let conf = $('#reportType')
@@ -103,7 +116,6 @@ require(['dojo/topic'], function(tp) {
             ResetForm();
             $('#cardContainer').hide();
             $('.returnBtn').show();
-            $('#reportLoader').hide();
         });
     }
 });

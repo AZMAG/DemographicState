@@ -499,8 +499,10 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function(tp, QueryTask) {
     tp.subscribe('create-grid', CreateKendoGrid);
 
     dataCache = {};
+    let $loadingSpinner = $('.loading-container');
 
     app.GetData = async function(conf, geoid, geo) {
+        $loadingSpinner.css('display', 'flex');
         if (conf.id !== 'blockGroups') {
             if (dataCache[conf.id + geoid]) {
                 app.selectedReport = dataCache[conf.id + geoid];
@@ -532,6 +534,7 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function(tp, QueryTask) {
         };
 
         dataCache[conf.id + geoid] = app.selectedReport;
+        $loadingSpinner.css('display', 'none');
 
         return $.extend({}, app.selectedReport);
     };

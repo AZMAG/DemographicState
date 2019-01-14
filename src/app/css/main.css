@@ -1152,17 +1152,6 @@ label:hover,
     display: none;
 }
 
-#reportLoader {
-    display: none;
-    align-items: center;
-}
-
-#reportLoader img {
-    padding-top: 10px;
-    height: 40px;
-    margin: auto;
-}
-
 #specificReportDiv {
     display: none;
 }

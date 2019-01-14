@@ -12,7 +12,6 @@ require(['dojo/topic', 'esri/views/2d/draw/Draw', 'esri/Graphic', 'esri/geometry
         let $drawingTooltip = $('#drawingTooltip');
         let $bufferSize = $bufferOptions.find('#bufferSize');
         let $bufferUnit = $bufferOptions.find('#bufferUnit');
-        let $loadingSpinner = $('.loading-container');
 
         if (panel === 'reports') {
             let draw = new Draw({
@@ -165,9 +164,6 @@ require(['dojo/topic', 'esri/views/2d/draw/Draw', 'esri/Graphic', 'esri/geometry
         }
 
         function ProcessSelection(gfx) {
-            //Start the loading spinner
-            $loadingSpinner.css('display', 'flex');
-
             app.GetData(app.config.layerDef['blockGroups'], null, gfx.geometry).then(function(data) {
                 var acsdata = app.summarizeFeatures(data.acsData);
                 var censusdata = app.summarizeFeatures(data.censusData);
@@ -193,7 +189,6 @@ require(['dojo/topic', 'esri/views/2d/draw/Draw', 'esri/Graphic', 'esri/geometry
                 tp.publish('open-report-window', app.selectedReport, 'acs');
                 $customGeographyReports.hide();
                 app.AddHighlightGraphics(data.acsData.features);
-                $loadingSpinner.css('display', 'none');
                 $('.reportFormArea').hide();
             });
         }
