@@ -175,7 +175,8 @@ require(['dojo/topic', 'esri/views/2d/draw/Draw', 'esri/Graphic', 'esri/geometry
                 app.selectedReport.acsData = {
                     features: [
                         {
-                            attributes: acsdata
+                            attributes: acsdata,
+                            count: data.acsData.features.length
                         }
                     ]
                 };
@@ -183,12 +184,13 @@ require(['dojo/topic', 'esri/views/2d/draw/Draw', 'esri/Graphic', 'esri/geometry
                 app.selectedReport.censusData = {
                     features: [
                         {
-                            attributes: censusdata
+                            attributes: censusdata,
+                            count: data.acsData.features.length
                         }
                     ]
                 };
 
-                tp.publish('open-report-window', app.selectedReport.acsData, app.acsFieldsConfig);
+                tp.publish('open-report-window', app.selectedReport, 'acs');
                 $customGeographyReports.hide();
                 app.AddHighlightGraphics(data.acsData.features);
                 $loadingSpinner.css('display', 'none');

@@ -95,7 +95,7 @@ require(['dojo/topic'], function(tp) {
             app.view.goTo(data.acsData.features[0].geometry.extent.expand(1.5));
 
             if (data) {
-                tp.publish('open-report-window', data.acsData, app.acsFieldsConfig);
+                tp.publish('open-report-window', data, 'acs');
             } else {
                 console.error('No matching features for: ' + q);
             }

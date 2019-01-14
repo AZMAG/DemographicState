@@ -48,26 +48,42 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function(tp, QueryTask) {
                     .removeClass('active');
 
                 let dataSrc = $(this).data('val');
-
                 let d = app.selectedReport;
 
-                if (dataSrc === 'acs') {
-                    OpenReportWindow(d.acsData, app.acsFieldsConfig);
-                } else {
-                    OpenReportWindow(d.censusData, app.censusFieldsConfig);
-                }
+                OpenReportWindow(d, dataSrc);
             });
         }
     });
 
-    function OpenReportWindow(res, fields) {
+    function GetTitle(d) {
+        //Always use ACS 2017 data to pull the name.  This field isn't always reliable in census 2010
+        if (d.acsData && d.acsData.features && d.acsData.features[0].attributes) {
+            let feature = d.acsData.features[0];
+            if (feature.count > 0) {
+                return `Block Groups (${feature.count} Selected)`;
+            }
+            return feature.attributes['NAME'];
+        }
+    }
+
+    function OpenReportWindow(data, type) {
+        let fields = app.censusFieldsConfig;
+        let res = data.censusData;
+
+        if (type === 'acs') {
+            fields = app.acsFieldsConfig;
+            res = data.acsData;
+        }
+
         $reportArea = $('#reportArea');
 
         let features = res.features;
         let feature = features[0];
         let attr = feature.attributes;
-        let type = $reportArea.find('.dataSrcToggle.active').data('val');
-        let title = attr['NAME'] || 'Selected Block Groups';
+
+        // let type = $reportArea.find('.dataSrcToggle.active').data('val');
+
+        let title = GetTitle(data);
 
         $reportArea.find('a[data-toggle="tab"]').on('shown.bs.tab', function(e) {
             $('.chartsArea')
