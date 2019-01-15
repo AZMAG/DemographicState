@@ -123,7 +123,7 @@ span {
     /* background: var(--secondaryColor); */
 }
 
-#sidebar ul li.active > a,
+#sidebar ul li.active>a,
 a[aria-expanded='true'] {
     color: var(--textColor);
     background: var(--secondaryColor);
@@ -278,7 +278,7 @@ body,
     overflow-y: hidden;
 }
 
-.nav > li > a {
+.nav>li>a {
     padding: 10px 10px;
 }
 
@@ -363,7 +363,7 @@ body,
     cursor: pointer;
 }
 
-#bottomBar ul li.active > a,
+#bottomBar ul li.active>a,
 a[aria-expanded='true'] {
     color: var(--textColor);
     background: var(--secondaryColor);
@@ -631,7 +631,7 @@ label:hover,
     display: none;
 }
 
-#layerList .regular-checkbox + label {
+#layerList .regular-checkbox+label {
     border: 1px solid #cacece;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05);
     padding: 9px;
@@ -640,13 +640,13 @@ label:hover,
     position: relative;
 }
 
-#layerList .regular-checkbox:checked + label {
+#layerList .regular-checkbox:checked+label {
     background-color: var(--secondaryColor);
     border: 1px solid #adb8c0;
     color: #000;
 }
 
-#layerList .regular-checkbox:checked + label:after {
+#layerList .regular-checkbox:checked+label:after {
     content: '\2714';
     font-size: 10px;
     position: absolute;
@@ -655,11 +655,11 @@ label:hover,
     color: var(--textColor);
 }
 
-#layerList .big-checkbox + label {
+#layerList .big-checkbox+label {
     padding: 10px;
 }
 
-#layerList .big-checkbox:checked + label:after {
+#layerList .big-checkbox:checked+label:after {
     font-size: 15.5555px;
     /* left: 4px; */
 }
@@ -874,8 +874,8 @@ label:hover,
     box-shadow: inset 0px 2px 2px 0px rgba(0, 0, 0, 0.75); */
 }
 
-.nav-tabs > li,
-.nav-pills > li {
+.nav-tabs>li,
+.nav-pills>li {
     float: none;
     display: inline-block;
     *display: inline;
@@ -968,9 +968,9 @@ label:hover,
     /* overflow-y: auto; */
 }
 
-.nav-pills > li.active > a,
-.nav-pills > li.active > a:focus,
-.nav-pills > li.active > a:hover {
+.nav-pills>li.active>a,
+.nav-pills>li.active>a:focus,
+.nav-pills>li.active>a:hover {
     background-color: var(--secondaryColor);
 }
 
@@ -1020,6 +1020,11 @@ label:hover,
     -moz-box-shadow: 47px 10px 5px 0px rgba(0, 0, 0, 0.75);
     box-shadow: 0px 0px 9px 0px rgba(0, 0, 0, 0.75);
     cursor: pointer;
+}
+
+#btnClassBreaksEditor {
+    margin-left: 10px;
+    display: none;
 }
 
 .loading-container {
@@ -1388,7 +1393,7 @@ label:hover,
 }
 
 @media (max-width: 350px) {
-    .nav > li > a {
+    .nav>li>a {
         padding: 10px 5px;
     }
 }

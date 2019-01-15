@@ -164,17 +164,17 @@ app.config = {
             showReport: true,
             showTOC: true
         },
-        {
-            legend: true,
-            id: 'cogBoundaries',
-            layerName: 'Cogs_Mpos',
-            title: 'COG / MPO Boundaries',
-            type: 'feature',
-            opacity: 0.7,
-            visible: false,
-            showReport: true,
-            showTOC: true
-        },
+        // {
+        //     legend: true,
+        //     id: 'cogBoundaries',
+        //     layerName: 'Cogs_Mpos',
+        //     title: 'COG / MPO Boundaries',
+        //     type: 'feature',
+        //     opacity: 0.7,
+        //     visible: false,
+        //     showReport: true,
+        //     showTOC: true
+        // },
         {
             legend: true,
             id: 'cogs',
