@@ -1,5 +1,5 @@
 app.config = {
-    Version: 'v3.2.4 | 2018-04-20',
+    version: 'v3.2.4 | 2018-04-20',
     copyright: '2018',
 
     LegendSource: 'American Community Survey 2013-2017 5yr',

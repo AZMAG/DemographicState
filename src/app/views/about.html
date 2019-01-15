@@ -35,15 +35,16 @@
         </div>
     </div>
     <hr>
-    <div class="container">
-        <h5>Additional Contacts</h5>
+    <div id="adContacts"
+         class="container">
+        <h5 class="contHeader">Additional Contacts</h5>
         <hr>
         <div class="row">
             <div class="col-md-6 contact">
-                <h6>Councils of Governments</h6>
+                <h7>Councils of Governments</h7>
             </div>
             <div class="col-md-6 contact">
-                <h6>Metropolitan Planning Orginzations</h6>
+                <h7>Metropolitan Planning Orginzations</h7>
             </div>
         </div>
         <div class="row">
@@ -65,6 +66,62 @@
                     <a class="link"
                        href="mailto:rsimms@cagaz.org">rsimms@cagaz.org</a>
                 </address>
+                <address>
+                    <a class="link"
+                       href="http://www.azmag.gov"><strong>Maricopa Association of Governments</strong></a>†&Delta;
+                    <br /> 302 North 1st Avenue, Suite 200
+                    <br /> Phoenix, Arizona 85003
+                    <br /> (602) 254-6300, FAX (602) 254-6490
+                    <br /> Information Services Manager: Anubhav Bagley
+                    <br /> E-mail:
+                    <a class="link"
+                       href="mailto:abagley@azmag.gov">abagley@azmag.gov</a>
+                </address>
+                <address>
+                    <a class="link"
+                       href="http://www.nacog.org/"><strong>Northern Arizona Council of Governments</strong></a>
+                    <br /> 119 E. Aspen Avenue
+                    <br /> Flagstaff, Arizona 86001-5296
+                    <br /> (928) 830-0127, FAX: (520) 773-1135
+                    <br /> Transportation Planning Director: Jason Kelly
+                    <br /> E-mail:
+                    <A class="link"
+                       HREF="mailto:jkelly@nacog.org">jkelly@nacog.org</A>
+                </address>
+                <address>
+                    <a class="link"
+                       href="http://www.PAGregion.com/"><strong>Pima Association of Governments</strong></a>†&Delta;
+                    <br /> 1 East Broadway, Suite 401
+                    <br /> Tucson, AZ 85701
+                    <br /> (520) 792-1093, FAX: (520) 620-6981
+                    <br /> Senior Research Statistical Analyst: Caroline WaiMan Leung
+                    <br /> E-mail:
+                    <A class="link"
+                       HREF="mailto:cleung@pagregion.com">cleung@pagregion.com</A>
+                </address>
+                <address>
+                    <a class="link"
+                       href="http://www.seago.org/index.html"><strong>SouthEastern Arizona Governments Organization</strong></a>
+                    <br /> 1403 W. Highway 92
+                    <br> Bisbee, Arizona 85603
+                    <br /> (520) 432-5301 ext. 202
+                    <br /> FAX: (520) 432-5858
+                    <br /> Executive Director: Randy Heiss
+                    <br /> E-mail:
+                    <a class="link"
+                       href="mailto:rheiss@seago.org">rheiss@seago.org</a>
+                </address>
+                <address>
+                    <a class="link"
+                       href="http://www.wacog.com/"><strong>Western Arizona Council of Governments</strong></a>
+                    <br /> 224 S. 3rd Avenue
+                    <br /> Yuma, Arizona 85364
+                    <br /> (928) 782-1886, FAX: (928) 329-4248
+                    <br /> Executive Director: Brian H. Babiars
+                    <br /> E-mail:
+                    <a class="link"
+                       href="mailto:brianb@wacog.com">brianb@wacog.com</a>
+                </address>
             </div>
             <div class="col-md-6 contact2">
                 <address>
@@ -82,18 +139,19 @@
             </div>
         </div>
     </div>
-
     <hr />
     <div id="copyDiv">
         <p>Copyright&nbsp;&copy;&nbsp;<span class="copyright"></span>&nbsp;by&nbsp;<a href="https://www.azmag.gov/"
-               target="_blank">Maricopa Association of Governments</a>&nbsp;|&nbsp;<span class="version"></span>&nbsp;|&nbsp;<a
+               target="_blank">Maricopa Association of Governments</a><br><span class="version"></span>&nbsp;|&nbsp;<a
                class="modal-anchor track"
                data-toggle="modal"
                data-target="#privacyModal">Privacy</a>&nbsp;|&nbsp;<a class="modal-anchor track"
                data-toggle="modal"
                data-target="#termsModal">Terms</a></p>
     </div>
+
 </div>
+
 
 <!--privacy modal-->
 <div class="modal fade"
@@ -109,8 +167,7 @@
     //*** privacy binding
     $("#privacyModal").load("views/modal-privacy.html");
     //*** version binding
-    $(".version").html("v5.0.8 | 2019-01-10");
+    $(".version").html(app.config.version);
     //*** copy write binding
-    $(".copyright").html("2019");
+    $(".copyright").html(app.config.copyright);
 </script>
-

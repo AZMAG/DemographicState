@@ -1082,10 +1082,20 @@ hr.pop{
     height: 23px;
     flex: 1;
 }
+#adContacts {
+    overflow: scroll;
+}
 
 #copyDiv {
-    font-size: 80%;
+    font-size: 68%;
     font-weight: 600;
+    text-align: center;
+}
+#copyDiv p {
+    margin: 0;
+}
+
+.contHeader {
     text-align: center;
 }
 
