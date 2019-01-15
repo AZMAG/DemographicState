@@ -500,6 +500,7 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function (tp, QueryTask) {
         if (conf.id !== 'blockGroups') {
             if (dataCache[conf.id + geoid]) {
                 app.selectedReport = dataCache[conf.id + geoid];
+                $loadingSpinner.css('display', 'none');
                 return app.selectedReport;
             }
         }
