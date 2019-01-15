@@ -28,7 +28,7 @@ p {
     font-size: 1.1em;
     font-weight: 300;
     line-height: 1.7em;
-    color: #999;
+    color: #4c4c4c;
 }
 
 .esri-view .esri-view-surface--inset-outline:focus::after {
@@ -68,6 +68,20 @@ a:focus {
 i,
 span {
     display: inline-block;
+}
+
+.contact {
+    font-size: 14px;
+    text-decoration: none;
+    color: #7a7a7a;
+}
+.contact a {
+    text-decoration: none;
+}
+.contact2 {
+    font-size: 11px;
+    text-decoration: none;
+    color: #7a7a7a;
 }
 
 /* ---------------------------------------------------
