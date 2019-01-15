@@ -35,15 +35,17 @@ require([
         }
     });
 
-    app.view.when(function () {
-        tp.publish("map-loaded");
-        app.view.popup.on("trigger-action", function (e) {
-            if (e.action.id === "open-report") {
+    app.view.when(function() {
+        tp.publish('map-loaded');
+        app.view.popup.on('trigger-action', function(e) {
+            if (e.action.id === 'open-report') {
+                tp.publish('toggle-panel', 'reports');
                 let f = e.target.selectedFeature;
                 let geoid = f.attributes["GEOID"];
                 let layerId = f.layer.id;
                 let conf = app.config.layerDef[layerId];
-                tp.publish("openReport-by-geoid", conf, geoid);
+
+                tp.publish('openReport-by-geoid', conf, geoid);
             }
         });
     });
@@ -55,9 +57,7 @@ require([
         app.config.layers.forEach(layer => {
             var layerToAdd;
             var url = app.config.mainUrl;
-            if (layer.type === "feature") {
-                let popupTemplate = new PopupTemplate();
-
+            if (layer.type === 'feature') {
                 if (layer.url) {
                     url = layer.url;
                 }

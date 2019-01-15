@@ -29,29 +29,43 @@ require(['dojo/topic'], function(tp) {
             }
 
             function updateReportDDL(layer, conf) {
-                let sumField = 'NAME';
+                let displayField = 'NAME';
+                console.log(layer, conf);
 
                 // hideReportLayers();
                 // layer.visible = true;
 
+                let optionalFields = conf.displayFields || [displayField];
+                let outFields = ['OBJECTID', 'GEOID'].concat(optionalFields);
+                console.log(outFields);
+
                 const q = {
                     where: '1=1',
-                    outFields: ['OBJECTID', 'GEOID', sumField],
+                    outFields: outFields,
                     returnGeometry: false,
                     distinct: true,
-                    orderByFields: [sumField]
+                    orderByFields: optionalFields
                 };
 
                 layer.queryFeatures(q).then(function(res) {
                     $('#specificReport').html('');
+
                     for (let i = 0; i < res.features.length; i++) {
                         const feature = res.features[i];
+                        const attr = feature.attributes;
+
+                        let displayTemplate = '';
+                        optionalFields.forEach(function(field) {
+                            displayTemplate += attr[field] + ' - ';
+                        });
+
                         $('#specificReport').append(
-                            `<option data-geo-id="${feature.attributes['GEOID']}" data-object-id="${
-                                feature.attributes['OBJECTID']
-                            }">${feature.attributes[sumField]}</option>`
+                            `<option data-geo-id="${attr['GEOID']}" data-object-id="${
+                                attr['OBJECTID']
+                            }">${displayTemplate.slice(0, -3)}</option>`
                         );
                     }
+                    $('#specificReport').combobox();
                 });
             }
 
@@ -69,16 +83,7 @@ require(['dojo/topic'], function(tp) {
                 }
             });
 
-            function ResetForm() {
-                $('#specificReportDiv').hide();
-                $('#standardBtnSubmit').hide();
-                $('#reportType').val('default');
-            }
-
-            tp.subscribe('openReport-by-geoid', OpenReportByGEOID);
-
             $('#reportForm').submit(function(e) {
-                $('#reportLoader').css('display', 'flex');
                 e.preventDefault();
                 $('#summaryReport').hide();
                 let conf = $('#reportType')
@@ -89,24 +94,28 @@ require(['dojo/topic'], function(tp) {
                     .data('geo-id');
                 OpenReportByGEOID(conf, GEOID);
             });
-
-            function OpenReportByGEOID(conf, GEOID) {
-                app.GetData(conf, GEOID).then(function(data) {
-                    app.AddHighlightGraphics(data.acsData.features);
-                    app.view.goTo(data.acsData.features[0].geometry.extent.expand(1.5));
-
-                    if (data) {
-                        tp.publish('open-report-window', data.acsData, app.acsFieldsConfig);
-                    } else {
-                        console.error('No matching features for: ' + q);
-                    }
-                    $('#reportForm').hide();
-
-                    ResetForm();
-                    $('#reportLoader').hide();
-                    // tp.publish('toggle-panel', 'reports');
-                });
-            }
         }
     });
+    function ResetForm() {
+        $('#specificReportDiv').hide();
+        $('#standardBtnSubmit').hide();
+        $('#reportType').val('default');
+    }
+    tp.subscribe('openReport-by-geoid', OpenReportByGEOID);
+    function OpenReportByGEOID(conf, GEOID) {
+        app.GetData(conf, GEOID).then(function(data) {
+            app.AddHighlightGraphics(data.acsData.features);
+            app.view.goTo(data.acsData.features[0].geometry.extent.expand(1.5));
+
+            if (data) {
+                tp.publish('open-report-window', data, 'acs');
+            } else {
+                console.error('No matching features for: ' + q);
+            }
+            $('#reportForm').hide();
+            ResetForm();
+            $('#cardContainer').hide();
+            $('.returnBtn').show();
+        });
+    }
 });

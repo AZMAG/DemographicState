@@ -1,35 +1,38 @@
 //This file should include logic on initialization of?????
 
-require(['dojo/topic', 'esri/tasks/QueryTask'], function(tp, QueryTask) {
-    tp.subscribe('panel-loaded', function(panel) {
+require(['dojo/topic', 'esri/tasks/QueryTask'], function (tp, QueryTask) {
+    tp.subscribe('panel-loaded', function (panel) {
         if (panel === 'reports') {
             let $reportArea = $('#reportArea');
             let $subHeaderTitle = $('#summaryReportHeader');
+            let $dataSrcSelector = $('#dataSrcSelector');
 
             function resetReportForm() {
                 $('.reportFormArea').hide();
-                $('#cardContainer').show();
+                $('#cardContainer').css('display', 'flex');
                 $('.returnBtn').hide();
                 $('#summaryReport').css('display', 'none');
+                $dataSrcSelector.find('button:first').addClass("active");
+                $dataSrcSelector.find('button:last').removeClass("active");
                 $subHeaderTitle.hide();
             }
 
-            tp.subscribe('panel-shown', function(panel) {
+            tp.subscribe('panel-shown', function (panel) {
+                resetReportForm();
+                // app.clearDrawnGraphics();
+            });
+
+            tp.subscribe('panel-hidden', function (panel) {
+                resetReportForm();
+                // app.clearDrawnGraphics();
+            });
+
+            $reportArea.on('click', '.returnBtn', function () {
                 resetReportForm();
                 app.clearDrawnGraphics();
             });
 
-            tp.subscribe('panel-hidden', function(panel) {
-                resetReportForm();
-                app.clearDrawnGraphics();
-            });
-
-            $reportArea.on('click', '.returnBtn', function() {
-                resetReportForm();
-                app.clearDrawnGraphics();
-            });
-
-            $reportArea.on('click', '.card', function() {
+            $reportArea.on('click', '.card', function () {
                 let val = $(this).data('report-form-id');
                 $('.reportFormArea').hide();
                 $('#cardContainer').hide();
@@ -39,7 +42,7 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function(tp, QueryTask) {
                 $('#reportForm').show();
             });
 
-            $reportArea.on('click', '.dataSrcToggle', function() {
+            $reportArea.on('click', '.dataSrcToggle', function () {
                 //This seems hacky..  It removes the active class from the other buttons
                 //https://stackoverflow.com/questions/9262827/twitter-bootstrap-onclick-event-on-buttons-radio
                 $(this)
@@ -48,28 +51,44 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function(tp, QueryTask) {
                     .removeClass('active');
 
                 let dataSrc = $(this).data('val');
-
                 let d = app.selectedReport;
 
-                if (dataSrc === 'acs') {
-                    OpenReportWindow(d.acsData, app.acsFieldsConfig);
-                } else {
-                    OpenReportWindow(d.censusData, app.censusFieldsConfig);
-                }
+                OpenReportWindow(d, dataSrc);
             });
         }
     });
 
-    function OpenReportWindow(res, fields) {
+    function GetTitle(d) {
+        //Always use ACS 2017 data to pull the name.  This field isn't always reliable in census 2010
+        if (d.acsData && d.acsData.features && d.acsData.features[0].attributes) {
+            let feature = d.acsData.features[0];
+            if (feature.count > 0) {
+                return `Block Groups (${feature.count} Selected)`;
+            }
+            return feature.attributes['NAME'];
+        }
+    }
+
+    function OpenReportWindow(data, type) {
+        let fields = app.censusFieldsConfig;
+        let res = data.censusData;
+
+        if (type === 'acs') {
+            fields = app.acsFieldsConfig;
+            res = data.acsData;
+        }
+
         $reportArea = $('#reportArea');
 
         let features = res.features;
         let feature = features[0];
         let attr = feature.attributes;
-        let type = $reportArea.find('.dataSrcToggle.active').data('val');
-        let title = attr['NAME'] || 'Selected Block Groups';
 
-        $reportArea.find('a[data-toggle="tab"]').on('shown.bs.tab', function(e) {
+        // let type = $reportArea.find('.dataSrcToggle.active').data('val');
+
+        let title = GetTitle(data);
+
+        $reportArea.find('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
             $('.chartsArea')
                 .data('kendoChart')
                 .resize();
@@ -173,7 +192,7 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function(tp, QueryTask) {
     }
 
     function SetupTitle6Grid(attr) {
-        $('#title6Toggle').click(function() {
+        $('#title6Toggle').click(function () {
             $('#title6Grid').toggle();
             $(this).toggleClass('k-i-expand k-i-collapse');
         });
@@ -183,8 +202,7 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function(tp, QueryTask) {
         var totalBlockCount = attr['TOT_BLOCKGROUP_COUNT'];
         var age65Plus = attr['AGE65TO74'] + attr['AGE75TO84'] + attr['AGE85PLUS'];
 
-        var dataSrc = [
-            {
+        var dataSrc = [{
                 Category: 'Population Base',
                 Footnote: '',
                 Total: totalPop,
@@ -251,12 +269,10 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function(tp, QueryTask) {
                 data: dataSrc
             },
             //height: 200,
-            columns: [
-                {
+            columns: [{
                     title: 'Population and Households',
                     width: '235px',
-                    columns: [
-                        {
+                    columns: [{
                             field: 'Category',
                             template: '#:Category#', //<sup>#:Footnote#</sup>
                             title: 'Category',
@@ -279,8 +295,7 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function(tp, QueryTask) {
                 {
                     title: 'Census Block Groups',
                     width: '325px',
-                    columns: [
-                        {
+                    columns: [{
                             field: 'NumberOfBlocks',
                             title: 'Number of block groups >= Area Percentage',
                             width: '90px',
@@ -322,23 +337,19 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function(tp, QueryTask) {
 
         // Kendo-ize
         $grid.kendoGrid({
-            toolbar: [
-                {
-                    template: `
+            toolbar: [{
+                template: `
                         <div class="gridToolbar">
                             <button class="btn btn-sm gridGroupToggle" id="expandBtn">${expandHTML}</button>
                             <button class="btn btn-sm" id="exportToExcelBtn">Export to Excel<i style="margin-left: 5px;" class="fa fa-table" aria-hidden="true"></i></button>
                         </div>
                     `
-                }
-            ],
+            }],
             dataSource: {
                 data: src,
-                group: [
-                    {
-                        field: 'fieldGroup'
-                    }
-                ],
+                group: [{
+                    field: 'fieldGroup'
+                }],
                 sort: {
                     field: 'fieldRowSort',
                     dir: 'asc'
@@ -350,8 +361,7 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function(tp, QueryTask) {
             sortable: false,
             resizable: true,
             columnMenu: false,
-            columns: [
-                {
+            columns: [{
                     field: 'fieldGroup',
                     title: 'Category',
                     hidden: true,
@@ -373,19 +383,19 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function(tp, QueryTask) {
                 }
                 //{field: "densityValueFormatted", title: "Per Sq Mile", format: "{0:n1}"}
             ],
-            dataBound: function(e) {
+            dataBound: function (e) {
                 //if (this.wrapper[0].id !== "demCensusDataGrid") {
                 var rowCollection = e.sender.tbody[0].children;
                 var data = e.sender._data;
                 var realRows = [];
 
-                $.each(data, function(i, el) {
-                    var foundElement = $('td').filter(function() {
+                $.each(data, function (i, el) {
+                    var foundElement = $('td').filter(function () {
                         return $(this).text() === el.tableHeader;
                     });
                     var finalElement = foundElement;
                     if (foundElement.length > 1) {
-                        $.each(foundElement, function(i, row) {
+                        $.each(foundElement, function (i, row) {
                             if ($(row)[0].previousSibling) {
                                 if ($(row)[0].previousSibling.innerText.indexOf(el.fieldCategory) !== -1) {
                                     finalElement = $(row);
@@ -445,23 +455,23 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function(tp, QueryTask) {
                     }
                 });
                 var grid = $('#' + this.wrapper[0].id).data('kendoGrid');
-                grid.tbody.find('tr.k-grouping-row').each(function(index) {
+                grid.tbody.find('tr.k-grouping-row').each(function (index) {
                     grid.collapseGroup(this);
                 });
-                $('.gridGroupToggle').click(function(e) {
-                    $.each($('.k-grid'), function(i, val) {
+                $('.gridGroupToggle').click(function (e) {
+                    $.each($('.k-grid'), function (i, val) {
                         if ($(val).is(':visible')) {
                             var grid = $(val).data('kendoGrid');
                             if (e.currentTarget.value === 'collapse') {
                                 e.currentTarget.value = 'expand';
                                 $(e.currentTarget).html(expandHTML);
-                                grid.tbody.find('tr.k-grouping-row').each(function(index) {
+                                grid.tbody.find('tr.k-grouping-row').each(function (index) {
                                     grid.collapseGroup(this);
                                 });
                             } else {
                                 e.currentTarget.value = 'collapse';
                                 $(e.currentTarget).html(collapseHTML);
-                                grid.tbody.find('tr.k-grouping-row').each(function(index) {
+                                grid.tbody.find('tr.k-grouping-row').each(function (index) {
                                     grid.expandGroup(this);
                                 });
                             }
@@ -469,7 +479,7 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function(tp, QueryTask) {
                     });
                 });
 
-                $('#exportToExcelBtn').click(function() {
+                $('#exportToExcelBtn').click(function () {
                     tp.publish('excel-export', {
                         data: data,
                         e: e,
@@ -483,11 +493,14 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function(tp, QueryTask) {
     tp.subscribe('create-grid', CreateKendoGrid);
 
     dataCache = {};
+    let $loadingSpinner = $('.loading-container');
 
-    app.GetData = async function(conf, geoid, geo) {
+    app.GetData = async function (conf, geoid, geo) {
+        $loadingSpinner.css('display', 'flex');
         if (conf.id !== 'blockGroups') {
             if (dataCache[conf.id + geoid]) {
                 app.selectedReport = dataCache[conf.id + geoid];
+                $loadingSpinner.css('display', 'none');
                 return app.selectedReport;
             }
         }
@@ -516,6 +529,7 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function(tp, QueryTask) {
         };
 
         dataCache[conf.id + geoid] = app.selectedReport;
+        $loadingSpinner.css('display', 'none');
 
         return $.extend({}, app.selectedReport);
     };

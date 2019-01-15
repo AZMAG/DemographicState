@@ -12,6 +12,7 @@ require(['dojo/topic'], function (tp) {
                 }
             }
             $layerList.find(".checkbox-div").click(toggleLayerItem);
+            $("[data-toggle=popover]").popover();
         }
     });
 
@@ -66,7 +67,7 @@ function getCheckBoxHTML(conf) {
                     data-placement="auto"
                     data-trigger="hover"
                     title="${c.title}"
-                    data-content="${c.definition}"><i class="glyphicon glyphicon glyphicon-info-sign"></i>
+                    data-content="${c.definition}"><i class="fas fa-info-circle"></i>
                     </a>
                 </div>
             </div>

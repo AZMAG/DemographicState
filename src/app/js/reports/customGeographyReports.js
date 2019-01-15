@@ -12,7 +12,6 @@ require(['dojo/topic', 'esri/views/2d/draw/Draw', 'esri/Graphic', 'esri/geometry
         let $drawingTooltip = $('#drawingTooltip');
         let $bufferSize = $bufferOptions.find('#bufferSize');
         let $bufferUnit = $bufferOptions.find('#bufferUnit');
-        let $loadingSpinner = $('.loading-container');
 
         if (panel === 'reports') {
             let draw = new Draw({
@@ -165,9 +164,6 @@ require(['dojo/topic', 'esri/views/2d/draw/Draw', 'esri/Graphic', 'esri/geometry
         }
 
         function ProcessSelection(gfx) {
-            //Start the loading spinner
-            $loadingSpinner.css('display', 'flex');
-
             app.GetData(app.config.layerDef['blockGroups'], null, gfx.geometry).then(function(data) {
                 var acsdata = app.summarizeFeatures(data.acsData);
                 var censusdata = app.summarizeFeatures(data.censusData);
@@ -175,7 +171,8 @@ require(['dojo/topic', 'esri/views/2d/draw/Draw', 'esri/Graphic', 'esri/geometry
                 app.selectedReport.acsData = {
                     features: [
                         {
-                            attributes: acsdata
+                            attributes: acsdata,
+                            count: data.acsData.features.length
                         }
                     ]
                 };
@@ -183,15 +180,15 @@ require(['dojo/topic', 'esri/views/2d/draw/Draw', 'esri/Graphic', 'esri/geometry
                 app.selectedReport.censusData = {
                     features: [
                         {
-                            attributes: censusdata
+                            attributes: censusdata,
+                            count: data.acsData.features.length
                         }
                     ]
                 };
 
-                tp.publish('open-report-window', app.selectedReport.acsData, app.acsFieldsConfig);
+                tp.publish('open-report-window', app.selectedReport, 'acs');
                 $customGeographyReports.hide();
                 app.AddHighlightGraphics(data.acsData.features);
-                $loadingSpinner.css('display', 'none');
                 $('.reportFormArea').hide();
             });
         }

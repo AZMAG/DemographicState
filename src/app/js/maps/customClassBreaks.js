@@ -8,31 +8,42 @@ require([
             let $classBreakSliders = $("#classBreakSliders");
             let $classBreakSliderTooltips = $("#classBreakSliderTooltips");
             let $classBreaksCount = $("#classBreaksCount");
+            let $btnClassBreaksEditor = $("#btnClassBreaksEditor");
             let sliders = [];
             let maxVal = 0;
             const minLabelSize = 13;
             const lyr = app.map.findLayerById("blockGroups").sublayers.getItemAt(0);
 
-            function CbrParamChanged() {
-                let type = $("#classType").val();
+
+            $btnClassBreaksEditor.click(function () {
+                CbrParamChanged('Custom');
+            })
+
+            function CbrParamChanged(type) {
                 if (type == 'Custom') {
                     $customClassBreaksModal.modal('show');
+                    $btnClassBreaksEditor.show();
                     SetupSplitter();
                     SetupCharts();
+                } else {
+                    $btnClassBreaksEditor.hide();
                 }
             }
 
             function SetupSplitter(custom) {
+
                 const rend = lyr.renderer;
                 let infos = custom || rend.classBreakInfos;
+
                 let data = app.GetCurrentMapsParams();
                 let sliderHeight = $classBreakSliders.height() - (infos.length - 1) * 7;
-                maxVal = infos[infos.length - 1].maxValue;
+                // maxVal = infos[infos.length - 1].maxValue;
 
                 if (data.classType === 'Custom' && !custom) {
                     let cbrCount = $classBreaksCount.val();
                     let breaks = data.conf.breaks['Jenks' + cbrCount];
                     infos = app.GetCurrentBreaks(breaks, data.colorRamp);
+                    maxVal = infos[infos.length - 1].maxValue;
                 }
 
                 //Clear out old class break sliders
@@ -40,6 +51,7 @@ require([
                 $classBreakSliderTooltips.html('');
 
                 const panes = [];
+
                 for (let i = infos.length - 1; i >= 0; i--) {
                     const info = infos[i];
                     const clr = info.symbol.color;
@@ -113,6 +125,7 @@ require([
             function UpdateRangeSliders(e) {
 
                 let resize = e.resizing || e.sender.resizing;
+                console.log(e);
 
                 if (resize && resize.previousPane && resize.nextPane) {
 
@@ -268,92 +281,92 @@ require([
 
 
                 }
-                $classBreakSliderTooltips.on("click", ".sliderTooltip", function () {
-                    let $sliderTooltip = $(this);
-                    let $label = $sliderTooltip.find("span.sliderTooltipInnerLabel");
-                    $label.hide();
-                    let $sliderTooltipInput = $sliderTooltip.find(".sliderTooltipInput");
-                    let val = $sliderTooltip.data("value");
-                    $sliderTooltipInput.show();
-                    $sliderTooltipInput.val(val);
-                    $sliderTooltipInput.focus();
+                // $classBreakSliderTooltips.on("click", ".sliderTooltip", function () {
+                //     let $sliderTooltip = $(this);
+                //     let $label = $sliderTooltip.find("span.sliderTooltipInnerLabel");
+                //     $label.hide();
+                //     let $sliderTooltipInput = $sliderTooltip.find(".sliderTooltipInput");
+                //     let val = $sliderTooltip.data("value");
+                //     $sliderTooltipInput.show();
+                //     $sliderTooltipInput.val(val);
+                //     $sliderTooltipInput.focus();
 
-                    $sliderTooltipInput.on('focusout', TooltipEditComplete)
+                //     $sliderTooltipInput.on('focusout', TooltipEditComplete)
 
-                    function TooltipEditComplete() {
-                        let $input = $(this);
-                        $input.hide();
-                        let newVal = $input.val();
+                //     function TooltipEditComplete() {
+                //         let $input = $(this);
+                //         $input.hide();
+                //         let newVal = $input.val();
 
-                        let $prevTooltip = $sliderTooltip.prev(".sliderTooltip");
-                        let $nextTooltip = $sliderTooltip.next(".sliderTooltip");
+                //         let $prevTooltip = $sliderTooltip.prev(".sliderTooltip");
+                //         let $nextTooltip = $sliderTooltip.next(".sliderTooltip");
 
-                        let nextVal = $nextTooltip.data("value");
-                        let prevVal = $prevTooltip.data("value");
+                //         let nextVal = $nextTooltip.data("value");
+                //         let prevVal = $prevTooltip.data("value");
 
-                        if (newVal >= prevVal) {
-                            newVal = prevVal - 1;
-                        } else if (newVal <= nextVal) {
-                            newVal = nextVal + 1;
-                        }
+                //         if (newVal >= prevVal) {
+                //             newVal = prevVal - 1;
+                //         } else if (newVal <= nextVal) {
+                //             newVal = nextVal + 1;
+                //         }
 
-                        //update label
-                        $label.html(newVal);
+                //         //update label
+                //         $label.html(newVal);
 
-                        //Update dataval
-                        $sliderTooltip.data("value", newVal);
+                //         //Update dataval
+                //         $sliderTooltip.data("value", newVal);
 
-                        //Update input for next edit
-                        $input.val(newVal);
+                //         //Update input for next edit
+                //         $input.val(newVal);
 
-                        //Show label again
-                        $label.show();
+                //         //Show label again
+                //         $label.show();
 
-                        //Update panel info values
-                        //Gets slider number value
-                        let sliderId = $sliderTooltip.attr('id').replace(/^\D+/g, '');
+                //         //Update panel info values
+                //         //Gets slider number value
+                //         let sliderId = $sliderTooltip.attr('id').replace(/^\D+/g, '');
 
-                        let $prevPane = $(`#cbPane${sliderId-1}`);
-                        let $nextPane = $(`#cbPane${sliderId}`);
+                //         let $prevPane = $(`#cbPane${sliderId-1}`);
+                //         let $nextPane = $(`#cbPane${sliderId}`);
 
-                        let prevInfo = $prevPane.data("info");
-                        let nextInfo = $nextPane.data("info");
+                //         let prevInfo = $prevPane.data("info");
+                //         let nextInfo = $nextPane.data("info");
 
-                        prevInfo.maxValue = Number(newVal);
-                        nextInfo.minValue = Number(newVal);
+                //         prevInfo.maxValue = Number(newVal);
+                //         nextInfo.minValue = Number(newVal);
 
-                        $prevPane.data("info", prevInfo);
-                        $nextPane.data("info", nextInfo);
+                //         $prevPane.data("info", prevInfo);
+                //         $nextPane.data("info", nextInfo);
 
-                        SetupSplitter(app.GetCustomBreaks());
+                //         SetupSplitter(app.GetCustomBreaks());
 
-                        //Call Update Range Sliders
-                        UpdateRangeSliders({
-                            resizing: {
-                                previousPane: $(`#cbPane${sliderId}`),
-                                nextPane: $(`#cbPane${sliderId-1}`)
-                            }
-                        })
-                    }
+                //         //Call Update Range Sliders
+                //         UpdateRangeSliders({
+                //             resizing: {
+                //                 previousPane: $(`#cbPane${sliderId}`),
+                //                 nextPane: $(`#cbPane${sliderId-1}`)
+                //             }
+                //         })
+                //     }
 
-                    //This ensures that a user doesn't enter a non-numeric character into the input
-                    $sliderTooltipInput.keydown(function (e) {
-                        //https://stackoverflow.com/questions/995183/how-to-allow-only-numeric-0-9-in-html-inputbox-using-jquery
-                        if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110]) !== -1 ||
-                            // Allow: Ctrl+A, Command+A
-                            (e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) ||
-                            // Allow: home, end, left, right, down, up
-                            (e.keyCode >= 35 && e.keyCode <= 40)) {
-                            // let it happen, don't do anything
-                            return;
-                        }
-                        // Ensure that it is a number and stop the keypress
-                        if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
-                            e.preventDefault();
-                        }
-                    })
+                //     //This ensures that a user doesn't enter a non-numeric character into the input
+                //     $sliderTooltipInput.keydown(function (e) {
+                //         //https://stackoverflow.com/questions/995183/how-to-allow-only-numeric-0-9-in-html-inputbox-using-jquery
+                //         if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110]) !== -1 ||
+                //             // Allow: Ctrl+A, Command+A
+                //             (e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) ||
+                //             // Allow: home, end, left, right, down, up
+                //             (e.keyCode >= 35 && e.keyCode <= 40)) {
+                //             // let it happen, don't do anything
+                //             return;
+                //         }
+                //         // Ensure that it is a number and stop the keypress
+                //         if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+                //             e.preventDefault();
+                //         }
+                //     })
 
-                })
+                // })
             }
 
 
