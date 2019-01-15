@@ -3,10 +3,7 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function (tp, QueryTask) {
 
     tp.subscribe('layers-added', function () {
 
-
-
         GetSmallShareLink().then(function (url) {
-            console.log(url);
             ShareWidgetInit(url);
         })
 
@@ -17,7 +14,7 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function (tp, QueryTask) {
             let via = 'MAGregion';
 
             let twitterHref = `${baseUrl}?text=${text}&url=${url}&hastag=${hashTag}&via=${via}`;
-            let mailTo = "mailto:?subject=MAG Demographics&amp;body=%0A%0ACheck out this website.%0A%0AMAG Demographics - %23MAGmaps%0A"
+            let mailTo = `mailto:?subject=MAG Demographics&amp;body=%0A%0ALook at the map I made using the MAG Demographics Viewer:%0A%0A${url}%0A`
 
             $share.attr(
                 'data-content',
@@ -73,15 +70,12 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function (tp, QueryTask) {
                 tt.attr('data-original-title', 'Link copied to clipboard').tooltip('show');
                 setTimeout(function () {
                     tt.attr('data-original-title', 'Click to copy link to clipboard').tooltip('hide');
-                }, 2000);
+                }, 1500);
             });
 
             $share.on('shown.bs.popover', function () {
                 let $shareLinkCopy = $('#shareLinkCopy');
                 $shareLinkCopy.tooltip();
-                // $shareLinkCopy.on('hidden.bs.tooltip', function () {
-                //     $shareLinkCopy.prop('title', 'Click to copy link to clipboard');
-                // });
             })
 
             $share.popover({
