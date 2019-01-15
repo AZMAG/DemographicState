@@ -15,16 +15,27 @@ require([
             });
 
             app.view.ui.add(basemapId, 'bottom-right');
+            let $toggleSelector = $("#" + basemapId);
             let toggled = true;
 
-            $("#" + basemapId).click(function () {
+            function ToggleBasemap() {
                 if (toggled) {
-                    $(this).attr("title", "Map");
+                    $toggleSelector.attr("title", "Map");
                 } else {
-                    $(this).attr("title", "Satellite");
+                    $toggleSelector.attr("title", "Satellite");
                 }
                 toggled = !toggled;
                 toggleVM.toggle();
+            }
+
+            $toggleSelector.click(function () {
+                ToggleBasemap();
             });
+
+            if (app.initConfig && app.initConfig.basemap) {
+                if (app.initConfig.basemap !== 'gray') {
+                    ToggleBasemap();
+                }
+            }
         })
     })

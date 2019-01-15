@@ -16,6 +16,7 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function (tp, QueryTask) {
                 $dataSrcSelector.find('button:first').addClass("active");
                 $dataSrcSelector.find('button:last').removeClass("active");
                 $subHeaderTitle.hide();
+                $title6Area.show();
             }
 
             tp.subscribe('panel-shown', function (panel) {
@@ -61,7 +62,6 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function (tp, QueryTask) {
                     //Hide Title 6 Data
                     $title6Area.hide();
                 }
-
 
                 OpenReportWindow(d, dataSrc);
             });

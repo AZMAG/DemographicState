@@ -289,9 +289,17 @@ body,
     justify-content: center;
 }
 
+#shareLinkCopy {
+    cursor: pointer;
+}
+
 .sideways components {
     /* background-color: blue; */
     display: flex;
+}
+
+.components {
+    cursor: pointer;
 }
 
 .panelHeader {
@@ -989,7 +997,8 @@ label:hover,
     font-weight: bold;
     padding-top: 5px;
 }
-hr.pop{
+
+hr.pop {
     margin: 10px;
 }
 
@@ -1037,9 +1046,9 @@ hr.pop{
 }
 
 .loading-container {
-    display: none;
+    display: flex;
     position: fixed;
-    z-index: 1;
+    z-index: 2;
     background-color: rgba(0, 0, 0, 0.302);
     width: 100%;
     height: 100%;

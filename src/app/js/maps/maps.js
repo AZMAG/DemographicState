@@ -16,7 +16,7 @@ require([
     app.view = new MapView({
         container: "viewDiv",
         map: app.map,
-        extent: app.config.initExtent,
+        extent: app.initConfig ? app.initConfig.extent : app.config.initExtent,
         constraints: {
             rotationEnabled: false,
             minZoom: 7
@@ -35,9 +35,9 @@ require([
         }
     });
 
-    app.view.when(function() {
+    app.view.when(function () {
         tp.publish('map-loaded');
-        app.view.popup.on('trigger-action', function(e) {
+        app.view.popup.on('trigger-action', function (e) {
             if (e.action.id === 'open-report') {
                 tp.publish('toggle-panel', 'reports');
                 let f = e.target.selectedFeature;
@@ -77,13 +77,11 @@ require([
                             `;
 
                         },
-                        actions: [
-                            {
-                                title: "Open Report",
-                                id: "open-report",
-                                className: "esri-icon-table"
-                            }
-                        ]
+                        actions: [{
+                            title: "Open Report",
+                            id: "open-report",
+                            className: "esri-icon-table"
+                        }]
                     },
                     outFields: layer.outFields || ["*"],
                     opacity: layer.opacity
@@ -100,12 +98,10 @@ require([
                     visible: layer.visible,
                     labelsVisible: false,
                     labelingInfo: [{}],
-                    sublayers: [
-                        {
-                            id: layer.ACSIndex,
-                            opacity: 1
-                        }
-                    ]
+                    sublayers: [{
+                        id: layer.ACSIndex,
+                        opacity: 1
+                    }]
                 });
             }
             if (layerToAdd) {
@@ -133,6 +129,7 @@ require([
         app.view.whenLayerView(bgLayer).then(function (lyrView) {
             lyrView.watch("updating", function (value) {
                 if (!value && !once) {
+                    $('.loading-container').css('display', 'none');
                     // app.blockGroupLyrView = lyrView;
                     tp.publish("layers-added");
                     once = true;

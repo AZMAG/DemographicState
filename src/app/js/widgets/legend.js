@@ -1,18 +1,15 @@
-require(['esri/widgets/Legend', 'dojo/topic', 'dojo/domReady!'], function(
+require(['esri/widgets/Legend', 'dojo/topic', 'dojo/domReady!'], function (
     Legend,
     tp
 ) {
-    tp.subscribe('layers-added', function() {
+    tp.subscribe('layers-added', function () {
         // TODO: Make Sure the dom gets correctly cached for this file.
 
         //Legend
         let legend = $('#legend');
         app.view.ui.add('legend', 'top-right');
 
-        if (window.innerWidth < 800) {
-            $('#legend').hide();
-            // $(".legendToggle").removeAttr('checked');
-        }
+
 
         //Create Block Group legend separately
         //Have to do this otherwise it makes the block group legend go to the bottom when other items are checked
@@ -22,23 +19,28 @@ require(['esri/widgets/Legend', 'dojo/topic', 'dojo/domReady!'], function(
         new Legend({
             view: app.view,
             container: 'legendDiv',
-            layerInfos: [
-                {
-                    title: app.config.layerDef['blockGroups'].title,
-                    layer: blockGroupsLayer
-                }
-            ]
+            layerInfos: [{
+                title: app.config.layerDef['blockGroups'].title,
+                layer: blockGroupsLayer
+            }]
         });
+
+        let initOpacity = .8;
+
+        if (app.initConfig && app.initConfig.transparency !== undefined) {
+            initOpacity = app.initConfig.transparency;
+            blockGroupsLayer.opacity = app.initConfig.transparency;
+        }
 
         //Add Slider
         $('#legendDiv').append(`
                 <div class="slidecontainer">
                     <span style="padding: 8px;">Transparency</span>
-                    <input type="range" min="0" max="1" value=".8" step=".05" class="round slider" id="slider">
-                    <span id="sliderLabel">80%</span>
+                    <input type="range" min="0" max="1" value="${initOpacity}" step=".05" class="round slider" id="slider">
+                    <span id="sliderLabel">${initOpacity * 100}%</span>
                 </div>
             `);
-        $('#slider').on('input', function() {
+        $('#slider').on('input', function () {
             blockGroupsLayer.opacity = this.value;
             $('#sliderLabel').html(`${Math.floor(this.value * 100)}%`);
             // alert(this.value)
@@ -72,5 +74,10 @@ require(['esri/widgets/Legend', 'dojo/topic', 'dojo/domReady!'], function(
         });
 
         $('.customWidget').show();
+
+        if (window.innerWidth < 800 || (app.initConfig && app.initConfig.legend === false)) {
+            $('#legend').hide();
+            // $(".legendToggle").removeAttr('checked');
+        }
     });
 });

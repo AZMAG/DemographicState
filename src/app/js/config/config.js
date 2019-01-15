@@ -19,6 +19,11 @@ app.config = {
         'Council, District'
     ],
 
+    bitly: {
+        login: "vwolfley",
+        apiKey: "R_8dbab4a2f0664e8f8b4f88fe0d9d7f80"
+    },
+
     DefaultColorRamp: 'GnBu',
     DefaultColorScheme: 'Sequential',
     DefaultNumberOfClassBreaks: 5,
@@ -207,6 +212,16 @@ app.config = {
             visible: false,
             showReport: true,
             showTOC: true
+        }, {
+            legend: true,
+            id: 'aiaAreas',
+            layerName: 'AmericanIndianAreas',
+            title: 'American Indian Areas',
+            type: 'feature',
+            opacity: 0.8,
+            visible: false,
+            showReport: true,
+            showTOC: true
         },
         {
             legend: true,
@@ -214,7 +229,7 @@ app.config = {
             layerName: 'State',
             title: 'State',
             type: 'feature',
-            opacity: 0.08,
+            opacity: 0.8,
             visible: false,
             showReport: true,
             showTOC: true
@@ -226,7 +241,7 @@ app.config = {
             displayFields: ['COUNTY', 'NAME'],
             title: 'Opportunity Zones',
             type: 'feature',
-            opacity: 0.08,
+            opacity: 0.8,
             visible: false,
             showReport: true,
             showTOC: true

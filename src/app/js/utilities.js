@@ -1,18 +1,28 @@
 //This file should include miscellaneous repeatable functions used in multiple places in the code.
 
-Number.prototype.MagFormat = function() {
+Number.prototype.MagFormat = function () {
     return this.toFixed(1);
 };
+
+function qs(key) {
+    key = key.replace(/[*+?^$.\[\]{}()|\\\/]/g, "\\$&"); // escape RegEx meta chars
+    var match = location.search.match(new RegExp("[?&]" + key + "=([^&]+)(&|$)"));
+    return match && decodeURIComponent(match[1].replace(/\+/g, " "));
+}
 
 function hexToRgb(hex) {
     // Expand shorthand form (e.g. "03F") to full form (e.g. "0033FF")
     var shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
-    hex = hex.replace(shorthandRegex, function(m, r, g, b) {
+    hex = hex.replace(shorthandRegex, function (m, r, g, b) {
         return r + r + g + g + b + b;
     });
 
     var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-    return result ? { r: parseInt(result[1], 16), g: parseInt(result[2], 16), b: parseInt(result[3], 16) } : null;
+    return result ? {
+        r: parseInt(result[1], 16),
+        g: parseInt(result[2], 16),
+        b: parseInt(result[3], 16)
+    } : null;
 }
 
 function componentToHex(c) {
@@ -32,40 +42,40 @@ async function GetRepresentativeInfo(id) {
     if (representativeCache[id]) {
         return representativeCache[id];
     }
-    return new Promise(function(resolve, reject) {
-        $.get(url, function(data) {
+    return new Promise(function (resolve, reject) {
+        $.get(url, function (data) {
             representativeCache[id] = data;
             resolve(data);
         });
     });
 }
 
-app.clearDrawnGraphics = function() {
+app.clearDrawnGraphics = function () {
     let gfxLayer = app.map.findLayerById('gfxLayer');
     gfxLayer.removeAll();
     app.view.graphics.removeAll();
 };
 
-app.numberWithCommas = function(x) {
+app.numberWithCommas = function (x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 };
 
-app.chartTooltip = function(value, category) {
+app.chartTooltip = function (value, category) {
     return `${app.numberWithCommas(value)} <r> ${category}`;
 };
 
-app.valueAxisTemplate = function(value) {
+app.valueAxisTemplate = function (value) {
     return app.numberWithCommas(value);
 };
 
-app.wrapText = function(value) {
+app.wrapText = function (value) {
     var wrapLength = 12;
     var returnLabel = '';
     var lineLength = 0;
 
     if (value.length >= wrapLength) {
         var wordsList = value.split(' ');
-        $.each(wordsList, function(index, word) {
+        $.each(wordsList, function (index, word) {
             var separator = ' ';
             if (lineLength >= wrapLength) {
                 separator = '\n';
@@ -80,12 +90,12 @@ app.wrapText = function(value) {
     return returnLabel;
 };
 
-app.showInThousands = function(value) {
+app.showInThousands = function (value) {
     console.log(value);
 };
 
-app.AddHighlightGraphics = function(features) {
-    require(['esri/Graphic'], function(Graphic) {
+app.AddHighlightGraphics = function (features) {
+    require(['esri/Graphic'], function (Graphic) {
         let gfx = [];
         for (let i = 0; i < features.length; i++) {
             const feature = features[i];
@@ -108,7 +118,7 @@ app.AddHighlightGraphics = function(features) {
     });
 };
 
-app.AddHighlightGraphic = function(graphic) {
+app.AddHighlightGraphic = function (graphic) {
     let gfxLayer = app.map.findLayerById('gfxLayer');
     console.log(graphic);
 
@@ -131,7 +141,7 @@ app.AddHighlightGraphic = function(graphic) {
     }
 };
 
-app.summarizeFeatures = function(res) {
+app.summarizeFeatures = function (res) {
     if (!app.summableFields) {
         app.summableFields = [];
         app.acsFieldsConfig.forEach(conf => {
@@ -158,15 +168,15 @@ app.summarizeFeatures = function(res) {
     return data;
 };
 
-app.PopupFormat = function(value, key, data) {
-console.log(data);
+app.PopupFormat = function (value, key, data) {
+    console.log(data);
     if (data['googleID']) {
-        GetRepresentativeInfo(data['googleID']).then(function(data) {
+        GetRepresentativeInfo(data['googleID']).then(function (data) {
             if (data.offices) {
                 let mainRep;
                 data.offices.forEach(office => {
                     let isKeyOffice = false;
-                    app.config.googleCivicOffices.forEach(function(conf) {
+                    app.config.googleCivicOffices.forEach(function (conf) {
                         if (office.name.indexOf(conf) > -1) {
                             isKeyOffice = true;
                         }

@@ -1,6 +1,6 @@
-require(['dojo/topic'], function(tp) {
+require(['dojo/topic'], function (tp) {
     // tp.subscribe("layers-added", initReports);
-    tp.subscribe('panel-loaded', function(panel) {
+    tp.subscribe('panel-loaded', function (panel) {
         if (panel === 'reports') {
             initReports();
 
@@ -13,14 +13,14 @@ require(['dojo/topic'], function(tp) {
                     }
                 }
                 $('#reportType').html(html);
-                $('#reportType option').each(function(i, el) {
+                $('#reportType option').each(function (i, el) {
                     let id = $(el).data('id');
                     $(el).data('conf', app.config.layers[id]);
                 });
             }
 
             function hideReportLayers() {
-                app.config.layers.forEach(function(conf) {
+                app.config.layers.forEach(function (conf) {
                     const layer = app.map.findLayerById(conf.id);
                     if (layer && conf.showReport) {
                         layer.visible = false;
@@ -30,14 +30,12 @@ require(['dojo/topic'], function(tp) {
 
             function updateReportDDL(layer, conf) {
                 let displayField = 'NAME';
-                console.log(layer, conf);
 
                 // hideReportLayers();
                 // layer.visible = true;
 
                 let optionalFields = conf.displayFields || [displayField];
                 let outFields = ['OBJECTID', 'GEOID'].concat(optionalFields);
-                console.log(outFields);
 
                 const q = {
                     where: '1=1',
@@ -47,7 +45,7 @@ require(['dojo/topic'], function(tp) {
                     orderByFields: optionalFields
                 };
 
-                layer.queryFeatures(q).then(function(res) {
+                layer.queryFeatures(q).then(function (res) {
                     $('#specificReport').html('');
 
                     for (let i = 0; i < res.features.length; i++) {
@@ -55,7 +53,7 @@ require(['dojo/topic'], function(tp) {
                         const attr = feature.attributes;
 
                         let displayTemplate = '';
-                        optionalFields.forEach(function(field) {
+                        optionalFields.forEach(function (field) {
                             displayTemplate += attr[field] + ' - ';
                         });
 
@@ -69,7 +67,7 @@ require(['dojo/topic'], function(tp) {
                 });
             }
 
-            $('#reportType').change(function() {
+            $('#reportType').change(function () {
                 let $selectedItem = $(this).find(':selected');
                 let text = $selectedItem.text();
                 if (text !== 'Select a Type') {
@@ -83,7 +81,7 @@ require(['dojo/topic'], function(tp) {
                 }
             });
 
-            $('#reportForm').submit(function(e) {
+            $('#reportForm').submit(function (e) {
                 e.preventDefault();
                 $('#summaryReport').hide();
                 let conf = $('#reportType')
@@ -96,14 +94,16 @@ require(['dojo/topic'], function(tp) {
             });
         }
     });
+
     function ResetForm() {
         $('#specificReportDiv').hide();
         $('#standardBtnSubmit').hide();
         $('#reportType').val('default');
     }
     tp.subscribe('openReport-by-geoid', OpenReportByGEOID);
+
     function OpenReportByGEOID(conf, GEOID) {
-        app.GetData(conf, GEOID).then(function(data) {
+        app.GetData(conf, GEOID).then(function (data) {
             app.AddHighlightGraphics(data.acsData.features);
             app.view.goTo(data.acsData.features[0].geometry.extent.expand(1.5));
 

@@ -1,7 +1,7 @@
 //This file listens for any changes to color ramps, number of class breaks,
 //or map changes and updates the block groups renderer.
-require(['dojo/topic', 'dojo/domReady!'], function(tp) {
-    $('#classType').change(function() {
+require(['dojo/topic', 'dojo/domReady!'], function (tp) {
+    $('#classType').change(function () {
         let type = $(this).val();
         tp.publish('classType-change', type);
         if (type !== 'Custom') {
@@ -9,7 +9,7 @@ require(['dojo/topic', 'dojo/domReady!'], function(tp) {
         }
     });
 
-    $('#classBreaksCount').change(function() {
+    $('#classBreaksCount').change(function () {
         tp.publish('classBreaksCount-change');
     });
 
@@ -45,9 +45,7 @@ require(['dojo/topic', 'dojo/domReady!'], function(tp) {
 
         if (renderer) {
             //Update the layer with the new renderer.
-            let layer = app.map
-                .findLayerById('blockGroups')
-                .findSublayerById(0);
+            let layer = app.map.findLayerById('blockGroups').findSublayerById(0);
             layer.renderer = renderer;
             tp.publish('BlockGroupRendererUpdated', renderer);
         }

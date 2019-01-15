@@ -1,5 +1,4 @@
-app.acsFieldsConfig = [
-    {
+app.acsFieldsConfig = [{
         fieldName: 'TOTAL_POP',
         fieldAlias: 'Total Population',
         fieldType: 'Number',
@@ -2253,7 +2252,7 @@ app.acsFieldsConfig = [
         chartType: 'pie',
         canSum: true,
         parentField: '',
-        percentOfField: ''
+        percentOfField: 'TOTAL_HOUSING_UNITS'
     },
     {
         fieldName: 'AVG_HOUSEHOLD_SIZE',
