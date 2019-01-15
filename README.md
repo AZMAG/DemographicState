@@ -54,15 +54,15 @@ And constructed with the following guidelines:
 2. **MINOR** version when you add functionality in a backwards-compatible manner **bumps the minor** resets patch
 3. **PATCH** version when you make backwards-compatible bug fixes and misc changes **bumps only the patch**
 
-### version 3.2.5
+### version | 4.0.0 ###
 
-`Updated: 2018-07-31`
+* Updated | 2019-01-09
 
-`Created: 2014-10-21`
+* Created | 2014-10-21
 
 ## Credits
 
-`Maricopa Association of Governments (MAG) and the MAG member agencies`
+Maricopa Association of Governments (MAG) and the MAG member agencies
 
 ## Site URL
 
