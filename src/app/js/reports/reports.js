@@ -6,6 +6,7 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function (tp, QueryTask) {
             let $reportArea = $('#reportArea');
             let $subHeaderTitle = $('#summaryReportHeader');
             let $dataSrcSelector = $('#dataSrcSelector');
+            let $title6Area = $("#title6Area");
 
             function resetReportForm() {
                 $('.reportFormArea').hide();
@@ -52,6 +53,15 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function (tp, QueryTask) {
 
                 let dataSrc = $(this).data('val');
                 let d = app.selectedReport;
+
+                if (dataSrc === 'acs') {
+                    //Show Title 6 data
+                    $title6Area.show();
+                } else {
+                    //Hide Title 6 Data
+                    $title6Area.hide();
+                }
+
 
                 OpenReportWindow(d, dataSrc);
             });
