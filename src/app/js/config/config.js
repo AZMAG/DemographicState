@@ -24,8 +24,7 @@ app.config = {
     DefaultNumberOfClassBreaks: 5,
 
     layerDef: {},
-    layers: [
-        {
+    layers: [{
             legend: true,
             id: 'blockGroups',
             layerName: 'Block_Groups',
@@ -58,7 +57,8 @@ app.config = {
             opacity: 1,
             visible: false,
             showReport: true,
-            showTOC: true
+            showTOC: true,
+            definition: 'Census Tracts are small, relatively permanent statistical subdivisions of a county or equivalent entity that are updated by local participants prior to each decennial census as part of the Census Bureau\'s Participant Statistical Areas Program.The Census Bureau delineates census tracts in situations where no local participant existed or where state, local, or tribal governments declined to participate.The primary purpose of census tracts is to provide a stable set of geographic units for the presentation of statistical data.Census tracts generally have a population size between 1,200 and 8,000 people, with an optimum size of 4,000 people.A census tract usually covers a contiguous area; however, the spatial size of census tracts varies widely depending on the density of settlement.Census tract boundaries are delineated with the intention of being maintained over a long time so that statistical comparisons can be made from census to census.Census tracts occasionally are split due to population growth or merged as a result of substantial population decline.'
         },
         {
             legend: true,
@@ -69,7 +69,8 @@ app.config = {
             opacity: 1,
             visible: false,
             showReport: true,
-            showTOC: true
+            showTOC: true,
+            definition: 'The council of a metropolitan district that has been granted city status. The council of a non-metropolitan district that has been granted city status. Some of these councils are unitary authorities and some share functions with county councils. A parish council that has been granted city status.'
         },
         {
             legend: true,
@@ -81,7 +82,8 @@ app.config = {
             opacity: 1,
             visible: false,
             showReport: true,
-            showTOC: true
+            showTOC: true,
+            definition: 'A board of supervisors is a governing body that oversees the operation of county government in the American states of Arizona, California, Iowa, Mississippi, Virginia, and Wisconsin, as well as 16 counties in New York. There are equivalent agencies in other states. [1]            Similar to a city council, a board of supervisors has legislative, executive, and quasi-judicial powers. The important difference is that a county is an administrative division of a state, whereas a city is a municipal corporation; thus, counties implement and, as necessary, refine the local application of state law and public policy, while cities produce and implement their own local laws and public policy (subject to the overriding authority of state law).'
         },
         {
             legend: true,
@@ -92,7 +94,8 @@ app.config = {
             opacity: 1,
             visible: false,
             showReport: true,
-            showTOC: true
+            showTOC: true,
+            definition: 'ZIP Code Tabulation Areas (ZCTAs) are statistical entities developed by the United States Census Bureau for tabulating summary statistics. These were introduced with the Census 2000 and continued with the 2010 Census. This new entity was developed to overcome the difficulties in precisely defining the land area covered by each ZIP code. Defining the extent of an area is necessary in order to tabulate census data for that area.'
         },
         {
             legend: true,
@@ -103,7 +106,8 @@ app.config = {
             opacity: 1,
             visible: false,
             showReport: true,
-            showTOC: true
+            showTOC: true,
+            definition: 'School Districts'
         },
         {
             legend: true,
@@ -265,8 +269,7 @@ app.config = {
     // ------------------------------
 
     // Specify the Markup / drawing tools.
-    markupToolTreeNodes: [
-        {
+    markupToolTreeNodes: [{
             id: 1,
             text: 'Polygon',
             DisplayText: 'Polygon',
@@ -340,9 +343,7 @@ app.config = {
 
     sourceLabel2: 'Source: United States Census Bureau, 2010 Decennial Census',
 
-    legalACSDisclaimer:
-        'Source: U.S. Census Bureau, 2013-2017 American Community Survey (ACS) 5-Year Estimates. ACS data are based on a sample and are subject to sampling variability.  The degree of uncertainty for an estimate is represented through the use of a margin of error (MOE).  In addition to sampling variability, the ACS estimates are subject to nonsampling error. The MOE and effect of nonsampling error is not represented in these tables. Supporting documentation on subject definitions, data accuracy, and statistical testing can be found on the American Community Survey website (www.census.gov/acs) in the Data and Documentation section. Sample size and data quality measures (including coverage rates, allocation rates, and response rates) can be found on the American Community Survey website (www.census.gov/acs) in the Methodology section.  The MOE for individual data elements can be found on the American FactFinder website (factfinder2.census.gov).  Note: Although the ACS produces population, demographic and housing unit estimates, the 2010 Census provides the official counts of the population and housing units for the nation, states, counties, cities and towns.  Prepared by: Maricopa Association of Governments, www.azmag.gov, (602) 254-6300',
+    legalACSDisclaimer: 'Source: U.S. Census Bureau, 2013-2017 American Community Survey (ACS) 5-Year Estimates. ACS data are based on a sample and are subject to sampling variability.  The degree of uncertainty for an estimate is represented through the use of a margin of error (MOE).  In addition to sampling variability, the ACS estimates are subject to nonsampling error. The MOE and effect of nonsampling error is not represented in these tables. Supporting documentation on subject definitions, data accuracy, and statistical testing can be found on the American Community Survey website (www.census.gov/acs) in the Data and Documentation section. Sample size and data quality measures (including coverage rates, allocation rates, and response rates) can be found on the American Community Survey website (www.census.gov/acs) in the Methodology section.  The MOE for individual data elements can be found on the American FactFinder website (factfinder2.census.gov).  Note: Although the ACS produces population, demographic and housing unit estimates, the 2010 Census provides the official counts of the population and housing units for the nation, states, counties, cities and towns.  Prepared by: Maricopa Association of Governments, www.azmag.gov, (602) 254-6300',
 
-    legalCensusDisclaimer:
-        'Source: United States Census Bureau, 2010 Decennial Census. Additional information about the 2010 Decennial Cenuss can be found on the US Census Bureau website at www.census.gov/2010census. Prepared by: Maricopa Association of Governments, www.azmag.gov, (602) 254-6300'
+    legalCensusDisclaimer: 'Source: United States Census Bureau, 2010 Decennial Census. Additional information about the 2010 Decennial Cenuss can be found on the US Census Bureau website at www.census.gov/2010census. Prepared by: Maricopa Association of Governments, www.azmag.gov, (602) 254-6300'
 }; //End Config
