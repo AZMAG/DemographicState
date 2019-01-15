@@ -5,12 +5,15 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function (tp, QueryTask) {
         if (panel === 'reports') {
             let $reportArea = $('#reportArea');
             let $subHeaderTitle = $('#summaryReportHeader');
+            let $dataSrcSelector = $('#dataSrcSelector');
 
             function resetReportForm() {
                 $('.reportFormArea').hide();
                 $('#cardContainer').css('display', 'flex');
                 $('.returnBtn').hide();
                 $('#summaryReport').css('display', 'none');
+                $dataSrcSelector.find('button:first').addClass("active");
+                $dataSrcSelector.find('button:last').removeClass("active");
                 $subHeaderTitle.hide();
             }
 
