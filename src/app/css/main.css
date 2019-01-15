@@ -984,6 +984,15 @@ label:hover,
     background-color: white;
 }
 
+.popf {
+    font-size: 16px;
+    font-weight: bold;
+    padding-top: 5px;
+}
+hr.pop{
+    margin: 10px;
+}
+
 .legal {
     font-size: 11px;
     padding: 5px;

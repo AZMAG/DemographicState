@@ -51,7 +51,7 @@ app.numberWithCommas = function(x) {
 };
 
 app.chartTooltip = function(value, category) {
-    return `${app.numberWithCommas(value)} <br> ${category}`;
+    return `${app.numberWithCommas(value)} <r> ${category}`;
 };
 
 app.valueAxisTemplate = function(value) {
@@ -159,6 +159,7 @@ app.summarizeFeatures = function(res) {
 };
 
 app.PopupFormat = function(value, key, data) {
+console.log(data);
     if (data['googleID']) {
         GetRepresentativeInfo(data['googleID']).then(function(data) {
             if (data.offices) {
@@ -190,7 +191,16 @@ app.PopupFormat = function(value, key, data) {
             }
         });
     }
-    return `${data['NAME']}`;
+    var temp1 = `
+                <span class="popf">${data['NAME']}</span><hr class="pop">
+                <ul>
+                    <li>Total Population: ${data['TOTAL_POP'].toLocaleString()}</li>
+                    <li>Median Age: ${data['MEDIAN_AGE']}</li>
+                    <li>Median Household Income: $${data['MEDIAN_HOUSEHOLD_INCOME'].toLocaleString()}</li>
+                </ul>
+                `
+
+    return temp1;
 };
 
 // {"name":"Craig L. Brown","address":[{"line1":"1015 Fair Street,","city":"Prescott","state":"AZ","zip":"86305"}],"party":"Republican","phones":["(928) 771-3207"],"urls":["http://www.yavapai.us/district4/"],"photoUrl":"http://www.yavapai.us/Portals/3/BrownCraig.png?ver=2015-12-23-094233-330","emails":["web.bos.district4@yavapai.us"],"office":"Board of Supervisors District 4"}
