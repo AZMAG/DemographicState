@@ -12,6 +12,7 @@ require(['dojo/topic', 'esri/views/2d/draw/Draw', 'esri/Graphic', 'esri/geometry
         let $drawingTooltip = $('#drawingTooltip');
         let $bufferSize = $bufferOptions.find('#bufferSize');
         let $bufferUnit = $bufferOptions.find('#bufferUnit');
+        let $useZoom = $("#useZoom");
 
         let drawMessages = {
             point: {
@@ -199,10 +200,9 @@ require(['dojo/topic', 'esri/views/2d/draw/Draw', 'esri/Graphic', 'esri/geometry
                         count: data.acsData.features.length
                     }]
                 };
-
                 tp.publish('open-report-window', app.selectedReport, 'acs');
                 $customGeographyReports.hide();
-                app.AddHighlightGraphics(data.acsData.features);
+                app.AddHighlightGraphics(data.acsData.features, $useZoom.is(':checked'));
                 $('.reportFormArea').hide();
             });
         }
