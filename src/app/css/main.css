@@ -1121,10 +1121,6 @@ hr.pop {
     flex: 1;
 }
 
-#adContacts {
-    overflow: scroll;
-}
-
 #copyDiv {
     font-size: 68%;
     font-weight: 600;
