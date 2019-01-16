@@ -58,3 +58,8 @@ require([
         });
     }
 )
+
+//*** terms binding
+$("#termsModal").load("app/views/modal-terms.html");
+//*** privacy binding
+$("#privacyModal").load("app/views/modal-privacy.html");
