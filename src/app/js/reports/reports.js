@@ -375,7 +375,7 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function (tp, QueryTask) {
             toolbar: [{
                 template: `
                         <div class="gridToolbar">
-                            <button class="btn btn-sm gridGroupToggle" id="expandBtn">${expandHTML}</button>
+                            <button class="btn btn-sm gridGroupToggle expandCollapseBtn">${expandHTML}</button>
                             <button class="btn btn-sm" id="exportToExcelBtn">Export to Excel<i style="margin-left: 5px;" class="fa fa-table" aria-hidden="true"></i></button>
                         </div>
                     `
@@ -493,9 +493,9 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function (tp, QueryTask) {
                 grid.tbody.find('tr.k-grouping-row').each(function (index) {
                     grid.collapseGroup(this);
                 });
-                $('.gridGroupToggle').click(function (e) {
+                $('.gridGroupToggle').off('click').on('click', function (e) {
                     $.each($('.k-grid'), function (i, val) {
-                        if ($(val).is(':visible')) {
+                        if ($(val).is(':visible') && val.id === "gridTarget") {
                             var grid = $(val).data('kendoGrid');
                             if (e.currentTarget.value === 'collapse') {
                                 e.currentTarget.value = 'expand';
