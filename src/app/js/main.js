@@ -63,3 +63,4 @@ require([
 $("#termsModal").load("app/views/modal-terms.html");
 //*** privacy binding
 $("#privacyModal").load("app/views/modal-privacy.html");
+$("#legendHelpModal").load("app/views/modal-help-legend.html");

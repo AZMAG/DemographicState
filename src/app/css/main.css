@@ -1321,6 +1321,9 @@ hr.pop {
     float: right;
     margin-top: 17px !important;
 }
+#legendGrip .fas {
+    padding: 0 5px 0 5px;
+}
 
 #bikeDefIcon:hover {
     cursor: pointer;
