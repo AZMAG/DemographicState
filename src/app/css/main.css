@@ -75,9 +75,11 @@ span {
     text-decoration: none;
     color: #7a7a7a;
 }
+
 .contact a {
     text-decoration: none;
 }
+
 .contact2 {
     font-size: 11px;
     text-decoration: none;
@@ -409,7 +411,11 @@ a[aria-expanded='true'] {
 .shareLinks ul {
     list-style: none;
     padding: 0px;
-    margin: 0px;
+    display: flex;
+    align-items: center;
+    width: 65%;
+    margin: auto;
+    justify-content: space-between;
 }
 
 .shareLinks li {
@@ -1091,6 +1097,7 @@ hr.pop {
     height: 23px;
     flex: 1;
 }
+
 #adContacts {
     overflow: scroll;
 }
@@ -1100,6 +1107,7 @@ hr.pop {
     font-weight: 600;
     text-align: center;
 }
+
 #copyDiv p {
     margin: 0;
 }
