@@ -397,6 +397,14 @@ a[aria-expanded='true'] {
     display: none;
 }
 
+.btnExportPDF {
+    margin-left: auto;
+}
+
+.btnExportPDF:hover {
+    background-color: #545b62;
+}
+
 .shareLinks a {
     cursor: pointer;
     height: 40px;

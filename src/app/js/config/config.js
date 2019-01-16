@@ -9,6 +9,7 @@ app.config = {
     exportWebMapUrl: 'https://geo.azmag.gov/gismag/rest/services/gp/stateDemo/GPServer/Export%20Web%20Map',
 
     mainUrl: 'https://geo.azmag.gov/gismag/rest/services/maps/DemographicState2017/MapServer',
+    pdfServiceUrl: 'https://geo.azmag.gov/services/demographics2017/Reports.html?',
     siteUrl: 'https://geo.azmag.gov/maps/azdemographics/?',
 
     googleCivicInfoApiKey: 'AIzaSyCicS2bzJk_ptthYD2nSu4tIPfjGYmxU1U',
@@ -54,28 +55,80 @@ app.config = {
         },
         {
             legend: true,
-            id: 'censusTracts',
-            layerName: 'Tracts',
-            title: 'Census Tracts',
-            displayFields: ['COUNTY', 'NAME'],
+            id: 'state',
+            layerName: 'State',
+            title: 'State',
             type: 'feature',
-            opacity: 1,
+            opacity: 0.8,
             visible: false,
             showReport: true,
-            showTOC: true,
-            definition: 'Census Tracts are small, relatively permanent statistical subdivisions of a county or equivalent entity that are updated by local participants prior to each decennial census as part of the Census Bureau\'s Participant Statistical Areas Program.The Census Bureau delineates census tracts in situations where no local participant existed or where state, local, or tribal governments declined to participate.The primary purpose of census tracts is to provide a stable set of geographic units for the presentation of statistical data.Census tracts generally have a population size between 1,200 and 8,000 people, with an optimum size of 4,000 people.A census tract usually covers a contiguous area; however, the spatial size of census tracts varies widely depending on the density of settlement.Census tract boundaries are delineated with the intention of being maintained over a long time so that statistical comparisons can be made from census to census.Census tracts occasionally are split due to population growth or merged as a result of substantial population decline.'
+            showTOC: true
         },
         {
             legend: true,
-            id: 'councilDistricts',
-            layerName: 'CityDistricts',
-            title: 'Council Districts',
+            id: 'countyBoundaries',
+            layerName: 'Counties',
+            title: 'County Boundaries',
+            type: 'feature',
+            opacity: 0.8,
+            visible: true,
+            showReport: true,
+            showTOC: true
+        },
+        {
+            legend: true,
+            id: 'places',
+            layerName: 'Places',
+            title: 'Places',
+            type: 'feature',
+            opacity: 0.8,
+            visible: false,
+            showReport: true,
+            showTOC: true
+        }, {
+            legend: true,
+            id: 'aiaAreas',
+            layerName: 'AmericanIndianAreas',
+            title: 'American Indian Areas',
+            type: 'feature',
+            opacity: 0.8,
+            visible: false,
+            showReport: true,
+            showTOC: true
+        },
+        {
+            legend: true,
+            id: 'zipCodes',
+            layerName: 'Zip_Codes',
+            title: 'ZIP Codes',
             type: 'feature',
             opacity: 1,
             visible: false,
             showReport: true,
             showTOC: true,
-            definition: 'The council of a metropolitan district that has been granted city status. The council of a non-metropolitan district that has been granted city status. Some of these councils are unitary authorities and some share functions with county councils. A parish council that has been granted city status.'
+            definition: 'ZIP Code Tabulation Areas (ZCTAs) are statistical entities developed by the United States Census Bureau for tabulating summary statistics. These were introduced with the Census 2000 and continued with the 2010 Census. This new entity was developed to overcome the difficulties in precisely defining the land area covered by each ZIP code. Defining the extent of an area is necessary in order to tabulate census data for that area.'
+        },
+        {
+            legend: true,
+            id: 'cogs',
+            layerName: 'Cogs',
+            title: 'Council of Governments',
+            type: 'feature',
+            opacity: 1,
+            visible: false,
+            showReport: true,
+            showTOC: true
+        },
+        {
+            legend: true,
+            id: 'mpos',
+            layerName: 'Mpos',
+            title: 'Metropolitan Planning Organizations',
+            type: 'feature',
+            opacity: 1,
+            visible: false,
+            showReport: true,
+            showTOC: true
         },
         {
             legend: true,
@@ -92,15 +145,62 @@ app.config = {
         },
         {
             legend: true,
-            id: 'zipCodes',
-            layerName: 'Zip_Codes',
-            title: 'ZIP Codes',
+            id: 'councilDistricts',
+            layerName: 'CityDistricts',
+            title: 'City Council Districts',
             type: 'feature',
             opacity: 1,
             visible: false,
             showReport: true,
             showTOC: true,
-            definition: 'ZIP Code Tabulation Areas (ZCTAs) are statistical entities developed by the United States Census Bureau for tabulating summary statistics. These were introduced with the Census 2000 and continued with the 2010 Census. This new entity was developed to overcome the difficulties in precisely defining the land area covered by each ZIP code. Defining the extent of an area is necessary in order to tabulate census data for that area.'
+            definition: 'The council of a metropolitan district that has been granted city status. The council of a non-metropolitan district that has been granted city status. Some of these councils are unitary authorities and some share functions with county councils. A parish council that has been granted city status.'
+        },
+        {
+            legend: true,
+            id: 'legislativeDistricts',
+            layerName: 'Legislative_Districts',
+            title: 'Legislative Districts',
+            type: 'feature',
+            opacity: 1,
+            visible: false,
+            showReport: true,
+            showTOC: true
+        },
+        {
+            legend: true,
+            id: 'congressionalDistricts',
+            layerName: 'Congressional_Districts',
+            title: 'Congressional Districts',
+            type: 'feature',
+            opacity: 1,
+            visible: false,
+            showReport: true,
+            showTOC: true
+        },
+        {
+            legend: true,
+            id: 'censusTracts',
+            layerName: 'Tracts',
+            title: 'Census Tracts',
+            displayFields: ['COUNTY', 'NAME'],
+            type: 'feature',
+            opacity: 1,
+            visible: false,
+            showReport: true,
+            showTOC: true,
+            definition: 'Census Tracts are small, relatively permanent statistical subdivisions of a county or equivalent entity that are updated by local participants prior to each decennial census as part of the Census Bureau\'s Participant Statistical Areas Program.The Census Bureau delineates census tracts in situations where no local participant existed or where state, local, or tribal governments declined to participate.The primary purpose of census tracts is to provide a stable set of geographic units for the presentation of statistical data.Census tracts generally have a population size between 1,200 and 8,000 people, with an optimum size of 4,000 people.A census tract usually covers a contiguous area; however, the spatial size of census tracts varies widely depending on the density of settlement.Census tract boundaries are delineated with the intention of being maintained over a long time so that statistical comparisons can be made from census to census.Census tracts occasionally are split due to population growth or merged as a result of substantial population decline.'
+        },
+        {
+            legend: true,
+            id: 'opportunityZones',
+            layerName: 'OpportunityZones',
+            displayFields: ['COUNTY', 'NAME'],
+            title: 'Opportunity Zones',
+            type: 'feature',
+            opacity: 0.8,
+            visible: false,
+            showReport: true,
+            showTOC: true
         },
         {
             legend: true,
@@ -135,117 +235,8 @@ app.config = {
             visible: false,
             showReport: true,
             showTOC: true
-        },
-        {
-            legend: true,
-            id: 'legislativeDistricts',
-            layerName: 'Legislative_Districts',
-            title: 'Legislative Districts',
-            type: 'feature',
-            opacity: 1,
-            visible: false,
-            showReport: true,
-            showTOC: true
-        },
-        {
-            legend: true,
-            id: 'congressionalDistricts',
-            layerName: 'Congressional_Districts',
-            title: 'Congressional Districts',
-            type: 'feature',
-            opacity: 1,
-            visible: false,
-            showReport: true,
-            showTOC: true
-        },
-        {
-            legend: true,
-            id: 'countyBoundaries',
-            layerName: 'Counties',
-            title: 'County Boundaries',
-            type: 'feature',
-            opacity: 0.8,
-            visible: true,
-            showReport: true,
-            showTOC: true
-        },
-        // {
-        //     legend: true,
-        //     id: 'cogBoundaries',
-        //     layerName: 'Cogs_Mpos',
-        //     title: 'COG / MPO Boundaries',
-        //     type: 'feature',
-        //     opacity: 0.7,
-        //     visible: false,
-        //     showReport: true,
-        //     showTOC: true
-        // },
-        {
-            legend: true,
-            id: 'cogs',
-            layerName: 'Cogs',
-            title: 'Council of Governments',
-            type: 'feature',
-            opacity: 1,
-            visible: false,
-            showReport: true,
-            showTOC: true
-        },
-        {
-            legend: true,
-            id: 'mpos',
-            layerName: 'Mpos',
-            title: 'Metropolitan Planning Organizations',
-            type: 'feature',
-            opacity: 1,
-            visible: false,
-            showReport: true,
-            showTOC: true
-        },
-        {
-            legend: true,
-            id: 'places',
-            layerName: 'Places',
-            title: 'Places',
-            type: 'feature',
-            opacity: 0.8,
-            visible: false,
-            showReport: true,
-            showTOC: true
-        }, {
-            legend: true,
-            id: 'aiaAreas',
-            layerName: 'AmericanIndianAreas',
-            title: 'American Indian Areas',
-            type: 'feature',
-            opacity: 0.8,
-            visible: false,
-            showReport: true,
-            showTOC: true
-        },
-        {
-            legend: true,
-            id: 'state',
-            layerName: 'State',
-            title: 'State',
-            type: 'feature',
-            opacity: 0.8,
-            visible: false,
-            showReport: true,
-            showTOC: true
-        },
-        {
-            legend: true,
-            id: 'opportunityZones',
-            layerName: 'OpportunityZones',
-            displayFields: ['COUNTY', 'NAME'],
-            title: 'Opportunity Zones',
-            type: 'feature',
-            opacity: 0.8,
-            visible: false,
-            showReport: true,
-            showTOC: true
         }
+
     ],
 
     initExtent: {

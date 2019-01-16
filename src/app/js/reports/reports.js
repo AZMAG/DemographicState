@@ -79,6 +79,11 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function (tp, QueryTask) {
         }
     }
 
+    function ExportReportToPDF(conf, ids) {
+        let url = `${app.config.pdfServiceUrl}layer=${conf.layerName}&ids=${ids}`;
+        window.open(url, '_blank');
+    }
+
     function OpenReportWindow(data, type) {
         let fields = app.censusFieldsConfig;
         let res = data.censusData;
@@ -105,8 +110,21 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function (tp, QueryTask) {
         });
 
         let $header = $('#summaryReportHeader');
-        $header.html(`${title} Report`);
+        $header.html(`
+            <span style="flex: 1;">${title} Report</span>
+            <button title="Export report to PDF" data-placement="right" class="btn btn-sm btnExportPDF"><i class="far fa-file-pdf"></i></button>
+        `);
         $header.css('display', 'Flex');
+
+        $header.find('.btnExportPDF').tooltip();
+
+        $header.find('.btnExportPDF').off('click').on('click', function () {
+            let ids = attr['GEOID'];
+            if (data.ids) {
+
+            }
+            ExportReportToPDF(app.selectedReport.conf, ids);
+        });
 
         // let $sumReportTabStrip = $("#sumReportTabStrip");
 
