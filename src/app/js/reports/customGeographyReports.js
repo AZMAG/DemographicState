@@ -1,10 +1,10 @@
-require(['dojo/topic', 'esri/views/2d/draw/Draw', 'esri/Graphic', 'esri/geometry/geometryEngine'], function(
+require(['dojo/topic', 'esri/views/2d/draw/Draw', 'esri/Graphic', 'esri/geometry/geometryEngine'], function (
     tp,
     Draw,
     Graphic,
     geometryEngine
 ) {
-    tp.subscribe('panel-loaded', function(panel) {
+    tp.subscribe('panel-loaded', function (panel) {
         let $customGeographyReports = $('#customGeographyReports');
         let $bufferCheckbox = $('#useBuffer');
         let $bufferOptions = $('#bufferOptions');
@@ -13,16 +13,35 @@ require(['dojo/topic', 'esri/views/2d/draw/Draw', 'esri/Graphic', 'esri/geometry
         let $bufferSize = $bufferOptions.find('#bufferSize');
         let $bufferUnit = $bufferOptions.find('#bufferUnit');
 
+        let drawMessages = {
+            point: {
+                start: 'Click anywhere to select a point of interest.'
+            },
+            polygon: {
+                start: 'Click or drag anywhere on the map to start drawing.',
+                during: 'Double click to finish drawing, or click/drag to change the selected shape.'
+            },
+            polyline: {
+                start: 'Click to add first point in the corridor of interest.',
+                during: 'Double click to finish drawing, or Click to add another point to the selected corridor.'
+            }
+        }
+
         if (panel === 'reports') {
             let draw = new Draw({
                 view: app.view
             });
-
-            $bufferCheckbox.change(function(e) {
-                $bufferOptions.toggle();
+            let bufferShown = false;
+            $bufferCheckbox.change(function (e) {
+                bufferShown = !bufferShown;
+                if (bufferShown) {
+                    $bufferOptions.css('display', 'flex');
+                } else {
+                    $bufferOptions.hide();
+                }
             });
 
-            $customSummaryButton.click(function(e) {
+            $customSummaryButton.click(function (e) {
                 $customSummaryButton.removeClass('active');
                 $(this).addClass('active');
                 let type = $(this).data('val');
@@ -30,8 +49,10 @@ require(['dojo/topic', 'esri/views/2d/draw/Draw', 'esri/Graphic', 'esri/geometry
                 // create() will return a reference to an instance of PolygonDrawAction
                 let action = draw.create(type);
 
+                $drawingTooltip.html(drawMessages[type].start);
+
                 //Creates a tooltip to give user instructions on drawing
-                $('#viewDiv').mousemove(function(e) {
+                $('#viewDiv').mousemove(function (e) {
                     $drawingTooltip
                         .css('left', e.pageX + 10)
                         .css('top', e.pageY + 10)
@@ -141,22 +162,19 @@ require(['dojo/topic', 'esri/views/2d/draw/Draw', 'esri/Graphic', 'esri/geometry
 
                 if (e.type === 'draw-complete') {
                     $('#viewDiv').off('mousemove');
-
                     $drawingTooltip.hide();
-                    $drawingTooltip.html('Click and drag anywhere on the map to start drawing.');
                     $customSummaryButton.removeClass('active');
-
                     if (buffGfx) {
                         ProcessSelection(buffGfx);
                     } else {
                         ProcessSelection(graphic);
                     }
-                } else {
-                    $('#drawClearBtn').hide();
                 }
 
                 if (e.type === 'vertex-add') {
-                    $drawingTooltip.html('Double click to finish graphic');
+                    if (drawMessages[type].during) {
+                        $drawingTooltip.html(drawMessages[type].during);
+                    }
                 }
 
                 app.view.graphics.add(graphic);
@@ -164,26 +182,22 @@ require(['dojo/topic', 'esri/views/2d/draw/Draw', 'esri/Graphic', 'esri/geometry
         }
 
         function ProcessSelection(gfx) {
-            app.GetData(app.config.layerDef['blockGroups'], null, gfx.geometry).then(function(data) {
+            app.GetData(app.config.layerDef['blockGroups'], null, gfx.geometry).then(function (data) {
                 var acsdata = app.summarizeFeatures(data.acsData);
                 var censusdata = app.summarizeFeatures(data.censusData);
 
                 app.selectedReport.acsData = {
-                    features: [
-                        {
-                            attributes: acsdata,
-                            count: data.acsData.features.length
-                        }
-                    ]
+                    features: [{
+                        attributes: acsdata,
+                        count: data.acsData.features.length
+                    }]
                 };
 
                 app.selectedReport.censusData = {
-                    features: [
-                        {
-                            attributes: censusdata,
-                            count: data.acsData.features.length
-                        }
-                    ]
+                    features: [{
+                        attributes: censusdata,
+                        count: data.acsData.features.length
+                    }]
                 };
 
                 tp.publish('open-report-window', app.selectedReport, 'acs');

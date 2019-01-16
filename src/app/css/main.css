@@ -779,6 +779,7 @@ label:hover,
     z-index: 10;
     border-radius: 10px;
     font-size: 11px;
+    pointer-events: none;
 }
 
 .flexContainer {
@@ -1226,6 +1227,14 @@ hr.pop {
 
 #bufferOptions {
     display: none;
+    align-items: center;
+    border: solid #e9e9ea;
+    border-width: 0.2rem;
+    padding: 0.5rem;
+}
+
+#bufferOptions .form-control {
+    margin-left: 8px;
 }
 
 #interactiveForm {

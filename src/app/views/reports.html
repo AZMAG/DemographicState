@@ -87,18 +87,18 @@
             </div>
 
             <div class="form-check">
-                <input type="checkbox" class="form-check-input" name="useBuffer" id="useBuffer" />
-                <label for="useBuffer" class="form-check-label">Use a buffer</label>
-            </div>
-
-            <div class="form-check">
                 <input type="checkbox" checked class="form-check-input" name="useZoom" id="useZoom" />
                 <label for="useZoom" class="form-check-label">Zoom to Selection</label>
             </div>
 
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" name="useBuffer" id="useBuffer" />
+                <label for="useBuffer" class="form-check-label">Buffer Selection</label>
+            </div>
+
             <div id="bufferOptions">
-                <input id="bufferSize" value="1" min="0" max="10000" step=".01" type="number" placeholder="Radius" />
-                <label for="bufferUnit">Units</label>
+                <small for="bufferUnit">Distance</small>
+                <input class="form-control" id="bufferSize" value="1" min="0" max="10000" step=".01" type="number" placeholder="Radius" />
                 <select style="width: auto;" class="form-control" name="bufferUnit" id="bufferUnit">
                     <option value="miles">Miles</option>
                     <option value="feet">Feet</option>
