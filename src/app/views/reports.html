@@ -98,7 +98,8 @@
 
             <div id="bufferOptions">
                 <small for="bufferUnit">Distance</small>
-                <input class="form-control" id="bufferSize" value="1" min="0" max="10000" step=".01" type="number" placeholder="Radius" />
+                <input class="form-control" id="bufferSize" value="1" min="0" max="10000" step=".01" type="number"
+                    placeholder="Radius" />
                 <select style="width: auto;" class="form-control" name="bufferUnit" id="bufferUnit">
                     <option value="miles">Miles</option>
                     <option value="feet">Feet</option>
@@ -108,25 +109,44 @@
         </form>
     </div>
     <div id="advancedReports" class="reportFormArea">
-        <span id="info"></span>
-        <!-- <div class="queryContainer">
-            <div id="treeViewContainer">
-                <div style="text-align:center">
+        <div class="bs-callout bs-callout-primary">
+            <h4>Choose Query</h4>
+            Drag or double click these fields to the query window to add a row to the
+            query.
+        </div>
+        <div id="advancedContainer">
+            <div id="advancedTreeview"></div>
+        </div>
+        <div id="advancedQueryTarget" data-role="droptarget">
+            <h4 id="dropPrompt" style="color: black; display: none;">Drop here</h4>
+        </div>
+        <div id="advancedCntDiv"> Number of selected block groups : <span id="advancedCount"></span>
+            <button id="btnAdvancedSubmit" class="btn btn-primary">Submit</button>
+        </div>
+
+
+
+
+
+        <!-- <span id="info"></span> -->
+        <!-- <div class="queryContainer"> -->
+        <!-- <div id="treeViewContainer"> -->
+        <!-- <div style="text-align:center">
                     <h4>Fields</h4>
                     <h6>Drag or double click these fields to the query window to add a row to the
                         query.</h6>
-                </div>
-                <div id="treeView" style="white-space: normal;"></div>
-            </div>
-            <div style="text-align:center">
+                </div> -->
+        <!-- <div id="treeView" style="white-space: normal;"></div> -->
+        <!-- </div> -->
+        <!-- <div style="text-align:center">
                 <h4>Query</h4>
                 <h6>Each row filters the selection of block groups. Counts and percentages are per
                     block group.</h6>
-            </div>
-            <div id="target">
+            </div> -->
+        <!-- <div id="target">
                 <h4 id="dropPrompt" style="color:black;">Drop here</h4>
-            </div>
-        </div> -->
+            </div> -->
+        <!-- </div> -->
         <!-- <span id="queryButtonGroup">
             <button id="runQuery" class="queryButtons" type="button" title="Run Query">Run Query</button>
             <button id="cancelQuery" class="queryButtons" type="button" title="Cancel Query">Cancel</button>
