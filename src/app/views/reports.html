@@ -15,8 +15,7 @@
                 <div class="flexCenter">
                     <i class="fas fa-table fa-3x cardIcon"></i>
                     <p class="card-text">
-                        Open a demographic report for any Jurisdiction, County, COG/MPO, Zip Code, Congressional
-                        Districts, County Supervisor Districts, or City Council Districts.
+                        Open a demographic report for any predefined geography.
                     </p>
                 </div>
             </div>
@@ -88,18 +87,18 @@
             </div>
 
             <div class="form-check">
-                <input type="checkbox" class="form-check-input" name="useBuffer" id="useBuffer" />
-                <label for="useBuffer" class="form-check-label">Use a buffer</label>
-            </div>
-
-            <div class="form-check">
                 <input type="checkbox" checked class="form-check-input" name="useZoom" id="useZoom" />
                 <label for="useZoom" class="form-check-label">Zoom to Selection</label>
             </div>
 
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" name="useBuffer" id="useBuffer" />
+                <label for="useBuffer" class="form-check-label">Buffer Selection</label>
+            </div>
+
             <div id="bufferOptions">
-                <input id="bufferSize" value="1" min="0" max="10000" step=".01" type="number" placeholder="Radius" />
-                <label for="bufferUnit">Units</label>
+                <small for="bufferUnit">Distance</small>
+                <input class="form-control" id="bufferSize" value="1" min="0" max="10000" step=".01" type="number" placeholder="Radius" />
                 <select style="width: auto;" class="form-control" name="bufferUnit" id="bufferUnit">
                     <option value="miles">Miles</option>
                     <option value="feet">Feet</option>
@@ -206,8 +205,8 @@
             <div class="tab-content" id="pills-tabContent">
                 <div class="tab-pane fade show active" id="gridTab" role="tabpanel" aria-labelledby="gridTab">
                     <div id="gridTarget"></div>
-                    <hr />
                     <div id="title6Area">
+                        <hr />
                         <p class="k-reset">
                             <a id="title6Toggle" class="k-icon k-i-expand" href="#" tabindex="-1" aria-label="Expand"></a>Title
                             6 Data

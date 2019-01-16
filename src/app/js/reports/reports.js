@@ -79,6 +79,11 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function (tp, QueryTask) {
         }
     }
 
+    function ExportReportToPDF(conf, ids) {
+        let url = `${app.config.pdfServiceUrl}layer=${conf.layerName}&ids=${ids}`;
+        window.open(url, '_blank');
+    }
+
     function OpenReportWindow(data, type) {
         let fields = app.censusFieldsConfig;
         let res = data.censusData;
@@ -105,8 +110,28 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function (tp, QueryTask) {
         });
 
         let $header = $('#summaryReportHeader');
-        $header.html(`${title} Report`);
+        $header.html(`
+            <span style="flex: 1;">${title} Report</span>
+            <button title="Export report to PDF" data-placement="right" class="btn btn-sm btnExportPDF"><i class="far fa-file-pdf"></i></button>
+        `);
         $header.css('display', 'Flex');
+        let $btnExportPDF = $header.find('.btnExportPDF');
+
+        if (title.indexOf('Block Groups') > -1) {
+            $btnExportPDF.hide();
+        } else {
+            $btnExportPDF.show();
+        }
+
+        $btnExportPDF.tooltip();
+
+        $btnExportPDF.off('click').on('click', function () {
+            let ids = attr['GEOID'];
+            if (data.ids) {
+
+            }
+            ExportReportToPDF(app.selectedReport.conf, ids);
+        });
 
         // let $sumReportTabStrip = $("#sumReportTabStrip");
 
@@ -193,19 +218,27 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function (tp, QueryTask) {
         tp.publish('create-grid', vals, 'gridTarget');
         tp.publish('create-charts', vals, 'chartsTarget');
 
-        if (attr['AFFECTED_DISABILITY_COUNT']) {
+        if (attr['AFFECTED_DISABILITY_COUNT'] && attr['TOTAL_POP'] > 5000) {
             SetupTitle6Grid(attr);
+            $('#title6Area').show();
         } else {
             $('#title6Grid').html('');
+            $('#title6Area').hide();
         }
         $('#summaryReport').show();
     }
 
     function SetupTitle6Grid(attr) {
-        $('#title6Toggle').click(function () {
+        if ($('#title6Area').length === 0) {
+            alert("jquery element not found?")
+        }
+        $('#title6Area').off('click').on('click', function () {
             $('#title6Grid').toggle();
-            $(this).toggleClass('k-i-expand k-i-collapse');
-        });
+            $('#title6Toggle').toggleClass('k-i-expand k-i-collapse');
+        })
+
+        // $('#title6Toggle').click(function () {
+        // });
 
         var fivePlus = attr['TOTAL_POP'] - attr['UNDER5'];
         var totalPop = attr['TOTAL_POP'];
@@ -256,7 +289,7 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function (tp, QueryTask) {
                 Category: 'Population with a Disability',
                 Footnote: 'c',
                 Total: attr['DISABILITY'],
-                Percent: attr['DISABILITY'] / attr['CIV_NON_INST_POP'],
+                Percent: attr['DISABILITY'] / attr['CIV_NONINST_POP'],
                 NumberOfBlocks: attr['AFFECTED_DISABILITY_COUNT'],
                 PercentOfBlocks: attr['AFFECTED_DISABILITY_COUNT'] / totalBlockCount,
                 AffectedPopulation: attr['AFFECTED_DISABILITY'],
@@ -281,17 +314,16 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function (tp, QueryTask) {
             //height: 200,
             columns: [{
                     title: 'Population and Households',
-                    width: '235px',
                     columns: [{
                             field: 'Category',
                             template: '#:Category#', //<sup>#:Footnote#</sup>
                             title: 'Category',
-                            width: '95px'
+                            width: '85px'
                         },
                         {
                             field: 'Total',
                             title: 'Total',
-                            width: '80px',
+                            width: '55px',
                             format: '{0:n0}'
                         },
                         {
@@ -307,8 +339,8 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function (tp, QueryTask) {
                     width: '325px',
                     columns: [{
                             field: 'NumberOfBlocks',
-                            title: 'Number of block groups >= Area Percentage',
-                            width: '90px',
+                            title: 'Number of block groups >= Area Pct',
+                            width: '70px',
                             format: '{0:n0}'
                         },
                         {
@@ -320,13 +352,13 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function (tp, QueryTask) {
                         {
                             field: 'AffectedPopulation',
                             title: 'Affected Population',
-                            width: '75px',
+                            width: '68px',
                             format: '{0:n0}'
                         },
                         {
                             field: 'PercentAffectedCaptured',
                             title: '% of Affected Population Captured in Census Block Groups',
-                            width: '95px',
+                            width: '85px',
                             format: '{0:p1}'
                         }
                     ]
@@ -350,7 +382,7 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function (tp, QueryTask) {
             toolbar: [{
                 template: `
                         <div class="gridToolbar">
-                            <button class="btn btn-sm gridGroupToggle" id="expandBtn">${expandHTML}</button>
+                            <button class="btn btn-sm gridGroupToggle expandCollapseBtn">${expandHTML}</button>
                             <button class="btn btn-sm" id="exportToExcelBtn">Export to Excel<i style="margin-left: 5px;" class="fa fa-table" aria-hidden="true"></i></button>
                         </div>
                     `
@@ -468,9 +500,9 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function (tp, QueryTask) {
                 grid.tbody.find('tr.k-grouping-row').each(function (index) {
                     grid.collapseGroup(this);
                 });
-                $('.gridGroupToggle').click(function (e) {
+                $('.gridGroupToggle').off('click').on('click', function (e) {
                     $.each($('.k-grid'), function (i, val) {
-                        if ($(val).is(':visible')) {
+                        if ($(val).is(':visible') && val.id === "gridTarget") {
                             var grid = $(val).data('kendoGrid');
                             if (e.currentTarget.value === 'collapse') {
                                 e.currentTarget.value = 'expand';

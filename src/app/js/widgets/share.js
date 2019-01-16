@@ -1,6 +1,8 @@
 require(['dojo/topic', 'esri/tasks/QueryTask'], function (tp, QueryTask) {
     let $share = $('.shareWidget');
 
+    let oldUrl = '';
+
     tp.subscribe('layers-added', function () {
 
         GetSmallShareLink().then(function (url) {
@@ -8,13 +10,19 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function (tp, QueryTask) {
         })
 
         function ShareWidgetInit(url) {
+            if (url) {
+                oldUrl = url;
+            } else {
+                url = oldUrl;
+            }
+
             let baseUrl = 'https://twitter.com/intent/tweet';
             let text = 'MAG%20%7C%20Demographics';
             let hashTag = 'MAGmaps';
             let via = 'MAGregion';
 
             let twitterHref = `${baseUrl}?text=${text}&url=${url}&hastag=${hashTag}&via=${via}`;
-            let mailTo = `mailto:?subject=MAG Demographics&amp;body=%0A%0ALook at the map I made using the MAG Demographics Viewer:%0A%0A${url}%0A`
+            let mailTo = `mailto:?subject=MAG Demographics&amp;body=%0A%0AHere is the map I made using the MAG Demographics Viewer:%0A%0A${url}%0A`
 
             $share.attr(
                 'data-content',
@@ -43,11 +51,6 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function (tp, QueryTask) {
                                 <em class="fab fa-linkedin"></em>
                             </a>
                         </li>
-                        <li>
-                            <a id="GPlusShareButton" title="Share on Google Plus">
-                                <em class="fab fa-google-plus"></em>
-                            </a>
-                        </li>
                     </ul>
                     <div class="flexCenter">
                         <input readonly id="bitlyUrlInput" class="linkReplace" style="width: 90%;" value="${url}">
@@ -73,9 +76,14 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function (tp, QueryTask) {
                 }, 1500);
             });
 
-            $share.on('shown.bs.popover', function () {
+            $share.off('show.bs.popover').on('show.bs.popover', function () {
                 let $shareLinkCopy = $('#shareLinkCopy');
                 $shareLinkCopy.tooltip();
+                $("#sharePopup").html('<span>loading...</span>');
+                GetSmallShareLink().then(function (url) {
+                    $("#bitlyUrlInput").val(url);
+                    ShareWidgetInit(url);
+                })
             })
 
             $share.popover({
@@ -97,27 +105,9 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function (tp, QueryTask) {
             //LinkedIn
             $(document).on('click', '#INshareButton', function () {
                 window.open(
-                    'https://www.linkedin.com/shareArticle?url=https://geo.azmag.gov/maps/bikemap',
+                    `https://www.linkedin.com/shareArticle?url=${url}`,
                     'shareLinkedIn',
                     'width=650, height=700'
-                );
-            });
-
-            // google +1
-            (function () {
-                var po = document.createElement('script');
-                po.type = 'text/javascript';
-                po.async = true;
-                po.src = 'https://apis.google.com/js/platform.js';
-                var s = document.getElementsByTagName('script')[0];
-                s.parentNode.insertBefore(po, s);
-            })();
-
-            $(document).on('click', '#GPlusShareButton', function () {
-                window.open(
-                    '//plus.google.com/share?url=https%3A%2F%2Fgeo.azmag.gov%2Fmaps%2Fbikemap',
-                    'shareGooglePlus',
-                    'width=400, height=700'
                 );
             });
 
@@ -153,10 +143,6 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function (tp, QueryTask) {
                 js.src = 'https://connect.facebook.net/en_US/sdk.js';
                 fjs.parentNode.insertBefore(js, fjs);
             })(document, 'script', 'facebook-jssdk');
-        }
-
-        function RefreshShareWidget() {
-            let link = GetSmallShareLink();
         }
 
         function GetVisibleLayers() {

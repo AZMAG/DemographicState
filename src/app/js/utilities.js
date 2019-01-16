@@ -94,7 +94,7 @@ app.showInThousands = function (value) {
     console.log(value);
 };
 
-app.AddHighlightGraphics = function (features) {
+app.AddHighlightGraphics = function (features, zoomTo) {
     require(['esri/Graphic'], function (Graphic) {
         let gfx = [];
         for (let i = 0; i < features.length; i++) {
@@ -115,6 +115,10 @@ app.AddHighlightGraphics = function (features) {
         }
         let gfxLayer = app.map.findLayerById('gfxLayer');
         gfxLayer.addMany(gfx);
+
+        if (zoomTo) {
+            app.view.goTo(gfx);
+        }
     });
 };
 

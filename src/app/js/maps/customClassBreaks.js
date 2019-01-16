@@ -15,11 +15,16 @@ require([
             const lyr = app.map.findLayerById("blockGroups").sublayers.getItemAt(0);
 
 
-            $btnClassBreaksEditor.click(function () {
+            $btnClassBreaksEditor.click(function (e) {
                 CbrParamChanged('Custom');
+                e.preventDefault();
             })
 
             function CbrParamChanged(type) {
+                if (!type) {
+                    type = $("#classType").val();
+                }
+
                 if (type == 'Custom') {
                     $customClassBreaksModal.modal('show');
                     $btnClassBreaksEditor.show();

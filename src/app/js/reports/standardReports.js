@@ -104,7 +104,7 @@ require(['dojo/topic'], function (tp) {
 
     function OpenReportByGEOID(conf, GEOID) {
         app.GetData(conf, GEOID).then(function (data) {
-            app.AddHighlightGraphics(data.acsData.features);
+            app.AddHighlightGraphics(data.acsData.features, true);
             app.view.goTo(data.acsData.features[0].geometry.extent.expand(1.5));
 
             if (data) {
