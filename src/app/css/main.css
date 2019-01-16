@@ -78,10 +78,18 @@ span {
 .contact a {
     text-decoration: none;
 }
-.contact2 {
+.contacts {
     font-size: 11px;
     text-decoration: none;
     color: #7a7a7a;
+}
+.contacts .link {
+    text-decoration: none;
+}
+
+.md {
+    cursor: pointer;
+    text-decoration: none;
 }
 
 /* ---------------------------------------------------
@@ -211,6 +219,7 @@ a.article:hover,
     display: none;
     height: 100vh;
     overflow-y: auto;
+    overflow-x: hidden;
     min-width: 25%;
     transition: all 0.3s;
 }
@@ -1028,18 +1037,23 @@ hr.pop {
     padding: 2px;
 }
 
-/* .modal {
-    overflow: hidden;
+.modal-body {
+    font-size: 80%;
 }
-
-.modal-dialog {
-    margin-right: 0;
-    margin-left: 0;
-} */
 
 .modal-header {
     /* not necessary but imo important for user */
     cursor: move;
+    display: initial;
+    background-color: #2baab1;
+}
+
+/* .modal-dialog {
+    margin-right: 0;
+    margin-left: 0;
+} */
+.btn {
+    background: #adb8c0;
 }
 
 .myHiddenClass {
@@ -1090,9 +1104,6 @@ hr.pop {
 .colorRampSquare {
     height: 23px;
     flex: 1;
-}
-#adContacts {
-    overflow: scroll;
 }
 
 #copyDiv {
