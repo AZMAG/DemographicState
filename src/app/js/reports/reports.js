@@ -211,19 +211,27 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function (tp, QueryTask) {
         tp.publish('create-grid', vals, 'gridTarget');
         tp.publish('create-charts', vals, 'chartsTarget');
 
-        if (attr['AFFECTED_DISABILITY_COUNT']) {
+        if (attr['AFFECTED_DISABILITY_COUNT'] && attr['TOTAL_POP'] > 5000) {
             SetupTitle6Grid(attr);
+            $('#title6Area').show();
         } else {
             $('#title6Grid').html('');
+            $('#title6Area').hide();
         }
         $('#summaryReport').show();
     }
 
     function SetupTitle6Grid(attr) {
-        $('#title6Toggle').click(function () {
+        if ($('#title6Area').length === 0) {
+            alert("jquery element not found?")
+        }
+        $('#title6Area').off('click').on('click', function () {
             $('#title6Grid').toggle();
-            $(this).toggleClass('k-i-expand k-i-collapse');
-        });
+            $('#title6Toggle').toggleClass('k-i-expand k-i-collapse');
+        })
+
+        // $('#title6Toggle').click(function () {
+        // });
 
         var fivePlus = attr['TOTAL_POP'] - attr['UNDER5'];
         var totalPop = attr['TOTAL_POP'];
@@ -274,7 +282,7 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function (tp, QueryTask) {
                 Category: 'Population with a Disability',
                 Footnote: 'c',
                 Total: attr['DISABILITY'],
-                Percent: attr['DISABILITY'] / attr['CIV_NON_INST_POP'],
+                Percent: attr['DISABILITY'] / attr['CIV_NONINST_POP'],
                 NumberOfBlocks: attr['AFFECTED_DISABILITY_COUNT'],
                 PercentOfBlocks: attr['AFFECTED_DISABILITY_COUNT'] / totalBlockCount,
                 AffectedPopulation: attr['AFFECTED_DISABILITY'],
@@ -299,17 +307,16 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function (tp, QueryTask) {
             //height: 200,
             columns: [{
                     title: 'Population and Households',
-                    width: '235px',
                     columns: [{
                             field: 'Category',
                             template: '#:Category#', //<sup>#:Footnote#</sup>
                             title: 'Category',
-                            width: '95px'
+                            width: '85px'
                         },
                         {
                             field: 'Total',
                             title: 'Total',
-                            width: '80px',
+                            width: '55px',
                             format: '{0:n0}'
                         },
                         {
@@ -325,8 +332,8 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function (tp, QueryTask) {
                     width: '325px',
                     columns: [{
                             field: 'NumberOfBlocks',
-                            title: 'Number of block groups >= Area Percentage',
-                            width: '90px',
+                            title: 'Number of block groups >= Area Pct',
+                            width: '70px',
                             format: '{0:n0}'
                         },
                         {
@@ -338,13 +345,13 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function (tp, QueryTask) {
                         {
                             field: 'AffectedPopulation',
                             title: 'Affected Population',
-                            width: '75px',
+                            width: '68px',
                             format: '{0:n0}'
                         },
                         {
                             field: 'PercentAffectedCaptured',
                             title: '% of Affected Population Captured in Census Block Groups',
-                            width: '95px',
+                            width: '85px',
                             format: '{0:p1}'
                         }
                     ]
