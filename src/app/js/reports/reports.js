@@ -115,10 +115,17 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function (tp, QueryTask) {
             <button title="Export report to PDF" data-placement="right" class="btn btn-sm btnExportPDF"><i class="far fa-file-pdf"></i></button>
         `);
         $header.css('display', 'Flex');
+        let $btnExportPDF = $header.find('.btnExportPDF');
 
-        $header.find('.btnExportPDF').tooltip();
+        if (title.indexOf('Block Groups') > -1) {
+            $btnExportPDF.hide();
+        } else {
+            $btnExportPDF.show();
+        }
 
-        $header.find('.btnExportPDF').off('click').on('click', function () {
+        $btnExportPDF.tooltip();
+
+        $btnExportPDF.off('click').on('click', function () {
             let ids = attr['GEOID'];
             if (data.ids) {
 
