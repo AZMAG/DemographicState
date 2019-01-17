@@ -772,8 +772,55 @@ label:hover,
     display: none;
 }
 
+
+#advancedTreeview {
+    height: 25vh;
+}
+
+#advancedContainer {
+    display: flex;
+    flex-direction: column;
+    border: solid #e9e9ea;
+    border-width: 0.2rem;
+    padding: 0.9rem;
+}
+
+#advancedQueryTarget {
+    height: 48vh;
+    margin-top: 10px;
+    border: solid #e9e9ea;
+    border-width: 0.2rem;
+    padding: 0.4rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#advancedCntDiv {
+    margin-top: 10px;
+    border: solid #e9e9ea;
+    border-width: 0.2rem;
+    padding: 0.4rem;
+    display: flex;
+    align-items: center;
+}
+
+#btnAdvancedSubmit {
+    margin-left: auto;
+}
+
+#advancedCount {
+    margin-left: 10px;
+    font-weight: bold;
+}
+
+
 #drawAddBtn {
     display: none;
+}
+
+.esri-icon-search {
+    color: white;
 }
 
 #drawInstructions {
@@ -1366,32 +1413,27 @@ hr.pop {
 }
 
 .queryItem {
-    margin-left: 3%;
-    line-height: 50px;
+    text-align: center;
+    flex: 1;
+    margin: 10px;
 }
 
 .inputBoxes {
-    float: right;
-    margin-right: 1%;
-    margin-top: 14px;
-    margin-bottom: 10px;
     color: black;
 }
 
 .joinDDLClass {
-    width: 80px;
-    margin-left: 40%;
+    width: 100px;
     margin-bottom: 5px;
     margin-top: 5px;
 }
 
 .operatorDDL {
-    margin-right: 10px;
     width: 130px;
 }
 
 .removeRowBtn {
-    margin-left: 10px;
+    margin-left: 5px;
 }
 
 .strMultiselect {
@@ -1400,12 +1442,15 @@ hr.pop {
 
 #dropPrompt {
     color: black;
-    margin-left: 40%;
-    margin-right: 35%;
-    margin-top: 21%;
-    /*border: 1px solid black;*/
-    padding: 10px;
+    margin: auto;
+    background-color: lightgrey;
+    padding: 20px;
     font-size: 18px;
+}
+
+.advancedRow {
+    display: flex;
+    align-items: center;
 }
 
 #value {
@@ -1432,7 +1477,7 @@ hr.pop {
 }
 
 .style1 {
-    width: 60px;
+    width: 65px;
     margin-left: 5px;
 }
 
@@ -1556,4 +1601,82 @@ hr.pop {
     .wrapper {
         flex-direction: column;
     }
+}
+
+
+
+/* 
+https://cpratt.co/twitter-bootstrap-callout-css-styles/
+*/
+.bs-callout {
+    padding: 20px;
+    margin: 20px 0;
+    border: 1px solid #eee;
+    border-left-width: 5px;
+    border-radius: 3px;
+}
+
+.bs-callout h4 {
+    margin-top: 0;
+    margin-bottom: 5px;
+}
+
+.bs-callout p:last-child {
+    margin-bottom: 0;
+}
+
+.bs-callout code {
+    border-radius: 3px;
+}
+
+.bs-callout+.bs-callout {
+    margin-top: -5px;
+}
+
+.bs-callout-default {
+    border-left-color: #777;
+}
+
+.bs-callout-default h4 {
+    color: #777;
+}
+
+.bs-callout-primary {
+    border-left-color: #428bca;
+}
+
+.bs-callout-primary h4 {
+    color: #428bca;
+}
+
+.bs-callout-success {
+    border-left-color: #5cb85c;
+}
+
+.bs-callout-success h4 {
+    color: #5cb85c;
+}
+
+.bs-callout-danger {
+    border-left-color: #d9534f;
+}
+
+.bs-callout-danger h4 {
+    color: #d9534f;
+}
+
+.bs-callout-warning {
+    border-left-color: #f0ad4e;
+}
+
+.bs-callout-warning h4 {
+    color: #f0ad4e;
+}
+
+.bs-callout-info {
+    border-left-color: #5bc0de;
+}
+
+.bs-callout-info h4 {
+    color: #5bc0de;
 }

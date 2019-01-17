@@ -69,6 +69,7 @@ require(['dojo/topic', 'dojo/domReady!'], function (tp) {
         }
 
         $links.on('click', function (e) {
+            e.preventDefault();
             let target = $(this).attr('panel-target');
 
             // <!-- comments:uncomment // -->
