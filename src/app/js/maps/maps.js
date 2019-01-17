@@ -70,13 +70,14 @@ require([
                     visible: layer.visible,
                     popupTemplate: {
                         title: layer.title + '<div style="display:none">{*}</div>',
-                        content: function () {
-                            return `
-                            {NAME:app.PopupFormat}
-                            <div id="googleCivicAPITarget"></div>
-                            `;
+                        content: app.PopupFormat,
+                        // function () {
+                        //     return `
+                        //     {NAME:app.PopupFormat}
+                        //     <div class="googleCivicAPITarget"></div>
+                        //     `;
 
-                        },
+                        // },
                         actions: [{
                             title: "Open Report",
                             id: "open-report",

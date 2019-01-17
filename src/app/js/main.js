@@ -44,7 +44,13 @@ require([
                     app.config.layerDef[conf.id] = conf;
                 }
             }
-            app.initConfig = JSON.parse(qs("init"));
+            app.initConfig = undefined;
+
+            let initStr = qs("init");
+            if (initStr) {
+                app.initConfig = JSON.parse(initStr);
+            }
+
             if (app.initConfig && app.initConfig.visibleLayers) {
                 app.initConfig.visibleLayers.forEach(function (layer) {
                     app.config.layers.forEach(function (conf) {

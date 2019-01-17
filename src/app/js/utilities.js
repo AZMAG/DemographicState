@@ -36,16 +36,20 @@ function rgbToHex(r, g, b) {
 
 const representativeCache = {};
 async function GetRepresentativeInfo(id) {
+    if (representativeCache[id]) {
+        return new Promise(function (resolve, reject) {
+            resolve(representativeCache[id]);
+        })
+    }
     let url = `https://content.googleapis.com/civicinfo/v2/representatives/${encodeURIComponent(
         id
     )}?recursive=false&key=${app.config.googleCivicInfoApiKey}`;
-    if (representativeCache[id]) {
-        return representativeCache[id];
-    }
     return new Promise(function (resolve, reject) {
         $.get(url, function (data) {
             representativeCache[id] = data;
             resolve(data);
+        }).fail(function (err) {
+            reject(err);
         });
     });
 }
@@ -124,10 +128,9 @@ app.AddHighlightGraphics = function (features, zoomTo) {
 
 app.AddHighlightGraphic = function (graphic) {
     let gfxLayer = app.map.findLayerById('gfxLayer');
-    console.log(graphic);
 
     if (gfxLayer.graphics && gfxLayer.graphics.items.length > 0) {
-        console.log('asdf');
+        console.log('no graphics to highlight');
     } else {
         var tempGraphic = $.extend({}, graphic);
 
@@ -172,10 +175,10 @@ app.summarizeFeatures = function (res) {
     return data;
 };
 
-app.PopupFormat = function (value, key, data) {
-    console.log(data);
-    if (data['googleID']) {
-        GetRepresentativeInfo(data['googleID']).then(function (data) {
+function GetRepHtml(googleID) {
+    return GetRepresentativeInfo(googleID)
+        .then(function (data) {
+
             if (data.offices) {
                 let mainRep;
                 data.offices.forEach(office => {
@@ -194,27 +197,69 @@ app.PopupFormat = function (value, key, data) {
                     }
                 });
                 if (mainRep) {
-                    $('#googleCivicAPITarget').html(
-                        `<div class="flexCenter"><img class="rep-pic" src="${mainRep.photoUrl}" alt="">
+                    console.log(mainRep);
+
+                    return `<div>
+                            ${mainRep.photoUrl ? `<img class="rep-pic" src="${mainRep.photoUrl}" alt="">`: ''}
+                            <strong>${mainRep.name}${mainRep.party ? ` (<strong>${mainRep.party === 'Demographic' ? '<span style="font-weight: bold; color: blue;">D</span>': '<span style="font-weight: bold; color: red;">R</span>'}</strong>) `: ''}</strong>
+                            
                             <div>
-                            <span>${mainRep.office}</span>: <span>${mainRep.name}</span>
+                                ${mainRep.address ? `
+                                    ${mainRep.address[0].line1 + " " + mainRep.address[0].city+ ", " + mainRep.address[0].state + " " + mainRep.address[0].zip}
+                                    <br>` : ''}
+                                ${mainRep.phones ? `<span title="Phone ${mainRep.name}" ><i class="fas fa-phone" aria-hidden="true"></i>  ${mainRep.phones[0]}</span><br>`: ''}
+                                ${mainRep.emails ? `<a style="margin-left: 5px;" title="Send an email to ${mainRep.name}" href="mailto:${mainRep.emails[0]}"><i class="fa fa-envelope" aria-hidden="true"></i>  ${mainRep.emails[0]}</a>`: ''}
                             </div>
                         </div>`
-                    );
-                }
-            }
-        });
-    }
-    var temp1 = `
-                <span class="popf">${data['NAME']}</span><hr class="pop">
-                <ul>
-                    <li>Total Population: ${data['TOTAL_POP'].toLocaleString()}</li>
-                    <li>Median Age: ${data['MEDIAN_AGE']}</li>
-                    <li>Median Household Income: $${data['MEDIAN_HOUSEHOLD_INCOME'].toLocaleString()}</li>
-                </ul>
-                `
+                    // ${mainRep.office}
+                    // ${mainRep.photoUrl ? `<img class="rep-pic" src="${mainRep.photoUrl}" alt="">`: ''}
 
-    return temp1;
+                }
+            } else {
+                return '';
+            }
+        })
+        .catch(function (err) {
+            console.log(err)
+        });
+
+}
+
+app.PopupFormat = async function (gfx) {
+    let attr = gfx.graphic.attributes;
+    let repHtml = '';
+    if (attr['googleID']) {
+        repHtml = await GetRepHtml(attr['googleID']);
+    }
+
+    return `
+                <span class="popf">${attr['NAME']}</span>
+                <hr class="pop">
+                <div>Total Population: <strong>${attr['TOTAL_POP'].toLocaleString()}</strong></div>
+                <div>Minority Population: <strong>${attr['MINORITY_POP'].toLocaleString()}</strong></div>
+                ${attr['MEDIAN_AGE'] ? `<div>Median Age: <strong>${attr['MEDIAN_AGE']} years</strong></div>` : ''}
+                <div>Number of Households: <strong>${attr['TOTAL_HOUSEHOLDS'].toLocaleString()}</strong></div>
+                ${attr['MEDIAN_HOUSEHOLD_INCOME'] ? `<div>Median Household Income: <strong>${attr['MEDIAN_HOUSEHOLD_INCOME'].toLocaleString()}</strong></div>` : ''}
+                ${repHtml ? `
+                <hr>
+                <h6>Representative Info</h6>
+                <div>${repHtml}</div>
+                ` : ''}
+            `;
 };
 
-// {"name":"Craig L. Brown","address":[{"line1":"1015 Fair Street,","city":"Prescott","state":"AZ","zip":"86305"}],"party":"Republican","phones":["(928) 771-3207"],"urls":["http://www.yavapai.us/district4/"],"photoUrl":"http://www.yavapai.us/Portals/3/BrownCraig.png?ver=2015-12-23-094233-330","emails":["web.bos.district4@yavapai.us"],"office":"Board of Supervisors District 4"}
+// {
+//     "name": "Craig L. Brown",
+//     "address": [{
+//         "line1": "1015 Fair Street,",
+//         "city": "Prescott",
+//         "state": "AZ",
+//         "zip": "86305"
+//     }],
+//     "party": "Republican",
+//     "phones": ["(928) 771-3207"],
+//     "urls": ["http://www.yavapai.us/district4/"],
+//     "photoUrl": "http://www.yavapai.us/Portals/3/BrownCraig.png?ver=2015-12-23-094233-330",
+//     "emails": ["web.bos.district4@yavapai.us"],
+//     "office": "Board of Supervisors District 4"
+// }
