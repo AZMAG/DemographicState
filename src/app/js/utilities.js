@@ -201,7 +201,7 @@ function GetRepHtml(googleID) {
 
                     return `<div>
                             ${mainRep.photoUrl ? `<img class="rep-pic" src="${mainRep.photoUrl}" alt="">`: ''}
-                            <strong>${mainRep.name}${mainRep.party ? ` (<strong>${mainRep.party === 'Demographic' ? '<span style="font-weight: bold; color: blue;">D</span>': '<span style="font-weight: bold; color: red;">R</span>'}</strong>) `: ''}</strong>
+                            <strong>${mainRep.name}${mainRep.party ? ` (<strong>${mainRep.party === 'Democratic' ? '<span style="font-weight: bold; color: blue;">D</span>': '<span style="font-weight: bold; color: red;">R</span>'}</strong>) `: ''}</strong>
                             
                             <div>
                                 ${mainRep.address ? `

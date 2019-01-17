@@ -541,9 +541,14 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function (tp, QueryTask) {
         $loadingSpinner.css('display', 'flex');
 
         let geoid = null;
-
+        let where = '1=1';
         if (geoids && geoids.length > 0) {
             geoid = geoids[0];
+            let str = ''
+            geoids.forEach(id => {
+                str += `'${id}',`
+            });
+            where = `GEOID IN(${str.slice(0, -1)})`;
         }
 
         if (conf.id !== 'blockGroups') {
@@ -553,17 +558,6 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function (tp, QueryTask) {
                 return app.selectedReport;
             }
         }
-
-        let where = '1=1';
-
-        if (geoids.length > 0) {
-            let str = ''
-            geoids.forEach(id => {
-                str += `'${id}',`
-            });
-            where = `GEOID IN(${str.slice(0, -1)})`;
-        }
-
 
         let q = {
             returnGeometry: true,
