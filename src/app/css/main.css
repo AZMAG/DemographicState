@@ -1077,9 +1077,9 @@ label:hover,
 }
 
 .link {
-    text-decoration: underline;
-    color: #2ad;
-    font-weight: 700;
+    text-decoration: none;
+    color: #2baab1;
+    font-weight: 600;
 }
 
 .esri-popup__pointer-direction.esri-popup--shadow {
@@ -1610,7 +1610,7 @@ hr.pop {
 
 
 
-/* 
+/*
 https://cpratt.co/twitter-bootstrap-callout-css-styles/
 */
 .bs-callout {
