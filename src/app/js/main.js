@@ -64,3 +64,7 @@ $("#termsModal").load("app/views/modal-terms.html");
 //*** privacy binding
 $("#privacyModal").load("app/views/modal-privacy.html");
 $("#legendHelpModal").load("app/views/modal-help-legend.html");
+$("#mapsHelpModal").load("app/views/modal-help-maps.html");
+$("#reportsHelpModal").load("app/views/modal-help-reports.html");
+$("#layersHelpModal").load("app/views/modal-help-layers.html");
+$("#aboutHelpModal").load("app/views/modal-help-about.html");

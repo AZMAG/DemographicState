@@ -246,8 +246,8 @@
         <div title="Click and drag to move window"
              id="legendHeader">
             <span>Legend</span><span id="legendGrip"><a class="modal-anchor md track"
-               data-toggle="modal"
-               data-target="#legendHelpModal"><i class="fas fa-question-circle"></i></a><i class="fas fa-grip-vertical"></i>
+                   data-toggle="modal"
+                   data-target="#legendHelpModal"><i class="fas fa-question-circle"></i></a><i class="fas fa-grip-vertical"></i>
             </span>
 
 
@@ -373,8 +373,13 @@
                  panel-id="maps">
                 <div class="panelHeader">
                     <span class="panelHeaderText">Choose a Map:</span>
-                    <a class="closePanel"
-                       href="#"> <i class="fas fa-times"></i> </a>
+                    <span class="panelHeaderIcons">
+                        <a class="modal-anchor md track"
+                           data-toggle="modal"
+                           data-target="#mapsHelpModal"><i class="fas fa-question-circle"></i></a>
+                        <a class="closePanel"
+                           href="#"> <i class="fas fa-times"></i></a>
+                    </span>
                 </div>
                 <!-- <button id="mapsListToggle" data-status="expand">Expand All</button> -->
                 <div id="mapsList"></div>
@@ -478,10 +483,26 @@
     <div class="modal fade"
          id="termsModal"
          role="dialog"></div>
-        <!--legend help modal-->
-        <div class="modal fade"
-             id="legendHelpModal"
-             role="dialog"></div>
+    <!--legend help modal-->
+    <div class="modal fade"
+         id="legendHelpModal"
+         role="dialog"></div>
+    <!--maps help modal-->
+    <div class="modal fade"
+         id="mapsHelpModal"
+         role="dialog"></div>
+    <!--lreports help modal-->
+    <div class="modal fade"
+         id="reportsHelpModal"
+         role="dialog"></div>
+    <!--layers help modal-->
+    <div class="modal fade"
+         id="layersHelpModal"
+         role="dialog"></div>
+    <!--about help modal-->
+    <div class="modal fade"
+         id="aboutHelpModal"
+         role="dialog"></div>
 
     <!-- *** JavaScript *** -->
     <!-- =================================================================================================== -->

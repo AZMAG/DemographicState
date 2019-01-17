@@ -92,6 +92,11 @@ span {
     cursor: pointer;
     text-decoration: none;
 }
+.panelHeaderIcons {
+    display: inline;
+    float: right;
+    padding: 13px;
+}
 
 /* ---------------------------------------------------
     SIDEBAR STYLE
@@ -904,8 +909,8 @@ label:hover,
 
 .closePanel {
     padding: 5px;
-    float: right;
-    margin-right: 5px;
+    /* float: right;
+    margin-right: 5px; */
 }
 
 .esri-icon {
@@ -1060,15 +1065,7 @@ hr.pop {
     /* not necessary but imo important for user */
     cursor: move;
     display: initial;
-    background-color: #2baab1;
-}
-
-/* .modal-dialog {
-    margin-right: 0;
-    margin-left: 0;
-} */
-.btn {
-    background: #adb8c0;
+    background-color: #c1c1c1;
 }
 
 .myHiddenClass {
