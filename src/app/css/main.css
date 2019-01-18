@@ -80,11 +80,13 @@ span {
 .contact a {
     text-decoration: none;
 }
+
 .contacts {
     font-size: 12px;
     text-decoration: none;
     color: #7a7a7a;
 }
+
 .contacts .link {
     text-decoration: none;
 }
@@ -93,6 +95,7 @@ span {
     cursor: pointer;
     text-decoration: none;
 }
+
 .panelHeaderIcons {
     display: inline;
     float: right;
@@ -549,7 +552,8 @@ a[aria-expanded='true'] {
 
 .rep-pic {
     border-radius: 50%;
-    height: 80px;
+    /* height: 80px; */
+    width: 50px;
 }
 
 .popover-title {
@@ -1366,6 +1370,7 @@ hr.pop {
     float: right;
     margin-top: 17px !important;
 }
+
 #legendGrip .fas {
     padding: 0 5px 0 5px;
 }
