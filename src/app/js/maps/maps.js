@@ -4,12 +4,13 @@ require([
     "esri/views/MapView",
     "esri/layers/FeatureLayer",
     "esri/layers/MapImageLayer",
+    "esri/layers/TileLayer",
     "esri/geometry/Extent",
     "esri/layers/GraphicsLayer",
     "esri/PopupTemplate",
     "dojo/topic",
     "dojo/domReady!"
-], function (Map, MapView, FeatureLayer, MapImageLayer, Extent, GraphicsLayer, PopupTemplate, tp) {
+], function (Map, MapView, FeatureLayer, MapImageLayer, TileLayer, Extent, GraphicsLayer, PopupTemplate, tp) {
     app.map = new Map({
         basemap: "gray"
     });
@@ -104,6 +105,17 @@ require([
                         id: layer.ACSIndex,
                         opacity: 1
                     }]
+                });
+            } else if (layer.type === "tile") {
+                if (layer.url) {
+                    url = layer.url;
+                }
+                var layerToAdd = new TileLayer({
+                    url: url,
+                    id: layer.id,
+                    opacity: layer.opacity || 1,
+                    title: layer.title,
+                    visible: layer.visible
                 });
             }
             if (layerToAdd) {
