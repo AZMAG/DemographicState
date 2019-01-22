@@ -68,6 +68,12 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function (tp, QueryTask) {
         }
     });
 
+    function resizeCharts() {
+        $('.chartTarget').each(function (i, val) {
+            $(val).data('kendoChart').resize();
+        })
+    }
+
     function GetTitle(d) {
         //Always use ACS 2017 data to pull the name.  This field isn't always reliable in census 2010
         if (d.acsData && d.acsData.features && d.acsData.features[0].attributes) {
@@ -98,15 +104,10 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function (tp, QueryTask) {
         let features = res.features;
         let feature = features[0];
         let attr = feature.attributes;
-
-        // let type = $reportArea.find('.dataSrcToggle.active').data('val');
-
         let title = GetTitle(data);
 
         $reportArea.find('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-            $('.chartTarget').each(function (i, val) {
-                $(val).data('kendoChart').resize();
-            })
+            resizeCharts();
         });
 
         let $header = $('#summaryReportHeader');
@@ -227,6 +228,17 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function (tp, QueryTask) {
             $('#title6Area').hide();
         }
         $('#summaryReport').show();
+    }
+    tp.subscribe('report-charts-created', refreshCharts);
+
+    function refreshCharts() {
+        let activeTab = $reportArea.find(".nav-link.active").text();
+
+        if (activeTab === 'Charts') {
+            $('.chartTarget').each(function (i, val) {
+                $(val).data('kendoChart').resize();
+            })
+        }
     }
 
     function SetupTitle6Grid(attr) {

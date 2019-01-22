@@ -103,5 +103,11 @@ require(['dojo/topic'], function (tp) {
                 type: data[0].chartType
             })
         })
+
+        // TODO: Refactor this at some point.
+        // This doesn't seem like an appropriate way to handle the resize event.
+        setTimeout(() => {
+            tp.publish('report-charts-created');
+        }, 10);
     }
 });
