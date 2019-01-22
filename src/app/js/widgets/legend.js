@@ -9,8 +9,6 @@ require(['esri/widgets/Legend', 'dojo/topic', 'dojo/domReady!'], function (
         let legend = $('#legend');
         app.view.ui.add('legend', 'top-right');
 
-
-
         //Create Block Group legend separately
         //Have to do this otherwise it makes the block group legend go to the bottom when other items are checked
 
@@ -20,7 +18,7 @@ require(['esri/widgets/Legend', 'dojo/topic', 'dojo/domReady!'], function (
             view: app.view,
             container: 'legendDiv',
             layerInfos: [{
-                title: app.config.layerDef['blockGroups'].title,
+                title: '', //app.config.layerDef['blockGroups'].title,
                 layer: blockGroupsLayer
             }]
         });
@@ -34,6 +32,7 @@ require(['esri/widgets/Legend', 'dojo/topic', 'dojo/domReady!'], function (
 
         //Add Slider
         $('#legendDiv').append(`
+                <span class="legendSrc legal">${app.config.layerDef['blockGroups'].title}</span>
                 <div class="slidecontainer">
                     <span style="padding: 8px;">Transparency</span>
                     <input type="range" min="0" max="1" value="${initOpacity}" step=".05" class="round slider" id="slider">

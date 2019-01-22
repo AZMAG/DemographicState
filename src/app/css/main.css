@@ -725,6 +725,8 @@ label:hover,
     cursor: move;
 }
 
+
+
 #legendHeader span {
     margin: 15px;
     font-weight: bold;
@@ -1117,6 +1119,14 @@ hr.pop {
     cursor: move;
     display: initial;
     background-color: #c1c1c1;
+}
+
+.legendSrc {
+    margin-left: 10%;
+    margin-right: 10%;
+    font-weight: bold;
+    margin-bottom: 11px;
+    padding: 0px;
 }
 
 .myHiddenClass {
