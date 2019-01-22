@@ -44,7 +44,7 @@ app.config = {
     {
         legend: false,
         id: 'esriReference',
-        layerName: '',
+        layerName: 'streets',
         title: 'Streets',
         type: 'tile',
         opacity: 1,
