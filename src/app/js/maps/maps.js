@@ -4,11 +4,13 @@ require([
     "esri/views/MapView",
     "esri/layers/FeatureLayer",
     "esri/layers/MapImageLayer",
+    "esri/layers/TileLayer",
+    "esri/geometry/Extent",
     "esri/layers/GraphicsLayer",
     "esri/PopupTemplate",
     "dojo/topic",
     "dojo/domReady!"
-], function (Map, MapView, FeatureLayer, MapImageLayer, GraphicsLayer, PopupTemplate, tp) {
+], function (Map, MapView, FeatureLayer, MapImageLayer, TileLayer, Extent, GraphicsLayer, PopupTemplate, tp) {
     app.map = new Map({
         basemap: "gray"
     });
@@ -104,6 +106,17 @@ require([
                         opacity: 1
                     }]
                 });
+            } else if (layer.type === "tile") {
+                if (layer.url) {
+                    url = layer.url;
+                }
+                var layerToAdd = new TileLayer({
+                    url: url,
+                    id: layer.id,
+                    opacity: layer.opacity || 1,
+                    title: layer.title,
+                    visible: layer.visible
+                });
             }
             if (layerToAdd) {
                 layersToAdd.push(layerToAdd);
@@ -136,6 +149,37 @@ require([
                     once = true;
                 }
             });
+        });
+
+        var maxExtent = new Extent({
+            xmax: -12014782.270383481,
+            xmin: -12867208.009819541,
+            ymax: 4497591.978076571,
+            ymin: 3571786.6914867624,
+            spatialReference: 102100
+        });
+
+        app.view.watch('extent', function (extent) {
+            let currentCenter = extent.center;
+            if (!maxExtent.contains(currentCenter)) {
+                let newCenter = extent.center;
+                if (currentCenter.x < maxExtent.xmin) {
+                    newCenter.x = maxExtent.xmin;
+                }
+                if (currentCenter.x > maxExtent.xmax) {
+                    newCenter.x = maxExtent.xmax;
+                }
+                if (currentCenter.y < maxExtent.ymin) {
+                    newCenter.y = maxExtent.ymin;
+                }
+                if (currentCenter.y > maxExtent.ymax) {
+                    newCenter.y = maxExtent.ymax;
+                }
+
+                let newExtent = app.view.extent.clone();
+                newExtent.centerAt(newCenter);
+                app.view.extent = newExtent;
+            }
         });
     }
 });

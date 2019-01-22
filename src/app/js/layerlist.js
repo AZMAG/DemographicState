@@ -2,10 +2,11 @@ require(['dojo/topic'], function (tp) {
     tp.subscribe("panel-loaded", function (panel) {
         if (panel === "layers") {
             var $layerList = $("#layerList");
-            var legendLayers = app.config.layers.filter(conf => conf.legend && !conf.legend.group);
-            var arr = legendLayers.sort((a, b) => a.legend.sort - b.legend.sort);
-            for (var i = 0; i < arr.length; i++) {
-                var conf = arr[i];
+            var layers = app.config.layers.filter(conf => conf.showTOC);
+            // var arr = legendLayers.sort((a, b) => a.legend.sort - b.legend.sort);
+
+            for (var i = 0; i < layers.length; i++) {
+                var conf = layers[i];
 
                 if (conf.id !== "blockGroups") {
                     $layerList.append(getCheckBoxHTML(conf));

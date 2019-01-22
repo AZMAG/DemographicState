@@ -14,6 +14,7 @@ require([
             let legend = $('#legend');
             app.view.ui.add('legend', 'top-right');
 
+<<<<<<< HEAD
             //Create Block Group legend separately
             //Have to do this otherwise it makes the block group legend go to the bottom when other items are checked
 
@@ -27,6 +28,21 @@ require([
                     layer: blockGroupsLayer
                 }]
             });
+=======
+        //Create Block Group legend separately
+        //Have to do this otherwise it makes the block group legend go to the bottom when other items are checked
+
+        var blockGroupsLayer = app.map.findLayerById('blockGroups');
+
+        new Legend({
+            view: app.view,
+            container: 'legendDiv',
+            layerInfos: [{
+                title: '', //app.config.layerDef['blockGroups'].title,
+                layer: blockGroupsLayer
+            }]
+        });
+>>>>>>> f249cdb2e49271e18de370b90085f8dcf2c73ef9
 
             let initOpacity = .8;
 
@@ -35,8 +51,14 @@ require([
                 blockGroupsLayer.opacity = app.initConfig.transparency;
             }
 
+<<<<<<< HEAD
             //Add Slider
             $('#legendDiv').append(`
+=======
+        //Add Slider
+        $('#legendDiv').append(`
+                <span class="legendSrc legal">${app.config.layerDef['blockGroups'].title}</span>
+>>>>>>> f249cdb2e49271e18de370b90085f8dcf2c73ef9
                 <div class="slidecontainer">
                     <span style="padding: 8px;">Transparency</span>
                     <input type="range" min="0" max="1" value="${initOpacity}" step=".05" class="round slider" id="slider">
