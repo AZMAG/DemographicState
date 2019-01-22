@@ -1677,6 +1677,8 @@ https://cpratt.co/twitter-bootstrap-callout-css-styles/
 
 .bs-callout-primary h4 {
     color: #428bca;
+    font-size: 15px;
+    font-weight: bold;
 }
 
 .bs-callout-success {

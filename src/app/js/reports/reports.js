@@ -104,9 +104,9 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function (tp, QueryTask) {
         let title = GetTitle(data);
 
         $reportArea.find('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-            $('.chartsArea')
-                .data('kendoChart')
-                .resize();
+            $('.chartTarget').each(function (i, val) {
+                $(val).data('kendoChart').resize();
+            })
         });
 
         let $header = $('#summaryReportHeader');
@@ -115,6 +115,7 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function (tp, QueryTask) {
             <button title="Export report to PDF" data-placement="right" class="btn btn-sm btnExportPDF"><i class="far fa-file-pdf"></i></button>
         `);
         $header.css('display', 'Flex');
+
         let $btnExportPDF = $header.find('.btnExportPDF');
 
         if (title.indexOf('Block Groups') > -1) {
@@ -139,14 +140,14 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function (tp, QueryTask) {
             // app.AddHighlightGraphic(feature);
         }
 
-        var valsDef = {};
-        var vals = [];
-        var duplicates = {};
+        let valsDef = {};
+        let vals = [];
+        let duplicates = {};
 
         for (let i = 0; i < fields.length; i++) {
             const fld = fields[i];
-            var oldFieldName = fld.fieldName;
-            var val = Number(attr[fld.fieldName]);
+            let oldFieldName = fld.fieldName;
+            let val = Number(attr[fld.fieldName]);
             if (fld.canSum === true || features.length === 1) {
                 if (valsDef[fld.fieldName]) {
                     if (duplicates[fld.fieldName]) {
