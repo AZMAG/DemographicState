@@ -1,10 +1,10 @@
-require(['dojo/topic', 'dojo/domReady!'], function(tp) {
+require(['dojo/topic', 'dojo/domReady!'], function (tp) {
     let $mapsList = $('#mapsList');
     let $colorRamp = $('#colorRamp');
     let $classBreaksCount = $('#classBreaksCount');
     let $classType = $('#classType');
 
-    app.GetColorRamp = function(type, rampKey, numBreaks) {
+    app.GetColorRamp = function (type, rampKey, numBreaks) {
         const ramps = app.GetRampsByNumAndType(type, numBreaks);
         let ramp = ramps[rampKey];
         let rtnRamp = [];
@@ -19,16 +19,16 @@ require(['dojo/topic', 'dojo/domReady!'], function(tp) {
         return rtnRamp;
     };
 
-    app.GetRampsByNumAndType = function(type, numBreaks) {
+    app.GetRampsByNumAndType = function (type, numBreaks) {
         let classBreakSet = app.colorRampConfig[type]['ClassBreakSets'][numBreaks];
         let allRamps = app.colorRampConfig[type]['ColorRamps'];
         let returnRamps = {};
 
-        Object.keys(allRamps).forEach(function(rampKey) {
+        Object.keys(allRamps).forEach(function (rampKey) {
             let ramp = allRamps[rampKey];
             let filteredRamp = [];
 
-            Object.keys(ramp).forEach(function(letterKey) {
+            Object.keys(ramp).forEach(function (letterKey) {
                 if (classBreakSet.indexOf(letterKey) > -1) {
                     filteredRamp.push(ramp[letterKey]);
                 }
@@ -38,7 +38,7 @@ require(['dojo/topic', 'dojo/domReady!'], function(tp) {
         return returnRamps;
     };
 
-    app.ColorRampToHTML = function(ramp, rampKey, rampType) {
+    app.ColorRampToHTML = function (ramp, rampKey, rampType) {
         let html = `<div data-type="${rampType}" data-id="${rampKey}" class="cRamp">`;
         for (let i = 0; i < ramp.length; i++) {
             let clr = ramp[i];
@@ -51,7 +51,7 @@ require(['dojo/topic', 'dojo/domReady!'], function(tp) {
         return (html += '</div>');
     };
 
-    app.GetActiveMapData = function() {
+    app.GetActiveMapData = function () {
         //Gets active map item
         let $activeItem = $mapsList.find('.activeMapItem');
         if ($activeItem) {
@@ -60,7 +60,7 @@ require(['dojo/topic', 'dojo/domReady!'], function(tp) {
         }
     };
 
-    app.GetCurrentMapsParams = function() {
+    app.GetCurrentMapsParams = function () {
         let conf = app.GetActiveMapData();
         let cbrCount = $classBreaksCount.val();
         let classType = $classType.val();
@@ -75,7 +75,7 @@ require(['dojo/topic', 'dojo/domReady!'], function(tp) {
         let colorRamp = app.GetColorRamp(type, rampKey, cbrCount);
 
         if (classType === 'Custom') {
-            cbInfos = app.GetCustomBreaks();
+            cbInfos = app.GetCustomBreaks(colorRamp);
         } else {
             cbInfos = app.GetCurrentBreaks(breaks, colorRamp);
         }
@@ -91,15 +91,15 @@ require(['dojo/topic', 'dojo/domReady!'], function(tp) {
         };
     };
 
-    app.pctLabel = function(val) {
+    app.pctLabel = function (val) {
         return (Math.round(val * 1000) / 10).toLocaleString('en-US');
     };
 
-    app.numLabel = function(val) {
+    app.numLabel = function (val) {
         return Math.round(val).toLocaleString('en-US');
     };
 
-    app.GetCurrentBreaks = function(breaks, colorRamp) {
+    app.GetCurrentBreaks = function (breaks, colorRamp) {
         const rtnData = [];
         let conf = app.GetActiveMapData();
         for (let i = 0; i < breaks.length - 1; i++) {

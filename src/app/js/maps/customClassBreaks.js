@@ -130,7 +130,6 @@ require([
             function UpdateRangeSliders(e) {
 
                 let resize = e.resizing || e.sender.resizing;
-                console.log(e);
 
                 if (resize && resize.previousPane && resize.nextPane) {
 
@@ -376,10 +375,14 @@ require([
 
 
 
-            app.GetCustomBreaks = function () {
+            app.GetCustomBreaks = function (colorRamp) {
+                // console.log(colorRamp);
                 let classBreaks = [];
-                $classBreakSliders.find(".cbPane").each(function (i, val) {
+                let $panes = $classBreakSliders.find(".cbPane");
+
+                $panes.each(function (i, val) {
                     let dataInfo = $(val).data('info');
+                    dataInfo.symbol.color = colorRamp[$panes.length - 1 - i];
                     classBreaks.push(dataInfo);
                 });
                 return classBreaks.reverse();
