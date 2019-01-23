@@ -184,26 +184,33 @@ require(['dojo/topic', 'esri/views/2d/draw/Draw', 'esri/Graphic', 'esri/geometry
 
         function ProcessSelection(gfx) {
             app.GetData(app.config.layerDef['blockGroups'], null, gfx.geometry).then(function (data) {
-                var acsdata = app.summarizeFeatures(data.acsData);
-                var censusdata = app.summarizeFeatures(data.censusData);
+                var acsData = app.summarizeFeatures(data.acsData);
+                var censusData = app.summarizeFeatures(data.censusData);
 
-                app.selectedReport.acsData = {
-                    features: [{
-                        attributes: acsdata,
-                        count: data.acsData.features.length
-                    }]
-                };
+                if (data.acsData.features.length === 0) {
+                    app.clearDrawnGraphics();
+                    // TODO: This should be prettied up at some point.
+                    // Just using the basic alert function isn't pretty enough.
+                    alert("Your selection did not return any results.  Please try again.")
+                } else {
+                    app.selectedReport.acsData = {
+                        features: [{
+                            attributes: acsData,
+                            count: data.acsData.features.length
+                        }]
+                    };
 
-                app.selectedReport.censusData = {
-                    features: [{
-                        attributes: censusdata,
-                        count: data.acsData.features.length
-                    }]
-                };
-                tp.publish('open-report-window', app.selectedReport, 'acs');
-                $customGeographyReports.hide();
-                app.AddHighlightGraphics(data.acsData.features, $useZoom.is(':checked'));
-                $('.reportFormArea').hide();
+                    app.selectedReport.censusData = {
+                        features: [{
+                            attributes: censusData,
+                            count: data.acsData.features.length
+                        }]
+                    };
+                    tp.publish('open-report-window', app.selectedReport, 'acs');
+                    $customGeographyReports.hide();
+                    app.AddHighlightGraphics(data.acsData.features, $useZoom.is(':checked'));
+                    $('.reportFormArea').hide();
+                }
             });
         }
     });
