@@ -14,20 +14,21 @@
 
 html {
     height: 100%;
+    /* font-size: 62.5%; */
 }
 
 body {
     font-family: 'Poppins', sans-serif;
+    /* font-size: 1.8em; */
     background: #fafafa;
     height: 100%;
     overflow: hidden !important;
 }
 
 p {
-    font-family: 'Poppins', sans-serif;
     font-size: 1.1em;
     font-weight: 300;
-    line-height: 1.7em;
+    line-height: 1.5em;
     color: #4c4c4c;
 }
 
