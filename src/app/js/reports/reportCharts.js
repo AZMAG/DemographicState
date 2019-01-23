@@ -1,5 +1,6 @@
-require(['dojo/topic'], function(tp) {
+require(['dojo/topic'], function (tp) {
     tp.subscribe('create-charts', CreateCharts);
+
     function CreateChart(ops) {
         if (ops.data.length) {
             return ops.element
@@ -14,14 +15,12 @@ require(['dojo/topic'], function(tp) {
                             color: 'black'
                         }
                     },
-                    series: [
-                        {
-                            field: 'fieldValue',
-                            categoryField: 'fieldAlias',
-                            type: ops.type,
-                            gap: 0.5
-                        }
-                    ],
+                    series: [{
+                        field: 'fieldValue',
+                        categoryField: 'fieldAlias',
+                        type: ops.type,
+                        gap: 0.5
+                    }],
                     seriesDefaults: {
                         labels: {
                             position: 'outsideEnd',
@@ -34,8 +33,7 @@ require(['dojo/topic'], function(tp) {
                         tooltip: {
                             visible: true,
                             // color: 'white',
-                            template:
-                                '#= app.chartTooltip(value, category) # <br> #= kendo.format("{0:P}", percentage) #'
+                            template: '#= app.chartTooltip(value, category) # <br> #= kendo.format("{0:P}", percentage) #'
                         }
                     },
                     chartArea: {
@@ -74,69 +72,42 @@ require(['dojo/topic'], function(tp) {
 
     function CreateCharts(data, target) {
         //Filter list
-        var categories = {};
-
-        var $target = $('#' + target);
-
-        var $chartsList = $target.find('#chartsList');
-        var $chartsType = $target.find('#chartsType');
-        var $chartsArea = $target.find('.chartsArea');
-
+        let categories = {};
+        let $target = $('#' + target);
+        let $chartsArea = $target.find('.chartsArea');
         $chartsArea.html('');
-        $chartsList.html('');
 
-        data.forEach(function(row) {
+        data.forEach(function (row) {
             if (row.chartCategory) {
                 if (!categories[row.chartCategory]) {
-                    categories[row.chartCategory] = {};
+                    categories[row.chartCategory] = [];
                 }
-                if (categories[row.chartCategory]['data']) {
-                    categories[row.chartCategory]['data'].push(row);
-                } else {
-                    categories[row.chartCategory]['data'] = [row];
-                    // $chartsList.append(`<button type="button" class="btn btn-secondary">${row.chartCategory}</button><br>`);
-                    $chartsList.append(`<option>${row.chartCategory}</option>`);
-                }
+                categories[row.chartCategory].push(row);
             }
         });
 
-        $chartsList.off('change').on('change', ChartOptionChanged);
-        $chartsType.off('change').on('change', ChartOptionChanged);
+        Object.keys(categories).forEach(function (category) {
+            let data = categories[category];
+            $chartsArea.append(`
+                    <div class="bs-callout bs-callout-primary">
+                        <h4>${category}</h4>
+                    </div>
+                    <div class="chartTarget" data-id="${category}"></div>
+                    <hr>
+            `).get(0);
 
-        function ChartOptionChanged() {
-            ClearCurrentChart();
-            let ops = GetChartOptions();
-            CreateChart(ops);
-        }
-
-        function ClearCurrentChart() {
-            var chart = $chartsArea.data('kendoChart');
-            if (chart !== null && chart !== undefined) {
-                chart.destroy();
-                chart.element.html('');
-            }
-        }
-
-        function GetChartOptions() {
-            let category = $chartsList.find(':selected').text();
-            let chartData = categories[category];
-
-            return {
-                element: $chartsArea,
+            CreateChart({
+                element: $chartsArea.find(`.chartTarget[data-id="${category}"]`),
                 category: category,
-                data: chartData.data,
-                type: chartData.data[0].chartType
-            };
-        }
+                data: data,
+                type: data[0].chartType
+            })
+        })
 
-        $chartsList
-            .find('option')
-            .first()
-            .prop('selected', 'selected');
-
-        $chartsList
-            .find('option')
-            .first()
-            .change();
+        // TODO: Refactor this at some point.
+        // This doesn't seem like an appropriate way to handle the resize event.
+        setTimeout(() => {
+            tp.publish('report-charts-created');
+        }, 10);
     }
 });

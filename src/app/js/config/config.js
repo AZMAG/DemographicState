@@ -51,6 +51,7 @@ app.config = {
             visible: true,
             showReport: false,
             showTOC: true,
+            definition: 'The streets layer adds a transportation layer from ESRI for reference.',
             url: 'http://server.arcgisonline.com/arcgis/rest/services/Reference/World_Transportation/MapServer'
         }, {
             legend: true,

@@ -14,11 +14,9 @@ require(['dojo/topic', 'dojo/domReady!'], function (tp) {
     });
 
     function UpdateMapRenderer() {
+
         let data = app.GetCurrentMapsParams();
 
-        // if (customBreaks && customBreaks.length) {
-        //     data.cbInfos = customBreaks;
-        // }
         //Construct renderer object
         let renderer = {
             type: 'class-breaks',
