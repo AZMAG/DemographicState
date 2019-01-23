@@ -30,9 +30,7 @@ require([
             dockEnabled: false,
             collapseEnabled: false,
             dockOptions: {
-                // Disables the dock button from the popup
                 buttonEnabled: false,
-                // Ignore the default sizes that trigger responsive docking
                 breakpoint: false,
             }
         }
@@ -74,13 +72,6 @@ require([
                     popupTemplate: {
                         title: layer.title + '<div style="display:none">{*}</div>',
                         content: app.PopupFormat,
-                        // function () {
-                        //     return `
-                        //     {NAME:app.PopupFormat}
-                        //     <div class="googleCivicAPITarget"></div>
-                        //     `;
-
-                        // },
                         actions: [{
                             title: "Open Report",
                             id: "open-report",
