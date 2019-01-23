@@ -28,6 +28,7 @@ require([
         },
         popup: {
             dockEnabled: false,
+            collapseEnabled: false,
             dockOptions: {
                 // Disables the dock button from the popup
                 buttonEnabled: false,

@@ -103,5 +103,18 @@ require(['dojo/topic', 'dojo/domReady!'], function (tp) {
         if (app.initConfig && app.initConfig.panel) {
             TogglePanel(app.initConfig.panel);
         }
+
+        $(window).resize(function () {
+            $('#legend').css({
+                left: '',
+                top: ''
+            });
+            if (window.outerWidth < 768 && $("#content").is(":visible") == true) {
+                $("#viewDiv").css("visibility", "visible");
+                $("#container").css("flex", "none");
+            } else if (window.outerWidth > 768 && $("#content").is(":visible") == true) {
+                $("#container").css("flex", 1);
+            }
+        });
     })
 });
