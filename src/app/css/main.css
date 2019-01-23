@@ -868,6 +868,11 @@ label:hover,
 
 .esri-legend__layer {
     order: 1;
+    width: 100%;
+}
+
+#layerLegend .esri-legend__layer {
+    order: 1;
     width: 20%;
 }
 

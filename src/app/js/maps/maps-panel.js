@@ -11,7 +11,7 @@ require(['dojo/topic', 'dojo/domReady!'], function (tp) {
 
     //This is the function that helps generate the maps html.
     //It is called recursively, so all future levels of categories will work correctly
-    function GetMapsHTML(items) {
+    function GetMapsHTML(items, cat) {
         let rtnHTML = '';
         for (let i = 0; i < items.length; i++) {
             const conf = items[i];
@@ -21,14 +21,10 @@ require(['dojo/topic', 'dojo/domReady!'], function (tp) {
                             <span class="expandBtn"><i class="fas fa-caret-right"></i></span>
                             <span>${conf.Name}</span>
                         </div>
-                        <div class="mapSubItemList" style="display:none;">${GetMapsHTML(
-                            conf.items
-                        )}</div>
+                        <div class="mapSubItemList" style="display:none;">${GetMapsHTML(conf.items, conf)}</div>
                         `;
             } else {
-                rtnHTML += `<div class="mapItem" data-lookup-id="${counter}">${
-                    conf.Name
-                }</div>`;
+                rtnHTML += `<div class="mapItem" data-category="${cat.ShortName}" data-lookup-id="${counter}">${conf.Name}</div>`;
                 configLookup.push(conf);
                 counter++;
             }
@@ -44,13 +40,15 @@ require(['dojo/topic', 'dojo/domReady!'], function (tp) {
         $mapsList.append(GetMapsHTML(app.mapsConfig));
 
         let $initMap = null;
-
         //Attach Data using jquery.
         //Seems like this could be included in the function
         //above somehow to prevent the second iteration of all the map items.
         $mapsList.find('.mapItem').each(function (i, item) {
             const lookupId = $(item).data('lookup-id');
+            const category = $(item).data('category');
             const data = configLookup[lookupId];
+            data.category = category;
+
             $(item).data('mapsConfig', data);
 
             if (app.initConfig && app.initConfig.mapData) {

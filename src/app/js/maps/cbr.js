@@ -24,7 +24,7 @@ require(['dojo/topic', 'dojo/domReady!'], function (tp) {
             normalizationField: data.conf.NormalizeField,
             classBreakInfos: data.cbInfos,
             legendOptions: {
-                title: data.conf.ShortName
+                title: `${data.conf.category}  -  ${data.conf.Name}`
             },
             defaultLabel: 'No Data',
             defaultSymbol: {

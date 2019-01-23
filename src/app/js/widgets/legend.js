@@ -16,7 +16,7 @@ require(['esri/widgets/Legend', 'dojo/topic', 'dojo/domReady!'], function (
 
         new Legend({
             view: app.view,
-            container: 'legendDiv',
+            container: 'bgLegend',
             layerInfos: [{
                 title: '', //app.config.layerDef['blockGroups'].title,
                 layer: blockGroupsLayer
@@ -31,7 +31,7 @@ require(['esri/widgets/Legend', 'dojo/topic', 'dojo/domReady!'], function (
         }
 
         //Add Slider
-        $('#legendDiv').append(`
+        $('#bgLegend').append(`
                 <span class="legendSrc legal">${app.config.layerDef['blockGroups'].title}</span>
                 <div class="slidecontainer">
                     <span style="padding: 8px;">Transparency</span>
@@ -61,7 +61,7 @@ require(['esri/widgets/Legend', 'dojo/topic', 'dojo/domReady!'], function (
 
         new Legend({
             view: app.view,
-            container: 'legendDiv',
+            container: 'layerLegend',
             layerInfos: layerInfos
         });
 
