@@ -295,6 +295,10 @@ a.article:hover,
     justify-content: space-between;
 }
 
+#layerLegend {
+    max-height: 30vh;
+}
+
 #layerLegend .esri-legend__service:first-of-type {
     padding-top: 10px;
     border-top: 1px solid rgba(0, 0, 0, 0.1);

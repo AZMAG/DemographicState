@@ -197,12 +197,16 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function (tp, QueryTask) {
             });
         }
 
+        function GetLegendStatus() {
+            return !$("#legendDiv").is(":hidden");
+        }
+
         function GetShareObject() {
             let mapData = app.GetCurrentMapsParams();
             let exportObj = {
                 extent: GetRoundedExtent(),
                 panel: GetActivePanel(),
-                legend: true,
+                legend: GetLegendStatus(),
                 mapData: {
                     classType: mapData.classType,
                     rampKey: mapData.rampKey,
