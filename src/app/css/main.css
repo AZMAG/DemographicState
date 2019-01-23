@@ -295,7 +295,7 @@ a.article:hover,
     justify-content: space-between;
 }
 
-.esri-legend__service:nth-of-type(3) {
+#layerLegend .esri-legend__service:first-of-type {
     padding-top: 10px;
     border-top: 1px solid rgba(0, 0, 0, 0.1);
 }
