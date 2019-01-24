@@ -7,10 +7,11 @@ require([
 ], function (
     Search, Locator, Map, MapView, tp
 ) {
-    tp.subscribe("map-loaded", function () {
+    tp.subscribe("widget-basemapToggle-loaded", function () {
         var search = new Search({
             view: app.view
         });
         app.view.ui.add(search, "bottom-right");
+        tp.publish('widget-search-loaded');
     })
 })

@@ -4,7 +4,7 @@ require([
         'dojo/domReady!'
     ],
     function (BasemapToggleViewModel, tp) {
-        tp.subscribe("map-loaded", function () {
+        tp.subscribe("widget-locate-loaded", function () {
 
             //Basemap
             const basemapId = "basemapToggle";
@@ -37,5 +37,6 @@ require([
                     ToggleBasemap();
                 }
             }
+            tp.publish('widget-basemapToggle-loaded');
         })
     })

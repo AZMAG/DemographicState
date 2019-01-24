@@ -4,7 +4,7 @@ require([
         'dojo/domReady!'
     ],
     function (LocateViewModel, tp) {
-        tp.subscribe("map-loaded", function () {
+        tp.subscribe("widget-home-loaded", function () {
             //Locate
             const locateId = "locateWidget";
             let locateVM = new LocateViewModel({
@@ -20,5 +20,7 @@ require([
                     // <!-- endcomments -->
                 });
             });
+
+            tp.publish('widget-locate-loaded');
         })
     })

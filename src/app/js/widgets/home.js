@@ -4,7 +4,7 @@ require([
         'dojo/domReady!'
     ],
     function (HomeViewModel, tp) {
-        tp.subscribe("map-loaded", function () {
+        tp.subscribe("widget-zoom-loaded", function () {
             const homeId = "homeWidget";
             let homeVM = new HomeViewModel({
                 view: app.view
@@ -15,5 +15,6 @@ require([
             $("#" + homeId).click(function () {
                 homeVM.go();
             });
+            tp.publish('widget-home-loaded');
         })
     })
