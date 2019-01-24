@@ -27,8 +27,7 @@ require([
             tp.publish("colorRamp-Changed");
         });
 
-        function UpdateColorRampControl() {
-            let data = app.GetCurrentMapsParams();
+        function UpdateColorRampControl(data) {
             $colorRamp.html(app.ColorRampToHTML(data.colorRamp, data.rampKey, data.type));
         }
 

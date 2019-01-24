@@ -1,8 +1,9 @@
-require(['dojo/topic', 'dojo/domReady!'], function (tp) {
+require(['dojo/topic', 'esri/tasks/QueryTask', 'dojo/domReady!'], function (tp, QueryTask) {
     let $mapsList = $('#mapsList');
     let $colorRamp = $('#colorRamp');
     let $classBreaksCount = $('#classBreaksCount');
     let $classType = $('#classType');
+    let $dynamicCBRCheckbox = $("#dynamicCBRCheckbox");
 
     app.GetColorRamp = function (type, rampKey, numBreaks) {
         const ramps = app.GetRampsByNumAndType(type, numBreaks);
@@ -60,11 +61,55 @@ require(['dojo/topic', 'dojo/domReady!'], function (tp) {
         }
     };
 
-    app.GetCurrentMapsParams = function () {
+    async function GetDynamicClassBreaks(cbrCount, classType, conf) {
+        let q = {
+            returnGeometry: false,
+            outFields: conf.NormalizeField ? [conf.FieldName, conf.NormalizeField] : [conf.FieldName],
+            where: `${conf.FieldName} IS NOT NULL`,
+            geometry: app.view.extent,
+            outSpatialReference: 102100,
+            maxAllowableOffset: .1
+        };
+
+        let qt = new QueryTask({
+            url: app.config.mainUrl + '/0'
+        });
+
+        return qt.execute(q).then(function (res) {
+            let arr = [];
+            res.features.forEach(feature => {
+                if (conf.NormalizeField) {
+                    arr.push(feature.attributes[conf.FieldName] / feature.attributes[conf.NormalizeField] || 0);
+                } else {
+                    arr.push(feature.attributes[conf.FieldName]);
+                }
+            });
+
+            let series = new geostats();
+            series.setSerie(arr);
+            let breakValues = [];
+
+            if (classType === "Jenks") {
+                breakValues = series.getClassJenks(cbrCount);
+            } else if (classType === "EqInterval") {
+                breakValues = series.getClassEqInterval(cbrCount);
+            } else if (classType === "Quantile") {
+                breakValues = series.getClassQuantile(cbrCount);
+            }
+            return breakValues;
+        })
+    }
+
+    app.GetCurrentMapsParams = async function () {
         let conf = app.GetActiveMapData();
         let cbrCount = $classBreaksCount.val();
         let classType = $classType.val();
         let breaks = conf.breaks[classType + cbrCount];
+
+        if ($dynamicCBRCheckbox.is(":checked") && classType !== Custom) {
+            breaks = await GetDynamicClassBreaks(cbrCount, classType, conf);
+        }
+
         let cbInfos = [];
 
         //Get color ramp info

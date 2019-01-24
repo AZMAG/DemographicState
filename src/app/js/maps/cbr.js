@@ -14,40 +14,38 @@ require(['dojo/topic', 'dojo/domReady!'], function (tp) {
     });
 
     function UpdateMapRenderer() {
-
-        let data = app.GetCurrentMapsParams();
-
-        //Construct renderer object
-        let renderer = {
-            type: 'class-breaks',
-            field: data.conf.FieldName,
-            normalizationField: data.conf.NormalizeField,
-            classBreakInfos: data.cbInfos,
-            legendOptions: {
-                title: `${data.conf.category}  -  ${data.conf.Name}`
-            },
-            defaultLabel: 'No Data',
-            defaultSymbol: {
-                type: 'simple-fill',
-                color: {
-                    r: '211',
-                    g: '211',
-                    b: '211'
+        app.GetCurrentMapsParams().then(function (data) {
+            //Construct renderer object
+            let renderer = {
+                type: 'class-breaks',
+                field: data.conf.FieldName,
+                normalizationField: data.conf.NormalizeField,
+                classBreakInfos: data.cbInfos,
+                legendOptions: {
+                    title: `${data.conf.category}  -  ${data.conf.Name}`
                 },
-                outline: {
-                    color: [0, 0, 0, 0.1],
-                    width: 0.5
+                defaultLabel: 'No Data',
+                defaultSymbol: {
+                    type: 'simple-fill',
+                    color: {
+                        r: '211',
+                        g: '211',
+                        b: '211'
+                    },
+                    outline: {
+                        color: [0, 0, 0, 0.1],
+                        width: 0.5
+                    }
                 }
-            }
-        };
+            };
 
-        if (renderer) {
-            //Update the layer with the new renderer.
-            let layer = app.map.findLayerById('blockGroups').findSublayerById(0);
-            layer.renderer = renderer;
-            tp.publish('BlockGroupRendererUpdated', renderer);
-        }
-        // }
+            if (renderer) {
+                //Update the layer with the new renderer.
+                let layer = app.map.findLayerById('blockGroups').findSublayerById(0);
+                layer.renderer = renderer;
+                tp.publish('BlockGroupRendererUpdated', data);
+            }
+        })
     }
 
     // Subscribe to other change events
@@ -57,4 +55,18 @@ require(['dojo/topic', 'dojo/domReady!'], function (tp) {
     tp.subscribe('map-selected', UpdateMapRenderer);
     tp.subscribe('customClassBreaks-selected', UpdateMapRenderer);
     tp.subscribe('classBreaksCount-change', UpdateMapRenderer);
+
+    tp.subscribe('layers-added', function () {
+        let $dynamicCBRCheckbox = $("#dynamicCBRCheckbox");
+        app.view.watch("stationary", function (stationary) {
+            if (stationary) {
+                if ($dynamicCBRCheckbox.is(':checked')) {
+                    UpdateMapRenderer();
+                }
+            }
+        })
+        setTimeout(() => {
+            UpdateMapRenderer();
+        }, 50);
+    })
 });

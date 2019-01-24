@@ -63,8 +63,6 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function (tp, QueryTask) {
             `
             );
 
-
-
             $('body').on('click', '#shareLinkCopy', function () {
                 $("#bitlyUrlInput").select();
                 document.execCommand("copy");
@@ -177,18 +175,20 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function (tp, QueryTask) {
             return layer.opacity;
         }
 
-        function GetBigShareLink() {
-            let queryString = '?init=' + encodeURIComponent(JSON.stringify(GetShareObject()));
+        async function GetBigShareLink() {
+            let shareObj = await GetShareObject();
+            let queryString = '?init=' + encodeURIComponent(JSON.stringify(shareObj));
             return location.origin + location.pathname + queryString;
         }
 
-        function GetSmallShareLink() {
-            return new Promise(function (resolve, reject) {
+        async function GetSmallShareLink() {
+            return new Promise(async function (resolve, reject) {
+                let longUrl = await GetBigShareLink();
                 $.getJSON("https://api-ssl.bitly.com/v3/shorten?callback=?", {
                         format: "json",
                         login: app.config.bitly.login,
                         apiKey: app.config.bitly.apiKey,
-                        longUrl: GetBigShareLink()
+                        longUrl: longUrl
                     },
                     function (res) {
                         resolve(res.data.url);
@@ -201,25 +201,26 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function (tp, QueryTask) {
             return !$("#legendDiv").is(":hidden");
         }
 
-        function GetShareObject() {
-            let mapData = app.GetCurrentMapsParams();
-            let exportObj = {
-                extent: GetRoundedExtent(),
-                panel: GetActivePanel(),
-                legend: GetLegendStatus(),
-                mapData: {
-                    classType: mapData.classType,
-                    rampKey: mapData.rampKey,
-                    type: mapData.type,
-                    FieldName: mapData.conf.FieldName,
-                    breaks: mapData.classType === 'Custom' ? mapData.cbInfos : []
-                },
-                basemap: app.map.basemap.id,
-                transparency: GetTransparency(),
-                visibleLayers: GetVisibleLayers(),
-                openReport: false
-            }
-            return exportObj;
+        async function GetShareObject() {
+            return app.GetCurrentMapsParams().then(function (mapData) {
+                let exportObj = {
+                    extent: GetRoundedExtent(),
+                    panel: GetActivePanel(),
+                    legend: GetLegendStatus(),
+                    mapData: {
+                        classType: mapData.classType,
+                        rampKey: mapData.rampKey,
+                        type: mapData.type,
+                        FieldName: mapData.conf.FieldName,
+                        breaks: mapData.classType === 'Custom' ? mapData.cbInfos : []
+                    },
+                    basemap: app.map.basemap.id,
+                    transparency: GetTransparency(),
+                    visibleLayers: GetVisibleLayers(),
+                    openReport: false
+                }
+                return exportObj;
+            })
         }
     })
 });

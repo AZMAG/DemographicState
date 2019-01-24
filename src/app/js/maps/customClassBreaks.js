@@ -40,90 +40,92 @@ require([
                 const rend = lyr.renderer;
                 let infos = custom || rend.classBreakInfos;
 
-                let data = app.GetCurrentMapsParams();
-                let sliderHeight = $classBreakSliders.height() - (infos.length - 1) * 7;
-                // maxVal = infos[infos.length - 1].maxValue;
+                app.GetCurrentMapsParams().then(function (data) {
 
-                if (data.classType === 'Custom' && !custom) {
-                    let cbrCount = $classBreaksCount.val();
-                    let breaks = data.conf.breaks['Jenks' + cbrCount];
-                    infos = app.GetCurrentBreaks(breaks, data.colorRamp);
-                    maxVal = infos[infos.length - 1].maxValue;
-                }
+                    let sliderHeight = $classBreakSliders.height() - (infos.length - 1) * 7;
+                    // maxVal = infos[infos.length - 1].maxValue;
 
-                //Clear out old class break sliders
-                $classBreakSliders.html('');
-                $classBreakSliderTooltips.html('');
-
-                const panes = [];
-
-                for (let i = infos.length - 1; i >= 0; i--) {
-                    const info = infos[i];
-                    const clr = info.symbol.color;
-                    const pct = (info.maxValue - info.minValue) / maxVal;
-                    const paneSize = Math.floor(sliderHeight * pct);
-
-                    sliders.push({
-                        info: info,
-                        clr: clr,
-                        size: paneSize
-                    })
-
-                    let minLabel = app.numLabel(info.minValue);
-                    let maxLabel = app.numLabel(info.maxValue);
-
-                    if (info.label.includes("%")) {
-                        minLabel = `${app.pctLabel(info.minValue)}%`;
-                        maxLabel = `${app.pctLabel(info.maxValue)}%`;
+                    if (data.classType === 'Custom' && !custom) {
+                        let cbrCount = $classBreaksCount.val();
+                        let breaks = data.conf.breaks['Jenks' + cbrCount];
+                        infos = app.GetCurrentBreaks(breaks, data.colorRamp);
+                        maxVal = infos[infos.length - 1].maxValue;
                     }
 
-                    if (i === infos.length - 1) {
+                    //Clear out old class break sliders
+                    $classBreakSliders.html('');
+                    $classBreakSliderTooltips.html('');
+
+                    const panes = [];
+
+                    for (let i = infos.length - 1; i >= 0; i--) {
+                        const info = infos[i];
+                        const clr = info.symbol.color;
+                        const pct = (info.maxValue - info.minValue) / maxVal;
+                        const paneSize = Math.floor(sliderHeight * pct);
+
+                        sliders.push({
+                            info: info,
+                            clr: clr,
+                            size: paneSize
+                        })
+
+                        let minLabel = app.numLabel(info.minValue);
+                        let maxLabel = app.numLabel(info.maxValue);
+
+                        if (info.label.includes("%")) {
+                            minLabel = `${app.pctLabel(info.minValue)}%`;
+                            maxLabel = `${app.pctLabel(info.maxValue)}%`;
+                        }
+
+                        if (i === infos.length - 1) {
+                            $classBreakSliderTooltips.append(`
+                            <div data-value="${info.maxValue}" style="margin-top: 3px;" id="sliderTooltip${i+1}" class="sliderTooltip">${maxLabel}</div>
+                            `);
+                        }
+                        //Add Tooltip
                         $classBreakSliderTooltips.append(`
-                    <div data-value="${info.maxValue}" style="margin-top: 3px;" id="sliderTooltip${i+1}" class="sliderTooltip">${maxLabel}</div>
-                    `);
-                    }
-                    //Add Tooltip
-                    $classBreakSliderTooltips.append(`
-                    <div data-value="${info.minValue}" class="sliderTooltip" id="sliderTooltip${i}" style="margin-top: ${paneSize - 10}px">
-                        <span class="sliderTooltipInnerLabel">${minLabel}</span>
-                        <input style="display:none;" class="sliderTooltipInput k-textbox" >
-                    </div>
-                    `);
+                        <div data-value="${info.minValue}" class="sliderTooltip" id="sliderTooltip${i}" style="margin-top: ${paneSize - 10}px">
+                            <span class="sliderTooltipInnerLabel">${minLabel}</span>
+                            <input style="display:none;" class="sliderTooltipInput k-textbox" >
+                        </div>
+                        `);
 
-                    let showLabel = 'none';
-                    if (paneSize > minLabelSize) {
-                        showLabel = 'inline-block';
-                    }
+                        let showLabel = 'none';
+                        if (paneSize > minLabelSize) {
+                            showLabel = 'inline-block';
+                        }
 
-                    //Add pane
-                    $classBreakSliders.append(`
+                        //Add pane
+                        $classBreakSliders.append(`
                         <div class="cbPane" id="cbPane${i}" 
                         style="display: flex; background-color:rgba(${clr.r},${clr.g},${clr.b},${lyr.opacity});">
                         <div class="paneLabel" style="display: ${showLabel}; margin: auto; font-size: 10.5px;">${info.label}</div>
                         </div>
                     `)
 
-                    $classBreakSliders.find("#cbPane" + i).data("info", info);
+                        $classBreakSliders.find("#cbPane" + i).data("info", info);
 
-                    const newPane = {
-                        size: paneSize + "px",
-                        resizable: true,
-                        idx: i,
-                        scrollable: false
+                        const newPane = {
+                            size: paneSize + "px",
+                            resizable: true,
+                            idx: i,
+                            scrollable: false
+                        }
+                        panes.push(newPane);
                     }
-                    panes.push(newPane);
-                }
 
-                let splitter = $classBreakSliders.data("kendoSplitter");
-                if (splitter) {
-                    splitter.destroy();
-                }
+                    let splitter = $classBreakSliders.data("kendoSplitter");
+                    if (splitter) {
+                        splitter.destroy();
+                    }
 
-                $classBreakSliders.kendoSplitter({
-                    orientation: "vertical",
-                    panes: panes,
-                    resize: UpdateRangeSliders
-                });
+                    $classBreakSliders.kendoSplitter({
+                        orientation: "vertical",
+                        panes: panes,
+                        resize: UpdateRangeSliders
+                    });
+                })
             }
 
             //This really just updates the tooltips?

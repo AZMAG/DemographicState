@@ -782,6 +782,14 @@ label:hover,
     padding-left: 7px;
 }
 
+#dynamicCBRCheckbox {
+    margin-left: 5px;
+}
+
+#dynamicCBRLabel {
+    margin-left: 10px;
+}
+
 .compareHeader {
     white-space: normal !important;
     vertical-align: middle !important;
