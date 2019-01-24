@@ -12,7 +12,6 @@ function exportToExcel(params) {
     let sourceLabel = app.config.sourceLabel;
     let disclaimer = app.config.legalACSDisclaimer;
 
-    let colSpan = 4;
     let rowSpan = 11;
 
     grid.bind("excelExport", function (e) {
@@ -93,7 +92,7 @@ function exportToExcel(params) {
         let headerRow = {
             cells: [{
                 background: '#000',
-                colSpan: colSpan,
+                colSpan: columns.length,
                 color: '#fff',
                 rowSpan: 1,
                 fontSize: 14,
@@ -107,7 +106,7 @@ function exportToExcel(params) {
         let sourceRow = {
             cells: [{
                 background: '#000',
-                colSpan: colSpan,
+                colSpan: columns.length,
                 color: '#fff',
                 rowSpan: 1,
                 fontSize: 11,
@@ -120,7 +119,7 @@ function exportToExcel(params) {
         let footerRow = {
             cells: [{
                 background: '#d3d3d3',
-                colSpan: colSpan,
+                colSpan: columns.length,
                 color: '#000',
                 rowSpan: disclaimer == app.config.legalACSDisclaimer ? Math.floor(rowSpan * .6) : rowSpan,
                 fontSize: 8,

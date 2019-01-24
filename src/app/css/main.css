@@ -782,10 +782,39 @@ label:hover,
     padding-left: 7px;
 }
 
+.compareHeader {
+    white-space: normal !important;
+    vertical-align: middle !important;
+    font-weight: bold !important;
+    font-size: 14px !important;
+    text-align: center !important;
+}
+
+#specificReportComparison {
+    display: none;
+}
+
+#specificReportComparisonSmall {
+    display: none;
+}
+
+#specificReportComparisonLabel {
+    display: none;
+    margin-top: 1rem;
+}
+
+#standardComparisonLabel {
+    padding: 10px 0px 0 0;
+    margin-bottom: 0px;
+}
+
 #drawClearBtn {
     display: none;
 }
 
+.k-treeview .k-item {
+    color: black;
+}
 
 #advancedTreeview {
     height: 25vh;

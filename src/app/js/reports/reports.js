@@ -76,12 +76,16 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function (tp, QueryTask) {
 
     function GetTitle(d) {
         //Always use ACS 2017 data to pull the name.  This field isn't always reliable in census 2010
-        if (d.acsData && d.acsData.features && d.acsData.features[0].attributes) {
+        if (d.acsData && d.acsData.features && d.acsData.features.length === 1) {
             let feature = d.acsData.features[0];
             if (feature.count > 0) {
-                return `Block Groups (${feature.count} Selected)`;
+                return `<span style="flex: 1;">Block Groups (${feature.count} Selected) Report</span>`;
             }
-            return feature.attributes['NAME'];
+            return `<span style="flex: 1;">${feature.attributes['NAME']} Report</span>`;
+        } else {
+            let primary = d.acsData.features[0].attributes['NAME'];
+            let compare = d.acsData.features[1].attributes['NAME'];
+            return `<span style="flex: 1;">${primary} & ${compare} Comparitive Report</span>`;
         }
     }
 
@@ -90,57 +94,7 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function (tp, QueryTask) {
         window.open(url, '_blank');
     }
 
-    function OpenReportWindow(data, type) {
-        let fields = app.censusFieldsConfig;
-        let res = data.censusData;
-
-        if (type === 'acs') {
-            fields = app.acsFieldsConfig;
-            res = data.acsData;
-        }
-
-        $reportArea = $('#reportArea');
-
-        let features = res.features;
-        let feature = features[0];
-        let attr = feature.attributes;
-        let title = GetTitle(data);
-
-        $reportArea.find('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-            resizeCharts();
-        });
-
-        let $header = $('#summaryReportHeader');
-        $header.html(`
-            <span style="flex: 1;">${title} Report</span>
-            <button title="Export report to PDF" data-placement="right" class="btn btn-sm btnExportPDF"><i class="far fa-file-pdf"></i></button>
-        `);
-        $header.css('display', 'Flex');
-
-        let $btnExportPDF = $header.find('.btnExportPDF');
-
-        if (title.indexOf('Block Groups') > -1) {
-            $btnExportPDF.hide();
-        } else {
-            $btnExportPDF.show();
-        }
-
-        $btnExportPDF.tooltip();
-
-        $btnExportPDF.off('click').on('click', function () {
-            let ids = attr['GEOID'];
-            if (data.ids) {
-
-            }
-            ExportReportToPDF(app.selectedReport.conf, ids);
-        });
-
-        // let $sumReportTabStrip = $("#sumReportTabStrip");
-
-        if (feature.geometry) {
-            // app.AddHighlightGraphic(feature);
-        }
-
+    function GetValsFromData(attr, fields) {
         let valsDef = {};
         let vals = [];
         let duplicates = {};
@@ -149,7 +103,7 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function (tp, QueryTask) {
             const fld = fields[i];
             let oldFieldName = fld.fieldName;
             let val = Number(attr[fld.fieldName]);
-            if (fld.canSum === true || features.length === 1) {
+            if (fld.canSum === true) {
                 if (valsDef[fld.fieldName]) {
                     if (duplicates[fld.fieldName]) {
                         duplicates[fld.fieldName]++;
@@ -216,9 +170,64 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function (tp, QueryTask) {
             }
             fld.fieldName = oldFieldName;
         }
+        return vals
+    }
 
-        tp.publish('create-grid', vals, 'gridTarget');
+
+    function OpenReportWindow(data, type) {
+        let fields = app.censusFieldsConfig;
+        let res = data.censusData;
+
+        if (type === 'acs') {
+            fields = app.acsFieldsConfig;
+            res = data.acsData;
+        }
+
+        $reportArea = $('#reportArea');
+
+        let features = res.features;
+        let feature = features[0];
+        let attr = feature.attributes;
+        let title = GetTitle(data);
+
+        $reportArea.find('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+            resizeCharts();
+        });
+
+        let $header = $('#summaryReportHeader');
+        $header.html(`
+            ${title}
+            <button title="Export report to PDF" data-placement="right" class="btn btn-sm btnExportPDF"><i class="far fa-file-pdf"></i></button>
+        `);
+        $header.css('display', 'Flex');
+
+        let $btnExportPDF = $header.find('.btnExportPDF');
+        if (title.indexOf('Block Groups') > -1) {
+            $btnExportPDF.hide();
+        } else {
+            $btnExportPDF.show();
+        }
+
+        $btnExportPDF.tooltip();
+        $btnExportPDF.off('click').on('click', function () {
+            let ids = attr['GEOID'];
+            if (data.ids) {
+
+            }
+            ExportReportToPDF(app.selectedReport.conf, ids);
+        });
+
+
+        let vals = GetValsFromData(attr, fields);
+        if (features.length > 1) {
+            let compareVals = GetValsFromData(features[1].attributes, fields);
+            tp.publish('create-compare-grid', vals, compareVals, 'gridTarget');
+        } else {
+            tp.publish('create-grid', vals, 'gridTarget');
+        }
+
         tp.publish('create-charts', vals, 'chartsTarget');
+
 
         if (attr['AFFECTED_DISABILITY_COUNT'] && attr['TOTAL_POP'] > 5000) {
             SetupTitle6Grid(attr);
@@ -249,9 +258,6 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function (tp, QueryTask) {
             $('#title6Grid').toggle();
             $('#title6Toggle').toggleClass('k-i-expand k-i-collapse');
         })
-
-        // $('#title6Toggle').click(function () {
-        // });
 
         var fivePlus = attr['TOTAL_POP'] - attr['UNDER5'];
         var totalPop = attr['TOTAL_POP'];
@@ -380,175 +386,7 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function (tp, QueryTask) {
         });
     }
 
-    function CreateKendoGrid(src, id) {
-        var $grid = $('#' + id);
-        if ($grid && $grid.data('kendoGrid')) {
-            $grid.data('kendoGrid').destroy();
-            $grid.empty();
-        }
-        const expandHTML = 'Expand Topics<i style="margin-left: 5px;" class="fa fa-expand" aria-hidden="true"></i>';
-        const collapseHTML =
-            'Collapse Topics<i style="margin-left: 5px;" class="fa fa-compress" aria-hidden="true"></i>';
-
-        // Kendo-ize
-        $grid.kendoGrid({
-            toolbar: [{
-                template: `
-                        <div class="gridToolbar">
-                            <button class="btn btn-sm gridGroupToggle expandCollapseBtn" value="collapse">${collapseHTML}</button>
-                            <button class="btn btn-sm" id="exportToExcelBtn">Export to Excel<i style="margin-left: 5px;" class="fa fa-table" aria-hidden="true"></i></button>
-                        </div>
-                    `
-            }],
-            dataSource: {
-                data: src,
-                group: [{
-                    field: 'fieldGroup'
-                }],
-                sort: {
-                    field: 'fieldRowSort',
-                    dir: 'asc'
-                }
-            },
-            // height: "10em",
-            selectable: false,
-            scrollable: false,
-            sortable: false,
-            resizable: true,
-            columnMenu: false,
-            columns: [{
-                    field: 'fieldGroup',
-                    title: 'Category',
-                    hidden: true,
-                    groupHeaderTemplate: '#=value#'
-                },
-                {
-                    field: 'tableHeader',
-                    title: 'Topic',
-                    width: '300px'
-                },
-                {
-                    field: 'fieldValueFormatted',
-                    title: 'Estimate'
-                    // format: '{0:n0}'
-                },
-                {
-                    field: 'percentValueFormatted',
-                    title: 'Percent'
-                }
-                //{field: "densityValueFormatted", title: "Per Sq Mile", format: "{0:n1}"}
-            ],
-            dataBound: function (e) {
-                //if (this.wrapper[0].id !== "demCensusDataGrid") {
-                var rowCollection = e.sender.tbody[0].children;
-                var data = e.sender._data;
-                var realRows = [];
-
-                $.each(data, function (i, el) {
-                    var foundElement = $('td').filter(function () {
-                        return $(this).text() === el.tableHeader;
-                    });
-                    var finalElement = foundElement;
-                    if (foundElement.length > 1) {
-                        $.each(foundElement, function (i, row) {
-                            if ($(row)[0].previousSibling) {
-                                if ($(row)[0].previousSibling.innerText.indexOf(el.fieldCategory) !== -1) {
-                                    finalElement = $(row);
-                                }
-                            }
-                        });
-                    } else if (foundElement.length === 1) {
-                        finalElement = foundElement;
-                    }
-                    var indent = el.indentLevel * 20;
-                    if (indent === 0) {
-                        indent = 3;
-                    }
-                    finalElement.css('padding-left', indent + 'px');
-
-                    $(finalElement)
-                        .next()
-                        .css('text-align', 'right');
-                    $(finalElement)
-                        .next()
-                        .next()
-                        .css('text-align', 'right');
-
-                    var parentElement = $(finalElement[0].parentElement);
-
-                    if (el.universeField === 1) {
-                        var universeColor = '#06c';
-                        parentElement.css({
-                            'background-color': universeColor,
-                            'font-weight': 'bold',
-                            'font-style': 'italic',
-                            'font-size': '12px',
-                            color: 'white'
-                        });
-                    } else if (el.universeField === 2) {
-                        var universeColor = '#808080';
-                        var nextSib = $(finalElement[0].nextSibling);
-                        var finalSib = $(nextSib[0].nextSibling);
-                        parentElement.css({
-                            'background-color': universeColor,
-                            'font-weight': 'bold',
-                            'font-size': '11.5px',
-                            color: 'white'
-                        });
-
-                        if (nextSib[0].innerText === '-') {
-                            nextSib.empty();
-                        }
-                        if (finalSib[0].innerText === '-') {
-                            finalSib.empty();
-                        }
-                    } else if (el.universeField === 0) {
-                        parentElement.css({
-                            'font-weight': 'normal',
-                            'font-size': '11.5px'
-                        });
-                    }
-                });
-                var grid = $('#' + this.wrapper[0].id).data('kendoGrid');
-
-                //This defaults the grid to a collapsed state.
-                // grid.tbody.find('tr.k-grouping-row').each(function (index) {
-                // grid.collapseGroup(this);
-                // });
-
-                $('.gridGroupToggle').off('click').on('click', function (e) {
-                    $.each($('.k-grid'), function (i, val) {
-                        if ($(val).is(':visible') && val.id === "gridTarget") {
-                            var grid = $(val).data('kendoGrid');
-                            if (e.currentTarget.value === 'collapse') {
-                                e.currentTarget.value = 'expand';
-                                $(e.currentTarget).html(expandHTML);
-                                grid.tbody.find('tr.k-grouping-row').each(function (index) {
-                                    grid.collapseGroup(this);
-                                });
-                            } else {
-                                e.currentTarget.value = 'collapse';
-                                $(e.currentTarget).html(collapseHTML);
-                                grid.tbody.find('tr.k-grouping-row').each(function (index) {
-                                    grid.expandGroup(this);
-                                });
-                            }
-                        }
-                    });
-                });
-
-                $('#exportToExcelBtn').click(function () {
-                    tp.publish('excel-export', {
-                        data: data,
-                        e: e,
-                        grid: grid
-                    });
-                });
-            }
-        });
-    }
     tp.subscribe('open-report-window', OpenReportWindow);
-    tp.subscribe('create-grid', CreateKendoGrid);
 
     dataCache = {};
     let $loadingSpinner = $('.loading-container');

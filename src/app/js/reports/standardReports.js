@@ -30,10 +30,6 @@ require(['dojo/topic'], function (tp) {
 
             function updateReportDDL(layer, conf) {
                 let displayField = 'NAME';
-
-                // hideReportLayers();
-                // layer.visible = true;
-
                 let optionalFields = conf.displayFields || [displayField];
                 let outFields = ['OBJECTID', 'GEOID'].concat(optionalFields);
 
@@ -47,6 +43,7 @@ require(['dojo/topic'], function (tp) {
 
                 layer.queryFeatures(q).then(function (res) {
                     $('#specificReport').html('');
+                    $('#specificReportComparison').html('');
 
                     for (let i = 0; i < res.features.length; i++) {
                         const feature = res.features[i];
@@ -62,10 +59,32 @@ require(['dojo/topic'], function (tp) {
                                 attr['OBJECTID']
                             }">${displayTemplate.slice(0, -3)}</option>`
                         );
+                        $('#specificReportComparison').append(
+                            `<option data-geo-id="${attr['GEOID']}" data-object-id="${
+                                attr['OBJECTID']
+                            }">${displayTemplate.slice(0, -3)}</option>`
+                        );
                     }
                     $('#specificReport').combobox();
                 });
             }
+
+            let $specificReportComparison = $("#specificReportComparison");
+            let $specificReportComparisonLabel = $("#specificReportComparisonLabel");
+            let $standardComparison = $('#standardComparison');
+            let $specificReportComparisonSmall = $("#specificReportComparisonSmall");
+
+            $standardComparison.change(function () {
+                if (this.checked) {
+                    $specificReportComparison.show()
+                    $specificReportComparisonLabel.show();
+                    $specificReportComparisonSmall.show();
+                } else {
+                    $specificReportComparison.hide()
+                    $specificReportComparisonLabel.hide();
+                    $specificReportComparisonSmall.hide();
+                }
+            });
 
             $('#reportType').change(function () {
                 let $selectedItem = $(this).find(':selected');
@@ -90,7 +109,17 @@ require(['dojo/topic'], function (tp) {
                 let GEOID = $('#specificReport')
                     .find(':selected')
                     .data('geo-id');
-                OpenReportByGEOID(conf, GEOID);
+
+                let GEOIDs = [GEOID];
+
+                if ($standardComparison.is(":checked")) {
+                    let comparisonGEOID = $specificReportComparison
+                        .find(':selected')
+                        .data('geo-id');
+                    GEOIDs.push(comparisonGEOID);
+                }
+
+                OpenReportByGEOIDs(conf, GEOIDs);
             });
         }
     });
@@ -100,11 +129,12 @@ require(['dojo/topic'], function (tp) {
         $('#standardBtnSubmit').hide();
         $('#reportType').val('default');
     }
-    tp.subscribe('openReport-by-geoid', OpenReportByGEOID);
+    tp.subscribe('openReport-by-geoids', OpenReportByGEOIDs);
 
-    function OpenReportByGEOID(conf, GEOID) {
-        app.GetData(conf, [GEOID]).then(function (data) {
+    function OpenReportByGEOIDs(conf, GEOIDs) {
+        app.GetData(conf, GEOIDs).then(function (data) {
             app.AddHighlightGraphics(data.acsData.features, true);
+
             app.view.goTo(data.acsData.features[0].geometry.extent.expand(1.5));
 
             if (data) {
