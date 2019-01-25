@@ -87,14 +87,14 @@ require(['dojo/topic', 'esri/tasks/QueryTask', 'dojo/domReady!'], function (tp, 
 
             let series = new geostats();
             series.setSerie(arr);
-            let breakValues = [];
 
+            let breakValues = [];
             if (classType === "Jenks") {
-                breakValues = series.getClassJenks(cbrCount);
+                breakValues = series.getClassJenks(Number(cbrCount));
             } else if (classType === "EqInterval") {
-                breakValues = series.getClassEqInterval(cbrCount);
+                breakValues = series.getClassEqInterval(Number(cbrCount));
             } else if (classType === "Quantile") {
-                breakValues = series.getClassQuantile(cbrCount);
+                breakValues = series.getClassQuantile(Number(cbrCount));
             }
             return breakValues;
         })
@@ -106,7 +106,7 @@ require(['dojo/topic', 'esri/tasks/QueryTask', 'dojo/domReady!'], function (tp, 
         let classType = $classType.val();
         let breaks = conf.breaks[classType + cbrCount];
 
-        if ($dynamicCBRCheckbox.is(":checked") && classType !== Custom) {
+        if ($dynamicCBRCheckbox.is(":checked") && classType !== "Custom") {
             breaks = await GetDynamicClassBreaks(cbrCount, classType, conf);
         }
 
