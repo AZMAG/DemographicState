@@ -175,46 +175,99 @@ app.summarizeFeatures = function (res) {
     return data;
 };
 
+function GetPartyLetter(party) {
+    if (party == 'Unknown' || !party)
+        return '';
+    if (party.indexOf('Democratic') > -1) {
+        return '<strong title="Democratic" style="font-weight: bold; color: blue;"> (D)</strong>';
+    } else if (party.indexOf('Republican') > -1) {
+        return '<strong title="Republican" style="font-weight: bold; color: red;"> (R)</strong>';
+    } else {
+        return `<strong title="${party}" style="font-weight: bold; color: green;"> (${party.charAt(0)})</strong>`;
+    }
+}
+
+function GetChannelsHTML(channels) {
+    let channelsHTML = '';
+    let types = {
+        Facebook: {
+            icon: 'fab fa-facebook-square',
+            url: 'https://www.facebook.com/'
+        },
+        Twitter: {
+            icon: 'fab fa-twitter',
+            url: 'https://twitter.com/'
+        },
+        YouTube: {
+            icon: 'fab fa-youtube-square',
+            url: 'https://www.youtube.com/user/'
+        }
+    }
+
+    channels.forEach(function (channel) {
+        let type = types[channel.type];
+        if (type) {
+            channelsHTML += `<a class="socialChannel" title="Visit the ${channel.type} page" target="_blank" href="${type.url + channel.id}"><i class="${type.icon}"></i></a>`;
+        }
+    })
+    return channelsHTML;
+}
+
+function GetRepHTML(rep) {
+    if (rep) {
+        return `<div class="repContainer">
+                    <div class="repPicContainer">
+                        ${rep.photoUrl ? `<img title="${rep.name}" class="rep-pic" src="${rep.photoUrl}" alt="${rep.name}">`: ''}
+                    </div>
+                    <div class="repInfoContainer">
+                        <div><i class="fas fa-user-alt"></i> <strong>${rep.name}</strong>${GetPartyLetter(rep.party)} - ${rep.office ? rep.office : ''}</div>
+                        ${rep.address ?
+                            `
+                            <div>
+                                <div><i class="fas fa-map-marked"></i> ${rep.address[0].line1}</div>
+                                <div>${rep.address[0].city}, ${rep.address[0].state} ${rep.address[0].zip}</div>
+                            </div>
+                            ` : ''}
+                        ${rep.phones ? `
+                            <span title="Phone ${rep.name}" ><i class="fas fa-phone" aria-hidden="true"></i>  ${rep.phones[0]}</span><br>
+                        `: ''}
+                        ${rep.emails ? `
+                            <a title="Send an email to ${rep.name}" href="mailto:${rep.emails[0]}">
+                            <i class="fa fa-envelope" aria-hidden="true"></i>  ${rep.emails[0]}</a>
+                        `: ''}
+                        ${rep.urls && rep.urls.length > 0 ? `
+                            <div>
+                            <a title="Visit the website ${rep.urls[0]}" target="_blank" href="${rep.urls[0]}">
+                            <i class="fas fa-external-link-alt"></i>  Website</a>
+                            </div>
+                        `: ''}
+                        ${rep.channels && rep.channels.length > 0 ? GetChannelsHTML(rep.channels) : ''}
+                    </div>
+            </div>`
+    }
+}
+
+
 function GetRepHtml(googleID) {
     return GetRepresentativeInfo(googleID)
         .then(function (data) {
-
             if (data.offices) {
-                let mainRep;
-                data.offices.forEach(office => {
-                    let isKeyOffice = false;
+                let rtnHTML = '';
+                data.offices.map(office => {
                     app.config.googleCivicOffices.forEach(function (conf) {
-                        if (office.name.indexOf(conf) > -1) {
-                            isKeyOffice = true;
+                        if (office.name.indexOf(conf.name) > -1) {
+                            if (data.officials && office.officialIndices) {
+                                for (let i = 0; i < office.officialIndices.length; i++) {
+                                    let rep = data.officials[office.officialIndices[i]];
+                                    rep['office'] = conf.displayValue;
+                                    let html = GetRepHTML(rep);
+                                    rtnHTML += `${html}<br>`;
+                                }
+                            }
                         }
                     });
-
-                    if (isKeyOffice) {
-                        if (data.officials && office.officialIndices) {
-                            mainRep = data.officials[office.officialIndices[0]];
-                            mainRep['office'] = office.name;
-                        }
-                    }
                 });
-                if (mainRep) {
-                    console.log(mainRep);
-
-                    return `<div>
-                            ${mainRep.photoUrl ? `<img class="rep-pic" src="${mainRep.photoUrl}" alt="">`: ''}
-                            <strong>${mainRep.name}${mainRep.party ? ` (<strong>${mainRep.party === 'Democratic' ? '<span style="font-weight: bold; color: blue;">D</span>': '<span style="font-weight: bold; color: red;">R</span>'}</strong>) `: ''}</strong>
-                            
-                            <div>
-                                ${mainRep.address ? `
-                                    ${mainRep.address[0].line1 + " " + mainRep.address[0].city+ ", " + mainRep.address[0].state + " " + mainRep.address[0].zip}
-                                    <br>` : ''}
-                                ${mainRep.phones ? `<span title="Phone ${mainRep.name}" ><i class="fas fa-phone" aria-hidden="true"></i>  ${mainRep.phones[0]}</span><br>`: ''}
-                                ${mainRep.emails ? `<a style="margin-left: 5px;" title="Send an email to ${mainRep.name}" href="mailto:${mainRep.emails[0]}"><i class="fa fa-envelope" aria-hidden="true"></i>  ${mainRep.emails[0]}</a>`: ''}
-                            </div>
-                        </div>`
-                    // ${mainRep.office}
-                    // ${mainRep.photoUrl ? `<img class="rep-pic" src="${mainRep.photoUrl}" alt="">`: ''}
-
-                }
+                return rtnHTML;
             } else {
                 return '';
             }

@@ -13,11 +13,30 @@ app.config = {
     siteUrl: 'https://geo.azmag.gov/maps/azdemographics/?',
 
     googleCivicInfoApiKey: 'AIzaSyCicS2bzJk_ptthYD2nSu4tIPfjGYmxU1U',
-    googleCivicOffices: [
-        'Mayor',
-        'Supervisors District',
-        'United States House of Representatives',
-        'Council, District'
+    googleCivicOffices: [{
+            name: 'Mayor',
+            displayValue: 'Mayor'
+        },
+        {
+            name: 'Supervisors District',
+            displayValue: 'Supervisor'
+        },
+        {
+            name: 'United States House of Representatives',
+            displayValue: 'US House Representative'
+        },
+        {
+            name: 'Council, District',
+            displayValue: 'Council Member'
+        },
+        {
+            name: 'AZ State Senate',
+            displayValue: 'AZ Senator'
+        },
+        {
+            name: 'AZ State House',
+            displayValue: 'AZ House Representative'
+        }
     ],
 
     bitly: {

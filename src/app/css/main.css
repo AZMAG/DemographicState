@@ -557,10 +557,33 @@ a[aria-expanded='true'] {
     color: var(--textColor);
 }
 
+.repContainer {
+    display: flex;
+    align-items: center;
+}
+
+.repInfoContainer {
+    flex: 1;
+    margin-left: 10px;
+}
+
 .rep-pic {
     border-radius: 50%;
     /* height: 80px; */
     width: 50px;
+}
+
+.socialChannel {
+    margin: 3px;
+    font-size: 17px;
+}
+
+.socialChannel:hover {
+    opacity: .8;
+}
+
+.socialChannel:first-of-type {
+    margin: 0px;
 }
 
 .popover-title {
