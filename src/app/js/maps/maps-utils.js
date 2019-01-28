@@ -89,8 +89,8 @@ require(['dojo/topic', 'esri/tasks/QueryTask', 'dojo/domReady!'], function (tp, 
             series.setSerie(arr);
 
             let breakValues = [];
-            if (classType === "Jenks") {
-                breakValues = series.getClassJenks(Number(cbrCount));
+            if (classType === "Jenks") {                
+                breakValues = series.jenks(arr, Number(cbrCount));
             } else if (classType === "EqInterval") {
                 breakValues = series.getClassEqInterval(Number(cbrCount));
             } else if (classType === "Quantile") {
