@@ -42,7 +42,7 @@
   ],
   "private": true,
   "dependencies": {
-    "arcgis-js-api": "^4.10.1"
+    "arcgis-js-api": "^4.10.1",
     "babel-polyfill": "^6.26.0"
   },
   "devDependencies": {
