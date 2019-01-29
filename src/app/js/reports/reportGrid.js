@@ -201,6 +201,9 @@ require(["dojo/topic"], function (tp) {
         });
         var grid = $("#" + this.wrapper[0].id).data("kendoGrid");
 
+        let $title6Grid = $('#title6Grid');
+        let $title6Toggle = $('#title6Toggle');
+
         //This defaults the grid to a collapsed state.
         // grid.tbody.find("tr.k-grouping-row").each(function (index) {
         // grid.collapseGroup(this);
@@ -216,12 +219,17 @@ require(["dojo/topic"], function (tp) {
                         grid.tbody.find("tr.k-grouping-row").each(function (index) {
                             grid.collapseGroup(this);
                         });
+                        $title6Grid.hide();
+                        $title6Toggle.addClass("k-i-expand").removeClass("k-i-collapse");
+
                     } else {
                         e.currentTarget.value = "collapse";
                         $(e.currentTarget).html(collapseHTML);
                         grid.tbody.find("tr.k-grouping-row").each(function (index) {
                             grid.expandGroup(this);
                         });
+                        $title6Grid.show();
+                        $title6Toggle.addClass("k-i-collapse").removeClass("k-i-expand");
                     }
                 }
             });

@@ -254,10 +254,24 @@ require(["dojo/topic", "esri/tasks/QueryTask"], function (tp, QueryTask) {
         if ($("#title6Area").length === 0) {
             alert("jquery element not found?");
         }
+<<<<<<< HEAD
         $("#title6Area").off("click").on("click", function () {
             $("#title6Grid").toggle();
             $("#title6Toggle").toggleClass("k-i-expand k-i-collapse");
         });
+=======
+        let $title6Grid = $('#title6Grid');
+        let $title6Toggle = $('#title6Toggle');
+
+        //Setup title 6 to be expanded on initial load.
+        $title6Grid.show();
+        $title6Toggle.addClass("k-i-collapse").removeClass("k-i-expand");
+
+        $('#title6Area').off('click').on('click', function () {
+            $title6Grid.toggle();
+            $title6Toggle.toggleClass('k-i-expand k-i-collapse');
+        })
+>>>>>>> 87388468b81114c8abdc59ec28a14d8ee67af1b7
 
         var fivePlus = attr["TOTAL_POP"] - attr["UNDER5"];
         var totalPop = attr["TOTAL_POP"];
@@ -326,7 +340,11 @@ require(["dojo/topic", "esri/tasks/QueryTask"], function (tp, QueryTask) {
             }
         ];
 
+<<<<<<< HEAD
         $("#title6Grid").kendoGrid({
+=======
+        $title6Grid.kendoGrid({
+>>>>>>> 87388468b81114c8abdc59ec28a14d8ee67af1b7
             dataSource: {
                 data: dataSrc
             },
