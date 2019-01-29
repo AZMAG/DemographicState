@@ -10,15 +10,13 @@
     SIDEBAR STYLES
 ----------------------------------------------------- */
 
-@import 'https://fonts.googleapis.com/css?family=Poppins:300, 400, 500, 600, 700';
-
 html {
     height: 100%;
     /* font-size: 62.5%; */
 }
 
 body {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Poppins', sans-serif !important;
     /* font-size: 1.8em; */
     background: #fafafa;
     height: 100%;
@@ -26,6 +24,7 @@ body {
 }
 
 p {
+    font-family: 'Poppins', sans-serif;
     font-size: 1.1em;
     font-weight: 300;
     line-height: 1.5em;
@@ -1651,6 +1650,10 @@ hr.pop {
 #treeViewContainer {
     width: 300px;
     float: left;
+}
+
+.esri-widget {
+    font-family: 'Poppins', sans-serif;
 }
 
 .esri-widget--button {
