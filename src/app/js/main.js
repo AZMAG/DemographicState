@@ -73,4 +73,3 @@ $("#legendHelpModal").load("app/views/modal-help-legend.html");
 $("#mapsHelpModal").load("app/views/modal-help-maps.html");
 $("#reportsHelpModal").load("app/views/modal-help-reports.html");
 $("#layersHelpModal").load("app/views/modal-help-layers.html");
-$("#aboutHelpModal").load("app/views/modal-help-about.html");
