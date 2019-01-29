@@ -1,3 +1,4 @@
+"use strict";
 require([
         "dojo/topic",
         "dojo/domReady!"
@@ -18,11 +19,11 @@ require([
         $colorRamp.click(function () {
             $sequentialRamps.html(GetRampsHTMLByType("Sequential"));
             $divergingRamps.html(GetRampsHTMLByType("Diverging"));
-            $colorRampModal.modal('show');
+            $colorRampModal.modal("show");
         });
 
         $("#selectionRamps").on("click", ".cRamp", function () {
-            $colorRampModal.modal('hide');
+            $colorRampModal.modal("hide");
             $colorRamp.html($(this)[0].outerHTML);
             tp.publish("colorRamp-Changed");
         });
@@ -31,10 +32,10 @@ require([
             $colorRamp.html(app.ColorRampToHTML(data.colorRamp, data.rampKey, data.type));
         }
 
-        tp.subscribe('BlockGroupRendererUpdated', UpdateColorRampControl);
+        tp.subscribe("BlockGroupRendererUpdated", UpdateColorRampControl);
 
         function GetRampsHTMLByType(type) {
-            let rampsHtml = ''
+            let rampsHtml = "";
             let numBreaks = $classBreaksCount.val();
             let ramps = app.GetRampsByNumAndType(type, numBreaks);
 
@@ -45,4 +46,4 @@ require([
             });
             return rampsHtml;
         }
-    })
+    });

@@ -1,13 +1,14 @@
-require(['dojo/topic', 'esri/tasks/QueryTask'], function (tp, QueryTask) {
-    let $share = $('.shareWidget');
+"use strict";
+require(["dojo/topic", "esri/tasks/QueryTask"], function (tp, QueryTask) {
+    let $share = $(".shareWidget");
 
-    let oldUrl = '';
+    let oldUrl = "";
 
-    tp.subscribe('layers-added', function () {
+    tp.subscribe("layers-added", function () {
 
         GetSmallShareLink().then(function (url) {
             ShareWidgetInit(url);
-        })
+        });
 
         function ShareWidgetInit(url) {
             if (url) {
@@ -16,16 +17,16 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function (tp, QueryTask) {
                 url = oldUrl;
             }
 
-            let baseUrl = 'https://twitter.com/intent/tweet';
-            let text = 'MAG%20%7C%20Demographics';
-            let hashTag = 'MAGmaps';
-            let via = 'MAGregion';
+            let baseUrl = "https://twitter.com/intent/tweet";
+            let text = "MAG%20%7C%20Demographics";
+            let hashTag = "MAGmaps";
+            let via = "MAGregion";
 
             let twitterHref = `${baseUrl}?text=${text}&url=${url}&hastag=${hashTag}&via=${via}`;
-            let mailTo = `mailto:?subject=MAG Demographics&amp;body=%0A%0AHere is the map I made using the MAG Demographics Viewer:%0A%0A${url}%0A`
+            let mailTo = `mailto:?subject=MAG Demographics&amp;body=%0A%0AHere is the map I made using the MAG Demographics Viewer:%0A%0A${url}%0A`;
 
             $share.attr(
-                'data-content',
+                "data-content",
                 `
             <div id="sharePopup">
                 <div class="shareLinks">
@@ -63,26 +64,26 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function (tp, QueryTask) {
             `
             );
 
-            $('body').on('click', '#shareLinkCopy', function () {
+            $("body").on("click", "#shareLinkCopy", function () {
                 $("#bitlyUrlInput").select();
                 document.execCommand("copy");
                 window.getSelection().removeAllRanges();
                 let tt = $(this);
-                tt.attr('data-original-title', 'Link copied to clipboard').tooltip('show');
+                tt.attr("data-original-title", "Link copied to clipboard").tooltip("show");
                 setTimeout(function () {
-                    tt.attr('data-original-title', 'Click to copy link to clipboard').tooltip('hide');
+                    tt.attr("data-original-title", "Click to copy link to clipboard").tooltip("hide");
                 }, 1500);
             });
 
-            $share.off('show.bs.popover').on('show.bs.popover', function () {
-                let $shareLinkCopy = $('#shareLinkCopy');
+            $share.off("show.bs.popover").on("show.bs.popover", function () {
+                let $shareLinkCopy = $("#shareLinkCopy");
                 $shareLinkCopy.tooltip();
-                $("#sharePopup").html('<span>loading...</span>');
+                $("#sharePopup").html("<span>loading...</span>");
                 GetSmallShareLink().then(function (url) {
                     $("#bitlyUrlInput").val(url);
                     ShareWidgetInit(url);
-                })
-            })
+                });
+            });
 
             $share.popover({
                 html: true
@@ -91,31 +92,31 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function (tp, QueryTask) {
             !(function (d, s, id) {
                 var js,
                     fjs = d.getElementsByTagName(s)[0],
-                    p = /^http:/.test(d.location) ? 'http' : 'https';
+                    p = /^http:/.test(d.location) ? "http" : "https";
                 if (!d.getElementById(id)) {
                     js = d.createElement(s);
                     js.id = id;
-                    js.src = p + '://platform.twitter.com/widgets.js';
+                    js.src = p + "://platform.twitter.com/widgets.js";
                     fjs.parentNode.insertBefore(js, fjs);
                 }
-            })(document, 'script', 'twitter-wjs');
+            })(document, "script", "twitter-wjs");
 
             //LinkedIn
-            $(document).on('click', '#INshareButton', function () {
+            $(document).on("click", "#INshareButton", function () {
                 window.open(
                     `https://www.linkedin.com/shareArticle?url=${url}`,
-                    'shareLinkedIn',
-                    'width=650, height=700'
+                    "shareLinkedIn",
+                    "width=650, height=700"
                 );
             });
 
             // facebook
-            //share dialog - use on('click') for it to work afte loading html
-            $(document).on('click', '#FBshareButton', function () {
+            //share dialog - use on("click") for it to work afte loading html
+            $(document).on("click", "#FBshareButton", function () {
                 FB.ui({
-                        method: 'share',
+                        method: "share",
                         mobile_iframe: true,
-                        href: 'https://geo.azmag.gov/maps/bikemap'
+                        href: "https://geo.azmag.gov/maps/azdemographics/"
                     },
                     function (response) {}
                 );
@@ -123,10 +124,10 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function (tp, QueryTask) {
 
             window.fbAsyncInit = function () {
                 FB.init({
-                    appId: '929950963769905',
+                    appId: "929950963769905",
                     cookie: true,
                     xfbml: true,
-                    version: 'v2.12'
+                    version: "v2.12"
                 });
             };
 
@@ -138,9 +139,9 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function (tp, QueryTask) {
                 }
                 js = d.createElement(s);
                 js.id = id;
-                js.src = 'https://connect.facebook.net/en_US/sdk.js';
+                js.src = "https://connect.facebook.net/en_US/sdk.js";
                 fjs.parentNode.insertBefore(js, fjs);
-            })(document, 'script', 'facebook-jssdk');
+            })(document, "script", "facebook-jssdk");
         }
 
         function GetVisibleLayers() {
@@ -149,7 +150,7 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function (tp, QueryTask) {
                 if (lyr.visible) {
                     rtnArr.push(lyr.id);
                 }
-            })
+            });
             return rtnArr;
         }
 
@@ -163,21 +164,21 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function (tp, QueryTask) {
                 xmin: Math.floor(e.xmin),
                 ymax: Math.floor(e.ymax),
                 ymin: Math.floor(e.ymin)
-            }
+            };
         }
 
         function GetActivePanel() {
-            return $(".components li.active").attr('panel-target');
+            return $(".components li.active").attr("panel-target");
         }
 
         function GetTransparency() {
-            const layer = app.map.findLayerById('blockGroups');
+            const layer = app.map.findLayerById("blockGroups");
             return layer.opacity;
         }
 
         async function GetBigShareLink() {
             let shareObj = await GetShareObject();
-            let queryString = '?init=' + encodeURIComponent(JSON.stringify(shareObj));
+            let queryString = "?init=" + encodeURIComponent(JSON.stringify(shareObj));
             return location.origin + location.pathname + queryString;
         }
 
@@ -212,7 +213,7 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function (tp, QueryTask) {
                         rampKey: mapData.rampKey,
                         type: mapData.type,
                         FieldName: mapData.conf.FieldName,
-                        breaks: mapData.classType === 'Custom' ? mapData.cbInfos : []
+                        breaks: mapData.classType === "Custom" ? mapData.cbInfos : []
                     },
                     basemap: app.map.basemap.id,
                     transparency: GetTransparency(),

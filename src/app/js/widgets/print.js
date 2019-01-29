@@ -1,3 +1,4 @@
+"use strict";
 require([
     // "esri/views/2d/draw/Draw",
     // "esri/Graphic",
@@ -27,16 +28,16 @@ require([
             }).then((screenshot) => {
                 savedScreenshot = screenshot;
                 showPreview(screenshot);
-            })
-        })
+            });
+        });
 
-        $screenshotDiv.find('button').click((e) => {
-            if (e.target.id == 'screenshotDownloadBtn') {
-                downloadImage('Arizona Demographics Map');
+        $screenshotDiv.find("button").click((e) => {
+            if (e.target.id === "screenshotDownloadBtn") {
+                downloadImage("Arizona Demographics Map");
             } else {
                 returnToMap();
             }
-        })
+        });
 
         async function prepImage(screenshot) {
             let screenSht = savedScreenshot;
@@ -67,12 +68,12 @@ require([
             ctx.fillStyle = "#FFF";
             ctx.font = "40px Arial";
 
-            ctx.fillText(title, (imageData.width / 2) - (ctx.measureText(title).width / 2), headerHeight * .7);
+            ctx.fillText(title, (imageData.width / 2) - (ctx.measureText(title).width / 2), headerHeight * 0.7);
 
-            $(".slidecontainer").hide()
+            $(".slidecontainer").hide();
             let legendCanvas = await html2canvas(document.querySelector("#legendDiv"));
             let legendWidth = legendCanvas.width;
-            $(".slidecontainer").show()
+            $(".slidecontainer").show();
             let padding = 20;
             ctx.drawImage(legendCanvas, imageData.width - legendWidth - padding, headerHeight + padding);
 
@@ -99,7 +100,7 @@ require([
             } else {
                 // for MS browsers convert dataUrl to Blob
                 const byteString = atob(dataUrl.split(",")[1]);
-                const mimeString = dataUrl.split(",")[0].split(":")[1].split(";")[0]
+                const mimeString = dataUrl.split(",")[0].split(":")[1].split(";")[0];
                 const ab = new ArrayBuffer(byteString.length);
                 const ia = new Uint8Array(ab);
                 for (let i = 0; i < byteString.length; i++) {
@@ -131,7 +132,7 @@ require([
             screenshotImage.src = screenshot.dataUrl;
         }
 
-        tp.publish('widget-print-loaded');
+        tp.publish("widget-print-loaded");
 
     });
 });

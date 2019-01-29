@@ -1,7 +1,8 @@
+"use strict";
 require([
-        'esri/widgets/Locate/LocateViewModel',
-        'dojo/topic',
-        'dojo/domReady!'
+        "esri/widgets/Locate/LocateViewModel",
+        "dojo/topic",
+        "dojo/domReady!"
     ],
     function (LocateViewModel, tp) {
         tp.subscribe("widget-home-loaded", function () {
@@ -11,7 +12,7 @@ require([
                 view: app.view
             });
 
-            app.view.ui.add(locateId, 'bottom-right');
+            app.view.ui.add(locateId, "bottom-right");
 
             $("#" + locateId).click(function () {
                 locateVM.locate().then(function () {
@@ -21,6 +22,6 @@ require([
                 });
             });
 
-            tp.publish('widget-locate-loaded');
-        })
-    })
+            tp.publish("widget-locate-loaded");
+        });
+    });

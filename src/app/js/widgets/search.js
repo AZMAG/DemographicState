@@ -1,3 +1,4 @@
+"use strict";
 require([
     "esri/widgets/Search",
     "esri/tasks/Locator",
@@ -12,6 +13,6 @@ require([
             view: app.view
         });
         app.view.ui.add(search, "bottom-right");
-        tp.publish('widget-search-loaded');
-    })
-})
+        tp.publish("widget-search-loaded");
+    });
+});

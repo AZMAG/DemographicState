@@ -1,34 +1,35 @@
-require(['dojo/topic', 'esri/views/2d/draw/Draw', 'esri/Graphic', 'esri/geometry/geometryEngine'], function (
+"use strict";
+require(["dojo/topic", "esri/views/2d/draw/Draw", "esri/Graphic", "esri/geometry/geometryEngine"], function (
     tp,
     Draw,
     Graphic,
     geometryEngine
 ) {
-    tp.subscribe('panel-loaded', function (panel) {
-        let $customGeographyReports = $('#customGeographyReports');
-        let $bufferCheckbox = $('#useBuffer');
-        let $bufferOptions = $('#bufferOptions');
-        let $customSummaryButton = $('.customSummaryButton');
-        let $drawingTooltip = $('#drawingTooltip');
-        let $bufferSize = $bufferOptions.find('#bufferSize');
-        let $bufferUnit = $bufferOptions.find('#bufferUnit');
+    tp.subscribe("panel-loaded", function (panel) {
+        let $customGeographyReports = $("#customGeographyReports");
+        let $bufferCheckbox = $("#useBuffer");
+        let $bufferOptions = $("#bufferOptions");
+        let $customSummaryButton = $(".customSummaryButton");
+        let $drawingTooltip = $("#drawingTooltip");
+        let $bufferSize = $bufferOptions.find("#bufferSize");
+        let $bufferUnit = $bufferOptions.find("#bufferUnit");
         let $useZoom = $("#useZoom");
 
         let drawMessages = {
             point: {
-                start: 'Click anywhere to select a point of interest.'
+                start: "Click anywhere to select a point of interest."
             },
             polygon: {
-                start: 'Click or drag anywhere on the map to start drawing.',
-                during: 'Double click to finish drawing, or click/drag to change the selected shape.'
+                start: "Click or drag anywhere on the map to start drawing.",
+                during: "Double click to finish drawing, or click/drag to change the selected shape."
             },
             polyline: {
-                start: 'Click to add first point in the corridor of interest.',
-                during: 'Double click to finish drawing, or Click to add another point to the selected corridor.'
+                start: "Click to add first point in the corridor of interest.",
+                during: "Double click to finish drawing, or Click to add another point to the selected corridor."
             }
-        }
+        };
 
-        if (panel === 'reports') {
+        if (panel === "reports") {
             let draw = new Draw({
                 view: app.view
             });
@@ -36,16 +37,16 @@ require(['dojo/topic', 'esri/views/2d/draw/Draw', 'esri/Graphic', 'esri/geometry
             $bufferCheckbox.change(function (e) {
                 bufferShown = !bufferShown;
                 if (bufferShown) {
-                    $bufferOptions.css('display', 'flex');
+                    $bufferOptions.css("display", "flex");
                 } else {
                     $bufferOptions.hide();
                 }
             });
 
             $customSummaryButton.click(function (e) {
-                $customSummaryButton.removeClass('active');
-                $(this).addClass('active');
-                let type = $(this).data('val');
+                $customSummaryButton.removeClass("active");
+                $(this).addClass("active");
+                let type = $(this).data("val");
 
                 // create() will return a reference to an instance of PolygonDrawAction
                 let action = draw.create(type);
@@ -53,11 +54,11 @@ require(['dojo/topic', 'esri/views/2d/draw/Draw', 'esri/Graphic', 'esri/geometry
                 $drawingTooltip.html(drawMessages[type].start);
 
                 //Creates a tooltip to give user instructions on drawing
-                $('#viewDiv').mousemove(function (e) {
+                $("#viewDiv").mousemove(function (e) {
                     $drawingTooltip
-                        .css('left', e.pageX + 10)
-                        .css('top', e.pageY + 10)
-                        .css('display', 'block');
+                        .css("left", e.pageX + 10)
+                        .css("top", e.pageY + 10)
+                        .css("display", "block");
                 });
 
                 // focus the view to activate keyboard shortcuts for drawing polygons
@@ -65,16 +66,16 @@ require(['dojo/topic', 'esri/views/2d/draw/Draw', 'esri/Graphic', 'esri/geometry
 
                 // listen polygonDrawAction events to give immediate visual feedback
                 // to users as the polygon is being drawn on the view.
-                action.on('vertex-add', e => {
+                action.on("vertex-add", e => {
                     drawPolygon(e, type);
                 });
-                action.on('cursor-update', e => {
+                action.on("cursor-update", e => {
                     drawPolygon(e, type);
                 });
-                action.on('vertex-remove', e => {
+                action.on("vertex-remove", e => {
                     drawPolygon(e, type);
                 });
-                action.on('draw-complete', e => {
+                action.on("draw-complete", e => {
                     drawPolygon(e, type);
                 });
 
@@ -91,27 +92,27 @@ require(['dojo/topic', 'esri/views/2d/draw/Draw', 'esri/Graphic', 'esri/geometry
                 let symbolLU = {
                     polygon: {
                         color: [0, 0, 0, 0.3],
-                        symbolType: 'simple-fill',
-                        geometryType: 'polygon',
-                        style: 'solid'
+                        symbolType: "simple-fill",
+                        geometryType: "polygon",
+                        style: "solid"
                     },
                     multipoint: {
                         color: [0, 0, 0, 0.3],
-                        symbolType: 'simple-fill',
-                        geometryType: 'polygon',
-                        style: 'solid'
+                        symbolType: "simple-fill",
+                        geometryType: "polygon",
+                        style: "solid"
                     },
                     polyline: {
-                        color: 'red',
-                        symbolType: 'simple-line',
-                        geometryType: 'polyline',
-                        style: 'solid'
+                        color: "red",
+                        symbolType: "simple-line",
+                        geometryType: "polyline",
+                        style: "solid"
                     },
                     point: {
-                        color: 'red',
-                        symbolType: 'simple-marker',
-                        geometryType: 'point',
-                        style: 'circle'
+                        color: "red",
+                        symbolType: "simple-marker",
+                        geometryType: "point",
+                        style: "circle"
                     }
                 };
 
@@ -122,7 +123,7 @@ require(['dojo/topic', 'esri/views/2d/draw/Draw', 'esri/Graphic', 'esri/geometry
                     width: 2,
                     size: 4,
                     outline: {
-                        color: 'red',
+                        color: "red",
                         width: 2
                     }
                 };
@@ -142,18 +143,18 @@ require(['dojo/topic', 'esri/views/2d/draw/Draw', 'esri/Graphic', 'esri/geometry
 
                 let buffGfx = null;
 
-                let buffer = $bufferCheckbox.is(':checked');
+                let buffer = $bufferCheckbox.is(":checked");
 
                 if (buffer) {
                     let buffered = geometryEngine.buffer(graphic.geometry, $bufferSize.val(), $bufferUnit.val());
                     buffGfx = new Graphic({
                         geometry: buffered,
                         symbol: {
-                            type: 'simple-fill',
+                            type: "simple-fill",
                             color: [0, 0, 0, 0],
                             outline: {
-                                style: 'dot',
-                                color: 'black',
+                                style: "dot",
+                                color: "black",
                                 width: 2
                             }
                         }
@@ -161,10 +162,10 @@ require(['dojo/topic', 'esri/views/2d/draw/Draw', 'esri/Graphic', 'esri/geometry
                     app.view.graphics.add(buffGfx);
                 }
 
-                if (e.type === 'draw-complete') {
-                    $('#viewDiv').off('mousemove');
+                if (e.type === "draw-complete") {
+                    $("#viewDiv").off("mousemove");
                     $drawingTooltip.hide();
-                    $customSummaryButton.removeClass('active');
+                    $customSummaryButton.removeClass("active");
                     if (buffGfx) {
                         ProcessSelection(buffGfx);
                     } else {
@@ -172,7 +173,7 @@ require(['dojo/topic', 'esri/views/2d/draw/Draw', 'esri/Graphic', 'esri/geometry
                     }
                 }
 
-                if (e.type === 'vertex-add') {
+                if (e.type === "vertex-add") {
                     if (drawMessages[type].during) {
                         $drawingTooltip.html(drawMessages[type].during);
                     }
@@ -183,15 +184,15 @@ require(['dojo/topic', 'esri/views/2d/draw/Draw', 'esri/Graphic', 'esri/geometry
         }
 
         function ProcessSelection(gfx) {
-            app.GetData(app.config.layerDef['blockGroups'], null, gfx.geometry).then(function (data) {
+            app.GetData(app.config.layerDef["blockGroups"], null, gfx.geometry).then(function (data) {
                 var acsData = app.summarizeFeatures(data.acsData);
                 var censusData = app.summarizeFeatures(data.censusData);
 
                 if (data.acsData.features.length === 0) {
                     app.clearDrawnGraphics();
                     // TODO: This should be prettied up at some point.
-                    // Just using the basic alert function isn't pretty enough.
-                    alert("Your selection did not return any results.  Please try again.")
+                    // Just using the basic alert function isn"t pretty enough.
+                    alert("Your selection did not return any results.  Please try again.");
                 } else {
                     app.selectedReport.acsData = {
                         features: [{
@@ -206,10 +207,10 @@ require(['dojo/topic', 'esri/views/2d/draw/Draw', 'esri/Graphic', 'esri/geometry
                             count: data.acsData.features.length
                         }]
                     };
-                    tp.publish('open-report-window', app.selectedReport, 'acs');
+                    tp.publish("open-report-window", app.selectedReport, "acs");
                     $customGeographyReports.hide();
-                    app.AddHighlightGraphics(data.acsData.features, $useZoom.is(':checked'));
-                    $('.reportFormArea').hide();
+                    app.AddHighlightGraphics(data.acsData.features, $useZoom.is(":checked"));
+                    $(".reportFormArea").hide();
                 }
             });
         }

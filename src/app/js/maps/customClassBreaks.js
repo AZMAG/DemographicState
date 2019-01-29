@@ -1,3 +1,4 @@
+"use strict";
 require([
         "dojo/topic",
         "dojo/domReady!"
@@ -16,17 +17,17 @@ require([
 
 
             $btnClassBreaksEditor.click(function (e) {
-                CbrParamChanged('Custom');
+                CbrParamChanged("Custom");
                 e.preventDefault();
-            })
+            });
 
             function CbrParamChanged(type) {
                 if (!type) {
                     type = $("#classType").val();
                 }
 
-                if (type == 'Custom') {
-                    $customClassBreaksModal.modal('show');
+                if (type === "Custom") {
+                    $customClassBreaksModal.modal("show");
                     $btnClassBreaksEditor.show();
                     SetupSplitter();
                     SetupCharts();
@@ -45,16 +46,16 @@ require([
                     let sliderHeight = $classBreakSliders.height() - (infos.length - 1) * 7;
                     // maxVal = infos[infos.length - 1].maxValue;
 
-                    if (data.classType === 'Custom' && !custom) {
+                    if (data.classType === "Custom" && !custom) {
                         let cbrCount = $classBreaksCount.val();
-                        let breaks = data.conf.breaks['Jenks' + cbrCount];
+                        let breaks = data.conf.breaks["Jenks" + cbrCount];
                         infos = app.GetCurrentBreaks(breaks, data.colorRamp);
                         maxVal = infos[infos.length - 1].maxValue;
                     }
 
                     //Clear out old class break sliders
-                    $classBreakSliders.html('');
-                    $classBreakSliderTooltips.html('');
+                    $classBreakSliders.html("");
+                    $classBreakSliderTooltips.html("");
 
                     const panes = [];
 
@@ -68,7 +69,7 @@ require([
                             info: info,
                             clr: clr,
                             size: paneSize
-                        })
+                        });
 
                         let minLabel = app.numLabel(info.minValue);
                         let maxLabel = app.numLabel(info.maxValue);
@@ -91,18 +92,18 @@ require([
                         </div>
                         `);
 
-                        let showLabel = 'none';
+                        let showLabel = "none";
                         if (paneSize > minLabelSize) {
-                            showLabel = 'inline-block';
+                            showLabel = "inline-block";
                         }
 
                         //Add pane
                         $classBreakSliders.append(`
-                        <div class="cbPane" id="cbPane${i}" 
+                        <div class="cbPane" id="cbPane${i}"
                         style="display: flex; background-color:rgba(${clr.r},${clr.g},${clr.b},${lyr.opacity});">
                         <div class="paneLabel" style="display: ${showLabel}; margin: auto; font-size: 10.5px;">${info.label}</div>
                         </div>
-                    `)
+                    `);
 
                         $classBreakSliders.find("#cbPane" + i).data("info", info);
 
@@ -111,7 +112,7 @@ require([
                             resizable: true,
                             idx: i,
                             scrollable: false
-                        }
+                        };
                         panes.push(newPane);
                     }
 
@@ -125,7 +126,7 @@ require([
                         panes: panes,
                         resize: UpdateRangeSliders
                     });
-                })
+                });
             }
 
             //This really just updates the tooltips?
@@ -225,13 +226,13 @@ require([
                 let totalHeight = $classBreakSliders.height() + 2;
                 let chartHeight = totalHeight / numberOfCharts;
 
-                //Gets active map item    
+                //Gets active map item
                 let $activeItem = $("#mapsList").find(".activeMapItem");
                 if ($activeItem) {
                     //Pull jquery data object from active map item
                     let conf = $activeItem.data("mapsConfig");
                     let $classBreakCharts = $("#classBreakCharts");
-                    $classBreakCharts.html('');
+                    $classBreakCharts.html("");
                     let dataBins = {};
                     let wFactor = .4;
                     let q = {
@@ -239,7 +240,7 @@ require([
                         outFields: [conf.FieldName],
                         returnGeometry: false,
                         orderByFields: [conf.FieldName + " DESC"]
-                    }
+                    };
 
                     if (conf.NormalizeField) {
                         q.outFields.push(conf.NormalizeField);
@@ -276,14 +277,14 @@ require([
                             }
                             $classBreakCharts.append(`
                         <div data-chart-id="chart${i}" class="classBreakChart"
-                        style="font-size:10px;height:${chartHeight}px; width: ${w}px;" 
+                        style="font-size:10px;height:${chartHeight}px; width: ${w}px;"
                         data-toggle="tooltip" data-placement="right" title="${count}">
                         </div>
-                        `)
+                        `);
                         }
                         //activate bootstrap tooltip
-                        $classBreakCharts.find('.classBreakChart').tooltip();
-                    })
+                        $classBreakCharts.find(".classBreakChart").tooltip();
+                    });
 
 
                 }
@@ -297,7 +298,7 @@ require([
                 //     $sliderTooltipInput.val(val);
                 //     $sliderTooltipInput.focus();
 
-                //     $sliderTooltipInput.on('focusout', TooltipEditComplete)
+                //     $sliderTooltipInput.on("focusout", TooltipEditComplete)
 
                 //     function TooltipEditComplete() {
                 //         let $input = $(this);
@@ -330,7 +331,7 @@ require([
 
                 //         //Update panel info values
                 //         //Gets slider number value
-                //         let sliderId = $sliderTooltip.attr('id').replace(/^\D+/g, '');
+                //         let sliderId = $sliderTooltip.attr("id").replace(/^\D+/g, "");
 
                 //         let $prevPane = $(`#cbPane${sliderId-1}`);
                 //         let $nextPane = $(`#cbPane${sliderId}`);
@@ -383,21 +384,21 @@ require([
                 let $panes = $classBreakSliders.find(".cbPane");
 
                 $panes.each(function (i, val) {
-                    let dataInfo = $(val).data('info');
+                    let dataInfo = $(val).data("info");
                     dataInfo.symbol.color = colorRamp[$panes.length - 1 - i];
                     classBreaks.push(dataInfo);
                 });
                 return classBreaks.reverse();
-            }
+            };
             $("#customClassBreaksButton").click(function () {
                 tp.publish("customClassBreaks-selected");
-                $customClassBreaksModal.modal('hide');
-            })
+                $customClassBreaksModal.modal("hide");
+            });
 
 
             tp.subscribe("layers-added", CbrParamChanged);
             tp.subscribe("map-selected", CbrParamChanged);
             tp.subscribe("classType-change", CbrParamChanged);
             tp.subscribe("classBreaksCount-change", CbrParamChanged);
-        })
-    })
+        });
+    });
