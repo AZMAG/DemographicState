@@ -1,13 +1,14 @@
+"use strict";
 require([
         "dojo/topic",
         "esri/tasks/QueryTask"
     ],
     function (tp, QueryTask) {
-        tp.subscribe('panel-loaded', function (panel) {
-            if (panel === 'reports') {
+        tp.subscribe("panel-loaded", function (panel) {
+            if (panel === "reports") {
                 InitAdvancedQuery();
             }
-        })
+        });
 
         let QueryItems = [];
         let CompareOperators = {
@@ -186,7 +187,7 @@ require([
 
             function OnDrop(e) {
                 AddRow(DataItemSelected);
-            };
+            }
             /**
             Method for executing the constructed query.
             @method runQuery
@@ -194,26 +195,26 @@ require([
             function RunQuery() {
 
                 if (resultCount === 0) {
-                    alert('0 block groups meet your current criteria.  Please refine your query and try again.');
+                    alert("0 block groups meet your current criteria.  Please refine your query and try again.");
                 } else {
                     let q = {
                         where: BuildQueryString(),
                         returnGeometry: false,
-                        outFields: ['GEOID']
+                        outFields: ["GEOID"]
                     };
 
                     let qt = new QueryTask({
-                        url: app.config.mainUrl + '/0'
+                        url: app.config.mainUrl + "/0"
                     });
 
                     qt.execute(q).then(function (res) {
                         let geoids = [];
 
                         res.features.forEach(feature => {
-                            geoids.push(feature.attributes['GEOID'])
+                            geoids.push(feature.attributes["GEOID"]);
                         });
 
-                        app.GetData(app.config.layerDef['blockGroups'], geoids).then(function (data) {
+                        app.GetData(app.config.layerDef["blockGroups"], geoids).then(function (data) {
 
                             var acsdata = app.summarizeFeatures(data.acsData);
                             var censusdata = app.summarizeFeatures(data.censusData);
@@ -231,13 +232,13 @@ require([
                                     count: data.acsData.features.length
                                 }]
                             };
-                            tp.publish('open-report-window', app.selectedReport, 'acs');
+                            tp.publish("open-report-window", app.selectedReport, "acs");
                             app.AddHighlightGraphics(data.acsData.features, true);
-                            $('.reportFormArea').hide();
+                            $(".reportFormArea").hide();
                         });
                     });
                 }
-            };
+            }
 
             PopulateStringDropdowns = function (results) {
                 var count = QueryItems.length;
@@ -326,7 +327,7 @@ require([
                     queryString = "1=1";
                 }
                 return queryString;
-            };
+            }
 
             /**
             Method for executing the constructed query.
@@ -341,14 +342,14 @@ require([
                 };
 
                 let qt = new QueryTask({
-                    url: app.config.mainUrl + '/0'
+                    url: app.config.mainUrl + "/0"
                 });
 
                 qt.executeForCount(q).then(function (count) {
                     $advancedCount.text(count).show();
                     resultCount = count;
                 });
-            };
+            }
 
             function OnChange(e) {
                 var item = $("#" + e.sender.element[0].id).parent();
@@ -385,7 +386,7 @@ require([
                     });
                 }
                 VerifyQuery();
-            };
+            }
 
             function AddRow(dataItem) {
                 var count = QueryItems.length + 1;
@@ -418,8 +419,8 @@ require([
                         }
 
                         target.append(`
-                        <div class='demo-section advancedRow k-header' id='${dataItem.uid}${count}'>
-                        <input class='hiddenFld' type='hidden' value='${dataItem.Type}' placeholder='${dataItem.Placeholder}'><span class='queryItem'>${dataItem.ShortName}: </span><span class="inputBoxes"><select class="operatorDDL" id="operatorDDL${count}"></select>
+                        <div class="demo-section advancedRow k-header" id="${dataItem.uid}${count}">
+                        <input class="hiddenFld" type="hidden" value="${dataItem.Type}" placeholder="${dataItem.Placeholder}"><span class="queryItem">${dataItem.ShortName}: </span><span class="inputBoxes"><select class="operatorDDL" id="operatorDDL${count}"></select>
                         <input class="style1" placeholder="min"></input>
                         <input placeholder="max" class="style1"></input>
                         <button title="Remove row" class="btn removeRowBtn"><i class="fas fa-trash"></i></button>
@@ -469,8 +470,8 @@ require([
                         };
                     } else {
                         target.append(`
-                        <div class='demo-section k-header' id='${dataItem.uid}${count}'>
-                        <span class='queryItem'>${dataItem.ShortName}: </span>
+                        <div class="demo-section k-header" id="${dataItem.uid}${count}">
+                        <span class="queryItem">${dataItem.ShortName}: </span>
                         <span class="inputBoxes">
                             <select class=strMultiselect id="strMS${count}"></select>
                             <button class="removeRowBtn">Remove</button>
@@ -493,6 +494,6 @@ require([
                     QueryItems.push(queryItem);
                     VerifyQuery();
                 }
-            };
+            }
         }
-    })
+    });

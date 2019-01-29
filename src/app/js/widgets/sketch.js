@@ -1,3 +1,4 @@
+"use strict";
 require([
     "esri/widgets/Sketch",
     "esri/Map",
@@ -17,5 +18,5 @@ require([
         //     view: app.view
         // });
         // app.view.ui.add(sketch, "bottom-right");
-    })
-})
+    });
+});

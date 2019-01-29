@@ -1,7 +1,8 @@
+"use strict";
 require([
-        'esri/widgets/Home/HomeViewModel',
-        'dojo/topic',
-        'dojo/domReady!'
+        "esri/widgets/Home/HomeViewModel",
+        "dojo/topic",
+        "dojo/domReady!"
     ],
     function (HomeViewModel, tp) {
         tp.subscribe("widget-zoom-loaded", function () {
@@ -10,11 +11,11 @@ require([
                 view: app.view
             });
 
-            app.view.ui.add(homeId, 'bottom-right');
+            app.view.ui.add(homeId, "bottom-right");
 
             $("#" + homeId).click(function () {
                 homeVM.go();
             });
-            tp.publish('widget-home-loaded');
-        })
-    })
+            tp.publish("widget-home-loaded");
+        });
+    });

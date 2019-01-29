@@ -1,7 +1,8 @@
+"use strict";
 require([
-        'esri/widgets/BasemapToggle/BasemapToggleViewModel',
-        'dojo/topic',
-        'dojo/domReady!'
+        "esri/widgets/BasemapToggle/BasemapToggleViewModel",
+        "dojo/topic",
+        "dojo/domReady!"
     ],
     function (BasemapToggleViewModel, tp) {
         tp.subscribe("widget-locate-loaded", function () {
@@ -11,10 +12,10 @@ require([
 
             let toggleVM = new BasemapToggleViewModel({
                 view: app.view,
-                nextBasemap: 'hybrid'
+                nextBasemap: "hybrid"
             });
 
-            app.view.ui.add(basemapId, 'bottom-right');
+            app.view.ui.add(basemapId, "bottom-right");
             let $toggleSelector = $("#" + basemapId);
             let toggled = true;
 
@@ -33,10 +34,10 @@ require([
             });
 
             if (app.initConfig && app.initConfig.basemap) {
-                if (app.initConfig.basemap !== 'gray') {
+                if (app.initConfig.basemap !== "gray") {
                     ToggleBasemap();
                 }
             }
-            tp.publish('widget-basemapToggle-loaded');
-        })
-    })
+            tp.publish("widget-basemapToggle-loaded");
+        });
+    });
