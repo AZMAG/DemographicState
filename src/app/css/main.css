@@ -586,6 +586,67 @@ a[aria-expanded='true'] {
     margin: 0px;
 }
 
+
+
+
+#screenshotDiv {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+.hide {
+    display: none;
+}
+
+#screenshotDiv img {
+    border: 10px solid white;
+    box-shadow: 2px 2px 5px 0 rgba(0, 0, 0, 0.5);
+    max-width: 70%;
+    max-height: 70%;
+}
+
+#screenshotDiv>* {
+    margin: 0.5em;
+}
+
+.screenshotCursor {
+    cursor: crosshair;
+}
+
+.action-button {
+    padding: 0.6em;
+    border: 1px solid #0079c1;
+    text-align: center;
+    background-color: white;
+    cursor: pointer;
+}
+
+.action-button:hover,
+.action-button:focus {
+    background: #0079c1;
+    color: white;
+}
+
+#maskDiv {
+    position: absolute;
+    background: rgba(255, 51, 0, 0.1);
+    border: 2px dashed rgb(255, 51, 0);
+}
+
+
+
+
+
+
+
+
+
+
 .popover-title {
     background: var(--mainColor);
     color: var(--textColor);
