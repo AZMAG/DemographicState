@@ -284,7 +284,19 @@
                     <div class="checkbox">
                         <input name="dynamicCBRCheckbox" id="dynamicCBRCheckbox" type="checkbox">
                         <label for="dynamicCBRCheckbox" id="dynamicCBRLabel">Use dynamic class breaks</label>
-                        <i style="margin-left: 5px;" class="fas fa-question-circle"></i>
+                        <!-- <span id="dynamicHelp" data-placement="right" data-toggle="popover" data-trigger="hover"
+                            tabindex="0" data-content=""
+                            aria-label="Dynamic Renderer Help" title="Dynamic Renderer Help">
+                            <i class="fas fa-question-circle"></i>
+                        </span> -->
+                        <span id="dynamicHelp" class="article-content" href="#" data-content="<div style='width: 90%;'>This option provides the ability to toggle between a static legend that is based on statewide data or a legend that is based on the current view of the map.</div>" rel="popover"
+                            data-placement="auto" data-original-title="Dynamic Renderer Help" data-trigger="hover"><i
+                                class="fas fa-question-circle"></i></span>
+                        <!-- {
+                        title: 'Dynamic Renderering',
+                        content: `<div></div>`,
+                        html: true
+                        } -->
                     </div>
                     <div class="flexCenter">
                         <label for="classBreaksCount">Number of Data Classes</label>

@@ -1551,7 +1551,11 @@ hr.pop {
 
 .popover {
     color: black;
-    width: 90vw;
+    /* pointer-events: none; */
+}
+
+#dynamicHelp {
+    cursor: pointer;
 }
 
 .queryContainer {
