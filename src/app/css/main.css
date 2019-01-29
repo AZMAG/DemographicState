@@ -606,8 +606,9 @@ a[aria-expanded='true'] {
 #screenshotDiv img {
     border: 10px solid white;
     box-shadow: 2px 2px 5px 0 rgba(0, 0, 0, 0.5);
-    max-width: 70%;
-    max-height: 70%;
+    width: 50%;
+    height: auto;
+    background-color: white;
 }
 
 #screenshotDiv>* {

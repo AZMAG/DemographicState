@@ -18,9 +18,13 @@ require([
 
         $printWidget.click(() => {
             app.view.takeScreenshot({
-                format: "png"
+                format: "png",
+                layers: [
+                    app.map.findLayerById("blockGroups"),
+                    app.map.findLayerById("streets"),
+                    app.map.findLayerById("countyBoundaries")
+                ]
             }).then((screenshot) => {
-                console.log(screenshot)
                 savedScreenshot = screenshot;
                 showPreview(screenshot);
             })
@@ -28,13 +32,56 @@ require([
 
         $screenshotDiv.find('button').click((e) => {
             if (e.target.id == 'screenshotDownloadBtn') {
-                downloadImage('Arizona Demographics Map', savedScreenshot.dataUrl);
+                downloadImage('Arizona Demographics Map');
             } else {
                 returnToMap();
             }
         })
 
-        function downloadImage(filename, dataUrl) {
+        async function prepImage(screenshot) {
+            let screenSht = savedScreenshot;
+            if (screenshot && screenshot.data) {
+                screenSht = screenshot;
+            }
+            const imageData = screenSht.data;
+
+            let mapData = app.GetActiveMapData();
+            const title = mapData.Name;
+
+            // to add the text to the screenshot we create a new canvas element
+            const canvas = document.createElement("canvas");
+            const ctx = canvas.getContext("2d");
+            canvas.height = imageData.height;
+            canvas.width = imageData.width;
+
+            // add the screenshot data to the canvas
+            ctx.putImageData(imageData, 0, 0);
+
+            const headerHeight = 75;
+
+            //Add black rectangle to the top of the image
+            ctx.fillStyle = "#000";
+            ctx.fillRect(0, 0, imageData.width, headerHeight);
+
+            //Add Title to top of image
+            ctx.fillStyle = "#FFF";
+            ctx.font = "40px Arial";
+
+            ctx.fillText(title, (imageData.width / 2) - (ctx.measureText(title).width / 2), headerHeight * .7);
+
+            $(".slidecontainer").hide()
+            let legendCanvas = await html2canvas(document.querySelector("#legendDiv"));
+            let legendWidth = legendCanvas.width;
+            $(".slidecontainer").show()
+            let padding = 20;
+            ctx.drawImage(legendCanvas, imageData.width - legendWidth - padding, headerHeight + padding);
+
+            return canvas.toDataURL();
+        }
+
+
+        async function downloadImage(filename) {
+            let dataUrl = await prepImage();
 
             // the download is handled differently in Microsoft browsers
             // because the download attribute for <a> elements is not supported
@@ -74,7 +121,8 @@ require([
 
         // creates an image that will be appended to the DOM
         // so that users can have a preview of what they will download
-        function showPreview(screenshot) {
+        async function showPreview(screenshot) {
+            screenshot.dataUrl = await prepImage(screenshot);
             screenshotDiv.classList.remove("hide");
             // add the screenshot dataUrl as the src of an image element
             const screenshotImage = document.getElementsByClassName("js-screenshot-image")[0];
