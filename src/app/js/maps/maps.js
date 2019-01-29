@@ -46,7 +46,7 @@ require([
                 let layerId = f.layer.id;
                 let conf = app.config.layerDef[layerId];
 
-                tp.publish('openReport-by-geoid', conf, geoid);
+                tp.publish('openReport-by-geoids', conf, [geoid]);
             }
         });
     });
