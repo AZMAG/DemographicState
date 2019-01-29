@@ -367,9 +367,12 @@ body,
     white-space: normal;
 }
 
-#title6Grid {
-    display: none;
+#title6Area {
     margin-bottom: 40px;
+}
+
+#title6Area .k-reset {
+    cursor: pointer;
 }
 
 #bottomBar ul {
