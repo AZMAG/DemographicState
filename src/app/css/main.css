@@ -438,7 +438,7 @@ a[aria-expanded='true'] {
 }
 
 .shareLinks a:hover {
-    opacity: 0.8;
+    opacity: 0.7;
 }
 
 .shareLinks ul {
@@ -561,6 +561,10 @@ a[aria-expanded='true'] {
 .repContainer {
     display: flex;
     align-items: center;
+}
+
+.repContainer a:hover {
+    opacity: 0.7;
 }
 
 .repInfoContainer {

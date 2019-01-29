@@ -210,7 +210,7 @@ function GetChannelsHTML(channels) {
             channelsHTML += `<a class="socialChannel" title="Visit the ${channel.type} page" target="_blank" href="${type.url + channel.id}"><i class="${type.icon}"></i></a>`;
         }
     })
-    return channelsHTML;
+    return channelsHTML === '' ? '' : `<div>${channelsHTML}</div>`;
 }
 
 function GetRepHTML(rep) {
