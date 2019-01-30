@@ -66,14 +66,15 @@ require(["dojo/topic", "dojo/domReady!"], function (tp) {
                 }
             }
         });
-        // setTimeout(() => {
-        //     UpdateMapRenderer();
-        // }, 50);
+        setTimeout(() => {
+            UpdateMapRenderer();
+        }, 90);
 
 
         let $dynamicHelp = $("#dynamicHelp");
-
-        $dynamicHelp.popover();
+        $dynamicHelp.popover({
+            html: true
+        });
 
     });
 });
