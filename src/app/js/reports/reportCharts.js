@@ -28,13 +28,13 @@ require(["dojo/topic"], function (tp) {
                             background: "#4D4D4D",
                             format: "{0:n}",
                             color: "black",
-                            template: "#= kendo.format("{0:P}", percentage) #"
+                            template: `#= kendo.format(" {0:P}", percentage) #`
                             // visible: true
                         },
                         tooltip: {
                             visible: true,
                             // color: "white",
-                            template: "#= app.chartTooltip(value, category) # <br> #= kendo.format("{0:P}", percentage) #"
+                            template: `#= app.chartTooltip(value, category) # <br> #= kendo.format("{0:P}", percentage) #`
                         }
                     },
                     chartArea: {

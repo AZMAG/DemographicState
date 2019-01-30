@@ -182,8 +182,7 @@ require(["dojo/topic", "esri/tasks/QueryTask"], function (tp, QueryTask) {
             fields = app.acsFieldsConfig;
             res = data.acsData;
         }
-
-        $reportArea = $("#reportArea");
+        let $reportArea = $("#reportArea");
 
         let features = res.features;
         let feature = features[0];
@@ -239,6 +238,7 @@ require(["dojo/topic", "esri/tasks/QueryTask"], function (tp, QueryTask) {
         $("#summaryReport").show();
     }
     tp.subscribe("report-charts-created", refreshCharts);
+    let $reportArea = $("#reportArea");
 
     function refreshCharts() {
         let activeTab = $reportArea.find(".nav-link.active").text();
@@ -395,7 +395,7 @@ require(["dojo/topic", "esri/tasks/QueryTask"], function (tp, QueryTask) {
 
     tp.subscribe("open-report-window", OpenReportWindow);
 
-    dataCache = {};
+    let dataCache = {};
     let $loadingSpinner = $(".loading-container");
 
     app.GetData = async function (conf, geoids, geo) {
@@ -407,7 +407,7 @@ require(["dojo/topic", "esri/tasks/QueryTask"], function (tp, QueryTask) {
             geoid = geoids[0];
             let str = "";
             geoids.forEach(id => {
-                str += `"${id}",`;
+                str += `'${id}',`;
             });
             where = `GEOID IN(${str.slice(0, -1)})`;
         }

@@ -240,7 +240,7 @@ require([
                 }
             }
 
-            PopulateStringDropdowns = function (results) {
+            function PopulateStringDropdowns(results) {
                 var count = QueryItems.length;
                 var sourceArray = [];
                 $.each(results.features, function (index, feature) {

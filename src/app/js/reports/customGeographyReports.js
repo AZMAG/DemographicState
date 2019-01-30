@@ -81,7 +81,7 @@ require(["dojo/topic", "esri/views/2d/draw/Draw", "esri/Graphic", "esri/geometry
 
                 e.preventDefault();
             });
-            count = 0;
+            let count = 0;
 
             function drawPolygon(e, type) {
                 //remove existing graphic
