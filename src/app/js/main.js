@@ -40,6 +40,12 @@ require([
     }
 );
 
+
+// $("#colorRampModal").load("app/views/modal-colorRamp.html", function () {
+
+// });
+$("#customClassBreaksModal").load("app/views/modal-customBreaks.html");
+
 //*** terms binding
 $("#termsModal").load("app/views/modal-terms.html");
 //*** privacy binding

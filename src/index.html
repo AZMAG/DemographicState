@@ -112,7 +112,10 @@
     <!-- /Google Analytics -->
 </head>
 
-<body class="claro">
+<body>
+
+    <!-- <div class="modal fade" id="colorRampModal" role="dialog"></div> -->
+
     <div id="colorRampModal" class="modal" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -141,35 +144,12 @@
             </div>
         </div>
     </div>
-    <div id="customClassBreaksModal" class="modal" data-keyboard="false" data-backdrop="static" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Update Custom Class Breaks</h5>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="form-group">
-                            <p class="info">
-                                Change data classification breaks by selecting a vertical slider bar and adjusting
-                                its position. You can also click on the slider bars and enter a starting value.
-                            </p>
-                            <div style="display:flex;">
-                                <div id="classBreakSliderTooltips"></div>
-                                <div id="classBreakSliders"></div>
-                                <div id="classBreakCharts"></div>
-                            </div>
-                            <div id="classBreakSliders2"></div>
-                            <hr />
-                            <button id="customClassBreaksButton" class="btn btn-submit" type="button">
-                                Confirm
-                            </button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
+
+    <div id="customClassBreaksModal" class="modal" data-keyboard="false" data-backdrop="static" tabindex="-1" role="dialog"></div>
+
+
+
+
     <div class="customWidget" id="legend">
         <div title="Click and drag to move window" id="legendHeader">
             <span>Legend</span><span id="legendGrip"><a class="modal-anchor md track" data-toggle="modal" data-target="#legendHelpModal"><i
@@ -221,6 +201,7 @@
     </div> -->
 
     <div id="drawingTooltip"></div>
+
     <div class="wrapper">
         <nav id="sidebar">
             <div class="sidebar-header">
@@ -289,9 +270,9 @@
                             aria-label="Dynamic Renderer Help" title="Dynamic Renderer Help">
                             <i class="fas fa-question-circle"></i>
                         </span> -->
-                        <span id="dynamicHelp" class="article-content" href="#" data-content="This option provides the ability to toggle between a static legend that is based on statewide data or a legend that is based on the current view of the map." rel="popover"
-                            data-placement="auto" data-original-title="Dynamic Renderer Help" data-trigger="hover"><i
-                                class="fas fa-question-circle"></i></span>
+                        <span id="dynamicHelp" class="article-content" href="#" data-content="This option provides the ability to toggle between a static legend that is based on statewide data or a legend that is based on the current view of the map."
+                            rel="popover" data-placement="auto" data-original-title="Dynamic Renderer Help"
+                            data-trigger="hover"><i class="fas fa-question-circle"></i></span>
                         <!-- {
                         title: 'Dynamic Renderering',
                         content: `<div></div>`,
@@ -372,6 +353,8 @@
             </div>
         </div>
     </div>
+
+
 
     <!--privacy modal-->
     <div class="modal fade" id="privacyModal" role="dialog"></div>
