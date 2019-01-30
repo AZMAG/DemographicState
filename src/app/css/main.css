@@ -448,7 +448,7 @@ a[aria-expanded='true'] {
     padding: 0px;
     display: flex;
     align-items: center;
-    width: 65%;
+    width: 90%;
     margin: auto;
     justify-content: space-between;
 }
@@ -1541,6 +1541,10 @@ hr.pop {
 #bikeDefIcon:hover {
     cursor: pointer;
     color: gray;
+}
+
+.popover-body {
+    max-width: 220px;
 }
 
 .popover.popover--topright {

@@ -73,7 +73,9 @@ require(["dojo/topic", "dojo/domReady!"], function (tp) {
 
         let $dynamicHelp = $('#dynamicHelp');
 
-        $dynamicHelp.popover();
+        $dynamicHelp.popover({
+            html: true
+        });
 
     })
 });
