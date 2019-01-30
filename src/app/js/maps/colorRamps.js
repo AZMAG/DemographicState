@@ -19,24 +19,28 @@ require([
         $colorRamp.click(function() {
             $sequentialRamps.html(GetRampsHTMLByType("Sequential"));
             $divergingRamps.html(GetRampsHTMLByType("Diverging"));
-            $colorRampModal.modal('show');
+            $colorRampModal.modal("show");
         });
 
+<<<<<<< HEAD
         $("#selectionRamps").on("click", ".cRamp", function() {
             $colorRampModal.modal('hide');
+=======
+        $("#selectionRamps").on("click", ".cRamp", function () {
+            $colorRampModal.modal("hide");
+>>>>>>> Jack-Develop-Branch
             $colorRamp.html($(this)[0].outerHTML);
             tp.publish("colorRamp-Changed");
         });
 
-        function UpdateColorRampControl() {
-            let data = app.GetCurrentMapsParams();
+        function UpdateColorRampControl(data) {
             $colorRamp.html(app.ColorRampToHTML(data.colorRamp, data.rampKey, data.type));
         }
 
-        tp.subscribe('BlockGroupRendererUpdated', UpdateColorRampControl);
+        tp.subscribe("BlockGroupRendererUpdated", UpdateColorRampControl);
 
         function GetRampsHTMLByType(type) {
-            let rampsHtml = ''
+            let rampsHtml = "";
             let numBreaks = $classBreaksCount.val();
             let ramps = app.GetRampsByNumAndType(type, numBreaks);
 
@@ -47,5 +51,9 @@ require([
             });
             return rampsHtml;
         }
+<<<<<<< HEAD
     }
 );
+=======
+    });
+>>>>>>> Jack-Develop-Branch

@@ -451,4 +451,4 @@ app.colorRampConfig = {
             }
         }
     }
-}
+};

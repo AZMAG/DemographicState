@@ -1,5 +1,4 @@
-app.censusFieldsConfig = [
-    {
+app.censusFieldsConfig = [{
         fieldName: 'ACRES',
         fieldAlias: 'ACRES',
         fieldType: 'Number',
@@ -669,7 +668,7 @@ app.censusFieldsConfig = [
         fieldName: 'SEASONAL_HU',
         fieldAlias: 'SEASONAL_HU',
         fieldType: 'Number',
-        tableHeader: 'Seasonal Vacant Housing Units',
+        tableHeader: 'For seasonal, recreational, or occasional use',
         indentLevel: 2,
         universeField: 0,
         category: 'Housing',
@@ -687,7 +686,7 @@ app.censusFieldsConfig = [
         fieldName: 'NON_SEASONAL_VACANT_HU',
         fieldAlias: 'NON_SEASONAL_VACANT_HU',
         fieldType: 'Number',
-        tableHeader: 'Non-Seasonal Vacant Housing Units',
+        tableHeader: 'All other Vacant',
         indentLevel: 2,
         universeField: 0,
         category: 'Housing',

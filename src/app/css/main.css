@@ -13,13 +13,18 @@
     SIDEBAR STYLES
 ----------------------------------------------------- */
 
+<<<<<<< HEAD
 @import 'https://fonts.googleapis.com/css?family=Poppins:300, 400, 500, 600, 700';
+=======
+>>>>>>> Jack-Develop-Branch
 html {
     height: 100%;
+    /* font-size: 62.5%; */
 }
 
 body {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Poppins', sans-serif !important;
+    /* font-size: 1.8em; */
     background: #fafafa;
     height: 100%;
     overflow: hidden !important;
@@ -29,8 +34,8 @@ p {
     font-family: 'Poppins', sans-serif;
     font-size: 1.1em;
     font-weight: 300;
-    line-height: 1.7em;
-    color: #999;
+    line-height: 1.5em;
+    color: #4c4c4c;
 }
 
 .esri-view .esri-view-surface--inset-outline:focus::after {
@@ -72,6 +77,39 @@ span {
     display: inline-block;
 }
 
+<<<<<<< HEAD
+=======
+.contact {
+    font-size: 14px;
+    text-decoration: none;
+    color: #7a7a7a;
+}
+
+.contact a {
+    text-decoration: none;
+}
+
+.contacts {
+    font-size: 12px;
+    text-decoration: none;
+    color: #7a7a7a;
+}
+
+.contacts .link {
+    text-decoration: none;
+}
+
+.md {
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.panelHeaderIcons {
+    display: inline;
+    float: right;
+    padding: 13px;
+}
+>>>>>>> Jack-Develop-Branch
 
 /* ---------------------------------------------------
     SIDEBAR STYLE
@@ -200,6 +238,7 @@ a.article:hover,
     display: none;
     height: 100vh;
     overflow-y: auto;
+    overflow-x: hidden;
     min-width: 25%;
     transition: all 0.3s;
 }
@@ -260,9 +299,16 @@ a.article:hover,
     word-wrap: break-word;
     border-bottom: none;
     padding-bottom: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
-.esri-legend__service:nth-of-type(3) {
+#layerLegend {
+    max-height: 30vh;
+}
+
+#layerLegend .esri-legend__service:first-of-type {
     padding-top: 10px;
     border-top: 1px solid rgba(0, 0, 0, 0.1);
 }
@@ -291,9 +337,17 @@ body,
     flex-direction: column;
 }
 
+#shareLinkCopy {
+    cursor: pointer;
+}
+
 .sideways components {
     /* background-color: blue; */
     display: flex;
+}
+
+.components {
+    cursor: pointer;
 }
 
 .panelHeader {
@@ -323,8 +377,12 @@ body,
     white-space: normal;
 }
 
-#title6Grid {
-    display: none;
+#title6Area {
+    margin-bottom: 40px;
+}
+
+#title6Area .k-reset {
+    cursor: pointer;
 }
 
 #bottomBar ul {
@@ -376,6 +434,14 @@ a[aria-expanded='true'] {
     display: none;
 }
 
+.btnExportPDF {
+    margin-left: auto;
+}
+
+.btnExportPDF:hover {
+    background-color: #545b62;
+}
+
 .shareLinks a {
     cursor: pointer;
     height: 40px;
@@ -384,13 +450,17 @@ a[aria-expanded='true'] {
 }
 
 .shareLinks a:hover {
-    opacity: 0.8;
+    opacity: 0.7;
 }
 
 .shareLinks ul {
     list-style: none;
     padding: 0px;
-    margin: 0px;
+    display: flex;
+    align-items: center;
+    width: 90%;
+    margin: auto;
+    justify-content: space-between;
 }
 
 .shareLinks li {
@@ -465,6 +535,7 @@ a[aria-expanded='true'] {
 
 #cardContainer .card-text {
     flex: 4;
+    margin-left: 10px;
 }
 
 #cardContainer .card:hover {
@@ -498,6 +569,104 @@ a[aria-expanded='true'] {
     color: var(--textColor);
 }
 
+<<<<<<< HEAD
+=======
+.repContainer {
+    display: flex;
+    align-items: center;
+}
+
+.repContainer a:hover {
+    opacity: 0.7;
+}
+
+.repInfoContainer {
+    flex: 1;
+    margin-left: 10px;
+}
+
+.rep-pic {
+    border-radius: 50%;
+    /* height: 80px; */
+    width: 50px;
+}
+
+.socialChannel {
+    margin: 3px;
+    font-size: 17px;
+}
+
+.socialChannel:hover {
+    opacity: .8;
+}
+
+.socialChannel:first-of-type {
+    margin: 0px;
+}
+
+
+
+
+#screenshotDiv {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+.hide {
+    display: none;
+}
+
+#screenshotDiv img {
+    border: 10px solid white;
+    box-shadow: 2px 2px 5px 0 rgba(0, 0, 0, 0.5);
+    width: 50%;
+    height: auto;
+    background-color: white;
+}
+
+#screenshotDiv>* {
+    margin: 0.5em;
+}
+
+.screenshotCursor {
+    cursor: crosshair;
+}
+
+.action-button {
+    padding: 0.6em;
+    border: 1px solid #0079c1;
+    text-align: center;
+    background-color: white;
+    cursor: pointer;
+}
+
+.action-button:hover,
+.action-button:focus {
+    background: #0079c1;
+    color: white;
+}
+
+#maskDiv {
+    position: absolute;
+    background: rgba(255, 51, 0, 0.1);
+    border: 2px dashed rgb(255, 51, 0);
+}
+
+
+
+
+
+
+
+
+
+
+>>>>>>> Jack-Develop-Branch
 .popover-title {
     background: var(--mainColor);
     color: var(--textColor);
@@ -668,6 +837,8 @@ label:hover,
     cursor: move;
 }
 
+
+
 #legendHeader span {
     margin: 15px;
     font-weight: bold;
@@ -716,12 +887,96 @@ label:hover,
     padding-left: 7px;
 }
 
+#dynamicCBRCheckbox {
+    margin-left: 5px;
+}
+
+#dynamicCBRLabel {
+    margin-left: 10px;
+}
+
+.compareHeader {
+    white-space: normal !important;
+    vertical-align: middle !important;
+    font-weight: bold !important;
+    font-size: 14px !important;
+    text-align: center !important;
+}
+
+#specificReportComparison {
+    display: none;
+}
+
+#specificReportComparisonSmall {
+    display: none;
+}
+
+#specificReportComparisonLabel {
+    display: none;
+    margin-top: 1rem;
+}
+
+#standardComparisonLabel {
+    padding: 10px 0px 0 0;
+    margin-bottom: 0px;
+}
+
 #drawClearBtn {
     display: none;
 }
 
+.k-treeview .k-item {
+    color: black;
+}
+
+#advancedTreeview {
+    height: 25vh;
+}
+
+#advancedContainer {
+    display: flex;
+    flex-direction: column;
+    border: solid #e9e9ea;
+    border-width: 0.2rem;
+    padding: 0.9rem;
+}
+
+#advancedQueryTarget {
+    height: 48vh;
+    margin-top: 10px;
+    border: solid #e9e9ea;
+    border-width: 0.2rem;
+    padding: 0.4rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#advancedCntDiv {
+    margin-top: 10px;
+    border: solid #e9e9ea;
+    border-width: 0.2rem;
+    padding: 0.4rem;
+    display: flex;
+    align-items: center;
+}
+
+#btnAdvancedSubmit {
+    margin-left: auto;
+}
+
+#advancedCount {
+    margin-left: 10px;
+    font-weight: bold;
+}
+
+
 #drawAddBtn {
     display: none;
+}
+
+.esri-icon-search {
+    color: white;
 }
 
 #drawInstructions {
@@ -740,6 +995,7 @@ label:hover,
     z-index: 10;
     border-radius: 10px;
     font-size: 11px;
+    pointer-events: none;
 }
 
 .flexContainer {
@@ -751,8 +1007,25 @@ label:hover,
     display: none;
 }
 
-.esri-widget__heading .esri-legend__service-label {
-    font-size: 13px;
+.esri-legend__service-label {
+    font-size: 12px !important;
+    flex: 1;
+    order: 2;
+}
+
+.esri-legend__layer {
+    order: 1;
+    width: 100%;
+}
+
+#layerLegend .esri-legend__layer {
+    order: 1;
+    width: 20%;
+}
+
+.esri-widget__heading {
+    font-size: 11px;
+    flex: 1;
 }
 
 .esri-legend__message {
@@ -856,8 +1129,8 @@ label:hover,
 
 .closePanel {
     padding: 5px;
-    float: right;
-    margin-right: 5px;
+    /* float: right;
+    margin-right: 5px; */
 }
 
 .esri-icon {
@@ -890,7 +1163,7 @@ label:hover,
 
 .panelDiv {
     padding: 5px;
-    max-width: 27vw;
+    width: 27vw;
     display: none;
 }
 
@@ -973,13 +1246,23 @@ label:hover,
 }
 
 .link {
-    text-decoration: underline;
-    color: #2ad;
-    font-weight: 700;
+    text-decoration: none;
+    color: #2baab1;
+    font-weight: 600;
 }
 
 .esri-popup__pointer-direction.esri-popup--shadow {
     background-color: white;
+}
+
+.popf {
+    font-size: 16px;
+    font-weight: bold;
+    padding-top: 5px;
+}
+
+hr.pop {
+    margin: 10px;
 }
 
 .legal {
@@ -994,19 +1277,29 @@ label:hover,
     padding: 2px;
 }
 
+<<<<<<< HEAD
 
 /* .modal {
     overflow: hidden;
+=======
+.modal-body {
+    font-size: 80%;
+>>>>>>> Jack-Develop-Branch
 }
-
-.modal-dialog {
-    margin-right: 0;
-    margin-left: 0;
-} */
 
 .modal-header {
     /* not necessary but imo important for user */
     cursor: move;
+    display: initial;
+    background-color: #c1c1c1;
+}
+
+.legendSrc {
+    margin-left: 10%;
+    margin-right: 10%;
+    font-weight: bold;
+    margin-bottom: 11px;
+    padding: 0px;
 }
 
 .myHiddenClass {
@@ -1021,6 +1314,31 @@ label:hover,
     cursor: pointer;
 }
 
+<<<<<<< HEAD
+=======
+#btnClassBreaksEditor {
+    margin-left: 10px;
+    display: none;
+}
+
+.loading-container {
+    display: flex;
+    position: fixed;
+    z-index: 2;
+    background-color: rgba(0, 0, 0, 0.302);
+    width: 100%;
+    height: 100%;
+}
+
+.loading-spinner {
+    margin: auto;
+    background-color: white;
+    text-align: center;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+>>>>>>> Jack-Develop-Branch
 .flexCenter {
     display: flex;
     align-items: center;
@@ -1037,7 +1355,20 @@ label:hover,
 }
 
 #copyDiv {
+<<<<<<< HEAD
     font-size: 70%;
+=======
+    font-size: 68%;
+    font-weight: 600;
+>>>>>>> Jack-Develop-Branch
+    text-align: center;
+}
+
+#copyDiv p {
+    margin: 0;
+}
+
+.contHeader {
     text-align: center;
 }
 
@@ -1132,17 +1463,6 @@ label:hover,
     display: none;
 }
 
-#reportLoader {
-    display: none;
-    align-items: center;
-}
-
-#reportLoader img {
-    padding-top: 10px;
-    height: 40px;
-    margin: auto;
-}
-
 #specificReportDiv {
     display: none;
 }
@@ -1153,6 +1473,14 @@ label:hover,
 
 #bufferOptions {
     display: none;
+    align-items: center;
+    border: solid #e9e9ea;
+    border-width: 0.2rem;
+    padding: 0.5rem;
+}
+
+#bufferOptions .form-control {
+    margin-left: 8px;
 }
 
 #interactiveForm {
@@ -1231,9 +1559,17 @@ label:hover,
     margin-top: 17px !important;
 }
 
+#legendGrip .fas {
+    padding: 0 5px 0 5px;
+}
+
 #bikeDefIcon:hover {
     cursor: pointer;
     color: gray;
+}
+
+.popover-body {
+    max-width: 220px;
 }
 
 .popover.popover--topright {
@@ -1244,7 +1580,11 @@ label:hover,
 
 .popover {
     color: black;
-    width: 90vw;
+    /* pointer-events: none; */
+}
+
+#dynamicHelp {
+    cursor: pointer;
 }
 
 .queryContainer {
@@ -1275,32 +1615,27 @@ label:hover,
 }
 
 .queryItem {
-    margin-left: 3%;
-    line-height: 50px;
+    text-align: center;
+    flex: 1;
+    margin: 10px;
 }
 
 .inputBoxes {
-    float: right;
-    margin-right: 1%;
-    margin-top: 14px;
-    margin-bottom: 10px;
     color: black;
 }
 
 .joinDDLClass {
-    width: 80px;
-    margin-left: 40%;
+    width: 100px;
     margin-bottom: 5px;
     margin-top: 5px;
 }
 
 .operatorDDL {
-    margin-right: 10px;
     width: 130px;
 }
 
 .removeRowBtn {
-    margin-left: 10px;
+    margin-left: 5px;
 }
 
 .strMultiselect {
@@ -1309,12 +1644,15 @@ label:hover,
 
 #dropPrompt {
     color: black;
-    margin-left: 40%;
-    margin-right: 35%;
-    margin-top: 21%;
-    /*border: 1px solid black;*/
-    padding: 10px;
+    margin: auto;
+    background-color: lightgrey;
+    padding: 20px;
     font-size: 18px;
+}
+
+.advancedRow {
+    display: flex;
+    align-items: center;
 }
 
 #value {
@@ -1341,13 +1679,17 @@ label:hover,
 }
 
 .style1 {
-    width: 60px;
+    width: 65px;
     margin-left: 5px;
 }
 
 #treeViewContainer {
     width: 300px;
     float: left;
+}
+
+.esri-widget {
+    font-family: 'Poppins', sans-serif;
 }
 
 .esri-widget--button {
@@ -1365,7 +1707,21 @@ label:hover,
 
 @media (max-width: 1300px) {
     .panelDiv {
-        max-width: 39vw;
+        width: 39vw;
+    }
+}
+
+@media (max-height: 800px) {
+    #sidebar ul li a i {
+        font-size: 2em;
+    }
+
+    #sidebar ul li a {
+        padding: 12px 6px;
+    }
+
+    #sidebar .arrow-left {
+        margin-top: -49px;
     }
 }
 
@@ -1374,7 +1730,7 @@ label:hover,
         width: 100vw;
     }
     .panelDiv {
-        max-width: 100vw;
+        width: 100%
     }
 }
 
@@ -1449,4 +1805,88 @@ label:hover,
     .wrapper {
         flex-direction: column;
     }
+<<<<<<< HEAD
 }
+=======
+}
+
+
+
+/*
+https://cpratt.co/twitter-bootstrap-callout-css-styles/
+*/
+.bs-callout {
+    padding: 20px;
+    margin: 20px 0;
+    border: 1px solid #eee;
+    border-left-width: 5px;
+    border-radius: 3px;
+}
+
+.bs-callout h4 {
+    margin-top: 0;
+    margin-bottom: 5px;
+}
+
+.bs-callout p:last-child {
+    margin-bottom: 0;
+}
+
+.bs-callout code {
+    border-radius: 3px;
+}
+
+.bs-callout+.bs-callout {
+    margin-top: -5px;
+}
+
+.bs-callout-default {
+    border-left-color: #777;
+}
+
+.bs-callout-default h4 {
+    color: #777;
+}
+
+.bs-callout-primary {
+    border-left-color: #428bca;
+}
+
+.bs-callout-primary h4 {
+    color: #428bca;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.bs-callout-success {
+    border-left-color: #5cb85c;
+}
+
+.bs-callout-success h4 {
+    color: #5cb85c;
+}
+
+.bs-callout-danger {
+    border-left-color: #d9534f;
+}
+
+.bs-callout-danger h4 {
+    color: #d9534f;
+}
+
+.bs-callout-warning {
+    border-left-color: #f0ad4e;
+}
+
+.bs-callout-warning h4 {
+    color: #f0ad4e;
+}
+
+.bs-callout-info {
+    border-left-color: #5bc0de;
+}
+
+.bs-callout-info h4 {
+    color: #5bc0de;
+}
+>>>>>>> Jack-Develop-Branch

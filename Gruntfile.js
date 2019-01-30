@@ -1,4 +1,4 @@
-module.exports = function(grunt) {
+module.exports = function (grunt) {
 
     "use strict";
 
@@ -269,12 +269,21 @@ module.exports = function(grunt) {
 
     });
 
+<<<<<<< HEAD
     grunt.registerTask("GetClassBreaks", function() {
         require("./src/app/resources/js/generateClassBreaks.js")(grunt, this.async, {
             inputLocation: "./src/app/config/cbrConfig.json",
             geoStatsPath: "./geostats.min.js",
             mainUrl: "https://geo.azmag.gov/gismag/rest/services/maps/DemographicState2016/MapServer",
             outputLocation: "./src/app/config/cbrConfig.json"
+=======
+    grunt.registerTask("GetClassBreaks", function () {
+        require("./src/app/vendor/js/generateClassBreaks.js")(grunt, this.async, {
+            inputLocation: "./src/app/js/config/cbrConfig.json",
+            geoStatsPath: "Z:\\Viewers\\Demographics\\src\\app\\vendor\\js\\geoStats.min.js",
+            mainUrl: "https://geo.azmag.gov/gismag/rest/services/maps/DemographicState2017/MapServer",
+            outputLocation: "./src/app/js/config/cbrConfig.json"
+>>>>>>> Jack-Develop-Branch
         });
     });
 

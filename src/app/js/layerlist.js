@@ -1,4 +1,5 @@
 "use strict";
+<<<<<<< HEAD
 require(['dojo/topic'],
     function(tp) {
         tp.subscribe("panel-loaded", function(panel) {
@@ -8,6 +9,17 @@ require(['dojo/topic'],
                 var arr = legendLayers.sort((a, b) => a.legend.sort - b.legend.sort);
                 for (var i = 0; i < arr.length; i++) {
                     var conf = arr[i];
+=======
+require(["dojo/topic"], function (tp) {
+    tp.subscribe("panel-loaded", function (panel) {
+        if (panel === "layers") {
+            var $layerList = $("#layerList");
+            var layers = app.config.layers.filter(conf => conf.showTOC);
+            // var arr = legendLayers.sort((a, b) => a.legend.sort - b.legend.sort);
+
+            for (var i = 0; i < layers.length; i++) {
+                var conf = layers[i];
+>>>>>>> Jack-Develop-Branch
 
                     if (conf.id !== "blockGroups") {
                         $layerList.append(getCheckBoxHTML(conf));
@@ -15,11 +27,20 @@ require(['dojo/topic'],
                 }
                 $layerList.find(".checkbox-div").click(toggleLayerItem);
             }
+<<<<<<< HEAD
         });
 
     }
 );
 
+=======
+            $layerList.find(".checkbox-div").click(toggleLayerItem);
+            $("[data-toggle=popover]").popover();
+        }
+    });
+
+});
+>>>>>>> Jack-Develop-Branch
 
 function toggleLayerItem(e) {
 
@@ -27,7 +48,7 @@ function toggleLayerItem(e) {
     let $cbox = $(this).find(".big-checkbox");
     $cbox.prop("checked", !$cbox.prop("checked"));
 
-    let layerId = $cbox.data('layer-id');
+    let layerId = $cbox.data("layer-id");
 
     //Toggle Layer
     let layer = app.map.findLayerById(layerId);
@@ -58,7 +79,7 @@ function getCheckBoxHTML(conf) {
     return `
             <div>
                 <div class="checkbox-div">
-                    <input type="checkbox" id="c-${c.id}" ${c.visible ? 'checked' : ''} data-layer-id="${c.id}" class="regular-checkbox big-checkbox" />
+                    <input type="checkbox" id="c-${c.id}" ${c.visible ? "checked" : ""} data-layer-id="${c.id}" class="regular-checkbox big-checkbox" />
                     <label></label>
                     <label class="layerLabel">${c.title}</label>
                     <a
@@ -70,9 +91,14 @@ function getCheckBoxHTML(conf) {
                     data-placement="auto"
                     data-trigger="hover"
                     title="${c.title}"
-                    data-content="${c.definition}"><i class="glyphicon glyphicon glyphicon-info-sign"></i>
+                    data-content="${c.definition}"><i class="fas fa-info-circle"></i>
                     </a>
                 </div>
             </div>
+<<<<<<< HEAD
             `
 }
+=======
+            `;
+}
+>>>>>>> Jack-Develop-Branch
