@@ -65,15 +65,15 @@ require(["dojo/topic", "dojo/domReady!"], function (tp) {
                     UpdateMapRenderer();
                 }
             }
-        })
+        });
         // setTimeout(() => {
         //     UpdateMapRenderer();
         // }, 50);
 
 
-        let $dynamicHelp = $('#dynamicHelp');
+        let $dynamicHelp = $("#dynamicHelp");
 
         $dynamicHelp.popover();
 
-    })
+    });
 });
