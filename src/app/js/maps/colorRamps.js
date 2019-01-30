@@ -22,13 +22,8 @@ require([
             $colorRampModal.modal("show");
         });
 
-<<<<<<< HEAD
-        $("#selectionRamps").on("click", ".cRamp", function() {
-            $colorRampModal.modal('hide');
-=======
         $("#selectionRamps").on("click", ".cRamp", function () {
             $colorRampModal.modal("hide");
->>>>>>> Jack-Develop-Branch
             $colorRamp.html($(this)[0].outerHTML);
             tp.publish("colorRamp-Changed");
         });
@@ -51,9 +46,4 @@ require([
             });
             return rampsHtml;
         }
-<<<<<<< HEAD
-    }
-);
-=======
     });
->>>>>>> Jack-Develop-Branch

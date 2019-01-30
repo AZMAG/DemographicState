@@ -30,11 +30,7 @@ And constructed with the following guidelines:
 
 ***************************************************
 
-<<<<<<< HEAD
-## Version 4.0.0 | 2019-01-04
-=======
 ## Version 4.0.0 | 2019-01-17
->>>>>>> Jack-Develop-Branch
 
 * Added Normalize.css
 * Complete rewrite of code in 4.x

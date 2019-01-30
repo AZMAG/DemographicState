@@ -4,12 +4,7 @@ require([
     ],
     function(tp) {
         tp.subscribe("excel-export", exportToExcel);
-<<<<<<< HEAD
-    }
-);
-=======
     });
->>>>>>> Jack-Develop-Branch
 
 function exportToExcel(params) {
     let grid = params.grid;
@@ -26,17 +21,10 @@ function exportToExcel(params) {
 
         columns[1].width = 290;
 
-<<<<<<< HEAD
-        $.each(rows, function(i, row) {
-            if (row.type === 'header') {
-                $.each(row.cells, function(i, cell) {
-                    cell.background = '#8DB4E2';
-=======
         $.each(rows, function (i, row) {
             if (row.type === "header") {
                 $.each(row.cells, function (i, cell) {
                     cell.background = "#8DB4E2";
->>>>>>> Jack-Develop-Branch
                     cell.bold = true;
                     cell.color = "#000";
                 });
@@ -61,13 +49,8 @@ function exportToExcel(params) {
                             row.cells[0].value = row.cells[1].value;
                             row.cells[0].colSpan = 2;
                             row.cells.splice(1, 1);
-<<<<<<< HEAD
-                            $.each(row.cells, function(i, cell) {
-                                cell.background = '#8DB4E2';
-=======
                             $.each(row.cells, function (i, cell) {
                                 cell.background = "#8DB4E2";
->>>>>>> Jack-Develop-Branch
                                 cell.italic = true;
                                 cell.bold = true;
                                 if (i > 0) {

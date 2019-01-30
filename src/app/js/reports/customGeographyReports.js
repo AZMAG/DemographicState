@@ -1,117 +1,4 @@
 "use strict";
-<<<<<<< HEAD
-require([
-        'dojo/topic',
-        'esri/views/2d/draw/Draw',
-        'esri/Graphic',
-        'esri/geometry/geometryEngine'
-    ],
-    function(
-        tp,
-        Draw,
-        Graphic,
-        geometryEngine
-    ) {
-        tp.subscribe('panel-loaded', function(panel) {
-            let $customGeographyReports = $('#customGeographyReports');
-            let $bufferCheckbox = $('#useBuffer');
-            let $bufferOptions = $('#bufferOptions');
-            let $customSummaryButton = $('.customSummaryButton');
-            let $drawingTooltip = $('#drawingTooltip');
-            let $bufferSize = $bufferOptions.find('#bufferSize');
-            let $bufferUnit = $bufferOptions.find('#bufferUnit');
-            let $loadingSpinner = $('.loading-container');
-
-            if (panel === 'reports') {
-                let draw = new Draw({
-                    view: app.view
-                });
-
-                $bufferCheckbox.change(function(e) {
-                    $bufferOptions.toggle();
-                });
-
-                $customSummaryButton.click(function(e) {
-                    $customSummaryButton.removeClass('active');
-                    $(this).addClass('active');
-                    let type = $(this).data('val');
-
-                    // create() will return a reference to an instance of PolygonDrawAction
-                    let action = draw.create(type);
-
-                    //Creates a tooltip to give user instructions on drawing
-                    $('#viewDiv').mousemove(function(e) {
-                        $drawingTooltip
-                            .css('left', e.pageX + 10)
-                            .css('top', e.pageY + 10)
-                            .css('display', 'block');
-                    });
-
-                    // focus the view to activate keyboard shortcuts for drawing polygons
-                    app.view.focus();
-
-                    // listen polygonDrawAction events to give immediate visual feedback
-                    // to users as the polygon is being drawn on the view.
-                    action.on('vertex-add', e => {
-                        drawPolygon(e, type);
-                    });
-                    action.on('cursor-update', e => {
-                        drawPolygon(e, type);
-                    });
-                    action.on('vertex-remove', e => {
-                        drawPolygon(e, type);
-                    });
-                    action.on('draw-complete', e => {
-                        drawPolygon(e, type);
-                    });
-
-                    e.preventDefault();
-                });
-                count = 0;
-
-                function drawPolygon(e, type) {
-                    //remove existing graphic
-                    app.view.graphics.removeAll();
-
-                    const pnts = e.vertices;
-
-                    let symbolLU = {
-                        polygon: {
-                            color: [0, 0, 0, 0.3],
-                            symbolType: 'simple-fill',
-                            geometryType: 'polygon',
-                            style: 'solid'
-                        },
-                        multipoint: {
-                            color: [0, 0, 0, 0.3],
-                            symbolType: 'simple-fill',
-                            geometryType: 'polygon',
-                            style: 'solid'
-                        },
-                        polyline: {
-                            color: 'red',
-                            symbolType: 'simple-line',
-                            geometryType: 'polyline',
-                            style: 'solid'
-                        },
-                        point: {
-                            color: 'red',
-                            symbolType: 'simple-marker',
-                            geometryType: 'point',
-                            style: 'circle'
-                        }
-                    };
-
-                    let symb = {
-                        type: symbolLU[type].symbolType,
-                        color: symbolLU[type].color,
-                        style: symbolLU[type].style,
-                        width: 2,
-                        size: 4,
-                        outline: {
-                            color: 'red',
-                            width: 2
-=======
 require(["dojo/topic", "esri/views/2d/draw/Draw", "esri/Graphic", "esri/geometry/geometryEngine"], function (
     tp,
     Draw,
@@ -270,9 +157,8 @@ require(["dojo/topic", "esri/views/2d/draw/Draw", "esri/Graphic", "esri/geometry
                                 color: "black",
                                 width: 2
                             }
->>>>>>> Jack-Develop-Branch
                         }
-                    };
+                    });
 
                     // create a new graphic representing the polygon, add it to the view
                     var graphic = new Graphic({
@@ -287,131 +173,58 @@ require(["dojo/topic", "esri/views/2d/draw/Draw", "esri/Graphic", "esri/geometry
                         symbol: symb
                     });
 
-<<<<<<< HEAD
-                    let buffGfx = null;
-
-                    let buffer = $bufferCheckbox.is(':checked');
-
-                    if (buffer) {
-                        let buffered = geometryEngine.buffer(graphic.geometry, $bufferSize.val(), $bufferUnit.val());
-                        buffGfx = new Graphic({
-                            geometry: buffered,
-                            symbol: {
-                                type: 'simple-fill',
-                                color: [0, 0, 0, 0],
-                                outline: {
-                                    style: 'dot',
-                                    color: 'black',
-                                    width: 2
-                                }
-                            }
-                        });
-                        app.view.graphics.add(buffGfx);
-                    }
-
-                    if (e.type === 'draw-complete') {
-                        $('#viewDiv').off('mousemove');
-
+                    if (e.type === "draw-complete") {
+                        $("#viewDiv").off("mousemove");
                         $drawingTooltip.hide();
-                        $drawingTooltip.html('Click and drag anywhere on the map to start drawing.');
-                        $customSummaryButton.removeClass('active');
-
+                        $customSummaryButton.removeClass("active");
                         if (buffGfx) {
                             ProcessSelection(buffGfx);
                         } else {
-                            ProcessSelection(graphic);
+                            $('#drawClearBtn').hide();
                         }
-=======
-                if (e.type === "draw-complete") {
-                    $("#viewDiv").off("mousemove");
-                    $drawingTooltip.hide();
-                    $customSummaryButton.removeClass("active");
-                    if (buffGfx) {
-                        ProcessSelection(buffGfx);
->>>>>>> Jack-Develop-Branch
-                    } else {
-                        $('#drawClearBtn').hide();
                     }
-<<<<<<< HEAD
 
-                    if (e.type === 'vertex-add') {
-                        $drawingTooltip.html('Double click to finish graphic');
+                    if (e.type === "vertex-add") {
+                        if (drawMessages[type].during) {
+                            $drawingTooltip.html(drawMessages[type].during);
+                        }
                     }
-=======
-                }
-
-                if (e.type === "vertex-add") {
-                    if (drawMessages[type].during) {
-                        $drawingTooltip.html(drawMessages[type].during);
-                    }
-                }
->>>>>>> Jack-Develop-Branch
 
                     app.view.graphics.add(graphic);
                 }
             }
 
-<<<<<<< HEAD
             function ProcessSelection(gfx) {
-                //Start the loading spinner
-                $loadingSpinner.css('display', 'flex');
+                app.GetData(app.config.layerDef["blockGroups"], null, gfx.geometry).then(function (data) {
+                    var acsData = app.summarizeFeatures(data.acsData);
+                    var censusData = app.summarizeFeatures(data.censusData);
 
-                app.GetData(app.config.layerDef['blockGroups'], null, gfx.geometry).then(function(data) {
-                    var acsdata = app.summarizeFeatures(data.acsData);
-                    var censusdata = app.summarizeFeatures(data.censusData);
+                    if (data.acsData.features.length === 0) {
+                        app.clearDrawnGraphics();
+                        // TODO: This should be prettied up at some point.
+                        // Just using the basic alert function isn"t pretty enough.
+                        alert("Your selection did not return any results.  Please try again.");
+                    } else {
+                        app.selectedReport.acsData = {
+                            features: [{
+                                attributes: acsData,
+                                count: data.acsData.features.length
+                            }]
+                        };
 
-                    app.selectedReport.acsData = {
-                        features: [{
-                            attributes: acsdata
-=======
-        function ProcessSelection(gfx) {
-            app.GetData(app.config.layerDef["blockGroups"], null, gfx.geometry).then(function (data) {
-                var acsData = app.summarizeFeatures(data.acsData);
-                var censusData = app.summarizeFeatures(data.censusData);
-
-                if (data.acsData.features.length === 0) {
-                    app.clearDrawnGraphics();
-                    // TODO: This should be prettied up at some point.
-                    // Just using the basic alert function isn"t pretty enough.
-                    alert("Your selection did not return any results.  Please try again.");
-                } else {
-                    app.selectedReport.acsData = {
-                        features: [{
-                            attributes: acsData,
-                            count: data.acsData.features.length
->>>>>>> Jack-Develop-Branch
-                        }]
-                    };
-
-                    app.selectedReport.censusData = {
-                        features: [{
-<<<<<<< HEAD
-                            attributes: censusdata
-                        }]
-                    };
-
-                    tp.publish('open-report-window', app.selectedReport.acsData, app.acsFieldsConfig);
-                    $customGeographyReports.hide();
-                    app.AddHighlightGraphics(data.acsData.features);
-                    $loadingSpinner.css('display', 'none');
-                    $('.reportFormArea').hide();
+                        app.selectedReport.censusData = {
+                            features: [{
+                                attributes: censusData,
+                                count: data.acsData.features.length
+                            }]
+                        };
+                        tp.publish("open-report-window", app.selectedReport, "acs");
+                        $customGeographyReports.hide();
+                        app.AddHighlightGraphics(data.acsData.features, $useZoom.is(":checked"));
+                        $(".reportFormArea").hide();
+                    }
                 });
             }
-        });
-    }
-);
-=======
-                            attributes: censusData,
-                            count: data.acsData.features.length
-                        }]
-                    };
-                    tp.publish("open-report-window", app.selectedReport, "acs");
-                    $customGeographyReports.hide();
-                    app.AddHighlightGraphics(data.acsData.features, $useZoom.is(":checked"));
-                    $(".reportFormArea").hide();
-                }
-            });
         }
     });
 });
->>>>>>> Jack-Develop-Branch

@@ -4,15 +4,9 @@ require([
         "dojo/topic",
         "dojo/domReady!"
     ],
-<<<<<<< HEAD
-    function(parser, tp) {
-        parser.parse();
-        $.getJSON(app.config.mainUrl + '/?f=json', function(data) {
-=======
     function (parser, tp) {
         parser.parse();
         $.getJSON(app.config.mainUrl + "/?f=json", function (data) {
->>>>>>> Jack-Develop-Branch
             for (var i = 0; i < data.layers.length; i++) {
                 var layer = data.layers[i];
                 for (var j = 0; j < app.config.layers.length; j++) {
@@ -44,9 +38,6 @@ require([
             tp.publish("config-loaded");
         });
     }
-<<<<<<< HEAD
-);
-=======
 );
 
 
@@ -63,4 +54,3 @@ $("#legendHelpModal").load("app/views/modal-help-legend.html");
 $("#mapsHelpModal").load("app/views/modal-help-maps.html");
 $("#reportsHelpModal").load("app/views/modal-help-reports.html");
 $("#layersHelpModal").load("app/views/modal-help-layers.html");
->>>>>>> Jack-Develop-Branch

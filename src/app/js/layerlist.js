@@ -1,15 +1,4 @@
 "use strict";
-<<<<<<< HEAD
-require(['dojo/topic'],
-    function(tp) {
-        tp.subscribe("panel-loaded", function(panel) {
-            if (panel === "layers") {
-                var $layerList = $("#layerList");
-                var legendLayers = app.config.layers.filter(conf => conf.legend && !conf.legend.group);
-                var arr = legendLayers.sort((a, b) => a.legend.sort - b.legend.sort);
-                for (var i = 0; i < arr.length; i++) {
-                    var conf = arr[i];
-=======
 require(["dojo/topic"], function (tp) {
     tp.subscribe("panel-loaded", function (panel) {
         if (panel === "layers") {
@@ -19,28 +8,17 @@ require(["dojo/topic"], function (tp) {
 
             for (var i = 0; i < layers.length; i++) {
                 var conf = layers[i];
->>>>>>> Jack-Develop-Branch
 
-                    if (conf.id !== "blockGroups") {
-                        $layerList.append(getCheckBoxHTML(conf));
-                    }
+                if (conf.id !== "blockGroups") {
+                    $layerList.append(getCheckBoxHTML(conf));
                 }
-                $layerList.find(".checkbox-div").click(toggleLayerItem);
             }
-<<<<<<< HEAD
-        });
-
-    }
-);
-
-=======
             $layerList.find(".checkbox-div").click(toggleLayerItem);
-            $("[data-toggle=popover]").popover();
         }
+        $layerList.find(".checkbox-div").click(toggleLayerItem);
+        $("[data-toggle=popover]").popover();
     });
-
 });
->>>>>>> Jack-Develop-Branch
 
 function toggleLayerItem(e) {
 
@@ -95,10 +73,5 @@ function getCheckBoxHTML(conf) {
                     </a>
                 </div>
             </div>
-<<<<<<< HEAD
-            `
-}
-=======
             `;
 }
->>>>>>> Jack-Develop-Branch

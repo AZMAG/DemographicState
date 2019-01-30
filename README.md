@@ -57,15 +57,6 @@ And constructed with the following guidelines:
 
 ### version | 4.0.0 ###
 
-<<<<<<< HEAD
-    Updated | 2019-01-09
-
-    Created | 2014-10-21
-
-## Credits
-
-    Maricopa Association of Governments (MAG) and the MAG member agencies
-=======
 * Updated | 2019-01-09
 
 * Created | 2014-10-21
@@ -73,7 +64,6 @@ And constructed with the following guidelines:
 ## Credits
 
 Maricopa Association of Governments (MAG) and the MAG member agencies
->>>>>>> Jack-Develop-Branch
 
 ## Site URL
 

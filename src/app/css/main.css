@@ -13,10 +13,6 @@
     SIDEBAR STYLES
 ----------------------------------------------------- */
 
-<<<<<<< HEAD
-@import 'https://fonts.googleapis.com/css?family=Poppins:300, 400, 500, 600, 700';
-=======
->>>>>>> Jack-Develop-Branch
 html {
     height: 100%;
     /* font-size: 62.5%; */
@@ -77,8 +73,6 @@ span {
     display: inline-block;
 }
 
-<<<<<<< HEAD
-=======
 .contact {
     font-size: 14px;
     text-decoration: none;
@@ -109,7 +103,6 @@ span {
     float: right;
     padding: 13px;
 }
->>>>>>> Jack-Develop-Branch
 
 /* ---------------------------------------------------
     SIDEBAR STYLE
@@ -569,8 +562,6 @@ a[aria-expanded='true'] {
     color: var(--textColor);
 }
 
-<<<<<<< HEAD
-=======
 .repContainer {
     display: flex;
     align-items: center;
@@ -666,7 +657,6 @@ a[aria-expanded='true'] {
 
 
 
->>>>>>> Jack-Develop-Branch
 .popover-title {
     background: var(--mainColor);
     color: var(--textColor);
@@ -1277,14 +1267,8 @@ hr.pop {
     padding: 2px;
 }
 
-<<<<<<< HEAD
-
-/* .modal {
-    overflow: hidden;
-=======
 .modal-body {
     font-size: 80%;
->>>>>>> Jack-Develop-Branch
 }
 
 .modal-header {
@@ -1314,8 +1298,6 @@ hr.pop {
     cursor: pointer;
 }
 
-<<<<<<< HEAD
-=======
 #btnClassBreaksEditor {
     margin-left: 10px;
     display: none;
@@ -1338,7 +1320,6 @@ hr.pop {
     border-radius: 5px;
 }
 
->>>>>>> Jack-Develop-Branch
 .flexCenter {
     display: flex;
     align-items: center;
@@ -1355,12 +1336,8 @@ hr.pop {
 }
 
 #copyDiv {
-<<<<<<< HEAD
-    font-size: 70%;
-=======
     font-size: 68%;
     font-weight: 600;
->>>>>>> Jack-Develop-Branch
     text-align: center;
 }
 
@@ -1805,9 +1782,6 @@ hr.pop {
     .wrapper {
         flex-direction: column;
     }
-<<<<<<< HEAD
-}
-=======
 }
 
 
@@ -1889,4 +1863,3 @@ https://cpratt.co/twitter-bootstrap-callout-css-styles/
 .bs-callout-info h4 {
     color: #5bc0de;
 }
->>>>>>> Jack-Develop-Branch

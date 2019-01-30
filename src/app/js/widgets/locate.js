@@ -4,13 +4,8 @@ require([
         "dojo/topic",
         "dojo/domReady!"
     ],
-<<<<<<< HEAD
-    function(LocateViewModel, tp) {
-        tp.subscribe("map-loaded", function() {
-=======
     function (LocateViewModel, tp) {
         tp.subscribe("widget-home-loaded", function () {
->>>>>>> Jack-Develop-Branch
             //Locate
             const locateId = "locateWidget";
             let locateVM = new LocateViewModel({
@@ -26,13 +21,7 @@ require([
                     // <!-- endcomments -->
                 });
             });
-<<<<<<< HEAD
-        });
-    }
-);
-=======
 
             tp.publish("widget-locate-loaded");
         });
     });
->>>>>>> Jack-Develop-Branch

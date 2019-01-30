@@ -1,10 +1,5 @@
-<<<<<<< HEAD
-'use strict';
-require(['dojo/topic'], function(tp) {
-=======
 "use strict";
 require(["dojo/topic"], function (tp) {
->>>>>>> Jack-Develop-Branch
     // tp.subscribe("layers-added", initReports);
     tp.subscribe("panel-loaded", function (panel) {
         if (panel === "reports") {
@@ -141,19 +136,12 @@ require(["dojo/topic"], function (tp) {
         app.GetData(conf, GEOIDs).then(function (data) {
             app.AddHighlightGraphics(data.acsData.features, true);
 
-<<<<<<< HEAD
-                    ResetForm();
-                    $('#reportLoader').hide();
-                    tp.publish('toggle-panel', 'reports');
-                });
-=======
             app.view.goTo(data.acsData.features[0].geometry.extent.expand(1.5));
 
             if (data) {
                 tp.publish("open-report-window", data, "acs");
             } else {
                 console.error("No matching features for: " + q);
->>>>>>> Jack-Develop-Branch
             }
             $("#reportForm").hide();
             ResetForm();

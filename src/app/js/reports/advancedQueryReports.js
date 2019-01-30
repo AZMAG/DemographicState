@@ -3,10 +3,6 @@ require([
         "dojo/topic",
         "esri/tasks/QueryTask"
     ],
-<<<<<<< HEAD
-    function(tp) {
-        tp.subscribe("layers-added", InitAdvancedQuery);
-=======
     function (tp, QueryTask) {
         tp.subscribe("panel-loaded", function (panel) {
             if (panel === "reports") {
@@ -67,7 +63,6 @@ require([
         };
 
 
->>>>>>> Jack-Develop-Branch
 
         function InitAdvancedQuery() {
             let $advancedTreeview = $("#advancedTreeview");
@@ -245,10 +240,6 @@ require([
                 }
             }
 
-<<<<<<< HEAD
-    }
-);
-=======
             function PopulateStringDropdowns(results) {
                 var count = QueryItems.length;
                 var sourceArray = [];
@@ -506,4 +497,3 @@ require([
             }
         }
     });
->>>>>>> Jack-Develop-Branch

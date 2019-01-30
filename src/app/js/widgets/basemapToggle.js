@@ -4,13 +4,8 @@ require([
         "dojo/topic",
         "dojo/domReady!"
     ],
-<<<<<<< HEAD
-    function(BasemapToggleViewModel, tp) {
-        tp.subscribe("map-loaded", function() {
-=======
     function (BasemapToggleViewModel, tp) {
         tp.subscribe("widget-locate-loaded", function () {
->>>>>>> Jack-Develop-Branch
 
             //Basemap
             const basemapId = "basemapToggle";
@@ -24,11 +19,7 @@ require([
             let $toggleSelector = $("#" + basemapId);
             let toggled = true;
 
-<<<<<<< HEAD
-            $("#" + basemapId).click(function() {
-=======
             function ToggleBasemap() {
->>>>>>> Jack-Develop-Branch
                 if (toggled) {
                     $toggleSelector.attr("title", "Map");
                 } else {
@@ -41,11 +32,6 @@ require([
             $toggleSelector.click(function () {
                 ToggleBasemap();
             });
-<<<<<<< HEAD
-        });
-    }
-);
-=======
 
             if (app.initConfig && app.initConfig.basemap) {
                 if (app.initConfig.basemap !== "gray") {
@@ -55,4 +41,3 @@ require([
             tp.publish("widget-basemapToggle-loaded");
         });
     });
->>>>>>> Jack-Develop-Branch

@@ -1,22 +1,5 @@
 "use strict";
 require([
-<<<<<<< HEAD
-        "esri/views/2d/draw/Draw",
-        "esri/Graphic",
-        "dojo/topic"
-    ],
-    function(Draw, Graphic, tp) {
-        let $drawWidget = $("#drawWidget");
-        let $drawingTooltip = $('#drawingTooltip');
-
-        tp.subscribe("map-loaded", function() {
-            // add the button for drawing polygons underneath zoom buttons
-            app.view.ui.add($drawWidget[0], "bottom-right");
-
-            var draw = new Draw({
-                view: app.view
-            });
-=======
     "esri/views/2d/draw/Draw",
     "esri/Graphic",
     "dojo/topic"
@@ -35,7 +18,6 @@ require([
         var draw = new Draw({
             view: app.view
         });
->>>>>>> Jack-Develop-Branch
 
         //Create the window that pops open when a user first clicks the tool
         $drawWidget.popover({
@@ -100,55 +82,8 @@ require([
             }
         }
 
-<<<<<<< HEAD
-            var panelOpen = false;
-            $drawWidget.click(StartDrawing);
-
-            function StartDrawing() {
-                if (panelOpen) {
-                    $drawWidget.popover('hide');
-                } else {
-                    $drawWidget.popover('show');
-
-                    $("#fillPicker").kendoColorPicker({
-                        value: rgbToHex(fillColor.r, fillColor.g, fillColor.b),
-                        buttons: false,
-                        change: reDrawGraphics
-                    });
-                    $("#outlinePicker").kendoColorPicker({
-                        value: outlineColor,
-                        buttons: false,
-                        change: reDrawGraphics
-                    });
-                    var $gfxSlider = $("#gfxSlider");
-                    $gfxSlider.val(transparency);
-
-                    // $("#gfxSliderLabel").html(`${Math.floor(transparency * 100)}%`)
-                    $gfxSlider.on("input", reDrawGraphics);
-
-                    // create() will return a reference to an instance of PolygonDrawAction
-                    var action = draw.create("polygon");
-
-                    //Creates a tooltip to give user instructions on drawing
-                    $("#viewDiv").mousemove(function(e) {
-                        $drawingTooltip.css('left', e.pageX + 10).css('top', e.pageY + 10).css('display', 'block');
-                    });
-
-                    // focus the view to activate keyboard shortcuts for drawing polygons
-                    app.view.focus();
-
-                    // listen polygonDrawAction events to give immediate visual feedback
-                    // to users as the polygon is being drawn on the view.
-                    action.on("vertex-add", drawPolygon);
-                    action.on("cursor-update", drawPolygon);
-                    action.on("vertex-remove", drawPolygon);
-                    action.on("redo", drawPolygon);
-                    action.on("undo", drawPolygon);
-                    action.on("draw-complete", drawPolygon);
-=======
         var panelOpen = false;
         $drawWidget.click(StartDrawing);
->>>>>>> Jack-Develop-Branch
 
         function StartDrawing() {
             if (panelOpen) {
@@ -169,18 +104,6 @@ require([
                 var $gfxSlider = $("#gfxSlider");
                 $gfxSlider.val(transparency);
 
-<<<<<<< HEAD
-            $("body").on("click", "#drawClearBtn", function() {
-                app.view.graphics.removeAll();
-                $(this).hide();
-                $("#drawAddBtn").show();
-            })
-
-            $("body").on("click", "#drawAddBtn", function() {
-                panelOpen = false;
-                StartDrawing();
-            })
-=======
                 // $("#gfxSliderLabel").html(`${Math.floor(transparency * 100)}%`)
                 $gfxSlider.on("input", reDrawGraphics);
 
@@ -191,7 +114,6 @@ require([
                 $("#viewDiv").mousemove(function (e) {
                     $drawingTooltip.css("left", e.pageX + 10).css("top", e.pageY + 10).css("display", "block");
                 });
->>>>>>> Jack-Develop-Branch
 
                 // focus the view to activate keyboard shortcuts for drawing polygons
                 app.view.focus();
@@ -258,11 +180,6 @@ require([
             } else {
                 $("#drawClearBtn").hide();
             }
-<<<<<<< HEAD
-        });
-    }
-);
-=======
 
             if (event.type === "vertex-add") {
                 $drawingTooltip.html("Double click to finish graphic");
@@ -272,4 +189,3 @@ require([
         }
     });
 });
->>>>>>> Jack-Develop-Branch
