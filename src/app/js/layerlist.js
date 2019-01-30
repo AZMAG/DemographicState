@@ -14,10 +14,10 @@ require(["dojo/topic"], function (tp) {
                 }
             }
             $layerList.find(".checkbox-div").click(toggleLayerItem);
+            $("[data-toggle=popover]").popover();
         }
-        $layerList.find(".checkbox-div").click(toggleLayerItem);
-        $("[data-toggle=popover]").popover();
     });
+
 });
 
 function toggleLayerItem(e) {

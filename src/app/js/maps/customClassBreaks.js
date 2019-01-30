@@ -3,8 +3,8 @@ require([
         "dojo/topic",
         "dojo/domReady!"
     ],
-    function(tp) {
-        tp.subscribe("layers-added", function() {
+    function (tp) {
+        tp.subscribe("layers-added", function () {
             let $customClassBreaksModal = $("#customClassBreaksModal");
             let $classBreakSliders = $("#classBreakSliders");
             let $classBreakSliderTooltips = $("#classBreakSliderTooltips");
@@ -246,7 +246,7 @@ require([
                         q.outFields.push(conf.NormalizeField);
                     }
 
-                    lyr.queryFeatures(q).then(function(res) {
+                    lyr.queryFeatures(q).then(function (res) {
                         let maxVal = res.features[0].attributes[conf.FieldName];
                         if (conf.NormalizeField) {
                             maxVal = maxVal / res.features[0].attributes[conf.NormalizeField];

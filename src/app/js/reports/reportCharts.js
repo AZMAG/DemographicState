@@ -50,8 +50,8 @@ require(["dojo/topic"], function (tp) {
                             },
                             template: "#= app.wrapText(value) #"
                         },
-                        chartArea: {
-                            background: '#fafafa'
+                        majorGridLines: {
+                            visible: false
                         },
                         line: {
                             visible: false
@@ -69,26 +69,27 @@ require(["dojo/topic"], function (tp) {
         } else {
             ops.element.html("No data available for this chart.");
         }
+    }
 
-        function CreateCharts(data, target) {
-            //Filter list
-            let categories = {};
-            let $target = $("#" + target);
-            let $chartsArea = $target.find(".chartsArea");
-            $chartsArea.html("");
+    function CreateCharts(data, target) {
+        //Filter list
+        let categories = {};
+        let $target = $("#" + target);
+        let $chartsArea = $target.find(".chartsArea");
+        $chartsArea.html("");
 
-            data.forEach(function (row) {
-                if (row.chartCategory) {
-                    if (!categories[row.chartCategory]) {
-                        categories[row.chartCategory] = [];
-                    }
-                    categories[row.chartCategory].push(row);
+        data.forEach(function (row) {
+            if (row.chartCategory) {
+                if (!categories[row.chartCategory]) {
+                    categories[row.chartCategory] = [];
                 }
-            });
+                categories[row.chartCategory].push(row);
+            }
+        });
 
-            Object.keys(categories).forEach(function (category) {
-                let data = categories[category];
-                $chartsArea.append(`
+        Object.keys(categories).forEach(function (category) {
+            let data = categories[category];
+            $chartsArea.append(`
                     <div class="bs-callout bs-callout-primary">
                         <h4>${category}</h4>
                     </div>
@@ -96,20 +97,18 @@ require(["dojo/topic"], function (tp) {
                     <hr>
             `).get(0);
 
-                CreateChart({
-                    element: $chartsArea.find(`.chartTarget[data-id="${category}"]`),
-                    category: category,
-                    data: data,
-                    type: data[0].chartType
-                });
+            CreateChart({
+                element: $chartsArea.find(`.chartTarget[data-id="${category}"]`),
+                category: category,
+                data: data,
+                type: data[0].chartType
             });
+        });
 
-            // TODO: Refactor this at some point.
-            // This doesn"t seem like an appropriate way to handle the resize event.
-            setTimeout(() => {
-                tp.publish("report-charts-created");
-            }, 10);
-        }
-
+        // TODO: Refactor this at some point.
+        // This doesn"t seem like an appropriate way to handle the resize event.
+        setTimeout(() => {
+            tp.publish("report-charts-created");
+        }, 10);
     }
 });

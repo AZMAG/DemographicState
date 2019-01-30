@@ -3,7 +3,7 @@ require([
         "dojo/topic",
         "dojo/domReady!"
     ],
-    function(tp) {
+    function (tp) {
         let $colorRamp = $("#colorRamp");
         let $rampType = $("#rampType");
         let $classBreaksCount = $("#classBreaksCount");
@@ -11,12 +11,12 @@ require([
         let $sequentialRamps = $("#sequentialRamps");
         let $divergingRamps = $("#divergingRamps");
 
-        $rampType.change(function() {
+        $rampType.change(function () {
             $sequentialRamps.toggle();
             $divergingRamps.toggle();
         });
 
-        $colorRamp.click(function() {
+        $colorRamp.click(function () {
             $sequentialRamps.html(GetRampsHTMLByType("Sequential"));
             $divergingRamps.html(GetRampsHTMLByType("Diverging"));
             $colorRampModal.modal("show");
@@ -39,7 +39,7 @@ require([
             let numBreaks = $classBreaksCount.val();
             let ramps = app.GetRampsByNumAndType(type, numBreaks);
 
-            Object.keys(ramps).forEach(function(key) {
+            Object.keys(ramps).forEach(function (key) {
                 const ramp = ramps[key];
                 let html = app.ColorRampToHTML(ramp, key, type);
                 rampsHtml += html;

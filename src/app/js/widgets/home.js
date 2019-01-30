@@ -13,7 +13,7 @@ require([
 
             app.view.ui.add(homeId, "bottom-right");
 
-            $("#" + homeId).click(function() {
+            $("#" + homeId).click(function () {
                 homeVM.go();
             });
             tp.publish("widget-home-loaded");

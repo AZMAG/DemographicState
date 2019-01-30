@@ -159,72 +159,60 @@ require(["dojo/topic", "esri/views/2d/draw/Draw", "esri/Graphic", "esri/geometry
                             }
                         }
                     });
-
-                    // create a new graphic representing the polygon, add it to the view
-                    var graphic = new Graphic({
-                        geometry: {
-                            rings: pnts,
-                            paths: [pnts],
-                            spatialReference: app.view.spatialReference,
-                            type: symbolLU[type].geometryType,
-                            x: e.coordinates ? e.coordinates[0] : undefined,
-                            y: e.coordinates ? e.coordinates[1] : undefined
-                        },
-                        symbol: symb
-                    });
-
-                    if (e.type === "draw-complete") {
-                        $("#viewDiv").off("mousemove");
-                        $drawingTooltip.hide();
-                        $customSummaryButton.removeClass("active");
-                        if (buffGfx) {
-                            ProcessSelection(buffGfx);
-                        } else {
-                            $('#drawClearBtn').hide();
-                        }
-                    }
-
-                    if (e.type === "vertex-add") {
-                        if (drawMessages[type].during) {
-                            $drawingTooltip.html(drawMessages[type].during);
-                        }
-                    }
-
-                    app.view.graphics.add(graphic);
+                    app.view.graphics.add(buffGfx);
                 }
-            }
 
-            function ProcessSelection(gfx) {
-                app.GetData(app.config.layerDef["blockGroups"], null, gfx.geometry).then(function (data) {
-                    var acsData = app.summarizeFeatures(data.acsData);
-                    var censusData = app.summarizeFeatures(data.censusData);
-
-                    if (data.acsData.features.length === 0) {
-                        app.clearDrawnGraphics();
-                        // TODO: This should be prettied up at some point.
-                        // Just using the basic alert function isn"t pretty enough.
-                        alert("Your selection did not return any results.  Please try again.");
+                if (e.type === "draw-complete") {
+                    $("#viewDiv").off("mousemove");
+                    $drawingTooltip.hide();
+                    $customSummaryButton.removeClass("active");
+                    if (buffGfx) {
+                        ProcessSelection(buffGfx);
                     } else {
-                        app.selectedReport.acsData = {
-                            features: [{
-                                attributes: acsData,
-                                count: data.acsData.features.length
-                            }]
-                        };
-
-                        app.selectedReport.censusData = {
-                            features: [{
-                                attributes: censusData,
-                                count: data.acsData.features.length
-                            }]
-                        };
-                        tp.publish("open-report-window", app.selectedReport, "acs");
-                        $customGeographyReports.hide();
-                        app.AddHighlightGraphics(data.acsData.features, $useZoom.is(":checked"));
-                        $(".reportFormArea").hide();
+                        ProcessSelection(graphic);
                     }
-                });
+                }
+
+                if (e.type === "vertex-add") {
+                    if (drawMessages[type].during) {
+                        $drawingTooltip.html(drawMessages[type].during);
+                    }
+                }
+
+                app.view.graphics.add(graphic);
             }
+        }
+
+        function ProcessSelection(gfx) {
+            app.GetData(app.config.layerDef["blockGroups"], null, gfx.geometry).then(function (data) {
+                var acsData = app.summarizeFeatures(data.acsData);
+                var censusData = app.summarizeFeatures(data.censusData);
+
+                if (data.acsData.features.length === 0) {
+                    app.clearDrawnGraphics();
+                    // TODO: This should be prettied up at some point.
+                    // Just using the basic alert function isn"t pretty enough.
+                    alert("Your selection did not return any results.  Please try again.");
+                } else {
+                    app.selectedReport.acsData = {
+                        features: [{
+                            attributes: acsData,
+                            count: data.acsData.features.length
+                        }]
+                    };
+
+                    app.selectedReport.censusData = {
+                        features: [{
+                            attributes: censusData,
+                            count: data.acsData.features.length
+                        }]
+                    };
+                    tp.publish("open-report-window", app.selectedReport, "acs");
+                    $customGeographyReports.hide();
+                    app.AddHighlightGraphics(data.acsData.features, $useZoom.is(":checked"));
+                    $(".reportFormArea").hide();
+                }
+            });
         }
     });
 });

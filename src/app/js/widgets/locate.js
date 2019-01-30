@@ -14,8 +14,8 @@ require([
 
             app.view.ui.add(locateId, "bottom-right");
 
-            $("#" + locateId).click(function() {
-                locateVM.locate().then(function() {
+            $("#" + locateId).click(function () {
+                locateVM.locate().then(function () {
                     // <!-- comments:uncomment // -->
                     // ga("send", "event", "Click", "Geo Location Click", "geolocationButton");
                     // <!-- endcomments -->

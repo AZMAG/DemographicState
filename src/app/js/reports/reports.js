@@ -166,7 +166,7 @@ require(["dojo/topic", "esri/tasks/QueryTask"], function (tp, QueryTask) {
                 if (valsDef[fld.fieldName].percentValueFormatted === "NaN%") {
                     valsDef[fld.fieldName].percentValueFormatted = "-";
                 }
-                fld.fieldName = oldFieldName;
+                vals.push(valsDef[fld.fieldName]);
             }
             fld.fieldName = oldFieldName;
         }
@@ -391,62 +391,62 @@ require(["dojo/topic", "esri/tasks/QueryTask"], function (tp, QueryTask) {
                 }
             ]
         });
-
-        tp.subscribe("open-report-window", OpenReportWindow);
-
-        let dataCache = {};
-        let $loadingSpinner = $(".loading-container");
-
-        app.GetData = async function (conf, geoids, geo) {
-            $loadingSpinner.css("display", "flex");
-
-            let geoid = null;
-            let where = "1=1";
-            if (geoids && geoids.length > 0) {
-                geoid = geoids[0];
-                let str = "";
-                geoids.forEach(id => {
-                    str += `'${id}',`;
-                });
-                where = `GEOID IN(${str.slice(0, -1)})`;
-            }
-
-            if (conf.id !== "blockGroups") {
-                if (dataCache[conf.id + geoid]) {
-                    app.selectedReport = dataCache[conf.id + geoid];
-                    $loadingSpinner.css("display", "none");
-                    return app.selectedReport;
-                }
-
-                let q = {
-                    returnGeometry: true,
-                    outFields: ["*"],
-                    where: where,
-                    geometry: geo ? geo : null
-                };
-
-                let qt = new QueryTask({
-                    url: app.config.mainUrl + "/" + conf.ACSIndex
-                });
-                let acsPromise = qt.execute(q);
-
-                qt.url = app.config.mainUrl + "/" + conf.censusIndex;
-                q.returnGeometry = false;
-
-                let censusPromise = qt.execute(q);
-
-                app.selectedReport = {
-                    conf: conf,
-                    acsData: await acsPromise,
-                    censusData: await censusPromise
-                };
-                if (geoid) {
-                    dataCache[conf.id + geoid] = app.selectedReport;
-                }
-                $loadingSpinner.css("display", "none");
-
-                return $.extend({}, app.selectedReport);
-            };
-        }
     }
+
+    tp.subscribe("open-report-window", OpenReportWindow);
+
+    let dataCache = {};
+    let $loadingSpinner = $(".loading-container");
+
+    app.GetData = async function (conf, geoids, geo) {
+        $loadingSpinner.css("display", "flex");
+
+        let geoid = null;
+        let where = "1=1";
+        if (geoids && geoids.length > 0) {
+            geoid = geoids[0];
+            let str = "";
+            geoids.forEach(id => {
+                str += `'${id}',`;
+            });
+            where = `GEOID IN(${str.slice(0, -1)})`;
+        }
+
+        if (conf.id !== "blockGroups") {
+            if (dataCache[conf.id + geoid]) {
+                app.selectedReport = dataCache[conf.id + geoid];
+                $loadingSpinner.css("display", "none");
+                return app.selectedReport;
+            }
+        }
+
+        let q = {
+            returnGeometry: true,
+            outFields: ["*"],
+            where: where,
+            geometry: geo ? geo : null
+        };
+
+        let qt = new QueryTask({
+            url: app.config.mainUrl + "/" + conf.ACSIndex
+        });
+        let acsPromise = qt.execute(q);
+
+        qt.url = app.config.mainUrl + "/" + conf.censusIndex;
+        q.returnGeometry = false;
+
+        let censusPromise = qt.execute(q);
+
+        app.selectedReport = {
+            conf: conf,
+            acsData: await acsPromise,
+            censusData: await censusPromise
+        };
+        if (geoid) {
+            dataCache[conf.id + geoid] = app.selectedReport;
+        }
+        $loadingSpinner.css("display", "none");
+
+        return $.extend({}, app.selectedReport);
+    };
 });

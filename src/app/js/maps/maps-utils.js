@@ -47,10 +47,9 @@ require(["dojo/topic", "esri/tasks/QueryTask", "dojo/domReady!"], function (tp, 
             if (clr.r && clr.g && clr.b) {
                 clr = `${clr.r}, ${clr.g}, ${clr.b}`;
             }
-            return (html += '</div>');
-        }
 
-        html += `<div style="background-color:rgb(${clr})" class="colorRampSquare"></div>`;
+            html += `<div style="background-color:rgb(${clr})" class="colorRampSquare"></div>`;
+        }
         return (html += "</div>");
     };
 

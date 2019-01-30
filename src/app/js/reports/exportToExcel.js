@@ -2,7 +2,7 @@
 require([
         "dojo/topic"
     ],
-    function(tp) {
+    function (tp) {
         tp.subscribe("excel-export", exportToExcel);
     });
 
@@ -15,7 +15,7 @@ function exportToExcel(params) {
 
     let rowSpan = 11;
 
-    grid.bind("excelExport", function(e) {
+    grid.bind("excelExport", function (e) {
         let rows = e.workbook.sheets[0].rows;
         let columns = e.workbook.sheets[0].columns;
 
@@ -34,7 +34,7 @@ function exportToExcel(params) {
                 row.cells[0].color = "#fff";
                 row.cells[0].bold = true;
             } else {
-                $.each(app.acsFieldsConfig, function(j, el) {
+                $.each(app.acsFieldsConfig, function (j, el) {
                     if (el.tableHeader === row.cells[1].value) {
                         let indent = {
                             0: "",
@@ -58,7 +58,7 @@ function exportToExcel(params) {
                                 }
                             });
                         } else if (el.universeField === 2) {
-                            $.each(row.cells, function(i, cell) {
+                            $.each(row.cells, function (i, cell) {
                                 if (i > 0) {
                                     cell.background = "#D9D9D9";
                                     cell.bold = true;
@@ -69,7 +69,7 @@ function exportToExcel(params) {
                                 }
                             });
                         } else {
-                            $.each(row.cells, function(i, cell) {
+                            $.each(row.cells, function (i, cell) {
                                 if (i > 1) {
                                     cell.textAlign = "right";
                                 }

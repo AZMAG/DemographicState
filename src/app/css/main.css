@@ -1,5 +1,3 @@
-/*! main.css v4.0.0 | MIT License | github.com/AZMAG/map-Demographic-Statewide */
-
 :root {
     --mainColor: #081f21;
     --secondaryColor: #2baab1;
@@ -7,7 +5,6 @@
     --hoverColor: #535353;
     --hoverText: #ffffff;
 }
-
 
 /* ---------------------------------------------------
     SIDEBAR STYLES
@@ -328,6 +325,7 @@ body,
     display: flex;
     flex: 1;
     flex-direction: column;
+    justify-content: center;
 }
 
 #shareLinkCopy {
@@ -358,7 +356,6 @@ body,
 .gridToolbar {
     text-align: right;
 }
-
 
 /* #gridTarget {
     border-style: none;
@@ -545,6 +542,7 @@ a[aria-expanded='true'] {
         flex-direction: column;
         /* overflow: hidden; */
     }
+
     #sidePanel {
         flex: 1;
         max-height: 55%;
@@ -834,7 +832,6 @@ label:hover,
     font-weight: bold;
     font-size: 15px;
 }
-
 
 /* .legendDiv {
     display: flex;
@@ -1323,6 +1320,7 @@ hr.pop {
 .flexCenter {
     display: flex;
     align-items: center;
+    padding: 5px;
 }
 
 .cRamp {
@@ -1677,7 +1675,6 @@ hr.pop {
     background-color: #6e6e6e;
 }
 
-
 /* ---------------------------------------------------
     MEDIAQUERIES
 ----------------------------------------------------- */
@@ -1706,6 +1703,7 @@ hr.pop {
     #content {
         width: 100vw;
     }
+
     .panelDiv {
         width: 100%
     }
@@ -1721,28 +1719,35 @@ hr.pop {
     .shareLinks a {
         margin: 2px;
     }
+
     .shareLinks em {
         margin-left: -27px;
         margin-top: -4px;
     }
+
     #aboutTitle {
         font-size: 12px;
     }
+
     .iconTooltip {
         display: none !important;
     }
+
     .arrow-left {
         display: none !important;
     }
+
     #bottomBar {
         display: block;
     }
+
     #sidebar {
         min-width: 80px;
         max-width: 80px;
         text-align: center;
         margin-left: -80px !important;
     }
+
     a[aria-expanded='false']::before,
     a[aria-expanded='true']::before {
         top: auto;
@@ -1752,33 +1757,42 @@ hr.pop {
         -ms-transform: translateX(50%);
         transform: translateX(50%);
     }
+
     #sidebar .sidebar-header h3,
     #sidebar .CTAs {
         display: none;
     }
+
     #sidebar .sidebar-header strong {
         display: block;
     }
+
     #sidebar ul li a {
         padding: 20px 10px;
     }
+
     #sidebar ul li a span {
         font-size: 0.85em;
     }
+
     #sidebar ul li a i {
         margin-right: 0;
         display: block;
     }
+
     #sidebar ul ul a {
         padding: 10px !important;
     }
+
     #sidebar ul li a i {
         font-size: 1.3em;
     }
+
     #sidebar {
         display: none;
         margin-left: 0;
     }
+
     .wrapper {
         flex-direction: column;
     }
