@@ -258,7 +258,7 @@ require([
                     change: VerifyQuery
                 });
                 VerifyQuery();
-            };
+            }
 
             function BuildQueryString() {
                 var queryString = "";
