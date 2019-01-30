@@ -77,13 +77,17 @@ require(["dojo/topic"], function (tp) {
 
             $standardComparison.change(function () {
                 if (this.checked) {
-                    $specificReportComparison.show();
+                    $specificReportComparison.combobox({
+                        appendId: 'comparisonCombo'
+                    });
                     $specificReportComparisonLabel.show();
                     $specificReportComparisonSmall.show();
+                    $("#specificReportComparisoncomparisonCombo").show();
                 } else {
                     $specificReportComparison.hide();
                     $specificReportComparisonLabel.hide();
                     $specificReportComparisonSmall.hide();
+                    $("#specificReportComparisoncomparisonCombo").hide();
                 }
             });
 
