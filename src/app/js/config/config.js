@@ -242,7 +242,7 @@ app.config = {
             legend: true,
             id: "schoolDistSecondary",
             layerName: "SchoolDist_Secondary",
-            title: "Secondary School Districtss",
+            title: "Secondary School Districts",
             type: "feature",
             opacity: 1,
             visible: false,

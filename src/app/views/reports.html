@@ -56,15 +56,15 @@
                 <select class="form-control" id="specificReport"> </select>
                 <small class="form-text text-muted">Choose the specific report to generate.</small>
                 <div class="checkbox">
-                    <label id="standardComparisonLabel">
-                        <input name="standardComparison" id="standardComparison" type="checkbox"> Use Comparison
+                    <label id="compareCheckboxLabel">
+                        <input name="compareCheckbox" id="compareCheckbox" type="checkbox"> Use Comparison
                     </label>
                 </div>
-                <label id="specificReportComparisonLabel" for="specificReportComparison">Choose Report for
-                    Comparison:</label>
-                <select class="form-control" id="specificReportComparison"> </select>
-                <small id="specificReportComparisonSmall" class="form-text text-muted">Choose the report for
-                    comparison.</small>
+                <div id="comparisonContainer">
+                    <label>Choose Report for Comparison:</label>
+                    <select class="form-control" id="specificReportComparison"></select>
+                    <small class="form-text text-muted">Choose the report for comparison.</small>
+                </div>
             </div>
             <button id="standardBtnSubmit" type="submit" class="btn btn-primary">Submit</button>
         </form>
