@@ -56,7 +56,7 @@ And constructed with the following guidelines:
 
 ### version | 4.0.0 ###
 
-* Updated | 2019-01-09
+* Updated | 2019-01-17
 
 * Created | 2014-10-21
 

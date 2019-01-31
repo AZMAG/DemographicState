@@ -21,8 +21,8 @@
     <meta name="contact" content="www.azmag.gov" />
     <meta name="url" content="https://geo.azmag.gov/maps/azdemographics/" />
     <meta name="creation-date" content="2014-10-21" />
-    <meta name="revision-date" content="2018-04-20" />
-    <meta name="version" content="3.2.4" />
+    <meta name="revision-date" content="2019-01-17" />
+    <meta name="version" content="4.0.0" />
     <!-- Apple-Specific Meta Tags -->
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -114,36 +114,7 @@
 
 <body>
 
-    <!-- <div class="modal fade" id="colorRampModal" role="dialog"></div> -->
-
-    <div id="colorRampModal" class="modal" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Update Color Scheme</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="form-group">
-                            <label for="rampType">Choose the Nature of your data:</label>
-                            <select class="form-control" id="rampType">
-                                <option data-id="sequential">Sequential</option>
-                                <option data-id="diverging">Diverging</option>
-                            </select>
-                        </div>
-                    </form>
-                    <p>Click a color below to update the color scheme for the map.</p>
-                    <div id="selectionRamps">
-                        <div id="sequentialRamps"></div>
-                        <div style="display:none" id="divergingRamps"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <div class="modal fade" id="colorRampModal" role="dialog"></div>
 
     <div id="customClassBreaksModal" class="modal" data-keyboard="false" data-backdrop="static" tabindex="-1" role="dialog"></div>
 

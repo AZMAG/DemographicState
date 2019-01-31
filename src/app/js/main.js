@@ -37,20 +37,23 @@ require([
             }
             tp.publish("config-loaded");
         });
+
+        $("#colorRampModal").load("app/views/modal-colorRamp.html", function () {
+            tp.publish("crp");
+        });
+        $("#customClassBreaksModal").load("app/views/modal-customBreaks.html");
+
+        //*** terms binding
+        $("#termsModal").load("app/views/modal-terms.html");
+        //*** privacy binding
+        $("#privacyModal").load("app/views/modal-privacy.html");
+        $("#legendHelpModal").load("app/views/modal-help-legend.html");
+        $("#mapsHelpModal").load("app/views/modal-help-maps.html");
+        $("#reportsHelpModal").load("app/views/modal-help-reports.html");
+        $("#layersHelpModal").load("app/views/modal-help-layers.html");
+
     }
 );
 
 
-// $("#colorRampModal").load("app/views/modal-colorRamp.html", function () {
 
-// });
-$("#customClassBreaksModal").load("app/views/modal-customBreaks.html");
-
-//*** terms binding
-$("#termsModal").load("app/views/modal-terms.html");
-//*** privacy binding
-$("#privacyModal").load("app/views/modal-privacy.html");
-$("#legendHelpModal").load("app/views/modal-help-legend.html");
-$("#mapsHelpModal").load("app/views/modal-help-maps.html");
-$("#reportsHelpModal").load("app/views/modal-help-reports.html");
-$("#layersHelpModal").load("app/views/modal-help-layers.html");

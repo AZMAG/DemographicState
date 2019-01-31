@@ -69,7 +69,7 @@ module.exports = function (grunt) {
                 sourceMaps: false,
                 presets: ["@babel/preset-env"]
             },
-            dist1: {
+            dist0: {
                 files: [{
                     expand: true,
                     cwd: "src/app/js/",
@@ -77,7 +77,7 @@ module.exports = function (grunt) {
                     dest: "dist/app/js/"
                 }]
             },
-            dist2: {
+            dist1: {
                 files: [{
                     expand: true,
                     cwd: "src/app/js/widgets",
@@ -85,7 +85,7 @@ module.exports = function (grunt) {
                     dest: "dist/app/js/widgets"
                 }]
             },
-            dist3: {
+            dist2: {
                 files: [{
                     expand: true,
                     cwd: "src/app/js/reports",
@@ -93,7 +93,7 @@ module.exports = function (grunt) {
                     dest: "dist/app/js/reports"
                 }]
             },
-            dist4: {
+            dist3: {
                 files: [{
                     expand: true,
                     cwd: "src/app/js/maps",
@@ -101,7 +101,7 @@ module.exports = function (grunt) {
                     dest: "dist/app/js/maps"
                 }]
             },
-            dist5: {
+            dist4: {
                 files: [{
                     expand: true,
                     cwd: "src/app/js/config",
@@ -116,12 +116,44 @@ module.exports = function (grunt) {
                 preserveComments: "true",
                 mangle: false
             },
-            my_target: {
+            target0: {
                 files: [{
                     expand: true,
                     cwd: "dist/app/js",
                     src: ["*.js"],
                     dest: "dist/app/js"
+                }]
+            },
+            target1: {
+                files: [{
+                    expand: true,
+                    cwd: "dist/app/js/widgets",
+                    src: ["*.js"],
+                    dest: "dist/app/js/widgets"
+                }]
+            },
+            target2: {
+                files: [{
+                    expand: true,
+                    cwd: "dist/app/js/reports",
+                    src: ["*.js"],
+                    dest: "dist/app/js/reports"
+                }]
+            },
+            target3: {
+                files: [{
+                    expand: true,
+                    cwd: "dist/app/js/maps",
+                    src: ["*.js"],
+                    dest: "dist/app/js/maps"
+                }]
+            },
+            target4: {
+                files: [{
+                    expand: true,
+                    cwd: "dist/app/js/config",
+                    src: ["*.js"],
+                    dest: "dist/app/js/config"
                 }]
             }
         },
