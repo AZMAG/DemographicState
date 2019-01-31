@@ -1677,6 +1677,12 @@ hr.pop {
 
 .cBoxHighlight {
     font-weight: bolder;
+.typeahead.typeahead-long.dropdown-menu {
+    width: 95%;
+}
+
+.typeahead.typeahead-long.dropdown-menu li.active {
+    background-color: #8d8d8d;
 }
 
 #dropPrompt {
