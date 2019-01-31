@@ -1674,6 +1674,15 @@ hr.pop {
     width: 90px;
 }
 
+.typeahead.typeahead-long.dropdown-menu {
+    width: 95%;
+}
+
+.typeahead.typeahead-long.dropdown-menu li.active {
+    background-color: #8d8d8d;
+
+}
+
 #dropPrompt {
     color: black;
     margin: auto;
