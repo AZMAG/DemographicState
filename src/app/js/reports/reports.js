@@ -103,71 +103,69 @@ require(["dojo/topic", "esri/tasks/QueryTask"], function (tp, QueryTask) {
             const fld = fields[i];
             let oldFieldName = fld.fieldName;
             let val = Number(attr[fld.fieldName]);
-            if (fld.canSum === true) {
-                if (valsDef[fld.fieldName]) {
-                    if (duplicates[fld.fieldName]) {
-                        duplicates[fld.fieldName]++;
-                    } else {
-                        duplicates[fld.fieldName] = 1;
-                    }
-                    fld.fieldName += duplicates[fld.fieldName];
+            if (valsDef[fld.fieldName]) {
+                if (duplicates[fld.fieldName]) {
+                    duplicates[fld.fieldName]++;
+                } else {
+                    duplicates[fld.fieldName] = 1;
                 }
-                valsDef[fld.fieldName] = {
-                    fieldCategory: fld.category,
-                    fieldGroup: fld.groupID,
-                    fieldRowSort: fld.rowID,
-                    fieldName: fld.fieldName,
-                    tableHeader: fld.tableHeader,
-                    fieldAlias: fld.fieldAlias,
-                    fieldType: fld.fieldType,
-                    fieldClass: fld.class,
-                    fieldValue: Number(val),
-                    fieldValueFormatted: app.numberWithCommas(Number(val).toFixed(1)).replace(".0", ""),
-                    chartCategory: fld.chartCategory,
-                    chartType: fld.chartType,
-                    chartName: fld.chartCategory,
-                    parentField: fld.parentField,
-                    timePeriod: fld.timePeriod,
-                    percentOfField: fld.percentOfField,
-                    derivedTargetField: fld.fieldName,
-                    indentLevel: fld.indentLevel,
-                    universeField: fld.universeField,
-                    derivedPercentOfField: fld.percentOfField,
-                    percentValue: 0,
-                    percentValueFormatted: "0",
-                    derivedDensityAreaField: fld.densityAreaField,
-                    densityValue: 0,
-                    densityValueFormatted: "0"
-                };
-                if (isNaN(val)) {
-                    valsDef[fld.fieldName].fieldValue = "-";
-                    valsDef[fld.fieldName].fieldValueFormatted = "-";
-                }
-                if (fld.percentOfField === "" || fld.percentOfField === undefined) {
-                    valsDef[fld.fieldName].percentValueFormatted = "-";
-                } else if (fld.percentOfField !== undefined) {
-                    var percentOf = Number(attr[fld.percentOfField]);
-                    valsDef[fld.fieldName].percentValue = (val / percentOf) * 100;
-                    valsDef[fld.fieldName].percentValueFormatted = ((val / percentOf) * 100).MagFormat() + "%";
-                    if (
-                        valsDef[fld.fieldName].percentValueFormatted.indexOf(".") > -1 &&
-                        valsDef[fld.fieldName].percentValueFormatted.length === 3
-                    ) {
-                        valsDef[fld.fieldName].percentValueFormatted =
-                            "0" + valsDef[fld.fieldName].percentValueFormatted;
-                    }
-                }
-                if (fld.densityAreaField !== "" || fld.densityAreaField !== undefined) {
-                    var densityArea = Number(attr[fld.densityAreaField]);
-                    valsDef[fld.fieldName].densityValue = val / densityArea;
-                    valsDef[fld.fieldName].densityValueFormatted = (val / densityArea).MagFormat();
-                }
-
-                if (valsDef[fld.fieldName].percentValueFormatted === "NaN%") {
-                    valsDef[fld.fieldName].percentValueFormatted = "-";
-                }
-                vals.push(valsDef[fld.fieldName]);
+                fld.fieldName += duplicates[fld.fieldName];
             }
+            valsDef[fld.fieldName] = {
+                fieldCategory: fld.category,
+                fieldGroup: fld.groupID,
+                fieldRowSort: fld.rowID,
+                fieldName: fld.fieldName,
+                tableHeader: fld.tableHeader,
+                fieldAlias: fld.fieldAlias,
+                fieldType: fld.fieldType,
+                fieldClass: fld.class,
+                fieldValue: Number(val),
+                fieldValueFormatted: app.numberWithCommas(Number(val).toFixed(1)).replace(".0", ""),
+                chartCategory: fld.chartCategory,
+                chartType: fld.chartType,
+                chartName: fld.chartCategory,
+                parentField: fld.parentField,
+                timePeriod: fld.timePeriod,
+                percentOfField: fld.percentOfField,
+                derivedTargetField: fld.fieldName,
+                indentLevel: fld.indentLevel,
+                universeField: fld.universeField,
+                derivedPercentOfField: fld.percentOfField,
+                percentValue: 0,
+                percentValueFormatted: "0",
+                derivedDensityAreaField: fld.densityAreaField,
+                densityValue: 0,
+                densityValueFormatted: "0"
+            };
+            if (isNaN(val)) {
+                valsDef[fld.fieldName].fieldValue = "-";
+                valsDef[fld.fieldName].fieldValueFormatted = "-";
+            }
+            if (fld.percentOfField === "" || fld.percentOfField === undefined) {
+                valsDef[fld.fieldName].percentValueFormatted = "-";
+            } else if (fld.percentOfField !== undefined) {
+                var percentOf = Number(attr[fld.percentOfField]);
+                valsDef[fld.fieldName].percentValue = (val / percentOf) * 100;
+                valsDef[fld.fieldName].percentValueFormatted = ((val / percentOf) * 100).MagFormat() + "%";
+                if (
+                    valsDef[fld.fieldName].percentValueFormatted.indexOf(".") > -1 &&
+                    valsDef[fld.fieldName].percentValueFormatted.length === 3
+                ) {
+                    valsDef[fld.fieldName].percentValueFormatted =
+                        "0" + valsDef[fld.fieldName].percentValueFormatted;
+                }
+            }
+            if (fld.densityAreaField !== "" || fld.densityAreaField !== undefined) {
+                var densityArea = Number(attr[fld.densityAreaField]);
+                valsDef[fld.fieldName].densityValue = val / densityArea;
+                valsDef[fld.fieldName].densityValueFormatted = (val / densityArea).MagFormat();
+            }
+
+            if (valsDef[fld.fieldName].percentValueFormatted === "NaN%") {
+                valsDef[fld.fieldName].percentValueFormatted = "-";
+            }
+            vals.push(valsDef[fld.fieldName]);
             fld.fieldName = oldFieldName;
         }
         return vals;

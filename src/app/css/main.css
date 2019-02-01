@@ -294,6 +294,12 @@ a.article:hover,
     justify-content: space-between;
 }
 
+.k-item.k-state-hover.k-state-focused {
+    background: #3276b1;
+    opacity: .85;
+    color: white;
+}
+
 #layerLegend {
     max-height: 30vh;
 }
@@ -890,20 +896,15 @@ label:hover,
     text-align: center !important;
 }
 
-#specificReportComparison {
-    display: none;
-}
-
-#specificReportComparisonSmall {
-    display: none;
-}
-
-#specificReportComparisonLabel {
-    display: none;
+#comparisonContainer label {
     margin-top: 1rem;
 }
 
-#standardComparisonLabel {
+#comparisonContainer {
+    display: none;
+}
+
+#compareCheckboxLabel {
     padding: 10px 0px 0 0;
     margin-bottom: 0px;
 }
@@ -1672,6 +1673,16 @@ hr.pop {
 
 .strMultiselect {
     width: 90px;
+}
+
+.cBoxHighlight {
+    font-weight: bolder;
+.typeahead.typeahead-long.dropdown-menu {
+    width: 95%;
+}
+
+.typeahead.typeahead-long.dropdown-menu li.active {
+    background-color: #8d8d8d;
 }
 
 #dropPrompt {
