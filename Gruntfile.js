@@ -201,7 +201,7 @@ module.exports = function (grunt) {
                 processors: [
                     require('pixrem')(),
                     require('autoprefixer')({
-                        browsers: 'last 2 versions'
+                        browsers: 'last 1 versions'
                     }),
                     require('cssnano')()
                 ]

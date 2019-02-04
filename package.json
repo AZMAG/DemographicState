@@ -12,7 +12,7 @@
     "2010",
     "American Community Survey",
     "ACS",
-    "2012-2016",
+    "2013-2017",
     "5 year",
     "MAG",
     "maps",
@@ -48,11 +48,9 @@
   "devDependencies": {
     "@babel/core": "^7.2.2",
     "@babel/preset-env": "^7.2.3",
-    "grunt": "^1.0.3",
-    "grunt-autoprefixer": "^3.0.4",
     "autoprefixer": "^9.4.7",
     "cssnano": "^4.1.8",
-    "pixrem": "^5.0.0",
+    "grunt": "^1.0.3",
     "grunt-babel": "^8.0.0",
     "grunt-comment-toggler": "^0.2.2",
     "grunt-contrib-clean": "^2.0.0",
@@ -69,7 +67,14 @@
     "lodash": "^4.17.11",
     "matchdep": "^2.0.0",
     "normalize.css": ">=8.0.1",
+    "pixrem": "^5.0.0",
     "request": "^2.88.0"
   },
+  "browserslist": [
+    "last 1 version",
+    "> 1%",
+    "maintained node versions",
+    "not dead"
+  ],
   "license": "MIT"
 }
