@@ -68,6 +68,7 @@
     "matchdep": "^2.0.0",
     "normalize.css": ">=8.0.1",
     "pixrem": "^5.0.0",
+    "postcss-preset-env": "^6.5.0",
     "request": "^2.88.0"
   },
   "browserslist": [

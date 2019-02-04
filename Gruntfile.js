@@ -197,18 +197,19 @@ module.exports = function (grunt) {
 
         postcss: {
             options: {
-                map: true,
+                map: false,
                 processors: [
                     require('pixrem')(),
+                    require('postcss-preset-env')(),
                     require('autoprefixer')({
                         browsers: 'last 1 versions'
                     }),
-                    require('cssnano')()
+                    // require('cssnano')()
                 ]
             },
             dist: {
                 files: {
-                    'dist/app/css/main.min.css': 'src/app/css/main.css'
+                    'dist/app/css/main.min.css': 'dist/app/css/main.css'
                 }
             }
         },
@@ -332,8 +333,10 @@ module.exports = function (grunt) {
 
     grunt.registerTask("x", ["babel"]);
 
+     grunt.registerTask("css", ["postcss"]);
+
     // grunt.registerTask("build", ["replace", "cssmin", "concat"]);
-    grunt.registerTask("build", ["clean:build", "replace", "copy", "toggleComments", "babel", "uglify", "htmlmin", "cssmin", "postcss", "concat", "clean:cleancss"]);
+    grunt.registerTask("build", ["clean:build", "replace", "copy", "toggleComments", "babel", "postcss", "uglify", "htmlmin", "cssmin", "concat"]);
 
     // the default task can be run just by typing "grunt" on the command line
     grunt.registerTask("default", []);
