@@ -53,7 +53,7 @@ app.config = {
             legend: true,
             id: "blockGroups",
             layerName: "Block_Groups",
-            title: "American Community Survey by Block Group, 2013-2017 5yr",
+            title: "American Community Survey by Block Group, 2013-2017 5 year estimates",
             type: "image",
             opacity: 0.8,
             visible: true,
