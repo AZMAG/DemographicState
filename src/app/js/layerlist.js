@@ -1,7 +1,7 @@
 "use strict";
 require(["dojo/topic"], function (tp) {
     tp.subscribe("panel-loaded", function (panel) {
-        if (panel === "layers") {
+        if (panel === "layers-view") {
             var $layerList = $("#layerList");
             var layers = app.config.layers.filter(conf => conf.showTOC);
             // var arr = legendLayers.sort((a, b) => a.legend.sort - b.legend.sort);
