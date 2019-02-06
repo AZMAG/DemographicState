@@ -43,7 +43,8 @@ function exportToExcel(params) {
                             3: "         "
                         };
 
-                        row.cells[1].formula = `="${indent[el.indentLevel]}${el.tableHeader}"`;
+                        // row.cells[1].formula = `="${indent[el.indentLevel]}${el.tableHeader}"`;
+                        row.cells[1].value = `${indent[el.indentLevel]}${el.tableHeader}`;
 
                         if (el.universeField === 1) {
                             row.cells[0].value = row.cells[1].value;

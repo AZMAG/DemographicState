@@ -53,7 +53,7 @@ app.config = {
             legend: true,
             id: "blockGroups",
             layerName: "Block_Groups",
-            title: "American Community Survey by Block Group, 2013-2017 5yr",
+            title: "American Community Survey by Block Group, 2013-2017 5 year estimates",
             type: "image",
             opacity: 0.8,
             visible: true,
@@ -74,20 +74,9 @@ app.config = {
             url: "http://server.arcgisonline.com/arcgis/rest/services/Reference/World_Transportation/MapServer"
         }, {
             legend: true,
-            id: "state",
-            layerName: "State",
-            title: "State",
-            type: "feature",
-            opacity: 0.8,
-            visible: false,
-            showReport: true,
-            showTOC: true,
-            definition: "State is a combination or association of persons in the form of government and governed and united together into a politically organized people of a definite territory."
-        }, {
-            legend: true,
             id: "countyBoundaries",
             layerName: "Counties",
-            title: "County Boundaries",
+            title: "Counties",
             type: "feature",
             opacity: 0.8,
             visible: true,
@@ -261,8 +250,19 @@ app.config = {
             showReport: true,
             showTOC: true,
             definition: "A Unified School District is a school district that generally includes and operates both Elementary and Secondary schools under the same district control. Unified school districts provide education to children of all school ages in their service areas - Grades K-12."
+        },
+        {
+            legend: true,
+            id: "state",
+            layerName: "State",
+            title: "State Boundary",
+            type: "feature",
+            opacity: 0.8,
+            visible: false,
+            showReport: true,
+            showTOC: true,
+            definition: "State is a combination or association of persons in the form of government and governed and united together into a politically organized people of a definite territory."
         }
-
     ],
 
     initExtent: {

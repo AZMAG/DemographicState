@@ -41,7 +41,9 @@ require([
         $("#colorRampModal").load("app/views/modal-colorRamp.html", function () {
             tp.publish("crp");
         });
-        $("#customClassBreaksModal").load("app/views/modal-customBreaks.html");
+        $("#customClassBreaksModal").load("app/views/modal-customBreaks.html", function () {
+            tp.publish("classBreaksModalLoaded");
+        });
 
         //*** terms binding
         $("#termsModal").load("app/views/modal-terms.html");
@@ -54,6 +56,3 @@ require([
 
     }
 );
-
-
-

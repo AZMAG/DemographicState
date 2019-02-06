@@ -2,9 +2,20 @@
 //or map changes and updates the block groups renderer.
 "use strict";
 require(["dojo/topic", "dojo/domReady!"], function (tp) {
+    let $dynamicCBRCheckbox = $("#dynamicCBRCheckbox");
     $("#classType").change(function () {
         let type = $(this).val();
+        let dynamic = $dynamicCBRCheckbox.is(":checked");
+
+        if (type === "Custom" && dynamic) {
+            $dynamicCBRCheckbox.prop('checked', false);
+            $dynamicCBRCheckbox.attr("disabled", true);
+        } else {
+            $dynamicCBRCheckbox.attr("disabled", false);
+        }
+
         tp.publish("classType-change", type);
+
         if (type !== "Custom") {
             UpdateMapRenderer();
         }
@@ -58,7 +69,6 @@ require(["dojo/topic", "dojo/domReady!"], function (tp) {
     tp.subscribe("classBreaksCount-change", UpdateMapRenderer);
 
     tp.subscribe("layers-added", function () {
-        let $dynamicCBRCheckbox = $("#dynamicCBRCheckbox");
         app.view.watch("stationary", function (stationary) {
             if (stationary) {
                 if ($dynamicCBRCheckbox.is(":checked")) {
@@ -70,6 +80,9 @@ require(["dojo/topic", "dojo/domReady!"], function (tp) {
             UpdateMapRenderer();
         }, 90);
 
+        $dynamicCBRCheckbox.change(function () {
+            UpdateMapRenderer();
+        })
 
         let $dynamicHelp = $("#dynamicHelp");
         $dynamicHelp.popover({
