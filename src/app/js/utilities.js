@@ -301,18 +301,3 @@ app.PopupFormat = async function (gfx) {
             `;
 }
 
-// {
-//     "name": "Craig L. Brown",
-//     "address": [{
-//         "line1": "1015 Fair Street,",
-//         "city": "Prescott",
-//         "state": "AZ",
-//         "zip": "86305"
-//     }],
-//     "party": "Republican",
-//     "phones": ["(928) 771-3207"],
-//     "urls": ["http://www.yavapai.us/district4/"],
-//     "photoUrl": "http://www.yavapai.us/Portals/3/BrownCraig.png?ver=2015-12-23-094233-330",
-//     "emails": ["web.bos.district4@yavapai.us"],
-//     "office": "Board of Supervisors District 4"
-// }

@@ -1,10 +1,10 @@
 <div id="reportArea">
-    <div class="panelHeader">
-        <span class="panelHeaderText">Generate a report:</span>
-        <span class="panelHeaderIcons">
+    <div class="row panelHeader">
+        <div class="col-sm-10 panelHeaderText">Generate a report:</div>
+        <div class="col-sm-2 panelHeaderIcons">
             <a class="modal-anchor md track" data-toggle="modal" data-target="#reportsHelpModal"><i class="fas fa-question-circle"></i></a>
             <a class="closePanel" href="#"> <i class="fas fa-times"></i></a>
-        </span>
+        </div>
     </div>
     <div class="panelSubHeader">
         <button class="btn returnBtn"><i class="fas fa-angle-double-left"></i> Back</button>
@@ -44,7 +44,6 @@
         </div>
     </div>
     <div id="standardReports" class="reportFormArea">
-        <!-- <div class="flexCenter"></div> -->
         <form id="reportForm">
             <div class="form-group">
                 <label for="reportType">Type of Report:</label>
@@ -122,16 +121,11 @@
         </form>
     </div>
     <div id="advancedReports" class="reportFormArea">
-        <!-- <div class="bs-callout bs-callout-primary">
-            <h4>Choose Query</h4>
-            Drag or double click these fields to the query window to add a row to the
-            query. 
-        </div> -->
         <div id="advancedContainer">
             <div id="advancedTreeview"></div>
         </div>
         <div id="advancedQueryTarget" data-role="droptarget">
-            <h4 id="dropPrompt" style="color: black; display: none;">Drop here</h4>
+            <h4 id="dropPrompt">Drop here</h4>
         </div>
         <div id="advancedCntDiv"> Number of selected block groups : <span id="advancedCount"></span>
             <button id="btnAdvancedSubmit" class="btn btn-primary">Submit</button>
@@ -147,21 +141,10 @@
                                 <a class="nav-link active" data-toggle="tab" href="#gridTab" role="tab" aria-controls="gridTab"
                                     aria-selected="true">Data</a>
                             </li>
-
                             <li class="nav-item">
                                 <a class="nav-link" data-toggle="tab" href="#chartsTab" role="tab" aria-controls="chartsTab"
                                     aria-selected="false">Charts</a>
                             </li>
-
-                            <!-- <li class="nav-item">
-                                        <a class="nav-link" data-toggle="tab" href="#censusGridTab" role="tab"
-                                            aria-controls="censusGridTab" aria-selected="false">Census 2010 Data</a>
-                                    </li>
-
-                                    <li class="nav-item">
-                                        <a class="nav-link" data-toggle="tab" href="#censusChartsTab" role="tab"
-                                            aria-controls="censusChartsTab" aria-selected="false">Census Charts</a>
-                                    </li> -->
                         </ul>
                     </div>
                     <span class="legal">Data Source</span>
@@ -174,32 +157,6 @@
                                 Census 2010
                             </button>
                         </div>
-                        <!-- <div
-                            class="btn-group btn-group-toggle"
-                            data-toggle="buttons"
-                        >
-                            <label class="btn btn-secondary btn-sm active">
-                                <input
-                                    data-val="acs"
-                                    type="radio"
-                                    class="dataSrcToggle"
-                                    name="options"
-                                    autocomplete="off"
-                                    checked
-                                />
-                                ACS 2016
-                            </label>
-                            <label class="btn btn-secondary btn-sm">
-                                <input
-                                    data-val="census2010"
-                                    type="radio"
-                                    class="dataSrcToggle"
-                                    name="options"
-                                    autocomplete="off"
-                                />
-                                Census 2010
-                            </label>
-                        </div> -->
                     </div>
                 </div>
             </div>

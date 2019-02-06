@@ -192,11 +192,6 @@
                 </li>
                 <li class="legendToggleLI" panel-target="legend">
                     <a href="#"> <i class="fas fa-th-list"></i> <span class="liLabel">Legend</span> </a>
-                    <!-- <label class="switch">
-                        <input class="legendToggle" type="checkbox" checked>
-                        <span class="slider round"></span>
-                    </label>
-                    <span class="arrow-left"></span> -->
                 </li>
 
                 <li panel-target="reports">
@@ -220,37 +215,26 @@
                 </li>
             </ul>
         </nav>
-        <div id="content">
-            <div class="panelDiv" panel-id="layers"></div>
-            <div class="panelDiv" panel-id="about"></div>
-            <div class="panelDiv" panel-id="maps">
-                <div class="panelHeader">
-                    <span class="panelHeaderText">Choose a Map:</span>
-                    <span class="panelHeaderIcons">
+        <div id="content" class="container">
+            <div class="row panelDiv" panel-id="layers"></div>
+            <div class="row panelDiv" panel-id="about"></div>
+            <div class="row panelDiv" panel-id="maps">
+                <div class="row panelHeader">
+                    <div class="col-sm-10 panelHeaderText">Choose a Map:</div>
+                    <div class="col-sm-2 panelHeaderIcons">
                         <a class="modal-anchor md track" data-toggle="modal" data-target="#mapsHelpModal"><i class="fas fa-question-circle"></i></a>
                         <a class="closePanel" href="#"> <i class="fas fa-times"></i></a>
-                    </span>
+                    </div>
                 </div>
-                <!-- <button id="mapsListToggle" data-status="expand">Expand All</button> -->
                 <div id="mapsList"></div>
                 <hr />
                 <form>
                     <div class="checkbox">
                         <input name="dynamicCBRCheckbox" id="dynamicCBRCheckbox" type="checkbox">
                         <label for="dynamicCBRCheckbox" id="dynamicCBRLabel">Use dynamic class breaks</label>
-                        <!-- <span id="dynamicHelp" data-placement="right" data-toggle="popover" data-trigger="hover"
-                            tabindex="0" data-content=""
-                            aria-label="Dynamic Renderer Help" title="Dynamic Renderer Help">
-                            <i class="fas fa-question-circle"></i>
-                        </span> -->
                         <span id="dynamicHelp" class="article-content" href="#" data-content="This option provides the ability to toggle between a static legend that is based on statewide data or a legend that is based on the current view of the map."
                             rel="popover" data-placement="auto" data-original-title="Dynamic Renderer Help"
                             data-trigger="hover"><i class="fas fa-question-circle"></i></span>
-                        <!-- {
-                        title: 'Dynamic Renderering',
-                        content: `<div></div>`,
-                        html: true
-                        } -->
                     </div>
                     <div class="flexCenter">
                         <label for="classBreaksCount">Number of Data Classes</label>
@@ -280,8 +264,8 @@
                     </div>
                 </form>
             </div>
-            <div class="panelDiv" style="display:block" panel-id="reports"></div>
-            <div class="panelDiv" panel-id="help"></div>
+            <div class="row panelDiv" panel-id="reports"></div>
+            <div class="row panelDiv" panel-id="help"></div>
         </div>
         <div class="loading-container">
             <div class="loading-spinner">Loading <br /><img src="app/images/Loading.gif" alt="Loading" /></div>
@@ -299,10 +283,6 @@
                     </li>
                     <li class="legendToggleLI" panel-target="legend">
                         <a href="#"> <i class="fas fa-th-list"></i> Legend </a>
-                        <!-- <label class="switch">
-                                <input class="legendToggle" type="checkbox" checked>
-                                <span class="slider round"></span>
-                            </label> -->
                         <span class="arrow-left"></span>
                     </li>
                     <li panel-target="reports">

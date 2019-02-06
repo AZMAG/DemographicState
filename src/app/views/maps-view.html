@@ -1,0 +1,49 @@
+<div class="maps-view">
+<div class="row panelHeader">
+    <span class="panelHeaderText">Choose a Map:</span>
+    <span class="panelHeaderIcons">
+        <a class="modal-anchor md track" data-toggle="modal" data-target="#mapsHelpModal"><i class="fas fa-question-circle"></i></a>
+        <a class="closePanel" href="#"> <i class="fas fa-times"></i></a>
+    </span>
+</div>
+<div id="mapsList"></div>
+<hr />
+<form>
+    <div class="checkbox">
+        <input name="dynamicCBRCheckbox" id="dynamicCBRCheckbox" type="checkbox">
+        <label for="dynamicCBRCheckbox" id="dynamicCBRLabel">Use dynamic class breaks</label>
+        <span id="dynamicHelp" class="article-content" href="#" data-content="This option provides the ability to toggle between a static legend that is based on statewide data or a legend that is based on the current view of the map."
+            rel="popover" data-placement="auto" data-original-title="Dynamic Renderer Help" data-trigger="hover"><i
+                class="fas fa-question-circle"></i></span>
+    </div>
+    <div class="flexCenter">
+        <label for="classBreaksCount">Number of Data Classes</label>
+        <select style="flex: 1; margin-left: 25px;" class="form-control" id="classBreaksCount">
+            <option>3</option>
+            <option>4</option>
+            <option selected="selected">5</option>
+            <option>6</option>
+            <option>7</option>
+            <option>8</option>
+            <option>9</option>
+        </select>
+    </div>
+    <div class="flexCenter">
+        <label for="classType">Classification Type</label>
+        <select style="flex: 1; margin-left: 25px;" class="form-control" id="classType">
+            <option value="Jenks">Natural Breaks</option>
+            <option value="EqInterval">Equal Interval</option>
+            <option value="Quantile">Quantile</option>
+            <option>Custom</option>
+        </select>
+        <button id="btnClassBreaksEditor" class="btn btn-primary">Edit</button>
+    </div>
+    <div class="form-group">
+        Click to change color scheme
+        <div id="colorRamp"></div>
+    </div>
+</form>
+</div>
+
+
+</div>

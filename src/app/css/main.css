@@ -97,7 +97,7 @@ span {
 
 .panelHeaderIcons {
     display: inline;
-    float: right;
+    /* float: right; */
     padding: 13px;
 }
 
@@ -223,14 +223,17 @@ a.article:hover,
 }
 
 #content {
-    min-width: 25%;
-    transition: all 0.3s;
     display: none;
     height: 100vh;
     overflow-y: auto;
     overflow-x: hidden;
-    min-width: 25%;
+    max-width: 30%;
     transition: all 0.3s;
+}
+.panelDiv {
+    padding-left: 10px;
+    padding-right: 10px;
+    display: none;
 }
 
 .switch {
@@ -263,6 +266,8 @@ a.article:hover,
     outline: none;
     opacity: 0.7;
     -webkit-transition: 0.2s;
+    -webkit-transition: opacity 0.2s;
+    -o-transition: opacity 0.2s;
     transition: opacity 0.2s;
 }
 
@@ -550,6 +555,8 @@ a[aria-expanded='true'] {
     }
 
     #sidePanel {
+        -webkit-box-flex: 1;
+        -ms-flex: 1;
         flex: 1;
         max-height: 55%;
         overflow-y: scroll;
@@ -755,6 +762,11 @@ a[aria-expanded='true'] {
     background-color: black;
     text-align: right;
     margin-left: 50%;
+}
+.layersTitle {
+    margin: 10px 5px 10px 5px;
+    font-weight: bold;
+    font-size: 0.95em;
 }
 
 #layerList .checkbox-div {
@@ -1149,12 +1161,6 @@ label:hover,
     margin-top: 10px;
 }
 
-.panelDiv {
-    padding: 5px;
-    width: 27vw;
-    display: none;
-}
-
 .helpSection {
     padding: 10px;
     border-bottom: 1px solid #0000002e;
@@ -1209,9 +1215,7 @@ label:hover,
 }
 
 .safetyContainer {
-    display: flex;
-    align-items: center;
-    padding: 5px;
+    padding: 10px;
 }
 
 .safetyDetailsContainer {
@@ -1220,12 +1224,6 @@ label:hover,
 
 #bikeSafety .safetyDetails {
     margin-left: 5%;
-}
-
-.tab-pane,
-.aboutTab {
-    /* max-height: 90vh; */
-    /* overflow-y: auto; */
 }
 
 .nav-pills>li.active>a,
@@ -1339,6 +1337,7 @@ hr.pop {
     font-size: 68%;
     font-weight: 600;
     text-align: center;
+    margin-bottom: 15px;
 }
 
 #copyDiv p {
@@ -1750,12 +1749,6 @@ hr.pop {
     MEDIAQUERIES
 ----------------------------------------------------- */
 
-@media (max-width: 1300px) {
-    .panelDiv {
-        width: 39vw;
-    }
-}
-
 @media (max-height: 800px) {
     #sidebar ul li a i {
         font-size: 2em;
@@ -1767,16 +1760,6 @@ hr.pop {
 
     #sidebar .arrow-left {
         margin-top: -49px;
-    }
-}
-
-@media (max-width: 900px) {
-    #content {
-        width: 100vw;
-    }
-
-    .panelDiv {
-        width: 100%
     }
 }
 
@@ -1859,9 +1842,9 @@ hr.pop {
         margin-left: 0;
     }
 
-    .wrapper {
+    /* .wrapper {
         flex-direction: column;
-    }
+    } */
 }
 
 

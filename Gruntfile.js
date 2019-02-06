@@ -204,7 +204,7 @@ module.exports = function (grunt) {
                     require('autoprefixer')({
                         browsers: 'last 1 versions'
                     }),
-                    // require('cssnano')()
+                    require('cssnano')()
                 ]
             },
             dist: {
@@ -336,7 +336,7 @@ module.exports = function (grunt) {
      grunt.registerTask("css", ["postcss"]);
 
     // grunt.registerTask("build", ["replace", "cssmin", "concat"]);
-    grunt.registerTask("build", ["clean:build", "replace", "copy", "toggleComments", "babel", "postcss", "uglify", "htmlmin", "cssmin", "concat"]);
+    grunt.registerTask("build", ["clean:build", "replace", "copy", "toggleComments", "babel", "postcss", "uglify", "htmlmin", "cssmin", "concat", "clean:cleancss"]);
 
     // the default task can be run just by typing "grunt" on the command line
     grunt.registerTask("default", []);
