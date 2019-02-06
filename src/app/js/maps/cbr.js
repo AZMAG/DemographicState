@@ -70,6 +70,9 @@ require(["dojo/topic", "dojo/domReady!"], function (tp) {
             UpdateMapRenderer();
         }, 90);
 
+        $dynamicCBRCheckbox.change(function () {
+            UpdateMapRenderer();
+        })
 
         let $dynamicHelp = $("#dynamicHelp");
         $dynamicHelp.popover({
