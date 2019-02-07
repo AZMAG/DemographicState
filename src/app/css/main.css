@@ -12,12 +12,11 @@
 
 html {
     height: 100%;
-    /* font-size: 62.5%; */
 }
 
 body {
-    font-family: 'Poppins', sans-serif !important;
-    /* font-size: 1.8em; */
+    font-family: 'Poppins', sans-serif;
+    font-size: 1em;
     background: #fafafa;
     height: 100%;
     overflow: hidden !important;
@@ -71,7 +70,7 @@ span {
 }
 
 .contact {
-    font-size: 14px;
+    font-size: 0.875em;
     text-decoration: none;
     color: #7a7a7a;
 }
@@ -81,7 +80,7 @@ span {
 }
 
 .contacts {
-    font-size: 12px;
+    font-size: 0.75em;
     text-decoration: none;
     color: #7a7a7a;
 }
@@ -93,6 +92,9 @@ span {
 .md {
     cursor: pointer;
     text-decoration: none;
+}
+.md:hover {
+    color: var(--secondaryColor);
 }
 
 .panelHeaderIcons {
@@ -374,7 +376,7 @@ body,
 
 #title6Grid td,
 #title6Grid th {
-    font-size: 11px;
+    font-size: 0.7em;
     white-space: normal;
 }
 
@@ -472,7 +474,7 @@ a[aria-expanded='true'] {
 .shareLinks em {
     margin: auto;
     color: #fff;
-    font-size: 18px;
+    font-size: 1.125em;
 }
 
 #EMshareButton {
@@ -535,7 +537,7 @@ a[aria-expanded='true'] {
 }
 
 #cardContainer .card-text {
-    flex: 4;
+    flex: 6;
     margin-left: 10px;
 }
 
@@ -568,11 +570,6 @@ a[aria-expanded='true'] {
     background-color: lightgray;
 }
 
-#contactHeader {
-    background: var(--mainColor);
-    color: var(--textColor);
-}
-
 .repContainer {
     display: flex;
     align-items: center;
@@ -595,7 +592,7 @@ a[aria-expanded='true'] {
 
 .socialChannel {
     margin: 3px;
-    font-size: 17px;
+    font-size: 1.05em;
 }
 
 .socialChannel:hover {
@@ -726,7 +723,7 @@ a[aria-expanded='true'] {
     /* border-radius: 2px; */
     /* color: white; */
     /* padding: 2px; */
-    font-size: 10px;
+    font-size: 0.625em;
     /* border: 1px solid black; */
     text-align: right;
     /* margin-top: -6px; */
@@ -795,7 +792,6 @@ label:hover,
 
 #layerList .layerLabel {
     margin-left: 5%;
-    font-size: 14px;
     flex: 1;
 }
 
@@ -820,7 +816,7 @@ label:hover,
 
 #layerList .regular-checkbox:checked+label:after {
     content: '\2714';
-    font-size: 10px;
+    font-size: 0.625em;
     position: absolute;
     top: 0px;
     left: 3px;
@@ -832,8 +828,7 @@ label:hover,
 }
 
 #layerList .big-checkbox:checked+label:after {
-    font-size: 15.5555px;
-    /* left: 4px; */
+    font-size: 0.95em;
 }
 
 #legendHeader {
@@ -843,31 +838,11 @@ label:hover,
     cursor: move;
 }
 
-
-
 #legendHeader span {
     margin: 15px;
     font-weight: bold;
-    font-size: 15px;
+    font-size: 0.95em;
 }
-
-/* .legendDiv {
-    display: flex;
-    padding: 2px;
-    font-size: 12px;
-    padding-left: 15px;
-    padding-right: 10px;
-    padding-bottom: 5px;
-    border-top: 1px solid #c2c0c0;
-    background-color: white;
-    color: black;
-}
-
-
-
-.legendDiv:first-of-type {
-    border-top: none;
-} */
 
 #legendDiv {
     background: white;
@@ -904,7 +879,7 @@ label:hover,
     white-space: normal !important;
     vertical-align: middle !important;
     font-weight: bold !important;
-    font-size: 14px !important;
+    font-size: 0.875em !important;
     text-align: center !important;
 }
 
@@ -994,7 +969,7 @@ label:hover,
     border: 1px solid gray;
     z-index: 10;
     border-radius: 10px;
-    font-size: 11px;
+    font-size: 0.7em;
     pointer-events: none;
 }
 
@@ -1008,7 +983,7 @@ label:hover,
 }
 
 .esri-legend__service-label {
-    font-size: 12px !important;
+    font-size: 0.75em !important;
     flex: 1;
     order: 2;
 }
@@ -1024,7 +999,7 @@ label:hover,
 }
 
 .esri-widget__heading {
-    font-size: 11px;
+    font-size: 0.7em;
     flex: 1;
 }
 
@@ -1038,7 +1013,7 @@ label:hover,
 
 #layerList .legendItemLabel {
     color: #d1d1d1;
-    font-size: 12px;
+    font-size: 0.75em;
     font-family: 'Avenir Next W00', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     line-height: 1.3em;
     margin-left: 1%;
@@ -1124,7 +1099,7 @@ label:hover,
     padding: 15px;
     padding-right: 0;
     font-weight: 700;
-    font-size: 15px;
+    font-size: 0.95em;
 }
 
 .closePanel {
@@ -1243,7 +1218,7 @@ label:hover,
 }
 
 .popf {
-    font-size: 16px;
+    font-size: 1em;
     font-weight: bold;
     padding-top: 5px;
 }
@@ -1253,7 +1228,7 @@ hr.pop {
 }
 
 .legal {
-    font-size: 11px;
+    font-size: 0.7em;
     padding: 5px;
     font-style: italic;
 }
@@ -1262,10 +1237,6 @@ hr.pop {
     height: 40px;
     margin: 10px;
     padding: 2px;
-}
-
-.modal-body {
-    font-size: 80%;
 }
 
 .modal-header {
@@ -1334,7 +1305,7 @@ hr.pop {
 }
 
 #copyDiv {
-    font-size: 68%;
+    font-size: 0.875em;
     font-weight: 600;
     text-align: center;
     margin-bottom: 15px;
@@ -1349,7 +1320,7 @@ hr.pop {
 }
 
 .expandBtn {
-    font-size: 23px;
+    font-size: 1.45em;
     margin-left: 10px;
     margin-right: 10px;
     cursor: pointer;
@@ -1516,7 +1487,7 @@ hr.pop {
     width: 150px;
     color: white;
     text-align: center;
-    font-size: 13px;
+    font-size: 0.8em;
     padding: 0px 0;
     border-radius: 6px;
     position: absolute;
@@ -1627,7 +1598,7 @@ hr.pop {
 
 .queryHeader {
     font-weight: bold;
-    font-size: 16px;
+    font-size: 1em;
 }
 
 .queryHeader th {
@@ -1692,7 +1663,7 @@ hr.pop {
     margin: auto;
     background-color: lightgrey;
     padding: 20px;
-    font-size: 18px;
+    font-size: 1.125em;
 }
 
 .advancedRow {
@@ -1775,7 +1746,7 @@ hr.pop {
     }
 
     #aboutTitle {
-        font-size: 12px;
+        font-size: 0.75em;
     }
 
     .iconTooltip {
@@ -1891,7 +1862,7 @@ https://cpratt.co/twitter-bootstrap-callout-css-styles/
 
 .bs-callout-primary h4 {
     color: #428bca;
-    font-size: 15px;
+    font-size: 0.95em;
     font-weight: bold;
 }
 
