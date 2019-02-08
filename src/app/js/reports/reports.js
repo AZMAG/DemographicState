@@ -2,7 +2,7 @@
 "use strict";
 require(["dojo/topic", "esri/tasks/QueryTask"], function (tp, QueryTask) {
     tp.subscribe("panel-loaded", function (panel) {
-        if (panel === "reports") {
+        if (panel === "reports-view") {
             let $reportArea = $("#reportArea");
             let $subHeaderTitle = $("#summaryReportHeader");
             let $dataSrcSelector = $("#dataSrcSelector");

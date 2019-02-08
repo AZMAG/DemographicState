@@ -5,7 +5,7 @@ require(["dojo/topic", "dojo/domReady!"], function (tp) {
     let configLookup = [];
     let counter = 0;
     tp.subscribe("map-loaded", function (panel) {
-        // if (panel === "maps") {
+        // if (panel === "maps-view") {
         StartupMapsList();
         // }
     });

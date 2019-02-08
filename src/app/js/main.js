@@ -38,6 +38,9 @@ require([
             tp.publish("config-loaded");
         });
 
+        // $("#maps-view").load("app/views/maps-view.html", function () {
+        //     tp.publish("maptab");
+        // });
         $("#colorRampModal").load("app/views/modal-colorRamp.html", function () {
             tp.publish("crp");
         });

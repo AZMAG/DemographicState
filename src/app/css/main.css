@@ -97,8 +97,8 @@ span {
 
 .panelHeaderIcons {
     display: inline;
-    /* float: right; */
     padding: 13px;
+    text-align: center;
 }
 
 /* ---------------------------------------------------

@@ -29,7 +29,7 @@ require(["dojo/topic", "esri/views/2d/draw/Draw", "esri/Graphic", "esri/geometry
             }
         };
 
-        if (panel === "reports") {
+        if (panel === "reports-view") {
             let draw = new Draw({
                 view: app.view
             });

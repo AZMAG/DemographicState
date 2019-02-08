@@ -2,7 +2,7 @@
 require(["dojo/topic"], function (tp) {
     tp.subscribe("panel-loaded", function (panel) {
 
-        if (panel === "reports") {
+        if (panel === "reports-view") {
             initReports();
         }
 

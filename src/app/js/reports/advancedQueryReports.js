@@ -5,7 +5,7 @@ require([
     ],
     function (tp, QueryTask) {
         tp.subscribe("panel-loaded", function (panel) {
-            if (panel === "reports") {
+            if (panel === "reports-view") {
                 InitAdvancedQuery();
             }
         });
