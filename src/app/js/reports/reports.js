@@ -90,7 +90,19 @@ require(["dojo/topic", "esri/tasks/QueryTask"], function (tp, QueryTask) {
     }
 
     function ExportReportToPDF(conf, ids) {
-        let url = `${app.config.pdfServiceUrl}layer=${conf.layerName}&ids=${ids}`;
+        let idStr = ids.join(",");
+        let url = `${app.config.pdfService.defaultUrl}layer=${conf.layerName}&ids=${idStr}`;
+
+        if (ids.length > 1) {
+            console.log(conf)
+            if (conf.id === "blockGroups") {
+                localStorage.setItem("magDemoSelectedGEOIDs", idStr);
+                url = `${app.config.pdfService.defaultUrl}layer=${conf.layerName}&ids=interactive`
+            } else {
+                url = `${app.config.pdfService.compareUrl}layer=${conf.layerName}&ids=${idStr}`
+            }
+        }
+
         window.open(url, "_blank");
     }
 
@@ -198,22 +210,21 @@ require(["dojo/topic", "esri/tasks/QueryTask"], function (tp, QueryTask) {
         `);
         $header.css("display", "Flex");
 
-        let $btnExportPDF = $header.find(".btnExportPDF");
-        if (title.indexOf("Block Groups") > -1) {
-            $btnExportPDF.hide();
-        } else {
-            $btnExportPDF.show();
+        let ids = [attr["GEOID"]];
+
+        if (features.length > 1) {
+            ids = features.map(feature => feature.attributes["GEOID"]);
         }
 
+        if (feature.ids) {
+            ids = feature.ids;
+        }
+
+        let $btnExportPDF = $header.find(".btnExportPDF");
         $btnExportPDF.tooltip();
         $btnExportPDF.off("click").on("click", function () {
-            let ids = attr["GEOID"];
-            if (data.ids) {
-
-            }
             ExportReportToPDF(app.selectedReport.conf, ids);
         });
-
 
         let vals = GetValsFromData(attr, fields);
         if (features.length > 1) {

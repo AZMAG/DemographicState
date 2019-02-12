@@ -197,14 +197,16 @@ require(["dojo/topic", "esri/views/2d/draw/Draw", "esri/Graphic", "esri/geometry
                     app.selectedReport.acsData = {
                         features: [{
                             attributes: acsData,
-                            count: data.acsData.features.length
+                            count: data.acsData.features.length,
+                            ids: data.acsData.features.map(feature => feature.attributes["GEOID"])
                         }]
                     };
 
                     app.selectedReport.censusData = {
                         features: [{
                             attributes: censusData,
-                            count: data.acsData.features.length
+                            count: data.censusData.features.length,
+                            ids: data.censusData.features.map(feature => feature.attributes["GEOID"])
                         }]
                     };
                     tp.publish("open-report-window", app.selectedReport, "acs");
