@@ -1627,6 +1627,10 @@ hr.pop {
         overflow: hidden;
     }
 
+    .wrapper {
+        flex-direction: column;
+    }
+
     #bottomBar {
         display: block;
         background-color: var(--mainColor);
@@ -1761,6 +1765,10 @@ hr.pop {
 
     #bottomBar {
         display: none;
+    }
+
+    .wrapper {
+        flex-direction: row;
     }
 
     #sidebar {
