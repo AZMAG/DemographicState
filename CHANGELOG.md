@@ -30,8 +30,9 @@ And constructed with the following guidelines:
 
 ***************************************************
 
-## Version 4.0.0 | 2019-01-17
+## Version 4.0.0 | 2019-02-13
 
+* Changed Build
 * Added Normalize.css
 * Complete rewrite of code in 4.x
 * Migrated code from bikeways viewer and from existing demographics viewer as possible
