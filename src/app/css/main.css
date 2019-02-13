@@ -177,39 +177,112 @@ a.article:hover,
 
 .slidecontainer {
     text-align: center;
-    padding-bottom: 10px;
+    width: 80%;
+    margin-left: 10%;
+    height: 55px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow-x: hidden;
+    overflow-y: hidden;
 }
 
-.slider {
+input[type=range] {
     -webkit-appearance: none;
-    width: 70%;
-    height: 10px;
-    border-radius: 5px;
-    background: #d3d3d3;
+    margin: 10px 0;
+    width: 100%;
+}
+
+input[type=range]:focus {
     outline: none;
-    opacity: 0.7;
-    -webkit-transition: 0.2s;
-    -webkit-transition: opacity 0.2s;
-    -o-transition: opacity 0.2s;
-    transition: opacity 0.2s;
 }
 
-.slider::-webkit-slider-thumb {
+input[type=range]::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 10.8px;
+    cursor: pointer;
+    box-shadow: 0px 0px 0px #000000, 0px 0px 0px #0d0d0d;
+    background: #d3d3d3;
+    border-radius: 25px;
+    border: 0px solid #000101;
+}
+
+input[type=range]::-webkit-slider-thumb {
+    box-shadow: 0px 0px 0px #000000, 0px 0px 0px #0d0d0d;
+    border: 0px solid #000000;
+    height: 15px;
+    width: 15px;
+    border-radius: 7px;
+    background: #4caf50;
+    cursor: pointer;
     -webkit-appearance: none;
-    appearance: none;
-    width: 15px;
+    margin-top: -2.5px;
+}
+
+input[type=range]:focus::-webkit-slider-runnable-track {
+    background: #d3d3d3;
+}
+
+input[type=range]::-moz-range-track {
+    width: 100%;
+    height: 10.8px;
+    cursor: pointer;
+    box-shadow: 0px 0px 0px #000000, 0px 0px 0px #0d0d0d;
+    background: #d3d3d3;
+    border-radius: 25px;
+    border: 0px solid #000101;
+}
+
+input[type=range]::-moz-range-thumb {
+    box-shadow: 0px 0px 0px #000000, 0px 0px 0px #0d0d0d;
+    border: 0px solid #000000;
     height: 15px;
-    border-radius: 50%;
+    width: 15px;
+    border-radius: 7px;
     background: #4caf50;
     cursor: pointer;
 }
 
-.slider::-moz-range-thumb {
-    width: 15px;
+input[type=range]::-ms-track {
+    width: 100%;
+    height: 10.8px;
+    cursor: pointer;
+    background: transparent;
+    border-color: transparent;
+    border-width: 39px 0;
+    color: transparent;
+}
+
+input[type=range]::-ms-fill-lower {
+    background: #d3d3d3;
+    border: 0px solid #000101;
+    border-radius: 50px;
+    box-shadow: 0px 0px 0px #000000, 0px 0px 0px #0d0d0d;
+}
+
+input[type=range]::-ms-fill-upper {
+    background: #d3d3d3;
+    border: 0px solid #000101;
+    border-radius: 50px;
+    box-shadow: 0px 0px 0px #000000, 0px 0px 0px #0d0d0d;
+}
+
+input[type=range]::-ms-thumb {
+    box-shadow: 0px 0px 0px #000000, 0px 0px 0px #0d0d0d;
+    border: 0px solid #000000;
     height: 15px;
-    border-radius: 50%;
+    width: 15px;
+    border-radius: 7px;
     background: #4caf50;
     cursor: pointer;
+}
+
+input[type=range]:focus::-ms-fill-lower {
+    background: #d3d3d3;
+}
+
+input[type=range]:focus::-ms-fill-upper {
+    background: #d3d3d3;
 }
 
 .esri-legend__service {
@@ -238,7 +311,6 @@ a.article:hover,
 }
 
 #sliderLabel {
-    width: 8%;
     margin-left: 3px;
 }
 
