@@ -767,7 +767,6 @@ label:hover,
     font-weight: bold;
 }
 
-
 #drawAddBtn {
     display: none;
 }
@@ -882,21 +881,6 @@ label:hover,
 .popupItem .popupLabel {
     flex: 1;
     font-weight: bold;
-}
-
-.arrow-left {
-    display: none;
-    float: right;
-    width: 0;
-    height: 0;
-    border-top: 10px solid transparent;
-    border-bottom: 10px solid transparent;
-    border-right: 10px solid white;
-    margin-top: -29px;
-}
-
-#sidebar .arrow-left {
-    margin-top: -55px;
 }
 
 .close-thick:after {
@@ -1742,10 +1726,6 @@ hr.pop {
         display: none !important;
     }
 
-    .arrow-left {
-        display: none !important;
-    }
-
     a[aria-expanded='false']::before,
     a[aria-expanded='true']::before {
         top: auto;
@@ -1754,6 +1734,21 @@ hr.pop {
         -webkit-transform: translateX(50%);
         -ms-transform: translateX(50%);
         transform: translateX(50%);
+    }
+
+    .arrow-left {
+        display: none;
+        float: right;
+        width: 0;
+        height: 0;
+        border-top: 10px solid transparent;
+        border-bottom: 10px solid transparent;
+        border-right: 10px solid white;
+        margin-top: -29px;
+    }
+
+    #sidebar .arrow-left {
+        margin-top: -55px;
     }
 }
 
@@ -1835,6 +1830,10 @@ hr.pop {
         max-width: 100vw;
     }
 
+
+
+
+
 }
 
 /* Large devices (desktops, 992px and up) */
@@ -1861,6 +1860,7 @@ hr.pop {
     #content {
         max-width: 30vw;
     }
+
 
 
 

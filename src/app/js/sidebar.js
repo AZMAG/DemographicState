@@ -59,6 +59,7 @@ require([
                         if (window.outerWidth < 780) {
                             $("#viewDiv").css("visibility", "hidden");
                             $("#navContainer").css("flex", "none");
+                            $allLinks.find(".arrow-left").hide();
                         }
 
                         if (loadedLayers.indexOf(target) === -1) {
