@@ -1,7 +1,7 @@
 {
   "name": "Demographics-State-App",
   "version": "4.0.0",
-  "date": "2019-01-17",
+  "date": "2019-02-13",
   "copyright": "2019",
   "description": "MAG State Demographic Viewer",
   "keywords": [
@@ -12,7 +12,7 @@
     "2010",
     "American Community Survey",
     "ACS",
-    "2012-2016",
+    "2013-2017",
     "5 year",
     "MAG",
     "maps",
@@ -48,8 +48,9 @@
   "devDependencies": {
     "@babel/core": "^7.2.2",
     "@babel/preset-env": "^7.2.3",
+    "autoprefixer": "^9.4.7",
+    "cssnano": "^4.1.8",
     "grunt": "^1.0.3",
-    "grunt-autoprefixer": "^3.0.4",
     "grunt-babel": "^8.0.0",
     "grunt-comment-toggler": "^0.2.2",
     "grunt-contrib-clean": "^2.0.0",
@@ -60,12 +61,21 @@
     "grunt-contrib-htmlmin": "^3.0.0",
     "grunt-contrib-jshint": "^2.0.0",
     "grunt-contrib-uglify": "^4.0.0",
+    "grunt-postcss": "^0.9.0",
     "grunt-text-replace": "^0.4.0",
     "jshint-stylish-ex": "^0.2.0",
     "lodash": "^4.17.11",
     "matchdep": "^2.0.0",
     "normalize.css": ">=8.0.1",
+    "pixrem": "^5.0.0",
+    "postcss-preset-env": "^6.5.0",
     "request": "^2.88.0"
   },
+  "browserslist": [
+    "last 1 version",
+    "> 1%",
+    "maintained node versions",
+    "not dead"
+  ],
   "license": "MIT"
 }

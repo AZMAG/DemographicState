@@ -5,7 +5,7 @@ require([
     ],
     function (tp, QueryTask) {
         tp.subscribe("panel-loaded", function (panel) {
-            if (panel === "reports") {
+            if (panel === "reports-view") {
                 InitAdvancedQuery();
             }
         });
@@ -181,63 +181,73 @@ require([
                 return false;
             });
 
-            $btnAdvancedSubmit.click(RunQuery);
+            $btnAdvancedSubmit.click(submitQuery);
 
             treeView.data("kendoTreeView").expand("li:first");
 
             function OnDrop(e) {
                 AddRow(DataItemSelected);
             }
+
+            function submitQuery() {
+                if (resultCount === 0) {
+                    alert("0 block groups meet your current criteria.  Please refine your query and try again.");
+                } else if (resultCount > 500) {
+                    let answer = window.confirm(`You have selected ${resultCount} block groups.  It may take some time to generate this report.  Are you sure you wish to proceed?`);
+                    if (answer) {
+                        RunQuery()
+                    }
+                } else {
+                    RunQuery();
+                }
+            }
+
             /**
             Method for executing the constructed query.
             @method runQuery
             **/
             function RunQuery() {
+                let q = {
+                    where: BuildQueryString(),
+                    returnGeometry: false,
+                    outFields: ["GEOID"]
+                };
 
-                if (resultCount === 0) {
-                    alert("0 block groups meet your current criteria.  Please refine your query and try again.");
-                } else {
-                    let q = {
-                        where: BuildQueryString(),
-                        returnGeometry: false,
-                        outFields: ["GEOID"]
-                    };
+                let qt = new QueryTask({
+                    url: app.config.mainUrl + "/0"
+                });
 
-                    let qt = new QueryTask({
-                        url: app.config.mainUrl + "/0"
+                qt.execute(q).then(function (res) {
+                    let geoids = [];
+
+                    res.features.forEach(feature => {
+                        geoids.push(feature.attributes["GEOID"]);
                     });
 
-                    qt.execute(q).then(function (res) {
-                        let geoids = [];
+                    app.GetData(app.config.layerDef["blockGroups"], geoids).then(function (data) {
 
-                        res.features.forEach(feature => {
-                            geoids.push(feature.attributes["GEOID"]);
-                        });
+                        var acsdata = app.summarizeFeatures(data.acsData);
+                        var censusdata = app.summarizeFeatures(data.censusData);
 
-                        app.GetData(app.config.layerDef["blockGroups"], geoids).then(function (data) {
+                        app.selectedReport.acsData = {
+                            features: [{
+                                attributes: acsdata,
+                                count: data.acsData.features.length
+                            }]
+                        };
 
-                            var acsdata = app.summarizeFeatures(data.acsData);
-                            var censusdata = app.summarizeFeatures(data.censusData);
-
-                            app.selectedReport.acsData = {
-                                features: [{
-                                    attributes: acsdata,
-                                    count: data.acsData.features.length
-                                }]
-                            };
-
-                            app.selectedReport.censusData = {
-                                features: [{
-                                    attributes: censusdata,
-                                    count: data.acsData.features.length
-                                }]
-                            };
-                            tp.publish("open-report-window", app.selectedReport, "acs");
-                            app.AddHighlightGraphics(data.acsData.features, true);
-                            $(".reportFormArea").hide();
-                        });
+                        app.selectedReport.censusData = {
+                            features: [{
+                                attributes: censusdata,
+                                count: data.acsData.features.length
+                            }]
+                        };
+                        tp.publish("open-report-window", app.selectedReport, "acs");
+                        app.AddHighlightGraphics(data.acsData.features, true);
+                        $(".reportFormArea").hide();
                     });
-                }
+                });
+
             }
 
             function PopulateStringDropdowns(results) {

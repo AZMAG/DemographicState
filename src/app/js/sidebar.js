@@ -28,12 +28,12 @@ require([
 
             function TogglePanel(target, e) {
                 $("#viewDiv").css("visibility", "visible");
-                $("#container").css("flex", "1");
+                $("#navContainer").css("flex", "1");
                 if (target === "legend") {
                     toggleLegend();
                 } else if (target === "share") {
                     if ($content.is(":visible") && window.outerWidth < 780) {
-                        $("#container").css("flex", "none");
+                        $("#navContainer").css("flex", "none");
                         $("#viewDiv").css("visibility", "hidden");
                     }
                 } else {
@@ -58,7 +58,8 @@ require([
 
                         if (window.outerWidth < 780) {
                             $("#viewDiv").css("visibility", "hidden");
-                            $("#container").css("flex", "none");
+                            $("#navContainer").css("flex", "none");
+                            $allLinks.find(".arrow-left").hide();
                         }
 
                         if (loadedLayers.indexOf(target) === -1) {
@@ -89,7 +90,7 @@ require([
 
             $("#content").on("click", ".closePanel", function () {
                 $("#viewDiv").css("visibility", "visible");
-                $("#container").css("flex", 1);
+                $("#navContainer").css("flex", 1);
                 $links.removeClass("active");
                 $arrows.hide();
                 $panelDivs.hide();
@@ -116,9 +117,9 @@ require([
                 });
                 if (window.outerWidth < 768 && $("#content").is(":visible") === true) {
                     $("#viewDiv").css("visibility", "visible");
-                    $("#container").css("flex", "none");
+                    $("#navContainer").css("flex", "none");
                 } else if (window.outerWidth > 768 && $("#content").is(":visible") === true) {
-                    $("#container").css("flex", 1);
+                    $("#navContainer").css("flex", 1);
                 }
             });
         });

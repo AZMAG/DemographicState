@@ -69,42 +69,42 @@ module.exports = function (grunt) {
                 sourceMaps: false,
                 presets: ["@babel/preset-env"]
             },
-            dist1: {
+            babel0: {
                 files: [{
                     expand: true,
-                    cwd: "src/app/js/",
+                    cwd: "dist/app/js/",
                     src: ["*.js"],
                     dest: "dist/app/js/"
                 }]
             },
-            dist2: {
+            babel1: {
                 files: [{
                     expand: true,
-                    cwd: "src/app/js/widgets",
+                    cwd: "dist/app/js/widgets",
                     src: ["*.js"],
                     dest: "dist/app/js/widgets"
                 }]
             },
-            dist3: {
+            babel2: {
                 files: [{
                     expand: true,
-                    cwd: "src/app/js/reports",
+                    cwd: "dist/app/js/reports",
                     src: ["*.js"],
                     dest: "dist/app/js/reports"
                 }]
             },
-            dist4: {
+            babel3: {
                 files: [{
                     expand: true,
-                    cwd: "src/app/js/maps",
+                    cwd: "dist/app/js/maps",
                     src: ["*.js"],
                     dest: "dist/app/js/maps"
                 }]
             },
-            dist5: {
+            babel4: {
                 files: [{
                     expand: true,
-                    cwd: "src/app/js/config",
+                    cwd: "dist/app/js/config",
                     src: ["*.js"],
                     dest: "dist/app/js/config"
                 }]
@@ -116,12 +116,44 @@ module.exports = function (grunt) {
                 preserveComments: "true",
                 mangle: false
             },
-            my_target: {
+            target0: {
                 files: [{
                     expand: true,
                     cwd: "dist/app/js",
                     src: ["*.js"],
                     dest: "dist/app/js"
+                }]
+            },
+            target1: {
+                files: [{
+                    expand: true,
+                    cwd: "dist/app/js/widgets",
+                    src: ["*.js"],
+                    dest: "dist/app/js/widgets"
+                }]
+            },
+            target2: {
+                files: [{
+                    expand: true,
+                    cwd: "dist/app/js/reports",
+                    src: ["*.js"],
+                    dest: "dist/app/js/reports"
+                }]
+            },
+            target3: {
+                files: [{
+                    expand: true,
+                    cwd: "dist/app/js/maps",
+                    src: ["*.js"],
+                    dest: "dist/app/js/maps"
+                }]
+            },
+            target4: {
+                files: [{
+                    expand: true,
+                    cwd: "dist/app/js/config",
+                    src: ["*.js"],
+                    dest: "dist/app/js/config"
                 }]
             }
         },
@@ -158,7 +190,26 @@ module.exports = function (grunt) {
                 },
                 files: {
                     "dist/app/css/normalize.min.css": ["src/app/css/normalize.css"],
-                    "dist/app/css/main.min.css": ["src/app/css/main.css"]
+                    // "dist/app/css/main.min.css": ["src/app/css/main.css"]
+                }
+            }
+        },
+
+        postcss: {
+            options: {
+                map: false,
+                processors: [
+                    require('pixrem')(),
+                    require('postcss-preset-env')(),
+                    require('autoprefixer')({
+                        browsers: 'last 1 versions'
+                    }),
+                    require('cssnano')()
+                ]
+            },
+            dist: {
+                files: {
+                    'dist/app/css/main.min.css': 'dist/app/css/main.css'
                 }
             }
         },
@@ -201,19 +252,7 @@ module.exports = function (grunt) {
                     removeCommands: false
                 },
                 files: {
-                    "dist/index.html": "dist/index.html",
-                    "dist/app/vm/cbr-vm.js": "dist/app/vm/cbr-vm.js",
-                    "dist/app/vm/colorRamp-vm.js": "dist/app/vm/colorRamp-vm.js",
-                    "dist/app/vm/contact-vm.js": "dist/app/vm/contact-vm.js",
-                    "dist/app/vm/help-vm.js": "dist/app/vm/help-vm.js",
-                    "dist/app/vm/interactiveTools-vm.js": "dist/app/vm/interactiveTools-vm.js",
-                    "dist/app/vm/legend-vm.js": "dist/app/vm/legend-vm.js",
-                    "dist/app/vm/mapContainer-vm.js": "dist/app/vm/mapContainer-vm.js",
-                    "dist/app/vm/markupTools-vm.js": "dist/app/vm/markupTools-vm.js",
-                    "dist/app/vm/panel-vm.js": "dist/app/vm/panel-vm.js",
-                    "dist/app/vm/print-vm.js": "dist/app/vm/print-vm.js",
-                    "dist/app/vm/queryBuilder-vm.js": "dist/app/vm/queryBuilder-vm.js",
-                    "dist/app/vm/social-vm.js": "dist/app/vm/social-vm.js"
+                    "dist/index.html": "dist/index.html"
                 }
             }
         },
@@ -294,8 +333,10 @@ module.exports = function (grunt) {
 
     grunt.registerTask("x", ["babel"]);
 
+     grunt.registerTask("css", ["postcss"]);
+
     // grunt.registerTask("build", ["replace", "cssmin", "concat"]);
-    grunt.registerTask("build", ["clean:build", "replace", "copy", "toggleComments", "babel", "uglify", "htmlmin", "cssmin", "concat", "clean:cleancss"]);
+    grunt.registerTask("build", ["clean:build", "replace", "copy", "toggleComments", "babel", "postcss", "uglify", "htmlmin", "cssmin", "concat", "clean:cleancss"]);
 
     // the default task can be run just by typing "grunt" on the command line
     grunt.registerTask("default", []);

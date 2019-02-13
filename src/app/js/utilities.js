@@ -292,7 +292,7 @@ app.PopupFormat = async function (gfx) {
                 <div>Minority Population: <strong>${attr["MINORITY_POP"].toLocaleString()}</strong></div>
                 ${attr["MEDIAN_AGE"] ? `<div>Median Age: <strong>${attr["MEDIAN_AGE"]} years</strong></div>` : ""}
                 <div>Number of Households: <strong>${attr["TOTAL_HOUSEHOLDS"].toLocaleString()}</strong></div>
-                ${attr["MEDIAN_HOUSEHOLD_INCOME"] ? `<div>Median Household Income: <strong>${attr["MEDIAN_HOUSEHOLD_INCOME"].toLocaleString()}</strong></div>` : ""}
+                ${attr["MEDIAN_HOUSEHOLD_INCOME"] ? `<div>Median Household Income: <strong>$${attr["MEDIAN_HOUSEHOLD_INCOME"].toLocaleString()}</strong></div>` : ""}
                 ${repHtml ? `
                 <hr>
                 <h6>Representative Info</h6>
@@ -301,18 +301,3 @@ app.PopupFormat = async function (gfx) {
             `;
 }
 
-// {
-//     "name": "Craig L. Brown",
-//     "address": [{
-//         "line1": "1015 Fair Street,",
-//         "city": "Prescott",
-//         "state": "AZ",
-//         "zip": "86305"
-//     }],
-//     "party": "Republican",
-//     "phones": ["(928) 771-3207"],
-//     "urls": ["http://www.yavapai.us/district4/"],
-//     "photoUrl": "http://www.yavapai.us/Portals/3/BrownCraig.png?ver=2015-12-23-094233-330",
-//     "emails": ["web.bos.district4@yavapai.us"],
-//     "office": "Board of Supervisors District 4"
-// }

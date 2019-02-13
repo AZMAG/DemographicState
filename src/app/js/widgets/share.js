@@ -64,6 +64,8 @@ require(["dojo/topic", "esri/tasks/QueryTask"], function (tp, QueryTask) {
             `
             );
 
+            $("#shareLinkCopy").tooltip();
+
             $("body").on("click", "#shareLinkCopy", function () {
                 $("#bitlyUrlInput").select();
                 document.execCommand("copy");

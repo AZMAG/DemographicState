@@ -15,7 +15,6 @@ require([
             const minLabelSize = 13;
             const lyr = app.map.findLayerById("blockGroups").sublayers.getItemAt(0);
 
-
             $btnClassBreaksEditor.click(function (e) {
                 CbrParamChanged("Custom");
                 e.preventDefault();
@@ -29,17 +28,27 @@ require([
                 if (type === "Custom") {
                     $customClassBreaksModal.modal("show");
                     $btnClassBreaksEditor.show();
-                    SetupSplitter();
-                    SetupCharts();
+                    // SetupSplitter();
+                    // SetupCharts();
                 } else {
                     $btnClassBreaksEditor.hide();
                 }
             }
+            let once = false;
+            $customClassBreaksModal.on('shown.bs.modal', function (e) {
+                if (!once) {
+                    SetupSplitter();
+                    SetupCharts();
+                }
+            });
+            let lastCustomBreaks;
 
             function SetupSplitter(custom) {
 
                 const rend = lyr.renderer;
                 let infos = custom || rend.classBreakInfos;
+
+
 
                 app.GetCurrentMapsParams().then(function (data) {
 
@@ -49,7 +58,7 @@ require([
                     if (data.classType === "Custom" && !custom) {
                         let cbrCount = $classBreaksCount.val();
                         let breaks = data.conf.breaks["Jenks" + cbrCount];
-                        infos = app.GetCurrentBreaks(breaks, data.colorRamp);
+                        infos = data.cbInfos && data.cbInfos.length > 0 ? data.cbInfos : app.GetCurrentBreaks(breaks, data.colorRamp);
                         maxVal = infos[infos.length - 1].maxValue;
                     }
 

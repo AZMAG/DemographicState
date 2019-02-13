@@ -53,7 +53,35 @@ require([
 
     tp.subscribe("map-loaded", addLayers);
 
-    function addLayers() {
+    async function addBGLayer() {
+        let res = await app.GetCurrentRenderer();
+        let conf = app.config.layerDef['blockGroups'];
+        let url = app.config.mainUrl;
+        if (conf.url) {
+            url = conf.url;
+        }
+        let bgLayer = new MapImageLayer({
+            url: url,
+            id: conf.id,
+            opacity: conf.opacity || 1,
+            title: conf.title,
+            visible: conf.visible,
+            labelsVisible: false,
+            labelingInfo: [{}],
+            sublayers: [{
+                id: conf.ACSIndex,
+                opacity: 1
+            }]
+        });
+
+        bgLayer.findSublayerById(0).renderer = res.renderer;
+        app.map.add(bgLayer);
+        return;
+    }
+
+    async function addLayers() {
+        await addBGLayer();
+
         var layersToAdd = [];
         app.config.layers.forEach(layer => {
             var layerToAdd;
@@ -81,7 +109,7 @@ require([
                     outFields: layer.outFields || ["*"],
                     opacity: layer.opacity
                 });
-            } else if (layer.type === "image") {
+            } else if (layer.type === "image" && layer.id !== "blockGroups") {
                 if (layer.url) {
                     url = layer.url;
                 }
@@ -116,16 +144,16 @@ require([
             }
         });
 
-        // layersToAdd.sort(function(a, b) {
-        //     return b.sortOrder - a.sortOrder;
-        // });
-
         app.map.layers.addMany(layersToAdd);
-
         var gfxLayer = new GraphicsLayer({
             id: "gfxLayer"
         });
         app.map.add(gfxLayer);
+
+        // layersToAdd.sort(function(a, b) {
+        //     return b.sortOrder - a.sortOrder;
+        // });
+
 
         //For now.... I'm waiting until the block groups layer is finished to publish the layers-added event.
         //TODO: This should prevent the legend from trying to load to early.
