@@ -39,13 +39,13 @@ require([
             //Add Slider
             $("#bgLegend").append(`
                 <span class="legendSrc legal">${app.config.layerDef["blockGroups"].title}</span>
+                <span style="padding: 8px;">Transparency</span><br>
                 <div class="slidecontainer">
-                    <span style="padding: 8px;">Transparency</span>
                     <input type="range" min="0" max="1" value="${initOpacity}" step=".05" class="round slider" id="slider">
                     <span id="sliderLabel">${initOpacity * 100}%</span>
                 </div>
             `);
-            $("#slider").on("input", function () {
+            $("#slider").on("input change", function () {
                 blockGroupsLayer.opacity = this.value;
                 $("#sliderLabel").html(`${Math.floor(this.value * 100)}%`);
                 // alert(this.value)
