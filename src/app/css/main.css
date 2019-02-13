@@ -6,10 +6,6 @@
     --hoverText: #ffffff;
 }
 
-/* ---------------------------------------------------
-    SIDEBAR STYLES
------------------------------------------------------ */
-
 html {
     height: 100%;
 }
@@ -22,7 +18,7 @@ body {
     overflow: hidden !important;
 }
 
-#container {
+#navContainer {
     display: flex;
     flex: 1;
     flex-direction: column;
@@ -122,8 +118,6 @@ span {
     align-items: stretch;
     height: 100%;
 }
-
-
 
 .disabled {
     background-color: lightgrey !important;
@@ -270,12 +264,9 @@ a.article:hover,
     color: var(--textColor);
 }
 
-
-
 .gridToolbar {
     text-align: right;
 }
-
 
 #title6Grid td,
 #title6Grid th {
@@ -290,8 +281,6 @@ a.article:hover,
 #title6Area .k-reset {
     cursor: pointer;
 }
-
-
 
 .customWidget {
     display: none;
@@ -446,9 +435,6 @@ a.article:hover,
 .socialChannel:first-of-type {
     margin: 0px;
 }
-
-
-
 
 #screenshotDiv {
     position: absolute;
@@ -1630,12 +1616,15 @@ hr.pop {
 /* ---------------------------------------------------
     MEDIAQUERIES
 ----------------------------------------------------- */
-
-/* Small devices (landscape phones, 576px and up) */
-@media (min-width: 576px) {
-
+/* Smartphones (portrait) ----------- */
+@media only screen and (min-width : 320px) {
     #sidebar {
         display: none;
+    }
+
+    #navContainer {
+        flex-direction: column;
+        overflow: hidden;
     }
 
     #bottomBar {
@@ -1762,10 +1751,10 @@ hr.pop {
         -ms-transform: translateX(50%);
         transform: translateX(50%);
     }
-
-
-
 }
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {}
 
 /* Medium devices (tablets, 768px and up) */
 @media (min-width: 768px) {
@@ -1784,17 +1773,17 @@ hr.pop {
         transition: all 0.3s;
     }
 
-     #sidebar .legendToggleLI {
-         display: block;
-     }
+    #sidebar .legendToggleLI {
+        display: block;
+    }
 
-     #sidebar .legendToggleLI label {
-         margin-left: 11px;
-     }
+    #sidebar .legendToggleLI label {
+        margin-left: 11px;
+    }
 
-     #sidebar ul ul a {
-         padding: 10px;
-     }
+    #sidebar ul ul a {
+        padding: 10px;
+    }
 
     #sidebar ul li a i {
         display: block;
@@ -1835,13 +1824,24 @@ hr.pop {
     }
 
     #content {
-        max-width: 100%;
+        max-width: 100vw;
     }
 
 }
 
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {
+
+    #sidebar ul li a {
+        display: block;
+        font-size: 0.9em;
+        padding: 20px 10px;
+        text-align: center;
+    }
+
+    #sidebar ul li a span {
+        font-size: 1em;
+    }
 
     #sidebar ul li a i {
         display: block;
@@ -1851,9 +1851,9 @@ hr.pop {
     }
 
     #content {
-        max-width: 25%;
-        min-width: 25%;
+        max-width: 30vw;
     }
+
 
 
 

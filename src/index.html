@@ -118,9 +118,6 @@
     <!--Custom Class Breaks modal-->
     <div class="modal fade" id="customClassBreaksModal" data-keyboard="false" data-backdrop="static" tabindex="-1" role="dialog"></div>
 
-
-
-
     <div class="customWidget" id="legend">
         <div title="Click and drag to move window" id="legendHeader">
             <span>Legend</span><span id="legendGrip"><a class="modal-anchor md track" data-toggle="modal" data-target="#legendHelpModal"><i
@@ -217,6 +214,10 @@
             </ul>
         </nav>
 
+        <div class="loading-container">
+            <div class="loading-spinner">Loading <br /><img src="app/images/Loading.gif" alt="Loading" /></div>
+        </div>
+
         <div id="content" class="container">
             <div class="row panelDiv" panel-id="layers-view"></div>
             <div class="row panelDiv" panel-id="about-view"></div>
@@ -270,13 +271,9 @@
             <div class="row panelDiv" panel-id="help-view"></div>
         </div>
 
-        <div class="loading-container">
-            <div class="loading-spinner">Loading <br /><img src="app/images/Loading.gif" alt="Loading" /></div>
-        </div>
-
-        <div id="container">
+        <div id="navContainer">
             <div id="viewDiv"></div>
-            <div id="bottomBar">
+            <nav id="bottomBar">
                 <ul class="list-unstyled components">
                     <li panel-target="maps-view">
                         <a href="#"> <i class="fas fa-map"></i> Maps </a> <span class="arrow-left"></span>
@@ -307,10 +304,10 @@
                         </a>
                     </li>
                 </ul>
-            </div>
+            </nav>
         </div>
-    </div>
 
+    </div>
 
 
     <!--privacy modal-->
