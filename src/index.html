@@ -67,7 +67,7 @@
     <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2018.3.1017/styles/kendo.common-bootstrap.min.css" />
     <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2018.3.1017/styles/kendo.bootstrap.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.6.3/css/all.min.css" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" />
     <!-- Application CSS -->
     <!-- comments:comment html -->
     <link rel="stylesheet" href="app/css/normalize.css" />
@@ -154,12 +154,12 @@
             <i class="esri-icon fas fa-minus"></i> <span class="esri-icon-font-fallback-text">Zoom Out</span>
         </div>
     </div>
-    <!-- <div id="printWidget" class="customWidget esri-component esri-zoom esri-widget">
+    <div id="printWidget" class="customWidget esri-component esri-zoom esri-widget">
         <div id="draw-polygon" class="esri-widget--button esri-widget esri-interactive" role="button" tabindex="0"
-            title="Print Widget">
+            title="Print this map">
             <i class="esri-icon fas fa-print"></i> <span class="esri-icon-font-fallback-text">Print</span>
         </div>
-    </div> -->
+    </div>
 
     <!-- <div id="drawWidget" class="customWidget esri-component esri-zoom esri-widget">
         <div id="draw-polygon" class="esri-widget--button esri-widget esri-interactive" role="button" tabindex="0"
@@ -322,6 +322,10 @@
     <div class="modal fade" id="reportsHelpModal" role="dialog"></div>
     <!--layers help modal-->
     <div class="modal fade" id="layersHelpModal" role="dialog"></div>
+    <!--print modal-->
+    <div class="modal fade" id="printWidgetModal" role="dialog"></div>
+
+
     <div id="screenshotDiv" class="hide">
         <img class="js-screenshot-image">
         <div class="alignCenter">
@@ -349,15 +353,16 @@
     </script>
 
     <!-- Vendor  -->
+    <!-- <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/7.2.5/polyfill.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
     <script src="https://kendo.cdn.telerik.com/2018.3.1017/js/jszip.min.js"></script>
     <script src="https://kendo.cdn.telerik.com/2018.3.1017/js/kendo.all.min.js"></script>
     <script src="app/js/vendor/draggable.js"></script>
     <script src="app/js/vendor/geoStats.min.js"></script>
     <script src="https://js.arcgis.com/4.10/"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/7.2.5/polyfill.min.js"></script>
 
     <script src="app/js/scripts.js"></script>
 </body>

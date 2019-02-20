@@ -1,138 +1,112 @@
 "use strict";
 require([
-    // "esri/views/2d/draw/Draw",
-    // "esri/Graphic",
-    "dojo/topic"
+    "dojo/topic",
+    "esri/widgets/Print/PrintViewModel"
 ], function (
-    // Draw,
-    // Graphic,
-    tp
+    tp,
+    PrintVM
 ) {
     let $printWidget = $("#printWidget");
-    let $screenshotDiv = $("#screenshotDiv");
+    let $printWidgetModal = $("#printWidgetModal");
 
-    tp.subscribe("widget-home-loaded", function () {
-        // add the button for drawing polygons underneath zoom buttons
+    tp.subscribe("widget-basemapToggle-loaded", function () {
+        let $printForm = $("#printForm");
+        let $formInputs = $("#printForm :input");
+        let $printMapTitle = $("#printMapTitle");
+        let $printMapNotes = $("#printMapNotes");
+        let $printMapLayout = $("#printMapLayout");
+        let $printMapFormat = $("#printMapFormat");
+        let $printLoader = $("#printLoader");
+        let $printResult = $("#printResult");
+
+        let printVM = new PrintVM({
+            printServiceUrl: app.config.printUrl,
+            updateDelay: 300,
+            view: app.view
+        });
+
         app.view.ui.add($printWidget[0], "bottom-right");
 
-        let savedScreenshot;
+        $printWidget.click(function () {
+            SetupPrintForm();
+        })
 
-        $printWidget.click(() => {
-            app.view.takeScreenshot({
-                format: "png",
-                layers: [
-                    app.map.findLayerById("blockGroups"),
-                    app.map.findLayerById("streets"),
-                    app.map.findLayerById("countyBoundaries")
-                ]
-            }).then((screenshot) => {
-                savedScreenshot = screenshot;
-                showPreview(screenshot);
-            });
+
+        $printForm.submit(async function (e) {
+            e.preventDefault();
+            let q = GetFormData();
+
+            //Disable form
+            $formInputs.prop("disabled", true);
+            $printLoader.show();
+            $printResult.hide();
+
+            let res = await printVM.print(q);
+
+            //Try to open the link in a new window
+            window.open(res.url, '_blank');
+
+            $printResult.attr("href", res.url);
+            $printResult.show();
+
+            //Re-enable form
+            $formInputs.prop("disabled", false);
+            $printLoader.hide();
         });
 
-        $screenshotDiv.find("button").click((e) => {
-            if (e.target.id === "screenshotDownloadBtn") {
-                downloadImage("Arizona Demographics Map");
-            } else {
-                returnToMap();
+
+
+        function GetFormData() {
+            let currentMap = app.GetActiveMapData();
+            let data = {
+                layoutOptions: {
+                    titleText: $printMapTitle.val(),
+                    notes: $printMapNotes.val(),
+                    scalebarUnit: "Miles",
+                    copyrightText: "<copyright info here>",
+                    authorText: "Made by:  MAG GIS Group",
+                    customTextElements: [{
+                        txtLegendHeader: `${currentMap.category} - ${currentMap.Name}\n<_BOL>${app.config.LegendSource}</_BOL>`
+                    }, {
+                        txtComments: $printMapNotes.val()
+                    }]
+                },
+                exportOptions: {
+                    dpi: 96
+                },
+                layout: $printMapLayout.find(":selected").val(),
+                format: $printMapFormat.find(":selected").val()
             }
-        });
-
-        async function prepImage(screenshot) {
-            let screenSht = savedScreenshot;
-            if (screenshot && screenshot.data) {
-                screenSht = screenshot;
-            }
-            const imageData = screenSht.data;
-
-            let mapData = app.GetActiveMapData();
-            const title = mapData.Name;
-
-            // to add the text to the screenshot we create a new canvas element
-            const canvas = document.createElement("canvas");
-            const ctx = canvas.getContext("2d");
-            canvas.height = imageData.height;
-            canvas.width = imageData.width;
-
-            // add the screenshot data to the canvas
-            ctx.putImageData(imageData, 0, 0);
-
-            const headerHeight = 75;
-
-            //Add black rectangle to the top of the image
-            ctx.fillStyle = "#000";
-            ctx.fillRect(0, 0, imageData.width, headerHeight);
-
-            //Add Title to top of image
-            ctx.fillStyle = "#FFF";
-            ctx.font = "40px Arial";
-
-            ctx.fillText(title, (imageData.width / 2) - (ctx.measureText(title).width / 2), headerHeight * 0.7);
-
-            $(".slidecontainer").hide();
-            let legendCanvas = await html2canvas(document.querySelector("#legendDiv"));
-            let legendWidth = legendCanvas.width;
-            $(".slidecontainer").show();
-            let padding = 20;
-            ctx.drawImage(legendCanvas, imageData.width - legendWidth - padding, headerHeight + padding);
-
-            return canvas.toDataURL();
+            return data;
         }
 
+        let printInit = false;
 
-        async function downloadImage(filename) {
-            let dataUrl = await prepImage();
+        async function InitializePrintForm() {
+            if (!printInit) {
+                $.getJSON(app.config.printUrl + "/?f=pjson", function (data, textStatus, jqXHR) {
+                    //Setup Layout List
+                    let printMapLayoutOptions = data.parameters[3].choiceList.map(choice => {
+                        if (!choice.includes('MAP_ONLY')) {
+                            return `<option value="${choice}">${choice}</option>`;
+                        }
+                    });
 
-            // the download is handled differently in Microsoft browsers
-            // because the download attribute for <a> elements is not supported
-            if (!window.navigator.msSaveOrOpenBlob) {
-
-                // in browsers that support the download attribute
-                // a link is created and a programmatic click will trigger the download
-                const element = document.createElement("a");
-                element.setAttribute("href", dataUrl);
-                element.setAttribute("download", filename);
-                element.style.display = "none";
-                document.body.appendChild(element);
-                element.click();
-                document.body.removeChild(element);
-            } else {
-                // for MS browsers convert dataUrl to Blob
-                const byteString = atob(dataUrl.split(",")[1]);
-                const mimeString = dataUrl.split(",")[0].split(":")[1].split(";")[0];
-                const ab = new ArrayBuffer(byteString.length);
-                const ia = new Uint8Array(ab);
-                for (let i = 0; i < byteString.length; i++) {
-                    ia[i] = byteString.charCodeAt(i);
-                }
-                const blob = new Blob([ab], {
-                    type: mimeString
+                    let currentMap = app.GetActiveMapData();
+                    $printMapTitle.val(`${currentMap.category} - ${currentMap.Name}`);
+                    $printMapLayout.html(printMapLayoutOptions);
+                    printInit = true;
+                    return true;
                 });
-
-                // download file
-                window.navigator.msSaveOrOpenBlob(blob, filename);
             }
-
         }
 
-        function returnToMap() {
-            $screenshotDiv.addClass("hide");
-        }
-
-        // creates an image that will be appended to the DOM
-        // so that users can have a preview of what they will download
-        async function showPreview(screenshot) {
-            screenshot.dataUrl = await prepImage(screenshot);
-            screenshotDiv.classList.remove("hide");
-            // add the screenshot dataUrl as the src of an image element
-            const screenshotImage = document.getElementsByClassName("js-screenshot-image")[0];
-            screenshotImage.width = screenshot.data.width;
-            screenshotImage.height = screenshot.data.height;
-            screenshotImage.src = screenshot.dataUrl;
+        async function SetupPrintForm() {
+            await InitializePrintForm();
+            $printForm[0].reset();
+            $printWidgetModal.modal("show");
         }
 
         tp.publish("widget-print-loaded");
-
     });
 });

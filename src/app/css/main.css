@@ -1195,6 +1195,17 @@ hr.pop {
     border-radius: 5px;
 }
 
+#printLoader {
+    display: none;
+    margin-left: 10px;
+}
+
+#printResult {
+    display: none;
+    margin-left: 10px;
+    text-decoration: underline;
+}
+
 .flexCenter {
     display: flex;
     align-items: center;
