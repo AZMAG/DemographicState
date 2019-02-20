@@ -9,6 +9,7 @@ app.config = {
     exportWebMapUrl: "https://geo.azmag.gov/gismag/rest/services/gp/stateDemo/GPServer/Export%20Web%20Map",
 
     mainUrl: "https://geo.azmag.gov/gismag/rest/services/maps/DemographicState2017/MapServer",
+    printUrl: "https://geo.azmag.gov/gismag/rest/services/gp/stateDemo/GPServer/Export%20Web%20Map",
     pdfService: {
         defaultUrl: "https://geo.azmag.gov/services/demographics2017/Reports.html?",
         compareUrl: "https://geo.azmag.gov/services/demographics2017/CompareReport.html?",

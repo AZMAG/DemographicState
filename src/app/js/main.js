@@ -56,6 +56,6 @@ require([
         $("#mapsHelpModal").load("app/views/modal-help-maps.html");
         $("#reportsHelpModal").load("app/views/modal-help-reports.html");
         $("#layersHelpModal").load("app/views/modal-help-layers.html");
-
+        $("#printWidgetModal").load("app/views/modal-print.html");
     }
 );
