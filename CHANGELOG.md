@@ -30,6 +30,10 @@ And constructed with the following guidelines:
 
 ***************************************************
 
+## Version 4.0.1 | 2019-02-20
+
+* Added Print widget
+
 ## Version 4.0.0 | 2019-02-13
 
 * Changed Build
