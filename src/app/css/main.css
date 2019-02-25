@@ -358,6 +358,18 @@ input[type=range]:focus::-ms-fill-upper {
     display: none;
 }
 
+.btn {
+    background-color: buttonface;
+}
+
+.btn-primary {
+    background-color: #007bff;
+}
+
+.btn-group .btn {
+    background-color: rgb(108, 117, 125);
+}
+
 .btnExportPDF {
     margin-left: auto;
 }
