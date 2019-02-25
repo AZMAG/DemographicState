@@ -6,7 +6,6 @@ app.config = {
     emailLink: "https://www.azmag.gov/Contact/4788?s=geo.azmag.gov/maps/azdemographics&n=Jason%20Howard&popUp=true",
 
     ArcGISInstanceURL: "https://geo.azmag.gov/gismag/rest",
-    exportWebMapUrl: "https://geo.azmag.gov/gismag/rest/services/gp/stateDemo/GPServer/Export%20Web%20Map",
 
     mainUrl: "https://geo.azmag.gov/gismag/rest/services/maps/DemographicState2017/MapServer",
     printUrl: "https://geo.azmag.gov/gismag/rest/services/gp/stateDemo/GPServer/Export%20Web%20Map",
