@@ -27,41 +27,39 @@ require(["dojo/topic", "esri/tasks/QueryTask"], function (tp, QueryTask) {
 
             $share.attr(
                 "data-content",
-                `
-            <div id="sharePopup">
-                <div class="shareLinks">
-                    <ul>
-                        <li>
-                            <a id="EMshareButton" href="${mailTo}"
-                                title="MAG|Demographics">
-                                <em class="fa fa-envelope"></em>
-                            </a>
-                        </li>
-                        <li>
-                            <a id="FBshareButton" title="Share on Facebook">
-                                <em class="fab fa-facebook-f"></em>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="${twitterHref}" id="TWshareButton" title="Share on Twitter">
-                                <em class="fab fa-twitter"></em>
-                            </a>
-                        </li>
-                        <li>
-                            <a id="INshareButton" title="Share on LinkedIn">
-                                <em class="fab fa-linkedin"></em>
-                            </a>
-                        </li>
-                    </ul>
-                    <div class="flexCenter">
-                        <input readonly id="bitlyUrlInput" class="linkReplace" style="width: 90%;" value="${url}">
-                        <button data-toggle="tooltip" data-trigger="click hover" data-placement="auto" title="Click to copy link to clipboard" id="shareLinkCopy">
-                            <i class="far fa-copy"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
-            `
+                `<div id="sharePopup">
+    <div class="shareLinks">
+        <ul>
+            <li>
+                <a id="EMshareButton" href="${mailTo}" title="MAG|Demographics">
+                    <em class="fa fa-envelope"></em>
+                </a>
+            </li>
+            <li>
+                <a id="FBshareButton" title="Share on Facebook">
+                    <em class="fab fa-facebook-f"></em>
+                </a>
+            </li>
+            <li>
+                <a href="${twitterHref}" id="TWshareButton" title="Share on Twitter">
+                    <em class="fab fa-twitter"></em>
+                </a>
+            </li>
+            <li>
+                <a id="INshareButton" title="Share on LinkedIn">
+                    <em class="fab fa-linkedin"></em>
+                </a>
+            </li>
+        </ul>
+        <div class="flexCenter">
+            <input readonly id="bitlyUrlInput" class="linkReplace" style="width: 90%;" value="${url}">
+            <button data-toggle="tooltip" data-trigger="click hover" data-placement="auto" title="Click to copy link to clipboard"
+                id="shareLinkCopy">
+                <i class="far fa-copy"></i>
+            </button>
+        </div>
+    </div>
+</div>`
             );
 
             $("#shareLinkCopy").tooltip();
@@ -80,8 +78,10 @@ require(["dojo/topic", "esri/tasks/QueryTask"], function (tp, QueryTask) {
             $share.off("show.bs.popover").on("show.bs.popover", function () {
                 let $shareLinkCopy = $("#shareLinkCopy");
                 $shareLinkCopy.tooltip();
-                $("#sharePopup").html("<span>loading...</span>");
+                // $("#sharePopup").html("<span>loading...</span>");
                 GetSmallShareLink().then(function (url) {
+                    console.log(url);
+
                     $("#bitlyUrlInput").val(url);
                     ShareWidgetInit(url);
                 });
