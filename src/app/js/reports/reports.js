@@ -185,6 +185,7 @@ require(["dojo/topic", "esri/tasks/QueryTask"], function (tp, QueryTask) {
 
 
     function OpenReportWindow(data, type) {
+
         let fields = app.censusFieldsConfig;
         let res = data.censusData;
 
@@ -236,7 +237,6 @@ require(["dojo/topic", "esri/tasks/QueryTask"], function (tp, QueryTask) {
 
         tp.publish("create-charts", vals, "chartsTarget");
 
-
         if (attr["AFFECTED_DISABILITY_COUNT"] && attr["TOTAL_POP"] > 5000) {
             SetupTitle6Grid(attr);
             $("#title6Area").show();
@@ -244,6 +244,7 @@ require(["dojo/topic", "esri/tasks/QueryTask"], function (tp, QueryTask) {
             $("#title6Grid").html("");
             $("#title6Area").hide();
         }
+        $("div[panel-id='reports-view']").show();
         $("#summaryReport").show();
     }
     tp.subscribe("report-charts-created", refreshCharts);
@@ -265,6 +266,10 @@ require(["dojo/topic", "esri/tasks/QueryTask"], function (tp, QueryTask) {
         }
         let $title6Grid = $('#title6Grid');
         let $title6Toggle = $('#title6Toggle');
+
+        console.log($title6Grid, $title6Toggle);
+
+
 
         //Setup title 6 to be expanded on initial load.
         $title6Grid.show();

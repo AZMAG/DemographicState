@@ -63,9 +63,6 @@ require([
                         }
 
                         if (loadedLayers.indexOf(target) === -1) {
-                            $(`div[panel-id="${target}"]`).load(`app/views/${target}.html`, function () {
-                                tp.publish("panel-loaded", target);
-                            });
                             loadedLayers.push(target);
                         }
 

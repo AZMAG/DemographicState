@@ -21,7 +21,7 @@ require([
             });
 
             function CbrParamChanged(type) {
-                if (!type) {
+                if (type !== "custom") {
                     type = $("#classType").val();
                 }
 
@@ -58,7 +58,8 @@ require([
                     if (data.classType === "Custom" && !custom) {
                         let cbrCount = $classBreaksCount.val();
                         let breaks = data.conf.breaks["Jenks" + cbrCount];
-                        infos = data.cbInfos && data.cbInfos.length > 0 ? data.cbInfos : app.GetCurrentBreaks(breaks, data.colorRamp);
+                        infos = app.GetCurrentBreaks(breaks, data.colorRamp);
+                        //infos = data.cbInfos && data.cbInfos.length > 0 ? data.cbInfos : app.GetCurrentBreaks(breaks, data.colorRamp);
                         maxVal = infos[infos.length - 1].maxValue;
                     }
 
