@@ -267,10 +267,6 @@ require(["dojo/topic", "esri/tasks/QueryTask"], function (tp, QueryTask) {
         let $title6Grid = $('#title6Grid');
         let $title6Toggle = $('#title6Toggle');
 
-        console.log($title6Grid, $title6Toggle);
-
-
-
         //Setup title 6 to be expanded on initial load.
         $title6Grid.show();
         $title6Toggle.addClass("k-i-collapse").removeClass("k-i-expand");

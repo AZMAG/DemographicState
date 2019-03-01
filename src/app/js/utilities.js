@@ -149,9 +149,16 @@ app.AddHighlightGraphic = function (graphic) {
 };
 
 app.summarizeFeatures = function (res) {
+    console.log(res);
+
     if (!app.summableFields) {
         app.summableFields = [];
         app.acsFieldsConfig.forEach(conf => {
+            if (conf.canSum) {
+                app.summableFields.push(conf.fieldName);
+            }
+        });
+        app.censusFieldsConfig.forEach(conf => {
             if (conf.canSum) {
                 app.summableFields.push(conf.fieldName);
             }
@@ -300,4 +307,3 @@ app.PopupFormat = async function (gfx) {
                 ` : ""}
             `;
 }
-

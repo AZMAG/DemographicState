@@ -26,6 +26,10 @@ require(["dojo/topic", "esri/views/2d/draw/Draw", "esri/Graphic", "esri/geometry
             polyline: {
                 start: "Click to add first point in the corridor of interest.",
                 during: "Double click to finish drawing, or Click to add another point to the selected corridor."
+            },
+            multipoint: {
+                start: "Click to add first point in the region of interest.",
+                during: "Double click to finish drawing, or Click to add another point to the selected region."
             }
         };
 
@@ -44,12 +48,20 @@ require(["dojo/topic", "esri/views/2d/draw/Draw", "esri/Graphic", "esri/geometry
             });
 
             $customSummaryButton.click(function (e) {
+                e.preventDefault();
                 $customSummaryButton.removeClass("active");
                 $(this).addClass("active");
                 let type = $(this).data("val");
 
+                // console.log(type);
+
                 // create() will return a reference to an instance of PolygonDrawAction
                 let action = draw.create(type);
+                // let action = draw.create('polygon', {
+                //     mode: "Left-drag"
+                // })
+
+
 
                 $drawingTooltip.html(drawMessages[type].start);
 
@@ -78,8 +90,6 @@ require(["dojo/topic", "esri/views/2d/draw/Draw", "esri/Graphic", "esri/geometry
                 action.on("draw-complete", e => {
                     drawPolygon(e, type);
                 });
-
-                e.preventDefault();
             });
             let count = 0;
 
