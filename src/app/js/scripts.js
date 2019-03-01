@@ -1,7 +1,6 @@
 "use strict";
 
 require([
-    "app/js/config/config.js",
     "app/js/utilities.js",
     "app/js/config/mapsConfig.js",
     "app/js/config/colorRampConfig.js",
