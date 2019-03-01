@@ -10,11 +10,11 @@ module.exports = function (grunt) {
 
         bannercss: "/*! ========================================================================\n" +
             " * Maricopa Association of Governments\n" +
-            " * CSS files for MAG State Demographic Viewer\n" +
+            " * CSS files for Arizona Demographics\n" +
             " * @concat.min.css | @version | <%= pkg.version %>\n" +
             " * Production | <%= pkg.date %>\n" +
             " * http://ims.azmag.gov/\n" +
-            " * State Demographic Viewer\n" +
+            " * Arizona Demographics\n" +
             " * ==========================================================================\n" +
             " * @Copyright <%= pkg.copyright %> MAG\n" +
             " * @License MIT\n" +
@@ -333,7 +333,7 @@ module.exports = function (grunt) {
 
     grunt.registerTask("x", ["babel"]);
 
-     grunt.registerTask("css", ["postcss"]);
+    grunt.registerTask("css", ["postcss"]);
 
     // grunt.registerTask("build", ["replace", "cssmin", "concat"]);
     grunt.registerTask("build", ["clean:build", "replace", "copy", "toggleComments", "babel", "postcss", "uglify", "htmlmin", "cssmin", "concat", "clean:cleancss"]);

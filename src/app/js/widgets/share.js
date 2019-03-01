@@ -18,12 +18,12 @@ require(["dojo/topic", "esri/tasks/QueryTask"], function (tp, QueryTask) {
             }
 
             let baseUrl = "https://twitter.com/intent/tweet";
-            let text = "MAG%20%7C%20Demographics";
+            let text = "Arizona Demographics";
             let hashTag = "MAGmaps";
             let via = "MAGregion";
 
             let twitterHref = `${baseUrl}?text=${text}&url=${url}&hastag=${hashTag}&via=${via}`;
-            let mailTo = `mailto:?subject=MAG Demographics&amp;body=%0A%0AHere is the map I made using the MAG Demographics Viewer:%0A%0A${url}%0A`;
+            let mailTo = `mailto:?subject=MAG Demographics&amp;body=%0A%0AHere is the map I made using Arizona Demographics:%0A%0A${url}%0A`;
 
             $share.attr(
                 "data-content",

@@ -19,9 +19,9 @@
   </span>
 </div>
 
-# MAG State Demographics Map Viewer
+# Arizona Demographics
 
-State Demographics map viewer for selected census info for Arizona
+Map viewer for selected census info for Arizona
 
 [![Website](https://img.shields.io/website-up-down-green-red/http/shields.io.svg?label=my-website)](http://geo.azmag.gov/maps/azdemographics/)
 [![GitHub version](https://badge.fury.io/gh/AZMAG%2fmap-Demographic-Statewide.svg)](https://badge.fury.io/gh/AZMAG%2fmap-Demographic-Statewide)
@@ -32,7 +32,7 @@ State Demographics map viewer for selected census info for Arizona
 [![Built with Grunt](http://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
 [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
-The State Demographic Map Viewer is one of the Maricopa Association of Governments interactive mapping and analysis sites, showing selected population and housing data. The viewer allows you to graphically view selected population and housing data for all Census block groups for the State of Arizona. The viewer provides interactive mapping and reporting tools to allow exploration of data from Census 2010 and the American Community Survey (ACS) 2013-2017.
+Arizona Demographics is one of the Maricopa Association of Governments interactive mapping and analysis sites, showing selected population and housing data. The viewer allows you to graphically view selected population and housing data for all Census block groups for the State of Arizona. The viewer provides interactive mapping and reporting tools to allow exploration of data from Census 2010 and the American Community Survey (ACS) 2013-2017.
 
 Use this site to explore Explore data from Census 2010 and American Community Survey (ACS) 2013-2017.
 

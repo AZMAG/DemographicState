@@ -70,7 +70,7 @@
     Components: HTML5BoilerPlate, Normalize.css, jQuery, Modernizr, Require.js, Kendo, Knockout, ESRI Javascript API, Grunt
 
 # SITE
-    Site Name: Demographic Maps Viewer
+    Site Name: Arizona Demographics
     Site URL: http://http://geo.azmag.gov/maps/azdemographics/
     Version: 4.0.0
 	Last updated: 2019-02-13
