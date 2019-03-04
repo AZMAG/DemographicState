@@ -86,6 +86,7 @@ require([
             });
 
             $("#content").on("click", ".closePanel", function () {
+                let pandelId = $(this).closest(".panelDiv").attr("panel-id");
                 $("#viewDiv").css("visibility", "visible");
                 $("#navContainer").css("flex", 1);
                 $links.removeClass("active");
@@ -93,6 +94,7 @@ require([
                 $panelDivs.hide();
                 $content.hide();
                 app.clearDrawnGraphics();
+                tp.publish("panel-hidden", pandelId);
             });
 
             function toggleLegend() {

@@ -10,6 +10,8 @@ require([
             }
         });
 
+        tp.subscribe("reset-reports", ClearQueryItems);
+
         let QueryItems = [];
         let CompareOperators = {
             string: [{
@@ -62,7 +64,11 @@ require([
             }]
         };
 
-
+        function ClearQueryItems() {
+            QueryItems = [];
+            $(".joinDDLClass").remove();
+            $(".advancedRow").remove();
+        }
 
         function InitAdvancedQuery() {
             let $advancedTreeview = $("#advancedTreeview");

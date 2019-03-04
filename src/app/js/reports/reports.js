@@ -9,6 +9,7 @@ require(["dojo/topic", "esri/tasks/QueryTask"], function (tp, QueryTask) {
             let $title6Area = $("#title6Area");
 
             function resetReportForm() {
+                tp.publish("reset-reports");
                 $(".reportFormArea").hide();
                 $("#cardContainer").css("display", "flex");
                 $(".returnBtn").hide();
@@ -17,6 +18,27 @@ require(["dojo/topic", "esri/tasks/QueryTask"], function (tp, QueryTask) {
                 $dataSrcSelector.find("button:last").removeClass("active");
                 $subHeaderTitle.hide();
                 $title6Area.show();
+
+                //Reset Buffer Area in custom
+                $("#bufferOptions").hide();
+                $("#useBuffer").prop('checked', false);
+
+
+                let reportTypeDDL = $('#reportType').data("kendoDropDownList");
+
+                if (reportTypeDDL) {
+                    reportTypeDDL.select(0);
+                }
+
+                let specificReportCbox = $("#specificReport").data("kendoComboBox");
+                if (specificReportCbox) {
+                    specificReportCbox.select(0);
+                }
+
+                $("#specificReportDiv").hide();
+                $("#comparisonContainer").hide();
+                $("#compareCheckbox").prop('checked', false);
+                $("#useZoom").prop('checked', true);
             }
 
             tp.subscribe("panel-shown", function (panel) {

@@ -32,9 +32,10 @@ require(["dojo/topic", "esri/views/2d/draw/Draw", "esri/Graphic", "esri/geometry
                 during: "Double click to finish drawing, or Click to add another point to the selected region."
             }
         };
+        let action, draw;
 
         if (panel === "reports-view") {
-            let draw = new Draw({
+            draw = new Draw({
                 view: app.view
             });
             let bufferShown = false;
@@ -56,7 +57,7 @@ require(["dojo/topic", "esri/views/2d/draw/Draw", "esri/Graphic", "esri/geometry
                 // console.log(type);
 
                 // create() will return a reference to an instance of PolygonDrawAction
-                let action = draw.create(type);
+                action = draw.create(type);
                 // let action = draw.create('polygon', {
                 //     mode: "Left-drag"
                 // })
@@ -191,7 +192,17 @@ require(["dojo/topic", "esri/views/2d/draw/Draw", "esri/Graphic", "esri/geometry
 
                 app.view.graphics.add(graphic);
             }
+            tp.subscribe("reset-reports", function () {
+                if (action && draw) {
+                    //Clears drawing if return button is clicked or panel is closed.
+                    $("#viewDiv").off("mousemove");
+                    $(".customSummaryButton").removeClass("active");
+                    $drawingTooltip.hide();
+                    draw.reset();
+                }
+            });
         }
+
 
         function ProcessSelection(gfx) {
             app.GetData(app.config.layerDef["blockGroups"], null, gfx.geometry).then(function (data) {
