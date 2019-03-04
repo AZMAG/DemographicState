@@ -4,10 +4,11 @@ require(["dojo/topic"], function (tp) {
         if (panel === "layers-view") {
             var $layerList = $("#layerList");
             var layers = app.config.layers.filter(conf => conf.showTOC);
-            // var arr = legendLayers.sort((a, b) => a.legend.sort - b.legend.sort);
 
-            for (var i = 0; i < layers.length; i++) {
-                var conf = layers[i];
+            var arr = layers.sort((a, b) => a.layerListOrder - b.layerListOrder);
+
+            for (var i = 0; i < arr.length; i++) {
+                var conf = arr[i];
 
                 if (conf.id !== "blockGroups") {
                     $layerList.append(getCheckBoxHTML(conf));

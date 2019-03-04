@@ -74,7 +74,8 @@ app.config = {
             showReport: false,
             showTOC: true,
             definition: "The streets layer adds a transportation layer from ESRI for reference.",
-            url: "http://server.arcgisonline.com/arcgis/rest/services/Reference/World_Transportation/MapServer"
+            url: "http://server.arcgisonline.com/arcgis/rest/services/Reference/World_Transportation/MapServer",
+            layerListOrder: 19
         }, {
             legend: true,
             id: "countyBoundaries",
@@ -85,7 +86,8 @@ app.config = {
             visible: true,
             showReport: true,
             showTOC: true,
-            definition: "Counties are the primary legal divisions of most states. Most counties are functioning governmental units, whose powers and functions vary from state to state."
+            definition: "Counties are the primary legal divisions of most states. Most counties are functioning governmental units, whose powers and functions vary from state to state.",
+            layerListOrder: 1
         }, {
             legend: true,
             id: "places",
@@ -96,7 +98,8 @@ app.config = {
             visible: false,
             showReport: true,
             showTOC: true,
-            definition: "Here Places are a combination of both Census Incorporated Places and Designated Places. An incorporated Place is established to provide governmental functions for a concentration of people as opposed to a minor civil division, which generally is created to provide services or administer an area without regard, necessarily, to population. Census Designated Places (CDPs) are the statistical counterparts of incorporated places, and are delineated to provide data for settled concentrations of population that are identifiable by name but are not legally incorporated under the laws of the state in which they are located.   The boundaries usually are defined in cooperation with local or tribal officials and generally updated prior to each decennial census. "
+            definition: "Here Places are a combination of both Census Incorporated Places and Designated Places. An incorporated Place is established to provide governmental functions for a concentration of people as opposed to a minor civil division, which generally is created to provide services or administer an area without regard, necessarily, to population. Census Designated Places (CDPs) are the statistical counterparts of incorporated places, and are delineated to provide data for settled concentrations of population that are identifiable by name but are not legally incorporated under the laws of the state in which they are located.   The boundaries usually are defined in cooperation with local or tribal officials and generally updated prior to each decennial census. ",
+            layerListOrder: 2
         }, {
             legend: true,
             id: "aiaAreas",
@@ -107,7 +110,8 @@ app.config = {
             visible: false,
             showReport: true,
             showTOC: true,
-            definition: "Census geographic entities that cover areas of American Indian and Alaska Native settlements, collectively termed American Indian and Alaska Native areas(AIANAs).The major types of AIANAs are American Indian reservations and trust lands, tribal jurisdiction statistical areas(TJSAs), Alaska Native Regional Corporations(ANRCs), Alaska Native village statistical areas(ANVSAs), and tribal designated statistical areas(TDSAs)."
+            definition: "Census geographic entities that cover areas of American Indian and Alaska Native settlements, collectively termed American Indian and Alaska Native areas(AIANAs).The major types of AIANAs are American Indian reservations and trust lands, tribal jurisdiction statistical areas(TJSAs), Alaska Native Regional Corporations(ANRCs), Alaska Native village statistical areas(ANVSAs), and tribal designated statistical areas(TDSAs).",
+            layerListOrder: 3
         }, {
             legend: true,
             id: "zipCodes",
@@ -118,7 +122,8 @@ app.config = {
             visible: false,
             showReport: true,
             showTOC: true,
-            definition: "ZIP Code Tabulation Areas (ZCTAs) are statistical entities developed by the United States Census Bureau for tabulating summary statistics. These were introduced with the Census 2000 and continued with the 2010 Census. This new entity was developed to overcome the difficulties in precisely defining the land area covered by each ZIP code. Defining the extent of an area is necessary in order to tabulate census data for that area."
+            definition: "ZIP Code Tabulation Areas (ZCTAs) are statistical entities developed by the United States Census Bureau for tabulating summary statistics. These were introduced with the Census 2000 and continued with the 2010 Census. This new entity was developed to overcome the difficulties in precisely defining the land area covered by each ZIP code. Defining the extent of an area is necessary in order to tabulate census data for that area.",
+            layerListOrder: 4
         }, {
             legend: true,
             id: "cogs",
@@ -129,7 +134,8 @@ app.config = {
             visible: false,
             showReport: true,
             showTOC: true,
-            definition: "Councils of governments (CoGs—also known as regional councils, regional commissions, regional planning commissions, and planning districts) are regional governing and/or coordinating bodies."
+            definition: "Councils of governments (CoGs—also known as regional councils, regional commissions, regional planning commissions, and planning districts) are regional governing and/or coordinating bodies.",
+            layerListOrder: 17
         },
         {
             legend: true,
@@ -141,7 +147,8 @@ app.config = {
             visible: false,
             showReport: true,
             showTOC: true,
-            definition: "A metropolitan planning organization (MPO) is a federally mandated and federally funded transportation policy-making organization that is made up of representatives from local government and governmental transportation authorities. They were created to ensure regional cooperation in transportation planning."
+            definition: "A metropolitan planning organization (MPO) is a federally mandated and federally funded transportation policy-making organization that is made up of representatives from local government and governmental transportation authorities. They were created to ensure regional cooperation in transportation planning.",
+            layerListOrder: 18
         },
         {
             legend: true,
@@ -154,7 +161,8 @@ app.config = {
             visible: false,
             showReport: true,
             showTOC: true,
-            definition: "A board of supervisors is a governing body that oversees the operation of county government in the American states of Arizona, California, Iowa, Mississippi, Virginia, and Wisconsin, as well as 16 counties in New York. There are equivalent agencies in other states. Similar to a city council, a board of supervisors has legislative, executive, and quasi-judicial powers. The important difference is that a county is an administrative division of a state, whereas a city is a municipal corporation; thus, counties implement and, as necessary, refine the local application of state law and public policy, while cities produce and implement their own local laws and public policy (subject to the overriding authority of state law)."
+            definition: "A board of supervisors is a governing body that oversees the operation of county government in the American states of Arizona, California, Iowa, Mississippi, Virginia, and Wisconsin, as well as 16 counties in New York. There are equivalent agencies in other states. Similar to a city council, a board of supervisors has legislative, executive, and quasi-judicial powers. The important difference is that a county is an administrative division of a state, whereas a city is a municipal corporation; thus, counties implement and, as necessary, refine the local application of state law and public policy, while cities produce and implement their own local laws and public policy (subject to the overriding authority of state law).",
+            layerListOrder: 5
         },
         {
             legend: true,
@@ -166,7 +174,8 @@ app.config = {
             visible: false,
             showReport: true,
             showTOC: true,
-            definition: "The council of a metropolitan district that has been granted city status. The council of a non-metropolitan district that has been granted city status. Some of these councils are unitary authorities and some share functions with county councils. A parish council that has been granted city status."
+            definition: "The council of a metropolitan district that has been granted city status. The council of a non-metropolitan district that has been granted city status. Some of these councils are unitary authorities and some share functions with county councils. A parish council that has been granted city status.",
+            layerListOrder: 6
         },
         {
             legend: true,
@@ -178,7 +187,8 @@ app.config = {
             visible: false,
             showReport: true,
             showTOC: true,
-            definition: "Legislative districts are areas from which members are elected to state or equivalent entity legislatures. State legislative districts embody the upper (senate—SLDU) and lower (house—SLDL) chambers of the state legislatures."
+            definition: "Legislative districts are areas from which members are elected to state or equivalent entity legislatures. State legislative districts embody the upper (senate—SLDU) and lower (house—SLDL) chambers of the state legislatures.",
+            layerListOrder: 7
         },
         {
             legend: true,
@@ -190,7 +200,8 @@ app.config = {
             visible: false,
             showReport: true,
             showTOC: true,
-            definition: "A congressional district is a territorial subdivision for electing members to a legislative body. Generally, only voters (constituents) who reside within the district are permitted to vote in an election held there.  There are 435 congressional districts in the United States House of Representatives, with each one representing approximately 711,000 people."
+            definition: "A congressional district is a territorial subdivision for electing members to a legislative body. Generally, only voters (constituents) who reside within the district are permitted to vote in an election held there.  There are 435 congressional districts in the United States House of Representatives, with each one representing approximately 711,000 people.",
+            layerListOrder: 8
         },
         {
             legend: true,
@@ -203,7 +214,8 @@ app.config = {
             visible: false,
             showReport: true,
             showTOC: true,
-            definition: "Census Tracts are small, relatively permanent statistical subdivisions of a county or equivalent entity that are updated by local participants prior to each decennial census as part of the Census Bureau\"s Participant Statistical Areas Program.The Census Bureau delineates census tracts in situations where no local participant existed or where state, local, or tribal governments declined to participate.The primary purpose of census tracts is to provide a stable set of geographic units for the presentation of statistical data.Census tracts generally have a population size between 1,200 and 8,000 people, with an optimum size of 4,000 people.A census tract usually covers a contiguous area; however, the spatial size of census tracts varies widely depending on the density of settlement.Census tract boundaries are delineated with the intention of being maintained over a long time so that statistical comparisons can be made from census to census.Census tracts occasionally are split due to population growth or merged as a result of substantial population decline."
+            definition: "Census Tracts are small, relatively permanent statistical subdivisions of a county or equivalent entity that are updated by local participants prior to each decennial census as part of the Census Bureau\"s Participant Statistical Areas Program.The Census Bureau delineates census tracts in situations where no local participant existed or where state, local, or tribal governments declined to participate.The primary purpose of census tracts is to provide a stable set of geographic units for the presentation of statistical data.Census tracts generally have a population size between 1,200 and 8,000 people, with an optimum size of 4,000 people.A census tract usually covers a contiguous area; however, the spatial size of census tracts varies widely depending on the density of settlement.Census tract boundaries are delineated with the intention of being maintained over a long time so that statistical comparisons can be made from census to census.Census tracts occasionally are split due to population growth or merged as a result of substantial population decline.",
+            layerListOrder: 9
         },
         {
             legend: true,
@@ -216,7 +228,8 @@ app.config = {
             visible: false,
             showReport: true,
             showTOC: true,
-            definition: "Opportunity Zones are census tracts generally composed of economically distressed communities that qualify for the Opportunity Zone program, according to criteria outlined in 2017’s Tax Cuts and Jobs Act."
+            definition: "Opportunity Zones are census tracts generally composed of economically distressed communities that qualify for the Opportunity Zone program, according to criteria outlined in 2017’s Tax Cuts and Jobs Act.",
+            layerListOrder: 10
         },
         {
             legend: true,
@@ -228,7 +241,8 @@ app.config = {
             visible: false,
             showReport: true,
             showTOC: true,
-            definition: "A Elementary School District is a school distict that generally provides education to the lower grade/age levels - grades K-8."
+            definition: "A Elementary School District is a school distict that generally provides education to the lower grade/age levels - grades K-8.",
+            layerListOrder: 11
         },
         {
             legend: true,
@@ -240,7 +254,8 @@ app.config = {
             visible: false,
             showReport: true,
             showTOC: true,
-            definition: "A Secondary School District is a school distict that generally provides education to the upper grade/age levels - grades 9-12."
+            definition: "A Secondary School District is a school distict that generally provides education to the upper grade/age levels - grades 9-12.",
+            layerListOrder: 12
         },
         {
             legend: true,
@@ -252,7 +267,8 @@ app.config = {
             visible: false,
             showReport: true,
             showTOC: true,
-            definition: "A Unified School District is a school district that generally includes and operates both Elementary and Secondary schools under the same district control. Unified school districts provide education to children of all school ages in their service areas - Grades K-12."
+            definition: "A Unified School District is a school district that generally includes and operates both Elementary and Secondary schools under the same district control. Unified school districts provide education to children of all school ages in their service areas - Grades K-12.",
+            layerListOrder: 13
         },
         {
             legend: true,
@@ -264,7 +280,8 @@ app.config = {
             visible: false,
             showReport: true,
             showTOC: true,
-            definition: "State is a combination or association of persons in the form of government and governed and united together into a politically organized people of a definite territory."
+            definition: "State is a combination or association of persons in the form of government and governed and united together into a politically organized people of a definite territory.",
+            layerListOrder: 18
         }
     ],
 
