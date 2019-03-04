@@ -1,6 +1,8 @@
 "use strict";
 require(["dojo/topic", "esri/tasks/QueryTask"], function (tp, QueryTask) {
     let $share = $(".shareWidget");
+    console.log($share);
+
 
     let oldUrl = "";
 
@@ -25,42 +27,51 @@ require(["dojo/topic", "esri/tasks/QueryTask"], function (tp, QueryTask) {
             let twitterHref = `${baseUrl}?text=${text}&url=${url}&hastag=${hashTag}&via=${via}`;
             let mailTo = `mailto:?subject=MAG Demographics&amp;body=%0A%0AHere is the map I made using Arizona Demographics:%0A%0A${url}%0A`;
 
+            let popupHTML =
+                `
+            <div id="sharePopup">
+                <div class="shareLinks">
+                    <ul>
+                        <li>
+                            <a id="EMshareButton" href="${mailTo}" title="MAG|Demographics">
+                                <em class="fa fa-envelope"></em>
+                            </a>
+                        </li>
+                        <li>
+                            <a id="FBshareButton" title="Share on Facebook">
+                                <em class="fab fa-facebook-f"></em>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="${twitterHref}" id="TWshareButton" title="Share on Twitter">
+                                <em class="fab fa-twitter"></em>
+                            </a>
+                        </li>
+                        <li>
+                            <a id="INshareButton" title="Share on LinkedIn">
+                                <em class="fab fa-linkedin"></em>
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="flexCenter">
+                        <input readonly id="bitlyUrlInput" class="linkReplace" style="width: 90%;" value="${url}">
+                        <button data-toggle="tooltip" data-trigger="click hover" data-placement="auto" title="Click to copy link to clipboard"
+                            id="shareLinkCopy">
+                            <i class="far fa-copy"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            `
+
             $share.attr(
                 "data-content",
-                `<div id="sharePopup">
-    <div class="shareLinks">
-        <ul>
-            <li>
-                <a id="EMshareButton" href="${mailTo}" title="MAG|Demographics">
-                    <em class="fa fa-envelope"></em>
-                </a>
-            </li>
-            <li>
-                <a id="FBshareButton" title="Share on Facebook">
-                    <em class="fab fa-facebook-f"></em>
-                </a>
-            </li>
-            <li>
-                <a href="${twitterHref}" id="TWshareButton" title="Share on Twitter">
-                    <em class="fab fa-twitter"></em>
-                </a>
-            </li>
-            <li>
-                <a id="INshareButton" title="Share on LinkedIn">
-                    <em class="fab fa-linkedin"></em>
-                </a>
-            </li>
-        </ul>
-        <div class="flexCenter">
-            <input readonly id="bitlyUrlInput" class="linkReplace" style="width: 90%;" value="${url}">
-            <button data-toggle="tooltip" data-trigger="click hover" data-placement="auto" title="Click to copy link to clipboard"
-                id="shareLinkCopy">
-                <i class="far fa-copy"></i>
-            </button>
-        </div>
-    </div>
-</div>`
+                popupHTML
             );
+
+            $share.popover({
+                html: true
+            });
 
             $("#shareLinkCopy").tooltip();
 
@@ -80,16 +91,14 @@ require(["dojo/topic", "esri/tasks/QueryTask"], function (tp, QueryTask) {
                 $shareLinkCopy.tooltip();
                 // $("#sharePopup").html("<span>loading...</span>");
                 GetSmallShareLink().then(function (url) {
-                    console.log(url);
+                    // console.log(url);
 
                     $("#bitlyUrlInput").val(url);
                     ShareWidgetInit(url);
                 });
             });
 
-            $share.popover({
-                html: true
-            });
+
 
             !(function (d, s, id) {
                 var js,
