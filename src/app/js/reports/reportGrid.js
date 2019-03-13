@@ -35,8 +35,9 @@ require(["dojo/topic"], function (tp) {
                 groupHeaderTemplate: "#=value#"
             },
             {
+                headerTemplate: "Topic",
                 field: "tableHeader",
-                title: " ",
+                template: "#=tableHeader#",
                 width: "120px"
             },
             {
@@ -89,7 +90,9 @@ require(["dojo/topic"], function (tp) {
                     groupHeaderTemplate: "#=value#"
                 },
                 {
+                    headerTemplate: "Topic",
                     field: "tableHeader",
+                    template: "#=tableHeader#",
                     title: "Topic",
                     width: "300px"
                 },
@@ -130,14 +133,16 @@ require(["dojo/topic"], function (tp) {
     }
 
     function DataBound(e) {
+
         var rowCollection = e.sender.tbody[0].children;
         var data = e.sender._data;
         var realRows = [];
 
         $.each(data, function (i, el) {
             var foundElement = $("td").filter(function () {
-                return $(this).text() === el.tableHeader;
+                return $(this).html() === el.tableHeader;
             });
+
             var finalElement = foundElement;
             if (foundElement.length > 1) {
                 $.each(foundElement, function (i, row) {
@@ -156,13 +161,8 @@ require(["dojo/topic"], function (tp) {
             }
             finalElement.css("padding-left", indent + "px");
 
-            $(finalElement)
-                .next()
-                .css("text-align", "right");
-            $(finalElement)
-                .next()
-                .next()
-                .css("text-align", "right");
+            $(finalElement).next().css("text-align", "right");
+            $(finalElement).next().next().css("text-align", "right");
 
             var parentElement = $(finalElement[0].parentElement);
 
@@ -237,11 +237,13 @@ require(["dojo/topic"], function (tp) {
 
         $("#exportToExcelBtn").click(function () {
             tp.publish("excel-export", {
-                data: data,
-                e: e,
-                grid: grid
+                data,
+                e,
+                grid
             });
         });
+
+        $("#minorityTooltip").tooltip();
     }
 
     tp.subscribe("create-grid", CreateKendoGrid);

@@ -16,9 +16,9 @@ function exportToExcel(params) {
     let rowSpan = 11;
 
     grid.bind("excelExport", function (e) {
+
         let rows = e.workbook.sheets[0].rows;
         let columns = e.workbook.sheets[0].columns;
-
         columns[1].width = 290;
 
         $.each(rows, function (i, row) {
@@ -36,6 +36,10 @@ function exportToExcel(params) {
             } else {
                 $.each(app.acsFieldsConfig, function (j, el) {
                     if (el.tableHeader === row.cells[1].value) {
+                        if (el.tableHeader.includes("Minority")) {
+                            el.tableHeader = "Minority";
+                        }
+
                         let indent = {
                             0: "",
                             1: "   ",
@@ -43,7 +47,6 @@ function exportToExcel(params) {
                             3: "         "
                         };
 
-                        // row.cells[1].formula = `="${indent[el.indentLevel]}${el.tableHeader}"`;
                         row.cells[1].value = `${indent[el.indentLevel]}${el.tableHeader}`;
 
                         if (el.universeField === 1) {

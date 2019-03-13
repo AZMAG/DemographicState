@@ -544,9 +544,9 @@ app.acsFieldsConfig = [{
     },
     {
         fieldName: 'MINORITY_POP',
-        fieldAlias: 'Minority (1)',
+        fieldAlias: 'Minority',
         fieldType: 'Number',
-        tableHeader: 'Minority (1)',
+        tableHeader: 'Minority<i id="minorityTooltip" style="margin-left:6px;" class="fas fa-question-circle" data-toggle="tooltip" data-placement="top" title="Minority is defined as Total Population less White, Non-Hispanic Population"></i>',
         category: 'Race and Ethnicity',
         indentLevel: 1,
         universeField: 0,

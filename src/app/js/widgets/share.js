@@ -1,8 +1,6 @@
 "use strict";
 require(["dojo/topic", "esri/tasks/QueryTask"], function (tp, QueryTask) {
     let $share = $(".shareWidget");
-    console.log($share);
-
 
     let oldUrl = "";
 
