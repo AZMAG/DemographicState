@@ -426,30 +426,18 @@ require(["dojo/topic", "esri/tasks/QueryTask"], function (tp, QueryTask) {
     }
 
     tp.subscribe("open-report-window", OpenReportWindow);
-
-    let dataCache = {};
     let $loadingSpinner = $(".loading-container");
 
     app.GetData = async function (conf, geoids, geo) {
         $loadingSpinner.css("display", "flex");
 
-        let geoid = null;
         let where = "1=1";
         if (geoids && geoids.length > 0) {
-            geoid = geoids[0];
             let str = "";
             geoids.forEach(id => {
                 str += `'${id}',`;
             });
             where = `GEOID IN(${str.slice(0, -1)})`;
-        }
-
-        if (conf.id !== "blockGroups") {
-            if (dataCache[conf.id + geoid]) {
-                app.selectedReport = dataCache[conf.id + geoid];
-                $loadingSpinner.css("display", "none");
-                return app.selectedReport;
-            }
         }
 
         let q = {
@@ -474,9 +462,7 @@ require(["dojo/topic", "esri/tasks/QueryTask"], function (tp, QueryTask) {
             acsData: await acsPromise,
             censusData: await censusPromise
         };
-        if (geoid) {
-            dataCache[conf.id + geoid] = app.selectedReport;
-        }
+
         $loadingSpinner.css("display", "none");
 
         return $.extend({}, app.selectedReport);
