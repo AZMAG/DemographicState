@@ -82,8 +82,59 @@ require([
 
             $dropPrompt.hide();
 
-            var fieldDataSource = new kendo.data.HierarchicalDataSource({
-                data: app.mapsConfig
+            let areaQFields = [{
+                Name: "Area",
+                ShortName: "Area",
+                items: [{
+                    FieldName: "COUNTY",
+                    Name: "County",
+                    ShortName: "County",
+                    Type: "string"
+                }, {
+                    FieldName: 'LEGDIST',
+                    Name: 'Legislative District',
+                    ShortName: 'Legislative District',
+                    Type: 'string'
+                }, {
+                    FieldName: 'CONDIST',
+                    Name: 'Congressional District',
+                    ShortName: 'Congressional District',
+                    Type: 'string'
+                }, {
+                    FieldName: 'UNIFIED_DIST',
+                    Name: 'Unified School District',
+                    ShortName: 'Unified School District',
+                    Type: 'string'
+                }, {
+                    FieldName: 'SEC_DIST',
+                    Name: 'Secondary School District',
+                    ShortName: 'Secondary School District',
+                    Type: 'string'
+                }, {
+                    FieldName: 'ELEM_DIST',
+                    Name: 'Elementary School District',
+                    ShortName: 'Elementary School District',
+                    Type: 'string'
+                }, {
+                    FieldName: "TRACTCE",
+                    Name: "Tract",
+                    ShortName: "Tract",
+                    Type: "string"
+                }, {
+                    FieldName: "BLKGRPCE",
+                    Name: "Block Group",
+                    ShortName: "Block Group",
+                    Type: "string"
+                }, {
+                    FieldName: "SQMI",
+                    Name: "Square Miles",
+                    ShortName: "Square Miles",
+                    Type: "number"
+                }]
+            }]
+
+            let fieldDataSource = new kendo.data.HierarchicalDataSource({
+                data: areaQFields.concat(app.mapsConfig)
             });
 
             var treeView = $advancedTreeview.kendoTreeView({
@@ -254,26 +305,6 @@ require([
                     });
                 });
 
-            }
-
-            function PopulateStringDropdowns(results) {
-                var count = QueryItems.length;
-                var sourceArray = [];
-                $.each(results.features, function (index, feature) {
-                    for (var id in feature.attributes) {
-                        if (feature.attributes.hasOwnProperty(id)) {
-                            if (feature.attributes[id]) {
-                                sourceArray.push(feature.attributes[id]);
-                            }
-                        }
-                    }
-                });
-
-                var strMultiselect = $("#strMS" + count).kendoDropDownList({
-                    dataSource: sourceArray,
-                    change: VerifyQuery
-                });
-                VerifyQuery();
             }
 
             function BuildQueryString() {
@@ -486,11 +517,11 @@ require([
                         };
                     } else {
                         target.append(`
-                        <div class="demo-section k-header" id="${dataItem.uid}${count}">
+                        <div class="k-header" id="${dataItem.uid}${count}">
                         <span class="queryItem">${dataItem.ShortName}: </span>
                         <span class="inputBoxes">
-                            <select class=strMultiselect id="strMS${count}"></select>
-                            <button class="removeRowBtn">Remove</button>
+                            <select class="strMultiselect" id="strMS${count}"></select>
+                            <button title="Remove row" class="btn removeRowBtn"><i class="fas fa-trash"></i></button>
                         </span>
                         </div>`);
 
@@ -505,7 +536,31 @@ require([
                             "strDDL": "#strMS" + count
                         };
 
-                        layerDelegate.query(self.layerACSUrl, self.populateStringDropdowns, self.errBack, undefined, "1=1", false, [dataItem.FieldName], [dataItem.FieldName], true);
+                        let qt = new QueryTask({
+                            url: app.config.mainUrl + "/0"
+                        });
+
+                        qt.execute({
+                            returnGeometry: false,
+                            outFields: [dataItem.FieldName],
+                            orderByFields: [dataItem.FieldName],
+                            returnDistinctValues: true,
+                            where: "1=1"
+                        }).then(function (res) {
+                            let ddlSrc = res.features.reduce((ddlSrc, f) => {
+                                if (f.attributes[dataItem.FieldName]) {
+                                    ddlSrc.push(f.attributes[dataItem.FieldName]);
+                                }
+                                return ddlSrc;
+                            }, [])
+
+                            $("#strMS" + count).kendoDropDownList({
+                                dataSource: ddlSrc,
+                                change: VerifyQuery
+                            });
+                            VerifyQuery();
+                        })
+
                     }
                     QueryItems.push(queryItem);
                     VerifyQuery();

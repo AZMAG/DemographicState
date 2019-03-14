@@ -606,6 +606,11 @@ input[type=range]:focus::-ms-fill-upper {
     color: lightgray;
 }
 
+.esri-popup__content {
+    /* overflow: hidden; */
+    /* height: 140px; */
+}
+
 .esri-popup__content a {
     color: #2baab1;
 }
@@ -1542,7 +1547,7 @@ hr.pop {
 }
 
 .strMultiselect {
-    width: 90px;
+    flex: 4;
 }
 
 .cBoxHighlight {
