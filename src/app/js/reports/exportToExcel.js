@@ -8,7 +8,9 @@ require([
 
 function exportToExcel(params) {
     let grid = params.grid;
-    let selectedReport = $("#specificReport").find(":selected").text();
+    // console.log(params);
+    let selectedReport = params.title;
+    // let selectedReport = $("#specificReport").find(":selected").text();
     let fileName = selectedReport + "_Demographic_Report.xlsx";
     let sourceLabel = app.config.sourceLabel;
     let disclaimer = app.config.legalACSDisclaimer;
@@ -27,6 +29,11 @@ function exportToExcel(params) {
                     cell.background = "#8DB4E2";
                     cell.bold = true;
                     cell.color = "#000";
+
+                    if (cell.value) {
+                        cell.value = cell.value.replace("tableHeader", "");
+                    }
+
                 });
             } else if (row.type === "group-header") {
                 row.cells[0].value = row.cells[0].value.substring(37);

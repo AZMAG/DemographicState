@@ -239,7 +239,8 @@ require(["dojo/topic"], function (tp) {
             tp.publish("excel-export", {
                 data,
                 e,
-                grid
+                grid,
+                title: $("#summaryReportHeader").text().trim()
             });
         });
 
