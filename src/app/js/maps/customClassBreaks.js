@@ -14,6 +14,8 @@ require([
             let maxVal = 0;
             const minLabelSize = 13;
             const lyr = app.map.findLayerById("blockGroups").sublayers.getItemAt(0);
+            let oldFld = 'TOTAL_POP';
+            let currFld = 'TOTAL_POP';
 
             $btnClassBreaksEditor.click(function (e) {
                 CbrParamChanged("Custom");
@@ -21,6 +23,14 @@ require([
             });
 
             function CbrParamChanged(type) {
+
+                //Saving the fld name when the map changes
+                //This is used to determine whether to regenerate class breaks or use existing.
+                oldFld = currFld;
+                if (type.FieldName) {
+                    currFld = type.FieldName;
+                }
+
                 if (type !== "custom") {
                     type = $("#classType").val();
                 }
@@ -28,8 +38,6 @@ require([
                 if (type === "Custom") {
                     $customClassBreaksModal.modal("show");
                     $btnClassBreaksEditor.show();
-                    // SetupSplitter();
-                    // SetupCharts();
                 } else {
                     $btnClassBreaksEditor.hide();
                 }
@@ -41,14 +49,11 @@ require([
                     SetupCharts();
                 }
             });
-            let lastCustomBreaks;
 
             function SetupSplitter(custom) {
 
                 const rend = lyr.renderer;
                 let infos = custom || rend.classBreakInfos;
-
-
 
                 app.GetCurrentMapsParams().then(function (data) {
 
@@ -58,8 +63,21 @@ require([
                     if (data.classType === "Custom" && !custom) {
                         let cbrCount = $classBreaksCount.val();
                         let breaks = data.conf.breaks["Jenks" + cbrCount];
-                        infos = app.GetCurrentBreaks(breaks, data.colorRamp);
-                        //infos = data.cbInfos && data.cbInfos.length > 0 ? data.cbInfos : app.GetCurrentBreaks(breaks, data.colorRamp);
+
+                        // This section trys to determine whether we should use the current breaks or set starting breaks
+                        // based on the jenks lookup.
+                        // Saving the map changes to be able to make sure if a new topic is chosen the breaks will always regenerate.
+                        if (data.conf.FieldName === oldFld) {
+                            if (data.cbInfos && data.cbInfos.length > 0) {
+                                infos = data.cbInfos;
+                            }
+                        } else {
+                            infos = app.GetCurrentBreaks(breaks, data.colorRamp);
+                        }
+
+
+                        // infos = app.GetCurrentBreaks(breaks, data.colorRamp);
+                        // infos = data.cbInfos && data.cbInfos.length > 0 ? data.cbInfos : 
                         maxVal = infos[infos.length - 1].maxValue;
                     }
 
