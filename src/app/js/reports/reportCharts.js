@@ -1,54 +1,67 @@
-"use strict";
-require(["dojo/topic"], function (tp) {
-    tp.subscribe("create-charts", CreateCharts);
+'use strict';
+require(['dojo/topic'], function(tp) {
+    tp.subscribe('create-charts', CreateCharts);
+    tp.subscribe('create-compare-charts', CreateCharts);
 
     function CreateChart(ops) {
         if (ops.data.length) {
+            let series = [
+                {
+                    field: 'fieldValue',
+                    categoryField: 'fieldAlias',
+                    type: ops.compareData ? 'bar' : ops.type,
+                    gap: 0.5,
+                    data: ops.data,
+                    name: ops.names ? ops.names[0] : undefined
+                }
+            ];
+
+            if (ops.compareData) {
+                series.push({
+                    field: 'fieldValue',
+                    categoryField: 'fieldAlias',
+                    type: 'bar',
+                    gap: 0.5,
+                    data: ops.compareData,
+                    name: ops.names ? ops.names[1] : undefined
+                });
+            }
+
             return ops.element
                 .kendoChart({
-                    dataSource: {
-                        data: ops.data
-                    },
                     seriesColors: app.config.seriesColors,
                     legend: {
-                        position: "bottom",
+                        position: 'bottom',
                         labels: {
-                            color: "black"
+                            color: 'black'
                         }
                     },
-                    series: [{
-                        field: "fieldValue",
-                        categoryField: "fieldAlias",
-                        type: ops.type,
-                        gap: 0.5
-                    }],
+                    series,
                     seriesDefaults: {
                         labels: {
-                            position: "outsideEnd",
-                            background: "#4D4D4D",
-                            format: "{0:n}",
-                            color: "black",
+                            position: 'outsideEnd',
+                            background: '#4D4D4D',
+                            format: '{0:n}',
+                            color: 'black',
                             template: `#= kendo.format(" {0:P}", percentage) #`
-                            // visible: true
                         },
                         tooltip: {
                             visible: true,
-                            // color: "white",
                             template: `#= app.chartTooltip(value, category) # <br> #= kendo.format("{0:P}", percentage) #`
                         }
                     },
                     chartArea: {
-                        background: "#fafafa"
+                        background: '#fafafa'
                     },
                     categoryAxis: {
-                        field: "fieldAlias",
-                        color: "black",
+                        field: 'fieldAlias',
+                        color: 'black',
                         labels: {
                             visible: true,
                             rotation: {
-                                angle: ops.type === "column" ? 45 : 0
+                                angle: ops.type === 'column' ? 45 : 0
                             },
-                            template: "#= app.wrapText(value) #"
+                            template: '#= app.wrapText(value) #'
                         },
                         majorGridLines: {
                             visible: false
@@ -58,57 +71,64 @@ require(["dojo/topic"], function (tp) {
                         }
                     },
                     valueAxis: {
-                        color: "black",
+                        color: 'black',
                         labels: {
-                            template: "#= app.valueAxisTemplate(value) #",
+                            template: '#= app.valueAxisTemplate(value) #',
                             step: 2
                         }
                     }
                 })
-                .data("kendoChart");
+                .data('kendoChart');
         } else {
-            ops.element.html("No data available for this chart.");
+            ops.element.html('No data available for this chart.');
         }
     }
 
-    function CreateCharts(data, target) {
-        //Filter list
-        let categories = {};
-        let $target = $("#" + target);
-        let $chartsArea = $target.find(".chartsArea");
-        $chartsArea.html("");
-
-        data.forEach(function (row) {
-            if (row.chartCategory) {
-                if (!categories[row.chartCategory]) {
-                    categories[row.chartCategory] = [];
-                }
-                categories[row.chartCategory].push(row);
+    function GetCategories(data) {
+        return data.reduce((categories, d) => {
+            if (!categories.includes(d.chartCategory) && d.chartCategory !== '') {
+                categories.push(d.chartCategory);
             }
-        });
+            return categories;
+        }, []);
+    }
 
-        Object.keys(categories).forEach(function (category) {
-            let data = categories[category];
-            $chartsArea.append(`
+    function CreateCharts({ data, compareData, target, names }) {
+        //Filter list
+        let $target = $('#' + target);
+        let $chartsArea = $target.find('.chartsArea');
+        $chartsArea.html('');
+
+        let categories = GetCategories(data);
+        categories.forEach(category => {
+            let chartData = data.filter(row => row.chartCategory === category);
+            let compareChartData = compareData ? compareData.filter(row => row.chartCategory === category) : undefined;
+
+            $chartsArea
+                .append(
+                    `
                     <div class="bs-callout bs-callout-primary">
                         <h4>${category}</h4>
                     </div>
                     <div class="chartTarget" data-id="${category}"></div>
                     <hr>
-            `).get(0);
-
+            `
+                )
+                .get(0);
             CreateChart({
                 element: $chartsArea.find(`.chartTarget[data-id="${category}"]`),
-                category: category,
-                data: data,
-                type: data[0].chartType
+                category,
+                data: chartData,
+                compareData: compareChartData,
+                names: compareChartData ? names : undefined,
+                type: chartData[0].chartType
             });
         });
 
         // TODO: Refactor this at some point.
         // This doesn"t seem like an appropriate way to handle the resize event.
         setTimeout(() => {
-            tp.publish("report-charts-created");
-        }, 10);
+            tp.publish('report-charts-created');
+        }, 100);
     }
 });

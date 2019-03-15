@@ -1,6 +1,5 @@
-"use strict";
-require(["dojo/topic"], function (tp) {
-
+'use strict';
+require(['dojo/topic'], function(tp) {
     const expandHTML = 'Expand Topics<i style="margin-left: 5px;" class="fa fa-expand" aria-hidden="true"></i>';
     const collapseHTML = 'Collapse Topics<i style="margin-left: 5px;" class="fa fa-compress" aria-hidden="true"></i>';
     const toolbarTemplate = `
@@ -11,115 +10,121 @@ require(["dojo/topic"], function (tp) {
     `;
 
     function RemoveOldGrid($grid) {
-        if ($grid && $grid.data("kendoGrid")) {
-            $grid.data("kendoGrid").destroy();
+        if ($grid && $grid.data('kendoGrid')) {
+            $grid.data('kendoGrid').destroy();
             $grid.empty();
         }
     }
 
-    function CreateComparisonKendoGrid(vals, compareVals, id) {
-        let $grid = $("#" + id);
+    function CreateComparisonKendoGrid({ data, compareData, target }) {
+        let $grid = $('#' + target);
 
-        for (let i = 0; i < vals.length; i++) {
-            let val = vals[i];
-            let compareVal = compareVals[i];
-            val["compareValueFormatted"] = compareVal["fieldValueFormatted"];
-            val["comparePercentValueFormatted"] = compareVal["percentValueFormatted"];
+        for (let i = 0; i < data.length; i++) {
+            let val = data[i];
+            let compareVal = compareData[i];
+            val['compareValueFormatted'] = compareVal['fieldValueFormatted'];
+            val['comparePercentValueFormatted'] = compareVal['percentValueFormatted'];
         }
 
         RemoveOldGrid($grid);
-        let cols = [{
-                field: "fieldGroup",
-                title: "Category",
+        let cols = [
+            {
+                field: 'fieldGroup',
+                title: 'Category',
                 hidden: true,
-                groupHeaderTemplate: "#=value#"
+                groupHeaderTemplate: '#=value#'
             },
             {
-                headerTemplate: "Topic",
-                field: "tableHeader",
-                template: "#=tableHeader#",
-                width: "120px"
+                headerTemplate: 'Topic',
+                field: 'tableHeader',
+                template: '#=tableHeader#',
+                width: '120px'
             },
             {
-                field: "fieldValueFormatted",
-                title: "Estimate",
-                format: "{0:n1}"
+                field: 'fieldValueFormatted',
+                title: 'Estimate',
+                format: '{0:n1}'
             },
             {
-                field: "percentValueFormatted",
-                title: "Percent"
+                field: 'percentValueFormatted',
+                title: 'Percent'
             },
             {
-                field: "compareValueFormatted",
-                title: "Estimate",
-                format: "{0:n1}"
+                field: 'compareValueFormatted',
+                title: 'Estimate',
+                format: '{0:n1}'
             },
             {
-                field: "comparePercentValueFormatted",
-                title: "Percent"
+                field: 'comparePercentValueFormatted',
+                title: 'Percent'
             }
         ];
 
-        CreateKendoGrid(vals, id, cols);
+        CreateKendoGrid({ data, target, cols });
         let features = app.selectedReport.acsData.features;
 
         $grid
-            .find("thead")
+            .find('thead')
             .first()
             .prepend(
                 `
                 <tr>
                     <th class="k-header"></th>
                     <th class="k-header"></th>
-                    <th class="k-header compareHeader" colspan="2">${features[0].attributes["NAME"]}</th>
-                    <th class="k-header compareHeader" colspan="2">${features[1].attributes["NAME"]}</th>
+                    <th class="k-header compareHeader" colspan="2">${features[0].attributes['NAME']}</th>
+                    <th class="k-header compareHeader" colspan="2">${features[1].attributes['NAME']}</th>
                 </tr>
                 `
             );
     }
 
-    function CreateKendoGrid(src, id, cols) {
-        let $grid = $("#" + id);
+    function CreateKendoGrid({ data, target, cols }) {
+        let $grid = $('#' + target);
         RemoveOldGrid($grid);
 
         if (!cols) {
-            cols = [{
-                    field: "fieldGroup",
-                    title: "Category",
+            cols = [
+                {
+                    field: 'fieldGroup',
+                    title: 'Category',
                     hidden: true,
-                    groupHeaderTemplate: "#=value#"
+                    groupHeaderTemplate: '#=value#'
                 },
                 {
-                    headerTemplate: "Topic",
-                    field: "tableHeader",
-                    template: "#=tableHeader#",
-                    title: "Topic",
-                    width: "300px"
+                    headerTemplate: 'Topic',
+                    field: 'tableHeader',
+                    template: '#=tableHeader#',
+                    title: 'Topic',
+                    width: '300px'
                 },
                 {
-                    field: "fieldValueFormatted",
-                    title: "Estimate"
+                    field: 'fieldValueFormatted',
+                    title: 'Estimate'
                 },
                 {
-                    field: "percentValueFormatted",
-                    title: "Percent"
+                    field: 'percentValueFormatted',
+                    title: 'Percent'
                 }
             ];
         }
 
         // Kendo-ize
         $grid.kendoGrid({
-            toolbar: [{
-                template: toolbarTemplate
-            }],
+            toolbar: [
+                {
+                    template: toolbarTemplate
+                }
+            ],
             dataSource: {
-                data: src,
-                group: [{
-                    field: "fieldGroup"
-                }],
+                data: data,
+                group: [
+                    {
+                        field: 'fieldGroup'
+                    }
+                ],
                 sort: {
-                    field: "fieldRowSort",
-                    dir: "asc"
+                    field: 'fieldRowSort',
+                    dir: 'asc'
                 }
             },
             selectable: false,
@@ -133,19 +138,18 @@ require(["dojo/topic"], function (tp) {
     }
 
     function DataBound(e) {
-
         var rowCollection = e.sender.tbody[0].children;
         var data = e.sender._data;
         var realRows = [];
 
-        $.each(data, function (i, el) {
-            var foundElement = $("td").filter(function () {
+        $.each(data, function(i, el) {
+            var foundElement = $('td').filter(function() {
                 return $(this).html() === el.tableHeader;
             });
 
             var finalElement = foundElement;
             if (foundElement.length > 1) {
-                $.each(foundElement, function (i, row) {
+                $.each(foundElement, function(i, row) {
                     if ($(row)[0].previousSibling) {
                         if ($(row)[0].previousSibling.innerText.indexOf(el.fieldCategory) !== -1) {
                             finalElement = $(row);
@@ -159,47 +163,52 @@ require(["dojo/topic"], function (tp) {
             if (indent === 0) {
                 indent = 3;
             }
-            finalElement.css("padding-left", indent + "px");
+            finalElement.css('padding-left', indent + 'px');
 
-            $(finalElement).next().css("text-align", "right");
-            $(finalElement).next().next().css("text-align", "right");
+            $(finalElement)
+                .next()
+                .css('text-align', 'right');
+            $(finalElement)
+                .next()
+                .next()
+                .css('text-align', 'right');
 
             var parentElement = $(finalElement[0].parentElement);
 
             if (el.universeField === 1) {
-                var universeColor = "#06c";
+                var universeColor = '#06c';
                 parentElement.css({
-                    "background-color": universeColor,
-                    "font-weight": "bold",
-                    "font-style": "italic",
-                    "font-size": "12px",
-                    color: "white"
+                    'background-color': universeColor,
+                    'font-weight': 'bold',
+                    'font-style': 'italic',
+                    'font-size': '12px',
+                    color: 'white'
                 });
             } else if (el.universeField === 2) {
-                var universeColor = "#808080";
+                var universeColor = '#808080';
                 var nextSib = $(finalElement[0].nextSibling);
                 var finalSib = $(nextSib[0].nextSibling);
                 parentElement.css({
-                    "background-color": universeColor,
-                    "font-weight": "bold",
-                    "font-size": "11.5px",
-                    color: "white"
+                    'background-color': universeColor,
+                    'font-weight': 'bold',
+                    'font-size': '11.5px',
+                    color: 'white'
                 });
 
-                if (nextSib[0].innerText === "-") {
+                if (nextSib[0].innerText === '-') {
                     nextSib.empty();
                 }
-                if (finalSib[0].innerText === "-") {
+                if (finalSib[0].innerText === '-') {
                     finalSib.empty();
                 }
             } else if (el.universeField === 0) {
                 parentElement.css({
-                    "font-weight": "normal",
-                    "font-size": "11.5px"
+                    'font-weight': 'normal',
+                    'font-size': '11.5px'
                 });
             }
         });
-        var grid = $("#" + this.wrapper[0].id).data("kendoGrid");
+        var grid = $('#' + this.wrapper[0].id).data('kendoGrid');
 
         let $title6Grid = $('#title6Grid');
         let $title6Toggle = $('#title6Toggle');
@@ -209,44 +218,47 @@ require(["dojo/topic"], function (tp) {
         // grid.collapseGroup(this);
         // });
 
-        $(".gridGroupToggle").off("click").on("click", function (e) {
-            $.each($(".k-grid"), function (i, val) {
-                if ($(val).is(":visible") && val.id === "gridTarget") {
-                    var grid = $(val).data("kendoGrid");
-                    if (e.currentTarget.value === "collapse") {
-                        e.currentTarget.value = "expand";
-                        $(e.currentTarget).html(expandHTML);
-                        grid.tbody.find("tr.k-grouping-row").each(function (index) {
-                            grid.collapseGroup(this);
-                        });
-                        $title6Grid.hide();
-                        $title6Toggle.addClass("k-i-expand").removeClass("k-i-collapse");
-
-                    } else {
-                        e.currentTarget.value = "collapse";
-                        $(e.currentTarget).html(collapseHTML);
-                        grid.tbody.find("tr.k-grouping-row").each(function (index) {
-                            grid.expandGroup(this);
-                        });
-                        $title6Grid.show();
-                        $title6Toggle.addClass("k-i-collapse").removeClass("k-i-expand");
+        $('.gridGroupToggle')
+            .off('click')
+            .on('click', function(e) {
+                $.each($('.k-grid'), function(i, val) {
+                    if ($(val).is(':visible') && val.id === 'gridTarget') {
+                        var grid = $(val).data('kendoGrid');
+                        if (e.currentTarget.value === 'collapse') {
+                            e.currentTarget.value = 'expand';
+                            $(e.currentTarget).html(expandHTML);
+                            grid.tbody.find('tr.k-grouping-row').each(function(index) {
+                                grid.collapseGroup(this);
+                            });
+                            $title6Grid.hide();
+                            $title6Toggle.addClass('k-i-expand').removeClass('k-i-collapse');
+                        } else {
+                            e.currentTarget.value = 'collapse';
+                            $(e.currentTarget).html(collapseHTML);
+                            grid.tbody.find('tr.k-grouping-row').each(function(index) {
+                                grid.expandGroup(this);
+                            });
+                            $title6Grid.show();
+                            $title6Toggle.addClass('k-i-collapse').removeClass('k-i-expand');
+                        }
                     }
-                }
+                });
             });
-        });
 
-        $("#exportToExcelBtn").click(function () {
-            tp.publish("excel-export", {
+        $('#exportToExcelBtn').click(function() {
+            tp.publish('excel-export', {
                 data,
                 e,
                 grid,
-                title: $("#summaryReportHeader").text().trim()
+                title: $('#summaryReportHeader')
+                    .text()
+                    .trim()
             });
         });
 
-        $("#minorityTooltip").tooltip();
+        $('#minorityTooltip').tooltip();
     }
 
-    tp.subscribe("create-grid", CreateKendoGrid);
-    tp.subscribe("create-compare-grid", CreateComparisonKendoGrid);
+    tp.subscribe('create-grid', CreateKendoGrid);
+    tp.subscribe('create-compare-grid', CreateComparisonKendoGrid);
 });
