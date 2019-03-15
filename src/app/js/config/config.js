@@ -133,7 +133,8 @@ app.config = {
                     color: "black",
                     haloSize: 2,
                     haloColor: "white"
-                }
+                },
+                minScale: 577790
             }
         }, {
             legend: true,
@@ -236,7 +237,8 @@ app.config = {
                     color: "black",
                     haloSize: 1,
                     haloColor: "white"
-                }
+                },
+                minScale: 288895
             }
         },
         {
