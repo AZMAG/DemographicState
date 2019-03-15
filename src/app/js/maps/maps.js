@@ -112,7 +112,8 @@ require([
                             }]
                         },
                         outFields: layer.outFields || ["*"],
-                        opacity: layer.opacity
+                        opacity: layer.opacity,
+                        labelingInfo: layer.labelClass ? [layer.labelClass] : undefined
                     });
                 } else if (layer.type === "image" && layer.id !== "blockGroups") {
                     if (layer.url) {
