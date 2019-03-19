@@ -1,7 +1,7 @@
 {
   "name": "Demographics-State-App",
-  "version": "4.0.0",
-  "date": "2019-02-13",
+  "version": "4.0.2",
+  "date": "2019-03-19",
   "copyright": "2019",
   "description": "MAG State Demographic Viewer",
   "keywords": [
@@ -24,8 +24,7 @@
   "main": "index.js",
   "homepage": "https://geo.azmag.gov/maps/azdemographics/",
   "author": "MAG Regional Analytics Devision (http://www.azmag.gov/About-Us/Divisions/Regional-Analytics-Division/)",
-  "contributors": [
-    {
+  "contributors": [{
       "name": "Vern Wolfley",
       "email": "vwolfley@azmag.gov"
     },
@@ -34,12 +33,10 @@
       "email": "jfairfield@azmag.gov"
     }
   ],
-  "repository": [
-    {
-      "type": "git",
-      "url": "https://github.com/AZMAG/map-DemographicState"
-    }
-  ],
+  "repository": [{
+    "type": "git",
+    "url": "https://github.com/AZMAG/map-DemographicState"
+  }],
   "private": true,
   "dependencies": {
     "arcgis-js-api": "^4.10.1",

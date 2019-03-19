@@ -30,6 +30,14 @@ And constructed with the following guidelines:
 
 ***************************************************
 
+## Version 4.0.2 | 2019-03-19
+
+* Fixed Share Funcationality
+* Reordered TOC
+* Added Spatial Layers to Advanced Selection Report
+* Added footnote for Minority Population
+* Updated SVMPO Contact info
+
 ## Version 4.0.1 | 2019-02-20
 
 * Added Print widget
