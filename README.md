@@ -1,35 +1,48 @@
-![](http://geo.azmag.gov/maps/readonaz/app/resources/img/maglogo_black.png)
-# MAG State Demographics Map Viewer
-State Demographics map viewer for selected census info for Arizona
+<div>
+  <span>
+  <a href="http://www.azmag.gov/">
+    <img
+      alt="MAG"
+      src="https://maps.azmag.gov/images/logos/MAG-logo.png"
+      width="200"
+    />
+   </a>
+  </span>
+  <span>
+  <a href="https://geo.azmag.gov/maps/azdemographics/">
+    <img
+      alt="Neigborhood Explorer"
+      src="https://maps.azmag.gov/images/viewer-icons/icon_statewide-demographics.png"
+      width="130"
+    />
+  </a>
+  </span>
+</div>
 
+# Arizona Demographics
+
+Map viewer for selected census info for Arizona
+
+[![Website](https://img.shields.io/website-up-down-green-red/http/shields.io.svg?label=my-website)](http://geo.azmag.gov/maps/azdemographics/)
+[![GitHub version](https://badge.fury.io/gh/AZMAG%2fmap-Demographic-Statewide.svg)](https://badge.fury.io/gh/AZMAG%2fmap-Demographic-Statewide)
 [![GitHub issues](https://img.shields.io/github/issues/AZMAG/map-Demographic-Statewide.svg)](https://github.com/AZMAG/map-Demographic-Statewide/issues)
-[![GitHub version](https://badge.fury.io/gh/AZMAG/map-Demographic-Statewide.svg)](https://badge.fury.io/gh/AZMAG/map-Demographic-Statewide)
 [![dependencies](https://david-dm.org/AZMAG/map-Demographic-Statewide.png)](https://david-dm.org/AZMAG/map-Demographic-Statewide)
 [![devDependency Status](https://david-dm.org/AZMAG/map-Demographic-Statewide/dev-status.png)](https://david-dm.org/AZMAG/map-Demographic-Statewide)
 [![Semver](http://img.shields.io/SemVer/2.0.0.png)](http://semver.org/spec/v2.0.0.html)
-[![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
+[![Built with Grunt](http://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
 [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-[![Website](https://img.shields.io/website-up-down-green-red/http/shields.io.svg?label=my-website)](http://geo.azmag.gov/maps/azdemographics/)
 
-***********************************************************************************************************
+Arizona Demographics is one of the Maricopa Association of Governments interactive mapping and analysis sites, showing selected population and housing data. The viewer allows you to graphically view selected population and housing data for all Census block groups for the State of Arizona. The viewer provides interactive mapping and reporting tools to allow exploration of data from Census 2010 and the American Community Survey (ACS) 2013-2017.
 
-The State Demographic Map Viewer is one of the Maricopa Association of Governments interactive mapping and analysis sites, showing selected population and housing data.  The viewer allows you to graphically view selected population and housing data for all Census block groups for the State of Arizona.  The viewer provides interactive mapping and reporting tools to allow exploration of data from Census 2010 and the American Community Survey (ACS) 2012-2016.
-
-Use this site to explore Explore data from Census 2010 and American Community Survey (ACS) 2012-2016.
+Use this site to explore Explore data from Census 2010 and American Community Survey (ACS) 2013-2017.
 
 This web app viewer was developed by MAG staff for MAG member agencies and the public using ESRI's JavaScript API.
 
 ## Keywords
 
-`Demographics` `Census` `2010` `American Community Survey` `ACS` `2012-2016` `5yr` `Counties` `State` `Arizona` `Maps` `MAG` `ESRI` `#MAGmaps`
+`Demographics` `Census` `2010` `American Community Survey` `ACS` `2013-2017` `5yr` `Counties` `State` `Arizona` `Maps` `MAG` `ESRI` `#MAGmaps`
 
 ## Version
-
-### version 3.2.5 ###
-
- `Updated: 2018-07-31`
-
- `Created: 2014-10-21`
 
 Releases will be numbered with the following format:
 
@@ -41,19 +54,25 @@ And constructed with the following guidelines:
 2. **MINOR** version when you add functionality in a backwards-compatible manner **bumps the minor** resets patch
 3. **PATCH** version when you make backwards-compatible bug fixes and misc changes **bumps only the patch**
 
+### version | 4.0.3 ###
+
+* Updated | 2019-03-28
+
+* Created | 2014-10-21
+
 ## Credits
 
-`Maricopa Association of Governments (MAG) and the MAG member agencies`
+Maricopa Association of Governments (MAG) and the MAG member agencies
 
 ## Site URL
 
-* [AZ State Demographics](http://geo.azmag.gov/maps/azdemographics/)
+-   [Arizona Demographics](http://geo.azmag.gov/maps/azdemographics/)
 
 ## Documentation
 
 A detailed list of the changes and fixes in each version update can be found in the CHANGELOG.md.
 
-* [CHANGELOG](CHANGELOG.md)
+-   [CHANGELOG](CHANGELOG.md)
 
 ## Resources
 
@@ -61,7 +80,7 @@ A detailed list of the changes and fixes in each version update can be found in 
 
 ## Dependencies
 
-* [git-labelmaker](https://github.com/himynameisdave/git-labelmaker?utm_source=hashnode.com)
+-   [git-labelmaker](https://github.com/himynameisdave/git-labelmaker?utm_source=hashnode.com)
 
 ## Legal Disclaimer
 
@@ -84,5 +103,4 @@ Code released under the MIT license.
 
 A copy of the license is available in the repository's `LICENSE` file.
 
-* [LICENSE](LICENSE)
-
+-   [LICENSE](LICENSE)

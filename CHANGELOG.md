@@ -30,11 +30,24 @@ And constructed with the following guidelines:
 
 ***************************************************
 
-## Version 3.2.5 | 2018-07-31
+## Version 4.0.2 | 2019-03-19
 
-* fixed config reference in cbr-vm
-* fixed issue with multiple map frames
-* added class breaks cache to improve map performance
+* Fixed Share Funcationality
+* Reordered TOC
+* Added Spatial Layers to Advanced Selection Report
+* Added footnote for Minority Population
+* Updated SVMPO Contact info
+
+## Version 4.0.1 | 2019-02-20
+
+* Added Print widget
+
+## Version 4.0.0 | 2019-02-13
+
+* Changed Build
+* Added Normalize.css
+* Complete rewrite of code in 4.x
+* Migrated code from bikeways viewer and from existing demographics viewer as possible
 
 ## Version 3.2.4 | 2018-04-20
 

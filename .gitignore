@@ -229,6 +229,3 @@ bower_components
 
  # workspace files are user-specific don't track
  *.sublime-workspace
-
-# folder for editing and testing
-reports/

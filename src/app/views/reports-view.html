@@ -1,0 +1,186 @@
+<div id="reportArea">
+    <div class="row panelHeader">
+        <div class="col-sm-10 panelHeaderText">Generate a report</div>
+        <div class="col-sm-2 panelHeaderIcons">
+            <a class="modal-anchor md track" data-toggle="modal" data-target="#reportsHelpModal"><i class="fas fa-question-circle"></i></a>
+            <a class="closePanel" href="#"> <i class="fas fa-times"></i></a>
+        </div>
+    </div>
+    <div class="panelSubHeader">
+        <button class="btn returnBtn"><i class="fas fa-angle-double-left"></i> Back</button>
+        <div id="summaryReportHeader"></div>
+    </div>
+
+    <div id="cardContainer" class="">
+        <div data-report-form-id="standardReports" class="card" style="width: 90%;">
+            <div class="card-body">
+                <h5 class="card-title">Standard Reports</h5>
+                <div class="flexCenter">
+                    <i class="fas fa-table fa-3x cardIcon"></i>
+                    <p class="card-text">
+                        Open a demographic report for any predefined geography.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div data-report-form-id="customGeographyReports" class="row card" style="width: 90%;">
+            <div class="card-body">
+                <h5 class="card-title">Custom Geography</h5>
+                <div class="flexCenter">
+                    <i class="fas fa-draw-polygon fa-3x cardIcon"></i>
+                    <p class="card-text">Create a report based on user selected block groups.</p>
+                </div>
+            </div>
+        </div>
+        <div data-report-form-id="advancedReports" class="row card" style="width: 90%;">
+            <div class="card-body">
+                <h5 class="card-title">Advanced Selection</h5>
+                <div class="flexCenter">
+                    <i class="fas fa-search-location fa-3x cardIcon"></i>
+                    <p class="card-text">Create a report by selecting block groups with certain attributes.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="standardReports" class="reportFormArea">
+        <form id="reportForm">
+            <div class="form-group">
+                <label for="reportType">Type of Report:</label>
+                <select class="form-control" id="reportType"></select>
+                <small class="form-text text-muted">Choose the type of geography for the report.</small>
+            </div>
+            <div id="specificReportDiv" class="form-group">
+                <label for="specificReport">Choose Report:</label>
+                <select class="form-control" id="specificReport"> </select>
+                <small class="form-text text-muted">Choose the specific report to generate.</small>
+                <div class="checkbox">
+                    <label id="compareCheckboxLabel">
+                        <input name="compareCheckbox" id="compareCheckbox" type="checkbox"> Use Comparison
+                    </label>
+                </div>
+                <div id="comparisonContainer">
+                    <label>Choose Report for Comparison:</label>
+                    <select class="form-control" id="specificReportComparison"></select>
+                    <small class="form-text text-muted">Choose the report for comparison.</small>
+                </div>
+            </div>
+            <button id="standardBtnSubmit" type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+    <div id="customGeographyReports" class="reportFormArea">
+        <form id="interactiveForm">
+            <h6>Identify a:</h6>
+            <div>
+                <div class="form-group">
+                    <button data-val="point" class="btn customSummaryButton">
+                        <img src="app/images/CustomSummaryIcons/i_draw_point.png" alt="" />
+                    </button>
+                    <span>Point of Interest</span>
+                </div>
+                <div class="form-group">
+                    <button data-val="polygon" class="btn customSummaryButton">
+                        <img src="app/images/CustomSummaryIcons/i_draw_freepoly.png" alt="" />
+                    </button>
+                    <span>Area of Interest</span>
+                </div>
+                <!-- <div class="form-group">
+                    <button data-val="multipoint" class="btn customSummaryButton">
+                        <img src="app/images/CustomSummaryIcons/i_draw_rect.png" alt="" />
+                    </button>
+                    <span>Region of Interest</span>
+                </div> -->
+                <div class="form-group">
+                    <button data-val="polyline" class="btn customSummaryButton">
+                        <img src="app/images/CustomSummaryIcons/i_draw_line.png" alt="" />
+                    </button>
+                    <span>Corridor of Interest</span>
+                </div>
+            </div>
+
+            <div class="form-check">
+                <input type="checkbox" checked class="form-check-input" name="useZoom" id="useZoom" />
+                <label for="useZoom" class="form-check-label">Zoom to Selection</label>
+            </div>
+
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" name="useBuffer" id="useBuffer" />
+                <label for="useBuffer" class="form-check-label">Buffer Selection</label>
+            </div>
+
+            <div id="bufferOptions">
+                <small for="bufferUnit">Distance</small>
+                <input class="form-control" id="bufferSize" value="1" min="0" max="10000" step=".01" type="number"
+                    placeholder="Radius" />
+                <select style="width: auto;" class="form-control" name="bufferUnit" id="bufferUnit">
+                    <option value="miles">Miles</option>
+                    <option value="feet">Feet</option>
+                    <option value="meters">Meters</option>
+                    <option value="kilometers">Kilometers</option>
+                </select>
+            </div>
+        </form>
+    </div>
+    <div id="advancedReports" class="reportFormArea">
+        <div id="advancedContainer">
+            <div id="advancedTreeview"></div>
+        </div>
+        <div id="advancedQueryTarget" data-role="droptarget">
+            <h4 id="dropPrompt">Drop here</h4>
+        </div>
+        <div id="advancedCntDiv"> Number of selected block groups : <span id="advancedCount"></span>
+            <button id="btnAdvancedSubmit" class="btn btn-primary">Submit</button>
+        </div>
+    </div>
+    <div id="summaryReport">
+        <div id="sumReportTabStrip">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm">
+                        <ul class="nav nav-tabs mb-3" id="tabs-tab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" data-toggle="tab" href="#gridTab" role="tab" aria-controls="gridTab"
+                                    aria-selected="true">Data</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#chartsTab" role="tab" aria-controls="chartsTab"
+                                    aria-selected="false">Charts</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <span class="legal">Data Source</span>
+                    <div class="col-sm">
+                        <div id="dataSrcSelector" class="btn-group">
+                            <button type="button" data-val="acs" class="dataSrcToggle btn btn-secondary btn-sm active">
+                                ACS 2017
+                            </button>
+                            <button data-val="census2010" type="button" class="dataSrcToggle btn btn-secondary btn-sm">
+                                Census 2010
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-content" id="pills-tabContent">
+                <div class="tab-pane fade show active" id="gridTab" role="tabpanel" aria-labelledby="gridTab">
+                    <div id="gridTarget"></div>
+                    <div id="title6Area">
+                        <hr />
+                        <p class="k-reset">
+                            <a id="title6Toggle" class="k-icon k-i-expand" href="#" tabindex="-1" aria-label="Expand"></a>Title
+                            6 Data
+                        </p>
+                        <div id="title6Grid"></div>
+                    </div>
+                    <div class="sourceLabel"></div>
+                </div>
+
+                <div class="tab-pane fade" id="chartsTab" role="tabpanel" aria-labelledby="chartsTab">
+                    <div id="chartsTarget">
+                        <div class="chartsArea"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="tempAttr"></div>
+</div>
