@@ -171,6 +171,12 @@ require([
                 Layout_Template: $printMapLayout.find(":selected").val(),
                 Format: $printMapFormat.find(":selected").val()
             }
+            // used to change the icon on the map link
+            if (data.Format === "PDF") {
+                $("#print-icon").attr("class", "fas fa-file-pdf");
+            } else {
+                $("#print-icon").attr("class", "fas fa-file-image");
+            }
 
             return data;
         }
