@@ -30,6 +30,18 @@ And constructed with the following guidelines:
 
 ***************************************************
 
+## Version 4.0.5 | 2019-03-28
+
+* Fixed widget hover titles - style issue
+
+## Version 4.0.4 | 2019-03-28
+
+* Fixed Print widget style issues
+* Added JPG icon to print widget when selected
+
+## Version 4.0.3 | 2019-03-28
+
+
 ## Version 4.0.2 | 2019-03-19
 
 * Fixed Share Funcationality
