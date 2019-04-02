@@ -30,6 +30,10 @@ And constructed with the following guidelines:
 
 ***************************************************
 
+## Version 4.0.6 | 2019-04-02
+
+* Changed Layer from "Council" to Councils of Governments
+
 ## Version 4.0.5 | 2019-03-28
 
 * Fixed widget hover titles - style issue

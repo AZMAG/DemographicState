@@ -1,5 +1,5 @@
 app.config = {
-    version: 'v4.0.5 | 2019-03-28',
+    version: 'v4.0.6 | 2019-04-02',
     copyright: '2019',
 
     LegendSource: 'American Community Survey 2013-2017 5yr',
@@ -151,7 +151,7 @@ app.config = {
             legend: true,
             id: 'cogs',
             layerName: 'Cogs',
-            title: 'Council of Governments',
+            title: 'Councils of Governments',
             type: 'feature',
             opacity: 1,
             visible: false,
