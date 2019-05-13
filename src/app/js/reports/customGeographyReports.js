@@ -38,10 +38,9 @@ require(["dojo/topic", "esri/views/2d/draw/Draw", "esri/Graphic", "esri/geometry
             draw = new Draw({
                 view: app.view
             });
-            let bufferShown = false;
             $bufferCheckbox.change(function (e) {
-                bufferShown = !bufferShown;
-                if (bufferShown) {
+                let checked = $bufferCheckbox.prop("checked");
+                if (checked) {
                     $bufferOptions.css("display", "flex");
                 } else {
                     $bufferOptions.hide();
@@ -198,6 +197,7 @@ require(["dojo/topic", "esri/views/2d/draw/Draw", "esri/Graphic", "esri/geometry
                     $("#viewDiv").off("mousemove");
                     $(".customSummaryButton").removeClass("active");
                     $drawingTooltip.hide();
+                    $bufferCheckbox.prop("checked", false);
                     draw.reset();
                 }
             });

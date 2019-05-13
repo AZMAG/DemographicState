@@ -149,7 +149,7 @@ app.AddHighlightGraphic = function (graphic) {
 };
 
 app.summarizeFeatures = function (res) {
-    console.log(res);
+    // console.log(res);
 
     if (!app.summableFields) {
         app.summableFields = [];

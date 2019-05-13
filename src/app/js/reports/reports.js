@@ -1,7 +1,7 @@
 //This file should include logic on initialization of?????
 'use strict';
-require(['dojo/topic', 'esri/tasks/QueryTask'], function(tp, QueryTask) {
-    tp.subscribe('panel-loaded', function(panel) {
+require(['dojo/topic', 'esri/tasks/QueryTask'], function (tp, QueryTask) {
+    tp.subscribe('panel-loaded', function (panel) {
         if (panel === 'reports-view') {
             let $reportArea = $('#reportArea');
             let $subHeaderTitle = $('#summaryReportHeader');
@@ -40,22 +40,22 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function(tp, QueryTask) {
                 $('#useZoom').prop('checked', true);
             }
 
-            tp.subscribe('panel-shown', function(panel) {
+            tp.subscribe('panel-shown', function (panel) {
                 resetReportForm();
                 // app.clearDrawnGraphics();
             });
 
-            tp.subscribe('panel-hidden', function(panel) {
+            tp.subscribe('panel-hidden', function (panel) {
                 resetReportForm();
                 // app.clearDrawnGraphics();
             });
 
-            $reportArea.on('click', '.returnBtn', function() {
+            $reportArea.on('click', '.returnBtn', function () {
                 resetReportForm();
                 app.clearDrawnGraphics();
             });
 
-            $reportArea.on('click', '.card', function() {
+            $reportArea.on('click', '.card', function () {
                 let val = $(this).data('report-form-id');
                 $('.reportFormArea').hide();
                 $('#cardContainer').hide();
@@ -65,7 +65,7 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function(tp, QueryTask) {
                 $('#reportForm').show();
             });
 
-            $reportArea.on('click', '.dataSrcToggle', function() {
+            $reportArea.on('click', '.dataSrcToggle', function () {
                 //This seems hacky..  It removes the active class from the other buttons
                 //https://stackoverflow.com/questions/9262827/twitter-bootstrap-onclick-event-on-buttons-radio
                 $(this)
@@ -91,7 +91,7 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function(tp, QueryTask) {
     });
 
     function resizeCharts() {
-        $('.chartTarget').each(function(i, val) {
+        $('.chartTarget').each(function (i, val) {
             $(val)
                 .data('kendoChart')
                 .resize();
@@ -220,14 +220,14 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function(tp, QueryTask) {
         }
         let $reportArea = $('#reportArea');
 
-        console.log(data);
+        // console.log(data);
 
         let features = res.features;
         let feature = features[0];
         let attr = feature.attributes;
         let title = GetTitle(data);
 
-        $reportArea.find('a[data-toggle="tab"]').on('shown.bs.tab', function(e) {
+        $reportArea.find('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
             resizeCharts();
         });
 
@@ -250,7 +250,7 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function(tp, QueryTask) {
 
         let $btnExportPDF = $header.find('.btnExportPDF');
         $btnExportPDF.tooltip();
-        $btnExportPDF.off('click').on('click', function() {
+        $btnExportPDF.off('click').on('click', function () {
             ExportReportToPDF(app.selectedReport.conf, ids);
         });
 
@@ -296,7 +296,7 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function(tp, QueryTask) {
         let activeTab = $reportArea.find('.nav-link.active').text();
 
         if (activeTab === 'Charts') {
-            $('.chartTarget').each(function(i, val) {
+            $('.chartTarget').each(function (i, val) {
                 $(val)
                     .data('kendoChart')
                     .resize();
@@ -317,7 +317,7 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function(tp, QueryTask) {
 
         $('#title6Area')
             .off('click')
-            .on('click', function() {
+            .on('click', function () {
                 $title6Grid.toggle();
                 $title6Toggle.toggleClass('k-i-expand k-i-collapse');
             });
@@ -327,8 +327,7 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function(tp, QueryTask) {
         var totalBlockCount = attr['TOT_BLOCKGROUP_COUNT'];
         var age65Plus = attr['AGE65TO74'] + attr['AGE75TO84'] + attr['AGE85PLUS'];
 
-        var dataSrc = [
-            {
+        var dataSrc = [{
                 Category: 'Population Base',
                 Footnote: '',
                 Total: totalPop,
@@ -395,11 +394,9 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function(tp, QueryTask) {
                 data: dataSrc
             },
             //height: 200,
-            columns: [
-                {
+            columns: [{
                     title: 'Population and Households',
-                    columns: [
-                        {
+                    columns: [{
                             field: 'Category',
                             template: '#:Category#', //<sup>#:Footnote#</sup>
                             title: 'Category',
@@ -422,8 +419,7 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function(tp, QueryTask) {
                 {
                     title: 'Census Block Groups',
                     width: '325px',
-                    columns: [
-                        {
+                    columns: [{
                             field: 'NumberOfBlocks',
                             title: 'Number of block groups >= Area Pct',
                             width: '70px',
@@ -456,7 +452,7 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function(tp, QueryTask) {
     tp.subscribe('open-report-window', OpenReportWindow);
     let $loadingSpinner = $('.loading-container');
 
-    app.GetData = async function(conf, geoids, geo) {
+    app.GetData = async function (conf, geoids, geo) {
         $loadingSpinner.css('display', 'flex');
 
         let where = '1=1';
