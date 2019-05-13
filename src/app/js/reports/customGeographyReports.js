@@ -1,7 +1,11 @@
 "use strict";
-require(["dojo/topic", "esri/views/2d/draw/Draw", "esri/Graphic", "esri/geometry/geometryEngine"], function (
+require(["dojo/topic",
+    "esri/widgets/Sketch/SketchViewModel",
+    "esri/Graphic",
+    "esri/geometry/geometryEngine"
+], function (
     tp,
-    Draw,
+    SketchViewModel,
     Graphic,
     geometryEngine
 ) {
@@ -27,17 +31,44 @@ require(["dojo/topic", "esri/views/2d/draw/Draw", "esri/Graphic", "esri/geometry
                 start: "Click to add first point in the corridor of interest.",
                 during: "Double click to finish drawing, or Click to add another point to the selected corridor."
             },
-            multipoint: {
-                start: "Click to add first point in the region of interest.",
-                during: "Double click to finish drawing, or Click to add another point to the selected region."
+            rectangle: {
+                start: "Click and drag to create a rectangle and select a region of interest.",
+                during: "Release to finish drawing and select a region of interest."
             }
         };
-        let action, draw;
+        let sketchVM;
 
         if (panel === "reports-view") {
-            draw = new Draw({
-                view: app.view
+            sketchVM = new SketchViewModel({
+                view: app.view,
+                layer: app.view.graphics,
+                updateOnGraphicClick: false,
+                pointSymbol: {
+                    type: "simple-marker",
+                    style: "circle",
+                    size: 6,
+                    color: [255, 0, 0],
+                    outline: {
+                        color: [50, 50, 50],
+                        width: 1
+                    }
+                },
+                polygonSymbol: {
+                    type: "simple-fill",
+                    style: "backward-diagonal",
+                    color: [255, 0, 0, 1],
+                    outline: {
+                        color: 'red',
+                        width: 2
+                    }
+                },
+                polylineSymbol: {
+                    type: "simple-line",
+                    color: [255, 0, 0],
+                    width: 2
+                }
             });
+
             $bufferCheckbox.change(function (e) {
                 let checked = $bufferCheckbox.prop("checked");
                 if (checked) {
@@ -52,18 +83,8 @@ require(["dojo/topic", "esri/views/2d/draw/Draw", "esri/Graphic", "esri/geometry
                 $customSummaryButton.removeClass("active");
                 $(this).addClass("active");
                 let type = $(this).data("val");
-
-                // console.log(type);
-
-                // create() will return a reference to an instance of PolygonDrawAction
-                action = draw.create(type);
-                // let action = draw.create('polygon', {
-                //     mode: "Left-drag"
-                // })
-
-
-
                 $drawingTooltip.html(drawMessages[type].start);
+                sketchVM.create(type);
 
                 //Creates a tooltip to give user instructions on drawing
                 $("#viewDiv").mousemove(function (e) {
@@ -75,130 +96,64 @@ require(["dojo/topic", "esri/views/2d/draw/Draw", "esri/Graphic", "esri/geometry
 
                 // focus the view to activate keyboard shortcuts for drawing polygons
                 app.view.focus();
-
-                // listen polygonDrawAction events to give immediate visual feedback
-                // to users as the polygon is being drawn on the view.
-                action.on("vertex-add", e => {
-                    drawPolygon(e, type);
-                });
-                action.on("cursor-update", e => {
-                    drawPolygon(e, type);
-                });
-                action.on("vertex-remove", e => {
-                    drawPolygon(e, type);
-                });
-                action.on("draw-complete", e => {
-                    drawPolygon(e, type);
-                });
             });
-            let count = 0;
 
-            function drawPolygon(e, type) {
-                //remove existing graphic
-                app.view.graphics.removeAll();
+            sketchVM.on("update", function (e) {
+                if (buffer) {
+                    AddBufferedGraphic(e);
+                }
+            });
 
-                const pnts = e.vertices;
-
-                let symbolLU = {
-                    polygon: {
-                        color: [0, 0, 0, 0.3],
-                        symbolType: "simple-fill",
-                        geometryType: "polygon",
-                        style: "solid"
-                    },
-                    multipoint: {
-                        color: [0, 0, 0, 0.3],
-                        symbolType: "simple-fill",
-                        geometryType: "polygon",
-                        style: "solid"
-                    },
-                    polyline: {
-                        color: "red",
-                        symbolType: "simple-line",
-                        geometryType: "polyline",
-                        style: "solid"
-                    },
-                    point: {
-                        color: "red",
-                        symbolType: "simple-marker",
-                        geometryType: "point",
-                        style: "circle"
-                    }
-                };
-
-                let symb = {
-                    type: symbolLU[type].symbolType,
-                    color: symbolLU[type].color,
-                    style: symbolLU[type].style,
-                    width: 2,
-                    size: 4,
-                    outline: {
-                        color: "red",
-                        width: 2
-                    }
-                };
-
-                // create a new graphic representing the polygon, add it to the view
-                var graphic = new Graphic({
-                    geometry: {
-                        rings: pnts,
-                        paths: [pnts],
-                        spatialReference: app.view.spatialReference,
-                        type: symbolLU[type].geometryType,
-                        x: e.coordinates ? e.coordinates[0] : undefined,
-                        y: e.coordinates ? e.coordinates[1] : undefined
-                    },
-                    symbol: symb
-                });
-
+            function AddBufferedGraphic(e) {
+                let bufferGraphicsLayer = app.map.findLayerById("bufferGraphics");
+                bufferGraphicsLayer.removeAll();
                 let buffGfx = null;
+                let buffered = geometryEngine.buffer(e.graphic.geometry, $bufferSize.val(), $bufferUnit.val());
+                buffGfx = new Graphic({
+                    geometry: buffered,
+                    symbol: {
+                        type: "simple-fill",
+                        color: [0, 0, 0, 0],
+                        outline: {
+                            style: "dot",
+                            color: "black",
+                            width: 2
+                        }
+                    }
+                });
+                bufferGraphicsLayer.add(buffGfx);
+                return buffGfx;
+            }
 
+            sketchVM.on("create", function (e) {
                 let buffer = $bufferCheckbox.is(":checked");
 
-                if (buffer) {
-                    let buffered = geometryEngine.buffer(graphic.geometry, $bufferSize.val(), $bufferUnit.val());
-                    buffGfx = new Graphic({
-                        geometry: buffered,
-                        symbol: {
-                            type: "simple-fill",
-                            color: [0, 0, 0, 0],
-                            outline: {
-                                style: "dot",
-                                color: "black",
-                                width: 2
-                            }
-                        }
-                    });
-                    app.view.graphics.add(buffGfx);
-                }
-
-                if (e.type === "draw-complete") {
+                if (e.state === "complete") {
                     $("#viewDiv").off("mousemove");
                     $drawingTooltip.hide();
                     $customSummaryButton.removeClass("active");
-                    if (buffGfx) {
-                        ProcessSelection(buffGfx);
+
+                    if (buffer) {
+                        let buffedGfx = AddBufferedGraphic(e);
+                        ProcessSelection(buffedGfx);
                     } else {
-                        ProcessSelection(graphic);
+                        ProcessSelection(e.graphic);
+                    }
+                } else {
+                    if (buffer) {
+                        AddBufferedGraphic(e);
                     }
                 }
+            });
 
-                if (e.type === "vertex-add") {
-                    if (drawMessages[type].during) {
-                        $drawingTooltip.html(drawMessages[type].during);
-                    }
-                }
-
-                app.view.graphics.add(graphic);
-            }
             tp.subscribe("reset-reports", function () {
-                if (action && draw) {
+                if (sketchVM) {
                     //Clears drawing if return button is clicked or panel is closed.
                     $("#viewDiv").off("mousemove");
                     $(".customSummaryButton").removeClass("active");
                     $drawingTooltip.hide();
                     $bufferCheckbox.prop("checked", false);
-                    draw.reset();
+                    sketchVM.reset();
                 }
             });
         }

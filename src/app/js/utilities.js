@@ -57,6 +57,9 @@ async function GetRepresentativeInfo(id) {
 app.clearDrawnGraphics = function () {
     let gfxLayer = app.map.findLayerById("gfxLayer");
     gfxLayer.removeAll();
+
+    let bufferGraphics = app.map.findLayerById("bufferGraphics");
+    bufferGraphics.removeAll();
     app.view.graphics.removeAll();
 };
 

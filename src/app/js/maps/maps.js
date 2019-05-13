@@ -150,12 +150,19 @@ require([
                 }
             });
 
-            app.map.layers.addMany(layersToAdd);
+
+
             var gfxLayer = new GraphicsLayer({
                 id: "gfxLayer"
             });
             app.map.add(gfxLayer);
 
+            let bufferGraphicsLayer = new GraphicsLayer({
+                id: "bufferGraphics"
+            });
+            app.map.layers.add(bufferGraphicsLayer);
+
+            app.map.layers.addMany(layersToAdd);
             // layersToAdd.sort(function(a, b) {
             //     return b.sortOrder - a.sortOrder;
             // });
