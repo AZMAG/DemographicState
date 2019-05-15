@@ -184,6 +184,16 @@ require([
                 });
             });
 
+
+            var once = false;
+            app.view.whenLayerView(gfxLayer).then(function (lyrView) {
+                lyrView.watch("updating", function (value) {
+                    if (!value && !once) {
+                        tp.publish("gfxLayer-loaded");
+                    }
+                })
+            })
+
             var maxExtent = new Extent({
                 xmax: -12014782.270383481,
                 xmin: -12867208.009819541,
