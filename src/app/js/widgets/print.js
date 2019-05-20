@@ -25,7 +25,7 @@ require([
             view: app.view
         });
 
-        app.view.ui.add($printWidget[0], "bottom-right");
+        // app.view.ui.add($printWidget[0], "bottom-right");
 
         $printWidget.click(function () {
             SetupPrintForm();
