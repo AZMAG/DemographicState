@@ -36,6 +36,7 @@ require([
                 });
             }
             tp.publish("config-loaded");
+            app.configLoaded = true;
         });
 
         // $("#maps-view").load("app/views/maps-view.html", function () {

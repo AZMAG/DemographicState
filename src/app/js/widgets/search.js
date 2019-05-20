@@ -9,7 +9,7 @@ require([
 ], function (
     Search, Locator, Map, MapView, Extent, tp
 ) {
-    tp.subscribe("widget-print-loaded", function () {
+    tp.subscribe("widget-basemapToggle-loaded", function () {
 
         let search = new Search({
             view: app.view,

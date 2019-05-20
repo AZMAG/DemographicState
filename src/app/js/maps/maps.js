@@ -7,15 +7,17 @@ require([
     "esri/layers/TileLayer",
     "esri/geometry/Extent",
     "esri/layers/GraphicsLayer",
-    "esri/PopupTemplate",
     "dojo/topic",
     "dojo/domReady!"
-], function (Map, MapView, FeatureLayer, MapImageLayer, TileLayer, Extent, GraphicsLayer, PopupTemplate, tp) {
+], function (Map, MapView, FeatureLayer, MapImageLayer, TileLayer, Extent, GraphicsLayer, tp) {
+
     tp.subscribe("config-loaded", initMap);
 
+    if (app.configLoaded) {
+        initMap();
+    }
+
     function initMap() {
-
-
         app.map = new Map({
             basemap: "gray"
         });
