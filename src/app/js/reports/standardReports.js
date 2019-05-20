@@ -42,6 +42,7 @@ require(["dojo/topic"], function (tp) {
                     resetForm();
                 } else if (dataItem.id === "state") {
                     $standardBtnSubmit.show();
+                    $specificReportDiv.hide();
                 } else {
                     let dataSrc = await getSpecificData(dataItem);
                     let compareSrc = dataSrc.slice();

@@ -15,7 +15,7 @@ require([
         // add the button for drawing polygons underneath zoom buttons
         app.view.ui.add($drawWidget[0], "bottom-right");
 
-        var draw = new Draw({
+        let draw = new Draw({
             view: app.view
         });
 
@@ -50,9 +50,9 @@ require([
         //Not sure if we need a label similar to the maing legend.  This could be added later.
         //<span id="gfxSliderLabel">80%</span>
 
-        var outlineColor = "black";
-        var transparency = .8;
-        var fillColor = {
+        let outlineColor = "black";
+        let transparency = .8;
+        let fillColor = {
             r: 0,
             g: 0,
             b: 255,
@@ -74,7 +74,7 @@ require([
 
             //Apply the new colors to the current graphic if it exists
             if (app.view.graphics.items.length > 0) {
-                var newGfx = app.view.graphics.items[0].clone();
+                let newGfx = app.view.graphics.items[0].clone();
                 newGfx.symbol.color = fillColor;
                 newGfx.symbol.outline.color = outlineColor;
                 app.view.graphics.removeAll();
@@ -82,7 +82,7 @@ require([
             }
         }
 
-        var panelOpen = false;
+        let panelOpen = false;
         $drawWidget.click(StartDrawing);
 
         function StartDrawing() {
@@ -101,14 +101,14 @@ require([
                     buttons: false,
                     change: reDrawGraphics
                 });
-                var $gfxSlider = $("#gfxSlider");
+                let $gfxSlider = $("#gfxSlider");
                 $gfxSlider.val(transparency);
 
                 // $("#gfxSliderLabel").html(`${Math.floor(transparency * 100)}%`)
                 $gfxSlider.on("input", reDrawGraphics);
 
                 // create() will return a reference to an instance of PolygonDrawAction
-                var action = draw.create("polygon");
+                let action = draw.create("polygon");
 
                 //Creates a tooltip to give user instructions on drawing
                 $("#viewDiv").mousemove(function (e) {
@@ -147,13 +147,13 @@ require([
         // to provide a visual feedback to users as they are drawing a polygon
         function drawPolygon(event) {
 
-            var vertices = event.vertices;
+            let vertices = event.vertices;
 
             //remove existing graphic
             app.view.graphics.removeAll();
 
             // create a new graphic representing the polygon, add it to the view
-            var graphic = new Graphic({
+            let graphic = new Graphic({
                 geometry: {
                     rings: vertices,
                     spatialReference: app.view.spatialReference,

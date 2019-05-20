@@ -1,5 +1,6 @@
 //This file should include logic on initialization of?????
 'use strict';
+
 require(['dojo/topic', 'esri/tasks/QueryTask'], function (tp, QueryTask) {
     tp.subscribe('panel-loaded', function (panel) {
         if (panel === 'reports-view') {
@@ -322,12 +323,12 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function (tp, QueryTask) {
                 $title6Toggle.toggleClass('k-i-expand k-i-collapse');
             });
 
-        var fivePlus = attr['TOTAL_POP'] - attr['UNDER5'];
-        var totalPop = attr['TOTAL_POP'];
-        var totalBlockCount = attr['TOT_BLOCKGROUP_COUNT'];
-        var age65Plus = attr['AGE65TO74'] + attr['AGE75TO84'] + attr['AGE85PLUS'];
+        let fivePlus = attr['TOTAL_POP'] - attr['UNDER5'];
+        let totalPop = attr['TOTAL_POP'];
+        let totalBlockCount = attr['TOT_BLOCKGROUP_COUNT'];
+        let age65Plus = attr['AGE65TO74'] + attr['AGE75TO84'] + attr['AGE85PLUS'];
 
-        var dataSrc = [{
+        let dataSrc = [{
                 Category: 'Population Base',
                 Footnote: '',
                 Total: totalPop,
@@ -475,17 +476,20 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function (tp, QueryTask) {
         let qt = new QueryTask({
             url: app.config.mainUrl + '/' + conf.ACSIndex
         });
-        let acsPromise = qt.execute(q);
+
+        const acsPromise = qt.execute(q);
 
         qt.url = app.config.mainUrl + '/' + conf.censusIndex;
         q.returnGeometry = false;
 
-        let censusPromise = qt.execute(q);
+        const censusPromise = qt.execute(q);
+
+        const [acsData, censusData] = await Promise.all([acsPromise, censusPromise]);
 
         app.selectedReport = {
             conf: conf,
-            acsData: await acsPromise,
-            censusData: await censusPromise
+            acsData,
+            censusData
         };
 
         $loadingSpinner.css('display', 'none');
