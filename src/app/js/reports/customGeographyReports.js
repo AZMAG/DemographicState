@@ -9,15 +9,15 @@ require(["dojo/topic",
     Graphic,
     geometryEngine
 ) {
-    let init = false;
+    let isInited = false;
     tp.subscribe("panel-loaded", init);
 
-    if (app.panelLoaded["reports-view"] && !init) {
+    if (app.panelLoaded["reports-view"] && !isInited) {
         init();
     }
 
     function init() {
-        init = true;
+        isInited = true;
         tp.subscribe("gfxLayer-loaded", function () {
 
             let $customGeographyReports = $("#customGeographyReports");

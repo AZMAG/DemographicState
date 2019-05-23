@@ -20347,6 +20347,8 @@ require([
             let panelId = $(el).attr("panel-id");
             $(el).load(`app/views/${panelId}.html`, function () {
                 tp.publish("panel-loaded", panelId);
+                app.panelLoaded = app.panelLoaded || {};
+                app.panelLoaded[panelId] = true;
             })
         })
     }
@@ -22135,7 +22137,15 @@ require(["dojo/topic",
     Graphic,
     geometryEngine
 ) {
-    tp.subscribe("panel-loaded", function (panel) {
+    let init = false;
+    tp.subscribe("panel-loaded", init);
+
+    if (app.panelLoaded["reports-view"] && !init) {
+        init();
+    }
+
+    function init() {
+        init = true;
         tp.subscribe("gfxLayer-loaded", function () {
 
             let $customGeographyReports = $("#customGeographyReports");
@@ -22165,129 +22175,126 @@ require(["dojo/topic",
                 }
             };
             let sketchVM;
-
-            if (panel === "reports-view") {
-                sketchVM = new SketchViewModel({
-                    view: app.view,
-                    layer: app.map.findLayerById("gfxLayer"),
-                    updateOnGraphicClick: false,
-                    pointSymbol: {
-                        type: "simple-marker",
-                        style: "circle",
-                        size: 6,
-                        color: [255, 0, 0],
-                        outline: {
-                            color: [50, 50, 50],
-                            width: 1
-                        }
-                    },
-                    polygonSymbol: {
-                        type: "simple-fill",
-                        style: "backward-diagonal",
-                        color: [255, 0, 0, 1],
-                        outline: {
-                            color: 'red',
-                            width: 2
-                        }
-                    },
-                    polylineSymbol: {
-                        type: "simple-line",
-                        color: [255, 0, 0],
+            sketchVM = new SketchViewModel({
+                view: app.view,
+                layer: app.map.findLayerById("gfxLayer"),
+                updateOnGraphicClick: false,
+                pointSymbol: {
+                    type: "simple-marker",
+                    style: "circle",
+                    size: 6,
+                    color: [255, 0, 0],
+                    outline: {
+                        color: [50, 50, 50],
+                        width: 1
+                    }
+                },
+                polygonSymbol: {
+                    type: "simple-fill",
+                    style: "backward-diagonal",
+                    color: [255, 0, 0, 1],
+                    outline: {
+                        color: 'red',
                         width: 2
                     }
+                },
+                polylineSymbol: {
+                    type: "simple-line",
+                    color: [255, 0, 0],
+                    width: 2
+                }
+            });
+
+            $bufferCheckbox.change(function (e) {
+                let checked = $bufferCheckbox.prop("checked");
+                if (checked) {
+                    $bufferOptions.css("display", "flex");
+                } else {
+                    $bufferOptions.hide();
+                }
+            });
+            $customSummaryButton.click(function (e) {
+                e.preventDefault();
+                $customSummaryButton.removeClass("active");
+                $(this).addClass("active");
+                let type = $(this).data("val");
+                $drawingTooltip.html(drawMessages[type].start);
+                sketchVM.create(type);
+
+                //Creates a tooltip to give user instructions on drawing
+                $("#viewDiv").mousemove(function (e) {
+                    $drawingTooltip
+                        .css("left", e.pageX + 10)
+                        .css("top", e.pageY + 10)
+                        .css("display", "block");
                 });
 
-                $bufferCheckbox.change(function (e) {
-                    let checked = $bufferCheckbox.prop("checked");
-                    if (checked) {
-                        $bufferOptions.css("display", "flex");
-                    } else {
-                        $bufferOptions.hide();
-                    }
-                });
+                // focus the view to activate keyboard shortcuts for drawing polygons
+                app.view.focus();
+            });
 
-                $customSummaryButton.click(function (e) {
-                    e.preventDefault();
-                    $customSummaryButton.removeClass("active");
-                    $(this).addClass("active");
-                    let type = $(this).data("val");
-                    $drawingTooltip.html(drawMessages[type].start);
-                    sketchVM.create(type);
+            sketchVM.on("update", function (e) {
+                let buffer = $bufferCheckbox.is(":checked");
+                if (buffer) {
+                    AddBufferedGraphic(e);
+                }
+            });
 
-                    //Creates a tooltip to give user instructions on drawing
-                    $("#viewDiv").mousemove(function (e) {
-                        $drawingTooltip
-                            .css("left", e.pageX + 10)
-                            .css("top", e.pageY + 10)
-                            .css("display", "block");
+            function AddBufferedGraphic(e) {
+                if (e.graphic) {
+                    let bufferGraphicsLayer = app.map.findLayerById("bufferGraphics");
+                    bufferGraphicsLayer.removeAll();
+                    let buffGfx = null;
+                    let buffered = geometryEngine.buffer(e.graphic.geometry, $bufferSize.val(), $bufferUnit.val());
+                    buffGfx = new Graphic({
+                        geometry: buffered,
+                        symbol: {
+                            type: "simple-fill",
+                            color: [0, 0, 0, 0],
+                            outline: {
+                                style: "dot",
+                                color: "black",
+                                width: 2
+                            }
+                        }
                     });
+                    bufferGraphicsLayer.add(buffGfx);
+                    return buffGfx;
+                }
+            }
 
-                    // focus the view to activate keyboard shortcuts for drawing polygons
-                    app.view.focus();
-                });
+            sketchVM.on("create", function (e) {
+                let buffer = $bufferCheckbox.is(":checked");
 
-                sketchVM.on("update", function (e) {
-                    let buffer = $bufferCheckbox.is(":checked");
+                if (e.state === "complete") {
+                    $("#viewDiv").off("mousemove");
+                    $drawingTooltip.hide();
+                    $customSummaryButton.removeClass("active");
+
+                    if (buffer) {
+                        let buffedGfx = AddBufferedGraphic(e);
+                        ProcessSelection(buffedGfx);
+                    } else {
+                        ProcessSelection(e.graphic);
+                    }
+                } else {
                     if (buffer) {
                         AddBufferedGraphic(e);
                     }
-                });
-
-                function AddBufferedGraphic(e) {
-                    if (e.graphic) {
-                        let bufferGraphicsLayer = app.map.findLayerById("bufferGraphics");
-                        bufferGraphicsLayer.removeAll();
-                        let buffGfx = null;
-                        let buffered = geometryEngine.buffer(e.graphic.geometry, $bufferSize.val(), $bufferUnit.val());
-                        buffGfx = new Graphic({
-                            geometry: buffered,
-                            symbol: {
-                                type: "simple-fill",
-                                color: [0, 0, 0, 0],
-                                outline: {
-                                    style: "dot",
-                                    color: "black",
-                                    width: 2
-                                }
-                            }
-                        });
-                        bufferGraphicsLayer.add(buffGfx);
-                        return buffGfx;
-                    }
                 }
+            });
 
-                sketchVM.on("create", function (e) {
-                    let buffer = $bufferCheckbox.is(":checked");
+            tp.subscribe("reset-reports", function () {
+                if (sketchVM) {
+                    //Clears drawing if return button is clicked or panel is closed.
+                    $("#viewDiv").off("mousemove");
+                    $(".customSummaryButton").removeClass("active");
+                    $drawingTooltip.hide();
+                    $bufferCheckbox.prop("checked", false);
+                    sketchVM.reset();
+                }
+            });
 
-                    if (e.state === "complete") {
-                        $("#viewDiv").off("mousemove");
-                        $drawingTooltip.hide();
-                        $customSummaryButton.removeClass("active");
-
-                        if (buffer) {
-                            let buffedGfx = AddBufferedGraphic(e);
-                            ProcessSelection(buffedGfx);
-                        } else {
-                            ProcessSelection(e.graphic);
-                        }
-                    } else {
-                        if (buffer) {
-                            AddBufferedGraphic(e);
-                        }
-                    }
-                });
-
-                tp.subscribe("reset-reports", function () {
-                    if (sketchVM) {
-                        //Clears drawing if return button is clicked or panel is closed.
-                        $("#viewDiv").off("mousemove");
-                        $(".customSummaryButton").removeClass("active");
-                        $drawingTooltip.hide();
-                        $bufferCheckbox.prop("checked", false);
-                        sketchVM.reset();
-                    }
-                });
-            }
 
 
             function ProcessSelection(gfx) {
@@ -22324,7 +22331,9 @@ require(["dojo/topic",
                 });
             }
         })
-    });
+    }
+
+
 });
 
 "use strict";
