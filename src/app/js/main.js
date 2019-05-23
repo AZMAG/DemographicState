@@ -62,6 +62,8 @@ require([
             let panelId = $(el).attr("panel-id");
             $(el).load(`app/views/${panelId}.html`, function () {
                 tp.publish("panel-loaded", panelId);
+                app.panelLoaded = app.panelLoaded || {};
+                app.panelLoaded[panelId] = true;
             })
         })
     }
