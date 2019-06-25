@@ -24,7 +24,6 @@ require(["dojo/topic", "esri/widgets/Print/PrintViewModel"], (tp, PrintVM) => {
         $printWidget.click(function () {
             // SetupPrintForm();
             alert("The print functionality for this tool is currently out of service.  Sorry for the inconvenience.")
-            $printWidget.tooltip('show');
         })
 
         function print(printObj) {
