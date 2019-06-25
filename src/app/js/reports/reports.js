@@ -464,7 +464,6 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function (tp, QueryTask) {
             });
             where = `GEOID IN(${str.slice(0, -1)})`;
         }
-
         let q = {
             returnGeometry: true,
             outFields: ['*'],
