@@ -76,7 +76,6 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function (tp, QueryTask) {
 
                 let dataSrc = $(this).data('val');
                 let d = app.selectedReport;
-                console.log(d);
 
                 if (dataSrc === 'acs') {
                     //Show Title 6 data
@@ -122,7 +121,6 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function (tp, QueryTask) {
     function ExportReportToPDF(conf, ids) {
         let idStr = ids.join(',');
         let url = `${app.config.pdfService.defaultUrl}layer=${conf.layerName}&ids=${idStr}`;
-
         if (ids.length > 1) {
             if (conf.id === 'blockGroups') {
                 localStorage.setItem('magDemoSelectedGEOIDs', idStr);
@@ -329,7 +327,7 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function (tp, QueryTask) {
         let age65Plus = attr['AGE65TO74'] + attr['AGE75TO84'] + attr['AGE85PLUS'];
 
         let dataSrc = [{
-                Category: 'Population Base',
+                Category: 'Population',
                 Footnote: '',
                 Total: totalPop,
                 Percent: 'N/A',
@@ -396,7 +394,7 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function (tp, QueryTask) {
             },
             //height: 200,
             columns: [{
-                    title: 'Population and Households',
+                    title: 'Population',
                     columns: [{
                             field: 'Category',
                             template: '#:Category#', //<sup>#:Footnote#</sup>
