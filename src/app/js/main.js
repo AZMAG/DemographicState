@@ -39,9 +39,6 @@ require([
             app.configLoaded = true;
         });
 
-        // $("#maps-view").load("app/views/maps-view.html", function () {
-        //     tp.publish("maptab");
-        // });
         $("#colorRampModal").load("app/views/modal-colorRamp.html", function () {
             tp.publish("crp");
         });
@@ -58,7 +55,7 @@ require([
         $("#reportsHelpModal").load("app/views/modal-help-reports.html");
         $("#layersHelpModal").load("app/views/modal-help-layers.html");
         $("#printWidgetModal").load("app/views/modal-print.html");
-        $(".panelDiv").each(function (i, el) {
+        $(".pd").each(function (i, el) {
             let panelId = $(el).attr("panel-id");
             $(el).load(`app/views/${panelId}.html`, function () {
                 tp.publish("panel-loaded", panelId);
