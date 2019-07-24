@@ -271,7 +271,7 @@ module.exports = function (grunt) {
         });
     });
 
-    grunt.registerTask("build-copy-concat", ["clean:build", "copy", "replace:File_Reference", "concat", "toggleComments"]);
+    grunt.registerTask("build-copy-concat", ["clean:build", "replace:update_Meta", "copy", "replace:File_Reference", "concat", "toggleComments"]);
     grunt.registerTask("build-js", ["clean:js", "babel", "uglify"]);
     grunt.registerTask("build-css", ["cssmin", "postcss", "clean:css"])
     grunt.registerTask("build-html", ["htmlmin"])
