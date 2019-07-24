@@ -1,3 +1,11 @@
+function randomString(length, chars) {
+    var result = '';
+    for (var i = length; i > 0; --i) result += chars[Math.round(Math.random() * (chars.length - 1))];
+    return result;
+}
+const fileHash = randomString(32, '0123456789abcdefghijklmnopqrstuvwxyz');
+const jsFilePath = `dist/app/js/main.${fileHash}.js`;
+
 module.exports = function (grunt) {
 
     "use strict";
@@ -76,38 +84,6 @@ module.exports = function (grunt) {
                     src: ["*.js"],
                     dest: "dist/app/js/"
                 }]
-            },
-            babel1: {
-                files: [{
-                    expand: true,
-                    cwd: "dist/app/js/widgets",
-                    src: ["*.js"],
-                    dest: "dist/app/js/widgets"
-                }]
-            },
-            babel2: {
-                files: [{
-                    expand: true,
-                    cwd: "dist/app/js/reports",
-                    src: ["*.js"],
-                    dest: "dist/app/js/reports"
-                }]
-            },
-            babel3: {
-                files: [{
-                    expand: true,
-                    cwd: "dist/app/js/maps",
-                    src: ["*.js"],
-                    dest: "dist/app/js/maps"
-                }]
-            },
-            babel4: {
-                files: [{
-                    expand: true,
-                    cwd: "dist/app/js/config",
-                    src: ["*.js"],
-                    dest: "dist/app/js/config"
-                }]
             }
         },
 
@@ -122,38 +98,6 @@ module.exports = function (grunt) {
                     cwd: "dist/app/js",
                     src: ["*.js"],
                     dest: "dist/app/js"
-                }]
-            },
-            target1: {
-                files: [{
-                    expand: true,
-                    cwd: "dist/app/js/widgets",
-                    src: ["*.js"],
-                    dest: "dist/app/js/widgets"
-                }]
-            },
-            target2: {
-                files: [{
-                    expand: true,
-                    cwd: "dist/app/js/reports",
-                    src: ["*.js"],
-                    dest: "dist/app/js/reports"
-                }]
-            },
-            target3: {
-                files: [{
-                    expand: true,
-                    cwd: "dist/app/js/maps",
-                    src: ["*.js"],
-                    dest: "dist/app/js/maps"
-                }]
-            },
-            target4: {
-                files: [{
-                    expand: true,
-                    cwd: "dist/app/js/config",
-                    src: ["*.js"],
-                    dest: "dist/app/js/config"
                 }]
             }
         },
@@ -189,8 +133,7 @@ module.exports = function (grunt) {
                     banner: '/* <%= pkg.name %> - v<%= pkg.version %> | <%= grunt.template.today("mm-dd-yyyy") %> */'
                 },
                 files: {
-                    "dist/app/css/normalize.min.css": ["src/app/css/normalize.css"],
-                    // "dist/app/css/main.min.css": ["src/app/css/main.css"]
+                    'dist/app/css/concat.min.css': 'dist/app/css/concat.min.css'
                 }
             }
         },
@@ -209,18 +152,18 @@ module.exports = function (grunt) {
             },
             dist: {
                 files: {
-                    'dist/app/css/main.min.css': 'dist/app/css/main.css'
+                    'dist/app/css/concat.min.css': 'dist/app/css/concat.min.css'
                 }
             }
         },
 
         concat: {
-            options: {
-                stripBanners: true,
-                banner: "<%= bannercss %>\n"
+            js: {
+                src: ["dist/app/js/**", "!dist/app/js/generateClassBreaks.js"],
+                dest: jsFilePath
             },
-            dist: {
-                src: ["dist/app/css/normalize.min.css", "dist/app/css/main.min.css"],
+            css: {
+                src: ["dist/app/css/*.css", "!dist/app/css/concat.min.css"],
                 dest: "dist/app/css/concat.min.css"
             }
         },
@@ -229,12 +172,13 @@ module.exports = function (grunt) {
             build: {
                 src: ["dist/"]
             },
-            cleanjs: {
-                src: ["dist/js/*.js", "!dist/js/master.min.js"]
+            js: {
+                src: ["dist/app/js/*", "!" + jsFilePath]
             },
-            cleancss: {
-                src: ["dist/app/css/*.css", "!dist/app/css/concat.min.css"]
+            css: {
+                src: ["dist/app/css/*", "!dist/app/css/concat.min.css"]
             }
+
         },
 
         copy: {
@@ -252,7 +196,8 @@ module.exports = function (grunt) {
                     removeCommands: false
                 },
                 files: {
-                    "dist/index.html": "dist/index.html"
+                    "dist/index.html": "dist/index.html",
+                    jsFilePath: jsFilePath
                 }
             }
         },
@@ -302,7 +247,16 @@ module.exports = function (grunt) {
                     from: /(Copyright \(c\) )([0-9]{4})/g,
                     to: "Copyright (c) " + "<%= pkg.copyright %>",
                 }]
+            },
+            File_Reference: {
+                src: ["dist/index.html"],
+                overwrite: true,
+                replacements: [{
+                    from: "REPLACE_FILE_NAME_HASH",
+                    to: fileHash,
+                }]
             }
+
         }
 
 
@@ -317,29 +271,15 @@ module.exports = function (grunt) {
         });
     });
 
+    grunt.registerTask("build-copy-concat", ["clean:build", "replace:update_Meta", "copy", "replace:File_Reference", "concat", "toggleComments"]);
+    grunt.registerTask("build-js", ["clean:js", "babel", "uglify"]);
+    grunt.registerTask("build-css", ["cssmin", "postcss", "clean:css"])
+    grunt.registerTask("build-html", ["htmlmin"])
 
-    // this would be run by typing "grunt test" on the command line
-    // grunt.registerTask("test", ["uglify", "cssmin", "concat"]);
-
-    grunt.registerTask("test", ["cssmin", "concat", "uglify"]);
-
-    grunt.registerTask("check", ["versioncheck"]);
-
-    grunt.registerTask("buildcss", ["cssmin", "concat"]);
-
-    grunt.registerTask("work", ["jshint"]);
-
-    grunt.registerTask("update", ["replace"]);
-
-    grunt.registerTask("x", ["babel"]);
-
-    grunt.registerTask("css", ["postcss"]);
-
-    // grunt.registerTask("build", ["replace", "cssmin", "concat"]);
-    grunt.registerTask("build", ["clean:build", "replace", "copy", "toggleComments", "babel", "postcss", "uglify", "htmlmin", "cssmin", "concat", "clean:cleancss"]);
+    grunt.registerTask("build", ["build-copy-concat", "build-js", "build-css", "build-html"]);
 
     // the default task can be run just by typing "grunt" on the command line
-    grunt.registerTask("default", []);
+    grunt.registerTask("default", ["build"]);
 
 };
 

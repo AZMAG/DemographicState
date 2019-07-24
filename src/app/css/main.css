@@ -314,7 +314,7 @@ input[type='range']:focus::-ms-fill-upper {
     margin-left: 3px;
 }
 
-.nav > li > a {
+.nav>li>a {
     padding: 10px 10px;
 }
 
@@ -542,7 +542,7 @@ input[type='range']:focus::-ms-fill-upper {
     background-color: white;
 }
 
-#screenshotDiv > * {
+#screenshotDiv>* {
     margin: 0.5em;
 }
 
@@ -710,7 +710,7 @@ label:hover,
     display: none;
 }
 
-#layerList .regular-checkbox + label {
+#layerList .regular-checkbox+label {
     border: 1px solid #cacece;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05);
     padding: 9px;
@@ -719,13 +719,13 @@ label:hover,
     position: relative;
 }
 
-#layerList .regular-checkbox:checked + label {
+#layerList .regular-checkbox:checked+label {
     background-color: var(--secondaryColor);
     border: 1px solid #adb8c0;
     color: #000;
 }
 
-#layerList .regular-checkbox:checked + label:after {
+#layerList .regular-checkbox:checked+label:after {
     content: '\2714';
     font-size: 0.625em;
     position: absolute;
@@ -734,11 +734,11 @@ label:hover,
     color: var(--textColor);
 }
 
-#layerList .big-checkbox + label {
+#layerList .big-checkbox+label {
     padding: 10px;
 }
 
-#layerList .big-checkbox:checked + label:after {
+#layerList .big-checkbox:checked+label:after {
     font-size: 0.95em;
 }
 
@@ -1015,8 +1015,8 @@ label:hover,
     box-shadow: inset 0px 2px 2px 0px rgba(0, 0, 0, 0.75); */
 }
 
-.nav-tabs > li,
-.nav-pills > li {
+.nav-tabs>li,
+.nav-pills>li {
     float: none;
     display: inline-block;
     *display: inline;
@@ -1108,9 +1108,9 @@ label:hover,
     margin-left: 5%;
 }
 
-.nav-pills > li.active > a,
-.nav-pills > li.active > a:focus,
-.nav-pills > li.active > a:hover {
+.nav-pills>li.active>a,
+.nav-pills>li.active>a:focus,
+.nav-pills>li.active>a:hover {
     background-color: var(--secondaryColor);
 }
 
@@ -1194,6 +1194,10 @@ hr.pop {
     text-align: center;
     padding: 20px;
     border-radius: 5px;
+}
+
+#printWidget {
+    opacity: .5;
 }
 
 #printLoader {
@@ -1658,7 +1662,7 @@ hr.pop {
     border-radius: 3px;
 }
 
-.bs-callout + .bs-callout {
+.bs-callout+.bs-callout {
     margin-top: -5px;
 }
 
@@ -1775,7 +1779,7 @@ hr.pop {
         cursor: pointer;
     }
 
-    #bottomBar ul li.active > a,
+    #bottomBar ul li.active>a,
     a[aria-expanded='true'] {
         color: var(--textColor);
         background: var(--secondaryColor);
@@ -1868,8 +1872,7 @@ hr.pop {
 }
 
 /* Small devices (landscape phones, 576px and up) */
-@media (min-width: 576px) {
-}
+@media (min-width: 576px) {}
 
 /* Medium devices (tablets, 768px and up) */
 @media (min-width: 768px) {
@@ -1931,7 +1934,7 @@ hr.pop {
         border-bottom: 1px solid var(--textColor);
     }
 
-    #sidebar ul li.active > a,
+    #sidebar ul li.active>a,
     a[aria-expanded='true'] {
         color: var(--textColor);
         background: var(--secondaryColor);
@@ -1972,5 +1975,4 @@ hr.pop {
 }
 
 /* Extra large devices (large desktops, 1200px and up) */
-@media (min-width: 1200px) {
-}
+@media (min-width: 1200px) {}

@@ -24,7 +24,7 @@ require(["dojo/topic"], function (tp) {
             filteredData.unshift({
                 title: "Select a Type of Report",
                 id: "default"
-            })
+            });
 
             //Setup report type dropdown
             $reportType.kendoDropDownList({
@@ -42,6 +42,7 @@ require(["dojo/topic"], function (tp) {
                     resetForm();
                 } else if (dataItem.id === "state") {
                     $standardBtnSubmit.show();
+                    $specificReportDiv.hide();
                 } else {
                     let dataSrc = await getSpecificData(dataItem);
                     let compareSrc = dataSrc.slice();
@@ -100,7 +101,9 @@ require(["dojo/topic"], function (tp) {
                 e.preventDefault();
                 $("#summaryReport").hide();
 
-                let conf = $reportType.data('kendoDropDownList').dataItem();
+                let kendoItem = $reportType.data('kendoDropDownList').dataItem();
+                let conf = app.config.layerDef[kendoItem.id];
+
                 if (conf.id === "state") {
                     OpenReportByGEOIDs(conf, ["04"]);
                 } else {

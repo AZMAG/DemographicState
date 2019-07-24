@@ -1,11 +1,5 @@
 "use strict";
-require([
-    "dojo/topic",
-    "esri/widgets/Print/PrintViewModel"
-], function (
-    tp,
-    PrintVM
-) {
+require(["dojo/topic", "esri/widgets/Print/PrintViewModel"], (tp, PrintVM) => {
     let $printWidget = $("#printWidget");
     let $printWidgetModal = $("#printWidgetModal");
 
@@ -24,11 +18,12 @@ require([
             updateDelay: 300,
             view: app.view
         });
-
+        // $printWidget.tooltip('show');
         app.view.ui.add($printWidget[0], "bottom-right");
 
         $printWidget.click(function () {
-            SetupPrintForm();
+            // SetupPrintForm();
+            alert("The print functionality for this tool is currently out of service.  Sorry for the inconvenience.")
         })
 
         function print(printObj) {

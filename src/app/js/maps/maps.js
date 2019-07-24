@@ -7,15 +7,17 @@ require([
     "esri/layers/TileLayer",
     "esri/geometry/Extent",
     "esri/layers/GraphicsLayer",
-    "esri/PopupTemplate",
     "dojo/topic",
     "dojo/domReady!"
-], function (Map, MapView, FeatureLayer, MapImageLayer, TileLayer, Extent, GraphicsLayer, PopupTemplate, tp) {
+], function (Map, MapView, FeatureLayer, MapImageLayer, TileLayer, Extent, GraphicsLayer, tp) {
+
     tp.subscribe("config-loaded", initMap);
 
+    if (app.configLoaded) {
+        initMap();
+    }
+
     function initMap() {
-
-
         app.map = new Map({
             basemap: "gray"
         });
@@ -150,12 +152,19 @@ require([
                 }
             });
 
-            app.map.layers.addMany(layersToAdd);
+
+
             var gfxLayer = new GraphicsLayer({
                 id: "gfxLayer"
             });
             app.map.add(gfxLayer);
 
+            let bufferGraphicsLayer = new GraphicsLayer({
+                id: "bufferGraphics"
+            });
+            app.map.layers.add(bufferGraphicsLayer);
+
+            app.map.layers.addMany(layersToAdd);
             // layersToAdd.sort(function(a, b) {
             //     return b.sortOrder - a.sortOrder;
             // });
@@ -176,6 +185,16 @@ require([
                     }
                 });
             });
+
+
+            var once = false;
+            app.view.whenLayerView(gfxLayer).then(function (lyrView) {
+                lyrView.watch("updating", function (value) {
+                    if (!value && !once) {
+                        tp.publish("gfxLayer-loaded");
+                    }
+                })
+            })
 
             var maxExtent = new Extent({
                 xmax: -12014782.270383481,

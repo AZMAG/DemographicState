@@ -5,9 +5,9 @@ require(["dojo/topic", "dojo/domReady!"], function (tp) {
     let configLookup = [];
     let counter = 0;
     tp.subscribe("map-loaded", function (panel) {
-        // if (panel === "maps-view") {
+
         StartupMapsList();
-        // }
+
     });
 
     //This is the function that helps generate the maps html.
