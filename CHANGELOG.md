@@ -30,6 +30,11 @@ And constructed with the following guidelines:
 
 ***************************************************
 
+## Version 4.0.7 | 2019-07-24
+
+* Changed language in custom classification types in the maps panel
+* Fixed build system
+
 ## Version 4.0.6 | 2019-04-02
 
 * Changed Layer from "Council" to Councils of Governments

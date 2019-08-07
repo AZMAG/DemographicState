@@ -3803,7 +3803,7 @@ app.colorRampConfig = {
 };
 
 app.config = {
-    version: 'v4.0.6 | 2019-04-02',
+    version: 'v4.0.7 | 2019-07-24',
     copyright: '2019',
 
     LegendSource: 'American Community Survey 2013-2017 5yr',
@@ -20324,9 +20324,6 @@ require([
             app.configLoaded = true;
         });
 
-        // $("#maps-view").load("app/views/maps-view.html", function () {
-        //     tp.publish("maptab");
-        // });
         $("#colorRampModal").load("app/views/modal-colorRamp.html", function () {
             tp.publish("crp");
         });
@@ -20343,7 +20340,7 @@ require([
         $("#reportsHelpModal").load("app/views/modal-help-reports.html");
         $("#layersHelpModal").load("app/views/modal-help-layers.html");
         $("#printWidgetModal").load("app/views/modal-print.html");
-        $(".panelDiv").each(function (i, el) {
+        $(".pd").each(function (i, el) {
             let panelId = $(el).attr("panel-id");
             $(el).load(`app/views/${panelId}.html`, function () {
                 tp.publish("panel-loaded", panelId);
@@ -20958,9 +20955,9 @@ require(["dojo/topic", "dojo/domReady!"], function (tp) {
     let configLookup = [];
     let counter = 0;
     tp.subscribe("map-loaded", function (panel) {
-        // if (panel === "maps-view") {
+
         StartupMapsList();
-        // }
+
     });
 
     //This is the function that helps generate the maps html.
