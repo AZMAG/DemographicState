@@ -1,5 +1,5 @@
 'use strict';
-require(['dojo/topic'], function(tp) {
+require(['dojo/topic'], function (tp) {
     const expandHTML = 'Expand Topics<i style="margin-left: 5px;" class="fa fa-expand" aria-hidden="true"></i>';
     const collapseHTML = 'Collapse Topics<i style="margin-left: 5px;" class="fa fa-compress" aria-hidden="true"></i>';
     const toolbarTemplate = `
@@ -16,7 +16,11 @@ require(['dojo/topic'], function(tp) {
         }
     }
 
-    function CreateComparisonKendoGrid({ data, compareData, target }) {
+    function CreateComparisonKendoGrid({
+        data,
+        compareData,
+        target
+    }) {
         let $grid = $('#' + target);
 
         for (let i = 0; i < data.length; i++) {
@@ -27,8 +31,7 @@ require(['dojo/topic'], function(tp) {
         }
 
         RemoveOldGrid($grid);
-        let cols = [
-            {
+        let cols = [{
                 field: 'fieldGroup',
                 title: 'Category',
                 hidden: true,
@@ -60,7 +63,11 @@ require(['dojo/topic'], function(tp) {
             }
         ];
 
-        CreateKendoGrid({ data, target, cols });
+        CreateKendoGrid({
+            data,
+            target,
+            cols
+        });
         let features = app.selectedReport.acsData.features;
 
         $grid
@@ -78,13 +85,16 @@ require(['dojo/topic'], function(tp) {
             );
     }
 
-    function CreateKendoGrid({ data, target, cols }) {
+    function CreateKendoGrid({
+        data,
+        target,
+        cols
+    }) {
         let $grid = $('#' + target);
         RemoveOldGrid($grid);
 
         if (!cols) {
-            cols = [
-                {
+            cols = [{
                     field: 'fieldGroup',
                     title: 'Category',
                     hidden: true,
@@ -107,34 +117,35 @@ require(['dojo/topic'], function(tp) {
                 }
             ];
         }
+        try {
 
-        // Kendo-ize
-        $grid.kendoGrid({
-            toolbar: [
-                {
+            $grid.kendoGrid({
+                toolbar: [{
                     template: toolbarTemplate
-                }
-            ],
-            dataSource: {
-                data: data,
-                group: [
-                    {
+                }],
+                dataSource: {
+                    data: data,
+                    group: [{
                         field: 'fieldGroup'
+                    }],
+                    sort: {
+                        field: 'fieldRowSort',
+                        dir: 'asc'
                     }
-                ],
-                sort: {
-                    field: 'fieldRowSort',
-                    dir: 'asc'
-                }
-            },
-            selectable: false,
-            scrollable: false,
-            sortable: false,
-            resizable: true,
-            columnMenu: false,
-            columns: cols,
-            dataBound: DataBound
-        });
+                },
+                selectable: false,
+                scrollable: false,
+                sortable: false,
+                resizable: true,
+                columnMenu: false,
+                columns: cols,
+                dataBound: DataBound
+            });
+        } catch (error) {
+            console.log(error);
+
+        }
+
     }
 
     function DataBound(e) {
@@ -142,14 +153,18 @@ require(['dojo/topic'], function(tp) {
         var data = e.sender._data;
         var realRows = [];
 
-        $.each(data, function(i, el) {
-            var foundElement = $('td').filter(function() {
-                return $(this).html() === el.tableHeader;
-            });
+        $.each(data, function (i, el) {
+            var foundElement = $('td').filter(function () {
+                let html = $(this).html();
+                if (html.includes("Minority is defined a") && el.tableHeader.includes("minorityTooltip")) {
+                    return true;
+                }
 
+                return html === el.tableHeader;
+            });
             var finalElement = foundElement;
             if (foundElement.length > 1) {
-                $.each(foundElement, function(i, row) {
+                $.each(foundElement, function (i, row) {
                     if ($(row)[0].previousSibling) {
                         if ($(row)[0].previousSibling.innerText.indexOf(el.fieldCategory) !== -1) {
                             finalElement = $(row);
@@ -173,39 +188,42 @@ require(['dojo/topic'], function(tp) {
                 .next()
                 .css('text-align', 'right');
 
-            var parentElement = $(finalElement[0].parentElement);
 
-            if (el.universeField === 1) {
-                var universeColor = '#06c';
-                parentElement.css({
-                    'background-color': universeColor,
-                    'font-weight': 'bold',
-                    'font-style': 'italic',
-                    'font-size': '12px',
-                    color: 'white'
-                });
-            } else if (el.universeField === 2) {
-                var universeColor = '#808080';
-                var nextSib = $(finalElement[0].nextSibling);
-                var finalSib = $(nextSib[0].nextSibling);
-                parentElement.css({
-                    'background-color': universeColor,
-                    'font-weight': 'bold',
-                    'font-size': '11.5px',
-                    color: 'white'
-                });
+            if (finalElement[0]) {
+                var parentElement = $(finalElement[0].parentElement);
 
-                if (nextSib[0].innerText === '-') {
-                    nextSib.empty();
+                if (el.universeField === 1) {
+                    var universeColor = '#06c';
+                    parentElement.css({
+                        'background-color': universeColor,
+                        'font-weight': 'bold',
+                        'font-style': 'italic',
+                        'font-size': '12px',
+                        color: 'white'
+                    });
+                } else if (el.universeField === 2) {
+                    var universeColor = '#808080';
+                    var nextSib = $(finalElement[0].nextSibling);
+                    var finalSib = $(nextSib[0].nextSibling);
+                    parentElement.css({
+                        'background-color': universeColor,
+                        'font-weight': 'bold',
+                        'font-size': '11.5px',
+                        color: 'white'
+                    });
+
+                    if (nextSib[0].innerText === '-') {
+                        nextSib.empty();
+                    }
+                    if (finalSib[0].innerText === '-') {
+                        finalSib.empty();
+                    }
+                } else if (el.universeField === 0) {
+                    parentElement.css({
+                        'font-weight': 'normal',
+                        'font-size': '11.5px'
+                    });
                 }
-                if (finalSib[0].innerText === '-') {
-                    finalSib.empty();
-                }
-            } else if (el.universeField === 0) {
-                parentElement.css({
-                    'font-weight': 'normal',
-                    'font-size': '11.5px'
-                });
             }
         });
         var grid = $('#' + this.wrapper[0].id).data('kendoGrid');
@@ -220,14 +238,14 @@ require(['dojo/topic'], function(tp) {
 
         $('.gridGroupToggle')
             .off('click')
-            .on('click', function(e) {
-                $.each($('.k-grid'), function(i, val) {
+            .on('click', function (e) {
+                $.each($('.k-grid'), function (i, val) {
                     if ($(val).is(':visible') && val.id === 'gridTarget') {
                         var grid = $(val).data('kendoGrid');
                         if (e.currentTarget.value === 'collapse') {
                             e.currentTarget.value = 'expand';
                             $(e.currentTarget).html(expandHTML);
-                            grid.tbody.find('tr.k-grouping-row').each(function(index) {
+                            grid.tbody.find('tr.k-grouping-row').each(function (index) {
                                 grid.collapseGroup(this);
                             });
                             $title6Grid.hide();
@@ -235,7 +253,7 @@ require(['dojo/topic'], function(tp) {
                         } else {
                             e.currentTarget.value = 'collapse';
                             $(e.currentTarget).html(collapseHTML);
-                            grid.tbody.find('tr.k-grouping-row').each(function(index) {
+                            grid.tbody.find('tr.k-grouping-row').each(function (index) {
                                 grid.expandGroup(this);
                             });
                             $title6Grid.show();
@@ -245,7 +263,7 @@ require(['dojo/topic'], function(tp) {
                 });
             });
 
-        $('#exportToExcelBtn').click(function() {
+        $('#exportToExcelBtn').click(function () {
             tp.publish('excel-export', {
                 data,
                 e,

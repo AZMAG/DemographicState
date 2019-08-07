@@ -187,10 +187,10 @@ require([
             });
 
 
-            var once = false;
+            var onc = false;
             app.view.whenLayerView(gfxLayer).then(function (lyrView) {
                 lyrView.watch("updating", function (value) {
-                    if (!value && !once) {
+                    if (!value && !onc) {
                         tp.publish("gfxLayer-loaded");
                     }
                 })

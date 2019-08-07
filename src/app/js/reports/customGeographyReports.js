@@ -18,7 +18,9 @@ require(["dojo/topic",
 
 
     function init() {
+
         if (!isInited) {
+
             isInited = true;
             tp.subscribe("gfxLayer-loaded", function () {
 
@@ -95,7 +97,7 @@ require(["dojo/topic",
                     let type = $(this).data("val");
                     $drawingTooltip.html(drawMessages[type].start);
                     sketchVM.create(type, {
-                        mode: "click"
+                        mode: "click drag"
                     });
 
                     //Creates a tooltip to give user instructions on drawing
