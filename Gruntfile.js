@@ -197,7 +197,7 @@ module.exports = function (grunt) {
                 },
                 files: {
                     "dist/index.html": "dist/index.html",
-                    jsFilePath: jsFilePath
+                    [jsFilePath]: jsFilePath
                 }
             }
         },
@@ -266,7 +266,7 @@ module.exports = function (grunt) {
         require("./src/app/vendor/js/generateClassBreaks.js")(grunt, this.async, {
             inputLocation: "./src/app/js/config/cbrConfig.json",
             geoStatsPath: "Z:\\Viewers\\Demographics\\src\\app\\vendor\\js\\geoStats.min.js",
-            mainUrl: "https://geo.azmag.gov/gismag/rest/services/maps/DemographicState2017/MapServer",
+            mainUrl: "https://geo.azmag.gov/arcgis/rest/services/maps/DemographicState2017/MapServer",
             outputLocation: "./src/app/js/config/cbrConfig.json"
         });
     });
