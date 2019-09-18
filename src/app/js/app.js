@@ -1,5 +1,5 @@
 define([
-
+    "mag/main"
 ], function () {
 
     /** The global MAG object. 

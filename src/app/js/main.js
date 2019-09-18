@@ -1,5 +1,4 @@
-"use strict";
-require([
+define([
         "dojo/parser",
         "dojo/topic",
         "dojo/domReady!"

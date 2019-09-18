@@ -43,7 +43,8 @@
   "private": true,
   "dependencies": {
     "arcgis-js-api": "^4.11.1",
-    "babel-polyfill": "^6.26.0"
+    "babel-polyfill": "^6.26.0",
+    "requirejs-domready": "^2.0.3"
   },
   "devDependencies": {
     "@babel/core": "^7.4.4",

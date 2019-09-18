@@ -15,8 +15,15 @@ module.exports = function (grunt) {
     var includedModules = [
         "mag/app"
     ]
+    var excludedModules = [
+        "dojo/domReady",
+        "dojo/parser",
+        "dojo/topic"
+    ]
     var paths = {
         "mag": "",
+        "dojo": "empty:",
+        "dojo/domReady": "../../../node_modules/requirejs-domready/domReady",
     }
     grunt.initConfig({
 
@@ -101,7 +108,7 @@ module.exports = function (grunt) {
                     // allow dependencies to be resolved but don't include in output (empty:)
                     paths: paths,
                     // but don't include them in the main build
-                    exclude: [],
+                    exclude: excludedModules,
                     include: includedModules,
                     inlineText: true,
                     optimize: 'none',
