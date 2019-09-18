@@ -290,7 +290,23 @@ module.exports = function (grunt) {
                 }]
             }
 
-        }
+        },
+
+        connect: {
+            options: {
+                hostname: 'localhost',
+                base: './',
+                keepalive: true
+            },
+            site: {
+                options: { 
+                    port: 8000, 
+                        open: {
+                        target: 'http://localhost:8000'
+                        }
+                    }
+                }
+            } 
 
 
     });
@@ -314,8 +330,8 @@ module.exports = function (grunt) {
     // the default task can be run just by typing "grunt" on the command line
     grunt.registerTask("default", ["build"]);
 
-    grunt.registerTask("require", ["requirejs"] )
-
+    grunt.registerTask("require", ["requirejs"] );
+    grunt.registerTask('conn', ["connect"]);
 };
 
 // ref

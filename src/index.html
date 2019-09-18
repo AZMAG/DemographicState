@@ -354,6 +354,9 @@
             packages: [{
                 name: 'app',
                 location: location.pathname.replace(/\/[^/]+$/, '') + './app/js'
+            },{
+                name: 'mag',
+                location: location.pathname.replace(/\/[^/]+$/, '') + '../dist/app/js'
             }]
         };
 
@@ -408,7 +411,7 @@
 
     <script src="app/js/layerlist.js"></script>
     <script src="app/js/sidebar.js"></script>
-    <script src="app/js/main.js"></script>
+    <!-- <script src="app/js/main.js"></script> -->
     <script src="app/js/maps/maps.js"></script>
 
     <!-- endcomments -->
@@ -416,7 +419,7 @@
     <!-- comments:uncomment-block html -->
     <!-- <script src="app/js/main.REPLACE_FILE_NAME_HASH.js"></script> -->
     <!-- endcomments -->
-
+    <script src="../dist/app/mag.js"></script>
 
 </body>
 
