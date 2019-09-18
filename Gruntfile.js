@@ -12,6 +12,12 @@ module.exports = function (grunt) {
 
     require("matchdep").filterDev("grunt-*").forEach(grunt.loadNpmTasks);
 
+    var includedModules = [
+        "mag/app"
+    ]
+    var paths = {
+        "mag": "",
+    }
     grunt.initConfig({
 
         pkg: grunt.file.readJSON("package.json"),
@@ -85,6 +91,26 @@ module.exports = function (grunt) {
                     dest: "dist/app/js/"
                 }]
             }
+        },
+
+        requirejs: {
+            debug: {
+                options: {
+                    baseUrl: 'src/app/js',                    
+                    out: 'dist/app/mag.js',
+                    // allow dependencies to be resolved but don't include in output (empty:)
+                    paths: paths,
+                    // but don't include them in the main build
+                    exclude: [],
+                    include: includedModules,
+                    inlineText: true,
+                    optimize: 'none',
+                    generateSourceMaps: false,
+                    preserveLicenseComments: true,
+                    findNestedDependencies: true,
+                    removeCombined: true
+                }
+            },
         },
 
         uglify: {
@@ -280,6 +306,8 @@ module.exports = function (grunt) {
 
     // the default task can be run just by typing "grunt" on the command line
     grunt.registerTask("default", ["build"]);
+
+    grunt.registerTask("require", ["requirejs"] )
 
 };
 
