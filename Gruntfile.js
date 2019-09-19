@@ -192,7 +192,7 @@ module.exports = function (grunt) {
 
         concat: {
             js: {
-                src: ["dist/app/js/**", "!dist/app/js/generateClassBreaks.js"],
+                src: ["dist/app/js/**", "!dist/app/js/generateClassBreaks.js", "!dist/app/js/main.js"],
                 dest: jsFilePath
             },
             css: {
@@ -295,7 +295,7 @@ module.exports = function (grunt) {
         connect: {
             options: {
                 hostname: 'localhost',
-                base: './',
+                base: './dist/',
                 keepalive: true
             },
             site: {
@@ -324,13 +324,14 @@ module.exports = function (grunt) {
     grunt.registerTask("build-js", ["clean:js", "babel", "uglify"]);
     grunt.registerTask("build-css", ["cssmin", "postcss", "clean:css"])
     grunt.registerTask("build-html", ["htmlmin"])
+    grunt.registerTask("require", ["requirejs"] );
 
-    grunt.registerTask("build", ["build-copy-concat", "build-js", "build-css", "build-html"]);
+    grunt.registerTask("build", ["build-copy-concat", "build-js", "build-css", "build-html", "require"]);
 
     // the default task can be run just by typing "grunt" on the command line
     grunt.registerTask("default", ["build"]);
 
-    grunt.registerTask("require", ["requirejs"] );
+ 
     grunt.registerTask('conn', ["connect"]);
 };
 
