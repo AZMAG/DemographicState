@@ -347,6 +347,22 @@
 
     <!-- *** JavaScript *** -->
     <!-- =================================================================================================== -->
+
+    <!-- comments:uncomment-block html -->
+    <!--<script>
+        var app = {};
+        var dojoConfig = {
+            // async: true,
+            packages: [{
+                name: 'app',
+                location: location.pathname.replace(/\/[^/]+$/, '') + './app/js'
+            }]
+        };
+
+    </script> -->
+    <!-- endcomments -->
+
+    <!-- comments:comment-block html -->
     <script>
         var app = {};
         var dojoConfig = {
@@ -354,13 +370,13 @@
             packages: [{
                 name: 'app',
                 location: location.pathname.replace(/\/[^/]+$/, '') + './app/js'
-            },{
+            }, {
                 name: 'mag',
                 location: location.pathname.replace(/\/[^/]+$/, '') + '../dist/app/js'
             }]
         };
-
     </script>
+    <!-- endcomments -->
 
     <!-- Vendor  -->
     <!-- <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script> -->
@@ -411,15 +427,15 @@
 
     <script src="app/js/layerlist.js"></script>
     <script src="app/js/sidebar.js"></script>
-    <!-- <script src="app/js/main.js"></script> -->
+    <script src="../dist/app/mag.js"></script>
     <script src="app/js/maps/maps.js"></script>
 
     <!-- endcomments -->
 
     <!-- comments:uncomment-block html -->
-    <!-- <script src="app/js/main.REPLACE_FILE_NAME_HASH.js"></script> -->
+    <!-- <script src="app/js/main.REPLACE_FILE_NAME_HASH.js"></script>
+    <script src="app/mag.js"></script> -->
     <!-- endcomments -->
-    <script src="../dist/app/mag.js"></script>
 
 </body>
 
