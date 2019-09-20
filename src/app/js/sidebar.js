@@ -1,6 +1,6 @@
 //This file includes all of the code and logic for controlling the side/bottom navigation bar
 "use strict";
-require([
+define([
         "dojo/topic",
         "dojo/domReady!"
     ],

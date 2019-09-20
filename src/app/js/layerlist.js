@@ -1,5 +1,5 @@
 "use strict";
-require(["dojo/topic"], function (tp) {
+define(["dojo/topic"], function (tp) {
     tp.subscribe("panel-loaded", function (panel) {
         if (panel === "layers-view") {
             var $layerList = $("#layerList");
