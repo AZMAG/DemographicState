@@ -291,12 +291,20 @@ module.exports = function (grunt) {
             }
 
         },
-
+        watch: {
+            options: {
+                livereload: 35729                
+            },
+            site: {
+                files: ['./src/app/css/**/*.css', './src/app/js/**/*.js', './src/app/js/**/*.html'],
+                tasks: ['build']
+            }
+        },
         connect: {
             options: {
                 hostname: 'localhost',
                 base: './dist/',
-                keepalive: true
+                livereload: 35729
             },
             site: {
                 options: { 
@@ -332,8 +340,9 @@ module.exports = function (grunt) {
     // the default task can be run just by typing "grunt" on the command line
     grunt.registerTask("default", ["build"]);
 
- 
-    grunt.registerTask('conn', ["connect"]);
+    grunt.registerTask('conn', [ "connect:site", "watch:site"]);
+
+    grunt.registerTask('run', [ "build", "connect:site", "watch:site"]);
 };
 
 // ref
