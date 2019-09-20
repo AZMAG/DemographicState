@@ -104,7 +104,7 @@ module.exports = function (grunt) {
             debug: {
                 options: {
                     baseUrl: 'src/app/js',                    
-                    out: 'dist/app/mag.js',
+                    out: 'dist/app/js/mag.js',
                     // allow dependencies to be resolved but don't include in output (empty:)
                     paths: paths,
                     // but don't include them in the main build
@@ -192,7 +192,7 @@ module.exports = function (grunt) {
 
         concat: {
             js: {
-                src: ["dist/app/js/**", "!dist/app/js/generateClassBreaks.js", "!dist/app/js/main.js"],
+                src: ["dist/app/js/**", "!dist/app/js/generateClassBreaks.js", "!dist/app/js/main.js", "!dist/app/js/app.js"],
                 dest: jsFilePath
             },
             css: {
@@ -326,7 +326,8 @@ module.exports = function (grunt) {
     grunt.registerTask("build-html", ["htmlmin"])
     grunt.registerTask("require", ["requirejs"] );
 
-    grunt.registerTask("build", ["build-copy-concat", "build-js", "build-css", "build-html", "require"]);
+    // grunt.registerTask("build", ["build-copy-concat", "build-js", "build-css", "build-html", "require"]);
+    grunt.registerTask("build", ["build-copy-concat", "build-js", "build-css", "require"]);
 
     // the default task can be run just by typing "grunt" on the command line
     grunt.registerTask("default", ["build"]);

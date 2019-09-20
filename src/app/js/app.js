@@ -8,7 +8,7 @@ define([
      * @author Kelly Bigley
      */
     var mag = {
-        /** The current version of RSMeans. 
+        /** The current version of MAG.
          * @type {String}
          * 
          */
