@@ -3,11 +3,13 @@
 
 <head>
     <!-- comments:uncomment-block html -->
+    
     <!-- <script type="text/javascript">
         if (window.location.protocol !== 'https:') {
             window.location = 'https://' + window.location.hostname + window.location.pathname + window.location.hash;
         }
     </script> -->
+
     <!-- endcomments -->
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=9, IE=10" />
@@ -347,7 +349,9 @@
 
     <!-- *** JavaScript *** -->
     <!-- =================================================================================================== -->
-    <script>
+
+    <!-- comments:uncomment-block html -->
+    <!--<script>
         var app = {};
         var dojoConfig = {
             // async: true,
@@ -357,7 +361,24 @@
             }]
         };
 
+    </script> -->
+    <!-- endcomments -->
+
+    <!-- comments:comment-block html -->
+    <script>
+        var app = {};
+        var dojoConfig = {
+            // async: true,
+            packages: [{
+                name: 'app',
+                location: location.pathname.replace(/\/[^/]+$/, '') + './app/js'
+            }, {
+                name: 'mag',
+                location: location.pathname.replace(/\/[^/]+$/, '') + '../dist/app/js'
+            }]
+        };
     </script>
+    <!-- endcomments -->
 
     <!-- Vendor  -->
     <!-- <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script> -->
@@ -408,13 +429,21 @@
 
     <script src="app/js/layerlist.js"></script>
     <script src="app/js/sidebar.js"></script>
-    <script src="app/js/main.js"></script>
     <script src="app/js/maps/maps.js"></script>
+    <script src="app/js/app.js"></script>
+    
+    
 
     <!-- endcomments -->
 
     <!-- comments:uncomment-block html -->
-    <!-- <script src="app/js/main.REPLACE_FILE_NAME_HASH.js"></script> -->
+    <!-- <script src="app/js/main.REPLACE_FILE_NAME_HASH.js"></script>
+    <script src="app/js/mag.js"></script>
+    <script>
+        require(["mag/app"], function(mag){
+
+        });
+    </script> -->
     <!-- endcomments -->
 
 </body>

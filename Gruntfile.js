@@ -12,6 +12,19 @@ module.exports = function (grunt) {
 
     require("matchdep").filterDev("grunt-*").forEach(grunt.loadNpmTasks);
 
+    var includedModules = [
+        "mag/app"
+    ]
+    var excludedModules = [
+        "dojo/domReady",
+        "dojo/parser",
+        "dojo/topic"
+    ]
+    var paths = {
+        "mag": "",
+        "dojo": "empty:",
+        "dojo/domReady": "../../../node_modules/requirejs-domready/domReady",
+    }
     grunt.initConfig({
 
         pkg: grunt.file.readJSON("package.json"),
@@ -87,6 +100,26 @@ module.exports = function (grunt) {
             }
         },
 
+        requirejs: {
+            debug: {
+                options: {
+                    baseUrl: 'src/app/js',                    
+                    out: 'dist/app/js/mag.js',
+                    // allow dependencies to be resolved but don't include in output (empty:)
+                    paths: paths,
+                    // but don't include them in the main build
+                    exclude: excludedModules,
+                    include: includedModules,
+                    inlineText: true,
+                    optimize: 'none',
+                    generateSourceMaps: false,
+                    preserveLicenseComments: true,
+                    findNestedDependencies: true,
+                    removeCombined: true
+                }
+            },
+        },
+
         uglify: {
             options: {
                 preserveComments: "true",
@@ -159,7 +192,8 @@ module.exports = function (grunt) {
 
         concat: {
             js: {
-                src: ["dist/app/js/**", "!dist/app/js/generateClassBreaks.js"],
+                src: ["dist/app/js/**", "!dist/app/js/generateClassBreaks.js", "!dist/app/js/main.js", "!dist/app/js/app.js",
+                        "!dist/app/js/layerlist.js","!dist/app/js/sidebar.js"],
                 dest: jsFilePath
             },
             css: {
@@ -257,7 +291,31 @@ module.exports = function (grunt) {
                 }]
             }
 
-        }
+        },
+        watch: {
+            options: {
+                livereload: 35729                
+            },
+            site: {
+                files: ['./src/app/css/**/*.css', './src/app/js/**/*.js', './src/app/js/**/*.html'],
+                tasks: ['build']
+            }
+        },
+        connect: {
+            options: {
+                hostname: 'localhost',
+                base: './dist/',
+                livereload: 35729
+            },
+            site: {
+                options: { 
+                    port: 8000, 
+                        open: {
+                        target: 'http://localhost:8000'
+                        }
+                    }
+                }
+            } 
 
 
     });
@@ -275,12 +333,17 @@ module.exports = function (grunt) {
     grunt.registerTask("build-js", ["clean:js", "babel", "uglify"]);
     grunt.registerTask("build-css", ["cssmin", "postcss", "clean:css"])
     grunt.registerTask("build-html", ["htmlmin"])
+    grunt.registerTask("require", ["requirejs"] );
 
-    grunt.registerTask("build", ["build-copy-concat", "build-js", "build-css", "build-html"]);
+    // grunt.registerTask("build", ["build-copy-concat", "build-js", "build-css", "build-html", "require"]);
+    grunt.registerTask("build", ["build-copy-concat", "build-js", "build-css", "require"]);
 
     // the default task can be run just by typing "grunt" on the command line
     grunt.registerTask("default", ["build"]);
 
+    grunt.registerTask('conn', [ "connect:site", "watch:site"]);
+
+    grunt.registerTask('run', [ "build", "connect:site", "watch:site"]);
 };
 
 // ref
