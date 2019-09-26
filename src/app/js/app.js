@@ -2,7 +2,12 @@ define([
     "mag/main",
     "mag/layerlist",
     "mag/sidebar",
-    "mag/maps/maps-panel"
+    "mag/maps/maps-panel",
+    "mag/maps/customClassBreaks",
+    "mag/maps/colorRamps",
+    "mag/maps/cbr",
+    "mag/maps/maps",
+    "mag/utilities"
 ], function () {
 
     /** The global MAG object. 
