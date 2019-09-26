@@ -195,6 +195,7 @@ module.exports = function (grunt) {
                 src: ["dist/app/js/**", "!dist/app/js/generateClassBreaks.js", "!dist/app/js/main.js", "!dist/app/js/app.js",
                         "!dist/app/js/layerlist.js",
                         "!dist/app/js/sidebar.js",
+                        "!dist/app/js/maps/cbr.js",
                         "!dist/app/js/utilities.js",
                         "!dist/app/js/maps/maps.js"
                     ],

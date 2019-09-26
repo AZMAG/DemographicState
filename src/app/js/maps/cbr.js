@@ -1,7 +1,7 @@
 //This file listens for any changes to color ramps, number of class breaks,
 //or map changes and updates the block groups renderer.
 "use strict";
-require(["dojo/topic", "dojo/domReady!"], function (tp) {
+define(["dojo/topic", "dojo/domReady!"], function (tp) {
     let $dynamicCBRCheckbox = $("#dynamicCBRCheckbox");
     $("#classType").change(function () {
         let type = $(this).val();
