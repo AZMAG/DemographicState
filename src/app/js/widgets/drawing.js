@@ -1,5 +1,5 @@
 "use strict";
-require([
+define([
     "esri/views/2d/draw/Draw",
     "esri/Graphic",
     "dojo/topic"
