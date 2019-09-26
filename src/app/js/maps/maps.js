@@ -1,5 +1,5 @@
 "use strict";
-require([
+define([
     "esri/Map",
     "esri/views/MapView",
     "esri/layers/FeatureLayer",
