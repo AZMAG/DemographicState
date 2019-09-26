@@ -17,12 +17,6 @@ define([
         }
     }
 
-    // function qs(key) {
-    //     key = key.replace(/[*+?^$.\[\]{}()|\\\/]/g, "\\$&"); // escape RegEx meta chars
-    //     var match = location.search.match(new RegExp("[?&]" + key + "=([^&]+)(&|$)"));
-    //     return match && decodeURIComponent(match[1].replace(/\+/g, " "));
-    // }
-
     function hexToRgb(hex) {
         // Expand shorthand form (e.g. "03F") to full form (e.g. "0033FF")
         var shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
@@ -115,7 +109,6 @@ define([
     };
 
     app.AddHighlightGraphics = function (features, zoomTo) {
-        // require(["esri/Graphic"], function (Graphic) {
             let gfx = [];
             for (let i = 0; i < features.length; i++) {
                 const feature = features[i];
@@ -139,7 +132,6 @@ define([
             if (zoomTo) {
                 app.view.goTo(gfx);
             }
-        // });
     };
 
     app.AddHighlightGraphic = function (graphic) {
