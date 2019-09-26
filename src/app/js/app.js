@@ -2,7 +2,10 @@ define([
     "mag/main",
     "mag/layerlist",
     "mag/sidebar",
-    "mag/maps/colorRamps"
+    "mag/maps/colorRamps",
+    "mag/maps/cbr",
+    "mag/maps/maps",
+    "mag/utilities"
 ], function () {
 
     /** The global MAG object. 
