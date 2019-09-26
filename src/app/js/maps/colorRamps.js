@@ -1,5 +1,5 @@
 "use strict";
-require([
+define([
         "dojo/topic",
         "dojo/domReady!"
     ],
