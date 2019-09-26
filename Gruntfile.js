@@ -194,7 +194,10 @@ module.exports = function (grunt) {
         concat: {
             js: {
                 src: ["dist/app/js/**", "!dist/app/js/generateClassBreaks.js", "!dist/app/js/main.js", "!dist/app/js/app.js",
-                        "!dist/app/js/layerlist.js","!dist/app/js/sidebar.js", "!dist/app/js/maps/maps-utils.js"],
+                        "!dist/app/js/layerlist.js",
+                        "!dist/app/js/sidebar.js",
+                        "!dist/app/js/maps/maps-utils.js"
+                    ],
                 dest: jsFilePath
             },
             css: {
