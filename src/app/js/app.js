@@ -2,6 +2,7 @@ define([
     "mag/main",
     "mag/layerlist",
     "mag/sidebar",
+    "mag/maps/maps-utils",
     "mag/maps/maps-panel",
     "mag/maps/customClassBreaks",
     "mag/maps/colorRamps",
