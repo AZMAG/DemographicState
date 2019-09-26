@@ -1,5 +1,5 @@
 "use strict";
-require([
+define([
         "dojo/topic",
         "esri/tasks/QueryTask",
         "dojo/domReady!"
