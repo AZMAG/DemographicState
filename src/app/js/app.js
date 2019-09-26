@@ -1,7 +1,8 @@
 define([
     "mag/main",
     "mag/layerlist",
-    "mag/sidebar"
+    "mag/sidebar",
+    "mag/maps/customClassBreaks"
 ], function () {
 
     /** The global MAG object. 
