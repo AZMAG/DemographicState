@@ -8,7 +8,8 @@ define([
     "mag/maps/colorRamps",
     "mag/maps/cbr",
     "mag/maps/maps",
-    "mag/utilities"
+    "mag/utilities",
+    "mag/config/acsFieldsConfig"
 ], function () {
 
     /** The global MAG object. 
