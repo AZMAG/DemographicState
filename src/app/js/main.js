@@ -1,9 +1,10 @@
 define([
+        "mag/utilities",
         "dojo/parser",
         "dojo/topic",
         "dojo/domReady!"
     ],
-    function (parser, tp) {
+    function (utils, parser, tp) {
         parser.parse();
         $.getJSON(app.config.mainUrl + "/?f=json", function (data) {
             for (var i = 0; i < data.layers.length; i++) {
@@ -20,7 +21,7 @@ define([
             }
             app.initConfig = undefined;
 
-            let initStr = qs("init");
+            let initStr = utils.qs("init");
             if (initStr) {
                 app.initConfig = JSON.parse(initStr);
             }

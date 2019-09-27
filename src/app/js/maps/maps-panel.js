@@ -1,5 +1,5 @@
 "use strict";
-require(["dojo/topic", "dojo/domReady!"], function (tp) {
+define(["dojo/topic", "dojo/domReady!"], function (tp) {
     //Cache Maps List Element
     let $mapsList = $("#mapsList");
     let configLookup = [];
