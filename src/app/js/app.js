@@ -1,4 +1,5 @@
 define([
+    "mag/config/config",
     "mag/main",
     "mag/layerlist",
     "mag/sidebar",
@@ -9,6 +10,7 @@ define([
     "mag/maps/cbr",
     "mag/maps/maps",
     "mag/utilities"
+    
 ], function () {
 
     /** The global MAG object. 
