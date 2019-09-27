@@ -12,6 +12,11 @@ var dojoConfig = {
     parseOnLoad: true,
     aliases: [['domReady', 'dojo/domReady']],
     packages: [
+        // local packages
+        {
+            name: 'mag',
+            location: '/base/src/app/js'
+        },
         // hosted packages
         {
             name: 'esri',
