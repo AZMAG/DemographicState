@@ -9,8 +9,27 @@ define([
     "mag/maps/colorRamps",
     "mag/maps/cbr",
     "mag/maps/maps",
-    "mag/utilities"
-    
+    "mag/utilities",
+    "mag/config/colorRampConfig",
+    "mag/config/censusFieldsConfig",
+    "mag/config/acsFieldsConfig",
+    "mag/reports/standardReports",
+    "mag/reports/reports",
+    "mag/reports/reportGrid",
+    "mag/reports/reportCharts",
+    "mag/reports/exportToExcel",
+    "mag/reports/customGeographyReports",
+    "mag/reports/advancedQueryReports",
+    "mag/widgets/zoom",
+    "mag/widgets/sketch",
+    "mag/widgets/share",
+    "mag/widgets/search",
+    "mag/widgets/print",
+    "mag/widgets/locate",
+    "mag/widgets/legend",
+    "mag/widgets/home",
+    "mag/widgets/basemapToggle",
+    "mag/widgets/drawing"
 ], function () {
 
     /** The global MAG object. 
