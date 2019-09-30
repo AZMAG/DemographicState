@@ -1,5 +1,5 @@
 "use strict";
-require([
+define([
         "esri/widgets/BasemapToggle/BasemapToggleViewModel",
         "dojo/topic",
         "dojo/domReady!"
