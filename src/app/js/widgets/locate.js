@@ -1,5 +1,5 @@
 "use strict";
-require([
+define([
         "esri/widgets/Locate/LocateViewModel",
         "dojo/topic",
         "dojo/domReady!"
