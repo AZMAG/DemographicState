@@ -9,6 +9,7 @@ define([
     "mag/maps/cbr",
     "mag/maps/maps",
     "mag/utilities",
+    "mag/widgets/locate",
     "mag/widgets/legend",
     "mag/widgets/home",
     "mag/widgets/basemapToggle",
