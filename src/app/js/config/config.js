@@ -8,7 +8,7 @@ app.config = {
     ArcGISInstanceURL: 'https://geo.azmag.gov/arcgis/rest',
 
     mainUrl: 'https://geo.azmag.gov/arcgis/rest/services/maps/DemographicState2017/MapServer',
-    printUrl: 'https://geo.azmag.gov/arcgis/rest/services/gp/stateDemo/GPServer/Export%20Web%20Map',
+    printUrl: 'https://geo.azmag.gov/arcgis/rest/services/gp/Demographic_Print/GPServer/Export%20Web%20Map',
     pdfService: {
         defaultUrl: 'https://geo.azmag.gov/services/demographics2017/Reports.html?',
         compareUrl: 'https://geo.azmag.gov/services/demographics2017/CompareReport.html?'

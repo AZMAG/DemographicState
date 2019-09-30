@@ -1196,10 +1196,6 @@ hr.pop {
     border-radius: 5px;
 }
 
-#printWidget {
-    opacity: .5;
-}
-
 #printLoader {
     display: none;
     margin-left: 10px;

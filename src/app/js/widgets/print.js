@@ -22,8 +22,7 @@ require(["dojo/topic", "esri/widgets/Print/PrintViewModel"], (tp, PrintVM) => {
         app.view.ui.add($printWidget[0], "bottom-right");
 
         $printWidget.click(function () {
-            // SetupPrintForm();
-            alert("The print functionality for this tool is currently out of service.  Sorry for the inconvenience.")
+            SetupPrintForm();
         })
 
         function print(printObj) {
@@ -33,7 +32,7 @@ require(["dojo/topic", "esri/widgets/Print/PrintViewModel"], (tp, PrintVM) => {
                     url: `${app.config.printUrl}/submitJob`,
                     data: printObj,
                     success: function (res) {
-                        let jobId = JSON.parse(res).jobId;
+                        let jobId = res.jobId;
                         let checkCompleteUrl = `${app.config.printUrl}/jobs/${jobId}`;
                         let outputUrl = `${checkCompleteUrl}/results/Output_File?f=json&returnType=data`;
 
