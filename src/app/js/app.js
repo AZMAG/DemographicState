@@ -10,6 +10,7 @@ define([
     "mag/maps/cbr",
     "mag/maps/maps",
     "mag/utilities",
+    "mag/config/mapsConfig",
     "mag/config/colorRampConfig",
     "mag/config/censusFieldsConfig",
     "mag/config/acsFieldsConfig",
