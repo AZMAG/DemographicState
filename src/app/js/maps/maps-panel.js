@@ -1,5 +1,5 @@
 "use strict";
-define(["dojo/topic", "dojo/domReady!"], function (tp) {
+define(["mag/config/mapsConfig", "dojo/topic", "dojo/domReady!"], function (mapsConfig, tp) {
     //Cache Maps List Element
     let $mapsList = $("#mapsList");
     let configLookup = [];
@@ -38,7 +38,7 @@ define(["dojo/topic", "dojo/domReady!"], function (tp) {
         // console.log($mapsList, app);
         // console.log(GetMapsHTML(app.mapsConfig));
 
-        $mapsList.append(GetMapsHTML(app.mapsConfig));
+        $mapsList.append(GetMapsHTML(mapsConfig));
 
         let $initMap = null;
         //Attach Data using jquery.
