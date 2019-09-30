@@ -9,6 +9,7 @@ define([
     "mag/maps/cbr",
     "mag/maps/maps",
     "mag/utilities",
+    "mag/reports/reports",
     "mag/reports/reportGrid",
     "mag/reports/reportCharts",
     "mag/reports/exportToExcel",
