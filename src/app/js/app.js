@@ -9,7 +9,9 @@ define([
     "mag/maps/cbr",
     "mag/maps/maps",
     "mag/utilities",
-    "mag/widgets/home"
+    "mag/widgets/home",
+    "mag/widgets/basemapToggle",
+    "mag/widgets/drawing"
 ], function () {
 
     /** The global MAG object. 
