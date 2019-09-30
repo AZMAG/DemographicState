@@ -1,5 +1,5 @@
 "use strict";
-require(["dojo/topic", "esri/tasks/QueryTask"], function (tp, QueryTask) {
+define(["dojo/topic", "esri/tasks/QueryTask"], function (tp, QueryTask) {
     let $share = $(".shareWidget");
 
     let oldUrl = "";
