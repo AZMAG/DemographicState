@@ -1,5 +1,5 @@
 define([], function() {
-    app.censusFieldsConfig = [{
+    var censusFieldsConfig = [{
             fieldName: 'ACRES',
             fieldAlias: 'ACRES',
             fieldType: 'Number',
@@ -702,4 +702,5 @@ define([], function() {
             percentOfField: 'TOTAL_HU'
         }
     ];
+    return censusFieldsConfig;
 });

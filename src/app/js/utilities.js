@@ -1,8 +1,9 @@
 
 "use strict";
 define([
+    "mag/config/censusFieldsConfig",
     "esri/Graphic"
-],function(Graphic){
+],function(censusFieldsConfig, Graphic){
 //This file should include miscellaneous repeatable functions used in multiple places in the code. 
 
     Number.prototype.MagFormat = function () {
@@ -166,7 +167,7 @@ define([
                     app.summableFields.push(conf.fieldName);
                 }
             });
-            app.censusFieldsConfig.forEach(conf => {
+            censusFieldsConfig.forEach(conf => {
                 if (conf.canSum) {
                     app.summableFields.push(conf.fieldName);
                 }

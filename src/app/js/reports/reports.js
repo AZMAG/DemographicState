@@ -1,7 +1,7 @@
 //This file should include logic on initialization of?????
 'use strict';
 
-define(['dojo/topic', 'esri/tasks/QueryTask'], function (tp, QueryTask) {
+define(['mag/config/censusFieldsConfig', 'dojo/topic', 'esri/tasks/QueryTask'], function (censusFieldsConfig, tp, QueryTask) {
     tp.subscribe('panel-loaded', function (panel) {
         if (panel === 'reports-view') {
             let $reportArea = $('#reportArea');
@@ -210,7 +210,7 @@ define(['dojo/topic', 'esri/tasks/QueryTask'], function (tp, QueryTask) {
     }
 
     function OpenReportWindow(data, type) {
-        let fields = app.censusFieldsConfig;
+        let fields = censusFieldsConfig;
         let res = data.censusData;
 
         if (type === 'acs') {
