@@ -9,6 +9,7 @@ define([
     "mag/maps/cbr",
     "mag/maps/maps",
     "mag/utilities",
+    "mag/widgets/basemapToggle",
     "mag/widgets/drawing"
 ], function () {
 
