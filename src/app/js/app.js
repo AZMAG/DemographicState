@@ -9,6 +9,7 @@ define([
     "mag/maps/cbr",
     "mag/maps/maps",
     "mag/utilities",
+    "mag/widgets/zoom",
     "mag/widgets/sketch",
     "mag/widgets/share",
     "mag/widgets/search",
