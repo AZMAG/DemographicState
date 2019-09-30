@@ -1,5 +1,5 @@
 "use strict";
-require(["esri/widgets/Zoom/ZoomViewModel", "dojo/topic", "dojo/domReady!"], function (ZoomViewModel, tp) {
+define(["esri/widgets/Zoom/ZoomViewModel", "dojo/topic", "dojo/domReady!"], function (ZoomViewModel, tp) {
     tp.subscribe("map-loaded", function () {
         //Zoom
         const zoomId = "zoomWidget";
