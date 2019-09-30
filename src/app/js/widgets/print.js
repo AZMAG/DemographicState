@@ -1,5 +1,5 @@
 "use strict";
-require(["dojo/topic", "esri/widgets/Print/PrintViewModel"], (tp, PrintVM) => {
+define(["dojo/topic", "esri/widgets/Print/PrintViewModel"], (tp, PrintVM) => {
     let $printWidget = $("#printWidget");
     let $printWidgetModal = $("#printWidgetModal");
 
