@@ -1,5 +1,5 @@
 "use strict";
-require(["dojo/topic",
+define(["dojo/topic",
     "esri/widgets/Sketch/SketchViewModel",
     "esri/Graphic",
     "esri/geometry/geometryEngine"

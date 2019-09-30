@@ -1,5 +1,5 @@
 "use strict";
-require([
+define([
         "esri/widgets/Legend",
         "dojo/topic",
         "dojo/domReady!"

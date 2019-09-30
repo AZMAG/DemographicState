@@ -1,5 +1,5 @@
 "use strict";
-require([
+define([
     "esri/widgets/Search",
     "esri/tasks/Locator",
     "esri/Map",
