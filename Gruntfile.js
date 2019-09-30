@@ -202,6 +202,7 @@ module.exports = function (grunt) {
                         "!dist/app/js/maps/cbr.js",
                         "!dist/app/js/utilities.js",
                         "!dist/app/js/maps/maps.js",
+                        "!dist/app/js/widgets/print.js",
                         "!dist/app/js/widgets/locate.js",
                         "!dist/app/js/widgets/legend.js",
                         "!dist/app/js/widgets/home.js",
