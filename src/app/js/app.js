@@ -9,6 +9,7 @@ define([
     "mag/maps/cbr",
     "mag/maps/maps",
     "mag/utilities",
+    "mag/config/acsFieldsConfig",
     "mag/reports/standardReports",
     "mag/reports/reports",
     "mag/reports/reportGrid",
