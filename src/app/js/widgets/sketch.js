@@ -1,5 +1,5 @@
 "use strict";
-require([
+define([
     "esri/widgets/Sketch",
     "esri/Map",
     "esri/layers/GraphicsLayer",
