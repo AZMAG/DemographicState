@@ -1,5 +1,5 @@
 'use strict';
-require(['dojo/topic', 'esri/tasks/QueryTask'], function (tp, QueryTask) {
+define(['dojo/topic', 'esri/tasks/QueryTask'], function (tp, QueryTask) {
     tp.subscribe('panel-loaded', function (panel) {
         if (panel === 'reports-view') {
             InitAdvancedQuery();
