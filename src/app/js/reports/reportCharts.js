@@ -1,5 +1,5 @@
 'use strict';
-require(['dojo/topic'], function(tp) {
+define(['dojo/topic'], function(tp) {
     tp.subscribe('create-charts', CreateCharts);
     tp.subscribe('create-compare-charts', CreateCharts);
 

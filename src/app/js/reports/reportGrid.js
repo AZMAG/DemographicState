@@ -1,5 +1,5 @@
 'use strict';
-require(['dojo/topic'], function (tp) {
+define(['dojo/topic'], function (tp) {
     const expandHTML = 'Expand Topics<i style="margin-left: 5px;" class="fa fa-expand" aria-hidden="true"></i>';
     const collapseHTML = 'Collapse Topics<i style="margin-left: 5px;" class="fa fa-compress" aria-hidden="true"></i>';
     const toolbarTemplate = `
