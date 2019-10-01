@@ -1,8 +1,9 @@
 "use strict";
 define([
+        "mag/config/config",
         "dojo/topic"
     ],
-    function (tp) {
+    function (config, tp) {
         tp.subscribe("excel-export", exportToExcel);
     });
 
@@ -12,8 +13,8 @@ function exportToExcel(params) {
     let selectedReport = params.title;
     // let selectedReport = $("#specificReport").find(":selected").text();
     let fileName = selectedReport + "_Demographic_Report.xlsx";
-    let sourceLabel = app.config.sourceLabel;
-    let disclaimer = app.config.legalACSDisclaimer;
+    let sourceLabel = config.sourceLabel;
+    let disclaimer = config.legalACSDisclaimer;
 
     let rowSpan = 11;
 
@@ -133,7 +134,7 @@ function exportToExcel(params) {
                 background: "#d3d3d3",
                 colSpan: columns.length,
                 color: "#000",
-                rowSpan: disclaimer === app.config.legalACSDisclaimer ? Math.floor(rowSpan * 0.6) : rowSpan,
+                rowSpan: disclaimer === config.legalACSDisclaimer ? Math.floor(rowSpan * 0.6) : rowSpan,
                 fontSize: 8,
                 value: disclaimer,
                 hAlign: "center",

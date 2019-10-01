@@ -1,9 +1,12 @@
 "use strict";
-define(["dojo/topic",
+define([
+    "mag/config/config",
+    "dojo/topic",
     "esri/widgets/Sketch/SketchViewModel",
     "esri/Graphic",
     "esri/geometry/geometryEngine"
 ], function (
+    config,
     tp,
     SketchViewModel,
     Graphic,
@@ -174,7 +177,7 @@ define(["dojo/topic",
                 tp.subscribe("reset-reports", resetReport);
 
                 function ProcessSelection(gfx) {
-                    app.GetData(app.config.layerDef["blockGroups"], null, gfx.geometry).then(function (data) {
+                    app.GetData(config.layerDef["blockGroups"], null, gfx.geometry).then(function (data) {
                         var acsData = app.summarizeFeatures(data.acsData);
                         var censusData = app.summarizeFeatures(data.censusData);
 

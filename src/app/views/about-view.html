@@ -204,9 +204,11 @@
 </div>
 
 <script>
-    //*** version binding
-    $(".version").html(app.config.version);
-    //*** copy write binding
-    $(".copyright").html(app.config.copyright);
+    require(["mag/config/config"], function(config){
+        //*** version binding
+        $(".version").html(config.version);
+        //*** copy write binding
+        $(".copyright").html(config.copyright);
+    });
 
 </script>

@@ -1,5 +1,5 @@
 'use strict';
-define(['dojo/topic', 'esri/tasks/QueryTask'], function (tp, QueryTask) {
+define(['mag/config/config', 'dojo/topic', 'esri/tasks/QueryTask'], function (config, tp, QueryTask) {
     tp.subscribe('panel-loaded', function (panel) {
         if (panel === 'reports-view') {
             InitAdvancedQuery();
@@ -307,7 +307,7 @@ define(['dojo/topic', 'esri/tasks/QueryTask'], function (tp, QueryTask) {
             };
 
             let qt = new QueryTask({
-                url: app.config.mainUrl + '/0'
+                url: config.mainUrl + '/0'
             });
 
             qt.execute(q).then(function (res) {
@@ -317,7 +317,7 @@ define(['dojo/topic', 'esri/tasks/QueryTask'], function (tp, QueryTask) {
                     geoids.push(feature.attributes['GEOID']);
                 });
 
-                app.GetData(app.config.layerDef['blockGroups'], geoids).then(function (data) {
+                app.GetData(config.layerDef['blockGroups'], geoids).then(function (data) {
                     var acsdata = app.summarizeFeatures(data.acsData);
                     var censusdata = app.summarizeFeatures(data.censusData);
 
@@ -436,7 +436,7 @@ define(['dojo/topic', 'esri/tasks/QueryTask'], function (tp, QueryTask) {
             };
 
             let qt = new QueryTask({
-                url: app.config.mainUrl + '/0'
+                url: config.mainUrl + '/0'
             });
 
             qt.executeForCount(q).then(function (count) {
@@ -598,7 +598,7 @@ define(['dojo/topic', 'esri/tasks/QueryTask'], function (tp, QueryTask) {
                     };
 
                     let qt = new QueryTask({
-                        url: app.config.mainUrl + '/0'
+                        url: config.mainUrl + '/0'
                     });
 
                     qt.execute({

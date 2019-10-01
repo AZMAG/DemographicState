@@ -1,9 +1,9 @@
 "use strict";
-define(["dojo/topic"], function (tp) {
+define(["mag/config/config", "dojo/topic"], function (config, tp) {
     tp.subscribe("panel-loaded", function (panel) {
         if (panel === "layers-view") {
             var $layerList = $("#layerList");
-            var layers = app.config.layers.filter(conf => conf.showTOC);
+            var layers = config.layers.filter(conf => conf.showTOC);
 
             var arr = layers.sort((a, b) => a.layerListOrder - b.layerListOrder);
 

@@ -1,22 +1,23 @@
 define([
+        "mag/config/config",
         "mag/utilities",
         "dojo/parser",
         "dojo/topic",
         "dojo/domReady!"
     ],
-    function (utils, parser, tp) {
+    function (config, utils, parser, tp) {
         parser.parse();
-        $.getJSON(app.config.mainUrl + "/?f=json", function (data) {
+        $.getJSON(config.mainUrl + "/?f=json", function (data) {
             for (var i = 0; i < data.layers.length; i++) {
                 var layer = data.layers[i];
-                for (var j = 0; j < app.config.layers.length; j++) {
-                    var conf = app.config.layers[j];
+                for (var j = 0; j < config.layers.length; j++) {
+                    var conf = config.layers[j];
                     if ("Census10_" + conf.layerName === layer.name) {
                         conf["censusIndex"] = layer.id;
                     } else if ("ACS_" + conf.layerName === layer.name) {
                         conf["ACSIndex"] = layer.id;
                     }
-                    app.config.layerDef[conf.id] = conf;
+                    config.layerDef[conf.id] = conf;
                 }
             }
             app.initConfig = undefined;
@@ -28,7 +29,7 @@ define([
 
             if (app.initConfig && app.initConfig.visibleLayers) {
                 app.initConfig.visibleLayers.forEach(function (layer) {
-                    app.config.layers.forEach(function (conf) {
+                    config.layers.forEach(function (conf) {
                         if (layer === conf.id) {
                             conf.visible = true;
                         }

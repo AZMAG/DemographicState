@@ -1,5 +1,5 @@
 "use strict";
-define(["dojo/topic"], function (tp) {
+define(["mag/config/config", "dojo/topic"], function (config, tp) {
     tp.subscribe("panel-loaded", function (panel) {
 
         if (panel === "reports-view") {
@@ -19,7 +19,7 @@ define(["dojo/topic"], function (tp) {
             let $specificReportComparison = $comparisonContainer.find("#specificReportComparison");
 
             //Only include layers with showReport
-            let filteredData = app.config.layers.filter(layer => layer.showReport);
+            let filteredData = config.layers.filter(layer => layer.showReport);
 
             filteredData.unshift({
                 title: "Select a Type of Report",
@@ -102,7 +102,7 @@ define(["dojo/topic"], function (tp) {
                 $("#summaryReport").hide();
 
                 let kendoItem = $reportType.data('kendoDropDownList').dataItem();
-                let conf = app.config.layerDef[kendoItem.id];
+                let conf = config.layerDef[kendoItem.id];
 
                 if (conf.id === "state") {
                     OpenReportByGEOIDs(conf, ["04"]);
