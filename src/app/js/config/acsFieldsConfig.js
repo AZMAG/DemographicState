@@ -1,5 +1,5 @@
 define([], function (){
-    app.acsFieldsConfig = [{
+    var acsFieldsConfig = [{
             fieldName: 'TOTAL_POP',
             fieldAlias: 'Total Population',
             fieldType: 'Number',
@@ -2640,4 +2640,5 @@ define([], function (){
             percentOfField: ''
         }
     ];
+    return acsFieldsConfig;
 });
