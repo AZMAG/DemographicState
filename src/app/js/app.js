@@ -1,6 +1,5 @@
 define([
     "mag/config/config",
-    "mag/config/mapsConfig",
     "mag/main",
     "mag/layerlist",
     "mag/sidebar",
