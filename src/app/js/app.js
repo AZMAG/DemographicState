@@ -3,7 +3,6 @@ define([
     "mag/config/mapsConfig",
     "mag/config/colorRampConfig",
     "mag/config/censusFieldsConfig",
-    "mag/config/acsFieldsConfig",
     "mag/main",
     "mag/layerlist",
     "mag/sidebar",
