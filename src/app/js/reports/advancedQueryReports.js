@@ -1,5 +1,12 @@
 'use strict';
-define(['mag/config/mapsConfig', 'dojo/topic', 'esri/tasks/QueryTask'], function (mapsConfig, tp, QueryTask) {
+define([
+    'mag/config/mapsConfig',
+    'dojo/topic', 'esri/tasks/QueryTask'
+], function (
+    mapsConfig,
+    tp,
+    QueryTask
+    ){
     tp.subscribe('panel-loaded', function (panel) {
         if (panel === 'reports-view') {
             InitAdvancedQuery();

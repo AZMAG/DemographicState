@@ -1,5 +1,12 @@
 "use strict";
-define(["mag/config/mapsConfig", "dojo/topic", "dojo/domReady!"], function (mapsConfig, tp) {
+define([
+    "mag/config/mapsConfig",
+    "dojo/topic",
+    "dojo/domReady!"
+], function (
+        mapsConfig,
+        tp
+    ){
     //Cache Maps List Element
     let $mapsList = $("#mapsList");
     let configLookup = [];
