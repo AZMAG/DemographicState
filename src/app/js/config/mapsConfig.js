@@ -1,5 +1,5 @@
 define([], function() {
-    app.mapsConfig = [{
+    var mapsConfig = [{
             "NodeType": "cat",
             "Name": "General",
             "ShortName": "General",
@@ -15936,4 +15936,5 @@ define([], function() {
             ]
         }
     ];
+    return mapsConfig;
 });

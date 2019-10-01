@@ -1,5 +1,12 @@
 'use strict';
-define(['dojo/topic', 'esri/tasks/QueryTask'], function (tp, QueryTask) {
+define([
+    'mag/config/mapsConfig',
+    'dojo/topic', 'esri/tasks/QueryTask'
+], function (
+    mapsConfig,
+    tp,
+    QueryTask
+    ){
     tp.subscribe('panel-loaded', function (panel) {
         if (panel === 'reports-view') {
             InitAdvancedQuery();
@@ -156,7 +163,7 @@ define(['dojo/topic', 'esri/tasks/QueryTask'], function (tp, QueryTask) {
         }];
 
         let fieldDataSource = new kendo.data.HierarchicalDataSource({
-            data: areaQFields.concat(app.mapsConfig)
+            data: areaQFields.concat(mapsConfigp)
         });
 
         var treeView = $advancedTreeview.kendoTreeView({

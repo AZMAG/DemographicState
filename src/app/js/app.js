@@ -1,6 +1,5 @@
 define([
     "mag/config/config",
-    "mag/config/mapsConfig",
     "mag/config/colorRampConfig",
     "mag/config/censusFieldsConfig",
     "mag/main",
