@@ -1,6 +1,6 @@
 // This product includes color specifications and designs developed by Cynthia Brewer (http://colorbrewer.org/).
 define([], function() {
-    app.colorRampConfig = {
+    var colorRampConfig = {
         Sequential: {
             ClassBreakSets: {
                 3: "CFI",
@@ -453,4 +453,5 @@ define([], function() {
             }
         }
     };
+    return colorRampConfig;
 });

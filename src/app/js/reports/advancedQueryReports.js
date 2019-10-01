@@ -1,10 +1,12 @@
 'use strict';
 define([
+        'mag/config/mapsConfig',
         'mag/config/config',
         'dojo/topic',
         'esri/tasks/QueryTask'
     ],
     function (
+        mapsConfig,
         config,
         tp,
         QueryTask
@@ -165,7 +167,7 @@ define([
         }];
 
         let fieldDataSource = new kendo.data.HierarchicalDataSource({
-            data: areaQFields.concat(app.mapsConfig)
+            data: areaQFields.concat(mapsConfigp)
         });
 
         var treeView = $advancedTreeview.kendoTreeView({

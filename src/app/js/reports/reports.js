@@ -3,11 +3,15 @@
 
 define([
         'mag/config/config',
+        'mag/config/censusFieldsConfig',
+        'mag/config/acsFieldsConfig',
         'dojo/topic',
         'esri/tasks/QueryTask'
     ],
     function (
         config,
+        censusFieldsConfig,
+        acsFieldsConfig,
         tp,
         QueryTask
     ){
@@ -219,11 +223,11 @@ define([
     }
 
     function OpenReportWindow(data, type) {
-        let fields = app.censusFieldsConfig;
+        let fields = censusFieldsConfig;
         let res = data.censusData;
 
         if (type === 'acs') {
-            fields = app.acsFieldsConfig;
+            fields = acsFieldsConfig;
             res = data.acsData;
         }
         let $reportArea = $('#reportArea');

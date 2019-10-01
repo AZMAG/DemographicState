@@ -1,16 +1,17 @@
 "use strict";
 define([
+        "mag/config/colorRampConfig",
         "mag/config/config",
         "dojo/topic",
         "esri/tasks/QueryTask",
         "dojo/domReady!"
     ],
     function (
+        colorRampConfig,
         config,
         tp,
         QueryTask
     ){
-
         let $mapsList = $("#mapsList");
         let $colorRamp = $("#colorRamp");
         let $classBreaksCount = $("#classBreaksCount");
@@ -33,8 +34,8 @@ define([
         };
 
         app.GetRampsByNumAndType = function (type, numBreaks) {
-            let classBreakSet = app.colorRampConfig[type]["ClassBreakSets"][numBreaks];
-            let allRamps = app.colorRampConfig[type]["ColorRamps"];
+            let classBreakSet = colorRampConfig[type]["ClassBreakSets"][numBreaks];
+            let allRamps = colorRampConfig[type]["ColorRamps"];
             let returnRamps = {};
 
             Object.keys(allRamps).forEach(function (rampKey) {

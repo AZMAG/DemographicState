@@ -1,16 +1,18 @@
 "use strict";
 define([
+        "mag/config/acsFieldsConfig",
         "mag/config/config",
         "dojo/topic"
     ],
     function (
+        acsFieldsConfig,
         config,
         tp
     ){
-        tp.subscribe("excel-export", exportToExcel);
-    });
+    tp.subscribe("excel-export", exportToExcel);
+   
 
-function exportToExcel(params) {
+    function exportToExcel(params) {
     let grid = params.grid;
     // console.log(params);
     let selectedReport = params.title;
@@ -45,7 +47,7 @@ function exportToExcel(params) {
                 row.cells[0].color = "#fff";
                 row.cells[0].bold = true;
             } else {
-                $.each(app.acsFieldsConfig, function (j, el) {
+                $.each(acsFieldsConfig, function (j, el) {
                     if (el.tableHeader === row.cells[1].value) {
                         if (el.tableHeader.includes("Minority")) {
                             el.tableHeader = "Minority";
@@ -159,4 +161,5 @@ function exportToExcel(params) {
         grid.unbind("excelExport");
     });
     grid.saveAsExcel();
-}
+    };
+});
