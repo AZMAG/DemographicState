@@ -2,9 +2,11 @@
 "use strict";
 define([
     "mag/config/censusFieldsConfig",
+    "mag/config/acsFieldsConfig",
     "esri/Graphic"
 ],function(
     censusFieldsConfig,
+    acsFieldsConfig,
     Graphic
     ){
 //This file should include miscellaneous repeatable functions used in multiple places in the code. 
@@ -165,7 +167,7 @@ define([
 
         if (!app.summableFields) {
             app.summableFields = [];
-            app.acsFieldsConfig.forEach(conf => {
+            acsFieldsConfig.forEach(conf => {
                 if (conf.canSum) {
                     app.summableFields.push(conf.fieldName);
                 }

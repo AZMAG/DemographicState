@@ -2,13 +2,16 @@
 'use strict';
 
 define([
-    'mag/config/censusFieldsConfig',
-    'dojo/topic',
-    'esri/tasks/QueryTask'
-], function (
-    censusFieldsConfig,
-    tp,
-    QueryTask
+        'mag/config/censusFieldsConfig',
+        'mag/config/acsFieldsConfig',
+        'dojo/topic',
+        'esri/tasks/QueryTask'
+    ],
+    function (
+        censusFieldsConfig,
+        acsFieldsConfig,
+        tp,
+        QueryTask
     ){
     tp.subscribe('panel-loaded', function (panel) {
         if (panel === 'reports-view') {
@@ -222,7 +225,7 @@ define([
         let res = data.censusData;
 
         if (type === 'acs') {
-            fields = app.acsFieldsConfig;
+            fields = acsFieldsConfig;
             res = data.acsData;
         }
         let $reportArea = $('#reportArea');

@@ -1,5 +1,6 @@
 define([
     "mag/config/config",
+    "mag/config/colorRampConfig",
     "mag/main",
     "mag/layerlist",
     "mag/sidebar",
@@ -10,9 +11,6 @@ define([
     "mag/maps/cbr",
     "mag/maps/maps",
     "mag/utilities",
-    "mag/config/mapsConfig",
-    "mag/config/colorRampConfig",
-    "mag/config/acsFieldsConfig",
     "mag/reports/standardReports",
     "mag/reports/reports",
     "mag/reports/reportGrid",
