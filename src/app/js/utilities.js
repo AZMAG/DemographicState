@@ -3,7 +3,10 @@
 define([
     "mag/config/censusFieldsConfig",
     "esri/Graphic"
-],function(censusFieldsConfig, Graphic){
+],function(
+    censusFieldsConfig,
+    Graphic
+    ){
 //This file should include miscellaneous repeatable functions used in multiple places in the code. 
 
     Number.prototype.MagFormat = function () {
