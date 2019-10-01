@@ -17,11 +17,10 @@ module.exports = function(config) {
     files: [
       'test/js/test-main.js',
 
-      { pattern: 'src/index.html', included: false },
-
       // amd modules are included on demand
       { pattern: 'src/app/js/**/*.js', included: false },
       { pattern: 'test/**/*spec.js', included: false }
+      
     ],
 
 

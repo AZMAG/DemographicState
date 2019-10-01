@@ -8,6 +8,7 @@ Object.keys(window.__karma__.files).forEach(function (file) {
     }
 });
 
+var app = {};
 var dojoConfig = {
     parseOnLoad: true,
     aliases: [['domReady', 'dojo/domReady']],
@@ -20,7 +21,7 @@ var dojoConfig = {
         // hosted packages
         {
             name: 'esri',
-            location: 'http://js.arcgis.com/4.11'
+            location: 'http://js.arcgis.com/4.11/esri'
         }, {
             name: 'dojo',
             location: 'http://js.arcgis.com/4.11/dojo'
