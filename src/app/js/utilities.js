@@ -1,9 +1,11 @@
 
 "use strict";
 define([
+    "mag/config/censusFieldsConfig",
     "mag/config/acsFieldsConfig",
     "esri/Graphic"
 ],function(
+    censusFieldsConfig,
     acsFieldsConfig,
     Graphic
     ){
@@ -170,7 +172,7 @@ define([
                     app.summableFields.push(conf.fieldName);
                 }
             });
-            app.censusFieldsConfig.forEach(conf => {
+            censusFieldsConfig.forEach(conf => {
                 if (conf.canSum) {
                     app.summableFields.push(conf.fieldName);
                 }

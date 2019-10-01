@@ -2,13 +2,16 @@
 'use strict';
 
 define([
-    'mag/config/acsFieldsConfig',
-    'dojo/topic',
-    'esri/tasks/QueryTask'
-], function (
-    acsFieldsConfig,
-    tp,
-    QueryTask
+        'mag/config/censusFieldsConfig',
+        'mag/config/acsFieldsConfig',
+        'dojo/topic',
+        'esri/tasks/QueryTask'
+    ],
+    function (
+        censusFieldsConfig,
+        acsFieldsConfig,
+        tp,
+        QueryTask
     ){
     tp.subscribe('panel-loaded', function (panel) {
         if (panel === 'reports-view') {
@@ -218,7 +221,7 @@ define([
     }
 
     function OpenReportWindow(data, type) {
-        let fields = app.censusFieldsConfig;
+        let fields = censusFieldsConfig;
         let res = data.censusData;
 
         if (type === 'acs') {

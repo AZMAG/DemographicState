@@ -1,7 +1,6 @@
 define([
     "mag/config/config",
     "mag/config/colorRampConfig",
-    "mag/config/censusFieldsConfig",
     "mag/main",
     "mag/layerlist",
     "mag/sidebar",
