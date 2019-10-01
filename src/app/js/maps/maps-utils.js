@@ -5,7 +5,11 @@ define([
         "esri/tasks/QueryTask",
         "dojo/domReady!"
     ],
-    function (config, tp, QueryTask) {
+    function (
+        config,
+        tp,
+        QueryTask
+    ){
 
         let $mapsList = $("#mapsList");
         let $colorRamp = $("#colorRamp");

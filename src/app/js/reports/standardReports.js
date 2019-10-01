@@ -1,5 +1,12 @@
 "use strict";
-define(["mag/config/config", "dojo/topic"], function (config, tp) {
+define([
+        "mag/config/config",
+        "dojo/topic"
+    ],
+    function (
+        config,
+        tp
+    ) {
     tp.subscribe("panel-loaded", function (panel) {
 
         if (panel === "reports-view") {

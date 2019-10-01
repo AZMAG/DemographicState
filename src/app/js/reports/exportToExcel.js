@@ -3,7 +3,10 @@ define([
         "mag/config/config",
         "dojo/topic"
     ],
-    function (config, tp) {
+    function (
+        config,
+        tp
+    ){
         tp.subscribe("excel-export", exportToExcel);
     });
 

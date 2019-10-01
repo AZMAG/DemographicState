@@ -1,5 +1,14 @@
 "use strict";
-define(["mag/config/config", "dojo/topic", "esri/tasks/QueryTask"], function (config, tp, QueryTask) {
+define([
+        "mag/config/config",
+        "dojo/topic",
+        "esri/tasks/QueryTask"
+    ],
+    function (
+        config,
+        tp,
+        QueryTask
+    ) {
     let $share = $(".shareWidget");
 
     let oldUrl = "";

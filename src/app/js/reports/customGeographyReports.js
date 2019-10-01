@@ -1,17 +1,18 @@
 "use strict";
 define([
-    "mag/config/config",
-    "dojo/topic",
-    "esri/widgets/Sketch/SketchViewModel",
-    "esri/Graphic",
-    "esri/geometry/geometryEngine"
-], function (
-    config,
-    tp,
-    SketchViewModel,
-    Graphic,
-    geometryEngine
-) {
+        "mag/config/config",
+        "dojo/topic",
+        "esri/widgets/Sketch/SketchViewModel",
+        "esri/Graphic",
+        "esri/geometry/geometryEngine"
+    ],
+    function (
+        config,
+        tp,
+        SketchViewModel,
+        Graphic,
+        geometryEngine
+    ){
     let isInited = false;
     tp.subscribe("panel-loaded", init);
 

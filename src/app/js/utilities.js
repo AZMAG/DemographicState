@@ -1,9 +1,13 @@
 
 "use strict";
 define([
-    "mag/config/config",
-    "esri/Graphic"
-],function(config, Graphic){
+        "mag/config/config",
+        "esri/Graphic"
+    ],
+    function(
+        config,
+        Graphic
+    ){
 //This file should include miscellaneous repeatable functions used in multiple places in the code. 
 
     Number.prototype.MagFormat = function () {

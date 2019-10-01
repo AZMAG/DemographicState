@@ -1,16 +1,27 @@
 "use strict";
 define([
-    "mag/config/config",
-    "esri/Map",
-    "esri/views/MapView",
-    "esri/layers/FeatureLayer",
-    "esri/layers/MapImageLayer",
-    "esri/layers/TileLayer",
-    "esri/geometry/Extent",
-    "esri/layers/GraphicsLayer",
-    "dojo/topic",
-    "dojo/domReady!"
-], function (config, Map, MapView, FeatureLayer, MapImageLayer, TileLayer, Extent, GraphicsLayer, tp) {
+        "mag/config/config",
+        "esri/Map",
+        "esri/views/MapView",
+        "esri/layers/FeatureLayer",
+        "esri/layers/MapImageLayer",
+        "esri/layers/TileLayer",
+        "esri/geometry/Extent",
+        "esri/layers/GraphicsLayer",
+        "dojo/topic",
+        "dojo/domReady!"
+    ],
+    function (
+        config,
+        Map,
+        MapView,
+        FeatureLayer,
+        MapImageLayer,
+        TileLayer,
+        Extent,
+        GraphicsLayer,
+        tp
+    ){
 
     tp.subscribe("config-loaded", initMap);
 

@@ -1,5 +1,14 @@
 "use strict";
-define(["mag/config/config", "dojo/topic", "esri/widgets/Print/PrintViewModel"], (config, tp, PrintVM) => {
+define([
+        "mag/config/config",
+        "dojo/topic",
+        "esri/widgets/Print/PrintViewModel"
+    ], 
+    (
+        config,
+        tp,
+        PrintVM
+    ) => {
     let $printWidget = $("#printWidget");
     let $printWidgetModal = $("#printWidgetModal");
 

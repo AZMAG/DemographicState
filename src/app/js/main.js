@@ -5,7 +5,12 @@ define([
         "dojo/topic",
         "dojo/domReady!"
     ],
-    function (config, utils, parser, tp) {
+    function (
+        config,
+        utils,
+        parser,
+        tp
+    ){
         parser.parse();
         $.getJSON(config.mainUrl + "/?f=json", function (data) {
             for (var i = 0; i < data.layers.length; i++) {

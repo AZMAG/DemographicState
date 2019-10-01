@@ -1,5 +1,12 @@
 'use strict';
-define(['mag/config/config', 'dojo/topic'], function(config, tp) {
+define([
+        'mag/config/config',
+        'dojo/topic'
+    ],
+    function(
+        config,
+        tp
+    ){
     tp.subscribe('create-charts', CreateCharts);
     tp.subscribe('create-compare-charts', CreateCharts);
 
