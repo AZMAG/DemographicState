@@ -1,14 +1,17 @@
 "use strict";
 define([
         "mag/config/colorRampConfig",
+        "mag/config/config",
         "dojo/topic",
         "esri/tasks/QueryTask",
         "dojo/domReady!"
-    ], function (
+    ],
+    function (
         colorRampConfig,
-        tp,QueryTask
-        ){
-
+        config,
+        tp,
+        QueryTask
+    ){
         let $mapsList = $("#mapsList");
         let $colorRamp = $("#colorRamp");
         let $classBreaksCount = $("#classBreaksCount");
@@ -82,7 +85,7 @@ define([
             };
 
             let qt = new QueryTask({
-                url: app.config.mainUrl + "/0"
+                url: config.mainUrl + "/0"
             });
 
             return qt.execute(q).then(function (res) {
@@ -123,8 +126,8 @@ define([
             let cbInfos = [];
 
             //Get color ramp info
-            let rampKey = $colorRamp.find(".cRamp").data("id") || app.config.DefaultColorRamp;
-            let type = $colorRamp.find(".cRamp").data("type") || app.config.DefaultColorScheme;
+            let rampKey = $colorRamp.find(".cRamp").data("id") || config.DefaultColorRamp;
+            let type = $colorRamp.find(".cRamp").data("type") || config.DefaultColorScheme;
 
             //Get a color ramp using above data
             let colorRamp = app.GetColorRamp(type, rampKey, cbrCount);

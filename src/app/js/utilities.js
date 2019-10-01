@@ -1,13 +1,16 @@
 
 "use strict";
 define([
-    "mag/config/censusFieldsConfig",
-    "mag/config/acsFieldsConfig",
-    "esri/Graphic"
-],function(
-    censusFieldsConfig,
-    acsFieldsConfig,
-    Graphic
+        "mag/config/config",
+        "mag/config/censusFieldsConfig",
+        "mag/config/acsFieldsConfig",
+        "esri/Graphic"
+    ],
+    function(
+        config,
+        censusFieldsConfig,
+        acsFieldsConfig,
+        Graphic
     ){
 //This file should include miscellaneous repeatable functions used in multiple places in the code. 
 
@@ -56,7 +59,7 @@ define([
         }
         let url = `https://content.googleapis.com/civicinfo/v2/representatives/${encodeURIComponent(
             id
-        )}?recursive=false&key=${app.config.googleCivicInfoApiKey}`;
+        )}?recursive=false&key=${config.googleCivicInfoApiKey}`;
         return new Promise(function (resolve, reject) {
             $.get(url, function (data) {
                 representativeCache[id] = data;
@@ -275,7 +278,7 @@ define([
                 if (data.offices) {
                     let rtnHTML = "";
                     data.offices.map(office => {
-                        app.config.googleCivicOffices.forEach(function (conf) {
+                        config.googleCivicOffices.forEach(function (conf) {
                             if (office.name.indexOf(conf.name) > -1) {
                                 if (data.officials && office.officialIndices) {
                                     for (let i = 0; i < office.officialIndices.length; i++) {

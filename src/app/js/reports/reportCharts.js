@@ -1,5 +1,12 @@
 'use strict';
-define(['dojo/topic'], function(tp) {
+define([
+        'mag/config/config',
+        'dojo/topic'
+    ],
+    function(
+        config,
+        tp
+    ){
     tp.subscribe('create-charts', CreateCharts);
     tp.subscribe('create-compare-charts', CreateCharts);
 
@@ -29,7 +36,7 @@ define(['dojo/topic'], function(tp) {
 
             return ops.element
                 .kendoChart({
-                    seriesColors: app.config.seriesColors,
+                    seriesColors: config.seriesColors,
                     legend: {
                         position: 'bottom',
                         labels: {

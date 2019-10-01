@@ -1,5 +1,14 @@
 "use strict";
-define(["dojo/topic", "esri/tasks/QueryTask"], function (tp, QueryTask) {
+define([
+        "mag/config/config",
+        "dojo/topic",
+        "esri/tasks/QueryTask"
+    ],
+    function (
+        config,
+        tp,
+        QueryTask
+    ) {
     let $share = $(".shareWidget");
 
     let oldUrl = "";
@@ -196,8 +205,8 @@ define(["dojo/topic", "esri/tasks/QueryTask"], function (tp, QueryTask) {
                 let longUrl = await GetBigShareLink();
                 $.getJSON("https://api-ssl.bitly.com/v3/shorten?callback=?", {
                         format: "json",
-                        login: app.config.bitly.login,
-                        apiKey: app.config.bitly.apiKey,
+                        login: config.bitly.login,
+                        apiKey: config.bitly.apiKey,
                         longUrl: longUrl
                     },
                     function (res) {

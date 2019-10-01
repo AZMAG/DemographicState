@@ -1,6 +1,4 @@
 define([
-    "mag/config/config",
-    "mag/config/colorRampConfig",
     "mag/main",
     "mag/layerlist",
     "mag/sidebar",

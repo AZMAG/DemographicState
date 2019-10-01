@@ -1,11 +1,15 @@
 'use strict';
 define([
-    'mag/config/mapsConfig',
-    'dojo/topic', 'esri/tasks/QueryTask'
-], function (
-    mapsConfig,
-    tp,
-    QueryTask
+        'mag/config/mapsConfig',
+        'mag/config/config',
+        'dojo/topic',
+        'esri/tasks/QueryTask'
+    ],
+    function (
+        mapsConfig,
+        config,
+        tp,
+        QueryTask
     ){
     tp.subscribe('panel-loaded', function (panel) {
         if (panel === 'reports-view') {
@@ -314,7 +318,7 @@ define([
             };
 
             let qt = new QueryTask({
-                url: app.config.mainUrl + '/0'
+                url: config.mainUrl + '/0'
             });
 
             qt.execute(q).then(function (res) {
@@ -324,7 +328,7 @@ define([
                     geoids.push(feature.attributes['GEOID']);
                 });
 
-                app.GetData(app.config.layerDef['blockGroups'], geoids).then(function (data) {
+                app.GetData(config.layerDef['blockGroups'], geoids).then(function (data) {
                     var acsdata = app.summarizeFeatures(data.acsData);
                     var censusdata = app.summarizeFeatures(data.censusData);
 
@@ -443,7 +447,7 @@ define([
             };
 
             let qt = new QueryTask({
-                url: app.config.mainUrl + '/0'
+                url: config.mainUrl + '/0'
             });
 
             qt.executeForCount(q).then(function (count) {
@@ -605,7 +609,7 @@ define([
                     };
 
                     let qt = new QueryTask({
-                        url: app.config.mainUrl + '/0'
+                        url: config.mainUrl + '/0'
                     });
 
                     qt.execute({

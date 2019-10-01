@@ -2,12 +2,14 @@
 'use strict';
 
 define([
+        'mag/config/config',
         'mag/config/censusFieldsConfig',
         'mag/config/acsFieldsConfig',
         'dojo/topic',
         'esri/tasks/QueryTask'
     ],
     function (
+        config,
         censusFieldsConfig,
         acsFieldsConfig,
         tp,
@@ -131,13 +133,13 @@ define([
 
     function ExportReportToPDF(conf, ids) {
         let idStr = ids.join(',');
-        let url = `${app.config.pdfService.defaultUrl}layer=${conf.layerName}&ids=${idStr}`;
+        let url = `${config.pdfService.defaultUrl}layer=${conf.layerName}&ids=${idStr}`;
         if (ids.length > 1) {
             if (conf.id === 'blockGroups') {
                 localStorage.setItem('magDemoSelectedGEOIDs', idStr);
-                url = `${app.config.pdfService.defaultUrl}layer=${conf.layerName}&ids=interactive`;
+                url = `${config.pdfService.defaultUrl}layer=${conf.layerName}&ids=interactive`;
             } else {
-                url = `${app.config.pdfService.compareUrl}layer=${conf.layerName}&ids=${idStr}`;
+                url = `${config.pdfService.compareUrl}layer=${conf.layerName}&ids=${idStr}`;
             }
         }
 
@@ -482,12 +484,12 @@ define([
         };
 
         let qt = new QueryTask({
-            url: app.config.mainUrl + '/' + conf.ACSIndex
+            url: config.mainUrl + '/' + conf.ACSIndex
         });
 
         const acsPromise = qt.execute(q);
 
-        qt.url = app.config.mainUrl + '/' + conf.censusIndex;
+        qt.url = config.mainUrl + '/' + conf.censusIndex;
         q.returnGeometry = false;
 
         const censusPromise = qt.execute(q);

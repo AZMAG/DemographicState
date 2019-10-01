@@ -1,5 +1,14 @@
 "use strict";
-define(["dojo/topic", "esri/widgets/Print/PrintViewModel"], (tp, PrintVM) => {
+define([
+        "mag/config/config",
+        "dojo/topic",
+        "esri/widgets/Print/PrintViewModel"
+    ], 
+    (
+        config,
+        tp,
+        PrintVM
+    ) => {
     let $printWidget = $("#printWidget");
     let $printWidgetModal = $("#printWidgetModal");
 
@@ -14,7 +23,7 @@ define(["dojo/topic", "esri/widgets/Print/PrintViewModel"], (tp, PrintVM) => {
         let $printResult = $("#printResult");
 
         let printVM = new PrintVM({
-            printServiceUrl: app.config.printUrl,
+            printServiceUrl: config.printUrl,
             updateDelay: 300,
             view: app.view
         });
@@ -30,11 +39,11 @@ define(["dojo/topic", "esri/widgets/Print/PrintViewModel"], (tp, PrintVM) => {
             return new Promise(function (resolve, reject) {
                 $.ajax({
                     type: "POST",
-                    url: `${app.config.printUrl}/submitJob`,
+                    url: `${config.printUrl}/submitJob`,
                     data: printObj,
                     success: function (res) {
                         let jobId = JSON.parse(res).jobId;
-                        let checkCompleteUrl = `${app.config.printUrl}/jobs/${jobId}`;
+                        let checkCompleteUrl = `${config.printUrl}/jobs/${jobId}`;
                         let outputUrl = `${checkCompleteUrl}/results/Output_File?f=json&returnType=data`;
 
                         function CheckComplete() {
@@ -146,7 +155,7 @@ define(["dojo/topic", "esri/widgets/Print/PrintViewModel"], (tp, PrintVM) => {
                     authorText: "Made by:  MAG GIS Group",
                     copyrightText: "<copyright info here>",
                     customTextElements: [{
-                        txtLegendHeader: `${currentMap.category} - ${currentMap.Name}\n<_BOL>${app.config.LegendSource}</_BOL>`
+                        txtLegendHeader: `${currentMap.category} - ${currentMap.Name}\n<_BOL>${config.LegendSource}</_BOL>`
                     }, {
                         txtComments: $printMapNotes.val()
                     }],
@@ -186,7 +195,7 @@ define(["dojo/topic", "esri/widgets/Print/PrintViewModel"], (tp, PrintVM) => {
         async function InitializePrintForm() {
             setupPrintTitle();
             if (!printInit) {
-                $.getJSON(app.config.printUrl + "/?f=pjson", function (data, textStatus, jqXHR) {
+                $.getJSON(config.printUrl + "/?f=pjson", function (data, textStatus, jqXHR) {
                     //Setup Layout List
                     let printMapLayoutOptions = data.parameters[3].choiceList.map(choice => {
                         if (!choice.includes('MAP_ONLY')) {
