@@ -1,7 +1,15 @@
 //This file should include logic on initialization of?????
 'use strict';
 
-define([ 'mag/config/acsFieldsConfig','dojo/topic', 'esri/tasks/QueryTask'], function (acsFieldsConfig, tp, QueryTask) {
+define([
+    'mag/config/acsFieldsConfig',
+    'dojo/topic',
+    'esri/tasks/QueryTask'
+], function (
+    acsFieldsConfig,
+    tp,
+    QueryTask
+    ){
     tp.subscribe('panel-loaded', function (panel) {
         if (panel === 'reports-view') {
             let $reportArea = $('#reportArea');

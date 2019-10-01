@@ -2,8 +2,9 @@
 define([
         "mag/config/acsFieldsConfig",
         "dojo/topic"
-    ],
-    function (acsFieldsConfig, tp) {
+    ], function (
+        acsFieldsConfig,
+        tp) {
         tp.subscribe("excel-export", exportToExcel);
    
 
