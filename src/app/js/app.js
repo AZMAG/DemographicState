@@ -1,5 +1,4 @@
 define([
-    "mag/config/config",
     "mag/main",
     "mag/layerlist",
     "mag/sidebar",
