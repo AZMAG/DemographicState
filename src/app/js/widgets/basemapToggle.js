@@ -1,10 +1,15 @@
 "use strict";
 define([
+        "mag/config/initConfig",
         "esri/widgets/BasemapToggle/BasemapToggleViewModel",
         "dojo/topic",
         "dojo/domReady!"
     ],
-    function (BasemapToggleViewModel, tp) {
+    function (
+        initConfig,
+        BasemapToggleViewModel,
+        tp
+        ) {
         tp.subscribe("widget-locate-loaded", function () {
 
             //Basemap
@@ -33,10 +38,8 @@ define([
                 ToggleBasemap();
             });
 
-            if (app.initConfig && app.initConfig.basemap) {
-                if (app.initConfig.basemap !== "gray") {
+            if (!initConfig.checkBasemap('gray')) {
                     ToggleBasemap();
-                }
             }
             tp.publish("widget-basemapToggle-loaded");
         });

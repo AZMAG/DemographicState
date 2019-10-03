@@ -1,12 +1,14 @@
 "use strict";
 define([
         "mag/config/config",
+        "mag/config/initConfig",
         "esri/widgets/Legend",
         "dojo/topic",
         "dojo/domReady!"
     ],
     function (
         config,
+        initConfig,
         Legend,
         tp
     ) {
@@ -33,9 +35,9 @@ define([
 
             let initOpacity = 0.8;
 
-            if (app.initConfig && app.initConfig.transparency !== undefined) {
-                initOpacity = app.initConfig.transparency;
-                blockGroupsLayer.opacity = app.initConfig.transparency;
+            if (initConfig.transparency) {
+                initOpacity = initConfig.transparency;
+                blockGroupsLayer.opacity = initConfig.transparency;
             }
 
             //Add Slider
@@ -79,7 +81,7 @@ define([
 
             $(".customWidget").show();
 
-            if (window.innerWidth < 800 || (app.initConfig && app.initConfig.legend === false)) {
+            if (window.innerWidth < 800 || (!initConfig.legend)) {
                 $("#legend").hide();
                 // $(".legendToggle").removeAttr("checked");
             }
