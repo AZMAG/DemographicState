@@ -1,15 +1,27 @@
 "use strict";
 define([
-    "esri/Map",
-    "esri/views/MapView",
-    "esri/layers/FeatureLayer",
-    "esri/layers/MapImageLayer",
-    "esri/layers/TileLayer",
-    "esri/geometry/Extent",
-    "esri/layers/GraphicsLayer",
-    "dojo/topic",
-    "dojo/domReady!"
-], function (Map, MapView, FeatureLayer, MapImageLayer, TileLayer, Extent, GraphicsLayer, tp) {
+        "mag/config/config",
+        "esri/Map",
+        "esri/views/MapView",
+        "esri/layers/FeatureLayer",
+        "esri/layers/MapImageLayer",
+        "esri/layers/TileLayer",
+        "esri/geometry/Extent",
+        "esri/layers/GraphicsLayer",
+        "dojo/topic",
+        "dojo/domReady!"
+    ],
+    function (
+        config,
+        Map,
+        MapView,
+        FeatureLayer,
+        MapImageLayer,
+        TileLayer,
+        Extent,
+        GraphicsLayer,
+        tp
+    ){
 
     tp.subscribe("config-loaded", initMap);
 
@@ -25,7 +37,7 @@ define([
         app.view = new MapView({
             container: "viewDiv",
             map: app.map,
-            extent: app.initConfig ? app.initConfig.extent : app.config.initExtent,
+            extent: app.initConfig ? app.initConfig.extent : config.initExtent,
             constraints: {
                 rotationEnabled: false,
                 minZoom: 7
@@ -51,7 +63,7 @@ define([
                     let f = e.target.selectedFeature;
                     let geoid = f.attributes["GEOID"];
                     let layerId = f.layer.id;
-                    let conf = app.config.layerDef[layerId];
+                    let conf = config.layerDef[layerId];
 
                     tp.publish('openReport-by-geoids', conf, [geoid]);
                 }
@@ -62,8 +74,8 @@ define([
 
         async function addBGLayer() {
             let res = await app.GetCurrentRenderer();
-            let conf = app.config.layerDef['blockGroups'];
-            let url = app.config.mainUrl;
+            let conf = config.layerDef['blockGroups'];
+            let url = config.mainUrl;
             if (conf.url) {
                 url = conf.url;
             }
@@ -90,9 +102,9 @@ define([
             await addBGLayer();
 
             var layersToAdd = [];
-            app.config.layers.forEach(layer => {
+            config.layers.forEach(layer => {
                 var layerToAdd;
-                var url = app.config.mainUrl;
+                var url = config.mainUrl;
                 if (layer.type === 'feature') {
                     if (layer.url) {
                         url = layer.url;

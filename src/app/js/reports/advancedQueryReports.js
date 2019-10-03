@@ -1,5 +1,16 @@
 'use strict';
-require(['dojo/topic', 'esri/tasks/QueryTask'], function (tp, QueryTask) {
+define([
+        'mag/config/mapsConfig',
+        'mag/config/config',
+        'dojo/topic',
+        'esri/tasks/QueryTask'
+    ],
+    function (
+        mapsConfig,
+        config,
+        tp,
+        QueryTask
+    ){
     tp.subscribe('panel-loaded', function (panel) {
         if (panel === 'reports-view') {
             InitAdvancedQuery();
@@ -156,7 +167,7 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function (tp, QueryTask) {
         }];
 
         let fieldDataSource = new kendo.data.HierarchicalDataSource({
-            data: areaQFields.concat(app.mapsConfig)
+            data: areaQFields.concat(mapsConfigp)
         });
 
         var treeView = $advancedTreeview.kendoTreeView({
@@ -307,7 +318,7 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function (tp, QueryTask) {
             };
 
             let qt = new QueryTask({
-                url: app.config.mainUrl + '/0'
+                url: config.mainUrl + '/0'
             });
 
             qt.execute(q).then(function (res) {
@@ -317,7 +328,7 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function (tp, QueryTask) {
                     geoids.push(feature.attributes['GEOID']);
                 });
 
-                app.GetData(app.config.layerDef['blockGroups'], geoids).then(function (data) {
+                app.GetData(config.layerDef['blockGroups'], geoids).then(function (data) {
                     var acsdata = app.summarizeFeatures(data.acsData);
                     var censusdata = app.summarizeFeatures(data.censusData);
 
@@ -436,7 +447,7 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function (tp, QueryTask) {
             };
 
             let qt = new QueryTask({
-                url: app.config.mainUrl + '/0'
+                url: config.mainUrl + '/0'
             });
 
             qt.executeForCount(q).then(function (count) {
@@ -598,7 +609,7 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function (tp, QueryTask) {
                     };
 
                     let qt = new QueryTask({
-                        url: app.config.mainUrl + '/0'
+                        url: config.mainUrl + '/0'
                     });
 
                     qt.execute({

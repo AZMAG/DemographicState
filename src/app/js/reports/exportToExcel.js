@@ -1,19 +1,25 @@
 "use strict";
-require([
+define([
+        "mag/config/acsFieldsConfig",
+        "mag/config/config",
         "dojo/topic"
     ],
-    function (tp) {
-        tp.subscribe("excel-export", exportToExcel);
-    });
+    function (
+        acsFieldsConfig,
+        config,
+        tp
+    ){
+    tp.subscribe("excel-export", exportToExcel);
+   
 
-function exportToExcel(params) {
+    function exportToExcel(params) {
     let grid = params.grid;
     // console.log(params);
     let selectedReport = params.title;
     // let selectedReport = $("#specificReport").find(":selected").text();
     let fileName = selectedReport + "_Demographic_Report.xlsx";
-    let sourceLabel = app.config.sourceLabel;
-    let disclaimer = app.config.legalACSDisclaimer;
+    let sourceLabel = config.sourceLabel;
+    let disclaimer = config.legalACSDisclaimer;
 
     let rowSpan = 11;
 
@@ -41,7 +47,7 @@ function exportToExcel(params) {
                 row.cells[0].color = "#fff";
                 row.cells[0].bold = true;
             } else {
-                $.each(app.acsFieldsConfig, function (j, el) {
+                $.each(acsFieldsConfig, function (j, el) {
                     if (el.tableHeader === row.cells[1].value) {
                         if (el.tableHeader.includes("Minority")) {
                             el.tableHeader = "Minority";
@@ -133,7 +139,7 @@ function exportToExcel(params) {
                 background: "#d3d3d3",
                 colSpan: columns.length,
                 color: "#000",
-                rowSpan: disclaimer === app.config.legalACSDisclaimer ? Math.floor(rowSpan * 0.6) : rowSpan,
+                rowSpan: disclaimer === config.legalACSDisclaimer ? Math.floor(rowSpan * 0.6) : rowSpan,
                 fontSize: 8,
                 value: disclaimer,
                 hAlign: "center",
@@ -155,4 +161,5 @@ function exportToExcel(params) {
         grid.unbind("excelExport");
     });
     grid.saveAsExcel();
-}
+    };
+});

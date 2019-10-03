@@ -1,10 +1,12 @@
 "use strict";
-require([
+define([
+        "mag/config/config",
         "esri/widgets/Legend",
         "dojo/topic",
         "dojo/domReady!"
     ],
     function (
+        config,
         Legend,
         tp
     ) {
@@ -24,7 +26,7 @@ require([
                 view: app.view,
                 container: "bgLegend",
                 layerInfos: [{
-                    title: "", //app.config.layerDef["blockGroups"].title,
+                    title: "", //config.layerDef["blockGroups"].title,
                     layer: blockGroupsLayer
                 }]
             });
@@ -38,7 +40,7 @@ require([
 
             //Add Slider
             $("#bgLegend").append(`
-                <span class="legendSrc legal">${app.config.layerDef["blockGroups"].title}</span>
+                <span class="legendSrc legal">${config.layerDef["blockGroups"].title}</span>
                 <span style="padding: 8px;">Transparency</span><br>
                 <div class="slidecontainer">
                     <input type="range" min="0" max="1" value="${initOpacity}" step=".05" class="round slider" id="slider">
@@ -52,7 +54,7 @@ require([
             });
 
             let layerInfos = [];
-            app.config.layers
+            config.layers
                 .forEach(conf => {
                     if (conf.legend && conf.id !== "blockGroups") {
                         layerInfos.push({
