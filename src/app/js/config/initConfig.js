@@ -16,8 +16,8 @@ define([
         }
     };
 
-    var _objectExists = function(obj){
-        if (obj !== 'undefined'){
+    var _objectExists = function(data, obj){
+        if (typeof data !== 'undefined' && typeof data[obj] !== 'undefined'){
             return true;
         }
         else  {
@@ -38,14 +38,14 @@ define([
     }
 
     var updateLayers = function(){
-        if(_objectExists(parsedData.visibleLayers)){
+        if(_objectExists(parsedData, 'visibleLayers')){
             _updateConfig(parsedData.visibleLayers);
         }
 
     };
 
     var mapDataFieldNameMatches = function(name){
-        if (_objectExists(parsedData.mapData)){
+        if (_objectExists(parsedData, 'mapData')){
             if (parsedData.mapData.FieldName === name){
                 return true;
             }
@@ -60,7 +60,7 @@ define([
 
 
     var checkBasemap = function(map) {
-        if (_objectExists(parsedData.basemap)) {
+        if (_objectExists(parsedData, 'basemap')) {
             if (parsedData.basemap === map) {
                 return true;
             }
@@ -69,12 +69,12 @@ define([
             }
         }
         else {
-            return false;
+            return 'not defined';
         }
     }
 
     var return_object = function(data, obj){
-        if (_objectExists(data[obj])){
+        if (_objectExists(data, obj)){
             return data[obj];
         }
         else {
