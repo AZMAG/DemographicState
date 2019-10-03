@@ -109,8 +109,8 @@ define([
                 $("#legend").fadeToggle();
                 $legendToggle.prop("checked", !$legendToggle.prop("checked"));
             }
-            if (initConfig.panel) {
-                TogglePanel(initConfig.panel);
+            if (initConfig.getPanel()) {
+                TogglePanel(initConfig.getPanel());
             }
 
             $(window).resize(function () {

@@ -38,7 +38,7 @@ define([
                 ToggleBasemap();
             });
 
-            if (!initConfig.checkBasemap('gray')) {
+            if (initConfig.checkBasemap('gray') === false) {
                     ToggleBasemap();
             }
             tp.publish("widget-basemapToggle-loaded");

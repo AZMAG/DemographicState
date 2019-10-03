@@ -39,7 +39,7 @@ define([
         app.view = new MapView({
             container: "viewDiv",
             map: app.map,
-            extent: initConfig.extent ? initConfig.extent : config.initExtent,
+            extent: initConfig.getExtent() ? initConfig.getExtent() : config.initExtent,
             constraints: {
                 rotationEnabled: false,
                 minZoom: 7

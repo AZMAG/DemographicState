@@ -35,9 +35,9 @@ define([
 
             let initOpacity = 0.8;
 
-            if (initConfig.transparency) {
-                initOpacity = initConfig.transparency;
-                blockGroupsLayer.opacity = initConfig.transparency;
+            if (initConfig.getTransparency() !== false) {
+                initOpacity = initConfig.getTransparency();
+                blockGroupsLayer.opacity = initConfig.getTransparency();
             }
 
             //Add Slider
@@ -81,7 +81,7 @@ define([
 
             $(".customWidget").show();
 
-            if (window.innerWidth < 800 || (!initConfig.legend)) {
+            if (window.innerWidth < 800 || (initConfig.getLegend() === false)) {
                 $("#legend").hide();
                 // $(".legendToggle").removeAttr("checked");
             }
