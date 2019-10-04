@@ -1,0 +1,32 @@
+{
+	"loader": {
+        "script": "dojo",
+        "options": {
+            "packages": [{
+                "name": "mag",
+                "location": "src/app/js"
+            },
+            {
+                "name": "esri",
+                "location": "http://js.arcgis.com/4.11/esri"
+            }, {
+                "name": "dojo",
+                "location": "http://js.arcgis.com/4.11/dojo"
+            },
+            {
+                "name": "@dojo/framework",
+                "location": "node_modules/@dojo/framework"
+            }
+        ]
+        }
+    },
+    "environments": ["node", { "browserName": "chrome" }],
+    "tunnelOptions": {
+        "drivers": [
+          { "name": "chrome", "version": "76.0.3809.126" }
+        ]
+      },
+    "suites": "test/unit/**/*.js",
+	"functionalSuites": []
+  
+}
