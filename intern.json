@@ -1,6 +1,11 @@
 {
 	"loader": {
         "script": "dojo",
+        "async": true,
+        "tlmSiblingOfDojo": false,
+        "has": {
+          "extend-esri": 1
+        },
         "options": {
             "packages": [{
                 "name": "mag",
@@ -8,25 +13,29 @@
             },
             {
                 "name": "esri",
-                "location": "http://js.arcgis.com/4.11/esri"
+                "location": "node_modules/arcgis-js-api"
             }, {
                 "name": "dojo",
-                "location": "http://js.arcgis.com/4.11/dojo"
+                "location": "node_modules/dojo"
+            }, {
+                "name": "dojox",
+                "location": "node_modules/dojox"
+            }, {
+                "name": "dijit",
+                "location": "node_modules/dijit"
             },
             {
-                "name": "@dojo/framework",
-                "location": "node_modules/@dojo/framework"
+                "name": "@dojo",
+                "location": "node_modules/@dojo"
+            },
+            {
+                "name": "tslib",
+                "location": "node_modules/tslib",
+                "main": "tslib"
             }
         ]
         }
     },
-    "environments": ["node", { "browserName": "chrome" }],
-    "tunnelOptions": {
-        "drivers": [
-          { "name": "chrome", "version": "76.0.3809.126" }
-        ]
-      },
-    "suites": "test/unit/**/*.js",
-	"functionalSuites": []
+    "suites": "test/js/**/*.js"
   
 }
