@@ -13,6 +13,7 @@ define([
         config,
         censusFieldsConfig,
         acsFieldsConfig,
+        utilities,
         tp,
         QueryTask
     ){
@@ -57,17 +58,17 @@ define([
 
             tp.subscribe('panel-shown', function (panel) {
                 resetReportForm();
-                // clearDrawnGraphics();
+                // utilities.clearDrawnGraphics();
             });
 
             tp.subscribe('panel-hidden', function (panel) {
                 resetReportForm();
-                // clearDrawnGraphics();
+                // utilities.clearDrawnGraphics();
             });
 
             $reportArea.on('click', '.returnBtn', function () {
                 resetReportForm();
-                clearDrawnGraphics();
+                utilities.clearDrawnGraphics();
             });
 
             $reportArea.on('click', '.card', function () {
@@ -174,7 +175,7 @@ define([
                 fieldType: fld.fieldType,
                 fieldClass: fld.class,
                 fieldValue: Number(val),
-                fieldValueFormatted: numberWithCommas(Number(val).toFixed(1)).replace('.0', ''),
+                fieldValueFormatted: utilities.numberWithCommas(Number(val).toFixed(1)).replace('.0', ''),
                 chartCategory: fld.chartCategory,
                 chartType: fld.chartType,
                 chartName: fld.chartCategory,

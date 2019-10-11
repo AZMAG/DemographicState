@@ -6,6 +6,7 @@ define([
     ],
     function(
         config,
+        utilities,
         tp
     ){
     tp.subscribe('create-charts', CreateCharts);
@@ -55,7 +56,7 @@ define([
                         },
                         tooltip: {
                             visible: true,
-                            template: `#= chartTooltip(value, category) # <br> #= kendo.format("{0:P}", percentage) #`
+                            template: `#= utilities.chartTooltip(value, category) # <br> #= kendo.format("{0:P}", percentage) #`
                         }
                     },
                     chartArea: {
@@ -69,7 +70,7 @@ define([
                             rotation: {
                                 angle: ops.type === 'column' ? 45 : 0
                             },
-                            template: '#= wrapText(value) #'
+                            template: '#= utilities.wrapText(value) #'
                         },
                         majorGridLines: {
                             visible: false
@@ -81,7 +82,7 @@ define([
                     valueAxis: {
                         color: 'black',
                         labels: {
-                            template: '#= valueAxisTemplate(value) #',
+                            template: '#= utilities.valueAxisTemplate(value) #',
                             step: 2
                         }
                     }

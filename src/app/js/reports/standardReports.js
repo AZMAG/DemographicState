@@ -6,6 +6,7 @@ define([
     ],
     function (
         config,
+        utilities,
         tp
     ) {
     tp.subscribe("panel-loaded", function (panel) {
@@ -157,7 +158,7 @@ define([
 
     function OpenReportByGEOIDs(conf, GEOIDs) {
         app.GetData(conf, GEOIDs).then(function (data) {
-            AddHighlightGraphics(data.acsData.features, true);
+            utilities.AddHighlightGraphics(data.acsData.features, true);
             app.view.goTo(data.acsData.features[0].geometry.extent.expand(1.5));
             if (data) {
                 tp.publish("open-report-window", data, "acs");

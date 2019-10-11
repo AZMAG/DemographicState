@@ -9,6 +9,7 @@ define([
     function (
         mapsConfig,
         config,
+        utilities,
         tp,
         QueryTask
     ){
@@ -330,8 +331,8 @@ define([
                 });
 
                 app.GetData(config.layerDef['blockGroups'], geoids).then(function (data) {
-                    var acsdata = summarizeFeatures(data.acsData);
-                    var censusdata = summarizeFeatures(data.censusData);
+                    var acsdata = utilities.summarizeFeatures(data.acsData);
+                    var censusdata = utilities.summarizeFeatures(data.censusData);
 
                     app.selectedReport.acsData = {
                         features: [{
@@ -349,7 +350,7 @@ define([
                         }]
                     };
                     tp.publish('open-report-window', app.selectedReport, 'acs');
-                    AddHighlightGraphics(data.acsData.features, true);
+                    utilities.AddHighlightGraphics(data.acsData.features, true);
                     $('.reportFormArea').hide();
                 });
             });

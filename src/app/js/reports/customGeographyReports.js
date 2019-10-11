@@ -9,6 +9,7 @@ define([
     ],
     function (
         config,
+        utilities,
         tp,
         SketchViewModel,
         Graphic,
@@ -180,11 +181,11 @@ define([
 
                 function ProcessSelection(gfx) {
                     app.GetData(config.layerDef["blockGroups"], null, gfx.geometry).then(function (data) {
-                        var acsData = summarizeFeatures(data.acsData);
-                        var censusData = summarizeFeatures(data.censusData);
+                        var acsData = utilities.summarizeFeatures(data.acsData);
+                        var censusData = utilities.summarizeFeatures(data.censusData);
 
                         if (data.acsData.features.length === 0) {
-                            clearDrawnGraphics();
+                            utilities.clearDrawnGraphics();
                             // TODO: This should be prettied up at some point.
                             // Just using the basic alert function isn"t pretty enough.
                             alert("Your selection did not return any results.  Please try again.");
@@ -206,7 +207,7 @@ define([
                             };
                             tp.publish("open-report-window", app.selectedReport, "acs");
                             $customGeographyReports.hide();
-                            AddHighlightGraphics(data.acsData.features, $useZoom.is(":checked"));
+                            utilities.AddHighlightGraphics(data.acsData.features, $useZoom.is(":checked"));
                             $(".reportFormArea").hide();
                         }
                     });

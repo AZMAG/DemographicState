@@ -23,7 +23,151 @@ define([
             key = key.replace(/[*+?^$.\[\]{}()|\\\/]/g, "\\$&"); // escape RegEx meta chars
             var match = location.search.match(new RegExp("[?&]" + key + "=([^&]+)(&|$)"));
             return match && decodeURIComponent(match[1].replace(/\+/g, " "));
+        },
+
+        numberWithCommas: function(x) {
+            return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        },
+    
+        chartTooltip: function(value, category) {
+            return `${app.numberWithCommas(value)} <r> ${category}`;
+        },
+    
+        valueAxisTemplate: function(value) {
+            return numberWithCommas(value);
+        },
+    
+        wrapText: function(value) {
+            var wrapLength = 12;
+            var returnLabel = "";
+            var lineLength = 0;
+    
+            if (value.length >= wrapLength) {
+                var wordsList = value.split(" ");
+                $.each(wordsList, function (index, word) {
+                    var separator = " ";
+                    if (lineLength >= wrapLength) {
+                        separator = "\n";
+                        lineLength = 0;
+                    }
+                    returnLabel += separator + word;
+                    lineLength += word.length;
+                });
+            } else {
+                returnLabel = value;
+            }
+            return returnLabel;
+        },
+
+        showInThousands: function(value) {
+            console.log(value);
+        },
+    
+        AddHighlightGraphics: function(features, zoomTo) {
+                let gfx = [];
+                for (let i = 0; i < features.length; i++) {
+                    const feature = features[i];
+                    let g = new Graphic({
+                        geometry: feature.geometry,
+                        symbol: {
+                            type: "simple-fill",
+                            color: [0, 255, 255, 0.5],
+                            opacity: 0.5,
+                            outline: {
+                                color: "cyan",
+                                width: "3"
+                            }
+                        }
+                    });
+                    gfx.push(g);
+                }
+                let gfxLayer = app.map.findLayerById("gfxLayer");
+                gfxLayer.addMany(gfx);
+    
+                if (zoomTo) {
+                    app.view.goTo(gfx);
+                }
+        },
+    
+        AddHighlightGraphic: function(graphic) {
+            let gfxLayer = app.map.findLayerById("gfxLayer");
+    
+            if (gfxLayer.graphics && gfxLayer.graphics.items.length > 0) {
+                console.log("no graphics to highlight");
+            } else {
+                var tempGraphic = $.extend({}, graphic);
+    
+                tempGraphic.symbol = {
+                    type: "simple-fill",
+                    color: [0, 255, 255, 0.5],
+                    opacity: 0.5,
+                    outline: {
+                        color: "cyan",
+                        width: "3"
+                    }
+                };
+    
+                gfxLayer.add(tempGraphic);
+            }
+        },
+    
+        summarizeFeatures: function(res) {
+            // console.log(res);
+    
+            if (!app.summableFields) {
+                app.summableFields = [];
+                acsFieldsConfig.forEach(conf => {
+                    if (conf.canSum) {
+                        app.summableFields.push(conf.fieldName);
+                    }
+                });
+                censusFieldsConfig.forEach(conf => {
+                    if (conf.canSum) {
+                        app.summableFields.push(conf.fieldName);
+                    }
+                });
+            }
+    
+            let data = {};
+            res.features.forEach(feature => {
+                let attr = feature.attributes;
+                Object.keys(attr).forEach(key => {
+                    if (app.summableFields.indexOf(key) > -1) {
+                        if (data[key]) {
+                            data[key] += attr[key];
+                        } else {
+                            data[key] = attr[key];
+                        }
+                    }
+                });
+            });
+    
+            return data;
+        },
+
+        PopupFormat: async function(gfx) {
+            let attr = gfx.graphic.attributes;
+            let repHtml = "";
+            if (attr["googleID"]) {
+                repHtml = await GetRepHtml(attr["googleID"]);
+            }
+    
+            return `
+                        <span class="popf">${attr["NAME"]}</span>
+                        <hr class="pop">
+                        <div>Total Population: <strong>${attr["TOTAL_POP"].toLocaleString()}</strong></div>
+                        <div>Minority Population: <strong>${attr["MINORITY_POP"].toLocaleString()}</strong></div>
+                        ${attr["MEDIAN_AGE"] ? `<div>Median Age: <strong>${attr["MEDIAN_AGE"]} years</strong></div>` : ""}
+                        <div>Number of Households: <strong>${attr["TOTAL_HOUSEHOLDS"].toLocaleString()}</strong></div>
+                        ${attr["MEDIAN_HOUSEHOLD_INCOME"] ? `<div>Median Household Income: <strong>$${attr["MEDIAN_HOUSEHOLD_INCOME"].toLocaleString()}</strong></div>` : ""}
+                        ${repHtml ? `
+                        <hr>
+                        <h6>Representative Info</h6>
+                        <div>${repHtml}</div>
+                        ` : ""}
+                    `;
         }
+    
     }
 
     function hexToRgb(hex) {
@@ -78,127 +222,7 @@ define([
         bufferGraphics.removeAll();
         app.view.graphics.removeAll();
     };
-
-    function numberWithCommas(x) {
-        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    };
-
-    function chartTooltip(value, category) {
-        return `${app.numberWithCommas(value)} <r> ${category}`;
-    };
-
-    function valueAxisTemplate(value) {
-        return numberWithCommas(value);
-    };
-
-    function wrapText(value) {
-        var wrapLength = 12;
-        var returnLabel = "";
-        var lineLength = 0;
-
-        if (value.length >= wrapLength) {
-            var wordsList = value.split(" ");
-            $.each(wordsList, function (index, word) {
-                var separator = " ";
-                if (lineLength >= wrapLength) {
-                    separator = "\n";
-                    lineLength = 0;
-                }
-                returnLabel += separator + word;
-                lineLength += word.length;
-            });
-        } else {
-            returnLabel = value;
-        }
-        return returnLabel;
-    };
-
-    function showInThousands(value) {
-        console.log(value);
-    };
-
-    function AddHighlightGraphics(features, zoomTo) {
-            let gfx = [];
-            for (let i = 0; i < features.length; i++) {
-                const feature = features[i];
-                let g = new Graphic({
-                    geometry: feature.geometry,
-                    symbol: {
-                        type: "simple-fill",
-                        color: [0, 255, 255, 0.5],
-                        opacity: 0.5,
-                        outline: {
-                            color: "cyan",
-                            width: "3"
-                        }
-                    }
-                });
-                gfx.push(g);
-            }
-            let gfxLayer = app.map.findLayerById("gfxLayer");
-            gfxLayer.addMany(gfx);
-
-            if (zoomTo) {
-                app.view.goTo(gfx);
-            }
-    };
-
-    function AddHighlightGraphic(graphic) {
-        let gfxLayer = app.map.findLayerById("gfxLayer");
-
-        if (gfxLayer.graphics && gfxLayer.graphics.items.length > 0) {
-            console.log("no graphics to highlight");
-        } else {
-            var tempGraphic = $.extend({}, graphic);
-
-            tempGraphic.symbol = {
-                type: "simple-fill",
-                color: [0, 255, 255, 0.5],
-                opacity: 0.5,
-                outline: {
-                    color: "cyan",
-                    width: "3"
-                }
-            };
-
-            gfxLayer.add(tempGraphic);
-        }
-    };
-
-    function summarizeFeatures(res) {
-        // console.log(res);
-
-        if (!app.summableFields) {
-            app.summableFields = [];
-            acsFieldsConfig.forEach(conf => {
-                if (conf.canSum) {
-                    app.summableFields.push(conf.fieldName);
-                }
-            });
-            censusFieldsConfig.forEach(conf => {
-                if (conf.canSum) {
-                    app.summableFields.push(conf.fieldName);
-                }
-            });
-        }
-
-        let data = {};
-        res.features.forEach(feature => {
-            let attr = feature.attributes;
-            Object.keys(attr).forEach(key => {
-                if (app.summableFields.indexOf(key) > -1) {
-                    if (data[key]) {
-                        data[key] += attr[key];
-                    } else {
-                        data[key] = attr[key];
-                    }
-                }
-            });
-        });
-
-        return data;
-    };
-
+        
     function GetPartyLetter(party) {
         if (party === "Unknown" || !party)
             return "";
@@ -301,28 +325,6 @@ define([
             });
 
     }
-
-    async function PopupFormat(gfx) {
-        let attr = gfx.graphic.attributes;
-        let repHtml = "";
-        if (attr["googleID"]) {
-            repHtml = await GetRepHtml(attr["googleID"]);
-        }
-
-        return `
-                    <span class="popf">${attr["NAME"]}</span>
-                    <hr class="pop">
-                    <div>Total Population: <strong>${attr["TOTAL_POP"].toLocaleString()}</strong></div>
-                    <div>Minority Population: <strong>${attr["MINORITY_POP"].toLocaleString()}</strong></div>
-                    ${attr["MEDIAN_AGE"] ? `<div>Median Age: <strong>${attr["MEDIAN_AGE"]} years</strong></div>` : ""}
-                    <div>Number of Households: <strong>${attr["TOTAL_HOUSEHOLDS"].toLocaleString()}</strong></div>
-                    ${attr["MEDIAN_HOUSEHOLD_INCOME"] ? `<div>Median Household Income: <strong>$${attr["MEDIAN_HOUSEHOLD_INCOME"].toLocaleString()}</strong></div>` : ""}
-                    ${repHtml ? `
-                    <hr>
-                    <h6>Representative Info</h6>
-                    <div>${repHtml}</div>
-                    ` : ""}
-                `;
-    }
+    
     return utils;
 })
