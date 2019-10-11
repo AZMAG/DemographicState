@@ -2,6 +2,7 @@
 define([
         'mag/config/mapsConfig',
         'mag/config/config',
+        'mag/utilities',
         'dojo/topic',
         'esri/tasks/QueryTask'
     ],
@@ -329,8 +330,8 @@ define([
                 });
 
                 app.GetData(config.layerDef['blockGroups'], geoids).then(function (data) {
-                    var acsdata = app.summarizeFeatures(data.acsData);
-                    var censusdata = app.summarizeFeatures(data.censusData);
+                    var acsdata = summarizeFeatures(data.acsData);
+                    var censusdata = summarizeFeatures(data.censusData);
 
                     app.selectedReport.acsData = {
                         features: [{
@@ -348,7 +349,7 @@ define([
                         }]
                     };
                     tp.publish('open-report-window', app.selectedReport, 'acs');
-                    app.AddHighlightGraphics(data.acsData.features, true);
+                    AddHighlightGraphics(data.acsData.features, true);
                     $('.reportFormArea').hide();
                 });
             });

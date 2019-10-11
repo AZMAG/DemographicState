@@ -1,6 +1,7 @@
 "use strict";
 define([
         "mag/config/config",
+        "map/utilities",
         "esri/Map",
         "esri/views/MapView",
         "esri/layers/FeatureLayer",
@@ -118,7 +119,7 @@ define([
                         visible: layer.visible,
                         popupTemplate: {
                             title: layer.title + '<div style="display:none">{*}</div>',
-                            content: app.PopupFormat,
+                            content: PopupFormat,
                             actions: [{
                                 title: "Open Report",
                                 id: "open-report",

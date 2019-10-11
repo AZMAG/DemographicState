@@ -70,7 +70,7 @@ define([
         });
     }
 
-    app.clearDrawnGraphics = function () {
+    function clearDrawnGraphics() {
         let gfxLayer = app.map.findLayerById("gfxLayer");
         gfxLayer.removeAll();
 
@@ -79,19 +79,19 @@ define([
         app.view.graphics.removeAll();
     };
 
-    app.numberWithCommas = function (x) {
+    function numberWithCommas(x) {
         return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     };
 
-    app.chartTooltip = function (value, category) {
+    function chartTooltip(value, category) {
         return `${app.numberWithCommas(value)} <r> ${category}`;
     };
 
-    app.valueAxisTemplate = function (value) {
-        return app.numberWithCommas(value);
+    function valueAxisTemplate(value) {
+        return numberWithCommas(value);
     };
 
-    app.wrapText = function (value) {
+    function wrapText(value) {
         var wrapLength = 12;
         var returnLabel = "";
         var lineLength = 0;
@@ -113,11 +113,11 @@ define([
         return returnLabel;
     };
 
-    app.showInThousands = function (value) {
+    function showInThousands(value) {
         console.log(value);
     };
 
-    app.AddHighlightGraphics = function (features, zoomTo) {
+    function AddHighlightGraphics(features, zoomTo) {
             let gfx = [];
             for (let i = 0; i < features.length; i++) {
                 const feature = features[i];
@@ -143,7 +143,7 @@ define([
             }
     };
 
-    app.AddHighlightGraphic = function (graphic) {
+    function AddHighlightGraphic(graphic) {
         let gfxLayer = app.map.findLayerById("gfxLayer");
 
         if (gfxLayer.graphics && gfxLayer.graphics.items.length > 0) {
@@ -165,7 +165,7 @@ define([
         }
     };
 
-    app.summarizeFeatures = function (res) {
+    function summarizeFeatures(res) {
         // console.log(res);
 
         if (!app.summableFields) {
@@ -302,7 +302,7 @@ define([
 
     }
 
-    app.PopupFormat = async function (gfx) {
+    async function PopupFormat(gfx) {
         let attr = gfx.graphic.attributes;
         let repHtml = "";
         if (attr["googleID"]) {

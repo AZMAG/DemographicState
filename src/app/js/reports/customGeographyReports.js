@@ -1,6 +1,7 @@
 "use strict";
 define([
         "mag/config/config",
+        "mag/utilities",
         "dojo/topic",
         "esri/widgets/Sketch/SketchViewModel",
         "esri/Graphic",
@@ -179,11 +180,11 @@ define([
 
                 function ProcessSelection(gfx) {
                     app.GetData(config.layerDef["blockGroups"], null, gfx.geometry).then(function (data) {
-                        var acsData = app.summarizeFeatures(data.acsData);
-                        var censusData = app.summarizeFeatures(data.censusData);
+                        var acsData = summarizeFeatures(data.acsData);
+                        var censusData = summarizeFeatures(data.censusData);
 
                         if (data.acsData.features.length === 0) {
-                            app.clearDrawnGraphics();
+                            clearDrawnGraphics();
                             // TODO: This should be prettied up at some point.
                             // Just using the basic alert function isn"t pretty enough.
                             alert("Your selection did not return any results.  Please try again.");
@@ -205,7 +206,7 @@ define([
                             };
                             tp.publish("open-report-window", app.selectedReport, "acs");
                             $customGeographyReports.hide();
-                            app.AddHighlightGraphics(data.acsData.features, $useZoom.is(":checked"));
+                            AddHighlightGraphics(data.acsData.features, $useZoom.is(":checked"));
                             $(".reportFormArea").hide();
                         }
                     });

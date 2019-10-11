@@ -1,6 +1,7 @@
 "use strict";
 define([
         "mag/config/config",
+        'mag/utilities',
         "dojo/topic"
     ],
     function (
@@ -156,7 +157,7 @@ define([
 
     function OpenReportByGEOIDs(conf, GEOIDs) {
         app.GetData(conf, GEOIDs).then(function (data) {
-            app.AddHighlightGraphics(data.acsData.features, true);
+            AddHighlightGraphics(data.acsData.features, true);
             app.view.goTo(data.acsData.features[0].geometry.extent.expand(1.5));
             if (data) {
                 tp.publish("open-report-window", data, "acs");

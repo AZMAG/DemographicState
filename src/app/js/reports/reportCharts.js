@@ -1,6 +1,7 @@
 'use strict';
 define([
         'mag/config/config',
+        'mag/utilities',
         'dojo/topic'
     ],
     function(
@@ -54,7 +55,7 @@ define([
                         },
                         tooltip: {
                             visible: true,
-                            template: `#= app.chartTooltip(value, category) # <br> #= kendo.format("{0:P}", percentage) #`
+                            template: `#= chartTooltip(value, category) # <br> #= kendo.format("{0:P}", percentage) #`
                         }
                     },
                     chartArea: {
@@ -68,7 +69,7 @@ define([
                             rotation: {
                                 angle: ops.type === 'column' ? 45 : 0
                             },
-                            template: '#= app.wrapText(value) #'
+                            template: '#= wrapText(value) #'
                         },
                         majorGridLines: {
                             visible: false
@@ -80,7 +81,7 @@ define([
                     valueAxis: {
                         color: 'black',
                         labels: {
-                            template: '#= app.valueAxisTemplate(value) #',
+                            template: '#= valueAxisTemplate(value) #',
                             step: 2
                         }
                     }
