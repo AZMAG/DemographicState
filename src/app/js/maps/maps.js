@@ -1,6 +1,7 @@
 "use strict";
 define([
         "mag/config/config",
+        "mag/config/initConfig",        
         "mag/utilities",
         "esri/Map",
         "esri/views/MapView",
@@ -14,6 +15,7 @@ define([
     ],
     function (
         config,
+        initConfig,        
         utilities,
         Map,
         MapView,
@@ -39,7 +41,7 @@ define([
         app.view = new MapView({
             container: "viewDiv",
             map: app.map,
-            extent: app.initConfig ? app.initConfig.extent : config.initExtent,
+            extent: initConfig.getExtent() ? initConfig.getExtent() : config.initExtent,
             constraints: {
                 rotationEnabled: false,
                 minZoom: 7

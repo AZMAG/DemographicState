@@ -1,13 +1,13 @@
 define([
         "mag/config/config",
-        "mag/utilities",
+        "mag/config/initConfig",
         "dojo/parser",
         "dojo/topic",
         "dojo/domReady!"
     ],
     function (
         config,
-        utils,
+        initConfig,
         parser,
         tp
     ){
@@ -25,22 +25,11 @@ define([
                     config.layerDef[conf.id] = conf;
                 }
             }
-            app.initConfig = undefined;
 
-            let initStr = utils.qs("init");
-            if (initStr) {
-                app.initConfig = JSON.parse(initStr);
-            }
+            initConfig.updateLayers();
 
-            if (app.initConfig && app.initConfig.visibleLayers) {
-                app.initConfig.visibleLayers.forEach(function (layer) {
-                    config.layers.forEach(function (conf) {
-                        if (layer === conf.id) {
-                            conf.visible = true;
-                        }
-                    });
-                });
-            }
+
+         
             tp.publish("config-loaded");
             app.configLoaded = true;
         });
