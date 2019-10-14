@@ -30,7 +30,7 @@ define([
         },
     
         chartTooltip: function(value, category) {
-            return `${app.numberWithCommas(value)} <r> ${category}`;
+            return `${this.numberWithCommas(value)} <r> ${category}`;
         },
     
         valueAxisTemplate: function(value) {
