@@ -2,11 +2,13 @@
 "use strict";
 define([
         "mag/config/initConfig",
+        "mag/utilities",
         "dojo/topic",
         "dojo/domReady!"
     ],
     function (
         initConfig,
+        utilities,        
         tp
         ) {
 
@@ -45,7 +47,7 @@ define([
                     $links.removeClass("active");
                     $arrows.hide();
                     $panelDivs.hide();
-                    app.clearDrawnGraphics();
+                    utilities.clearDrawnGraphics();
 
                     if (isActive) {
                         $content.hide();
@@ -97,7 +99,7 @@ define([
                 $arrows.hide();
                 $panelDivs.hide();
                 $content.hide();
-                app.clearDrawnGraphics();
+                utilties.clearDrawnGraphics();
                 tp.publish("panel-hidden", pandelId);
             });
 

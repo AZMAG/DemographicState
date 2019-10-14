@@ -8,7 +8,6 @@ define([
     "mag/maps/colorRamps",
     "mag/maps/cbr",
     "mag/maps/maps",
-    "mag/utilities",
     "mag/reports/standardReports",
     "mag/reports/reports",
     "mag/reports/reportGrid",
