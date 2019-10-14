@@ -110,6 +110,16 @@ define([
                 gfxLayer.add(tempGraphic);
             }
         },
+
+        
+        clearDrawnGraphics: function() {
+            let gfxLayer = app.map.findLayerById("gfxLayer");
+            gfxLayer.removeAll();
+
+            let bufferGraphics = app.map.findLayerById("bufferGraphics");
+            bufferGraphics.removeAll();
+            app.view.graphics.removeAll();
+        },
     
         summarizeFeatures: function(res) {
             // console.log(res);
@@ -213,15 +223,6 @@ define([
             });
         });
     }
-
-    function clearDrawnGraphics() {
-        let gfxLayer = app.map.findLayerById("gfxLayer");
-        gfxLayer.removeAll();
-
-        let bufferGraphics = app.map.findLayerById("bufferGraphics");
-        bufferGraphics.removeAll();
-        app.view.graphics.removeAll();
-    };
         
     function GetPartyLetter(party) {
         if (party === "Unknown" || !party)
