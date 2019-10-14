@@ -20,7 +20,7 @@ define([
 
         var mapsutils = {
             GetColorRamp: function (type, rampKey, numBreaks) {
-                const ramps = app.GetRampsByNumAndType(type, numBreaks);
+                const ramps = this.GetRampsByNumAndType(type, numBreaks);
                 let ramp = ramps[rampKey];
                 let rtnRamp = [];
                 for (let i = 0; i < ramp.length; i++) {
