@@ -34,7 +34,7 @@ define([
         },
     
         valueAxisTemplate: function(value) {
-            return numberWithCommas(value);
+            return this.numberWithCommas(value);
         },
     
         wrapText: function(value) {
