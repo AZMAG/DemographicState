@@ -9,9 +9,6 @@ define([
         },
         'Another Simple test' () {
                 assert.equal(1, 1);
-        },
-        'Another Simple test that fails' () {
-                assert.equal(1, 0);
         }
     });
 });
