@@ -10,7 +10,7 @@ module.exports = function (grunt) {
 
     "use strict";
 
-    require("matchdep").filterDev("grunt-*").forEach(grunt.loadNpmTasks);
+    require("matchdep").filterDev(["grunt-*","intern"]).forEach(grunt.loadNpmTasks);
 
     var includedModules = [
         "mag/app"
@@ -347,9 +347,57 @@ module.exports = function (grunt) {
                         }
                     }
                 }
-            } 
-
-
+            },
+            intern: {
+                options: {
+                    suites: ["test/js/**/*.js"],
+                    reporters: [ 'runner' ],
+                    loader: {
+                        script: "dojo",
+                        options: {
+                            async: false,
+                            tlmSiblingOfDojo: false,
+                            has: {
+                                "extend-esri": 1
+                            },
+                            packages: [
+                                {
+                                    name: "mag",
+                                    location: "src/app/js"
+                                },
+                                {
+                                    name: "esri",
+                                    location: "node_modules/arcgis-js-api"
+                                },
+                                {
+                                    name: "dojo",
+                                    location: "node_modules/dojo"
+                                },
+                                {
+                                    name: "dojox",
+                                    location: "node_modules/dojox"
+                                },
+                                {
+                                    name: "dijit",
+                                    location: "node_modules/dijit"
+                                },
+                                {
+                                    name: "@dojo",
+                                    location: "node_modules/@dojo"
+                                },
+                                {
+                                    name: "tslib",
+                                    location: "node_modules/tslib",
+                                    main: "tslib"
+                                }
+                            ]
+                        }
+                    }
+                },
+                node: {
+                    options: {}
+                }
+            }
     });
 
     grunt.registerTask("GetClassBreaks", function () {
@@ -376,6 +424,8 @@ module.exports = function (grunt) {
     grunt.registerTask('conn', [ "connect:site", "watch:site"]);
 
     grunt.registerTask('run', [ "build", "connect:site", "watch:site"]);
+
+    grunt.registerTask("test", ["intern"]);
 };
 
 // ref
