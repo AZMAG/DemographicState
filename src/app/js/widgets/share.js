@@ -1,11 +1,13 @@
 "use strict";
 define([
         "mag/config/config",
+        "mag/maps/maps-utils",
         "dojo/topic",
         "esri/tasks/QueryTask"
     ],
     function (
         config,
+        mapsutils,
         tp,
         QueryTask
     ) {
@@ -221,7 +223,7 @@ define([
         }
 
         async function GetShareObject() {
-            return app.GetCurrentMapsParams().then(function (mapData) {
+            return mapsutils.GetCurrentMapsParams().then(function (mapData) {
                 let exportObj = {
                     extent: GetRoundedExtent(),
                     panel: GetActivePanel(),
