@@ -1,10 +1,12 @@
 "use strict";
 define([
     "mag/config/mapsConfig",
+    "mag/config/initConfig",
     "dojo/topic",
     "dojo/domReady!"
 ], function (
         mapsConfig,
+        initConfig,
         tp
     ){
     //Cache Maps List Element
@@ -59,10 +61,8 @@ define([
 
             $(item).data("mapsConfig", data);
 
-            if (app.initConfig && app.initConfig.mapData) {
-                if (app.initConfig.mapData.FieldName === data.FieldName) {
-                    $initMap = $(this);
-                }
+            if (initConfig.mapDataFieldNameMatches(data.FieldName)) {
+                $initMap = $(this);
             }
         });
 

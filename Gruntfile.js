@@ -207,6 +207,7 @@ module.exports = function (grunt) {
                         "!dist/app/js/config/colorRampConfig.js",
                         "!dist/app/js/config/censusFieldsConfig.js",
                         "!dist/app/js/config/acsFieldsConfig.js",
+                        "!dist/app/js/config/initConfig.js",
                         "!dist/app/js/reports/standardReports.js",
                         "!dist/app/js/reports/reports.js",
                         "!dist/app/js/reports/reportGrid.js",

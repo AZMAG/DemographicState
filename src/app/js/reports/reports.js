@@ -5,6 +5,7 @@ define([
         'mag/config/config',
         'mag/config/censusFieldsConfig',
         'mag/config/acsFieldsConfig',
+        'mag/utilities',
         'dojo/topic',
         'esri/tasks/QueryTask'
     ],
@@ -12,6 +13,7 @@ define([
         config,
         censusFieldsConfig,
         acsFieldsConfig,
+        utilities,
         tp,
         QueryTask
     ){
@@ -56,17 +58,17 @@ define([
 
             tp.subscribe('panel-shown', function (panel) {
                 resetReportForm();
-                // app.clearDrawnGraphics();
+                // utilities.clearDrawnGraphics();
             });
 
             tp.subscribe('panel-hidden', function (panel) {
                 resetReportForm();
-                // app.clearDrawnGraphics();
+                // utilities.clearDrawnGraphics();
             });
 
             $reportArea.on('click', '.returnBtn', function () {
                 resetReportForm();
-                app.clearDrawnGraphics();
+                utilities.clearDrawnGraphics();
             });
 
             $reportArea.on('click', '.card', function () {
@@ -173,7 +175,7 @@ define([
                 fieldType: fld.fieldType,
                 fieldClass: fld.class,
                 fieldValue: Number(val),
-                fieldValueFormatted: app.numberWithCommas(Number(val).toFixed(1)).replace('.0', ''),
+                fieldValueFormatted: utilities.numberWithCommas(Number(val).toFixed(1)).replace('.0', ''),
                 chartCategory: fld.chartCategory,
                 chartType: fld.chartType,
                 chartName: fld.chartCategory,

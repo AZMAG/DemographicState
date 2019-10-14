@@ -1,7 +1,9 @@
 "use strict";
 require([
+    "mag/maps/maps-utils",
     "dojo/topic"
 ], function (
+    mapsutils,
     tp
 ) {
     let $printWidget = $("#printWidget");
@@ -42,7 +44,7 @@ require([
             }
             const imageData = screenSht.data;
 
-            let mapData = app.GetActiveMapData();
+            let mapData = mapsutils.GetActiveMapData();
             const title = mapData.Name;
 
             // to add the text to the screenshot we create a new canvas element
