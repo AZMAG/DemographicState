@@ -86,25 +86,11 @@ define([
             else {
                 return null;
             }
-        }
-        // extent: this.returnObject(this.parsedData, 'extent'), 
-        // panel: this.returnObject(this.parsedData, 'panel'), 
-        // transparency: this.returnObject(this.parsedData, 'transparency'), 
-        // legend: this.returnObject(this.parsedData, 'legend'),        
+        }      
 
     }
 
     
     return initConfig;
-        // {
-        //     mapDataFieldNameMatches: mapDataFieldNameMatches,
-        //     updateLayers: updateLayers,
-        //     checkBasemap: checkBasemap,
-        //     extent: extent,
-        //     panel: panel,
-        //     transparency: transparency,
-        //     legend: legend
-
-        // }; 
 
 });
