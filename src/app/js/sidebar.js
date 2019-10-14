@@ -1,14 +1,16 @@
 //This file includes all of the code and logic for controlling the side/bottom navigation bar
 "use strict";
 define([
+        "mag/config/initConfig",
         "mag/utilities",
         "dojo/topic",
         "dojo/domReady!"
     ],
     function (
-        utilities,
+        initConfig,
+        utilities,        
         tp
-    ) {
+        ) {
 
         tp.subscribe("layers-added", function () {
 
@@ -109,8 +111,8 @@ define([
                 $("#legend").fadeToggle();
                 $legendToggle.prop("checked", !$legendToggle.prop("checked"));
             }
-            if (app.initConfig && app.initConfig.panel) {
-                TogglePanel(app.initConfig.panel);
+            if (initConfig.getPanel()) {
+                TogglePanel(initConfig.getPanel());
             }
 
             $(window).resize(function () {
