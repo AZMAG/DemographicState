@@ -193,5 +193,7 @@ define([
                 return breakValues;
             });
         }
+
+        return mapsutils;
     }
 );

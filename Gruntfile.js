@@ -177,9 +177,7 @@ module.exports = function (grunt) {
                 processors: [
                     require('pixrem')(),
                     require('postcss-preset-env')(),
-                    require('autoprefixer')({
-                        browsers: 'last 1 versions'
-                    }),
+                    require('autoprefixer')(),
                     require('cssnano')()
                 ]
             },
@@ -190,45 +188,7 @@ module.exports = function (grunt) {
             }
         },
 
-        concat: {
-            js: {
-                src: ["dist/app/js/**", "!dist/app/js/generateClassBreaks.js", "!dist/app/js/main.js", "!dist/app/js/app.js",
-                        "!dist/app/js/layerlist.js",
-                        "!dist/app/js/sidebar.js",
-                        "!dist/app/js/maps/maps-utils.js",
-                        "!dist/app/js/maps/maps-panel.js",
-                        "!dist/app/js/maps/customClassBreaks.js",
-                        "!dist/app/js/maps/colorRamps.js",
-                        "!dist/app/js/maps/cbr.js",
-                        "!dist/app/js/utilities.js",
-                        "!dist/app/js/maps/maps.js",
-                        "!dist/app/js/config/mapsConfig.js",
-                        "!dist/app/js/config/config.js",
-                        "!dist/app/js/config/colorRampConfig.js",
-                        "!dist/app/js/config/censusFieldsConfig.js",
-                        "!dist/app/js/config/acsFieldsConfig.js",
-                        "!dist/app/js/config/initConfig.js",
-                        "!dist/app/js/reports/standardReports.js",
-                        "!dist/app/js/reports/reports.js",
-                        "!dist/app/js/reports/reportGrid.js",
-                        "!dist/app/js/reports/reportCharts.js",
-                        "!dist/app/js/reports/exportToExcel.js",
-                        "!dist/app/js/reports/customGeographyReports.js",
-                        "!dist/app/js/reports/advancedQueryReports.js",
-                        "!dist/app/js/widgets/zoom.js",
-                        "!dist/app/js/widgets/sketch.js",
-                        "!dist/app/js/widgets/share.js",
-                        "!dist/app/js/widgets/search.js",
-                        "!dist/app/js/widgets/print.js",
-                        "!dist/app/js/widgets/locate.js",
-                        "!dist/app/js/widgets/legend.js",
-                        "!dist/app/js/widgets/home.js",
-                        "!dist/app/js/widgets/basemapToggle.js",
-                        "!dist/app/js/widgets/drawing.js"
-                    ],
-
-                dest: jsFilePath
-            },
+        concat: {           
             css: {
                 src: ["dist/app/css/*.css", "!dist/app/css/concat.min.css"],
                 dest: "dist/app/css/concat.min.css"
@@ -318,10 +278,8 @@ module.exports = function (grunt) {
             File_Reference: {
                 src: ["dist/index.html"],
                 overwrite: true,
-                replacements: [{
-                    from: "REPLACE_FILE_NAME_HASH",
-                    to: fileHash,
-                }]
+                replacements: [                   
+                ]
             }
 
         },
