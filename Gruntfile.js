@@ -375,7 +375,7 @@ module.exports = function (grunt) {
     grunt.registerTask("require", ["requirejs"] );
 
     // grunt.registerTask("build", ["build-copy-concat", "build-js", "build-css", "build-html", "require"]);
-    grunt.registerTask("build", ["build-copy-concat", "build-js", "build-css", "require"]);
+    grunt.registerTask("build", ["intern", "build-copy-concat", "build-js", "build-css", "require"]);
 
     // the default task can be run just by typing "grunt" on the command line
     grunt.registerTask("default", ["build"]);
