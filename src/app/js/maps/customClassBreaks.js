@@ -1,9 +1,13 @@
 "use strict";
 define([
+        "mag/maps/maps-utils",
         "dojo/topic",
         "dojo/domReady!"
     ],
-    function (tp) {
+    function (
+        mapsutils,
+        tp
+    ) {
         tp.subscribe("layers-added", function () {
             let $customClassBreaksModal = $("#customClassBreaksModal");
             let $classBreakSliders = $("#classBreakSliders");
@@ -55,7 +59,7 @@ define([
                 const rend = lyr.renderer;
                 let infos = custom || rend.classBreakInfos;
 
-                app.GetCurrentMapsParams().then(function (data) {
+                mapsutils.GetCurrentMapsParams().then(function (data) {
 
                     let sliderHeight = $classBreakSliders.height() - (infos.length - 1) * 7;
                     // maxVal = infos[infos.length - 1].maxValue;
@@ -72,11 +76,11 @@ define([
                                 infos = data.cbInfos;
                             }
                         } else {
-                            infos = app.GetCurrentBreaks(breaks, data.colorRamp);
+                            infos = mapsutils.GetCurrentBreaks(breaks, data.colorRamp);
                         }
 
 
-                        // infos = app.GetCurrentBreaks(breaks, data.colorRamp);
+                        // infos = mapsutils.GetCurrentBreaks(breaks, data.colorRamp);
                         // infos = data.cbInfos && data.cbInfos.length > 0 ? data.cbInfos : 
                         maxVal = infos[infos.length - 1].maxValue;
                     }
@@ -99,12 +103,12 @@ define([
                             size: paneSize
                         });
 
-                        let minLabel = app.numLabel(info.minValue);
-                        let maxLabel = app.numLabel(info.maxValue);
+                        let minLabel = mapsutils.numLabel(info.minValue);
+                        let maxLabel = mapsutils.numLabel(info.maxValue);
 
                         if (info.label.includes("%")) {
-                            minLabel = `${app.pctLabel(info.minValue)}%`;
-                            maxLabel = `${app.pctLabel(info.maxValue)}%`;
+                            minLabel = `${mapsutils.pctLabel(info.minValue)}%`;
+                            maxLabel = `${mapsutils.pctLabel(info.maxValue)}%`;
                         }
 
                         if (i === infos.length - 1) {
@@ -201,26 +205,26 @@ define([
                     // update tooltip on left side of sliders
                     // Update inner label
                     if (prevInfo.label.includes("%")) {
-                        const newPrevLabel = `${app.pctLabel(prevMin)}% - ${app.pctLabel(prevMax)}%`;
+                        const newPrevLabel = `${mapsutils.pctLabel(prevMin)}% - ${mapsutils.pctLabel(prevMax)}%`;
                         prevInfo.label = newPrevLabel;
                         $prevInnerLabel.html(newPrevLabel);
 
-                        const newNextLabel = `${app.pctLabel(nextMin)}% - ${app.pctLabel(nextMax)}%`;
+                        const newNextLabel = `${mapsutils.pctLabel(nextMin)}% - ${mapsutils.pctLabel(nextMax)}%`;
                         nextInfo.label = newNextLabel;
                         $nextInnerLabel.html(newNextLabel);
 
-                        $prevTooltip.html(`<span class="sliderTooltipInnerLabel">${app.pctLabel(prevMin)}%</span>
+                        $prevTooltip.html(`<span class="sliderTooltipInnerLabel">${mapsutils.pctLabel(prevMin)}%</span>
                         <input style="display:none;" class="sliderTooltipInput k-textbox" >`);
                     } else {
-                        const newPrevLabel = `${app.numLabel(prevMin)} - ${app.numLabel(prevMax)}`;
+                        const newPrevLabel = `${mapsutils.numLabel(prevMin)} - ${mapsutils.numLabel(prevMax)}`;
                         $prevInnerLabel.html(newPrevLabel);
                         prevInfo.label = newPrevLabel;
 
-                        const newNextLabel = `${app.numLabel(nextMin)} - ${app.numLabel(nextMax)}`;
+                        const newNextLabel = `${mapsutils.numLabel(nextMin)} - ${mapsutils.numLabel(nextMax)}`;
                         $nextInnerLabel.html(newNextLabel);
                         nextInfo.label = newNextLabel;
 
-                        $prevTooltip.html(`<span class="sliderTooltipInnerLabel">${app.numLabel(prevMin)}</span>
+                        $prevTooltip.html(`<span class="sliderTooltipInnerLabel">${mapsutils.numLabel(prevMin)}</span>
                         <input style="display:none;" class="sliderTooltipInput k-textbox" >`);
                     }
 

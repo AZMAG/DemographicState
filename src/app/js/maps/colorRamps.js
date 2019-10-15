@@ -1,10 +1,14 @@
 "use strict";
 define([
+        "mag/maps/maps-utils",
         "dojo/topic",
         "dojo/domReady!"
     ],
 
-    function (tp) {
+    function (
+        mapsutils,
+        tp
+    ) {
         tp.subscribe("crp", buildColorRamp);
 
         function buildColorRamp() {
@@ -34,7 +38,7 @@ define([
             });
 
             function UpdateColorRampControl(data) {
-                $colorRamp.html(app.ColorRampToHTML(data.colorRamp, data.rampKey, data.type));
+                $colorRamp.html(mapsutils.ColorRampToHTML(data.colorRamp, data.rampKey, data.type));
             }
 
             tp.subscribe("BlockGroupRendererUpdated", UpdateColorRampControl);
@@ -42,11 +46,11 @@ define([
             function GetRampsHTMLByType(type) {
                 let rampsHtml = "";
                 let numBreaks = $classBreaksCount.val();
-                let ramps = app.GetRampsByNumAndType(type, numBreaks);
+                let ramps = mapsutils.GetRampsByNumAndType(type, numBreaks);
 
                 Object.keys(ramps).forEach(function (key) {
                     const ramp = ramps[key];
-                    let html = app.ColorRampToHTML(ramp, key, type);
+                    let html = mapsutils.ColorRampToHTML(ramp, key, type);
                     rampsHtml += html;
                 });
                 return rampsHtml;

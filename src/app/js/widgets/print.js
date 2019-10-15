@@ -1,11 +1,13 @@
 "use strict";
 define([
         "mag/config/config",
+        "mag/maps/maps-utils",
         "dojo/topic",
         "esri/widgets/Print/PrintViewModel"
     ], 
     (
         config,
+        mapsutils,
         tp,
         PrintVM
     ) => {
@@ -116,7 +118,7 @@ define([
 
 
         function GetFormData() {
-            let currentMap = app.GetActiveMapData();
+            let currentMap = mapsutils.GetActiveMapData();
             let legendLayers = [];
             let visibleLayers = app.map.layers.filter(layer => layer.visible);
 
@@ -186,7 +188,7 @@ define([
         }
 
         function setupPrintTitle() {
-            let currentMap = app.GetActiveMapData();
+            let currentMap = mapsutils.GetActiveMapData();
             $printMapTitle.val(`${currentMap.category} - ${currentMap.Name}`);
         }
 

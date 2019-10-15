@@ -1,7 +1,7 @@
 //This file listens for any changes to color ramps, number of class breaks,
 //or map changes and updates the block groups renderer.
 "use strict";
-define(["dojo/topic", "dojo/domReady!"], function (tp) {
+define(["mag/maps/maps-utils", "dojo/topic", "dojo/domReady!"], function (mapsutils, tp) {
     let $dynamicCBRCheckbox = $("#dynamicCBRCheckbox");
     $("#classType").change(function () {
         let type = $(this).val();
@@ -26,7 +26,7 @@ define(["dojo/topic", "dojo/domReady!"], function (tp) {
     });
 
     app.GetCurrentRenderer = async function () {
-        let data = await app.GetCurrentMapsParams();
+        let data = await mapsutils.GetCurrentMapsParams();
         //Construct renderer object
         let renderer = {
             type: "class-breaks",
