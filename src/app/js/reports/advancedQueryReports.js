@@ -169,7 +169,7 @@ define([
         }];
 
         let fieldDataSource = new kendo.data.HierarchicalDataSource({
-            data: areaQFields.concat(mapsConfigp)
+            data: areaQFields.concat(mapsConfig)
         });
 
         var treeView = $advancedTreeview.kendoTreeView({
