@@ -1,0 +1,41 @@
+{
+	"loader": {
+        "script": "dojo",
+        "async": true,
+        "tlmSiblingOfDojo": false,
+        "has": {
+          "extend-esri": 1
+        },
+        "options": {
+            "packages": [{
+                "name": "mag",
+                "location": "src/app/js"
+            },
+            {
+                "name": "esri",
+                "location": "node_modules/arcgis-js-api"
+            }, {
+                "name": "dojo",
+                "location": "node_modules/dojo"
+            }, {
+                "name": "dojox",
+                "location": "node_modules/dojox"
+            }, {
+                "name": "dijit",
+                "location": "node_modules/dijit"
+            },
+            {
+                "name": "@dojo",
+                "location": "node_modules/@dojo"
+            },
+            {
+                "name": "tslib",
+                "location": "node_modules/tslib",
+                "main": "tslib"
+            }
+        ]
+        }
+    },
+    "suites": "test/js/**/*.js"
+  
+}
