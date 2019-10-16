@@ -2,11 +2,13 @@
 define([
         "mag/config/config",
         'mag/utilities',
+        "mag/maps/maps-utils",
         "dojo/topic"
     ],
     function (
         config,
         utilities,
+        mapsutils,
         tp
     ) {
     tp.subscribe("panel-loaded", function (panel) {
@@ -135,7 +137,7 @@ define([
             let optionalFields = conf.displayFields || [displayField];
             let outFields = ["OBJECTID", "GEOID"].concat(optionalFields.slice());
 
-            let layer = app.map.findLayerById(conf.id);
+            let layer = mapsutilsi.map.findLayerById(conf.id);
 
             const q = {
                 where: "1=1",

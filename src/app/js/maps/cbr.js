@@ -60,7 +60,7 @@ define(["mag/maps/maps-utils", "dojo/topic", "dojo/domReady!"], function (mapsut
         app.GetCurrentRenderer().then(function (res) {
             if (res.renderer) {
                 //Update the layer with the new renderer.
-                let layer = app.map.findLayerById("blockGroups");
+                let layer = mapsutils.map.findLayerById("blockGroups");
                 let subLayer = layer.findSublayerById(0);
 
                 subLayer.renderer = res.renderer;

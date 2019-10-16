@@ -3,6 +3,7 @@ define([
         "mag/config/config",
         "mag/config/initConfig",        
         "mag/utilities",
+        "mag/maps/maps-utils",
         "esri/Map",
         "esri/views/MapView",
         "esri/layers/FeatureLayer",
@@ -17,6 +18,7 @@ define([
         config,
         initConfig,        
         utilities,
+        mapsutils,
         Map,
         MapView,
         FeatureLayer,
@@ -34,13 +36,13 @@ define([
     }
 
     function initMap() {
-        app.map = new Map({
+        mapsutils.map = new Map({
             basemap: "gray"
         });
 
         app.view = new MapView({
             container: "viewDiv",
-            map: app.map,
+            map: mapsutils.map,
             extent: initConfig.getExtent() ? initConfig.getExtent() : config.initExtent,
             constraints: {
                 rotationEnabled: false,
@@ -98,7 +100,7 @@ define([
             });
 
             bgLayer.findSublayerById(0).renderer = res.renderer;
-            app.map.add(bgLayer);
+            mapsutils.map.add(bgLayer);
             return;
         }
 
@@ -173,14 +175,14 @@ define([
             var gfxLayer = new GraphicsLayer({
                 id: "gfxLayer"
             });
-            app.map.add(gfxLayer);
+            mapsutils.map.add(gfxLayer);
 
             let bufferGraphicsLayer = new GraphicsLayer({
                 id: "bufferGraphics"
             });
-            app.map.layers.add(bufferGraphicsLayer);
+            mapsutils.map.layers.add(bufferGraphicsLayer);
 
-            app.map.layers.addMany(layersToAdd);
+            mapsutils.map.layers.addMany(layersToAdd);
             // layersToAdd.sort(function(a, b) {
             //     return b.sortOrder - a.sortOrder;
             // });
@@ -189,7 +191,7 @@ define([
             //For now.... I'm waiting until the block groups layer is finished to publish the layers-added event.
             //TODO: This should prevent the legend from trying to load to early.
             //It Should probably be refactored at some point
-            let bgLayer = app.map.findLayerById("blockGroups");
+            let bgLayer = mapsutils.map.findLayerById("blockGroups");
             var once = false;
             app.view.whenLayerView(bgLayer).then(function (lyrView) {
                 lyrView.watch("updating", function (value) {

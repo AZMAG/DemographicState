@@ -152,6 +152,9 @@ define([
                     });
                 }
                 return rtnData;
+            },
+            map:{
+                
             }
         }
 
