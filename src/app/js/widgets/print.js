@@ -27,10 +27,10 @@ define([
         let printVM = new PrintVM({
             printServiceUrl: config.printUrl,
             updateDelay: 300,
-            view: app.view
+            view: mapsutils.view
         });
         // $printWidget.tooltip('show');
-        app.view.ui.add($printWidget[0], "bottom-right");
+        mapsutils.view.ui.add($printWidget[0], "bottom-right");
 
         $printWidget.click(function () {
             // SetupPrintForm();
@@ -75,7 +75,7 @@ define([
         $printForm.submit(async function (e) {
             e.preventDefault();
             let q = GetFormData();
-            q.view = app.view;
+            q.view = mapsutils.view;
 
             //Disable form
             $formInputs.prop("disabled", true);

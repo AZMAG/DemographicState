@@ -4,12 +4,14 @@ define([
         "mag/config/config",
         "mag/config/censusFieldsConfig",
         "mag/config/acsFieldsConfig",
+        "mag/maps/maps-utils",
         "esri/Graphic"
     ],
     function(
         config,
         censusFieldsConfig,
         acsFieldsConfig,
+        mapsutils,
         Graphic
     ){
 //This file should include miscellaneous repeatable functions used in multiple places in the code. 
@@ -85,7 +87,7 @@ define([
                 gfxLayer.addMany(gfx);
     
                 if (zoomTo) {
-                    app.view.goTo(gfx);
+                    mapsutils.view.goTo(gfx);
                 }
         },
     
@@ -118,7 +120,7 @@ define([
 
             let bufferGraphics = app.map.findLayerById("bufferGraphics");
             bufferGraphics.removeAll();
-            app.view.graphics.removeAll();
+            mapsutils.view.graphics.removeAll();
         },
     
         summarizeFeatures: function(res) {

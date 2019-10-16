@@ -2,6 +2,7 @@
 define([
         "mag/config/config",
         "mag/config/initConfig",
+        "mag/maps/maps-utils",
         "esri/widgets/Legend",
         "dojo/topic",
         "dojo/domReady!"
@@ -9,6 +10,7 @@ define([
     function (
         config,
         initConfig,
+        mapsutils,
         Legend,
         tp
     ) {
@@ -17,7 +19,7 @@ define([
 
             //Legend
             let legend = $("#legend");
-            app.view.ui.add("legend", "top-right");
+            mapsutils.view.ui.add("legend", "top-right");
 
             //Create Block Group legend separately
             //Have to do this otherwise it makes the block group legend go to the bottom when other items are checked
@@ -25,7 +27,7 @@ define([
             var blockGroupsLayer = app.map.findLayerById("blockGroups");
 
             new Legend({
-                view: app.view,
+                view: mapsutils.view,
                 container: "bgLegend",
                 layerInfos: [{
                     title: "", //config.layerDef["blockGroups"].title,
@@ -67,7 +69,7 @@ define([
                 });
 
             new Legend({
-                view: app.view,
+                view: mapsutils.view,
                 container: "layerLegend",
                 layerInfos: layerInfos
             });

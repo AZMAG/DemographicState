@@ -78,7 +78,7 @@ define(["mag/maps/maps-utils", "dojo/topic", "dojo/domReady!"], function (mapsut
     tp.subscribe("classBreaksCount-change", UpdateMapRenderer);
 
     tp.subscribe("layers-added", function () {
-        app.view.watch("stationary", function (stationary) {
+        mapsutils.view.watch("stationary", function (stationary) {
             if (stationary) {
                 if ($dynamicCBRCheckbox.is(":checked")) {
                     UpdateMapRenderer();

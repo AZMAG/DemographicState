@@ -2,6 +2,7 @@
 define([
         "mag/config/config",
         "mag/utilities",
+        "mag/maps/maps-utils",
         "dojo/topic",
         "esri/widgets/Sketch/SketchViewModel",
         "esri/Graphic",
@@ -10,6 +11,7 @@ define([
     function (
         config,
         utilities,
+        mapsutils,
         tp,
         SketchViewModel,
         Graphic,
@@ -58,7 +60,7 @@ define([
                 };
                 let sketchVM;
                 sketchVM = new SketchViewModel({
-                    view: app.view,
+                    view: mapsutils.view,
                     layer: app.map.findLayerById("gfxLayer"),
                     updateOnGraphicClick: false,
                     pointSymbol: {
