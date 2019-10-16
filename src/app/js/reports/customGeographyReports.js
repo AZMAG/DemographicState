@@ -1,6 +1,7 @@
 "use strict";
 define([
         "mag/config/config",
+        "mag/reports/reports",
         "mag/utilities",
         "dojo/topic",
         "esri/widgets/Sketch/SketchViewModel",
@@ -9,6 +10,7 @@ define([
     ],
     function (
         config,
+        reports,
         utilities,
         tp,
         SketchViewModel,
@@ -180,7 +182,7 @@ define([
                 tp.subscribe("reset-reports", resetReport);
 
                 function ProcessSelection(gfx) {
-                    app.GetData(config.layerDef["blockGroups"], null, gfx.geometry).then(function (data) {
+                    reports.GetData(config.layerDef["blockGroups"], null, gfx.geometry).then(function (data) {
                         var acsData = utilities.summarizeFeatures(data.acsData);
                         var censusData = utilities.summarizeFeatures(data.censusData);
 

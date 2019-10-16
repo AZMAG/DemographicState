@@ -2,6 +2,7 @@
 define([
         'mag/config/mapsConfig',
         'mag/config/config',
+        'mag/reports/reports',
         'mag/utilities',
         'dojo/topic',
         'esri/tasks/QueryTask'
@@ -9,6 +10,7 @@ define([
     function (
         mapsConfig,
         config,
+        reports,
         utilities,
         tp,
         QueryTask
@@ -330,7 +332,7 @@ define([
                     geoids.push(feature.attributes['GEOID']);
                 });
 
-                app.GetData(config.layerDef['blockGroups'], geoids).then(function (data) {
+                reports.GetData(config.layerDef['blockGroups'], geoids).then(function (data) {
                     var acsdata = utilities.summarizeFeatures(data.acsData);
                     var censusdata = utilities.summarizeFeatures(data.censusData);
 
