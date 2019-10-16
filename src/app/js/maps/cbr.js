@@ -4,10 +4,12 @@
 define([
     "mag/maps/maps-utils",
     "dojo/topic",
+    "dojo/_base/lang",
     "dojo/domReady!"
 ], function (
     mapsutils,
-    tp
+    tp,
+    lang
     ) {
 
     var cbr = {
@@ -40,20 +42,20 @@ define([
                 renderer,
                 data
             };
-        },
-        
-        UpdateMapRenderer: function() {
-            this.GetCurrentRenderer().then(function (res) {
-                if (res.renderer) {
-                    //Update the layer with the new renderer.
-                    let layer = app.map.findLayerById("blockGroups");
-                    let subLayer = layer.findSublayerById(0);
-    
-                    subLayer.renderer = res.renderer;
-                    tp.publish("BlockGroupRendererUpdated", res.data);
-                }
-            })
         }
+    }
+
+    function UpdateMapRenderer() {
+        cbr.GetCurrentRenderer().then(function (res) {
+            if (res.renderer) {
+                //Update the layer with the new renderer.
+                let layer = app.map.findLayerById("blockGroups");
+                let subLayer = layer.findSublayerById(0);
+
+                subLayer.renderer = res.renderer;
+                tp.publish("BlockGroupRendererUpdated", res.data);
+            }
+        })
     }
 
     let $dynamicCBRCheckbox = $("#dynamicCBRCheckbox");
@@ -71,7 +73,7 @@ define([
         tp.publish("classType-change", type);
 
         if (type !== "Custom") {
-            cbr.UpdateMapRenderer();
+            UpdateMapRenderer();
         }
     });
 
@@ -84,17 +86,17 @@ define([
 
     // Subscribe to other change events
     // and update the renderer when any of them fire.
-    tp.subscribe("layers-added", cbr.UpdateMapRenderer());
-    tp.subscribe("colorRamp-Changed", cbr.UpdateMapRenderer());
-    tp.subscribe("map-selected", cbr.UpdateMapRenderer());
-    tp.subscribe("customClassBreaks-selected", cbr.UpdateMapRenderer());
-    tp.subscribe("classBreaksCount-change", cbr.UpdateMapRenderer());
+    tp.subscribe("layers-added", UpdateMapRenderer);
+    tp.subscribe("colorRamp-Changed", UpdateMapRenderer);
+    tp.subscribe("map-selected", UpdateMapRenderer);
+    tp.subscribe("customClassBreaks-selected", UpdateMapRenderer);
+    tp.subscribe("classBreaksCount-change", UpdateMapRenderer);
 
     tp.subscribe("layers-added", function () {
         app.view.watch("stationary", function (stationary) {
             if (stationary) {
                 if ($dynamicCBRCheckbox.is(":checked")) {
-                    cbr.UpdateMapRenderer();
+                    UpdateMapRenderer();
                 }
             }
         });
@@ -103,7 +105,7 @@ define([
         // }, 90);
 
         $dynamicCBRCheckbox.change(function () {
-            cbr.UpdateMapRenderer();
+            UpdateMapRenderer();
         })
 
         let $dynamicHelp = $("#dynamicHelp");
