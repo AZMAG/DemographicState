@@ -90,7 +90,7 @@ define([
                     .removeClass('active');
 
                 let dataSrc = $(this).data('val');
-                let d = app.selectedReport;
+                let d = reportutils.selectedReport;
 
                 if (dataSrc === 'acs') {
                     //Show Title 6 data
@@ -265,7 +265,7 @@ define([
         let $btnExportPDF = $header.find('.btnExportPDF');
         $btnExportPDF.tooltip();
         $btnExportPDF.off('click').on('click', function () {
-            ExportReportToPDF(app.selectedReport.conf, ids);
+            ExportReportToPDF(reportutils.selectedReport.conf, ids);
         });
 
         let vals = GetValsFromData(attr, fields);
@@ -467,6 +467,7 @@ define([
     let $loadingSpinner = $('.loading-container');
 
     var reportutils = {
+        selectedReport: {},
         GetData: async function (conf, geoids, geo) {
             $loadingSpinner.css('display', 'flex');
     
@@ -499,7 +500,7 @@ define([
     
             const [acsData, censusData] = await Promise.all([acsPromise, censusPromise]);
     
-            app.selectedReport = {
+            this.selectedReport = {
                 conf: conf,
                 acsData,
                 censusData
@@ -507,9 +508,9 @@ define([
     
             $loadingSpinner.css('display', 'none');
     
-            return $.extend({}, app.selectedReport);
+            return $.extend({}, this.selectedReport);
         }
-    }; 
+    } 
     
     return reportutils;
 });

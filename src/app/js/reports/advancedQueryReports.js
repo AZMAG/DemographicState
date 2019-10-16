@@ -336,7 +336,7 @@ define([
                     var acsdata = utilities.summarizeFeatures(data.acsData);
                     var censusdata = utilities.summarizeFeatures(data.censusData);
 
-                    app.selectedReport.acsData = {
+                    reports.selectedReport.acsData = {
                         features: [{
                             attributes: acsdata,
                             count: data.acsData.features.length,
@@ -344,14 +344,14 @@ define([
                         }]
                     };
 
-                    app.selectedReport.censusData = {
+                    reports.selectedReport.censusData = {
                         features: [{
                             attributes: censusdata,
                             count: data.acsData.features.length,
                             ids: data.censusData.features.map(feature => feature.attributes["GEOID"])
                         }]
                     };
-                    tp.publish('open-report-window', app.selectedReport, 'acs');
+                    tp.publish('open-report-window', reports.selectedReport, 'acs');
                     utilities.AddHighlightGraphics(data.acsData.features, true);
                     $('.reportFormArea').hide();
                 });

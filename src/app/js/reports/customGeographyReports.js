@@ -192,7 +192,7 @@ define([
                             // Just using the basic alert function isn"t pretty enough.
                             alert("Your selection did not return any results.  Please try again.");
                         } else {
-                            app.selectedReport.acsData = {
+                            reports.selectedReport.acsData = {
                                 features: [{
                                     attributes: acsData,
                                     count: data.acsData.features.length,
@@ -200,14 +200,14 @@ define([
                                 }]
                             };
 
-                            app.selectedReport.censusData = {
+                            reports.selectedReport.censusData = {
                                 features: [{
                                     attributes: censusData,
                                     count: data.censusData.features.length,
                                     ids: data.censusData.features.map(feature => feature.attributes["GEOID"])
                                 }]
                             };
-                            tp.publish("open-report-window", app.selectedReport, "acs");
+                            tp.publish("open-report-window", reports.selectedReport, "acs");
                             $customGeographyReports.hide();
                             utilities.AddHighlightGraphics(data.acsData.features, $useZoom.is(":checked"));
                             $(".reportFormArea").hide();
