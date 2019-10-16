@@ -29,7 +29,7 @@ define([
 
     tp.subscribe("config-loaded", initMap);
 
-    if (app.configLoaded) {
+    if (config.configLoaded) {
         initMap();
     }
 
