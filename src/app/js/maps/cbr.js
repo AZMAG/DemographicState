@@ -4,12 +4,10 @@
 define([
     "mag/maps/maps-utils",
     "dojo/topic",
-    "dojo/_base/lang",
     "dojo/domReady!"
 ], function (
     mapsutils,
-    tp,
-    lang
+    tp
     ) {
 
     var cbr = {
