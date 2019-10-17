@@ -31,7 +31,7 @@ define([
 
          
             tp.publish("config-loaded");
-            app.configLoaded = true;
+            config.configLoaded = true;
         });
 
         $("#colorRampModal").load("app/views/modal-colorRamp.html", function () {
