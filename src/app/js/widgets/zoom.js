@@ -1,12 +1,20 @@
 "use strict";
-define(["esri/widgets/Zoom/ZoomViewModel", "dojo/topic", "dojo/domReady!"], function (ZoomViewModel, tp) {
+define([
+        "mag/maps/maps-utils",
+        "esri/widgets/Zoom/ZoomViewModel",
+        "dojo/topic",
+        "dojo/domReady!"
+], function (
+        mapsutils,
+        ZoomViewModel,
+        tp) {
     tp.subscribe("map-loaded", function () {
         //Zoom
         const zoomId = "zoomWidget";
         let zoomVM = new ZoomViewModel({
-            view: app.view
+            view: mapsutils.view
         });
-        app.view.ui.add(zoomId, "bottom-right");
+        mapsutils.view.ui.add(zoomId, "bottom-right");
 
         let $zoomArea = $("#" + zoomId);
         $zoomArea.on("click", ".esri-widget--button", function () {
@@ -19,7 +27,7 @@ define(["esri/widgets/Zoom/ZoomViewModel", "dojo/topic", "dojo/domReady!"], func
         });
 
         let $zoomOutBtn = $zoomArea.find("#zoomOutBtn");
-        app.view.watch("zoom", function (zoom) {
+        mapsutils.view.watch("zoom", function (zoom) {
             if (zoom === 7) {
                 $zoomOutBtn.addClass("disabled");
             } else {

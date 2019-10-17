@@ -175,7 +175,7 @@ define([
         }
 
         function GetRoundedExtent() {
-            let e = app.view.extent;
+            let e = mapsutils.view.extent;
             return {
                 spatialReference: {
                     wkid: 102100

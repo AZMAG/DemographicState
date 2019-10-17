@@ -1,17 +1,20 @@
 "use strict";
 define([
+        "mag/maps/maps-utils",
         "esri/widgets/Home/HomeViewModel",
         "dojo/topic",
         "dojo/domReady!"
-    ],
-    function (HomeViewModel, tp) {
+],  function (
+    mapsutils,
+    HomeViewModel,
+    tp) {
         tp.subscribe("widget-zoom-loaded", function () {
             const homeId = "homeWidget";
             let homeVM = new HomeViewModel({
-                view: app.view
+                view: mapsutils.view
             });
 
-            app.view.ui.add(homeId, "bottom-right");
+            mapsutils.view.ui.add(homeId, "bottom-right");
 
             $("#" + homeId).click(function () {
                 homeVM.go();

@@ -1,12 +1,14 @@
 "use strict";
 define([
         "mag/config/initConfig",
+        "mag/maps/maps-utils",
         "esri/widgets/BasemapToggle/BasemapToggleViewModel",
         "dojo/topic",
         "dojo/domReady!"
     ],
     function (
         initConfig,
+        mapsutils,
         BasemapToggleViewModel,
         tp
         ) {
@@ -16,11 +18,11 @@ define([
             const basemapId = "basemapToggle";
 
             let toggleVM = new BasemapToggleViewModel({
-                view: app.view,
+                view: mapsutils.view,
                 nextBasemap: "hybrid"
             });
 
-            app.view.ui.add(basemapId, "bottom-right");
+            mapsutils.view.ui.add(basemapId, "bottom-right");
             let $toggleSelector = $("#" + basemapId);
             let toggled = true;
 

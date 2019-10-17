@@ -60,7 +60,7 @@ define([
                 };
                 let sketchVM;
                 sketchVM = new SketchViewModel({
-                    view: app.view,
+                    view: mapsutils.view,
                     layer: mapsutils.map.findLayerById("gfxLayer"),
                     updateOnGraphicClick: false,
                     pointSymbol: {

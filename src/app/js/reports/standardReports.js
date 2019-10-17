@@ -161,7 +161,7 @@ define([
     function OpenReportByGEOIDs(conf, GEOIDs) {
         app.GetData(conf, GEOIDs).then(function (data) {
             utilities.AddHighlightGraphics(data.acsData.features, true);
-            app.view.goTo(data.acsData.features[0].geometry.extent.expand(1.5));
+            mapsutils.view.goTo(data.acsData.features[0].geometry.extent.expand(1.5));
             if (data) {
                 tp.publish("open-report-window", data, "acs");
             } else {

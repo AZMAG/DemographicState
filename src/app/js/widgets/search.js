@@ -1,5 +1,6 @@
 "use strict";
 define([
+    "mag/maps/maps-utils",
     "esri/widgets/Search",
     "esri/tasks/Locator",
     "esri/Map",
@@ -7,12 +8,18 @@ define([
     "esri/geometry/Extent",
     "dojo/topic"
 ], function (
-    Search, Locator, Map, MapView, Extent, tp
+    mapsutils,
+    Search,
+    Locator,
+    Map,
+    MapView,
+    Extent,
+    tp
 ) {
     tp.subscribe("widget-print-loaded", function () {
 
         let search = new Search({
-            view: app.view,
+            view: mapsutils.view,
             includeDefaultSources: false,
             sources: [{
                 locator: new Locator({
@@ -43,7 +50,7 @@ define([
             }
         });
 
-        app.view.ui.add(search, "bottom-right");
+        mapsutils.view.ui.add(search, "bottom-right");
         tp.publish("widget-search-loaded");
     });
 });

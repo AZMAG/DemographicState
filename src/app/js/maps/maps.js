@@ -42,7 +42,7 @@ define([
             basemap: "gray"
         });
 
-        app.view = new MapView({
+        mapsutils.view = new MapView({
             container: "viewDiv",
             map: mapsutils.map,
             extent: initConfig.getExtent() ? initConfig.getExtent() : config.initExtent,
@@ -63,9 +63,9 @@ define([
             }
         });
 
-        app.view.when(function () {
+        mapsutils.view.when(function () {
             tp.publish('map-loaded');
-            app.view.popup.on('trigger-action', function (e) {
+            mapsutils.view.popup.on('trigger-action', function (e) {
                 if (e.action.id === 'open-report') {
                     tp.publish('toggle-panel', 'reports');
                     let f = e.target.selectedFeature;
@@ -195,7 +195,7 @@ define([
             //It Should probably be refactored at some point
             let bgLayer = mapsutils.map.findLayerById("blockGroups");
             var once = false;
-            app.view.whenLayerView(bgLayer).then(function (lyrView) {
+            mapsutils.view.whenLayerView(bgLayer).then(function (lyrView) {
                 lyrView.watch("updating", function (value) {
                     if (!value && !once) {
                         $('.loading-container').css('display', 'none');
@@ -208,7 +208,7 @@ define([
 
 
             var onc = false;
-            app.view.whenLayerView(gfxLayer).then(function (lyrView) {
+            mapsutils.view.whenLayerView(gfxLayer).then(function (lyrView) {
                 lyrView.watch("updating", function (value) {
                     if (!value && !onc) {
                         tp.publish("gfxLayer-loaded");
@@ -224,7 +224,7 @@ define([
                 spatialReference: 102100
             });
 
-            app.view.watch('extent', function (extent) {
+            mapsutils.view.watch('extent', function (extent) {
                 let currentCenter = extent.center;
                 if (!maxExtent.contains(currentCenter)) {
                     let newCenter = extent.center;
@@ -241,9 +241,9 @@ define([
                         newCenter.y = maxExtent.ymax;
                     }
 
-                    let newExtent = app.view.extent.clone();
+                    let newExtent = mapsutils.view.extent.clone();
                     newExtent.centerAt(newCenter);
-                    app.view.extent = newExtent;
+                    mapsutils.view.extent = newExtent;
                 }
             });
         }

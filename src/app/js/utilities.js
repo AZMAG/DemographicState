@@ -87,7 +87,7 @@ define([
                 gfxLayer.addMany(gfx);
     
                 if (zoomTo) {
-                    app.view.goTo(gfx);
+                    mapsutils.view.goTo(gfx);
                 }
         },
     
@@ -120,7 +120,7 @@ define([
 
             let bufferGraphics = mapsutils.map.findLayerById("bufferGraphics");
             bufferGraphics.removeAll();
-            app.view.graphics.removeAll();
+            mapsutils.view.graphics.removeAll();
         },
     
         summarizeFeatures: function(res) {
