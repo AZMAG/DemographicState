@@ -95,7 +95,7 @@ define([
                 let colorRamp = this.GetColorRamp(type, rampKey, cbrCount);
     
                 if (classType === "Custom") {
-                    cbInfos = app.GetCustomBreaks(colorRamp);
+                    cbInfos = this.GetCustomBreaks(colorRamp);
                 } else {
                     cbInfos = this.GetCurrentBreaks(breaks, colorRamp);
                 }

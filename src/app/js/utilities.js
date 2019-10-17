@@ -19,6 +19,8 @@ define([
     Number.prototype.MagFormat = function () {
         return this.toFixed(1);
     };
+    
+    var summableFields = null;
 
     var utils = {
         qs: function(key){
@@ -126,16 +128,16 @@ define([
         summarizeFeatures: function(res) {
             // console.log(res);
     
-            if (!app.summableFields) {
-                app.summableFields = [];
+            if (!summableFields) {
+                summableFields = [];
                 acsFieldsConfig.forEach(conf => {
                     if (conf.canSum) {
-                        app.summableFields.push(conf.fieldName);
+                        summableFields.push(conf.fieldName);
                     }
                 });
                 censusFieldsConfig.forEach(conf => {
                     if (conf.canSum) {
-                        app.summableFields.push(conf.fieldName);
+                        summableFields.push(conf.fieldName);
                     }
                 });
             }
@@ -144,7 +146,7 @@ define([
             res.features.forEach(feature => {
                 let attr = feature.attributes;
                 Object.keys(attr).forEach(key => {
-                    if (app.summableFields.indexOf(key) > -1) {
+                    if (summableFields.indexOf(key) > -1) {
                         if (data[key]) {
                             data[key] += attr[key];
                         } else {

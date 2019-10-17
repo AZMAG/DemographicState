@@ -199,7 +199,7 @@ define([
                 lyrView.watch("updating", function (value) {
                     if (!value && !once) {
                         $('.loading-container').css('display', 'none');
-                        // app.blockGroupLyrView = lyrView;
+                        // blockGroupLyrView = lyrView;
                         tp.publish("layers-added");
                         once = true;
                     }
