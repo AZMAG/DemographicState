@@ -153,9 +153,7 @@ define([
                 }
                 return rtnData;
             },
-            map:{
-                
-            }
+            map: null
         }
 
         async function GetDynamicClassBreaks(cbrCount, classType, conf) {
