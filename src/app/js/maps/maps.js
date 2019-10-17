@@ -4,6 +4,7 @@ define([
         "mag/config/initConfig",        
         "mag/utilities",
         "mag/maps/maps-utils",
+        "mag/maps/cbr",
         "esri/Map",
         "esri/views/MapView",
         "esri/layers/FeatureLayer",
@@ -19,6 +20,7 @@ define([
         initConfig,        
         utilities,
         mapsutils,
+        cbr,
         Map,
         MapView,
         FeatureLayer,
@@ -31,7 +33,7 @@ define([
 
     tp.subscribe("config-loaded", initMap);
 
-    if (app.configLoaded) {
+    if (config.configLoaded) {
         initMap();
     }
 
@@ -79,7 +81,7 @@ define([
         tp.subscribe("map-loaded", addLayers);
 
         async function addBGLayer() {
-            let res = await app.GetCurrentRenderer();
+            let res = await cbr.GetCurrentRenderer();
             let conf = config.layerDef['blockGroups'];
             let url = config.mainUrl;
             if (conf.url) {
