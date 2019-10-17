@@ -99,7 +99,7 @@ define([
                 $arrows.hide();
                 $panelDivs.hide();
                 $content.hide();
-                utilties.clearDrawnGraphics();
+                utilities.clearDrawnGraphics();
                 tp.publish("panel-hidden", pandelId);
             });
 

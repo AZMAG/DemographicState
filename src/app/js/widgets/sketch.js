@@ -12,11 +12,11 @@ define([
         // let newGfxLay = new GraphicsLayer({
         //     id: 'sketchGfx'
         // })
-        // app.map.add(newGfxLay);
+        // mapsutils.map.add(newGfxLay);
         // var sketch = new Sketch({
         //     layer: newGfxLay,
-        //     view: app.view
+        //     view: mapsutils.view
         // });
-        // app.view.ui.add(sketch, "bottom-right");
+        // mapsutils.view.ui.add(sketch, "bottom-right");
     });
 });
