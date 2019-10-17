@@ -1,12 +1,14 @@
 "use strict";
 define([
         "mag/config/config",
+        'mag/reports/reports-utils',
         'mag/utilities',
         "mag/maps/maps-utils",
         "dojo/topic"
     ],
     function (
         config,
+        reportsutils,
         utilities,
         mapsutils,
         tp
@@ -137,7 +139,7 @@ define([
             let optionalFields = conf.displayFields || [displayField];
             let outFields = ["OBJECTID", "GEOID"].concat(optionalFields.slice());
 
-            let layer = mapsutilsi.map.findLayerById(conf.id);
+            let layer = mapsutils.map.findLayerById(conf.id);
 
             const q = {
                 where: "1=1",
@@ -159,7 +161,7 @@ define([
     tp.subscribe("openReport-by-geoids", OpenReportByGEOIDs);
 
     function OpenReportByGEOIDs(conf, GEOIDs) {
-        app.GetData(conf, GEOIDs).then(function (data) {
+        reportsutils.GetData(conf, GEOIDs).then(function (data) {
             utilities.AddHighlightGraphics(data.acsData.features, true);
             mapsutils.view.goTo(data.acsData.features[0].geometry.extent.expand(1.5));
             if (data) {

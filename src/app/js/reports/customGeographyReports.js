@@ -1,6 +1,7 @@
 "use strict";
 define([
         "mag/config/config",
+        "mag/reports/reports-utils",
         "mag/utilities",
         "mag/maps/maps-utils",
         "dojo/topic",
@@ -10,6 +11,7 @@ define([
     ],
     function (
         config,
+        reportsutils,
         utilities,
         mapsutils,
         tp,
@@ -182,7 +184,7 @@ define([
                 tp.subscribe("reset-reports", resetReport);
 
                 function ProcessSelection(gfx) {
-                    app.GetData(config.layerDef["blockGroups"], null, gfx.geometry).then(function (data) {
+                    reportsutils.GetData(config.layerDef["blockGroups"], null, gfx.geometry).then(function (data) {
                         var acsData = utilities.summarizeFeatures(data.acsData);
                         var censusData = utilities.summarizeFeatures(data.censusData);
 
@@ -192,7 +194,7 @@ define([
                             // Just using the basic alert function isn"t pretty enough.
                             alert("Your selection did not return any results.  Please try again.");
                         } else {
-                            app.selectedReport.acsData = {
+                            reportsutils.selectedReport.acsData = {
                                 features: [{
                                     attributes: acsData,
                                     count: data.acsData.features.length,
@@ -200,14 +202,14 @@ define([
                                 }]
                             };
 
-                            app.selectedReport.censusData = {
+                            reportsutils.selectedReport.censusData = {
                                 features: [{
                                     attributes: censusData,
                                     count: data.censusData.features.length,
                                     ids: data.censusData.features.map(feature => feature.attributes["GEOID"])
                                 }]
                             };
-                            tp.publish("open-report-window", app.selectedReport, "acs");
+                            tp.publish("open-report-window", reportsutils.selectedReport, "acs");
                             $customGeographyReports.hide();
                             utilities.AddHighlightGraphics(data.acsData.features, $useZoom.is(":checked"));
                             $(".reportFormArea").hide();
