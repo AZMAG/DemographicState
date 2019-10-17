@@ -24,7 +24,7 @@ define([
             //Create Block Group legend separately
             //Have to do this otherwise it makes the block group legend go to the bottom when other items are checked
 
-            var blockGroupsLayer = app.map.findLayerById("blockGroups");
+            var blockGroupsLayer = mapsutils.map.findLayerById("blockGroups");
 
             new Legend({
                 view: mapsutils.view,
@@ -63,7 +63,7 @@ define([
                     if (conf.legend && conf.id !== "blockGroups") {
                         layerInfos.push({
                             title: conf.title,
-                            layer: app.map.findLayerById(conf.id)
+                            layer: mapsutils.map.findLayerById(conf.id)
                         });
                     }
                 });

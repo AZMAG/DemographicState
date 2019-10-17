@@ -61,7 +61,7 @@ define([
                 let sketchVM;
                 sketchVM = new SketchViewModel({
                     view: mapsutils.view,
-                    layer: app.map.findLayerById("gfxLayer"),
+                    layer: mapsutils.map.findLayerById("gfxLayer"),
                     updateOnGraphicClick: false,
                     pointSymbol: {
                         type: "simple-marker",
@@ -126,7 +126,7 @@ define([
 
                 function AddBufferedGraphic(e) {
                     if (e.graphic) {
-                        let bufferGraphicsLayer = app.map.findLayerById("bufferGraphics");
+                        let bufferGraphicsLayer = mapsutils.map.findLayerById("bufferGraphics");
                         bufferGraphicsLayer.removeAll();
                         let buffGfx = null;
                         let buffered = geometryEngine.buffer(e.graphic.geometry, $bufferSize.val(), $bufferUnit.val());

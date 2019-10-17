@@ -45,7 +45,7 @@ define([
     function StartupMapsList() {
         //Append html
         // console.log($mapsList, app);
-        // console.log(GetMapsHTML(app.mapsConfig));
+        // console.log(GetMapsHTML(maputils.mapsConfig));
 
         $mapsList.append(GetMapsHTML(mapsConfig));
 

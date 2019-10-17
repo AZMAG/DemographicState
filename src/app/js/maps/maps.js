@@ -4,6 +4,7 @@ define([
         "mag/config/initConfig",        
         "mag/utilities",
         "mag/maps/maps-utils",
+        "mag/maps/cbr",
         "esri/Map",
         "esri/views/MapView",
         "esri/layers/FeatureLayer",
@@ -19,6 +20,7 @@ define([
         initConfig,        
         utilities,
         mapsutils,
+        cbr,
         Map,
         MapView,
         FeatureLayer,
@@ -31,18 +33,18 @@ define([
 
     tp.subscribe("config-loaded", initMap);
 
-    if (app.configLoaded) {
+    if (config.configLoaded) {
         initMap();
     }
 
     function initMap() {
-        app.map = new Map({
+        mapsutils.map = new Map({
             basemap: "gray"
         });
 
         mapsutils.view = new MapView({
             container: "viewDiv",
-            map: app.map,
+            map: mapsutils.map,
             extent: initConfig.getExtent() ? initConfig.getExtent() : config.initExtent,
             constraints: {
                 rotationEnabled: false,
@@ -79,7 +81,7 @@ define([
         tp.subscribe("map-loaded", addLayers);
 
         async function addBGLayer() {
-            let res = await app.GetCurrentRenderer();
+            let res = await cbr.GetCurrentRenderer();
             let conf = config.layerDef['blockGroups'];
             let url = config.mainUrl;
             if (conf.url) {
@@ -100,7 +102,7 @@ define([
             });
 
             bgLayer.findSublayerById(0).renderer = res.renderer;
-            app.map.add(bgLayer);
+            mapsutils.map.add(bgLayer);
             return;
         }
 
@@ -175,14 +177,14 @@ define([
             var gfxLayer = new GraphicsLayer({
                 id: "gfxLayer"
             });
-            app.map.add(gfxLayer);
+            mapsutils.map.add(gfxLayer);
 
             let bufferGraphicsLayer = new GraphicsLayer({
                 id: "bufferGraphics"
             });
-            app.map.layers.add(bufferGraphicsLayer);
+            mapsutils.map.layers.add(bufferGraphicsLayer);
 
-            app.map.layers.addMany(layersToAdd);
+            mapsutils.map.layers.addMany(layersToAdd);
             // layersToAdd.sort(function(a, b) {
             //     return b.sortOrder - a.sortOrder;
             // });
@@ -191,7 +193,7 @@ define([
             //For now.... I'm waiting until the block groups layer is finished to publish the layers-added event.
             //TODO: This should prevent the legend from trying to load to early.
             //It Should probably be refactored at some point
-            let bgLayer = app.map.findLayerById("blockGroups");
+            let bgLayer = mapsutils.map.findLayerById("blockGroups");
             var once = false;
             mapsutils.view.whenLayerView(bgLayer).then(function (lyrView) {
                 lyrView.watch("updating", function (value) {

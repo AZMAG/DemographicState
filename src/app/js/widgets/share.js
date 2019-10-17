@@ -166,7 +166,7 @@ define([
 
         function GetVisibleLayers() {
             let rtnArr = [];
-            app.map.layers.items.forEach((lyr) => {
+            mapsutils.map.layers.items.forEach((lyr) => {
                 if (lyr.visible) {
                     rtnArr.push(lyr.id);
                 }
@@ -192,7 +192,7 @@ define([
         }
 
         function GetTransparency() {
-            const layer = app.map.findLayerById("blockGroups");
+            const layer = mapsutils.map.findLayerById("blockGroups");
             return layer.opacity;
         }
 
@@ -235,7 +235,7 @@ define([
                         FieldName: mapData.conf.FieldName,
                         breaks: mapData.classType === "Custom" ? mapData.cbInfos : []
                     },
-                    basemap: app.map.basemap.id,
+                    basemap: mapsutils.map.basemap.id,
                     transparency: GetTransparency(),
                     visibleLayers: GetVisibleLayers(),
                     openReport: false

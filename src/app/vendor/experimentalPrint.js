@@ -19,9 +19,9 @@ require([
             mapsutils.view.takeScreenshot({
                 format: "png",
                 layers: [
-                    app.map.findLayerById("blockGroups"),
-                    app.map.findLayerById("streets"),
-                    app.map.findLayerById("countyBoundaries")
+                    mapsutils.map.findLayerById("blockGroups"),
+                    mapsutils.map.findLayerById("streets"),
+                    mapsutils.map.findLayerById("countyBoundaries")
                 ]
             }).then((screenshot) => {
                 savedScreenshot = screenshot;

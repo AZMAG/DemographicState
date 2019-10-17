@@ -83,7 +83,7 @@ define([
                     });
                     gfx.push(g);
                 }
-                let gfxLayer = app.map.findLayerById("gfxLayer");
+                let gfxLayer = mapsutils.map.findLayerById("gfxLayer");
                 gfxLayer.addMany(gfx);
     
                 if (zoomTo) {
@@ -92,7 +92,7 @@ define([
         },
     
         AddHighlightGraphic: function(graphic) {
-            let gfxLayer = app.map.findLayerById("gfxLayer");
+            let gfxLayer = mapsutils.map.findLayerById("gfxLayer");
     
             if (gfxLayer.graphics && gfxLayer.graphics.items.length > 0) {
                 console.log("no graphics to highlight");
@@ -115,10 +115,10 @@ define([
 
         
         clearDrawnGraphics: function() {
-            let gfxLayer = app.map.findLayerById("gfxLayer");
+            let gfxLayer = mapsutils.map.findLayerById("gfxLayer");
             gfxLayer.removeAll();
 
-            let bufferGraphics = app.map.findLayerById("bufferGraphics");
+            let bufferGraphics = mapsutils.map.findLayerById("bufferGraphics");
             bufferGraphics.removeAll();
             mapsutils.view.graphics.removeAll();
         },
