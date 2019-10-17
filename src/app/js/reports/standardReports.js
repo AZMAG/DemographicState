@@ -139,7 +139,7 @@ define([
             let optionalFields = conf.displayFields || [displayField];
             let outFields = ["OBJECTID", "GEOID"].concat(optionalFields.slice());
 
-            let layer = mapsutilsi.map.findLayerById(conf.id);
+            let layer = mapsutils.map.findLayerById(conf.id);
 
             const q = {
                 where: "1=1",
