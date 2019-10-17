@@ -1,5 +1,12 @@
 'use strict';
-define(['dojo/topic'], function (tp) {
+define([
+    'mag/reports/reports-utils',
+    'dojo/topic'
+],
+function (
+    reportsutils,
+    tp
+    ){
     const expandHTML = 'Expand Topics<i style="margin-left: 5px;" class="fa fa-expand" aria-hidden="true"></i>';
     const collapseHTML = 'Collapse Topics<i style="margin-left: 5px;" class="fa fa-compress" aria-hidden="true"></i>';
     const toolbarTemplate = `
@@ -68,7 +75,7 @@ define(['dojo/topic'], function (tp) {
             target,
             cols
         });
-        let features = app.selectedReport.acsData.features;
+        let features = reportsutils.selectedReport.acsData.features;
 
         $grid
             .find('thead')

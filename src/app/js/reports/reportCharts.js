@@ -56,7 +56,10 @@ define([
                         },
                         tooltip: {
                             visible: true,
-                            template: `#= utilities.chartTooltip(value, category) # <br> #= kendo.format("{0:P}", percentage) #`
+                            template: function (item) {
+                                var text = utilities.chartTooltip(item.value, item.category);
+                                return text+' <br> '+kendo.format("{0:P}", item.percentage);
+                            }
                         }
                     },
                     chartArea: {
@@ -70,7 +73,10 @@ define([
                             rotation: {
                                 angle: ops.type === 'column' ? 45 : 0
                             },
-                            template: '#= utilities.wrapText(value) #'
+                            template: function (item) {
+                                var text = utilities.wrapText(item.value);
+                                return text;
+                            }
                         },
                         majorGridLines: {
                             visible: false
@@ -82,7 +88,10 @@ define([
                     valueAxis: {
                         color: 'black',
                         labels: {
-                            template: '#= utilities.valueAxisTemplate(value) #',
+                            template: function (item) {
+                                var text = utilities.valueAxisTemplate(item.value);
+                                return text;
+                            },
                             step: 2
                         }
                     }

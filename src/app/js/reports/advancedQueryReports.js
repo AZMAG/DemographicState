@@ -2,6 +2,7 @@
 define([
         'mag/config/mapsConfig',
         'mag/config/config',
+        'mag/reports/reports-utils',
         'mag/utilities',
         'dojo/topic',
         'esri/tasks/QueryTask'
@@ -9,6 +10,7 @@ define([
     function (
         mapsConfig,
         config,
+        reportsutils,
         utilities,
         tp,
         QueryTask
@@ -330,11 +332,11 @@ define([
                     geoids.push(feature.attributes['GEOID']);
                 });
 
-                app.GetData(config.layerDef['blockGroups'], geoids).then(function (data) {
+                reportsutils.GetData(config.layerDef['blockGroups'], geoids).then(function (data) {
                     var acsdata = utilities.summarizeFeatures(data.acsData);
                     var censusdata = utilities.summarizeFeatures(data.censusData);
 
-                    app.selectedReport.acsData = {
+                    reportsutils.selectedReport.acsData = {
                         features: [{
                             attributes: acsdata,
                             count: data.acsData.features.length,
@@ -342,14 +344,14 @@ define([
                         }]
                     };
 
-                    app.selectedReport.censusData = {
+                    reportsutils.selectedReport.censusData = {
                         features: [{
                             attributes: censusdata,
                             count: data.acsData.features.length,
                             ids: data.censusData.features.map(feature => feature.attributes["GEOID"])
                         }]
                     };
-                    tp.publish('open-report-window', app.selectedReport, 'acs');
+                    tp.publish('open-report-window', reportsutils.selectedReport, 'acs');
                     utilities.AddHighlightGraphics(data.acsData.features, true);
                     $('.reportFormArea').hide();
                 });
