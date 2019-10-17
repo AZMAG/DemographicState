@@ -3,6 +3,8 @@ define([
         "mag/config/config",
         "mag/config/initConfig",        
         "mag/utilities",
+        "mag/maps/maps-utils",
+        "mag/maps/cbr",
         "esri/Map",
         "esri/views/MapView",
         "esri/layers/FeatureLayer",
@@ -17,6 +19,8 @@ define([
         config,
         initConfig,        
         utilities,
+        mapsutils,
+        cbr,
         Map,
         MapView,
         FeatureLayer,
@@ -29,18 +33,18 @@ define([
 
     tp.subscribe("config-loaded", initMap);
 
-    if (app.configLoaded) {
+    if (config.configLoaded) {
         initMap();
     }
 
     function initMap() {
-        app.map = new Map({
+        mapsutils.map = new Map({
             basemap: "gray"
         });
 
-        app.view = new MapView({
+        mapsutils.view = new MapView({
             container: "viewDiv",
-            map: app.map,
+            map: mapsutils.map,
             extent: initConfig.getExtent() ? initConfig.getExtent() : config.initExtent,
             constraints: {
                 rotationEnabled: false,
@@ -59,9 +63,9 @@ define([
             }
         });
 
-        app.view.when(function () {
+        mapsutils.view.when(function () {
             tp.publish('map-loaded');
-            app.view.popup.on('trigger-action', function (e) {
+            mapsutils.view.popup.on('trigger-action', function (e) {
                 if (e.action.id === 'open-report') {
                     tp.publish('toggle-panel', 'reports');
                     let f = e.target.selectedFeature;
@@ -77,7 +81,7 @@ define([
         tp.subscribe("map-loaded", addLayers);
 
         async function addBGLayer() {
-            let res = await app.GetCurrentRenderer();
+            let res = await cbr.GetCurrentRenderer();
             let conf = config.layerDef['blockGroups'];
             let url = config.mainUrl;
             if (conf.url) {
@@ -98,7 +102,7 @@ define([
             });
 
             bgLayer.findSublayerById(0).renderer = res.renderer;
-            app.map.add(bgLayer);
+            mapsutils.map.add(bgLayer);
             return;
         }
 
@@ -173,14 +177,14 @@ define([
             var gfxLayer = new GraphicsLayer({
                 id: "gfxLayer"
             });
-            app.map.add(gfxLayer);
+            mapsutils.map.add(gfxLayer);
 
             let bufferGraphicsLayer = new GraphicsLayer({
                 id: "bufferGraphics"
             });
-            app.map.layers.add(bufferGraphicsLayer);
+            mapsutils.map.layers.add(bufferGraphicsLayer);
 
-            app.map.layers.addMany(layersToAdd);
+            mapsutils.map.layers.addMany(layersToAdd);
             // layersToAdd.sort(function(a, b) {
             //     return b.sortOrder - a.sortOrder;
             // });
@@ -189,9 +193,9 @@ define([
             //For now.... I'm waiting until the block groups layer is finished to publish the layers-added event.
             //TODO: This should prevent the legend from trying to load to early.
             //It Should probably be refactored at some point
-            let bgLayer = app.map.findLayerById("blockGroups");
+            let bgLayer = mapsutils.map.findLayerById("blockGroups");
             var once = false;
-            app.view.whenLayerView(bgLayer).then(function (lyrView) {
+            mapsutils.view.whenLayerView(bgLayer).then(function (lyrView) {
                 lyrView.watch("updating", function (value) {
                     if (!value && !once) {
                         $('.loading-container').css('display', 'none');
@@ -204,7 +208,7 @@ define([
 
 
             var onc = false;
-            app.view.whenLayerView(gfxLayer).then(function (lyrView) {
+            mapsutils.view.whenLayerView(gfxLayer).then(function (lyrView) {
                 lyrView.watch("updating", function (value) {
                     if (!value && !onc) {
                         tp.publish("gfxLayer-loaded");
@@ -220,7 +224,7 @@ define([
                 spatialReference: 102100
             });
 
-            app.view.watch('extent', function (extent) {
+            mapsutils.view.watch('extent', function (extent) {
                 let currentCenter = extent.center;
                 if (!maxExtent.contains(currentCenter)) {
                     let newCenter = extent.center;
@@ -237,9 +241,9 @@ define([
                         newCenter.y = maxExtent.ymax;
                     }
 
-                    let newExtent = app.view.extent.clone();
+                    let newExtent = mapsutils.view.extent.clone();
                     newExtent.centerAt(newCenter);
-                    app.view.extent = newExtent;
+                    mapsutils.view.extent = newExtent;
                 }
             });
         }

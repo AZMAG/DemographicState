@@ -1,7 +1,61 @@
 //This file listens for any changes to color ramps, number of class breaks,
 //or map changes and updates the block groups renderer.
 "use strict";
-define(["mag/maps/maps-utils", "dojo/topic", "dojo/domReady!"], function (mapsutils, tp) {
+define([
+    "mag/maps/maps-utils",
+    "dojo/topic",
+    "dojo/domReady!"
+], function (
+    mapsutils,
+    tp
+    ) {
+
+    var cbr = {
+        GetCurrentRenderer: async function () {
+            let data = await mapsutils.GetCurrentMapsParams();
+            //Construct renderer object
+            let renderer = {
+                type: "class-breaks",
+                field: data.conf.FieldName,
+                normalizationField: data.conf.NormalizeField,
+                classBreakInfos: data.cbInfos,
+                legendOptions: {
+                    title: `${data.conf.category}  -  ${data.conf.Name}`
+                },
+                defaultLabel: "No Data",
+                defaultSymbol: {
+                    type: "simple-fill",
+                    color: {
+                        r: "211",
+                        g: "211",
+                        b: "211"
+                    },
+                    outline: {
+                        color: [0, 0, 0, 0.1],
+                        width: 0.5
+                    }
+                }
+            }
+            return {
+                renderer,
+                data
+            };
+        }
+    }
+
+    function UpdateMapRenderer() {
+        cbr.GetCurrentRenderer().then(function (res) {
+            if (res.renderer) {
+                //Update the layer with the new renderer.
+                let layer = app.map.findLayerById("blockGroups");
+                let subLayer = layer.findSublayerById(0);
+
+                subLayer.renderer = res.renderer;
+                tp.publish("BlockGroupRendererUpdated", res.data);
+            }
+        })
+    }
+
     let $dynamicCBRCheckbox = $("#dynamicCBRCheckbox");
     $("#classType").change(function () {
         let type = $(this).val();
@@ -25,42 +79,13 @@ define(["mag/maps/maps-utils", "dojo/topic", "dojo/domReady!"], function (mapsut
         tp.publish("classBreaksCount-change");
     });
 
-    app.GetCurrentRenderer = async function () {
-        let data = await mapsutils.GetCurrentMapsParams();
-        //Construct renderer object
-        let renderer = {
-            type: "class-breaks",
-            field: data.conf.FieldName,
-            normalizationField: data.conf.NormalizeField,
-            classBreakInfos: data.cbInfos,
-            legendOptions: {
-                title: `${data.conf.category}  -  ${data.conf.Name}`
-            },
-            defaultLabel: "No Data",
-            defaultSymbol: {
-                type: "simple-fill",
-                color: {
-                    r: "211",
-                    g: "211",
-                    b: "211"
-                },
-                outline: {
-                    color: [0, 0, 0, 0.1],
-                    width: 0.5
-                }
-            }
-        }
-        return {
-            renderer,
-            data
-        };
-    }
+    
 
     function UpdateMapRenderer() {
         app.GetCurrentRenderer().then(function (res) {
             if (res.renderer) {
                 //Update the layer with the new renderer.
-                let layer = app.map.findLayerById("blockGroups");
+                let layer = mapsutils.map.findLayerById("blockGroups");
                 let subLayer = layer.findSublayerById(0);
 
                 subLayer.renderer = res.renderer;
@@ -78,7 +103,7 @@ define(["mag/maps/maps-utils", "dojo/topic", "dojo/domReady!"], function (mapsut
     tp.subscribe("classBreaksCount-change", UpdateMapRenderer);
 
     tp.subscribe("layers-added", function () {
-        app.view.watch("stationary", function (stationary) {
+        mapsutils.view.watch("stationary", function (stationary) {
             if (stationary) {
                 if ($dynamicCBRCheckbox.is(":checked")) {
                     UpdateMapRenderer();
@@ -99,4 +124,5 @@ define(["mag/maps/maps-utils", "dojo/topic", "dojo/domReady!"], function (mapsut
         });
 
     });
+    return cbr;
 });

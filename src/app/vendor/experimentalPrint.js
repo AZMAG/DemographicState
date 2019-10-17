@@ -11,17 +11,17 @@ require([
 
     tp.subscribe("widget-basemapToggle-loaded", function () {
         // add the button for drawing polygons underneath zoom buttons
-        app.view.ui.add($printWidget[0], "bottom-right");
+        mapsutils.view.ui.add($printWidget[0], "bottom-right");
 
         let savedScreenshot;
 
         $printWidget.click(() => {
-            app.view.takeScreenshot({
+            mapsutils.view.takeScreenshot({
                 format: "png",
                 layers: [
-                    app.map.findLayerById("blockGroups"),
-                    app.map.findLayerById("streets"),
-                    app.map.findLayerById("countyBoundaries")
+                    mapsutils.map.findLayerById("blockGroups"),
+                    mapsutils.map.findLayerById("streets"),
+                    mapsutils.map.findLayerById("countyBoundaries")
                 ]
             }).then((screenshot) => {
                 savedScreenshot = screenshot;

@@ -1,18 +1,22 @@
 "use strict";
 define([
+        "mag/maps/maps-utils",
         "esri/widgets/Locate/LocateViewModel",
         "dojo/topic",
         "dojo/domReady!"
     ],
-    function (LocateViewModel, tp) {
+    function (
+        mapsutils,
+        LocateViewModel,
+        tp) {
         tp.subscribe("widget-home-loaded", function () {
             //Locate
             const locateId = "locateWidget";
             let locateVM = new LocateViewModel({
-                view: app.view
+                view: mapsutils.view
             });
 
-            app.view.ui.add(locateId, "bottom-right");
+            mapsutils.view.ui.add(locateId, "bottom-right");
 
             $("#" + locateId).click(function () {
                 locateVM.locate().then(function () {

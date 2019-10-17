@@ -3,12 +3,14 @@ define([
         "mag/config/config",
         'mag/reports/reports-utils',
         'mag/utilities',
+        "mag/maps/maps-utils",
         "dojo/topic"
     ],
     function (
         config,
         reportsutils,
         utilities,
+        mapsutils,
         tp
     ) {
     tp.subscribe("panel-loaded", function (panel) {
@@ -137,7 +139,7 @@ define([
             let optionalFields = conf.displayFields || [displayField];
             let outFields = ["OBJECTID", "GEOID"].concat(optionalFields.slice());
 
-            let layer = app.map.findLayerById(conf.id);
+            let layer = mapsutilsi.map.findLayerById(conf.id);
 
             const q = {
                 where: "1=1",
@@ -161,7 +163,7 @@ define([
     function OpenReportByGEOIDs(conf, GEOIDs) {
         reportsutils.GetData(conf, GEOIDs).then(function (data) {
             utilities.AddHighlightGraphics(data.acsData.features, true);
-            app.view.goTo(data.acsData.features[0].geometry.extent.expand(1.5));
+            mapsutils.view.goTo(data.acsData.features[0].geometry.extent.expand(1.5));
             if (data) {
                 tp.publish("open-report-window", data, "acs");
             } else {
