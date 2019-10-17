@@ -152,7 +152,9 @@ define([
                     });
                 }
                 return rtnData;
-            }
+            },
+            view: null,
+            map: null
         }
 
         async function GetDynamicClassBreaks(cbrCount, classType, conf) {
@@ -160,7 +162,7 @@ define([
                 returnGeometry: false,
                 outFields: conf.NormalizeField ? [conf.FieldName, conf.NormalizeField] : [conf.FieldName],
                 where: `${conf.FieldName} IS NOT NULL`,
-                geometry: app.view.extent,
+                geometry: mapsutils.view.extent,
                 outSpatialReference: 102100,
                 maxAllowableOffset: .1
             };

@@ -1,10 +1,12 @@
 "use strict";
 define([
         "mag/config/config",
+        "mag/maps/maps-utils",
         "dojo/topic"
     ],
     function (
         config,
+        mapsutils,
         tp
     ){
     tp.subscribe("panel-loaded", function (panel) {
@@ -37,7 +39,7 @@ define([
         let layerId = $cbox.data("layer-id");
 
         //Toggle Layer
-        let layer = app.map.findLayerById(layerId);
+        let layer = mapsutils.map.findLayerById(layerId);
         if (layer) {
             layer.visible = !layer.visible;
         } else {
@@ -46,7 +48,7 @@ define([
             for (var i = 0; i < grpLayers.length; i++) {
                 var grpLayer = grpLayers[i];
 
-                let lay = app.map.findLayerById(grpLayer.id);
+                let lay = mapsutils.map.findLayerById(grpLayer.id);
                 if (lay) {
                     lay.visible = !lay.visible;
                 }

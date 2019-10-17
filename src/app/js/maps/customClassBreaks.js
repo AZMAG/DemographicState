@@ -17,7 +17,7 @@ define([
             let sliders = [];
             let maxVal = 0;
             const minLabelSize = 13;
-            const lyr = app.map.findLayerById("blockGroups").sublayers.getItemAt(0);
+            const lyr = mapsutils.map.findLayerById("blockGroups").sublayers.getItemAt(0);
             let oldFld = 'TOTAL_POP';
             let currFld = 'TOTAL_POP';
 

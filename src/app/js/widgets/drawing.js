@@ -1,9 +1,11 @@
 "use strict";
 define([
+    "mag/maps/maps-utils",
     "esri/views/2d/draw/Draw",
     "esri/Graphic",
     "dojo/topic"
 ], function (
+    mapsutils,
     Draw,
     Graphic,
     tp
@@ -13,10 +15,10 @@ define([
 
     tp.subscribe("map-loaded", function () {
         // add the button for drawing polygons underneath zoom buttons
-        app.view.ui.add($drawWidget[0], "bottom-right");
+        mapsutils.view.ui.add($drawWidget[0], "bottom-right");
 
         let draw = new Draw({
-            view: app.view
+            view: mapsutils.view
         });
 
         //Create the window that pops open when a user first clicks the tool
@@ -73,12 +75,12 @@ define([
             fillColor["a"] = transparency;
 
             //Apply the new colors to the current graphic if it exists
-            if (app.view.graphics.items.length > 0) {
-                let newGfx = app.view.graphics.items[0].clone();
+            if (mapsutils.view.graphics.items.length > 0) {
+                let newGfx = mapsutils.view.graphics.items[0].clone();
                 newGfx.symbol.color = fillColor;
                 newGfx.symbol.outline.color = outlineColor;
-                app.view.graphics.removeAll();
-                app.view.graphics.add(newGfx);
+                mapsutils.view.graphics.removeAll();
+                mapsutils.view.graphics.add(newGfx);
             }
         }
 
@@ -116,7 +118,7 @@ define([
                 });
 
                 // focus the view to activate keyboard shortcuts for drawing polygons
-                app.view.focus();
+                mapsutils.view.focus();
 
                 // listen polygonDrawAction events to give immediate visual feedback
                 // to users as the polygon is being drawn on the view.
@@ -133,7 +135,7 @@ define([
 
 
         $("body").on("click", "#drawClearBtn", function () {
-            app.view.graphics.removeAll();
+            mapsutils.view.graphics.removeAll();
             $(this).hide();
             $("#drawAddBtn").show();
         });
@@ -150,13 +152,13 @@ define([
             let vertices = event.vertices;
 
             //remove existing graphic
-            app.view.graphics.removeAll();
+            mapsutils.view.graphics.removeAll();
 
             // create a new graphic representing the polygon, add it to the view
             let graphic = new Graphic({
                 geometry: {
                     rings: vertices,
-                    spatialReference: app.view.spatialReference,
+                    spatialReference: mapsutils.view.spatialReference,
                     type: "polygon"
                 },
                 symbol: {
@@ -185,7 +187,7 @@ define([
                 $drawingTooltip.html("Double click to finish graphic");
             }
 
-            app.view.graphics.add(graphic);
+            mapsutils.view.graphics.add(graphic);
         }
     });
 });
