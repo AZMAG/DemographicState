@@ -81,6 +81,18 @@ define([
 
     
 
+    function UpdateMapRenderer() {
+        app.GetCurrentRenderer().then(function (res) {
+            if (res.renderer) {
+                //Update the layer with the new renderer.
+                let layer = mapsutils.map.findLayerById("blockGroups");
+                let subLayer = layer.findSublayerById(0);
+
+                subLayer.renderer = res.renderer;
+                tp.publish("BlockGroupRendererUpdated", res.data);
+            }
+        })
+    }
 
     // Subscribe to other change events
     // and update the renderer when any of them fire.

@@ -120,7 +120,7 @@ define([
         function GetFormData() {
             let currentMap = mapsutils.GetActiveMapData();
             let legendLayers = [];
-            let visibleLayers = app.map.layers.filter(layer => layer.visible);
+            let visibleLayers = mapsutils.map.layers.filter(layer => layer.visible);
 
             if (visibleLayers.length > 2) {
                 legendLayers = [{

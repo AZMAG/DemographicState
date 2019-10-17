@@ -152,7 +152,8 @@ define([
                     });
                 }
                 return rtnData;
-            }
+            },
+            map: null
         }
 
         async function GetDynamicClassBreaks(cbrCount, classType, conf) {
