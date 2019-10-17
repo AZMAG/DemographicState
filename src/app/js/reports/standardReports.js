@@ -1,13 +1,13 @@
 "use strict";
 define([
         "mag/config/config",
-        'mag/reports/reports',
+        'mag/reports/reports-utils',
         'mag/utilities',
         "dojo/topic"
     ],
     function (
         config,
-        reports,
+        reportsutils,
         utilities,
         tp
     ) {
@@ -159,7 +159,7 @@ define([
     tp.subscribe("openReport-by-geoids", OpenReportByGEOIDs);
 
     function OpenReportByGEOIDs(conf, GEOIDs) {
-        reports.GetData(conf, GEOIDs).then(function (data) {
+        reportsutils.GetData(conf, GEOIDs).then(function (data) {
             utilities.AddHighlightGraphics(data.acsData.features, true);
             app.view.goTo(data.acsData.features[0].geometry.extent.expand(1.5));
             if (data) {

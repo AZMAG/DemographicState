@@ -5,17 +5,17 @@ define([
         'mag/config/config',
         'mag/config/censusFieldsConfig',
         'mag/config/acsFieldsConfig',
+        'mag/reports/reports-utils',
         'mag/utilities',
-        'dojo/topic',
-        'esri/tasks/QueryTask'
+        'dojo/topic'
     ],
     function (
         config,
         censusFieldsConfig,
         acsFieldsConfig,
+        reportsutils,
         utilities,
-        tp,
-        QueryTask
+        tp
     ){
     tp.subscribe('panel-loaded', function (panel) {
         if (panel === 'reports-view') {
@@ -90,7 +90,7 @@ define([
                     .removeClass('active');
 
                 let dataSrc = $(this).data('val');
-                let d = reportutils.selectedReport;
+                let d = reportsutils.selectedReport;
 
                 if (dataSrc === 'acs') {
                     //Show Title 6 data
@@ -265,7 +265,7 @@ define([
         let $btnExportPDF = $header.find('.btnExportPDF');
         $btnExportPDF.tooltip();
         $btnExportPDF.off('click').on('click', function () {
-            ExportReportToPDF(reportutils.selectedReport.conf, ids);
+            ExportReportToPDF(reportsutils.selectedReport.conf, ids);
         });
 
         let vals = GetValsFromData(attr, fields);
@@ -464,53 +464,5 @@ define([
     }
 
     tp.subscribe('open-report-window', OpenReportWindow);
-    let $loadingSpinner = $('.loading-container');
-
-    var reportutils = {
-        selectedReport: {},
-        GetData: async function (conf, geoids, geo) {
-            $loadingSpinner.css('display', 'flex');
     
-            let where = '1=1';
-            if (geoids && geoids.length > 0) {
-                let str = '';
-                geoids.forEach(id => {
-                    str += `'${id}',`;
-                });
-                where = `GEOID IN(${str.slice(0, -1)})`;
-            }
-            let q = {
-                returnGeometry: true,
-                outFields: ['*'],
-                where: where,
-                geometry: geo ? geo : null,
-                orderByFields: ['GEOID']
-            };
-    
-            let qt = new QueryTask({
-                url: config.mainUrl + '/' + conf.ACSIndex
-            });
-    
-            const acsPromise = qt.execute(q);
-    
-            qt.url = config.mainUrl + '/' + conf.censusIndex;
-            q.returnGeometry = false;
-    
-            const censusPromise = qt.execute(q);
-    
-            const [acsData, censusData] = await Promise.all([acsPromise, censusPromise]);
-    
-            this.selectedReport = {
-                conf: conf,
-                acsData,
-                censusData
-            };
-    
-            $loadingSpinner.css('display', 'none');
-    
-            return $.extend({}, this.selectedReport);
-        }
-    } 
-    
-    return reportutils;
 });

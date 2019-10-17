@@ -1,10 +1,10 @@
 'use strict';
 define([
-    'mag/reports/reports',
+    'mag/reports/reports-utils',
     'dojo/topic'
 ],
 function (
-    reports,
+    reportsutils,
     tp
     ){
     const expandHTML = 'Expand Topics<i style="margin-left: 5px;" class="fa fa-expand" aria-hidden="true"></i>';
@@ -75,7 +75,7 @@ function (
             target,
             cols
         });
-        let features = reports.selectedReport.acsData.features;
+        let features = reportsutils.selectedReport.acsData.features;
 
         $grid
             .find('thead')
