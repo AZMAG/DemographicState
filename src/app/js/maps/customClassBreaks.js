@@ -377,7 +377,7 @@ define([
                 //         $prevPane.data("info", prevInfo);
                 //         $nextPane.data("info", nextInfo);
 
-                //         SetupSplitter(app.GetCustomBreaks());
+                //         SetupSplitter(mapsutils.GetCustomBreaks());
 
                 //         //Call Update Range Sliders
                 //         UpdateRangeSliders({
@@ -410,7 +410,7 @@ define([
 
 
 
-            app.GetCustomBreaks = function (colorRamp) {
+            mapsutils.GetCustomBreaks = function (colorRamp) {
                 // console.log(colorRamp);
                 let classBreaks = [];
                 let $panes = $classBreakSliders.find(".cbPane");
