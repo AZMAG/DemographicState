@@ -348,19 +348,13 @@ module.exports = function (grunt) {
                                     name: "tslib",
                                     location: "node_modules/tslib",
                                     main: "tslib"
-                                },
-                                {
-                                    name: "jquery",
-                                    location: "node_modules/jquery/dist",
-                                    main: "jquery"
                                 }
                             ]
                         }
                     },
                     plugins: [
                         {
-                            script: 'test/mocks/nodeDom.js',
-                            useLoader: false
+                            script: 'test/mocks/nodeDom.js'
                         }]
                 },
                 node: {

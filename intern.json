@@ -36,6 +36,11 @@
         ]
         }
     },
-    "suites": "test/js/**/*.js"
+    "suites": "test/js/**/*.js",
+    "plugins": [
+            {
+                "script": "test/mocks/nodeDom.js"
+            }]
+    
   
 }
