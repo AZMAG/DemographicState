@@ -351,7 +351,11 @@ module.exports = function (grunt) {
                                 }
                             ]
                         }
-                    }
+                    },
+                    plugins: [
+                        {
+                            script: 'test/mocks/nodeDom.js'
+                        }]
                 },
                 node: {
                     options: {}
