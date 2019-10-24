@@ -1,5 +1,4 @@
 define([
-    "mag/main",
     "mag/layerlist",
     "mag/sidebar",
     "mag/maps/maps-panel",
@@ -23,7 +22,8 @@ define([
     "mag/widgets/legend",
     "mag/widgets/home",
     "mag/widgets/basemapToggle",
-    "mag/widgets/drawing"
+    "mag/widgets/drawing",
+    "mag/main"
 ], function () {
 
     /** The global MAG object. 

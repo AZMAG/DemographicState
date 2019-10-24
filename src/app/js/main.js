@@ -54,8 +54,6 @@ define([
             let panelId = $(el).attr("panel-id");
             $(el).load(`app/views/${panelId}.html`, function () {
                 tp.publish("panel-loaded", panelId);
-                config.panelLoaded = config.panelLoaded || {};
-                config.panelLoaded[panelId] = true;
             })
         })
     }

@@ -22,10 +22,6 @@ define([
     let isInited = false;
     tp.subscribe("panel-loaded", init);
 
-    if (config.panelLoaded && config.panelLoaded["reports-view"] && !isInited) {
-        init();
-    }
-
 
     function init() {
 
