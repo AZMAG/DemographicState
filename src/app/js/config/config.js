@@ -441,7 +441,9 @@ define([], function(){
 
         legalCensusDisclaimer: 'Source: United States Census Bureau, 2010 Decennial Census. Additional information about the 2010 Decennial Cenuss can be found on the US Census Bureau website at www.census.gov/2010census. Prepared by: Maricopa Association of Governments, www.azmag.gov, (602) 254-6300',
 
-        configLoaded: false
+        configLoaded: false,
+
+        panelLoaded: {}
     }; //End Config
     return config;
 });

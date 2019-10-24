@@ -22,7 +22,7 @@ define([
     let isInited = false;
     tp.subscribe("panel-loaded", init);
 
-    if (app.panelLoaded && app.panelLoaded["reports-view"] && !isInited) {
+    if (config.panelLoaded && config.panelLoaded["reports-view"] && !isInited) {
         init();
     }
 
