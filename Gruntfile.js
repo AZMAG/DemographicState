@@ -309,7 +309,22 @@ module.exports = function (grunt) {
             },
             intern: {
                 options: {
-                    suites: ["test/js/**/*.js"],
+                    suites: ["test/unit/**/*.js",],
+                    functionalSuites: ["test/functional/**/*.js"],
+                    environments: [
+                        "node",
+                        { browserName: "chrome",
+                        fixSessionCapabilities: "no-detect",
+                        chromeOptions: {
+                          args: ["headless", "disable-gpu", "window-size=1024,768"]
+                        }}
+                        
+                    ],
+                    tunnelOptions: {
+                        drivers: [
+                          { name: "chrome", "version": "76.0.3809.68" }
+                        ]
+                    },                    
                     reporters: [ 'runner' ],
                     loader: {
                         script: "dojo",

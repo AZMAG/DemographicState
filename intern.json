@@ -36,11 +36,27 @@
         ]
         }
     },
-    "suites": "test/js/**/*.js",
+    "suites": "test/unit/**/*.js",
+    "functionalSuites": "test/functional/**/*.js",
     "plugins": [
             {
                 "script": "test/mocks/nodeDom.js"
-            }]
+            }
+    ],
+    "environments": [
+        "node",
+        { "browserName": "chrome",
+        "fixSessionCapabilities": "no-detect",
+        "chromeOptions": {
+          "args": ["headless", "disable-gpu", "window-size=1024,768"]
+        }}
+        
+    ],
+    "tunnelOptions": {
+        "drivers": [
+          { "name": "chrome", "version": "76.0.3809.68" }
+        ]
+      }
     
   
 }
