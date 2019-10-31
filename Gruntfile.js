@@ -10,7 +10,7 @@ module.exports = function (grunt) {
 
     "use strict";
 
-    require("matchdep").filterDev(["grunt-*","intern"]).forEach(grunt.loadNpmTasks);
+    require("matchdep").filterDev(["grunt-*", "intern"]).forEach(grunt.loadNpmTasks);
 
     var includedModules = [
         "mag/app"
@@ -103,7 +103,7 @@ module.exports = function (grunt) {
         requirejs: {
             debug: {
                 options: {
-                    baseUrl: 'src/app/js',                    
+                    baseUrl: 'src/app/js',
                     out: 'dist/app/js/mag.js',
                     // allow dependencies to be resolved but don't include in output (empty:)
                     paths: paths,
@@ -188,7 +188,7 @@ module.exports = function (grunt) {
             }
         },
 
-        concat: {           
+        concat: {
             css: {
                 src: ["dist/app/css/*.css", "!dist/app/css/concat.min.css"],
                 dest: "dist/app/css/concat.min.css"
@@ -278,14 +278,14 @@ module.exports = function (grunt) {
             File_Reference: {
                 src: ["dist/index.html"],
                 overwrite: true,
-                replacements: [                   
+                replacements: [
                 ]
             }
 
         },
         watch: {
             options: {
-                livereload: 35729                
+                livereload: 35729
             },
             site: {
                 files: ['./src/app/css/**/*.css', './src/app/js/**/*.js', './src/app/js/**/*.html'],
@@ -299,35 +299,38 @@ module.exports = function (grunt) {
                 livereload: 35729
             },
             site: {
-                options: { 
-                    port: 8000, 
-                        open: {
+                options: {
+                    port: 8000,
+                    open: {
                         target: 'http://localhost:8000'
-                        }
                     }
                 }
-            },
-            intern: {
-                options: {
-                    suites: ["test/unit/**/*.js",],
-                    functionalSuites: ["test/functional/**/*.js"],
-                    environments: [
-                        "node",
-                        { browserName: "chrome",
+            }
+        },
+        intern: {
+            options: {
+                suites: ["test/unit/**/*.js",],
+                functionalSuites: ["test/functional/**/*.js"],
+                environments: [
+                    {
+                        browserName: "chrome",
                         fixSessionCapabilities: "no-detect",
                         chromeOptions: {
-                          args: ["headless", "disable-gpu", "window-size=1024,768"]
-                        }}
-                        
-                    ],
+                            args: ["headless", "disable-gpu", "window-size=1024,768"]
+                        }
+                    }
+                ],
+                reporters: ['runner'],
+            },
+            browser: {
+                options: {
                     tunnelOptions: {
                         drivers: [
-                          { name: "chrome", "version": "76.0.3809.68" }
+                            { name: "chrome", "version": "78.0.3904.70" }
                         ]
-                    },                    
-                    reporters: [ 'runner' ],
+                    },
                     loader: {
-                        script: "dojo",
+                        script: "dojo2",
                         options: {
                             async: false,
                             tlmSiblingOfDojo: false,
@@ -368,14 +371,11 @@ module.exports = function (grunt) {
                         }
                     },
                     plugins: [
-                        {
-                            script: 'test/mocks/nodeDom.js'
-                        }]
-                },
-                node: {
-                    options: {}
+                        'node_modules/jquery/dist/jquery.js'
+                    ]
                 }
             }
+        }
     });
 
     grunt.registerTask("GetClassBreaks", function () {
@@ -391,7 +391,7 @@ module.exports = function (grunt) {
     grunt.registerTask("build-js", ["clean:js", "babel", "uglify"]);
     grunt.registerTask("build-css", ["cssmin", "postcss", "clean:css"])
     grunt.registerTask("build-html", ["htmlmin"])
-    grunt.registerTask("require", ["requirejs"] );
+    grunt.registerTask("require", ["requirejs"]);
 
     // grunt.registerTask("build", ["build-copy-concat", "build-js", "build-css", "build-html", "require"]);
     grunt.registerTask("build", ["intern", "build-copy-concat", "build-js", "build-css", "require"]);
@@ -399,9 +399,9 @@ module.exports = function (grunt) {
     // the default task can be run just by typing "grunt" on the command line
     grunt.registerTask("default", ["build"]);
 
-    grunt.registerTask('conn', [ "connect:site", "watch:site"]);
+    grunt.registerTask('conn', ["connect:site", "watch:site"]);
 
-    grunt.registerTask('run', [ "build", "connect:site", "watch:site"]);
+    grunt.registerTask('run', ["build", "connect:site", "watch:site"]);
 
     grunt.registerTask("test", ["intern"]);
 };
