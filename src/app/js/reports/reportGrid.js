@@ -268,6 +268,7 @@ require(['dojo/topic'], function (tp) {
                 data,
                 e,
                 grid,
+                title6Grid: $title6Grid,
                 title: $('#summaryReportHeader')
                     .text()
                     .trim()
