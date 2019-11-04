@@ -307,8 +307,24 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function (tp, QueryTask) {
         if ($('#title6Area').length === 0) {
             alert('jquery element not found?');
         }
+        
         let $title6Grid = $('#title6Grid');
         let $title6Toggle = $('#title6Toggle');
+        let $title6Tooltip = $('#title6Tooltip');
+
+        $title6Tooltip.tooltip({
+            title: `
+            <div class="title6TooltipTitle">The data used in this analysis are generated using an enhanced method of interpolation based on the ACS 2015 block groups and using the 2010 Census block data.  In order to approximate the population, housing and workforce data for these custom areas, the following enhanced method was used:</div>
+            <ul>
+                <li class="legal">The counts are redistributed to a more detailed geography (Census Block Group data or Census Tracts), that better nests within the MPO boundaries.</li>
+                <li class="legal">The counts are proportionally redistributed to blocks based on the Census 2010 counts for population, households or housing units.</li>
+                <li class="legal">The blocks are then assigned to the MPO containing their center, and summed by the MPO, to obtain the final counts.This is a test</li>
+            <ul>
+            `,
+
+            html: true
+
+        });
 
         //Setup title 6 to be expanded on initial load.
         $title6Grid.show();
