@@ -1,6 +1,6 @@
 {
 	"loader": {
-        "script": "dojo",
+        "script": "dojo2",
         "async": true,
         "tlmSiblingOfDojo": false,
         "has": {
@@ -39,12 +39,9 @@
     "suites": "test/unit/**/*.js",
     "functionalSuites": "test/functional/**/*.js",
     "plugins": [
-            {
-                "script": "test/mocks/nodeDom.js"
-            }
+            "node_modules/jquery/dist/jquery.js"
     ],
     "environments": [
-        "node",
         { "browserName": "chrome",
         "fixSessionCapabilities": "no-detect",
         "chromeOptions": {
@@ -54,7 +51,7 @@
     ],
     "tunnelOptions": {
         "drivers": [
-          { "name": "chrome", "version": "76.0.3809.68" }
+          { "name": "chrome", "version": "78.0.3904.70" }
         ]
       }
     
