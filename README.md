@@ -11,7 +11,7 @@
   <span>
   <a href="https://geo.azmag.gov/maps/azdemographics/">
     <img
-      alt="Neigborhood Explorer"
+      alt="Neighborhood Explorer"
       src="https://maps.azmag.gov/images/viewer-icons/icon_statewide-demographics.png"
       width="130"
     />
@@ -104,3 +104,11 @@ Code released under the MIT license.
 A copy of the license is available in the repository's `LICENSE` file.
 
 -   [LICENSE](LICENSE)
+
+## Tests
+
+Tests use [Intern](https://theintern.io/) 
+
+More information on running and writing tests can be found in TESTS.md.
+
+-   [TESTS](test/TESTS.md)
