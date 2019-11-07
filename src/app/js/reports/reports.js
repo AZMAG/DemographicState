@@ -276,8 +276,9 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function(tp, QueryTask) {
             });
         }
 
-        if (data.acsData.blockGroups) {
-            SetupBlockGroupGrid(data.acsData.blockGroups);
+        if (res.blockGroups) {
+            SetupBlockGroupGrid(res.blockGroups);
+            $("#tabs-tab").find("li").first().find("a").tab("show");
         }
 
         if (attr['AFFECTED_DISABILITY_COUNT'] && attr['TOTAL_POP'] > 5000) {
@@ -287,6 +288,7 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function(tp, QueryTask) {
             $('#title6Grid').html('');
             $('#title6Area').hide();
         }
+
         $("div[panel-id='reports-view']").show();
         $('#summaryReport').show();
     }
@@ -330,42 +332,48 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function(tp, QueryTask) {
             </div>
         `;
 
-        $("#bgGrid").kendoGrid({
-            dataSource: data,
-            sortable: true,
-            columns: [{
-                field: "GEOID",
-                title: "ID",
-                width: 100
-            }, {
-                field: "SQMI",
-                title: "SQMI",
-                format: "{0:n1}",
-                width: 60
-            }, {
-                field: "TOTAL_POP",
-                title: "Total Pop",
-                format: "{0:n0}",
-                width: 75
-            }, {
-                field: "MINORITY_POP",
-                title: "Minority Pop",
-                format: "{0:n0}",
-                width: 90
-            }, {
-                field: "MEDIAN_AGE",
-                title: "Median Age",
-                format: "{0:n0}",
-                width: 90
-            }, {
+        let columns = [{
+            field: "GEOID",
+            title: "ID",
+            width: 100
+        }, {
+            field: "SQMI",
+            title: "SQMI",
+            format: "{0:n1}",
+            width: 60
+        }, {
+            field: "TOTAL_POP",
+            title: "Total Pop",
+            format: "{0:n0}",
+            width: 75
+        }, {
+            field: "MINORITY_POP",
+            title: "Minority Pop",
+            format: "{0:n0}",
+            width: 90
+        }, {
+            field: "MEDIAN_AGE",
+            title: "Median Age",
+            format: "{0:n0}",
+            width: 90
+        }]
+
+        if (data[0]["MEDIAN_HOUSEHOLD_INCOME"]) {
+            columns.push({
                 field: "MEDIAN_HOUSEHOLD_INCOME",
                 title: "Median HH Income",
                 format: "{0:c0}"
-            }],
+            });
+        }
+
+        $("#bgGrid").kendoGrid({
+            dataSource: data,
+            sortable: true,
+            columns,
             toolbar: [{
                 template
             }],
-            dataBound: GridRowHover
+            // dataBound: GridRowHover
         });
 
         $("#bgTab").on("click", "#exportBG", (e) => {

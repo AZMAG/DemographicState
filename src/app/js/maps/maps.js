@@ -41,11 +41,11 @@ require([
                     breakpoint: false,
                 }
             },
-            highlightOptions: {
-                color: [255, 255, 0, 1],
-                haloOpacity: 0.9,
-                fillOpacity: 0.95
-            }
+            // highlightOptions: {
+            //     color: [255, 255, 0, 1],
+            //     haloOpacity: 0.9,
+            //     fillOpacity: 0.95
+            // }
         });
 
         app.view.when(function() {
@@ -72,17 +72,21 @@ require([
             if (conf.url) {
                 url = conf.url;
             }
-            let bgLayer = new FeatureLayer({
+            let bgLayer = new MapImageLayer({
                 url: url,
                 id: conf.id,
                 opacity: conf.opacity || 1,
                 title: conf.title,
                 visible: conf.visible,
                 labelsVisible: false,
-                labelingInfo: [{}]
+                labelingInfo: [{}],
+                sublayers: [{
+                    id: conf.ACSIndex,
+                    opacity: 1
+                }]
             });
 
-            bgLayer.renderer = res.renderer;
+            bgLayer.findSublayerById(0).renderer = res.renderer;
             app.map.add(bgLayer);
             return;
         }
@@ -94,7 +98,7 @@ require([
             app.config.layers.forEach(layer => {
                 var layerToAdd;
                 var url = app.config.mainUrl;
-                if (layer.type === 'feature' && layer.id !== "blockGroups") {
+                if (layer.type === 'feature') {
                     if (layer.url) {
                         url = layer.url;
                     }
@@ -118,7 +122,7 @@ require([
                         opacity: layer.opacity,
                         labelingInfo: layer.labelClass ? [layer.labelClass] : undefined
                     });
-                } else if (layer.type === "image") {
+                } else if (layer.type === "image" && layer.id !== "blockGroups") {
                     if (layer.url) {
                         url = layer.url;
                     }

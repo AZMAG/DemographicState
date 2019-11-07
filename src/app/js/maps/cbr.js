@@ -61,7 +61,8 @@ require(["dojo/topic", "dojo/domReady!"], function(tp) {
             if (res.renderer) {
                 //Update the layer with the new renderer.
                 let layer = app.map.findLayerById("blockGroups");
-                layer.renderer = res.renderer;
+                let subLayer = layer.findSublayerById(0);
+                subLayer.renderer = res.renderer;
                 tp.publish("BlockGroupRendererUpdated", res.data);
             }
         })
