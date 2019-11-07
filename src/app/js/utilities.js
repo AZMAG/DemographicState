@@ -1,6 +1,6 @@
 //This file should include miscellaneous repeatable functions used in multiple places in the code.
 "use strict";
-Number.prototype.MagFormat = function () {
+Number.prototype.MagFormat = function() {
     return this.toFixed(1);
 };
 
@@ -13,7 +13,7 @@ function qs(key) {
 function hexToRgb(hex) {
     // Expand shorthand form (e.g. "03F") to full form (e.g. "0033FF")
     var shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
-    hex = hex.replace(shorthandRegex, function (m, r, g, b) {
+    hex = hex.replace(shorthandRegex, function(m, r, g, b) {
         return r + r + g + g + b + b;
     });
 
@@ -37,24 +37,24 @@ function rgbToHex(r, g, b) {
 const representativeCache = {};
 async function GetRepresentativeInfo(id) {
     if (representativeCache[id]) {
-        return new Promise(function (resolve, reject) {
+        return new Promise(function(resolve, reject) {
             resolve(representativeCache[id]);
         });
     }
     let url = `https://content.googleapis.com/civicinfo/v2/representatives/${encodeURIComponent(
         id
     )}?recursive=false&key=${app.config.googleCivicInfoApiKey}`;
-    return new Promise(function (resolve, reject) {
-        $.get(url, function (data) {
+    return new Promise(function(resolve, reject) {
+        $.get(url, function(data) {
             representativeCache[id] = data;
             resolve(data);
-        }).fail(function (err) {
+        }).fail(function(err) {
             reject(err);
         });
     });
 }
 
-app.clearDrawnGraphics = function () {
+app.clearDrawnGraphics = function() {
     let gfxLayer = app.map.findLayerById("gfxLayer");
     gfxLayer.removeAll();
 
@@ -63,26 +63,26 @@ app.clearDrawnGraphics = function () {
     app.view.graphics.removeAll();
 };
 
-app.numberWithCommas = function (x) {
+app.numberWithCommas = function(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 };
 
-app.chartTooltip = function (value, category) {
+app.chartTooltip = function(value, category) {
     return `${app.numberWithCommas(value)} <r> ${category}`;
 };
 
-app.valueAxisTemplate = function (value) {
+app.valueAxisTemplate = function(value) {
     return app.numberWithCommas(value);
 };
 
-app.wrapText = function (value) {
+app.wrapText = function(value) {
     var wrapLength = 12;
     var returnLabel = "";
     var lineLength = 0;
 
     if (value.length >= wrapLength) {
         var wordsList = value.split(" ");
-        $.each(wordsList, function (index, word) {
+        $.each(wordsList, function(index, word) {
             var separator = " ";
             if (lineLength >= wrapLength) {
                 separator = "\n";
@@ -97,12 +97,12 @@ app.wrapText = function (value) {
     return returnLabel;
 };
 
-app.showInThousands = function (value) {
+app.showInThousands = function(value) {
     console.log(value);
 };
 
-app.AddHighlightGraphics = function (features, zoomTo) {
-    require(["esri/Graphic"], function (Graphic) {
+app.AddHighlightGraphics = function(features, zoomTo) {
+    require(["esri/Graphic"], function(Graphic) {
         let gfx = [];
         for (let i = 0; i < features.length; i++) {
             const feature = features[i];
@@ -111,7 +111,7 @@ app.AddHighlightGraphics = function (features, zoomTo) {
                 symbol: {
                     type: "simple-fill",
                     color: [0, 255, 255, 0.5],
-                    opacity: 0.5,
+                    opacity: 0.4,
                     outline: {
                         color: "cyan",
                         width: "3"
@@ -129,7 +129,7 @@ app.AddHighlightGraphics = function (features, zoomTo) {
     });
 };
 
-app.AddHighlightGraphic = function (graphic) {
+app.AddHighlightGraphic = function(graphic) {
     let gfxLayer = app.map.findLayerById("gfxLayer");
 
     if (gfxLayer.graphics && gfxLayer.graphics.items.length > 0) {
@@ -151,7 +151,7 @@ app.AddHighlightGraphic = function (graphic) {
     }
 };
 
-app.summarizeFeatures = function (res) {
+app.summarizeFeatures = function(res) {
     // console.log(res);
 
     if (!app.summableFields) {
@@ -214,7 +214,7 @@ function GetChannelsHTML(channels) {
         }
     };
 
-    channels.forEach(function (channel) {
+    channels.forEach(function(channel) {
         let type = types[channel.type];
         if (type) {
             channelsHTML += `<a class="socialChannel" title="Visit the ${channel.type} page" target="_blank" href="${type.url + channel.id}"><i class="${type.icon}"></i></a>`;
@@ -260,11 +260,11 @@ function GetRepHTML(rep) {
 
 function GetRepHtml(googleID) {
     return GetRepresentativeInfo(googleID)
-        .then(function (data) {
+        .then(function(data) {
             if (data.offices) {
                 let rtnHTML = "";
                 data.offices.map(office => {
-                    app.config.googleCivicOffices.forEach(function (conf) {
+                    app.config.googleCivicOffices.forEach(function(conf) {
                         if (office.name.indexOf(conf.name) > -1) {
                             if (data.officials && office.officialIndices) {
                                 for (let i = 0; i < office.officialIndices.length; i++) {
@@ -282,13 +282,13 @@ function GetRepHtml(googleID) {
                 return "";
             }
         })
-        .catch(function (err) {
+        .catch(function(err) {
             console.log(err);
         });
 
 }
 
-app.PopupFormat = async function (gfx) {
+app.PopupFormat = async function(gfx) {
     let attr = gfx.graphic.attributes;
     let repHtml = "";
     if (attr["googleID"]) {

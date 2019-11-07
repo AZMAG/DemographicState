@@ -1449,6 +1449,14 @@ hr.pop {
     opacity: 0;
 }
 
+#bgGrid {
+    font-size: 11px;
+}
+
+#bgGrid .k-grid-content {
+    height: 500px;
+}
+
 #legendGrip {
     float: right;
     margin-top: 17px !important;

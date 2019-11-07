@@ -1,8 +1,8 @@
 //This file should include logic on initialization of?????
 'use strict';
 
-require(['dojo/topic', 'esri/tasks/QueryTask'], function (tp, QueryTask) {
-    tp.subscribe('panel-loaded', function (panel) {
+require(['dojo/topic', 'esri/tasks/QueryTask'], function(tp, QueryTask) {
+    tp.subscribe('panel-loaded', function(panel) {
         if (panel === 'reports-view') {
             let $reportArea = $('#reportArea');
             let $subHeaderTitle = $('#summaryReportHeader');
@@ -41,22 +41,22 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function (tp, QueryTask) {
                 $('#useZoom').prop('checked', true);
             }
 
-            tp.subscribe('panel-shown', function (panel) {
+            tp.subscribe('panel-shown', function(panel) {
                 resetReportForm();
                 // app.clearDrawnGraphics();
             });
 
-            tp.subscribe('panel-hidden', function (panel) {
+            tp.subscribe('panel-hidden', function(panel) {
                 resetReportForm();
                 // app.clearDrawnGraphics();
             });
 
-            $reportArea.on('click', '.returnBtn', function () {
+            $reportArea.on('click', '.returnBtn', function() {
                 resetReportForm();
                 app.clearDrawnGraphics();
             });
 
-            $reportArea.on('click', '.card', function () {
+            $reportArea.on('click', '.card', function() {
                 let val = $(this).data('report-form-id');
                 $('.reportFormArea').hide();
                 $('#cardContainer').hide();
@@ -66,7 +66,7 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function (tp, QueryTask) {
                 $('#reportForm').show();
             });
 
-            $reportArea.on('click', '.dataSrcToggle', function () {
+            $reportArea.on('click', '.dataSrcToggle', function() {
                 //This seems hacky..  It removes the active class from the other buttons
                 //https://stackoverflow.com/questions/9262827/twitter-bootstrap-onclick-event-on-buttons-radio
                 $(this)
@@ -91,7 +91,7 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function (tp, QueryTask) {
     });
 
     function resizeCharts() {
-        $('.chartTarget').each(function (i, val) {
+        $('.chartTarget').each(function(i, val) {
             $(val)
                 .data('kendoChart')
                 .resize();
@@ -219,14 +219,12 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function (tp, QueryTask) {
         }
         let $reportArea = $('#reportArea');
 
-        // console.log(data);
-
         let features = res.features;
         let feature = features[0];
         let attr = feature.attributes;
         let title = GetTitle(data);
 
-        $reportArea.find('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+        $reportArea.find('a[data-toggle="tab"]').on('shown.bs.tab', function(e) {
             resizeCharts();
         });
 
@@ -249,7 +247,7 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function (tp, QueryTask) {
 
         let $btnExportPDF = $header.find('.btnExportPDF');
         $btnExportPDF.tooltip();
-        $btnExportPDF.off('click').on('click', function () {
+        $btnExportPDF.off('click').on('click', function() {
             ExportReportToPDF(app.selectedReport.conf, ids);
         });
 
@@ -278,6 +276,10 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function (tp, QueryTask) {
             });
         }
 
+        if (data.acsData.blockGroups) {
+            SetupBlockGroupGrid(data.acsData.blockGroups);
+        }
+
         if (attr['AFFECTED_DISABILITY_COUNT'] && attr['TOTAL_POP'] > 5000) {
             SetupTitle6Grid(attr);
             $('#title6Area').show();
@@ -295,7 +297,7 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function (tp, QueryTask) {
         let activeTab = $reportArea.find('.nav-link.active').text();
 
         if (activeTab === 'Charts') {
-            $('.chartTarget').each(function (i, val) {
+            $('.chartTarget').each(function(i, val) {
                 $(val)
                     .data('kendoChart')
                     .resize();
@@ -303,11 +305,107 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function (tp, QueryTask) {
         }
     }
 
+    function SetupBlockGroupGrid(blockGroups) {
+        RemoveBlockGroupsGrid();
+        $("#tabsContainer").css("flex", "2");
+        $("#tabs-tab").append(`
+            <li id="bg-tab" class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#bgTab" role="tab"
+                    aria-controls="bgTab" aria-selected="false">Block Group Data</a>
+            </li>
+        `);
+
+        $("#pills-tabContent").append(`
+        <div class="tab-pane fade" id="bgTab" role="tabpanel" aria-labelledby="bgTab">
+            <div id="bgGrid"></div>
+        </div>`);
+
+        const data = blockGroups.map((bg) => {
+            return bg.attributes;
+        });
+
+        const template = `
+            <div class="gridToolbar">
+                <button class="btn btn-sm" id="exportBG">Export to Excel<i style="margin-left: 5px;" class="fa fa-table" aria-hidden="true"></i></button>
+            </div>
+        `;
+
+        $("#bgGrid").kendoGrid({
+            dataSource: data,
+            sortable: true,
+            columns: [{
+                field: "GEOID",
+                title: "ID",
+                width: 100
+            }, {
+                field: "SQMI",
+                title: "SQMI",
+                format: "{0:n1}",
+                width: 60
+            }, {
+                field: "TOTAL_POP",
+                title: "Total Pop",
+                format: "{0:n0}",
+                width: 75
+            }, {
+                field: "MINORITY_POP",
+                title: "Minority Pop",
+                format: "{0:n0}",
+                width: 90
+            }, {
+                field: "MEDIAN_AGE",
+                title: "Median Age",
+                format: "{0:n0}",
+                width: 90
+            }, {
+                field: "MEDIAN_HOUSEHOLD_INCOME",
+                title: "Median HH Income",
+                format: "{0:c0}"
+            }],
+            toolbar: [{
+                template
+            }],
+            dataBound: GridRowHover
+        });
+
+        $("#bgTab").on("click", "#exportBG", (e) => {
+            $("#bgGrid").data("kendo-grid").saveAsExcel();
+        })
+    }
+
+    function GridRowHover(evt) {
+        let ds = evt.sender.dataSource;
+        let highlight;
+        let $grid = $(evt.sender.element);
+
+        $grid.find("table tbody tr").off('mouseenter').on("mouseenter", (e) => {
+            const uid = $(e.currentTarget).data("uid");
+            const { OBJECTID } = ds.getByUid(uid);
+
+            if (highlight) {
+                highlight.remove();
+            }
+            highlight = app.blockGroupLyrView.highlight(OBJECTID);
+        });
+
+        $grid.find("table tbody tr").off('mouseleave').on("mouseleave", (e) => {
+            if (highlight) {
+                highlight.remove();
+            }
+        })
+    }
+
+    function RemoveBlockGroupsGrid() {
+        $("#tabsContainer").css("flex", "1");
+        $("#bg-tab").remove();
+        $("#bgTab").remove();
+    }
+
     function SetupTitle6Grid(attr) {
         if ($('#title6Area').length === 0) {
             alert('jquery element not found?');
         }
-        
+
         let $title6Grid = $('#title6Grid');
         let $title6Toggle = $('#title6Toggle');
         let $title6Tooltip = $('#title6Tooltip');
@@ -332,7 +430,7 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function (tp, QueryTask) {
 
         $('#title6Area')
             .off('click')
-            .on('click', function () {
+            .on('click', function() {
                 $title6Grid.toggle();
                 $title6Toggle.toggleClass('k-i-expand k-i-collapse');
             });
@@ -467,7 +565,7 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function (tp, QueryTask) {
     tp.subscribe('open-report-window', OpenReportWindow);
     let $loadingSpinner = $('.loading-container');
 
-    app.GetData = async function (conf, geoids, geo) {
+    app.GetData = async function(conf, geoids, geo) {
         $loadingSpinner.css('display', 'flex');
 
         let where = '1=1';

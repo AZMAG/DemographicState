@@ -3,8 +3,8 @@ require([
         "dojo/topic",
         "dojo/domReady!"
     ],
-    function (tp) {
-        tp.subscribe("layers-added", function () {
+    function(tp) {
+        tp.subscribe("layers-added", function() {
             let $customClassBreaksModal = $("#customClassBreaksModal");
             let $classBreakSliders = $("#classBreakSliders");
             let $classBreakSliderTooltips = $("#classBreakSliderTooltips");
@@ -13,11 +13,11 @@ require([
             let sliders = [];
             let maxVal = 0;
             const minLabelSize = 13;
-            const lyr = app.map.findLayerById("blockGroups").sublayers.getItemAt(0);
+            const lyr = app.map.findLayerById("blockGroups");
             let oldFld = 'TOTAL_POP';
             let currFld = 'TOTAL_POP';
 
-            $btnClassBreaksEditor.click(function (e) {
+            $btnClassBreaksEditor.click(function(e) {
                 CbrParamChanged("Custom");
                 e.preventDefault();
             });
@@ -43,7 +43,7 @@ require([
                 }
             }
             let once = false;
-            $customClassBreaksModal.on('shown.bs.modal', function (e) {
+            $customClassBreaksModal.on('shown.bs.modal', function(e) {
                 if (!once) {
                     SetupSplitter();
                     SetupCharts();
@@ -55,7 +55,7 @@ require([
                 const rend = lyr.renderer;
                 let infos = custom || rend.classBreakInfos;
 
-                app.GetCurrentMapsParams().then(function (data) {
+                app.GetCurrentMapsParams().then(function(data) {
 
                     let sliderHeight = $classBreakSliders.height() - (infos.length - 1) * 7;
                     // maxVal = infos[infos.length - 1].maxValue;
@@ -274,7 +274,7 @@ require([
                         q.outFields.push(conf.NormalizeField);
                     }
 
-                    lyr.queryFeatures(q).then(function (res) {
+                    lyr.queryFeatures(q).then(function(res) {
                         let maxVal = res.features[0].attributes[conf.FieldName];
                         if (conf.NormalizeField) {
                             maxVal = maxVal / res.features[0].attributes[conf.NormalizeField];
@@ -406,19 +406,19 @@ require([
 
 
 
-            app.GetCustomBreaks = function (colorRamp) {
+            app.GetCustomBreaks = function(colorRamp) {
                 // console.log(colorRamp);
                 let classBreaks = [];
                 let $panes = $classBreakSliders.find(".cbPane");
 
-                $panes.each(function (i, val) {
+                $panes.each(function(i, val) {
                     let dataInfo = $(val).data("info");
                     dataInfo.symbol.color = colorRamp[$panes.length - 1 - i];
                     classBreaks.push(dataInfo);
                 });
                 return classBreaks.reverse();
             };
-            $("#customClassBreaksButton").click(function () {
+            $("#customClassBreaksButton").click(function() {
                 tp.publish("customClassBreaks-selected");
                 $customClassBreaksModal.modal("hide");
             });
