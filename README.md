@@ -112,3 +112,11 @@ Tests use [Intern](https://theintern.io/)
 More information on running and writing tests can be found in TESTS.md.
 
 -   [TESTS](test/TESTS.md)
+
+## Build
+
+You can build the compiled files by running the default grunt task from the root folder. Running the run task will also build the compiled files and spin up a node server the app will run on and watch for modified the source code and rebuild.
+
+`grunt` or `grunt run`
+
+This will compile the files and place them in the **dist** folder for distribution.
