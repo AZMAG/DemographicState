@@ -1,8 +1,8 @@
 This directory has the following structure:
 ```
 test/
-    js/functional/ - Functional tests
-    js/unit/ - Unit tests
+    functional/ - Functional tests
+    unit/ - Unit tests
 ```
 ## Setup
 

@@ -109,9 +109,7 @@ A copy of the license is available in the repository's `LICENSE` file.
 
 Tests use [Intern](https://theintern.io/) 
 
-More information on running and writing tests can be found in TESTS.md.
-
--   [TESTS](test/TESTS.md)
+More information on running and writing tests can be found in [TESTS.md.](test/TESTS.md)
 
 ## Build
 
