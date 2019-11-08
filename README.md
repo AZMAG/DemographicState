@@ -115,7 +115,7 @@ More information on running and writing tests can be found in TESTS.md.
 
 ## Build
 
-You can build the compiled files by running the default grunt task from the root folder. Running the run task will also build the compiled files and spin up a node server the app will run on and watch for modified the source code and rebuild.
+You can build the compiled files by running the default grunt task from the root folder. Running the run task will also build the compiled files and spin up a node server the app will run on and watch for modified source code and rebuild after changes are saved.
 
 `grunt` or `grunt run`
 
