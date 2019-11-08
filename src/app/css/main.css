@@ -1454,7 +1454,7 @@ hr.pop {
 }
 
 #bgGrid .k-grid-content {
-    height: 500px;
+    max-height: 500px;
 }
 
 #legendGrip {

@@ -332,39 +332,26 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function(tp, QueryTask) {
             </div>
         `;
 
-        let columns = [{
+        let fields = app.acsFieldsConfig;
+
+        if (!data[0]["MEDIAN_HOUSEHOLD_INCOME"]) {
+            fields = app.censusFieldsConfig;
+        }
+
+        let columns = fields.filter(({ universeField }) => universeField !== 2).map(({ fieldName, tableHeader, fieldType }) => {
+            return {
+                field: fieldName,
+                title: tableHeader.includes("Minority") ? "Minority" : tableHeader,
+                format: fieldType ? `{0:${fieldType[0].toLowerCase()}0}` : undefined,
+                width: 150
+            }
+        })
+
+        columns.unshift({
             field: "GEOID",
             title: "ID",
             width: 100
-        }, {
-            field: "SQMI",
-            title: "SQMI",
-            format: "{0:n1}",
-            width: 60
-        }, {
-            field: "TOTAL_POP",
-            title: "Total Pop",
-            format: "{0:n0}",
-            width: 75
-        }, {
-            field: "MINORITY_POP",
-            title: "Minority Pop",
-            format: "{0:n0}",
-            width: 90
-        }, {
-            field: "MEDIAN_AGE",
-            title: "Median Age",
-            format: "{0:n0}",
-            width: 90
-        }]
-
-        if (data[0]["MEDIAN_HOUSEHOLD_INCOME"]) {
-            columns.push({
-                field: "MEDIAN_HOUSEHOLD_INCOME",
-                title: "Median HH Income",
-                format: "{0:c0}"
-            });
-        }
+        });
 
         $("#bgGrid").kendoGrid({
             dataSource: data,
@@ -373,7 +360,15 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function(tp, QueryTask) {
             toolbar: [{
                 template
             }],
+            excel: {
+                fileName: "Block Groups Report.xlsx"
+            },
             // dataBound: GridRowHover
+        });
+
+        $("#bgGrid").data("kendo-grid").bind("excelExport", function(e) {
+            console.log(e);
+
         });
 
         $("#bgTab").on("click", "#exportBG", (e) => {
