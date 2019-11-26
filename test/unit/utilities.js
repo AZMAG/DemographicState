@@ -1,6 +1,6 @@
 define([
     'mag/utilities'
-], function (utilities) {
+], function(utilities) {
     var { assert } = intern.getPlugin('chai');
     var { registerSuite } = intern.getPlugin('interface.object');
     registerSuite('Utilities Module Test', {
@@ -29,6 +29,54 @@ define([
             var inputval = 4000;
             var returnval = utilities.valueAxisTemplate(inputval);
             assert.equal(returnval, "4,000");
+        },
+
+
+        'getSummableFields - returns correct length'() {
+            const inputArr = [{
+                canSum: false,
+                fieldName: "name"
+            }, {
+                canSum: true,
+                fieldName: "salary"
+            }, {
+                canSum: false,
+                fieldName: "date"
+            }]
+
+            const returnArr = utilities.getSummableFields(inputArr);
+            assert.equal(returnArr.length, 1);
+        },
+
+
+        'summarizeFeatures'() {
+            const testFeatures = [{
+                attributes: {
+                    name: "jill",
+                    salary: 100
+                }
+            }, {
+                attributes: {
+                    name: "jim",
+                    salary: 400
+                }
+            }, {
+                attributes: {
+                    name: "sally",
+                    salary: 1000
+                }
+            }]
+
+            const inputFields = [{
+                canSum: false,
+                fieldName: "name"
+            }, {
+                canSum: true,
+                fieldName: "salary"
+            }]
+
+            const returnval = utilities.summarizeFeatures(testFeatures, inputFields);
+            assert.equal(returnval["salary"], 1500);
         }
     });
 });
