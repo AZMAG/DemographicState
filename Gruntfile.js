@@ -13,7 +13,9 @@ module.exports = function (grunt) {
     require("matchdep").filterDev(["grunt-*", "intern"]).forEach(grunt.loadNpmTasks);
 
     var includedModules = [
-        "mag/app"
+        "mag/app",
+        "magcore/main",
+        "magcore/utils/formatter"
     ]
     var excludedModules = [
         "dojo/domReady",
@@ -22,6 +24,7 @@ module.exports = function (grunt) {
     ]
     var paths = {
         "mag": "",
+        "magcore": "../../../node_modules/magcore/src/js",
         "dojo": "empty:",
         "dojo/domReady": "../../../node_modules/requirejs-domready/domReady",
         "esri": "empty:"
@@ -341,6 +344,10 @@ module.exports = function (grunt) {
                                 {
                                     name: "mag",
                                     location: "src/app/js"
+                                },
+                                {
+                                    name: "magcore",
+                                    location: "node_modules/magcore/src/js"
                                 },
                                 {
                                     name: "esri",
