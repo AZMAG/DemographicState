@@ -1,14 +1,14 @@
 define([
-        "mag/utilities",
-        "mag/config/config"
+        "mag/config/config",
+        "magcore/utils/formatter"
 
 ], function(
-    utils,
-    config
+    config,
+    formatter
 ){
 
     var _parseURL= function(){
-        var initStr = utils.qs("init");
+        var initStr = formatter.qs("init");
         if (initStr) {
             return JSON.parse(initStr);
         }

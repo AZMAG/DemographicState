@@ -7,6 +7,7 @@ define([
         'mag/config/acsFieldsConfig',
         'mag/reports/reports-utils',
         'mag/utilities',
+        'magcore/utils/formatter',
         'dojo/topic'
     ],
     function (
@@ -15,6 +16,7 @@ define([
         acsFieldsConfig,
         reportsutils,
         utilities,
+        formatter,
         tp
     ){
     tp.subscribe('panel-loaded', function (panel) {
@@ -175,7 +177,7 @@ define([
                 fieldType: fld.fieldType,
                 fieldClass: fld.class,
                 fieldValue: Number(val),
-                fieldValueFormatted: utilities.numberWithCommas(Number(val).toFixed(1)).replace('.0', ''),
+                fieldValueFormatted: formatter.numberWithCommas(Number(val).toFixed(1)).replace('.0', ''),
                 chartCategory: fld.chartCategory,
                 chartType: fld.chartType,
                 chartName: fld.chartCategory,
