@@ -45,6 +45,7 @@
     "arcgis-js-api": "^4.11.1",
     "babel-polyfill": "^6.26.0",
     "grunt-cli": "^1.3.2",
+    "magcore": "github:AZMAG/map-mag-core-js#develop",
     "requirejs-domready": "^2.0.3"
   },
   "devDependencies": {
