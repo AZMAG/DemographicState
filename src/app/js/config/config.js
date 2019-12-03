@@ -141,32 +141,7 @@ app.config = {
                 },
                 minScale: 577790
             }
-        },
-        {
-            legend: true,
-            id: 'cogs',
-            layerName: 'Cogs',
-            title: 'Councils of Governments',
-            type: 'feature',
-            opacity: 1,
-            visible: false,
-            showReport: true,
-            showTOC: true,
-            definition: 'Councils of governments (CoGs—also known as regional councils, regional commissions, regional planning commissions, and planning districts) are regional governing and/or coordinating bodies.',
-            layerListOrder: 17
-        },
-        {
-            legend: true,
-            id: 'mpos',
-            layerName: 'Mpos',
-            title: 'Metropolitan Planning Organizations',
-            type: 'feature',
-            opacity: 1,
-            visible: false,
-            showReport: true,
-            showTOC: true,
-            definition: 'A metropolitan planning organization (MPO) is a federally mandated and federally funded transportation policy-making organization that is made up of representatives from local government and governmental transportation authorities. They were created to ensure regional cooperation in transportation planning.',
-            layerListOrder: 18
+
         },
         {
             legend: true,
@@ -313,6 +288,30 @@ app.config = {
             layerListOrder: 13
         },
         {
+            legend: true,
+            id: 'cogs',
+            layerName: 'Cogs',
+            title: 'Councils of Governments',
+            type: 'feature',
+            opacity: 1,
+            visible: false,
+            showReport: true,
+            showTOC: true,
+            definition: 'Councils of governments (CoGs—also known as regional councils, regional commissions, regional planning commissions, and planning districts) are regional governing and/or coordinating bodies.',
+            layerListOrder: 17
+        }, {
+            legend: true,
+            id: 'mpos',
+            layerName: 'Mpos',
+            title: 'Metropolitan Planning Organizations',
+            type: 'feature',
+            opacity: 1,
+            visible: false,
+            showReport: true,
+            showTOC: true,
+            definition: 'A metropolitan planning organization (MPO) is a federally mandated and federally funded transportation policy-making organization that is made up of representatives from local government and governmental transportation authorities. They were created to ensure regional cooperation in transportation planning.',
+            layerListOrder: 18
+        }, {
             legend: true,
             id: 'state',
             layerName: 'State',
