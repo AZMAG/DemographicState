@@ -3,7 +3,7 @@ require(["dojo/topic",
     "esri/widgets/Sketch/SketchViewModel",
     "esri/Graphic",
     "esri/geometry/geometryEngine"
-], function (
+], function(
     tp,
     SketchViewModel,
     Graphic,
@@ -18,9 +18,11 @@ require(["dojo/topic",
 
 
     function init() {
+
         if (!isInited) {
+
             isInited = true;
-            tp.subscribe("gfxLayer-loaded", function () {
+            tp.subscribe("gfxLayer-loaded", function() {
 
                 let $customGeographyReports = $("#customGeographyReports");
                 let $bufferCheckbox = $("#useBuffer");
@@ -79,7 +81,7 @@ require(["dojo/topic",
                     }
                 });
 
-                $bufferCheckbox.change(function (e) {
+                $bufferCheckbox.change(function(e) {
                     let checked = $bufferCheckbox.prop("checked");
                     if (checked) {
                         $bufferOptions.css("display", "flex");
@@ -88,18 +90,18 @@ require(["dojo/topic",
                     }
                 });
 
-                $customSummaryButton.click(function (e) {
+                $customSummaryButton.click(function(e) {
                     e.preventDefault();
                     $customSummaryButton.removeClass("active");
                     $(this).addClass("active");
                     let type = $(this).data("val");
                     $drawingTooltip.html(drawMessages[type].start);
                     sketchVM.create(type, {
-                        mode: "click"
+                        mode: "click drag"
                     });
 
                     //Creates a tooltip to give user instructions on drawing
-                    $("#viewDiv").mousemove(function (e) {
+                    $("#viewDiv").mousemove(function(e) {
                         $drawingTooltip
                             .css("left", e.pageX + 10)
                             .css("top", e.pageY + 10)
@@ -107,7 +109,7 @@ require(["dojo/topic",
                     });
                 });
 
-                sketchVM.on("update", function (e) {
+                sketchVM.on("update", function(e) {
                     let buffer = $bufferCheckbox.is(":checked");
                     if (buffer) {
                         AddBufferedGraphic(e);
@@ -137,7 +139,7 @@ require(["dojo/topic",
                     }
                 }
 
-                sketchVM.on("create", function (e) {
+                sketchVM.on("create", function(e) {
                     let buffer = $bufferCheckbox.is(":checked");
 
                     if (e.state === "complete") {
@@ -165,14 +167,14 @@ require(["dojo/topic",
                         $(".customSummaryButton").removeClass("active");
                         $drawingTooltip.hide();
                         $bufferCheckbox.prop("checked", false);
-                        sketchVM.reset();
+                        sketchVM.cancel();
                     }
                 }
 
                 tp.subscribe("reset-reports", resetReport);
 
                 function ProcessSelection(gfx) {
-                    app.GetData(app.config.layerDef["blockGroups"], null, gfx.geometry).then(function (data) {
+                    app.GetData(app.config.layerDef["blockGroups"], null, gfx.geometry).then(function(data) {
                         var acsData = app.summarizeFeatures(data.acsData);
                         var censusData = app.summarizeFeatures(data.censusData);
 
@@ -187,7 +189,8 @@ require(["dojo/topic",
                                     attributes: acsData,
                                     count: data.acsData.features.length,
                                     ids: data.acsData.features.map(feature => feature.attributes["GEOID"])
-                                }]
+                                }],
+                                blockGroups: data.acsData.features
                             };
 
                             app.selectedReport.censusData = {
@@ -195,7 +198,8 @@ require(["dojo/topic",
                                     attributes: censusData,
                                     count: data.censusData.features.length,
                                     ids: data.censusData.features.map(feature => feature.attributes["GEOID"])
-                                }]
+                                }],
+                                blockGroups: data.censusData.features
                             };
                             tp.publish("open-report-window", app.selectedReport, "acs");
                             $customGeographyReports.hide();

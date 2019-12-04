@@ -9,7 +9,7 @@ require([
     "esri/layers/GraphicsLayer",
     "dojo/topic",
     "dojo/domReady!"
-], function (Map, MapView, FeatureLayer, MapImageLayer, TileLayer, Extent, GraphicsLayer, tp) {
+], function(Map, MapView, FeatureLayer, MapImageLayer, TileLayer, Extent, GraphicsLayer, tp) {
 
     tp.subscribe("config-loaded", initMap);
 
@@ -40,12 +40,17 @@ require([
                     buttonEnabled: false,
                     breakpoint: false,
                 }
-            }
+            },
+            // highlightOptions: {
+            //     color: [255, 255, 0, 1],
+            //     haloOpacity: 0.9,
+            //     fillOpacity: 0.95
+            // }
         });
 
-        app.view.when(function () {
+        app.view.when(function() {
             tp.publish('map-loaded');
-            app.view.popup.on('trigger-action', function (e) {
+            app.view.popup.on('trigger-action', function(e) {
                 if (e.action.id === 'open-report') {
                     tp.publish('toggle-panel', 'reports');
                     let f = e.target.selectedFeature;
@@ -175,11 +180,12 @@ require([
             //It Should probably be refactored at some point
             let bgLayer = app.map.findLayerById("blockGroups");
             var once = false;
-            app.view.whenLayerView(bgLayer).then(function (lyrView) {
-                lyrView.watch("updating", function (value) {
+            app.view.whenLayerView(bgLayer).then(function(lyrView) {
+                lyrView.watch("updating", function(value) {
                     if (!value && !once) {
                         $('.loading-container').css('display', 'none');
-                        // app.blockGroupLyrView = lyrView;
+                        app.blockGroupLyrView = lyrView;
+
                         tp.publish("layers-added");
                         once = true;
                     }
@@ -187,10 +193,10 @@ require([
             });
 
 
-            var once = false;
-            app.view.whenLayerView(gfxLayer).then(function (lyrView) {
-                lyrView.watch("updating", function (value) {
-                    if (!value && !once) {
+            var onc = false;
+            app.view.whenLayerView(gfxLayer).then(function(lyrView) {
+                lyrView.watch("updating", function(value) {
+                    if (!value && !onc) {
                         tp.publish("gfxLayer-loaded");
                     }
                 })
@@ -204,7 +210,7 @@ require([
                 spatialReference: 102100
             });
 
-            app.view.watch('extent', function (extent) {
+            app.view.watch('extent', function(extent) {
                 let currentCenter = extent.center;
                 if (!maxExtent.contains(currentCenter)) {
                     let newCenter = extent.center;

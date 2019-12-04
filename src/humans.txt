@@ -72,8 +72,8 @@
 # SITE
     Site Name: Arizona Demographics
     Site URL: http://http://geo.azmag.gov/maps/azdemographics/
-    Version: 4.0.7
-	Last updated: 2019-07-24
+    Version: 4.0.8
+	Last updated: 2019-12-03
     Creation Date: 2014-10-21
 	Language: English
 	Doctype: HTML5

@@ -1196,10 +1196,6 @@ hr.pop {
     border-radius: 5px;
 }
 
-#printWidget {
-    opacity: .5;
-}
-
 #printLoader {
     display: none;
     margin-left: 10px;
@@ -1434,9 +1430,31 @@ hr.pop {
     border: 2px solid black;
 }
 
+.title6TooltipTitle {
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.tooltip-inner {
+    max-width: 500px;
+    text-align: left;
+}
+
+#title6Area.legal {
+    font-size: 10px;
+}
+
 .iconTooltip:hover {
     display: none;
     opacity: 0;
+}
+
+#bgGrid {
+    font-size: 11px;
+}
+
+#bgGrid .k-grid-content {
+    max-height: 500px;
 }
 
 #legendGrip {
