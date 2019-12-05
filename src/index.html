@@ -74,13 +74,10 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.6.3/css/all.min.css" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
     <!-- Application CSS -->
-    <!-- comments:comment html -->
+
     <link rel="stylesheet" href="app/css/normalize.css" />
     <link rel="stylesheet" href="app/css/main.css" />
-    <!-- endcomments -->
-    <!-- comments:uncomment html -->
-    <!-- <link rel="stylesheet" type="text/css" href="app/css/concat.min.css"> -->
-    <!-- endcomments -->
+ 
     <!-- prevent cache -->
     <!--  removed once App goes into production -->
     <!-- comments:comment html -->
@@ -352,21 +349,6 @@
     <!-- *** JavaScript *** -->
     <!-- =================================================================================================== -->
 
-    <!-- comments:uncomment-block html -->
-    <!--<script>
-        var app = {};
-        var dojoConfig = {
-            // async: true,
-            packages: [{
-                name: 'app',
-                location: location.pathname.replace(/\/[^/]+$/, '') + './app/js'
-            }]
-        };
-
-    </script> -->
-    <!-- endcomments -->
-
-    <!-- comments:comment-block html -->
     <script>
         var app = {};
         var dojoConfig = {
@@ -374,13 +356,10 @@
             packages: [{
                 name: 'app',
                 location: location.pathname.replace(/\/[^/]+$/, '') + './app/js'
-            }, {
-                name: 'mag',
-                location: location.pathname.replace(/\/[^/]+$/, '') + '../dist/app/js'
             }]
         };
+
     </script>
-    <!-- endcomments -->
 
     <!-- Vendor  -->
     <!-- <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script> -->
@@ -396,58 +375,11 @@
     <script src="https://js.arcgis.com/4.11/"></script>
     <script src="app/libs/magcore/dist/js/magcore.js"></script>
 
-    <!-- comments:comment-block html -->
-
-    <script src="app/js/config/config.js"></script>
-    <script src="app/js/utilities.js"></script>
-    <script src="app/js/config/mapsConfig.js"></script>
-    <script src="app/js/config/colorRampConfig.js"></script>
-    <script src="app/js/config/acsFieldsConfig.js"></script>
-    <script src="app/js/config/censusFieldsConfig.js"></script>
-
-    <script src="app/js/widgets/legend.js"></script>
-    <script src="app/js/widgets/zoom.js"></script>
-    <script src="app/js/widgets/home.js"></script>
-    <script src="app/js/widgets/locate.js"></script>
-    <script src="app/js/widgets/basemapToggle.js"></script>
-    <script src="app/js/widgets/share.js"></script>
-    <script src="app/js/widgets/sketch.js"></script>
-    <script src="app/js/widgets/search.js"></script>
-    <script src="app/js/widgets/print.js"></script>
-
-    <script src="app/js/maps/cbr.js"></script>
-    <script src="app/js/maps/colorRamps.js"></script>
-    <script src="app/js/maps/customClassBreaks.js"></script>
-    <script src="app/js/maps/maps-panel.js"></script>
-    <script src="app/js/maps/maps-utils.js"></script>
-
-
-    <script src="app/js/reports/exportToExcel.js"></script>
-    <script src="app/js/reports/reportGrid.js"></script>
-    <script src="app/js/reports/reportCharts.js"></script>
-    <script src="app/js/reports/reports.js"></script>
-    <script src="app/js/reports/standardReports.js"></script>
-    <script src="app/js/reports/advancedQueryReports.js"></script>
-    <script src="app/js/reports/customGeographyReports.js"></script>
-
-    <script src="app/js/layerlist.js"></script>
-    <script src="app/js/sidebar.js"></script>
-    <script src="app/js/maps/maps.js"></script>
-    <script src="app/js/app.js"></script>
-    
-    
-
-    <!-- endcomments -->
-
-    <!-- comments:uncomment-block html -->
-    <!-- 
-    <script src="app/js/mag.js"></script>
     <script>
         require(["mag/app"], function(mag){
 
         });
-    </script> -->
-    <!-- endcomments -->
+    </script>
 
 </body>
 
