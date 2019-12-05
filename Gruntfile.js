@@ -30,6 +30,10 @@ module.exports = function (grunt) {
         "esri": "empty:"
     }
     grunt.initConfig({
+        config: {
+            out: 'dist',
+            src: 'src'
+        },
         pkg: grunt.file.readJSON("package.json"),
 
         bannercss: "/*! ========================================================================\n" +
@@ -106,8 +110,8 @@ module.exports = function (grunt) {
         requirejs: {
             debug: {
                 options: {
-                    baseUrl: 'src/app/js',
-                    out: 'dist/app/js/mag.js',
+                    baseUrl: './<%=config.src%>/app/js',
+                    out: './<%=config.out%>/app/js/mag.js',
                     // allow dependencies to be resolved but don't include in output (empty:)
                     paths: paths,
                     // but don't include them in the main build
@@ -121,20 +125,29 @@ module.exports = function (grunt) {
                     removeCombined: true
                 }
             },
-        },
+            release: {
+                options: {
+                    baseUrl: './<%=config.src%>/app/js',
+                    // allow dependencies to be resolved but don't include in output (empty:)
+                    paths: paths,
+                    // but don't include them in the main build
+                    exclude: excludedModules,
+                    include: includedModules,
+                    inlineText: true,
+                    optimize: 'none',
+                    generateSourceMaps: false,
+                    preserveLicenseComments: true,
+                    findNestedDependencies: true,
+                    removeCombined: true,
+                    out: function (text, sourceMapText) {
+                        var UglifyJS = require('uglify-es'),
+                            uglified = UglifyJS.minify(text),
+                            config = grunt.config.get('config'),
+                            pkg = grunt.config.get('pkg');
 
-        uglify: {
-            options: {
-                preserveComments: "true",
-                mangle: false
-            },
-            target0: {
-                files: [{
-                    expand: true,
-                    cwd: "dist/app/js",
-                    src: ["*.js"],
-                    dest: "dist/app/js"
-                }]
+                        grunt.file.write(`${config.out}/app/js/mag.min.js`, uglified.code);
+                    }
+                }
             }
         },
 
@@ -250,9 +263,16 @@ module.exports = function (grunt) {
                 src: 'src/index.html',
                 dest: 'dist/index.html',
                 replacements: [ 
+                    { from: 'main.css', to: 'concat.min.css'},   
+                    { from: 'magcore.js', to: 'magcore.min.js'},
                     { 
-                        from: 'magcore.js', 
-                        to: 'magcore.min.js'
+                        from: '<script src="app/libs/magcore/dist/js/magcore.js"></script>\n', 
+                        to: '<script src="app/libs/magcore/dist/js/magcore.min.js"></script>\n\t' + 
+                        '<script src="app/js/<%= pkg.name %>.min.js"></script>\t\n'
+                    },
+                    { 
+                        from: '<link rel="stylesheet" href="app/css/normalize.css" />', 
+                        to: ''
                     }
                 ]
             },
@@ -414,7 +434,7 @@ module.exports = function (grunt) {
     });
 
     grunt.registerTask("build-copy-concat", ["clean:build", "replace:update_Meta", "copy", "replace:File_Reference", "replace:index", "concat", "toggleComments"]);
-    grunt.registerTask("build-js", ["clean:js", "babel", "uglify"]);
+    grunt.registerTask("build-js", ["clean:js", "babel"]);
     grunt.registerTask("build-css", ["cssmin", "postcss", "clean:css"])
     grunt.registerTask("build-html", ["htmlmin"])
     grunt.registerTask("require", ["requirejs"]);
