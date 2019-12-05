@@ -24,7 +24,7 @@ module.exports = function (grunt) {
     ]
     var paths = {
         "mag": "",
-        "magcore": "../../../node_modules/magcore/src/js",
+        "magcore": "empty:",
         "dojo": "empty:",
         "dojo/domReady": "../../../node_modules/requirejs-domready/domReady",
         "esri": "empty:"
@@ -213,10 +213,23 @@ module.exports = function (grunt) {
 
         copy: {
             build: {
-                cwd: "src/",
-                src: ["**"],
-                dest: "dist/",
-                expand: true
+                files: [
+                    {
+                        cwd: "src/",
+                        src: ["**"],
+                        dest: "dist/",
+                        expand: true
+                    },
+                    { 
+                        expand: true, 
+                        cwd: "node_modules/", 
+                        src: [
+                            "magcore/dist/**"
+                        ], 
+                        dest: "dist/app/libs/"
+                    }
+                
+                ]
             }
         },
 
@@ -233,6 +246,16 @@ module.exports = function (grunt) {
         },
 
         replace: {
+            index: {
+                src: 'src/index.html',
+                dest: 'dist/index.html',
+                replacements: [ 
+                    { 
+                        from: 'magcore.js', 
+                        to: 'magcore.min.js'
+                    }
+                ]
+            },
             update_Meta: {
                 src: ["src/index.html", "src/humans.txt", "README.md", "LICENSE", "src/LICENSE", "src/app/css/main.css", "src/app/js/config/config.js"],
                 overwrite: true, // overwrite matched source files
@@ -346,10 +369,6 @@ module.exports = function (grunt) {
                                     location: "src/app/js"
                                 },
                                 {
-                                    name: "magcore",
-                                    location: "node_modules/magcore/src/js"
-                                },
-                                {
                                     name: "esri",
                                     location: "node_modules/arcgis-js-api"
                                 },
@@ -394,7 +413,7 @@ module.exports = function (grunt) {
         });
     });
 
-    grunt.registerTask("build-copy-concat", ["clean:build", "replace:update_Meta", "copy", "replace:File_Reference", "concat", "toggleComments"]);
+    grunt.registerTask("build-copy-concat", ["clean:build", "replace:update_Meta", "copy", "replace:File_Reference", "replace:index", "concat", "toggleComments"]);
     grunt.registerTask("build-js", ["clean:js", "babel", "uglify"]);
     grunt.registerTask("build-css", ["cssmin", "postcss", "clean:css"])
     grunt.registerTask("build-html", ["htmlmin"])
