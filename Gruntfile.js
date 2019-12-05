@@ -266,9 +266,9 @@ module.exports = function (grunt) {
                     { from: 'main.css', to: 'concat.min.css'},   
                     { from: 'magcore.js', to: 'magcore.min.js'},
                     { 
-                        from: '<script src="app/libs/magcore/dist/js/magcore.js"></script>\n', 
+                        from: '<script src="app/libs/magcore/dist/js/magcore.min.js"></script>\n', 
                         to: '<script src="app/libs/magcore/dist/js/magcore.min.js"></script>\n\t' + 
-                        '<script src="app/js/<%= pkg.name %>.min.js"></script>\t\n'
+                        '<script src="app/js/mag.min.js"></script>\t\n'
                     },
                     { 
                         from: '<link rel="stylesheet" href="app/css/normalize.css" />', 
