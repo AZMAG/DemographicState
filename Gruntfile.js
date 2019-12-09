@@ -6,7 +6,7 @@ function randomString(length, chars) {
 const fileHash = randomString(32, '0123456789abcdefghijklmnopqrstuvwxyz');
 const jsFilePath = `dist/app/js/main.${fileHash}.js`;
 
-module.exports = function (grunt) {
+module.exports = function(grunt) {
 
     "use strict";
 
@@ -278,8 +278,7 @@ module.exports = function (grunt) {
             File_Reference: {
                 src: ["dist/index.html"],
                 overwrite: true,
-                replacements: [
-                ]
+                replacements: []
             }
 
         },
@@ -309,17 +308,15 @@ module.exports = function (grunt) {
         },
         intern: {
             options: {
-                suites: ["test/unit/**/*.js",],
-                functionalSuites: ["test/functional/**/*.js"],
-                environments: [
-                    {
-                        browserName: "chrome",
-                        fixSessionCapabilities: "no-detect",
-                        chromeOptions: {
-                            args: ["headless", "disable-gpu", "window-size=1024,768"]
-                        }
+                suites: ["test/unit/**/*.js", ],
+                // functionalSuites: ["test/functional/**/*.js"],
+                environments: [{
+                    browserName: "chrome",
+                    fixSessionCapabilities: "no-detect",
+                    chromeOptions: {
+                        args: ["headless", "disable-gpu", "window-size=1024,768"]
                     }
-                ],
+                }, ],
                 reporters: ['runner'],
             },
             browser: {
@@ -337,8 +334,7 @@ module.exports = function (grunt) {
                             has: {
                                 "extend-esri": 1
                             },
-                            packages: [
-                                {
+                            packages: [{
                                     name: "mag",
                                     location: "src/app/js"
                                 },
@@ -378,7 +374,7 @@ module.exports = function (grunt) {
         }
     });
 
-    grunt.registerTask("GetClassBreaks", function () {
+    grunt.registerTask("GetClassBreaks", function() {
         require("./src/app/vendor/js/generateClassBreaks.js")(grunt, this.async, {
             inputLocation: "./src/app/js/config/cbrConfig.json",
             geoStatsPath: "Z:\\Viewers\\Demographics\\src\\app\\vendor\\js\\geoStats.min.js",

@@ -123,10 +123,11 @@ define([
             },
 
             getSummableFields: function(fields) {
-                console.log(fields);
-
-                const filtered = fields.filter(field => field.canSum);
-                return filtered.map(field => field.fieldName);
+                if (fields.constructor === Array) {
+                    const filtered = fields.filter(field => field.canSum);
+                    return filtered.map(field => field.fieldName);
+                }
+                return [];
             },
 
             summarizeFeatures: function(features, fields) {

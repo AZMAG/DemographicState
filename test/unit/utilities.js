@@ -32,7 +32,7 @@ define([
         },
 
 
-        'getSummableFields - returns correct length'() {
+        'getSummableFields - returns correct array'() {
             const inputArr = [{
                 canSum: false,
                 fieldName: "name"
@@ -45,7 +45,17 @@ define([
             }]
 
             const returnArr = utilities.getSummableFields(inputArr);
-            assert.equal(returnArr.length, 1);
+            assert.deepEqual(returnArr, ["salary"]);
+        },
+
+        'getSummableFields - returns empty array - input string'() {
+            const returnArr = utilities.getSummableFields("test");
+            assert.deepEqual(returnArr, []);
+        },
+
+        'getSummableFields - returns empty array - input empty array'() {
+            const returnArr = utilities.getSummableFields([]);
+            assert.deepEqual(returnArr, []);
         },
 
 
