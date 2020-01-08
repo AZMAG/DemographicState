@@ -89,7 +89,7 @@ module.exports = function (grunt) {
                 jshintrc: true,
                 reporter: require("jshint-stylish-ex")
             },
-            src: ["Gruntfile.js", "src/app/js/*.js", "src/app/js/config/*.js", "src/app/js/maps/*.js", "src/app/js/reports/*.js", "src/app/js/widgets/*.js"],
+            src: ["Gruntfile.js", "<%=config.src%>/app/js/*.js", "<%=config.src%>/app/js/config/*.js", "<%=config.src%>/app/js/maps/*.js", "<%=config.src%>/app/js/reports/*.js", "<%=config.src%>/app/js/widgets/*.js"],
         },
 
         babel: {
@@ -100,9 +100,9 @@ module.exports = function (grunt) {
             babel0: {
                 files: [{
                     expand: true,
-                    cwd: "dist/app/js/",
+                    cwd: "<%=config.out%>/app/js/",
                     src: ["*.js"],
-                    dest: "dist/app/js/"
+                    dest: "<%=config.out%>/app/js/"
                 }]
             }
         },
@@ -158,7 +158,7 @@ module.exports = function (grunt) {
                     collapseWhitespace: true
                 },
                 files: {
-                    "dist/index.html": "dist/index.html",
+                    "<%=config.out%>/index.html": "<%=config.out%>/index.html",
                 }
             },
             htmlmin2: {
@@ -168,9 +168,9 @@ module.exports = function (grunt) {
                 },
                 files: [{
                     expand: true,
-                    cwd: "dist/app/views",
+                    cwd: "<%=config.out%>/app/views",
                     src: ["*.html"],
-                    dest: "dist/app/views"
+                    dest: "<%=config.out%>/app/views"
                 }]
             }
         },
@@ -182,7 +182,7 @@ module.exports = function (grunt) {
                     banner: '/* <%= pkg.name %> - v<%= pkg.version %> | <%= grunt.template.today("mm-dd-yyyy") %> */'
                 },
                 files: {
-                    'dist/app/css/concat.min.css': 'dist/app/css/concat.min.css'
+                    '<%=config.out%>/app/css/concat.min.css': '<%=config.out%>/app/css/concat.min.css'
                 }
             }
         },
@@ -199,27 +199,27 @@ module.exports = function (grunt) {
             },
             dist: {
                 files: {
-                    'dist/app/css/concat.min.css': 'dist/app/css/concat.min.css'
+                    '<%=config.out%>/app/css/concat.min.css': '<%=config.out%>/app/css/concat.min.css'
                 }
             }
         },
 
         concat: {
             css: {
-                src: ["dist/app/css/*.css", "!dist/app/css/concat.min.css"],
-                dest: "dist/app/css/concat.min.css"
+                src: ["<%=config.out%>/app/css/*.css", "!<%=config.out%>/app/css/concat.min.css"],
+                dest: "<%=config.out%>/app/css/concat.min.css"
             }
         },
 
         clean: {
             build: {
-                src: ["dist/"]
+                src: ["<%=config.out%>/"]
             },
             js: {
-                src: ["dist/app/js/*", "!" + jsFilePath]
+                src: ["<%=config.out%>/app/js/*", "!" + jsFilePath]
             },
             css: {
-                src: ["dist/app/css/*", "!dist/app/css/concat.min.css"]
+                src: ["<%=config.out%>/app/css/*", "!<%=config.out%>/app/css/concat.min.css"]
             }
 
         },
@@ -228,18 +228,18 @@ module.exports = function (grunt) {
             build: {
                 files: [
                     {
-                        cwd: "src/",
+                        cwd: "<%=config.src%>/",
                         src: ["**"],
-                        dest: "dist/",
+                        dest: "<%=config.out%>/",
                         expand: true
                     },
                     { 
                         expand: true, 
                         cwd: "node_modules/", 
                         src: [
-                            "magcore/dist/**"
+                            "magcore/<%=config.out%>/**"
                         ], 
-                        dest: "dist/app/libs/"
+                        dest: "<%=config.out%>/app/libs/"
                     }
                 
                 ]
@@ -252,7 +252,7 @@ module.exports = function (grunt) {
                     removeCommands: false
                 },
                 files: {
-                    "dist/index.html": "dist/index.html",
+                    "<%=config.out%>/index.html": "<%=config.out%>/index.html",
                     [jsFilePath]: jsFilePath
                 }
             }
@@ -260,17 +260,17 @@ module.exports = function (grunt) {
 
         replace: {
             index: {
-                src: 'src/index.html',
-                dest: 'dist/index.html',
+                src: '<%=config.src%>/index.html',
+                dest: '<%=config.out%>/index.html',
                 replacements: [ 
                     {
                         from: '<link rel="stylesheet" href="app/css/main.css" />', 
                         to: '<link rel="stylesheet" href="app/css/concat.min.css" />'
                     },   
-                    { from: '../node_modules/magcore/dist/js/magcore.js', to: 'app/libs/magcore/dist/js/magcore.min.js'},
+                    { from: '../node_modules/magcore/<%=config.out%>/js/magcore.js', to: 'app/libs/magcore/<%=config.out%>/js/magcore.min.js'},
                     { 
-                        from: '<script src="app/libs/magcore/dist/js/magcore.min.js"></script>\n', 
-                        to: '<script src="app/libs/magcore/dist/js/magcore.min.js"></script>\n\t' + 
+                        from: '<script src="app/libs/magcore/<%=config.out%>/js/magcore.min.js"></script>\n', 
+                        to: '<script src="app/libs/magcore/<%=config.out%>/js/magcore.min.js"></script>\n\t' + 
                         '<script src="app/js/mag.min.js"></script>\t\n'
                     },
                     { 
@@ -280,7 +280,7 @@ module.exports = function (grunt) {
                 ]
             },
             update_Meta: {
-                src: ["src/index.html", "src/humans.txt", "README.md", "LICENSE", "src/LICENSE", "src/app/css/main.css", "src/app/js/config/config.js"],
+                src: ["<%=config.src%>/index.html", "<%=config.src%>/humans.txt", "README.md", "LICENSE", "<%=config.src%>/LICENSE", "<%=config.src%>/app/css/main.css", "<%=config.src%>/app/js/config/config.js"],
                 overwrite: true, // overwrite matched source files
                 replacements: [{
                     // html pages
@@ -325,7 +325,7 @@ module.exports = function (grunt) {
                 }]
             },
             File_Reference: {
-                src: ["dist/index.html"],
+                src: ["<%=config.out%>/index.html"],
                 overwrite: true,
                 replacements: [
                 ]
@@ -337,14 +337,14 @@ module.exports = function (grunt) {
                 livereload: 35729
             },
             site: {
-                files: ['./src/app/css/**/*.css', './src/app/js/**/*.js', './src/app/js/**/*.html'],
+                files: ['./<%=config.src%>/app/css/**/*.css', './<%=config.src%>/app/js/**/*.js', './<%=config.src%>/app/js/**/*.html'],
                 tasks: ['build']
             }
         },
         connect: {
             options: {
                 hostname: 'localhost',
-                base: './dist/',
+                base: './<%=config.out%>/',
                 livereload: 35729
             },
             site: {
@@ -389,7 +389,7 @@ module.exports = function (grunt) {
                             packages: [
                                 {
                                     name: "mag",
-                                    location: "src/app/js"
+                                    location: "<%=config.src%>/app/js"
                                 },
                                 {
                                     name: "esri",
@@ -420,7 +420,7 @@ module.exports = function (grunt) {
                         }
                     },
                     plugins: [
-                        'node_modules/jquery/dist/jquery.js'
+                        'node_modules/jquery/<%=config.out%>/jquery.js'
                     ]
                 }
             }
@@ -428,11 +428,11 @@ module.exports = function (grunt) {
     });
 
     grunt.registerTask("GetClassBreaks", function () {
-        require("./src/app/vendor/js/generateClassBreaks.js")(grunt, this.async, {
-            inputLocation: "./src/app/js/config/cbrConfig.json",
-            geoStatsPath: "Z:\\Viewers\\Demographics\\src\\app\\vendor\\js\\geoStats.min.js",
+        require("./<%=config.src%>/app/vendor/js/generateClassBreaks.js")(grunt, this.async, {
+            inputLocation: "./<%=config.src%>/app/js/config/cbrConfig.json",
+            geoStatsPath: "Z:\\Viewers\\Demographics\\<%=config.src%>\\app\\vendor\\js\\geoStats.min.js",
             mainUrl: "https://geo.azmag.gov/arcgis/rest/services/maps/DemographicState2017/MapServer",
-            outputLocation: "./src/app/js/config/cbrConfig.json"
+            outputLocation: "./<%=config.src%>/app/js/config/cbrConfig.json"
         });
     });
 
