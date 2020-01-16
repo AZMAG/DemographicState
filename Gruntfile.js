@@ -263,10 +263,10 @@ module.exports = function (grunt) {
     });
 
     grunt.registerTask("GetClassBreaks", function () {
-        require("./src/app/vendor/js/generateClassBreaks.js")(grunt, this.async, {
+        require("./src/generateClassBreaks.js")(grunt, this.async, {
             inputLocation: "./src/app/js/config/cbrConfig.json",
-            geoStatsPath: "Z:\\Viewers\\Demographics\\src\\app\\vendor\\js\\geoStats.min.js",
-            mainUrl: "https://geo.azmag.gov/arcgis/rest/services/maps/DemographicState2017/MapServer",
+            geoStatsPath: "./src/app/vendor/geoStats.min.js",
+            mainUrl: "https://geo.azmag.gov/arcgis/rest/services/maps/DemographicState2018/MapServer",
             outputLocation: "./src/app/js/config/cbrConfig.json"
         });
     });
@@ -275,6 +275,7 @@ module.exports = function (grunt) {
     grunt.registerTask("build-js", ["clean:js", "babel", "uglify"]);
     grunt.registerTask("build-css", ["cssmin", "postcss", "clean:css"])
     grunt.registerTask("build-html", ["htmlmin"])
+
 
     grunt.registerTask("build", ["build-copy-concat", "build-js", "build-css", "build-html"]);
 

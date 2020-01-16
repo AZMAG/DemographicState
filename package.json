@@ -12,7 +12,7 @@
     "2010",
     "American Community Survey",
     "ACS",
-    "2013-2017",
+    "2014-2018",
     "5 year",
     "MAG",
     "maps",
@@ -43,7 +43,8 @@
   "private": true,
   "dependencies": {
     "arcgis-js-api": "^4.11.1",
-    "babel-polyfill": "^6.26.0"
+    "babel-polyfill": "^6.26.0",
+    "geostats": "^1.8.0"
   },
   "devDependencies": {
     "@babel/core": "^7.4.4",
