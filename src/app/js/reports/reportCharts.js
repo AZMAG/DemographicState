@@ -1,12 +1,12 @@
 'use strict';
 define([
         'mag/config/config',
-        'mag/utilities',
+        'magcore/utils/formatter',
         'dojo/topic'
     ],
     function(
         config,
-        utilities,
+        formatter,
         tp
     ){
     tp.subscribe('create-charts', CreateCharts);
@@ -57,7 +57,7 @@ define([
                         tooltip: {
                             visible: true,
                             template: function (item) {
-                                var text = utilities.chartTooltip(item.value, item.category);
+                                var text = formatter.chartTooltip(item.value, item.category);
                                 return text+' <br> '+kendo.format("{0:P}", item.percentage);
                             }
                         }
@@ -74,7 +74,7 @@ define([
                                 angle: ops.type === 'column' ? 45 : 0
                             },
                             template: function (item) {
-                                var text = utilities.wrapText(item.value);
+                                var text = formatter.wrapText(item.value);
                                 return text;
                             }
                         },
@@ -89,7 +89,7 @@ define([
                         color: 'black',
                         labels: {
                             template: function (item) {
-                                var text = utilities.valueAxisTemplate(item.value);
+                                var text = formatter.valueAxisTemplate(item.value);
                                 return text;
                             },
                             step: 2
