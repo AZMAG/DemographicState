@@ -15,7 +15,9 @@ module.exports = function (grunt) {
     var includedModules = [
         "mag/app",
         "magcore/main",
-        "magcore/utils/formatter"
+        "magcore/utils/formatter",
+        "magcore/utils/charts",
+        "magcore/utils/reports"
     ]
     var excludedModules = [
         "dojo/domReady",

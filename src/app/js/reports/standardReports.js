@@ -4,6 +4,7 @@ define([
         'mag/reports/reports-utils',
         'mag/utilities',
         "mag/maps/maps-utils",
+        'magcore/utils/reports',
         "dojo/topic"
     ],
     function (
@@ -11,6 +12,7 @@ define([
         reportsutils,
         utilities,
         mapsutils,
+        reports,
         tp
     ) {
     tp.subscribe("panel-loaded", function (panel) {
@@ -57,7 +59,8 @@ define([
                     $standardBtnSubmit.show();
                     $specificReportDiv.hide();
                 } else {
-                    let dataSrc = await getSpecificData(dataItem);
+                    let lyr = mapsutils.map.findLayerById(dataItem.id);
+                    let dataSrc = await reports.getSpecificData(dataItem, lyr);
                     let compareSrc = dataSrc.slice();
                     compareSrc.shift();
 
@@ -134,28 +137,6 @@ define([
             });
         }
 
-        async function getSpecificData(conf) {
-            let displayField = "NAME";
-            let optionalFields = conf.displayFields || [displayField];
-            let outFields = ["OBJECTID", "GEOID"].concat(optionalFields.slice());
-
-            let layer = mapsutils.map.findLayerById(conf.id);
-
-            const q = {
-                where: "1=1",
-                outFields: outFields,
-                returnGeometry: false,
-                distinct: true,
-                orderByFields: optionalFields
-            };
-
-            let res = await layer.queryFeatures(q);
-            let rtnFeatures = [];
-            res.features.forEach((feature) => {
-                rtnFeatures.push(feature.attributes);
-            })
-            return rtnFeatures;
-        }
     });
 
     tp.subscribe("openReport-by-geoids", OpenReportByGEOIDs);
