@@ -2,6 +2,7 @@
 
 var request = require('request');
 var fs = require('fs');
+var geostats = require('geostats');
 
 module.exports = function (grunt, async, options) {
     console.log(options);
@@ -12,11 +13,6 @@ module.exports = function (grunt, async, options) {
     }
 
     var thematicMaps = JSON.parse(fs.readFileSync(options.inputLocation));
-
-    console.log(options.geoStatsPath);
-
-
-    var geostats = require(options.geoStatsPath);
     var series = new geostats();
     var counter = 0;
 

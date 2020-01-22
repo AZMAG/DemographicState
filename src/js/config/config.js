@@ -1,23 +1,24 @@
 define([], function(){
     var config = {
-        version: 'v4.0.7 | 2019-07-24',
+        version: 'v4.0.8 | 2019-12-03',
         copyright: '2019',
 
-        LegendSource: 'American Community Survey 2013-2017 5yr',
+        LegendSource: 'American Community Survey 2014-2018 5yr',
         emailLink: 'https://www.azmag.gov/Contact/4788?s=geo.azmag.gov/maps/azdemographics&n=Jason%20Howard&popUp=true',
 
         ArcGISInstanceURL: 'https://geo.azmag.gov/arcgis/rest',
 
-        mainUrl: 'https://geo.azmag.gov/arcgis/rest/services/maps/DemographicState2017/MapServer',
-        printUrl: 'https://geo.azmag.gov/arcgis/rest/services/gp/stateDemo/GPServer/Export%20Web%20Map',
+        mainUrl: 'https://geo.azmag.gov/arcgis/rest/services/maps/DemographicState2018/MapServer',
+        printUrl: 'https://geo.azmag.gov/arcgis/rest/services/gp/Demographic_Print/GPServer/Export%20Web%20Map',
         pdfService: {
-            defaultUrl: 'https://geo.azmag.gov/services/demographics2017/Reports.html?',
-            compareUrl: 'https://geo.azmag.gov/services/demographics2017/CompareReport.html?'
+            defaultUrl: 'https://geo.azmag.gov/services/demographics2018/Reports.html?',
+            compareUrl: 'https://geo.azmag.gov/services/demographics2018/CompareReport.html?'
         },
         siteUrl: 'https://geo.azmag.gov/maps/azdemographics/?',
 
         googleCivicInfoApiKey: 'AIzaSyCicS2bzJk_ptthYD2nSu4tIPfjGYmxU1U',
-        googleCivicOffices: [{
+        googleCivicOffices: [
+            {
                 name: 'Mayor',
                 displayValue: 'Mayor'
             },
@@ -53,12 +54,14 @@ define([], function(){
         DefaultNumberOfClassBreaks: 5,
 
         layerDef: {},
-        layers: [{
+        layers: [
+            {
                 legend: true,
                 id: 'blockGroups',
                 layerName: 'Block_Groups',
-                title: 'American Community Survey by Block Group, 2013-2017 5 year estimates',
+                title: 'American Community Survey by Block Group, 2014-2018 5 year estimates',
                 type: 'image',
+                outFields: ["*"],
                 opacity: 0.8,
                 visible: true,
                 showReport: false,
@@ -141,32 +144,6 @@ define([], function(){
                     },
                     minScale: 577790
                 }
-            },
-            {
-                legend: true,
-                id: 'cogs',
-                layerName: 'Cogs',
-                title: 'Councils of Governments',
-                type: 'feature',
-                opacity: 1,
-                visible: false,
-                showReport: true,
-                showTOC: true,
-                definition: 'Councils of governments (CoGs—also known as regional councils, regional commissions, regional planning commissions, and planning districts) are regional governing and/or coordinating bodies.',
-                layerListOrder: 17
-            },
-            {
-                legend: true,
-                id: 'mpos',
-                layerName: 'Mpos',
-                title: 'Metropolitan Planning Organizations',
-                type: 'feature',
-                opacity: 1,
-                visible: false,
-                showReport: true,
-                showTOC: true,
-                definition: 'A metropolitan planning organization (MPO) is a federally mandated and federally funded transportation policy-making organization that is made up of representatives from local government and governmental transportation authorities. They were created to ensure regional cooperation in transportation planning.',
-                layerListOrder: 18
             },
             {
                 legend: true,
@@ -314,6 +291,32 @@ define([], function(){
             },
             {
                 legend: true,
+                id: 'cogs',
+                layerName: 'Cogs',
+                title: 'Councils of Governments',
+                type: 'feature',
+                opacity: 1,
+                visible: false,
+                showReport: true,
+                showTOC: true,
+                definition: 'Councils of governments (CoGs—also known as regional councils, regional commissions, regional planning commissions, and planning districts) are regional governing and/or coordinating bodies.',
+                layerListOrder: 17
+            },
+            {
+                legend: true,
+                id: 'mpos',
+                layerName: 'Mpos',
+                title: 'Metropolitan Planning Organizations',
+                type: 'feature',
+                opacity: 1,
+                visible: false,
+                showReport: true,
+                showTOC: true,
+                definition: 'A metropolitan planning organization (MPO) is a federally mandated and federally funded transportation policy-making organization that is made up of representatives from local government and governmental transportation authorities. They were created to ensure regional cooperation in transportation planning.',
+                layerListOrder: 18
+            },
+            {
+                legend: true,
                 id: 'state',
                 layerName: 'State',
                 title: 'State Boundary',
@@ -363,7 +366,8 @@ define([], function(){
         // ------------------------------
 
         // Specify the Markup / drawing tools.
-        markupToolTreeNodes: [{
+        markupToolTreeNodes: [
+            {
                 id: 1,
                 text: 'Polygon',
                 DisplayText: 'Polygon',
@@ -433,11 +437,11 @@ define([], function(){
 
         textSymbolFontSizes: [8, 9, 10, 11, 12, 14, 16, 18, 20, 24, 30, 50],
 
-        sourceLabel: 'Source: United States Census Bureau, American Community Survey 2013-2017 5yr Estimates',
+        sourceLabel: 'Source: United States Census Bureau, American Community Survey 2014-2018 5yr Estimates',
 
         sourceLabel2: 'Source: United States Census Bureau, 2010 Decennial Census',
 
-        legalACSDisclaimer: 'Source: U.S. Census Bureau, 2013-2017 American Community Survey (ACS) 5-Year Estimates. ACS data are based on a sample and are subject to sampling variability.  The degree of uncertainty for an estimate is represented through the use of a margin of error (MOE).  In addition to sampling variability, the ACS estimates are subject to nonsampling error. The MOE and effect of nonsampling error is not represented in these tables. Supporting documentation on subject definitions, data accuracy, and statistical testing can be found on the American Community Survey website (www.census.gov/acs) in the Data and Documentation section. Sample size and data quality measures (including coverage rates, allocation rates, and response rates) can be found on the American Community Survey website (www.census.gov/acs) in the Methodology section.  The MOE for individual data elements can be found on the American FactFinder website (factfinder2.census.gov).  Note: Although the ACS produces population, demographic and housing unit estimates, the 2010 Census provides the official counts of the population and housing units for the nation, states, counties, cities and towns.  Prepared by: Maricopa Association of Governments, www.azmag.gov, (602) 254-6300',
+        legalACSDisclaimer: 'Source: U.S. Census Bureau, 2014-2018 American Community Survey (ACS) 5-Year Estimates. ACS data are based on a sample and are subject to sampling variability.  The degree of uncertainty for an estimate is represented through the use of a margin of error (MOE).  In addition to sampling variability, the ACS estimates are subject to nonsampling error. The MOE and effect of nonsampling error is not represented in these tables. Supporting documentation on subject definitions, data accuracy, and statistical testing can be found on the American Community Survey website (www.census.gov/acs) in the Data and Documentation section. Sample size and data quality measures (including coverage rates, allocation rates, and response rates) can be found on the American Community Survey website (www.census.gov/acs) in the Methodology section.  The MOE for individual data elements can be found on the American FactFinder website (factfinder2.census.gov).  Note: Although the ACS produces population, demographic and housing unit estimates, the 2010 Census provides the official counts of the population and housing units for the nation, states, counties, cities and towns.  Prepared by: Maricopa Association of Governments, www.azmag.gov, (602) 254-6300',
 
         legalCensusDisclaimer: 'Source: United States Census Bureau, 2010 Decennial Census. Additional information about the 2010 Decennial Cenuss can be found on the US Census Bureau website at www.census.gov/2010census. Prepared by: Maricopa Association of Governments, www.azmag.gov, (602) 254-6300',
 

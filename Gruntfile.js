@@ -440,10 +440,10 @@ module.exports = function (grunt) {
     });
 
     grunt.registerTask("GetClassBreaks", function () {
-        require("./<%=config.src%>/vendor/js/generateClassBreaks.js")(grunt, this.async, {
+        require("./<%=config.src%>/generateClassBreaks.js")(grunt, this.async, {
             inputLocation: "./<%=config.src%>/js/config/cbrConfig.json",
-            geoStatsPath: "Z:\\Viewers\\Demographics\\<%=config.src%>\\vendor\\js\\geoStats.min.js",
-            mainUrl: "https://geo.azmag.gov/arcgis/rest/services/maps/DemographicState2017/MapServer",
+            geoStatsPath: "./<%=config.src%>/vendor/geoStats.min.js",
+            mainUrl: "https://geo.azmag.gov/arcgis/rest/services/maps/DemographicState2018/MapServer",
             outputLocation: "./<%=config.src%>/js/config/cbrConfig.json"
         });
     });

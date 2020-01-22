@@ -1,7 +1,7 @@
 {
   "name": "mag-demographics",
-  "version": "4.0.7",
-  "date": "2019-07-24",
+  "version": "4.0.8",
+  "date": "2019-12-03",
   "copyright": "2019",
   "description": "MAG State Demographic Viewer",
   "keywords": [
@@ -12,7 +12,7 @@
     "2010",
     "American Community Survey",
     "ACS",
-    "2013-2017",
+    "2014-2018",
     "5 year",
     "MAG",
     "maps",
@@ -43,8 +43,9 @@
     "arcgis-js-api": "^4.11.1",
     "babel-polyfill": "^6.26.0",
     "grunt-cli": "^1.3.2",
-    "magcore": "github:AZMAG/map-mag-core-js#gisinc/add-reports",
-    "requirejs-domready": "^2.0.3"
+    "magcore": "github:AZMAG/map-mag-core-js#develop",
+    "requirejs-domready": "^2.0.3",
+    "geostats": "^1.8.0"
   },
   "devDependencies": {
     "@dojo/framework": "^6.0.3",

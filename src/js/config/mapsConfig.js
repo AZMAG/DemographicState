@@ -8274,8 +8274,8 @@ define([], function() {
         },
         {
             "NodeType": "cat",
-            "Name": "Household Income (in 2016 inflation-adjusted dollars)",
-            "ShortName": "Household Income (in 2016 inflation-adjusted dollars)",
+            "Name": "Household Income (in 2018 inflation-adjusted dollars)",
+            "ShortName": "Household Income (in 2018 inflation-adjusted dollars)",
             "Description": "...",
             "items": [{
                     "NodeType": "map",

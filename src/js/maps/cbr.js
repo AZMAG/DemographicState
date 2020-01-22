@@ -57,7 +57,7 @@ define([
     }
 
     let $dynamicCBRCheckbox = $("#dynamicCBRCheckbox");
-    $("#classType").change(function () {
+    $("#classType").change(function() {
         let type = $(this).val();
         let dynamic = $dynamicCBRCheckbox.is(":checked");
 
@@ -75,7 +75,7 @@ define([
         }
     });
 
-    $("#classBreaksCount").change(function () {
+    $("#classBreaksCount").change(function() {
         tp.publish("classBreaksCount-change");
     });
 
@@ -99,7 +99,7 @@ define([
         //     UpdateMapRenderer();
         // }, 90);
 
-        $dynamicCBRCheckbox.change(function () {
+        $dynamicCBRCheckbox.change(function() {
             UpdateMapRenderer();
         })
 
