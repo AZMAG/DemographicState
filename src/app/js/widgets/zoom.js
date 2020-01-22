@@ -17,7 +17,7 @@ define([
         mapsutils.view.ui.add(zoomId, "bottom-right");
 
         let $zoomArea = $("#" + zoomId);
-        $zoomArea.on("click", ".esri-widget--button", function () {
+        $zoomArea.on("click", ".esri-widget--button", function() {
             const direction = $(this).data("id");
             if (direction === "In") {
                 zoomVM.zoomIn();

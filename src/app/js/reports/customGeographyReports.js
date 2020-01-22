@@ -28,7 +28,7 @@ define([
         if (!isInited) {
 
             isInited = true;
-            tp.subscribe("gfxLayer-loaded", function () {
+            tp.subscribe("gfxLayer-loaded", function() {
 
                 let $customGeographyReports = $("#customGeographyReports");
                 let $bufferCheckbox = $("#useBuffer");
@@ -87,7 +87,7 @@ define([
                     }
                 });
 
-                $bufferCheckbox.change(function (e) {
+                $bufferCheckbox.change(function(e) {
                     let checked = $bufferCheckbox.prop("checked");
                     if (checked) {
                         $bufferOptions.css("display", "flex");
@@ -96,7 +96,7 @@ define([
                     }
                 });
 
-                $customSummaryButton.click(function (e) {
+                $customSummaryButton.click(function(e) {
                     e.preventDefault();
                     $customSummaryButton.removeClass("active");
                     $(this).addClass("active");
@@ -107,7 +107,7 @@ define([
                     });
 
                     //Creates a tooltip to give user instructions on drawing
-                    $("#viewDiv").mousemove(function (e) {
+                    $("#viewDiv").mousemove(function(e) {
                         $drawingTooltip
                             .css("left", e.pageX + 10)
                             .css("top", e.pageY + 10)
@@ -115,7 +115,7 @@ define([
                     });
                 });
 
-                sketchVM.on("update", function (e) {
+                sketchVM.on("update", function(e) {
                     let buffer = $bufferCheckbox.is(":checked");
                     if (buffer) {
                         AddBufferedGraphic(e);
@@ -145,7 +145,7 @@ define([
                     }
                 }
 
-                sketchVM.on("create", function (e) {
+                sketchVM.on("create", function(e) {
                     let buffer = $bufferCheckbox.is(":checked");
 
                     if (e.state === "complete") {
@@ -173,7 +173,7 @@ define([
                         $(".customSummaryButton").removeClass("active");
                         $drawingTooltip.hide();
                         $bufferCheckbox.prop("checked", false);
-                        sketchVM.reset();
+                        sketchVM.cancel();
                     }
                 }
 
@@ -195,7 +195,8 @@ define([
                                     attributes: acsData,
                                     count: data.acsData.features.length,
                                     ids: data.acsData.features.map(feature => feature.attributes["GEOID"])
-                                }]
+                                }],
+                                blockGroups: data.acsData.features
                             };
 
                             reportsutils.selectedReport.censusData = {
@@ -203,7 +204,8 @@ define([
                                     attributes: censusData,
                                     count: data.censusData.features.length,
                                     ids: data.censusData.features.map(feature => feature.attributes["GEOID"])
-                                }]
+                                }],
+                                blockGroups: data.censusData.features
                             };
                             tp.publish("open-report-window", reportsutils.selectedReport, "acs");
                             $customGeographyReports.hide();

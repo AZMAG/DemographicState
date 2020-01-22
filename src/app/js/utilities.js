@@ -60,7 +60,7 @@ define([
                 tempGraphic.symbol = {
                     type: "simple-fill",
                     color: [0, 255, 255, 0.5],
-                    opacity: 0.5,
+                    opacity: 0.4,
                     outline: {
                         color: "cyan",
                         width: "3"

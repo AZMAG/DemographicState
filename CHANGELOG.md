@@ -32,6 +32,11 @@ And constructed with the following guidelines:
 
 ## Version 4.0.7 | 2019-07-24
 
+* Fix the order of Report drop down to move COGs & MPOs to bottom [github #260]
+* Fix the order of the layers list to move COGs & MPOs to bottom
+
+## Version 4.0.7 | 2019-07-24
+
 * Changed language in custom classification types in the maps panel
 * Fixed build system
 

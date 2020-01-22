@@ -3,16 +3,18 @@
 define([
         "mag/config/initConfig",
         "mag/utilities",
+        "magcore/utils/formatter",
         "dojo/topic",
         "dojo/domReady!"
     ],
     function (
         initConfig,
-        utilities,        
+        utilities, 
+        formatter,       
         tp
         ) {
 
-        tp.subscribe("layers-added", function () {
+        tp.subscribe("layers-added", function() {
 
             let $sidebar = $("#sidebar");
             let $sidebarCollapse = $("#sidebarCollapse");
@@ -23,7 +25,7 @@ define([
             let $content = $("#content");
             let $legendToggle = $(".legendToggle");
 
-            $(".sidebarCollapse").on("click", function () {
+            $(".sidebarCollapse").on("click", function() {
                 $sidebar.toggleClass("active");
                 $sidebarCollapse.toggleClass("active");
             });
@@ -77,7 +79,7 @@ define([
                 }
             }
 
-            $links.on("click", function (e) {
+            $links.on("click", function(e) {
                 e.preventDefault();
                 let target = $(this).attr("panel-target");
 
@@ -87,11 +89,11 @@ define([
                 TogglePanel(target, this);
             });
 
-            $legendToggle.click(function (e) {
+            $legendToggle.click(function(e) {
                 return false;
             });
 
-            $("#content").on("click", ".closePanel", function () {
+            $("#content").on("click", ".closePanel", function() {
                 let pandelId = $(this).closest(".panelDiv").attr("panel-id");
                 $("#viewDiv").css("visibility", "visible");
                 $("#navContainer").css("flex", 1);
@@ -115,7 +117,14 @@ define([
                 TogglePanel(initConfig.getPanel());
             }
 
-            $(window).resize(function () {
+            let initReport = formatter.qs("bgid");
+            if (initReport) {
+                TogglePanel("reports-view");
+                tp.publish('openReport-by-geoids', app.config.layerDef['blockGroups'], [initReport]);
+            }
+
+
+            $(window).resize(function() {
                 $("#legend").css({
                     left: "",
                     top: ""

@@ -61,6 +61,11 @@ define([
                     breakpoint: false,
                 }
             }
+            // highlightOptions: {
+            //     color: [255, 255, 0, 1],
+            //     haloOpacity: 0.9,
+            //     fillOpacity: 0.95
+            // }
         });
 
         mapsutils.view.when(function () {

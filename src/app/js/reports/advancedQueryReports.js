@@ -179,7 +179,7 @@ define([
             dataTextField: ['ShortName']
         });
 
-        $advancedTreeview.on('dblclick', function (e) {
+        $advancedTreeview.on('dblclick', function(e) {
             var treeView = $advancedTreeview.data('kendoTreeView');
             var dataItem = treeView.dataItem(e.target);
             DataItemSelected = dataItem;
@@ -192,7 +192,7 @@ define([
 
         $advancedTreeview.kendoDraggable({
             filter: '.k-in', //specify which items will be draggable
-            hint: function (element) {
+            hint: function(element) {
                 //create a UI hint, the `element` argument is the dragged item
                 return element.clone().css({
                     opacity: 0.4,
@@ -200,7 +200,7 @@ define([
                     cursor: 'move'
                 });
             },
-            dragstart: function (e) {
+            dragstart: function(e) {
                 var treeView = $advancedTreeview.data('kendoTreeView');
                 var dataItem = treeView.dataItem(e.currentTarget);
                 DataItemSelected = dataItem;
@@ -212,7 +212,7 @@ define([
                     $(this).addClass('k-add');
                 }
             },
-            dragend: function (e) {
+            dragend: function(e) {
                 $advancedQueryTarget.css('backgroundColor', 'transparent');
                 $advancedQueryTarget.children().show();
                 $dropPrompt.hide();
@@ -220,13 +220,13 @@ define([
         });
 
         $advancedQueryTarget.kendoDropTarget({
-            dragenter: function (e) {
+            dragenter: function(e) {
                 if (DataItemSelected.Type !== undefined) {
                     e.draggable.hint.css('opacity', 1);
                     $advancedQueryTarget.css('backgroundColor', 'darkgrey');
                 }
             },
-            dragleave: function (e) {
+            dragleave: function(e) {
                 if (DataItemSelected.Type !== undefined) {
                     e.draggable.hint.css('opacity', 0.5);
                     $advancedQueryTarget.css('backgroundColor', 'grey');
@@ -235,7 +235,7 @@ define([
             drop: OnDrop
         });
 
-        $('body').on('click', '.removeRowBtn', function () {
+        $('body').on('click', '.removeRowBtn', function() {
             var str = $(this)
                 .parents('div:first')[0]
                 .innerText.toString();
@@ -261,7 +261,7 @@ define([
                 .remove();
 
             //update array
-            $.each(QueryItems, function (index, queryItem) {
+            $.each(QueryItems, function(index, queryItem) {
                 if (queryItem.name === fieldName) {
                     QueryItems.splice(index, 1);
                     return false;
@@ -271,10 +271,10 @@ define([
             return false;
         });
 
-        $('body').on('click', '.clearRowBtn', function () {
+        $('body').on('click', '.clearRowBtn', function() {
             var selector = $(this).parents('div:first')[0].id;
             var textBoxes = $('#' + selector + ' .style1');
-            $.each(textBoxes, function (index, textBox) {
+            $.each(textBoxes, function(index, textBox) {
                 var tb = $(textBox).data('kendoNumericTextBox');
                 if (tb) {
                     tb._old = tb._value;
@@ -325,7 +325,7 @@ define([
                 url: config.mainUrl + '/0'
             });
 
-            qt.execute(q).then(function (res) {
+            qt.execute(q).then(function(res) {
                 let geoids = [];
 
                 res.features.forEach(feature => {
@@ -341,7 +341,8 @@ define([
                             attributes: acsdata,
                             count: data.acsData.features.length,
                             ids: data.acsData.features.map(feature => feature.attributes["GEOID"])
-                        }]
+                        }],
+                        blockGroups: data.acsData.features
                     };
 
                     reportsutils.selectedReport.censusData = {
@@ -349,7 +350,8 @@ define([
                             attributes: censusdata,
                             count: data.acsData.features.length,
                             ids: data.censusData.features.map(feature => feature.attributes["GEOID"])
-                        }]
+                        }],
+                        blockGroups: data.censusData.features
                     };
                     tp.publish('open-report-window', reportsutils.selectedReport, 'acs');
                     utilities.AddHighlightGraphics(data.acsData.features, true);
@@ -454,7 +456,7 @@ define([
                 url: config.mainUrl + '/0'
             });
 
-            qt.executeForCount(q).then(function (count) {
+            qt.executeForCount(q).then(function(count) {
                 $advancedCount.text(count).show();
                 resultCount = count;
             });
@@ -622,7 +624,7 @@ define([
                         orderByFields: [dataItem.FieldName],
                         returnDistinctValues: true,
                         where: '1=1'
-                    }).then(function (res) {
+                    }).then(function(res) {
                         let ddlSrc = res.features.reduce((ddlSrc, f) => {
                             if (f.attributes[dataItem.FieldName]) {
                                 ddlSrc.push(f.attributes[dataItem.FieldName]);

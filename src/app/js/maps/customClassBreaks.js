@@ -21,7 +21,7 @@ define([
             let oldFld = 'TOTAL_POP';
             let currFld = 'TOTAL_POP';
 
-            $btnClassBreaksEditor.click(function (e) {
+            $btnClassBreaksEditor.click(function(e) {
                 CbrParamChanged("Custom");
                 e.preventDefault();
             });
@@ -47,7 +47,7 @@ define([
                 }
             }
             let once = false;
-            $customClassBreaksModal.on('shown.bs.modal', function (e) {
+            $customClassBreaksModal.on('shown.bs.modal', function(e) {
                 if (!once) {
                     SetupSplitter();
                     SetupCharts();
@@ -278,7 +278,7 @@ define([
                         q.outFields.push(conf.NormalizeField);
                     }
 
-                    lyr.queryFeatures(q).then(function (res) {
+                    lyr.queryFeatures(q).then(function(res) {
                         let maxVal = res.features[0].attributes[conf.FieldName];
                         if (conf.NormalizeField) {
                             maxVal = maxVal / res.features[0].attributes[conf.NormalizeField];
@@ -415,14 +415,14 @@ define([
                 let classBreaks = [];
                 let $panes = $classBreakSliders.find(".cbPane");
 
-                $panes.each(function (i, val) {
+                $panes.each(function(i, val) {
                     let dataInfo = $(val).data("info");
                     dataInfo.symbol.color = colorRamp[$panes.length - 1 - i];
                     classBreaks.push(dataInfo);
                 });
                 return classBreaks.reverse();
             };
-            $("#customClassBreaksButton").click(function () {
+            $("#customClassBreaksButton").click(function() {
                 tp.publish("customClassBreaks-selected");
                 $customClassBreaksModal.modal("hide");
             });
