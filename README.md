@@ -3,7 +3,7 @@
   <a href="http://www.azmag.gov/">
     <img
       alt="MAG"
-      src="https://maps.azmag.gov/images/logos/MAG-logo.png"
+      src="https://maps.azmag.gov/app/images/logos/MAG-logo.png"
       width="200"
     />
    </a>
@@ -12,7 +12,7 @@
   <a href="https://geo.azmag.gov/maps/azdemographics/">
     <img
       alt="Neighborhood Explorer"
-      src="https://maps.azmag.gov/images/viewer-icons/icon_statewide-demographics.png"
+      src="https://maps.azmag.gov/app/images/viewer-icons/icon_statewide-demographics.png"
       width="130"
     />
   </a>
@@ -113,8 +113,6 @@ More information on running and writing tests can be found in [TESTS.md.](test/T
 
 ## Build
 
-You can build the compiled files by running the default grunt task from the root folder. Running the run task will also build the compiled files and spin up a node server the app will run on and watch for modified source code and rebuild after changes are saved.
+You can build the compiled files by running the default grunt task (`grunt`) from the root folder. This will compile (bundle and minify) the files and place them in the **build** folder. Running the `grunt debug` task will run the tests and spin up a node server to test the application, watch for modified source code, and refresh after changes are saved.
 
-`grunt` or `grunt run`
-
-This will compile the files and place them in the **dist** folder for distribution.
+Additionally, there is a `grunt deploy` task that will build the application *and* spin up a node server to test the built files.

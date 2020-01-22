@@ -1,23 +1,12 @@
-function randomString(length, chars) {
-    var result = '';
-    for (var i = length; i > 0; --i) result += chars[Math.round(Math.random() * (chars.length - 1))];
-    return result;
-}
-const fileHash = randomString(32, '0123456789abcdefghijklmnopqrstuvwxyz');
-const jsFilePath = `dist/app/js/main.${fileHash}.js`;
-
 module.exports = function (grunt) {
 
     "use strict";
-
+    
     require("matchdep").filterDev(["grunt-*", "intern"]).forEach(grunt.loadNpmTasks);
 
+    var VERSION_REGEXP = /\b(?:0|[1-9][0-9]*)\.(?:0|[1-9][0-9]*)\.(?:0|[1-9][0-9]*)(?:-[\da-z\-]+(?:\.[\da-z\-]+)*)?(?:\+[\da-z\-]+(?:\.[\da-z\-]+)*)?\b/i;
     var includedModules = [
-        "mag/app",
-        "magcore/main",
-        "magcore/utils/formatter",
-        "magcore/utils/charts",
-        "magcore/utils/reports"
+        "mag-demographics/main"
     ]
     var excludedModules = [
         "dojo/domReady",
@@ -25,31 +14,67 @@ module.exports = function (grunt) {
         "dojo/topic"
     ]
     var paths = {
-        "mag": "",
+        "mag-demographics": "",
         "magcore": "empty:",
         "dojo": "empty:",
-        "dojo/domReady": "../../../node_modules/requirejs-domready/domReady",
+        "dojo/domReady": "../../node_modules/requirejs-domready/domReady",
         "esri": "empty:"
     }
     grunt.initConfig({
         config: {
-            out: 'dist',
+            out: 'build',
             src: 'src'
         },
         pkg: grunt.file.readJSON("package.json"),
-
-        bannercss: "/*! ========================================================================\n" +
+        license: grunt.file.read('LICENSE'),
+        bannercss: "/*! <%=pkg.description%>\n *\n" +
             " * Maricopa Association of Governments\n" +
             " * CSS files for Arizona Demographics\n" +
-            " * @concat.min.css | @version | <%= pkg.version %>\n" +
+            " * @<%=pkg.name%>.min.css | v<%= pkg.version %>\n" +
             " * Production | <%= pkg.date %>\n" +
             " * http://ims.azmag.gov/\n" +
             " * Arizona Demographics\n" +
-            " * ==========================================================================\n" +
-            " * @Copyright <%= pkg.copyright %> MAG\n" +
-            " * @License MIT\n" +
-            " * ========================================================================== */\n",
-
+            " */\n\n" +
+            " /*! <%= license%>\n" +
+            " */\n",
+        banner: "/*! <%= pkg.description %>\n *\n" +
+            " * <%= pkg.name %> v<%= pkg.version %> (<%= pkg.homepage %>)\n" +
+            " */\n\n" +
+            " /*! <%= license %>\n" +
+            " */\n",
+        usebanner: {
+            js: {
+                options: {
+                    position: 'top',
+                    banner: '<%= banner %>'
+                },
+                files: {
+                    src: ['./<%=config.out%>/js/*.js']
+                }
+            },
+            css: {
+                options: {
+                    position: 'top',
+                    banner: '<%= bannercss %>'
+                },
+                files: {
+                    src: ['./<%=config.out%>/css/*.css']
+                }
+            }
+        },
+        bump: {
+            options: {
+                files: ['package.json', '<%=pkg.name%>/js/main.js'],
+                updateConfigs: ['pkg'],
+                commit: false,
+                createTag: false,
+                tagName: '%VERSION%',
+                tagMessage: '%VERSION%',
+                push: false,
+                globalReplace: true,
+                prereleaseName: 'beta'
+            }
+        },
         htmlhint: {
             build: {
                 options: {
@@ -63,7 +88,7 @@ module.exports = function (grunt) {
                     // "head-script-disabled": false,   // Prevent script tags being loaded in the head for performance reasons
                     "style-disabled": true // Prevent style tags. CSS should be loaded through
                 },
-                src: ["index.html", "app/views/*.html"]
+                src: ["index.html", "views/*.html"]
             }
         },
 
@@ -71,7 +96,7 @@ module.exports = function (grunt) {
         // https://github.com/gruntjs/grunt-contrib-csslint
         csslint: {
             // define the files to lint
-            files: ["app/resources/css/main.css"],
+            files: ["<%=config.src%>/css/main.css"],
             strict: {
                 options: {
                     "import": 0,
@@ -91,29 +116,13 @@ module.exports = function (grunt) {
                 jshintrc: true,
                 reporter: require("jshint-stylish-ex")
             },
-            src: ["Gruntfile.js", "<%=config.src%>/app/js/*.js", "<%=config.src%>/app/js/config/*.js", "<%=config.src%>/app/js/maps/*.js", "<%=config.src%>/app/js/reports/*.js", "<%=config.src%>/app/js/widgets/*.js"],
+            src: ["Gruntfile.js", "<%=config.src%>/js/**/*.js"],
         },
-
-        babel: {
-            options: {
-                sourceMaps: false,
-                presets: ["@babel/preset-env"]
-            },
-            babel0: {
-                files: [{
-                    expand: true,
-                    cwd: "<%=config.out%>/app/js/",
-                    src: ["*.js"],
-                    dest: "<%=config.out%>/app/js/"
-                }]
-            }
-        },
-
         requirejs: {
             debug: {
                 options: {
-                    baseUrl: './<%=config.src%>/app/js',
-                    out: './<%=config.out%>/app/js/mag.js',
+                    baseUrl: './<%=config.src%>/js',
+                    out: './<%=config.out%>/js/<%=pkg.name%>.js',
                     // allow dependencies to be resolved but don't include in output (empty:)
                     paths: paths,
                     // but don't include them in the main build
@@ -129,7 +138,7 @@ module.exports = function (grunt) {
             },
             release: {
                 options: {
-                    baseUrl: './<%=config.src%>/app/js',
+                    baseUrl: './<%=config.src%>/js',
                     // allow dependencies to be resolved but don't include in output (empty:)
                     paths: paths,
                     // but don't include them in the main build
@@ -147,7 +156,7 @@ module.exports = function (grunt) {
                             config = grunt.config.get('config'),
                             pkg = grunt.config.get('pkg');
 
-                        grunt.file.write(`${config.out}/app/js/mag.min.js`, uglified.code);
+                        grunt.file.write(`${config.out}/js/${pkg.name}.min.js`, uglified.code);
                     }
                 }
             }
@@ -170,21 +179,17 @@ module.exports = function (grunt) {
                 },
                 files: [{
                     expand: true,
-                    cwd: "<%=config.out%>/app/views",
+                    cwd: "<%=config.out%>/views",
                     src: ["*.html"],
-                    dest: "<%=config.out%>/app/views"
+                    dest: "<%=config.out%>/views"
                 }]
             }
         },
 
         cssmin: {
-            add_banner: {
-                options: {
-                    // add banner to top of output file
-                    banner: '/* <%= pkg.name %> - v<%= pkg.version %> | <%= grunt.template.today("mm-dd-yyyy") %> */'
-                },
+            release: {
                 files: {
-                    '<%=config.out%>/app/css/concat.min.css': '<%=config.out%>/app/css/concat.min.css'
+                    '<%=config.out%>/css/<%=pkg.name%>.min.css': '<%=config.out%>/css/<%=pkg.name%>.css'
                 }
             }
         },
@@ -195,94 +200,93 @@ module.exports = function (grunt) {
                 processors: [
                     require('pixrem')(),
                     require('postcss-preset-env')(),
-                    require('autoprefixer')(),
-                    require('cssnano')()
+                    require('autoprefixer')()
                 ]
             },
             dist: {
                 files: {
-                    '<%=config.out%>/app/css/concat.min.css': '<%=config.out%>/app/css/concat.min.css'
+                    '<%=config.out%>/css/<%=pkg.name%>.min.css': '<%=config.out%>/css/<%=pkg.name%>.min.css',
+                    '<%=config.out%>/css/<%=pkg.name%>.css': '<%=config.out%>/css/<%=pkg.name%>.css'
                 }
             }
         },
 
         concat: {
             css: {
-                src: ["<%=config.out%>/app/css/*.css", "!<%=config.out%>/app/css/concat.min.css"],
-                dest: "<%=config.out%>/app/css/concat.min.css"
+                src: ["<%=config.src%>/css/*.css"],
+                dest: "<%=config.out%>/css/<%=pkg.name%>.css"
             }
         },
-
         clean: {
             build: {
                 src: ["<%=config.out%>/"]
-            },
-            js: {
-                src: ["<%=config.out%>/app/js/*", "!" + jsFilePath]
-            },
-            css: {
-                src: ["<%=config.out%>/app/css/*", "!<%=config.out%>/app/css/concat.min.css"]
             }
-
         },
-
         copy: {
             build: {
                 files: [
                     {
-                        cwd: "<%=config.src%>/",
-                        src: ["**"],
+                        cwd: "<%=config.src%>",
+                        src: ["*", "images/**", "vendor/**", "views/**", "!index.html", "!css"],
                         dest: "<%=config.out%>/",
                         expand: true
                     },
-                    { 
-                        expand: true, 
-                        cwd: "node_modules/", 
+                    {
+                        expand: true,
+                        cwd: "node_modules/",
                         src: [
-                            "magcore/<%=config.out%>/**"
-                        ], 
-                        dest: "<%=config.out%>/app/libs/"
+                            "magcore/dist/**"
+                        ],
+                        dest: "<%=config.out%>/libs/"
                     }
-                
                 ]
             }
         },
-
         toggleComments: {
             customOptions: {
                 options: {
                     removeCommands: false
                 },
                 files: {
-                    "<%=config.out%>/index.html": "<%=config.out%>/index.html",
-                    [jsFilePath]: jsFilePath
+                    "<%=config.out%>/index.html": "<%=config.out%>/index.html"
                 }
             }
         },
-
         replace: {
             index: {
                 src: '<%=config.src%>/index.html',
                 dest: '<%=config.out%>/index.html',
-                replacements: [ 
+                replacements: [
                     {
-                        from: '<link rel="stylesheet" href="app/css/main.css" />', 
-                        to: '<link rel="stylesheet" href="app/css/concat.min.css" />'
-                    },   
-                    { from: '../node_modules/magcore/<%=config.out%>/js/magcore.js', to: 'app/libs/magcore/<%=config.out%>/js/magcore.min.js'},
-                    { 
-                        from: '<script src="app/libs/magcore/<%=config.out%>/js/magcore.min.js"></script>\n', 
-                        to: '<script src="app/libs/magcore/<%=config.out%>/js/magcore.min.js"></script>\n\t' + 
-                        '<script src="app/js/mag.min.js"></script>\t\n'
-                    },
-                    { 
-                        from: '<link rel="stylesheet" href="app/css/normalize.css" />', 
+                        from: '<link rel="stylesheet" href="css/normalize.css" />',
                         to: ''
+                    },
+                    {
+                        from: '<link rel="stylesheet" href="css/main.css" />',
+                        to: '<link rel="stylesheet" href="css/<%=pkg.name%>.min.css" />'
+                    },
+                    {
+                        from: '../node_modules/magcore/dist/js/magcore.js',
+                        to: 'libs/magcore/dist/js/magcore.min.js'
+                    },
+                    {
+                        from: '<script src="libs/magcore/dist/js/magcore.min.js"></script>\n',
+                        to: '<script src="libs/magcore/dist/js/magcore.min.js"></script>\n\t' +
+                            '<script src="js/<%=pkg.name%>.min.js"></script>\t\n'
                     }
                 ]
             },
-            update_Meta: {
-                src: ["<%=config.src%>/index.html", "<%=config.src%>/humans.txt", "README.md", "LICENSE", "<%=config.src%>/LICENSE", "<%=config.src%>/app/css/main.css", "<%=config.src%>/app/js/config/config.js"],
+            src: {
+                src: [ '<%=config.src%>/js/main.js'],
+                dest: [ '<%=config.src%>/js/main.js'],
+                replacements: [{
+                    from: VERSION_REGEXP,
+                    to: '<%=pkg.version%>'
+                }]
+            },
+            metadata: {
+                src: ["<%=config.src%>/index.html", "<%=config.src%>/humans.txt", "README.md", "LICENSE",
+                    "<%=config.src%>/LICENSE", "<%=config.src%>/css/main.css", "<%=config.src%>/js/config/config.js"],
                 overwrite: true, // overwrite matched source files
                 replacements: [{
                     // html pages
@@ -325,35 +329,41 @@ module.exports = function (grunt) {
                     from: /(Copyright \(c\) )([0-9]{4})/g,
                     to: "Copyright (c) " + "<%= pkg.copyright %>",
                 }]
-            },
-            File_Reference: {
-                src: ["<%=config.out%>/index.html"],
-                overwrite: true,
-                replacements: [
-                ]
             }
-
         },
         watch: {
             options: {
                 livereload: 35729
             },
-            site: {
-                files: ['./<%=config.src%>/app/css/**/*.css', './<%=config.src%>/app/js/**/*.js', './<%=config.src%>/app/js/**/*.html'],
-                tasks: ['build']
+            debug: {
+                files: ['./<%=config.src%>/css/**/*.css', './<%=config.src%>/js/**/*.js', './<%=config.src%>/views/**/*.html'],
+                tasks: []
+            },
+            build: {
+                files: ['./<%=config.src%>/css/**/*.css', './<%=config.src%>/js/**/*.js', './<%=config.src%>/views/**/*.html'],
+                tasks: ['default']
             }
         },
         connect: {
             options: {
                 hostname: 'localhost',
-                base: './<%=config.out%>/',
+                base: './',
                 livereload: 35729
             },
-            site: {
+            debug: {
                 options: {
                     port: 8000,
                     open: {
-                        target: 'http://localhost:8000'
+                        target: 'http://localhost:8000/src'
+                    }
+                }
+            },
+            build: {
+                options: {
+                    port: 8001,
+                    protocol: 'https',
+                    open: {
+                        target: 'https://localhost:8001/build'
                     }
                 }
             }
@@ -390,8 +400,8 @@ module.exports = function (grunt) {
                             },
                             packages: [
                                 {
-                                    name: "mag",
-                                    location: "<%=config.src%>/app/js"
+                                    name: "mag-demographics",
+                                    location: "<%=config.src%>/js"
                                 },
                                 {
                                     name: "esri",
@@ -422,7 +432,7 @@ module.exports = function (grunt) {
                         }
                     },
                     plugins: [
-                        'node_modules/jquery/<%=config.out%>/jquery.js'
+                        'node_modules/jquery/dist/jquery.js'
                     ]
                 }
             }
@@ -430,31 +440,49 @@ module.exports = function (grunt) {
     });
 
     grunt.registerTask("GetClassBreaks", function () {
-        require("./<%=config.src%>/app/vendor/js/generateClassBreaks.js")(grunt, this.async, {
-            inputLocation: "./<%=config.src%>/app/js/config/cbrConfig.json",
-            geoStatsPath: "Z:\\Viewers\\Demographics\\<%=config.src%>\\app\\vendor\\js\\geoStats.min.js",
+        require("./<%=config.src%>/vendor/js/generateClassBreaks.js")(grunt, this.async, {
+            inputLocation: "./<%=config.src%>/js/config/cbrConfig.json",
+            geoStatsPath: "Z:\\Viewers\\Demographics\\<%=config.src%>\\vendor\\js\\geoStats.min.js",
             mainUrl: "https://geo.azmag.gov/arcgis/rest/services/maps/DemographicState2017/MapServer",
-            outputLocation: "./<%=config.src%>/app/js/config/cbrConfig.json"
+            outputLocation: "./<%=config.src%>/js/config/cbrConfig.json"
         });
     });
 
-    grunt.registerTask("build-copy-concat", ["clean:build", "replace:update_Meta", "copy", "replace:File_Reference", "replace:index", "concat", "toggleComments"]);
-    grunt.registerTask("build-js", ["clean:js", "babel"]);
-    grunt.registerTask("build-css", ["cssmin", "postcss", "clean:css"])
-    grunt.registerTask("build-html", ["htmlmin"])
-    grunt.registerTask("require", ["requirejs"]);
-
-    // grunt.registerTask("build", ["build-copy-concat", "build-js", "build-css", "build-html", "require"]);
-    grunt.registerTask("build", ["intern", "build-copy-concat", "build-js", "build-css", "require"]);
-
-    // the default task can be run just by typing "grunt" on the command line
-    grunt.registerTask("default", ["build"]);
-
-    grunt.registerTask('conn', ["connect:site", "watch:site"]);
-
-    grunt.registerTask('run', ["build", "connect:site", "watch:site"]);
-
+    // main build of the application
+    grunt.registerTask("default", [
+        "intern",
+        "replace:metadata",
+        "clean",      
+        "requirejs",
+        "replace:index",
+        "concat",
+        "cssmin",
+        "postcss",
+        "copy",
+        "toggleComments",
+        "htmlmin",
+        "usebanner"
+    ]);
+    // build for deployment and run the application for testing
+    grunt.registerTask("deploy", [
+        "default",
+        "connect:build",
+        "watch:build"
+    ]);
+    // run the application for testing
+    grunt.registerTask('debug', [
+        "intern",
+        "connect:debug",
+        "watch:debug"
+    ]);
+    // run the tests alone
     grunt.registerTask("test", ["intern"]);
+
+    // lint the css and js
+    grunt.registerTask("lint", [
+        "csslint",
+        "jshint"
+    ]);
 };
 
 // ref

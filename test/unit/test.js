@@ -1,5 +1,5 @@
 define([
-    'mag/test'
+    'mag-demographics/test'
 ], function (test) {
     var { assert } = intern.getPlugin('chai');
     var { registerSuite } = intern.getPlugin('interface.object');

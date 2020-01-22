@@ -3,14 +3,12 @@
 
 <head>
     <!-- comments:uncomment-block html -->
-    
-    <!--
-        <!-- <script type="text/javascript">
+       
+    <!-- <script type="text/javascript">
         if (window.location.protocol !== 'https:') {
             window.location = 'https://' + window.location.hostname + window.location.pathname + window.location.hash;
         }
     </script> -->
-    -->
 
     <!-- endcomments -->
     <meta charset="utf-8" />
@@ -61,10 +59,10 @@
             sizes="144x144"
             href="img/shareImg.png"
         /> -->
-    <link rel="apple-touch-icon" type="image/png" sizes="114x114" href="app/images/magicon_114.png" />
-    <link rel="apple-touch-icon" type="image/png" sizes="72x72" href="app/images/magicon_72.png" />
-    <link rel="apple-touch-icon" type="image/png" sizes="57x57" href="app/images/magicon_57.png" />
-    <link rel="shortcut icon" type="image-favorites-icon" href="app/images/magfavicon.png" />
+    <link rel="apple-touch-icon" type="image/png" sizes="114x114" href="images/magicon_114.png" />
+    <link rel="apple-touch-icon" type="image/png" sizes="72x72" href="images/magicon_72.png" />
+    <link rel="apple-touch-icon" type="image/png" sizes="57x57" href="images/magicon_57.png" />
+    <link rel="shortcut icon" type="image-favorites-icon" href="images/magfavicon.png" />
     <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
     <!-- ESRI javaScript API CSS -->
     <link rel="stylesheet" href="https://js.arcgis.com/4.11/esri/css/main.css" />
@@ -75,8 +73,8 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
     <!-- Application CSS -->
 
-    <link rel="stylesheet" href="app/css/normalize.css" />
-    <link rel="stylesheet" href="app/css/main.css" />
+    <link rel="stylesheet" href="css/normalize.css" />
+    <link rel="stylesheet" href="css/main.css" />
  
     <!-- prevent cache -->
     <!--  removed once App goes into production -->
@@ -135,7 +133,7 @@
     </div>
     <div id="basemapToggle" class="customWidget esri-component esri-widget--button esri-widget" role="button"
         tabindex="0" aria-label="Satellite" title="Satellite">
-        <span class="esri-icon"> <img src="app/images/widgetIcons/Imagery-Map-View-Icon.png" alt="" /> </span>
+        <span class="esri-icon"> <img src="images/widgetIcons/Imagery-Map-View-Icon.png" alt="" /> </span>
         <span class="esri-icon-font-fallback-text">Toggle Basemap</span>
     </div>
     <div id="locateWidget" class="customWidget esri-component esri-widget--button esri-widget" role="button"
@@ -180,7 +178,7 @@
                 <div class="smallLogo">
                     <a href="https://maps.azmag.gov/" target="_blank" alt="MAG Maps Page"><img
                             title="MAG Arizona State Demographics" width="65"
-                            src="app/images/icon_statewide-demographics.png" alt="AZ Demographics Icon" /></a>
+                            src="images/icon_statewide-demographics.png" alt="AZ Demographics Icon" /></a>
                 </div>
                 <span>Arizona<br>Demographics</span>
             </div>
@@ -220,7 +218,7 @@
         </nav>
 
         <div class="loading-container">
-            <div class="loading-spinner">Loading <br /><img src="app/images/Loading.gif" alt="Loading" /></div>
+            <div class="loading-spinner">Loading <br /><img src="images/Loading.gif" alt="Loading" /></div>
         </div>
 
         <div id="content" class="container">
@@ -352,10 +350,10 @@
     <script>
         var app = {};
         var dojoConfig = {
-            // async: true,
+            async: true,
             packages: [{
-                name: 'app',
-                location: location.pathname.replace(/\/[^/]+$/, '') + './app/js'
+                name: 'mag-demographics',
+                location: location.pathname.replace(/\/[^/]+$/, '') + './js'
             }]
         };
 
@@ -370,15 +368,13 @@
 
     <script src="https://kendo.cdn.telerik.com/2018.3.1017/js/jszip.min.js"></script>
     <script src="https://kendo.cdn.telerik.com/2018.3.1017/js/kendo.all.min.js"></script>
-    <script src="app/vendor/draggable.js"></script>
-    <script src="app/vendor/geoStats.min.js"></script>
+    <script src="vendor/draggable.js"></script>
+    <script src="vendor/geoStats.min.js"></script>
     <script src="https://js.arcgis.com/4.11/"></script>
     <script src="../node_modules/magcore/dist/js/magcore.js"></script>
 
     <script>
-        require(["mag/app"], function(mag){
-
-        });
+        require(["mag-demographics/main"]);
     </script>
 
 </body>

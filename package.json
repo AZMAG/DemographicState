@@ -1,5 +1,5 @@
 {
-  "name": "Demographics-State-App",
+  "name": "mag-demographics",
   "version": "4.0.7",
   "date": "2019-07-24",
   "copyright": "2019",
@@ -23,7 +23,7 @@
   ],
   "main": "index.js",
   "homepage": "https://geo.azmag.gov/maps/azdemographics/",
-  "author": "MAG Regional Analytics Devision (http://www.azmag.gov/About-Us/Divisions/Regional-Analytics-Division/)",
+  "author": "MAG Regional Analytics Division (http://www.azmag.gov/About-Us/Divisions/Regional-Analytics-Division/)",
   "contributors": [
     {
       "name": "Vern Wolfley",
@@ -34,12 +34,10 @@
       "email": "jfairfield@azmag.gov"
     }
   ],
-  "repository": [
-    {
-      "type": "git",
-      "url": "https://github.com/AZMAG/map-DemographicState"
-    }
-  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AZMAG/map-DemographicState"
+  },
   "private": true,
   "dependencies": {
     "arcgis-js-api": "^4.11.1",
@@ -49,15 +47,13 @@
     "requirejs-domready": "^2.0.3"
   },
   "devDependencies": {
-    "@babel/core": "^7.4.4",
-    "@babel/preset-env": "^7.4.4",
     "@dojo/framework": "^6.0.3",
     "@dojo/loader": "^2.0.0",
     "autoprefixer": "^9.5.1",
-    "cssnano": "^4.1.10",
     "dojo": "1.14.1",
     "grunt": "^1.0.4",
-    "grunt-babel": "^8.0.0",
+    "grunt-banner": "^0.6.0",
+    "grunt-bump": "^0.8.0",
     "grunt-comment-toggler": "^0.2.2",
     "grunt-contrib-clean": "^2.0.0",
     "grunt-contrib-concat": "^1.0.1",
