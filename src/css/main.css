@@ -1179,7 +1179,7 @@ hr.pop {
 }
 
 .loading-container {
-    display: flex;
+    display: none;
     position: fixed;
     z-index: 2;
     background-color: rgba(0, 0, 0, 0.302);

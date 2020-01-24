@@ -1,20 +1,21 @@
 'use strict';
 define([
-        '../config/mapsConfig',
-        '../config/config',
-        './reports-utils',
-        '../utilities',
-        'dojo/topic',
-        'esri/tasks/QueryTask'
-    ],
-    function (
-        mapsConfig,
-        config,
-        reportsutils,
-        utilities,
-        tp,
-        QueryTask
-    ){
+    '../config/mapsConfig',
+    '../config/config',
+    '../utilities',
+    'magcore/utils/reports',
+    'magcore/utils/data',
+    'magcore/utils/application',
+    'dojo/topic'
+], function (
+    mapsConfig,
+    config,
+    utilities,
+    dataUtils,
+    reportUtils,
+    appUtils,
+    tp
+) {
     tp.subscribe('panel-loaded', function (panel) {
         if (panel === 'reports-view') {
             InitAdvancedQuery();
@@ -22,71 +23,71 @@ define([
     });
 
     tp.subscribe('reset-reports', ClearQueryItems);
-
+    
     let QueryItems = [];
     let CompareOperators = {
         string: [{
-                Name: 'Equals',
-                Sign: '='
-            },
-            {
-                Name: 'Starts With',
-                Sign: '%[value]'
-            },
-            {
-                Name: 'Contains',
-                Sign: '%[value]%'
-            },
-            {
-                Name: 'Ends With',
-                Sign: '[value]%'
-            }
+            Name: 'Equals',
+            Sign: '='
+        },
+        {
+            Name: 'Starts With',
+            Sign: '%[value]'
+        },
+        {
+            Name: 'Contains',
+            Sign: '%[value]%'
+        },
+        {
+            Name: 'Ends With',
+            Sign: '[value]%'
+        }
         ],
         number: [{
-                Name: 'Between',
-                Sign: 'between'
-            },
-            {
-                Name: 'Equals',
-                Sign: '='
-            },
-            {
-                Name: 'Less Than',
-                Sign: '<'
-            },
-            {
-                Name: 'Less Than Or Equal To',
-                Sign: '<='
-            },
-            {
-                Name: 'Greater Than Or Equal To',
-                Sign: '>='
-            },
-            {
-                Name: 'Greater Than',
-                Sign: '>'
-            }
+            Name: 'Between',
+            Sign: 'between'
+        },
+        {
+            Name: 'Equals',
+            Sign: '='
+        },
+        {
+            Name: 'Less Than',
+            Sign: '<'
+        },
+        {
+            Name: 'Less Than Or Equal To',
+            Sign: '<='
+        },
+        {
+            Name: 'Greater Than Or Equal To',
+            Sign: '>='
+        },
+        {
+            Name: 'Greater Than',
+            Sign: '>'
+        }
         ],
         date: [{
-                Name: 'Equals',
-                Sign: '='
-            },
-            {
-                Name: 'Less Than',
-                Sign: '<'
-            },
-            {
-                Name: 'Less Than Or Equal To',
-                Sign: '<='
-            },
-            {
-                Name: 'Greater Than Or Equal To',
-                Sign: '>='
-            },
-            {
-                Name: 'Greater Than',
-                Sign: '>'
-            }
+            Name: 'Equals',
+            Sign: '='
+        },
+        {
+            Name: 'Less Than',
+            Sign: '<'
+        },
+        {
+            Name: 'Less Than Or Equal To',
+            Sign: '<='
+        },
+        {
+            Name: 'Greater Than Or Equal To',
+            Sign: '>='
+        },
+        {
+            Name: 'Greater Than',
+            Sign: '>'
+        }
         ]
     };
 
@@ -114,59 +115,59 @@ define([
             ShortName: 'Area',
             expanded: false,
             items: [{
-                    FieldName: 'COUNTY',
-                    Name: 'County',
-                    ShortName: 'County',
-                    Type: 'string'
-                },
-                {
-                    FieldName: 'LEGDIST',
-                    Name: 'Legislative District',
-                    ShortName: 'Legislative District',
-                    Type: 'string'
-                },
-                {
-                    FieldName: 'CONDIST',
-                    Name: 'Congressional District',
-                    ShortName: 'Congressional District',
-                    Type: 'string'
-                },
-                {
-                    FieldName: 'UNIFIED_DIST',
-                    Name: 'Unified School District',
-                    ShortName: 'Unified School District',
-                    Type: 'string'
-                },
-                {
-                    FieldName: 'SEC_DIST',
-                    Name: 'Secondary School District',
-                    ShortName: 'Secondary School District',
-                    Type: 'string'
-                },
-                {
-                    FieldName: 'ELEM_DIST',
-                    Name: 'Elementary School District',
-                    ShortName: 'Elementary School District',
-                    Type: 'string'
-                },
-                {
-                    FieldName: 'TRACTCE',
-                    Name: 'Tract',
-                    ShortName: 'Tract',
-                    Type: 'string'
-                },
-                {
-                    FieldName: 'BLKGRPCE',
-                    Name: 'Block Group',
-                    ShortName: 'Block Group',
-                    Type: 'string'
-                },
-                {
-                    FieldName: 'SQMI',
-                    Name: 'Square Miles',
-                    ShortName: 'Square Miles',
-                    Type: 'number'
-                }
+                FieldName: 'COUNTY',
+                Name: 'County',
+                ShortName: 'County',
+                Type: 'string'
+            },
+            {
+                FieldName: 'LEGDIST',
+                Name: 'Legislative District',
+                ShortName: 'Legislative District',
+                Type: 'string'
+            },
+            {
+                FieldName: 'CONDIST',
+                Name: 'Congressional District',
+                ShortName: 'Congressional District',
+                Type: 'string'
+            },
+            {
+                FieldName: 'UNIFIED_DIST',
+                Name: 'Unified School District',
+                ShortName: 'Unified School District',
+                Type: 'string'
+            },
+            {
+                FieldName: 'SEC_DIST',
+                Name: 'Secondary School District',
+                ShortName: 'Secondary School District',
+                Type: 'string'
+            },
+            {
+                FieldName: 'ELEM_DIST',
+                Name: 'Elementary School District',
+                ShortName: 'Elementary School District',
+                Type: 'string'
+            },
+            {
+                FieldName: 'TRACTCE',
+                Name: 'Tract',
+                ShortName: 'Tract',
+                Type: 'string'
+            },
+            {
+                FieldName: 'BLKGRPCE',
+                Name: 'Block Group',
+                ShortName: 'Block Group',
+                Type: 'string'
+            },
+            {
+                FieldName: 'SQMI',
+                Name: 'Square Miles',
+                ShortName: 'Square Miles',
+                Type: 'number'
+            }
             ]
         }];
 
@@ -179,7 +180,7 @@ define([
             dataTextField: ['ShortName']
         });
 
-        $advancedTreeview.on('dblclick', function(e) {
+        $advancedTreeview.on('dblclick', function (e) {
             var treeView = $advancedTreeview.data('kendoTreeView');
             var dataItem = treeView.dataItem(e.target);
             DataItemSelected = dataItem;
@@ -192,7 +193,7 @@ define([
 
         $advancedTreeview.kendoDraggable({
             filter: '.k-in', //specify which items will be draggable
-            hint: function(element) {
+            hint: function (element) {
                 //create a UI hint, the `element` argument is the dragged item
                 return element.clone().css({
                     opacity: 0.4,
@@ -200,7 +201,7 @@ define([
                     cursor: 'move'
                 });
             },
-            dragstart: function(e) {
+            dragstart: function (e) {
                 var treeView = $advancedTreeview.data('kendoTreeView');
                 var dataItem = treeView.dataItem(e.currentTarget);
                 DataItemSelected = dataItem;
@@ -212,7 +213,7 @@ define([
                     $(this).addClass('k-add');
                 }
             },
-            dragend: function(e) {
+            dragend: function (e) {
                 $advancedQueryTarget.css('backgroundColor', 'transparent');
                 $advancedQueryTarget.children().show();
                 $dropPrompt.hide();
@@ -220,13 +221,13 @@ define([
         });
 
         $advancedQueryTarget.kendoDropTarget({
-            dragenter: function(e) {
+            dragenter: function (e) {
                 if (DataItemSelected.Type !== undefined) {
                     e.draggable.hint.css('opacity', 1);
                     $advancedQueryTarget.css('backgroundColor', 'darkgrey');
                 }
             },
-            dragleave: function(e) {
+            dragleave: function (e) {
                 if (DataItemSelected.Type !== undefined) {
                     e.draggable.hint.css('opacity', 0.5);
                     $advancedQueryTarget.css('backgroundColor', 'grey');
@@ -235,7 +236,7 @@ define([
             drop: OnDrop
         });
 
-        $('body').on('click', '.removeRowBtn', function() {
+        $('body').on('click', '.removeRowBtn', function () {
             var str = $(this)
                 .parents('div:first')[0]
                 .innerText.toString();
@@ -261,7 +262,7 @@ define([
                 .remove();
 
             //update array
-            $.each(QueryItems, function(index, queryItem) {
+            $.each(QueryItems, function (index, queryItem) {
                 if (queryItem.name === fieldName) {
                     QueryItems.splice(index, 1);
                     return false;
@@ -271,10 +272,10 @@ define([
             return false;
         });
 
-        $('body').on('click', '.clearRowBtn', function() {
+        $('body').on('click', '.clearRowBtn', function () {
             var selector = $(this).parents('div:first')[0].id;
             var textBoxes = $('#' + selector + ' .style1');
-            $.each(textBoxes, function(index, textBox) {
+            $.each(textBoxes, function (index, textBox) {
                 var tb = $(textBox).data('kendoNumericTextBox');
                 if (tb) {
                     tb._old = tb._value;
@@ -321,22 +322,14 @@ define([
                 outFields: ['GEOID']
             };
 
-            let qt = new QueryTask({
-                url: config.mainUrl + '/0'
-            });
-
-            qt.execute(q).then(function(res) {
-                let geoids = [];
-
-                res.features.forEach(feature => {
-                    geoids.push(feature.attributes['GEOID']);
-                });
-
-                reportsutils.GetData(config.layerDef['blockGroups'], geoids).then(function (data) {
+            dataUtils.query(config.mainUrl + '/0', q).then(function (res) {
+                let geoids = res.features.map(feature => feature.attributes['GEOID']);
+                appUtils.showLoading('.loading-container');
+                reportUtils.getReportData(config.mainUrl, config.layerDef['blockGroups'], geoids).then(function (data) {
                     var acsdata = utilities.summarizeFeatures(data.acsData);
                     var censusdata = utilities.summarizeFeatures(data.censusData);
 
-                    reportsutils.selectedReport.acsData = {
+                    reportUtils.getSelectedReport().acsData = {
                         features: [{
                             attributes: acsdata,
                             count: data.acsData.features.length,
@@ -345,7 +338,7 @@ define([
                         blockGroups: data.acsData.features
                     };
 
-                    reportsutils.selectedReport.censusData = {
+                    reportUtils.getSelectedReport().censusData = {
                         features: [{
                             attributes: censusdata,
                             count: data.acsData.features.length,
@@ -353,10 +346,10 @@ define([
                         }],
                         blockGroups: data.censusData.features
                     };
-                    tp.publish('open-report-window', reportsutils.selectedReport, 'acs');
+                    tp.publish('open-report-window', reportUtils.getSelectedReport(), 'acs');
                     utilities.AddHighlightGraphics(data.acsData.features, true);
                     $('.reportFormArea').hide();
-                });
+                }).finally(() => appUtils.hideLoading('.loading-container'));
             });
         }
 
@@ -452,11 +445,7 @@ define([
                 where: queryString
             };
 
-            let qt = new QueryTask({
-                url: config.mainUrl + '/0'
-            });
-
-            qt.executeForCount(q).then(function(count) {
+            dataUtils.query(config.mainUrl + '/0', q, { countOnly: true }).then(function (count) {
                 $advancedCount.text(count).show();
                 resultCount = count;
             });
@@ -516,11 +505,11 @@ define([
 
                     var joinDropDown = $('#joinDDL' + count).kendoDropDownList({
                         dataSource: [{
-                                name: 'AND'
-                            },
-                            {
-                                name: 'OR'
-                            }
+                            name: 'AND'
+                        },
+                        {
+                            name: 'OR'
+                        }
                         ],
                         dataTextField: 'name',
                         dataValueField: 'name',
@@ -539,9 +528,9 @@ define([
                         <div class="advancedRow k-header" id="${dataItem.uid}${count}">
                         <input class="hiddenFld" type="hidden" value="${dataItem.Type}" placeholder="${
                         dataItem.Placeholder
-                    }"><span class="queryItem">${
+                        }"><span class="queryItem">${
                         dataItem.ShortName
-                    }: </span><span class="inputBoxes"><select class="operatorDDL" id="operatorDDL${count}"></select>
+                        }: </span><span class="inputBoxes"><select class="operatorDDL" id="operatorDDL${count}"></select>
                         <input class="style1" placeholder="min"></input>
                         <input placeholder="max" class="style1"></input>
                         <button title="Remove row" class="btn removeRowBtn"><i class="fas fa-trash"></i></button>
@@ -624,7 +613,7 @@ define([
                         orderByFields: [dataItem.FieldName],
                         returnDistinctValues: true,
                         where: '1=1'
-                    }).then(function(res) {
+                    }).then(function (res) {
                         let ddlSrc = res.features.reduce((ddlSrc, f) => {
                             if (f.attributes[dataItem.FieldName]) {
                                 ddlSrc.push(f.attributes[dataItem.FieldName]);

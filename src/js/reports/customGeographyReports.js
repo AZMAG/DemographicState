@@ -1,24 +1,25 @@
 "use strict";
 define([
-        "../config/config",
-        "./reports-utils",
-        "../utilities",
-        "../maps/maps-utils",
-        "dojo/topic",
-        "esri/widgets/Sketch/SketchViewModel",
-        "esri/Graphic",
-        "esri/geometry/geometryEngine"
-    ],
-    function (
-        config,
-        reportsutils,
-        utilities,
-        mapsutils,
-        tp,
-        SketchViewModel,
-        Graphic,
-        geometryEngine
-    ){
+    "../config/config",
+    "../utilities",
+    "../maps/maps-utils",
+    "magcore/utils/reports",
+    "magcore/utils/application",
+    "dojo/topic",
+    "esri/widgets/Sketch/SketchViewModel",
+    "esri/Graphic",
+    "esri/geometry/geometryEngine"
+], function (
+    config,
+    utilities,
+    mapsutils,
+    reportUtils,
+    appUtils,
+    tp,
+    SketchViewModel,
+    Graphic,
+    geometryEngine
+) {
     let isInited = false;
     tp.subscribe("panel-loaded", init);
 
@@ -28,7 +29,7 @@ define([
         if (!isInited) {
 
             isInited = true;
-            tp.subscribe("gfxLayer-loaded", function() {
+            tp.subscribe("gfxLayer-loaded", function () {
 
                 let $customGeographyReports = $("#customGeographyReports");
                 let $bufferCheckbox = $("#useBuffer");
@@ -87,7 +88,7 @@ define([
                     }
                 });
 
-                $bufferCheckbox.change(function(e) {
+                $bufferCheckbox.change(function (e) {
                     let checked = $bufferCheckbox.prop("checked");
                     if (checked) {
                         $bufferOptions.css("display", "flex");
@@ -96,7 +97,7 @@ define([
                     }
                 });
 
-                $customSummaryButton.click(function(e) {
+                $customSummaryButton.click(function (e) {
                     e.preventDefault();
                     $customSummaryButton.removeClass("active");
                     $(this).addClass("active");
@@ -107,7 +108,7 @@ define([
                     });
 
                     //Creates a tooltip to give user instructions on drawing
-                    $("#viewDiv").mousemove(function(e) {
+                    $("#viewDiv").mousemove(function (e) {
                         $drawingTooltip
                             .css("left", e.pageX + 10)
                             .css("top", e.pageY + 10)
@@ -115,7 +116,7 @@ define([
                     });
                 });
 
-                sketchVM.on("update", function(e) {
+                sketchVM.on("update", function (e) {
                     let buffer = $bufferCheckbox.is(":checked");
                     if (buffer) {
                         AddBufferedGraphic(e);
@@ -145,7 +146,7 @@ define([
                     }
                 }
 
-                sketchVM.on("create", function(e) {
+                sketchVM.on("create", function (e) {
                     let buffer = $bufferCheckbox.is(":checked");
 
                     if (e.state === "complete") {
@@ -180,7 +181,8 @@ define([
                 tp.subscribe("reset-reports", resetReport);
 
                 function ProcessSelection(gfx) {
-                    reportsutils.GetData(config.layerDef["blockGroups"], null, gfx.geometry).then(function (data) {
+                    appUtils.showLoading(".loading-container");
+                    reportUtils.getReportData(config.mainUrl, config.layerDef["blockGroups"], null, gfx.geometry).then(function (data) {
                         var acsData = utilities.summarizeFeatures(data.acsData);
                         var censusData = utilities.summarizeFeatures(data.censusData);
 
@@ -190,7 +192,7 @@ define([
                             // Just using the basic alert function isn"t pretty enough.
                             alert("Your selection did not return any results.  Please try again.");
                         } else {
-                            reportsutils.selectedReport.acsData = {
+                            reportUtils.getSelectedReport().acsData = {
                                 features: [{
                                     attributes: acsData,
                                     count: data.acsData.features.length,
@@ -199,7 +201,7 @@ define([
                                 blockGroups: data.acsData.features
                             };
 
-                            reportsutils.selectedReport.censusData = {
+                            reportUtils.getSelectedReport().censusData = {
                                 features: [{
                                     attributes: censusData,
                                     count: data.censusData.features.length,
@@ -207,12 +209,12 @@ define([
                                 }],
                                 blockGroups: data.censusData.features
                             };
-                            tp.publish("open-report-window", reportsutils.selectedReport, "acs");
+                            tp.publish("open-report-window", reportUtils.getSelectedReport(), "acs");
                             $customGeographyReports.hide();
                             utilities.AddHighlightGraphics(data.acsData.features, $useZoom.is(":checked"));
                             $(".reportFormArea").hide();
                         }
-                    });
+                    }).finally(() => appUtils.hideLoading(".loading-container"));
                 }
             })
         }

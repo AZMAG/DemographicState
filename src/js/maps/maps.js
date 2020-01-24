@@ -5,6 +5,7 @@ define([
         "../utilities",
         "./maps-utils",
         "./cbr",
+        "magcore/utils/application",
         "esri/Map",
         "esri/views/MapView",
         "esri/layers/FeatureLayer",
@@ -21,6 +22,7 @@ define([
         utilities,
         mapsutils,
         cbr,
+        appUtils,
         Map,
         MapView,
         FeatureLayer,
@@ -203,7 +205,7 @@ define([
             mapsutils.view.whenLayerView(bgLayer).then(function (lyrView) {
                 lyrView.watch("updating", function (value) {
                     if (!value && !once) {
-                        $('.loading-container').css('display', 'none');
+                        appUtils.hideLoading('.loading-container');
                         // blockGroupLyrView = lyrView;
                         tp.publish("layers-added");
                         once = true;

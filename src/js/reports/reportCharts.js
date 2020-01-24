@@ -1,19 +1,17 @@
 'use strict';
 define([
-        'dojo/topic',
-        '../config/config',
-        'magcore/utils/charts'
-        
-    ],
-    function(
-        tp,
-        config,
-        charts
-    ){
-    tp.subscribe('create-charts', CreateCharts);
-    tp.subscribe('create-compare-charts', CreateCharts);
+    'dojo/topic',
+    '../config/config',
+    'magcore/utils/charts'
+], function (
+    tp,
+    config,
+    charts
+) {
+    tp.subscribe('create-charts', createCharts);
+    tp.subscribe('create-compare-charts', createCharts);
 
-    function CreateChart(ops) {
+    function createChart(ops) {
         if (ops.data.length) {
             var params = charts.createChartParams(ops, config.seriesColors)
 
@@ -25,13 +23,13 @@ define([
         }
     }
 
-    function CreateCharts({ data, compareData, target, names }) {
+    function createCharts({ data, compareData, target, names }) {
         //Filter list
         let $target = $('#' + target);
         let $chartsArea = $target.find('.chartsArea');
         $chartsArea.html('');
 
-        let categories = charts.GetCategories(data);
+        let categories = charts.getCategories(data);
         categories.forEach(category => {
             let chartData = data.filter(row => row.chartCategory === category);
             let compareChartData = compareData ? compareData.filter(row => row.chartCategory === category) : undefined;
@@ -47,7 +45,7 @@ define([
             `
                 )
                 .get(0);
-            CreateChart({
+            createChart({
                 element: $chartsArea.find(`.chartTarget[data-id="${category}"]`),
                 category,
                 data: chartData,

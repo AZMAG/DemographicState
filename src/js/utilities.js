@@ -1,62 +1,58 @@
 
 "use strict";
 define([
-        "./config/config",
-        "./config/censusFieldsConfig",
-        "./config/acsFieldsConfig",
-        "./maps/maps-utils",
-        "esri/Graphic"
-    ],
-    function(
-        config,
-        censusFieldsConfig,
-        acsFieldsConfig,
-        mapsutils,
-        Graphic
-    ){
-//This file should include miscellaneous repeatable functions used in multiple places in the code. 
+    "./config/config",
+    "./config/censusFieldsConfig",
+    "./config/acsFieldsConfig",
+    "./maps/maps-utils",
+    "esri/Graphic"
+], function (
+    config,
+    censusFieldsConfig,
+    acsFieldsConfig,
+    mapsutils,
+    Graphic
+) {
+    //This file should include miscellaneous repeatable functions used in multiple places in the code. 
 
-    Number.prototype.MagFormat = function () {
-        return this.toFixed(1);
-    };
-    
     var summableFields = null;
+    const representativeCache = {};
 
-    var utils = {   
-        AddHighlightGraphics: function(features, zoomTo) {
-                let gfx = [];
-                for (let i = 0; i < features.length; i++) {
-                    const feature = features[i];
-                    let g = new Graphic({
-                        geometry: feature.geometry,
-                        symbol: {
-                            type: "simple-fill",
-                            color: [0, 255, 255, 0.5],
-                            opacity: 0.5,
-                            outline: {
-                                color: "cyan",
-                                width: "3"
-                            }
+    var utils = {
+        AddHighlightGraphics: function (features, zoomTo) {
+            let gfx = [];
+            for (let i = 0; i < features.length; i++) {
+                const feature = features[i];
+                let g = new Graphic({
+                    geometry: feature.geometry,
+                    symbol: {
+                        type: "simple-fill",
+                        color: [0, 255, 255, 0.5],
+                        opacity: 0.5,
+                        outline: {
+                            color: "cyan",
+                            width: "3"
                         }
-                    });
-                    gfx.push(g);
-                }
-                let gfxLayer = mapsutils.map.findLayerById("gfxLayer");
-                gfxLayer.addMany(gfx);
-    
-                if (zoomTo) {
-                    mapsutils.view.goTo(gfx);
-                }
-        },
-    
-        AddHighlightGraphic: function(graphic) {
+                    }
+                });
+                gfx.push(g);
+            }
             let gfxLayer = mapsutils.map.findLayerById("gfxLayer");
-    
+            gfxLayer.addMany(gfx);
+
+            if (zoomTo) {
+                mapsutils.view.goTo(gfx);
+            }
+        },
+
+        AddHighlightGraphic: function (graphic) {
+            let gfxLayer = mapsutils.map.findLayerById("gfxLayer");
+
             if (gfxLayer.graphics && gfxLayer.graphics.items.length > 0) {
                 console.log("no graphics to highlight");
             } else {
                 var tempGraphic = $.extend({}, graphic);
-    
+
                 tempGraphic.symbol = {
                     type: "simple-fill",
                     color: [0, 255, 255, 0.5],
@@ -66,13 +62,12 @@ define([
                         width: "3"
                     }
                 };
-    
+
                 gfxLayer.add(tempGraphic);
             }
         },
 
-        
-        clearDrawnGraphics: function() {
+        clearDrawnGraphics: function () {
             let gfxLayer = mapsutils.map.findLayerById("gfxLayer");
             gfxLayer.removeAll();
 
@@ -80,10 +75,10 @@ define([
             bufferGraphics.removeAll();
             mapsutils.view.graphics.removeAll();
         },
-    
-        summarizeFeatures: function(res) {
+
+        summarizeFeatures: function (res) {
             // console.log(res);
-    
+
             if (!summableFields) {
                 summableFields = [];
                 acsFieldsConfig.forEach(conf => {
@@ -97,7 +92,7 @@ define([
                     }
                 });
             }
-    
+
             let data = {};
             res.features.forEach(feature => {
                 let attr = feature.attributes;
@@ -111,17 +106,17 @@ define([
                     }
                 });
             });
-    
+
             return data;
         },
 
-        PopupFormat: async function(gfx) {
+        PopupFormat: async function (gfx) {
             let attr = gfx.graphic.attributes;
             let repHtml = "";
             if (attr["googleID"]) {
                 repHtml = await GetRepHtml(attr["googleID"]);
             }
-    
+
             return `
                         <span class="popf">${attr["NAME"]}</span>
                         <hr class="pop">
@@ -137,34 +132,8 @@ define([
                         ` : ""}
                     `;
         }
-    
     }
 
-    function hexToRgb(hex) {
-        // Expand shorthand form (e.g. "03F") to full form (e.g. "0033FF")
-        var shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
-        hex = hex.replace(shorthandRegex, function (m, r, g, b) {
-            return r + r + g + g + b + b;
-        });
-
-        var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-        return result ? {
-            r: parseInt(result[1], 16),
-            g: parseInt(result[2], 16),
-            b: parseInt(result[3], 16)
-        } : null;
-    }
-
-    function componentToHex(c) {
-        var hex = c.toString(16);
-        return hex.length === 1 ? "0" + hex : hex;
-    }
-
-    function rgbToHex(r, g, b) {
-        return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
-    }
-
-    const representativeCache = {};
     async function GetRepresentativeInfo(id) {
         if (representativeCache[id]) {
             return new Promise(function (resolve, reject) {
@@ -183,7 +152,7 @@ define([
             });
         });
     }
-        
+
     function GetPartyLetter(party) {
         if (party === "Unknown" || !party)
             return "";
@@ -226,12 +195,12 @@ define([
         if (rep) {
             return `<div class="repContainer">
                         <div class="repPicContainer">
-                            ${rep.photoUrl ? `<img title="${rep.name}" class="rep-pic" src="${rep.photoUrl}" alt="${rep.name}">`: ""}
+                            ${rep.photoUrl ? `<img title="${rep.name}" class="rep-pic" src="${rep.photoUrl}" alt="${rep.name}">` : ""}
                         </div>
                         <div class="repInfoContainer">
                             <div><i class="fas fa-user-alt"></i> <strong>${rep.name}</strong>${GetPartyLetter(rep.party)} - ${rep.office ? rep.office : ""}</div>
                             ${rep.address ?
-                                `
+                    `
                                 <div>
                                     <div><i class="fas fa-map-marked"></i> ${rep.address[0].line1}</div>
                                     <div>${rep.address[0].city}, ${rep.address[0].state} ${rep.address[0].zip}</div>
@@ -286,6 +255,6 @@ define([
             });
 
     }
-    
+
     return utils;
 })

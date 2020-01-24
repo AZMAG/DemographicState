@@ -113,6 +113,6 @@ More information on running and writing tests can be found in [TESTS.md.](test/T
 
 ## Build
 
-You can build the compiled files by running the default grunt task (`grunt`) from the root folder. This will compile (bundle and minify) the files and place them in the **build** folder. Running the `grunt debug` task will run the tests and spin up a node server to test the application, watch for modified source code, and refresh after changes are saved.
+You can build the compiled files by running the default grunt task (`grunt`) from the root folder. This will compile (bundle and minify) the files and place them in the **build** folder. Running the `grunt run` task will run the tests and spin up a node server to test the application, watch for modified source code, and refresh after changes are saved.
 
 Additionally, there is a `grunt deploy` task that will build the application *and* spin up a node server to test the built files.

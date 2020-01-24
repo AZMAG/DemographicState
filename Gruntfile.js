@@ -470,7 +470,7 @@ module.exports = function (grunt) {
         "watch:build"
     ]);
     // run the application for testing
-    grunt.registerTask('debug', [
+    grunt.registerTask('run', [
         "intern",
         "connect:debug",
         "watch:debug"

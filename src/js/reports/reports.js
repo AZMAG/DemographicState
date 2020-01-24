@@ -4,19 +4,19 @@
 define([
         '../config/config',
         '../config/censusFieldsConfig',
-        '../config/acsFieldsConfig',
-        './reports-utils',
+        '../config/acsFieldsConfig',        
         '../utilities',
         'magcore/utils/formatter',
+        'magcore/utils/reports',
         'dojo/topic'
     ],
     function (
         config,
         censusFieldsConfig,
         acsFieldsConfig,
-        reportsutils,
         utilities,
         formatter,
+        reports,
         tp
     ){
     tp.subscribe('panel-loaded', function (panel) {
@@ -92,7 +92,7 @@ define([
                     .removeClass('active');
 
                 let dataSrc = $(this).data('val');
-                let d = reportsutils.selectedReport;
+                let d = reports.getSelectedReport();
 
                 if (dataSrc === 'acs') {
                     //Show Title 6 data
@@ -236,9 +236,8 @@ define([
         }
         let $reportArea = $('#reportArea');
 
-        let features = res.features;
-        let feature = features[0];
-        let attr = feature.attributes;
+        let features = res.features; 
+        let attr = features.length ? features[0].attributes : {};      
         let title = GetTitle(data);
 
         $reportArea.find('a[data-toggle="tab"]').on('shown.bs.tab', function(e) {
@@ -252,22 +251,18 @@ define([
         `);
         $header.css('display', 'Flex');
 
-        let ids = [attr['GEOID']];
-
-        if (features.length > 1) {
-            ids = features.map(feature => feature.attributes['GEOID']);
-        }
-
-        if (feature.ids) {
-            ids = feature.ids;
+        let ids = features.map(feature => feature.attributes['GEOID']);
+        
+        if (features.length && features[0].ids) {
+            ids = features[0].ids;
         }
 
         let $btnExportPDF = $header.find('.btnExportPDF');
         $btnExportPDF.tooltip();
-        $btnExportPDF.off('click').on('click', function () {
-            ExportReportToPDF(reportsutils.selectedReport.conf, ids);
+        $btnExportPDF.off('click').on('click', function () { 
+            ExportReportToPDF(reports.getSelectedReport().options, ids);
         });
-
+        
         let vals = GetValsFromData(attr, fields);
         if (features.length > 1) {
             let compareVals = GetValsFromData(features[1].attributes, fields);

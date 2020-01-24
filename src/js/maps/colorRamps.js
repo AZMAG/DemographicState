@@ -26,8 +26,8 @@ define([
             });
 
             $colorRamp.click(function () {
-                $sequentialRamps.html(GetRampsHTMLByType("Sequential"));
-                $divergingRamps.html(GetRampsHTMLByType("Diverging"));
+                $sequentialRamps.html(GetRampsHTMLByType("sequential"));
+                $divergingRamps.html(GetRampsHTMLByType("diverging"));
                 $colorRampModal.modal("show");
             });
 

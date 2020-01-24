@@ -1,11 +1,13 @@
 "use strict";
 define([
     "../maps/maps-utils",
+    "magcore/utils/application",
     "esri/views/2d/draw/Draw",
     "esri/Graphic",
     "dojo/topic"
 ], function (
     mapsutils,
+    appUtils,
     Draw,
     Graphic,
     tp
@@ -64,7 +66,7 @@ define([
         //This function is called on change of the color pickers, the transparency slider, or when a graphic is being drawn
         function reDrawGraphics() {
             outlineColor = $("#outlinePicker").data("kendoColorPicker").value();
-            fillColor = hexToRgb($("#fillPicker").data("kendoColorPicker").value());
+            fillColor = appUtils.hexToRgb($("#fillPicker").data("kendoColorPicker").value());
 
             transparency = $("#gfxSlider").val();
 
@@ -94,7 +96,7 @@ define([
                 $drawWidget.popover("show");
 
                 $("#fillPicker").kendoColorPicker({
-                    value: rgbToHex(fillColor.r, fillColor.g, fillColor.b),
+                    value: appUtils.rgbToHex(fillColor.r, fillColor.g, fillColor.b),
                     buttons: false,
                     change: reDrawGraphics
                 });

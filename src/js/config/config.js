@@ -50,7 +50,7 @@ define([], function(){
         },
 
         DefaultColorRamp: 'GnBu',
-        DefaultColorScheme: 'Sequential',
+        DefaultColorScheme: 'sequential',
         DefaultNumberOfClassBreaks: 5,
 
         layerDef: {},

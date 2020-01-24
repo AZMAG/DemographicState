@@ -1,12 +1,11 @@
 'use strict';
 define([
-    './reports-utils',
+    'magcore/utils/reports',
     'dojo/topic'
-],
-function (
-    reportsutils,
+], function (
+    reportUtils,
     tp
-    ){
+) {
     const expandHTML = 'Expand Topics<i style="margin-left: 5px;" class="fa fa-expand" aria-hidden="true"></i>';
     const collapseHTML = 'Collapse Topics<i style="margin-left: 5px;" class="fa fa-compress" aria-hidden="true"></i>';
     const toolbarTemplate = `
@@ -16,14 +15,17 @@ function (
         </div>
     `;
 
-    function RemoveOldGrid($grid) {
+    tp.subscribe('create-grid', createKendoGrid);
+    tp.subscribe('create-compare-grid', createComparisonKendoGrid);
+
+    function removeOldGrid($grid) {
         if ($grid && $grid.data('kendoGrid')) {
             $grid.data('kendoGrid').destroy();
             $grid.empty();
         }
     }
 
-    function CreateComparisonKendoGrid({
+    function createComparisonKendoGrid({
         data,
         compareData,
         target
@@ -37,45 +39,45 @@ function (
             val['comparePercentValueFormatted'] = compareVal['percentValueFormatted'];
         }
 
-        RemoveOldGrid($grid);
+        removeOldGrid($grid);
         let cols = [{
-                field: 'fieldGroup',
-                title: 'Category',
-                hidden: true,
-                groupHeaderTemplate: '#=value#'
-            },
-            {
-                headerTemplate: 'Topic',
-                field: 'tableHeader',
-                template: '#=tableHeader#',
-                width: '120px'
-            },
-            {
-                field: 'fieldValueFormatted',
-                title: 'Estimate',
-                format: '{0:n1}'
-            },
-            {
-                field: 'percentValueFormatted',
-                title: 'Percent'
-            },
-            {
-                field: 'compareValueFormatted',
-                title: 'Estimate',
-                format: '{0:n1}'
-            },
-            {
-                field: 'comparePercentValueFormatted',
-                title: 'Percent'
-            }
+            field: 'fieldGroup',
+            title: 'Category',
+            hidden: true,
+            groupHeaderTemplate: '#=value#'
+        },
+        {
+            headerTemplate: 'Topic',
+            field: 'tableHeader',
+            template: '#=tableHeader#',
+            width: '120px'
+        },
+        {
+            field: 'fieldValueFormatted',
+            title: 'Estimate',
+            format: '{0:n1}'
+        },
+        {
+            field: 'percentValueFormatted',
+            title: 'Percent'
+        },
+        {
+            field: 'compareValueFormatted',
+            title: 'Estimate',
+            format: '{0:n1}'
+        },
+        {
+            field: 'comparePercentValueFormatted',
+            title: 'Percent'
+        }
         ];
 
-        CreateKendoGrid({
+        createKendoGrid({
             data,
             target,
             cols
         });
-        let features = reportsutils.selectedReport.acsData.features;
+        let features = reportUtils.getSelectedReport().acsData.features;
 
         $grid
             .find('thead')
@@ -92,36 +94,36 @@ function (
             );
     }
 
-    function CreateKendoGrid({
+    function createKendoGrid({
         data,
         target,
         cols
     }) {
         let $grid = $('#' + target);
-        RemoveOldGrid($grid);
+        removeOldGrid($grid);
 
         if (!cols) {
             cols = [{
-                    field: 'fieldGroup',
-                    title: 'Category',
-                    hidden: true,
-                    groupHeaderTemplate: '#=value#'
-                },
-                {
-                    headerTemplate: 'Topic',
-                    field: 'tableHeader',
-                    template: '#=tableHeader#',
-                    title: 'Topic',
-                    width: '300px'
-                },
-                {
-                    field: 'fieldValueFormatted',
-                    title: 'Estimate'
-                },
-                {
-                    field: 'percentValueFormatted',
-                    title: 'Percent'
-                }
+                field: 'fieldGroup',
+                title: 'Category',
+                hidden: true,
+                groupHeaderTemplate: '#=value#'
+            },
+            {
+                headerTemplate: 'Topic',
+                field: 'tableHeader',
+                template: '#=tableHeader#',
+                title: 'Topic',
+                width: '300px'
+            },
+            {
+                field: 'fieldValueFormatted',
+                title: 'Estimate'
+            },
+            {
+                field: 'percentValueFormatted',
+                title: 'Percent'
+            }
             ];
         }
         try {
@@ -146,16 +148,14 @@ function (
                 resizable: true,
                 columnMenu: false,
                 columns: cols,
-                dataBound: DataBound
+                dataBound: dataBound
             });
         } catch (error) {
-            console.log(error);
-
+            console.error(error);
         }
-
     }
 
-    function DataBound(e) {
+    function dataBound(e) {
         var rowCollection = e.sender.tbody[0].children;
         var data = e.sender._data;
         var realRows = [];
@@ -284,7 +284,4 @@ function (
 
         $('#minorityTooltip').tooltip();
     }
-
-    tp.subscribe('create-grid', CreateKendoGrid);
-    tp.subscribe('create-compare-grid', CreateComparisonKendoGrid);
 });
