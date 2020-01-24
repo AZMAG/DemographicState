@@ -1,6 +1,7 @@
 define([
     "dojo/parser",
     "dojo/topic",
+    "magcore/widgets/layer-list",
     "./config/config",
     "./config/initConfig",
     "./layerlist",
@@ -31,6 +32,7 @@ define([
 ], function (
     parser,
     tp,
+    LayerList,
     config,
     initConfig
 ) {
@@ -88,12 +90,18 @@ define([
     $(".pd").each(function (i, el) {
         let panelId = $(el).attr("panel-id");
         $(el).load(`views/${panelId}.html`, function () {
+
             tp.publish("panel-loaded", panelId);
-            if (panelId === "about-view") {
-                //*** version binding
-                $(".version").html(config.version);
-                //*** copy write binding
-                $(".copyright").html(config.copyright);
+            switch (panelId) {
+                case "about-view":
+                    //*** version binding
+                    $(".version").html(config.version);
+                    //*** copy write binding
+                    $(".copyright").html(config.copyright);
+                    break;
+                case "layers-view":
+                    var layers = new LayerList({}, "layerList");
+                    break
             }
         })
     });
