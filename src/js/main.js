@@ -2,6 +2,7 @@ define([
     "dojo/parser",
     "dojo/topic",
     "magcore/widgets/layer-list",
+    "./maps/maps-utils",
     "./config/config",
     "./config/initConfig",
     "./layerlist",
@@ -33,6 +34,7 @@ define([
     parser,
     tp,
     LayerList,
+    mapUtils,
     config,
     initConfig
 ) {
@@ -100,11 +102,21 @@ define([
                     $(".copyright").html(config.copyright);
                     break;
                 case "layers-view":
-                    var layers = new LayerList({}, "layerList");
+                    if (mapUtils.map != null) {
+                        initLayers();
+                    } else {
+                        tp.subscribe("map-loaded", initLayers);
+                    }
+                    
                     break
             }
         })
     });
-
+    function initLayers() {
+        var layers = new LayerList({
+            layers: config.layers.filter(x => x.showTOC),
+            map: mapUtils.map
+        }, "layerList");
+    }
     return mag;
 });
