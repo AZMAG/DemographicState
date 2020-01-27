@@ -5,7 +5,6 @@ define([
     "./maps/maps-utils",
     "./config/config",
     "./config/initConfig",
-    "./layerlist",
     "./sidebar",
     "./maps/maps-panel",
     "./maps/customClassBreaks",
