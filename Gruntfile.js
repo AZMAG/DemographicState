@@ -270,6 +270,10 @@ module.exports = function (grunt) {
                         to: 'libs/magcore/dist/js/magcore.min.js'
                     },
                     {
+                        from: '../node_modules/magcore/dist/css',
+                        to: 'libs/magcore/dist/css'
+                    },
+                    {
                         from: '<script src="libs/magcore/dist/js/magcore.min.js"></script>\n',
                         to: '<script src="libs/magcore/dist/js/magcore.min.js"></script>\n\t' +
                             '<script src="js/<%=pkg.name%>.min.js"></script>\t\n'

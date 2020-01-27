@@ -112,7 +112,7 @@ define([
         })
     });
     function initLayers() {
-        var layers = new LayerList({
+        var layerList = new LayerList({
             layers: config.layers.filter(x => x.showTOC),
             map: mapUtils.map
         }, "layerList");
