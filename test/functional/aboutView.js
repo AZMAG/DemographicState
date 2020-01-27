@@ -3,7 +3,7 @@ var { assert } = intern.getPlugin('chai');
     registerSuite('About View', {
         'page opens': function () {
             return this.remote
-            .get('src/app/views/about-view.html')
+            .get('src/views/about-view.html')
             .findByCssSelector('[class="col-sm-10 panelHeaderText"]')
             .getVisibleText()
             .then(text => {
