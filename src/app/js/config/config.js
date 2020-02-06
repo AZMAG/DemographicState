@@ -25,6 +25,10 @@ app.config = {
             displayValue: 'Supervisor'
         },
         {
+            name: 'County Supervisor',
+            displayValue: 'Supervisor'
+        },
+        {
             name: 'United States House of Representatives',
             displayValue: 'US House Representative'
         },
@@ -37,10 +41,36 @@ app.config = {
             displayValue: 'AZ Senator'
         },
         {
+            name: 'AZ State Senator',
+            displayValue: 'AZ Senator'
+        },
+        {
             name: 'AZ State House',
             displayValue: 'AZ House Representative'
+        },
+        {
+            name: 'U.S. Representative',
+            displayValue: 'US House Representative'
+        }, {
+            name: 'State Representative',
+            displayValue: 'AZ State Representative'
+        }, {
+            name: 'City Council Member',
+            displayValue: 'City Council Member'
         }
+
     ],
+
+    // "name": "Phoenix Mayor",
+    // "name": "Maricopa County Supervisor",
+    // "name": "Pinal County Supervisor",
+    // "name": "Glendale City Council Member",
+    // "name": "Phoenix City Council Member",
+    // "name": "Glendale City Council Member",
+    // "name": "Peoria City Council Member",
+    // "name": "AZ State Senator",
+    // "name": "AZ State Representative",
+    // "name": "U.S. Representative",
 
     bitly: {
         login: 'vwolfley',

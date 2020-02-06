@@ -223,7 +223,7 @@ function GetChannelsHTML(channels) {
     return channelsHTML === "" ? "" : `<div>${channelsHTML}</div>`;
 }
 
-function GetRepHTML(rep) {
+function getRepFullHtml(rep) {
     if (rep) {
         return `<div class="repContainer">
                     <div class="repPicContainer">
@@ -258,33 +258,32 @@ function GetRepHTML(rep) {
 }
 
 
-function GetRepHtml(googleID) {
-    return GetRepresentativeInfo(googleID)
-        .then(function(data) {
-            if (data.offices) {
-                let rtnHTML = "";
-                data.offices.map(office => {
-                    app.config.googleCivicOffices.forEach(function(conf) {
-                        if (office.name.indexOf(conf.name) > -1) {
-                            if (data.officials && office.officialIndices) {
-                                for (let i = 0; i < office.officialIndices.length; i++) {
-                                    let rep = data.officials[office.officialIndices[i]];
-                                    rep["office"] = conf.displayValue;
-                                    let html = GetRepHTML(rep);
-                                    rtnHTML += `${html}<br>`;
-                                }
+async function GetRepHtml(googleID) {
+    try {
+        let data = await GetRepresentativeInfo(googleID);
+        if (data.offices) {
+            let rtnHTML = "";
+            data.offices.map(office => {
+                app.config.googleCivicOffices.forEach(function(conf) {
+                    if (office.name.indexOf(conf.name) > -1) {
+                        if (data.officials && office.officialIndices) {
+                            for (let i = 0; i < office.officialIndices.length; i++) {
+                                let rep = data.officials[office.officialIndices[i]];
+                                rep["office"] = conf.displayValue;
+                                let html = getRepFullHtml(rep);
+                                rtnHTML += `${html}<br>`;
                             }
                         }
-                    });
+                    }
                 });
-                return rtnHTML;
-            } else {
-                return "";
-            }
-        })
-        .catch(function(err) {
-            console.log(err);
-        });
+            });
+            return rtnHTML;
+        } else {
+            return "";
+        }
+    } catch (error) {
+        return "";
+    }
 
 }
 
