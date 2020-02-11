@@ -1,43 +1,38 @@
 "use strict";
 define([
-        "../config/config",
-        "../config/initConfig",        
-        "../utilities",
-        "./maps-utils",
-        "./cbr",
-        "magcore/utils/application",
-        "esri/Map",
-        "esri/views/MapView",
-        "esri/layers/FeatureLayer",
-        "esri/layers/MapImageLayer",
-        "esri/layers/TileLayer",
-        "esri/geometry/Extent",
-        "esri/layers/GraphicsLayer",
-        "dojo/topic",
-        "dojo/domReady!"
-    ],
-    function (
-        config,
-        initConfig,        
-        utilities,
-        mapsutils,
-        cbr,
-        appUtils,
-        Map,
-        MapView,
-        FeatureLayer,
-        MapImageLayer,
-        TileLayer,
-        Extent,
-        GraphicsLayer,
-        tp
-    ){
+    "../main",
+    "../config/appConfig",
+    "../utilities",
+    "./maps-utils",
+    "./cbr",
+    "magcore/utils/application",
+    "esri/Map",
+    "esri/views/MapView",
+    "esri/layers/FeatureLayer",
+    "esri/layers/MapImageLayer",
+    "esri/layers/TileLayer",
+    "esri/geometry/Extent",
+    "esri/layers/GraphicsLayer",
+    "dojo/topic",
+    "dojo/domReady!"
+], function (
+    mag,
+    config,
+    utilities,
+    mapsutils,
+    cbr,
+    appUtils,
+    Map,
+    MapView,
+    FeatureLayer,
+    MapImageLayer,
+    TileLayer,
+    Extent,
+    GraphicsLayer,
+    tp
+) {
 
-    tp.subscribe("config-loaded", initMap);
-
-    if (config.configLoaded) {
-        initMap();
-    }
+    initMap();
 
     function initMap() {
         mapsutils.map = new Map({
@@ -47,7 +42,7 @@ define([
         mapsutils.view = new MapView({
             container: "viewDiv",
             map: mapsutils.map,
-            extent: initConfig.getExtent() ? initConfig.getExtent() : config.initExtent,
+            extent: mag.getExtent() ? mag.getExtent() : config.initExtent,
             constraints: {
                 rotationEnabled: false,
                 minZoom: 7
@@ -72,6 +67,7 @@ define([
 
         mapsutils.view.when(function () {
             tp.publish('map-loaded');
+            addLayers();
             mapsutils.view.popup.on('trigger-action', function (e) {
                 if (e.action.id === 'open-report') {
                     tp.publish('toggle-panel', 'reports');
@@ -84,8 +80,6 @@ define([
                 }
             });
         });
-
-        tp.subscribe("map-loaded", addLayers);
 
         async function addBGLayer() {
             let res = await cbr.GetCurrentRenderer();

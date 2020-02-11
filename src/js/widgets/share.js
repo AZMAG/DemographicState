@@ -1,6 +1,6 @@
 "use strict";
 define([
-        "../config/config",
+        "../config/appConfig",
         "../maps/maps-utils",
         "dojo/topic",
         "esri/tasks/QueryTask"

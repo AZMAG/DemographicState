@@ -1,7 +1,7 @@
 
 "use strict";
 define([
-    "./config/config",
+    "./config/appConfig",
     "./config/censusFieldsConfig",
     "./config/acsFieldsConfig",
     "./maps/maps-utils",

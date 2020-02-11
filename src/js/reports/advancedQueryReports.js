@@ -1,7 +1,7 @@
 'use strict';
 define([
     '../config/mapsConfig',
-    '../config/config',
+    '../config/appConfig',
     '../utilities',
     'magcore/utils/reports',
     'magcore/utils/data',
@@ -16,14 +16,9 @@ define([
     appUtils,
     tp
 ) {
-    tp.subscribe('panel-loaded', function (panel) {
-        if (panel === 'reports-view') {
-            InitAdvancedQuery();
-        }
-    });
 
     tp.subscribe('reset-reports', ClearQueryItems);
-    
+    InitAdvancedQuery();
     let QueryItems = [];
     let CompareOperators = {
         string: [{

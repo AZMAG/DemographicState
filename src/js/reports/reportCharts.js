@@ -1,7 +1,7 @@
 'use strict';
 define([
     'dojo/topic',
-    '../config/config',
+    '../config/appConfig',
     'magcore/utils/charts'
 ], function (
     tp,

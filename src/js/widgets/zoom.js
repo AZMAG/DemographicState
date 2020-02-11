@@ -1,13 +1,14 @@
 "use strict";
 define([
-        "../maps/maps-utils",
-        "esri/widgets/Zoom/ZoomViewModel",
-        "dojo/topic",
-        "dojo/domReady!"
+    "../maps/maps-utils",
+    "esri/widgets/Zoom/ZoomViewModel",
+    "dojo/topic",
+    "dojo/domReady!"
 ], function (
-        mapsutils,
-        ZoomViewModel,
-        tp) {
+    mapsutils,
+    ZoomViewModel,
+    tp
+) {
     tp.subscribe("map-loaded", function () {
         //Zoom
         const zoomId = "zoomWidget";
@@ -17,7 +18,7 @@ define([
         mapsutils.view.ui.add(zoomId, "bottom-right");
 
         let $zoomArea = $("#" + zoomId);
-        $zoomArea.on("click", ".esri-widget--button", function() {
+        $zoomArea.on("click", ".esri-widget--button", function () {
             const direction = $(this).data("id");
             if (direction === "In") {
                 zoomVM.zoomIn();
