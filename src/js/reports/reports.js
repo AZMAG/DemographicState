@@ -2,113 +2,109 @@
 'use strict';
 
 define([
-        '../config/config',
-        '../config/censusFieldsConfig',
-        '../config/acsFieldsConfig',        
-        '../utilities',
-        'magcore/utils/formatter',
-        'magcore/utils/reports',
-        'dojo/topic'
-    ],
-    function (
-        config,
-        censusFieldsConfig,
-        acsFieldsConfig,
-        utilities,
-        formatter,
-        reports,
-        tp
-    ){
-    tp.subscribe('panel-loaded', function (panel) {
-        if (panel === 'reports-view') {
-            let $reportArea = $('#reportArea');
-            let $subHeaderTitle = $('#summaryReportHeader');
-            let $dataSrcSelector = $('#dataSrcSelector');
-            let $title6Area = $('#title6Area');
+    '../config/appConfig',
+    '../config/censusFieldsConfig',
+    '../config/acsFieldsConfig',
+    '../utilities',
+    'magcore/utils/formatter',
+    'magcore/utils/reports',
+    'dojo/topic'
+], function (
+    config,
+    censusFieldsConfig,
+    acsFieldsConfig,
+    utilities,
+    formatter,
+    reports,
+    tp
+) {
 
-            function resetReportForm() {
-                tp.publish('reset-reports');
-                $('.reportFormArea').hide();
-                $('#cardContainer').css('display', 'flex');
-                $('.returnBtn').hide();
-                $('#summaryReport').css('display', 'none');
-                $dataSrcSelector.find('button:first').addClass('active');
-                $dataSrcSelector.find('button:last').removeClass('active');
-                $subHeaderTitle.hide();
-                $title6Area.show();
+    let $reportArea = $('#reportArea');
+    let $subHeaderTitle = $('#summaryReportHeader');
+    let $dataSrcSelector = $('#dataSrcSelector');
+    let $title6Area = $('#title6Area');
 
-                //Reset Buffer Area in custom
-                $('#bufferOptions').hide();
-                $('#useBuffer').prop('checked', false);
+    function resetReportForm() {
+        tp.publish('reset-reports');
+        $('.reportFormArea').hide();
+        $('#cardContainer').css('display', 'flex');
+        $('.returnBtn').hide();
+        $('#summaryReport').css('display', 'none');
+        $dataSrcSelector.find('button:first').addClass('active');
+        $dataSrcSelector.find('button:last').removeClass('active');
+        $subHeaderTitle.hide();
+        $title6Area.show();
 
-                let reportTypeDDL = $('#reportType').data('kendoDropDownList');
+        //Reset Buffer Area in custom
+        $('#bufferOptions').hide();
+        $('#useBuffer').prop('checked', false);
 
-                if (reportTypeDDL) {
-                    reportTypeDDL.select(0);
-                }
+        let reportTypeDDL = $('#reportType').data('kendoDropDownList');
 
-                let specificReportCbox = $('#specificReport').data('kendoComboBox');
-                if (specificReportCbox) {
-                    specificReportCbox.select(0);
-                }
-
-                $('#specificReportDiv').hide();
-                $('#comparisonContainer').hide();
-                $('#compareCheckbox').prop('checked', false);
-                $('#useZoom').prop('checked', true);
-            }
-
-            tp.subscribe('panel-shown', function(panel) {
-                resetReportForm();
-                // utilities.clearDrawnGraphics();
-            });
-
-            tp.subscribe('panel-hidden', function(panel) {
-                resetReportForm();
-                // utilities.clearDrawnGraphics();
-            });
-
-            $reportArea.on('click', '.returnBtn', function() {
-                resetReportForm();
-                utilities.clearDrawnGraphics();
-            });
-
-            $reportArea.on('click', '.card', function() {
-                let val = $(this).data('report-form-id');
-                $('.reportFormArea').hide();
-                $('#cardContainer').hide();
-                $(`#${val}`).show();
-                $('.returnBtn').show();
-                $('#summaryReport').css('display', 'none');
-                $('#reportForm').show();
-            });
-
-            $reportArea.on('click', '.dataSrcToggle', function() {
-                //This seems hacky..  It removes the active class from the other buttons
-                //https://stackoverflow.com/questions/9262827/twitter-bootstrap-onclick-event-on-buttons-radio
-                $(this)
-                    .addClass('active')
-                    .siblings()
-                    .removeClass('active');
-
-                let dataSrc = $(this).data('val');
-                let d = reports.getSelectedReport();
-
-                if (dataSrc === 'acs') {
-                    //Show Title 6 data
-                    $title6Area.show();
-                } else {
-                    //Hide Title 6 Data
-                    $title6Area.hide();
-                }
-
-                OpenReportWindow(d, dataSrc);
-            });
+        if (reportTypeDDL) {
+            reportTypeDDL.select(0);
         }
+
+        let specificReportCbox = $('#specificReport').data('kendoComboBox');
+        if (specificReportCbox) {
+            specificReportCbox.select(0);
+        }
+
+        $('#specificReportDiv').hide();
+        $('#comparisonContainer').hide();
+        $('#compareCheckbox').prop('checked', false);
+        $('#useZoom').prop('checked', true);
+    }
+
+    tp.subscribe('panel-shown', function (panel) {
+        resetReportForm();
+        // utilities.clearDrawnGraphics();
+    });
+
+    tp.subscribe('panel-hidden', function (panel) {
+        resetReportForm();
+        // utilities.clearDrawnGraphics();
+    });
+
+    $reportArea.on('click', '.returnBtn', function () {
+        resetReportForm();
+        utilities.clearDrawnGraphics();
+    });
+
+    $reportArea.on('click', '.card', function () {
+        let val = $(this).data('report-form-id');
+        $('.reportFormArea').hide();
+        $('#cardContainer').hide();
+        $(`#${val}`).show();
+        $('.returnBtn').show();
+        $('#summaryReport').css('display', 'none');
+        $('#reportForm').show();
+    });
+
+    $reportArea.on('click', '.dataSrcToggle', function () {
+        //This seems hacky..  It removes the active class from the other buttons
+        //https://stackoverflow.com/questions/9262827/twitter-bootstrap-onclick-event-on-buttons-radio
+        $(this)
+            .addClass('active')
+            .siblings()
+            .removeClass('active');
+
+        let dataSrc = $(this).data('val');
+        let d = reports.getSelectedReport();
+
+        if (dataSrc === 'acs') {
+            //Show Title 6 data
+            $title6Area.show();
+        } else {
+            //Hide Title 6 Data
+            $title6Area.hide();
+        }
+
+        OpenReportWindow(d, dataSrc);
     });
 
     function resizeCharts() {
-        $('.chartTarget').each(function(i, val) {
+        $('.chartTarget').each(function (i, val) {
             $(val)
                 .data('kendoChart')
                 .resize();
@@ -234,13 +230,12 @@ define([
             fields = acsFieldsConfig;
             res = data.acsData;
         }
-        let $reportArea = $('#reportArea');
-
-        let features = res.features; 
-        let attr = features.length ? features[0].attributes : {};      
+        
+        let features = res.features;
+        let attr = features.length ? features[0].attributes : {};
         let title = GetTitle(data);
 
-        $reportArea.find('a[data-toggle="tab"]').on('shown.bs.tab', function(e) {
+        $reportArea.find('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
             resizeCharts();
         });
 
@@ -252,17 +247,17 @@ define([
         $header.css('display', 'Flex');
 
         let ids = features.map(feature => feature.attributes['GEOID']);
-        
+
         if (features.length && features[0].ids) {
             ids = features[0].ids;
         }
 
         let $btnExportPDF = $header.find('.btnExportPDF');
         $btnExportPDF.tooltip();
-        $btnExportPDF.off('click').on('click', function () { 
+        $btnExportPDF.off('click').on('click', function () {
             ExportReportToPDF(reports.getSelectedReport().options, ids);
         });
-        
+
         let vals = GetValsFromData(attr, fields);
         if (features.length > 1) {
             let compareVals = GetValsFromData(features[1].attributes, fields);
@@ -305,13 +300,12 @@ define([
         $('#summaryReport').show();
     }
     tp.subscribe('report-charts-created', refreshCharts);
-    let $reportArea = $('#reportArea');
-
+    
     function refreshCharts() {
         let activeTab = $reportArea.find('.nav-link.active').text();
 
         if (activeTab === 'Charts') {
-            $('.chartTarget').each(function(i, val) {
+            $('.chartTarget').each(function (i, val) {
                 $(val)
                     .data('kendoChart')
                     .resize();
@@ -378,7 +372,7 @@ define([
             // dataBound: GridRowHover
         });
 
-        $("#bgGrid").data("kendo-grid").bind("excelExport", function(e) {
+        $("#bgGrid").data("kendo-grid").bind("excelExport", function (e) {
             console.log(e);
 
         });
@@ -445,7 +439,7 @@ define([
 
         $('#title6Area')
             .off('click')
-            .on('click', function() {
+            .on('click', function () {
                 $title6Grid.toggle();
                 $title6Toggle.toggleClass('k-i-expand k-i-collapse');
             });
@@ -456,65 +450,65 @@ define([
         let age65Plus = attr['AGE65TO74'] + attr['AGE75TO84'] + attr['AGE85PLUS'];
 
         let dataSrc = [{
-                Category: 'Population',
-                Footnote: '',
-                Total: totalPop,
-                Percent: 'N/A',
-                NumberOfBlocks: totalBlockCount,
-                PercentOfBlocks: totalBlockCount / totalBlockCount,
-                AffectedPopulation: 'N/A',
-                PercentAffectedCaptured: 'N/A'
-            },
-            {
-                Category: 'Minority',
-                Footnote: 'a',
-                Total: attr['MINORITY_POP'],
-                Percent: attr['MINORITY_POP'] / totalPop,
-                NumberOfBlocks: attr['AFFECTED_MINORITY_POP_COUNT'],
-                PercentOfBlocks: attr['AFFECTED_MINORITY_POP_COUNT'] / totalBlockCount,
-                AffectedPopulation: attr['AFFECTED_MINORITY_POP'],
-                PercentAffectedCaptured: attr['AFFECTED_MINORITY_POP'] / attr['MINORITY_POP']
-            },
-            {
-                Category: 'Age 65+',
-                Footnote: '',
-                Total: age65Plus,
-                Percent: age65Plus / totalPop,
-                NumberOfBlocks: attr['AFFECTED_AGE65PLUS_COUNT'],
-                PercentOfBlocks: attr['AFFECTED_AGE65PLUS_COUNT'] / totalBlockCount,
-                AffectedPopulation: attr['AFFECTED_AGE65PLUS'],
-                PercentAffectedCaptured: attr['AFFECTED_AGE65PLUS'] / age65Plus
-            },
-            {
-                Category: 'Below Poverty Level',
-                Footnote: 'b',
-                Total: attr['INCOME_BELOW_POVERTY'],
-                Percent: attr['INCOME_BELOW_POVERTY'] / attr['POP_FOR_POVERTY'],
-                NumberOfBlocks: attr['AFFECTED_INCOME_BELOW_POVERTY_COUNT'],
-                PercentOfBlocks: attr['AFFECTED_INCOME_BELOW_POVERTY_COUNT'] / totalBlockCount,
-                AffectedPopulation: attr['AFFECTED_INCOME_BELOW_POVERTY'],
-                PercentAffectedCaptured: attr['AFFECTED_INCOME_BELOW_POVERTY'] / attr['INCOME_BELOW_POVERTY']
-            },
-            {
-                Category: 'Population with a Disability',
-                Footnote: 'c',
-                Total: attr['DISABILITY'],
-                Percent: attr['DISABILITY'] / attr['CIV_NONINST_POP'],
-                NumberOfBlocks: attr['AFFECTED_DISABILITY_COUNT'],
-                PercentOfBlocks: attr['AFFECTED_DISABILITY_COUNT'] / totalBlockCount,
-                AffectedPopulation: attr['AFFECTED_DISABILITY'],
-                PercentAffectedCaptured: attr['AFFECTED_DISABILITY'] / attr['DISABILITY']
-            },
-            {
-                Category: 'Limited English Proficient Persons (LEP)',
-                Footnote: 'd',
-                Total: attr['LIMITED_ENG_PROF'],
-                Percent: attr['LIMITED_ENG_PROF'] / fivePlus,
-                NumberOfBlocks: attr['AFFECTED_LIMITED_ENG_PROF_COUNT'],
-                PercentOfBlocks: attr['AFFECTED_LIMITED_ENG_PROF_COUNT'] / totalBlockCount,
-                AffectedPopulation: attr['AFFECTED_LIMITED_ENG_PROF'],
-                PercentAffectedCaptured: attr['AFFECTED_LIMITED_ENG_PROF'] / attr['LIMITED_ENG_PROF']
-            }
+            Category: 'Population',
+            Footnote: '',
+            Total: totalPop,
+            Percent: 'N/A',
+            NumberOfBlocks: totalBlockCount,
+            PercentOfBlocks: totalBlockCount / totalBlockCount,
+            AffectedPopulation: 'N/A',
+            PercentAffectedCaptured: 'N/A'
+        },
+        {
+            Category: 'Minority',
+            Footnote: 'a',
+            Total: attr['MINORITY_POP'],
+            Percent: attr['MINORITY_POP'] / totalPop,
+            NumberOfBlocks: attr['AFFECTED_MINORITY_POP_COUNT'],
+            PercentOfBlocks: attr['AFFECTED_MINORITY_POP_COUNT'] / totalBlockCount,
+            AffectedPopulation: attr['AFFECTED_MINORITY_POP'],
+            PercentAffectedCaptured: attr['AFFECTED_MINORITY_POP'] / attr['MINORITY_POP']
+        },
+        {
+            Category: 'Age 65+',
+            Footnote: '',
+            Total: age65Plus,
+            Percent: age65Plus / totalPop,
+            NumberOfBlocks: attr['AFFECTED_AGE65PLUS_COUNT'],
+            PercentOfBlocks: attr['AFFECTED_AGE65PLUS_COUNT'] / totalBlockCount,
+            AffectedPopulation: attr['AFFECTED_AGE65PLUS'],
+            PercentAffectedCaptured: attr['AFFECTED_AGE65PLUS'] / age65Plus
+        },
+        {
+            Category: 'Below Poverty Level',
+            Footnote: 'b',
+            Total: attr['INCOME_BELOW_POVERTY'],
+            Percent: attr['INCOME_BELOW_POVERTY'] / attr['POP_FOR_POVERTY'],
+            NumberOfBlocks: attr['AFFECTED_INCOME_BELOW_POVERTY_COUNT'],
+            PercentOfBlocks: attr['AFFECTED_INCOME_BELOW_POVERTY_COUNT'] / totalBlockCount,
+            AffectedPopulation: attr['AFFECTED_INCOME_BELOW_POVERTY'],
+            PercentAffectedCaptured: attr['AFFECTED_INCOME_BELOW_POVERTY'] / attr['INCOME_BELOW_POVERTY']
+        },
+        {
+            Category: 'Population with a Disability',
+            Footnote: 'c',
+            Total: attr['DISABILITY'],
+            Percent: attr['DISABILITY'] / attr['CIV_NONINST_POP'],
+            NumberOfBlocks: attr['AFFECTED_DISABILITY_COUNT'],
+            PercentOfBlocks: attr['AFFECTED_DISABILITY_COUNT'] / totalBlockCount,
+            AffectedPopulation: attr['AFFECTED_DISABILITY'],
+            PercentAffectedCaptured: attr['AFFECTED_DISABILITY'] / attr['DISABILITY']
+        },
+        {
+            Category: 'Limited English Proficient Persons (LEP)',
+            Footnote: 'd',
+            Total: attr['LIMITED_ENG_PROF'],
+            Percent: attr['LIMITED_ENG_PROF'] / fivePlus,
+            NumberOfBlocks: attr['AFFECTED_LIMITED_ENG_PROF_COUNT'],
+            PercentOfBlocks: attr['AFFECTED_LIMITED_ENG_PROF_COUNT'] / totalBlockCount,
+            AffectedPopulation: attr['AFFECTED_LIMITED_ENG_PROF'],
+            PercentAffectedCaptured: attr['AFFECTED_LIMITED_ENG_PROF'] / attr['LIMITED_ENG_PROF']
+        }
         ];
 
         $title6Grid.kendoGrid({
@@ -523,60 +517,60 @@ define([
             },
             //height: 200,
             columns: [{
-                    title: 'Population',
-                    columns: [{
-                            field: 'Category',
-                            template: '#:Category#', //<sup>#:Footnote#</sup>
-                            title: 'Category',
-                            width: '85px'
-                        },
-                        {
-                            field: 'Total',
-                            title: 'Total',
-                            width: '55px',
-                            format: '{0:n0}'
-                        },
-                        {
-                            field: 'Percent',
-                            title: 'Percent',
-                            format: '{0:p1}',
-                            width: '60px'
-                        }
-                    ]
+                title: 'Population',
+                columns: [{
+                    field: 'Category',
+                    template: '#:Category#', //<sup>#:Footnote#</sup>
+                    title: 'Category',
+                    width: '85px'
                 },
                 {
-                    title: 'Census Block Groups',
-                    width: '325px',
-                    columns: [{
-                            field: 'NumberOfBlocks',
-                            title: 'Number of block groups >= Area Pct',
-                            width: '70px',
-                            format: '{0:n0}'
-                        },
-                        {
-                            field: 'PercentOfBlocks',
-                            title: '% Block Groups',
-                            format: '{0:p1}',
-                            width: '65px'
-                        },
-                        {
-                            field: 'AffectedPopulation',
-                            title: 'Affected Population',
-                            width: '68px',
-                            format: '{0:n0}'
-                        },
-                        {
-                            field: 'PercentAffectedCaptured',
-                            title: '% of Affected Population Captured in Census Block Groups',
-                            width: '85px',
-                            format: '{0:p1}'
-                        }
-                    ]
+                    field: 'Total',
+                    title: 'Total',
+                    width: '55px',
+                    format: '{0:n0}'
+                },
+                {
+                    field: 'Percent',
+                    title: 'Percent',
+                    format: '{0:p1}',
+                    width: '60px'
                 }
+                ]
+            },
+            {
+                title: 'Census Block Groups',
+                width: '325px',
+                columns: [{
+                    field: 'NumberOfBlocks',
+                    title: 'Number of block groups >= Area Pct',
+                    width: '70px',
+                    format: '{0:n0}'
+                },
+                {
+                    field: 'PercentOfBlocks',
+                    title: '% Block Groups',
+                    format: '{0:p1}',
+                    width: '65px'
+                },
+                {
+                    field: 'AffectedPopulation',
+                    title: 'Affected Population',
+                    width: '68px',
+                    format: '{0:n0}'
+                },
+                {
+                    field: 'PercentAffectedCaptured',
+                    title: '% of Affected Population Captured in Census Block Groups',
+                    width: '85px',
+                    format: '{0:p1}'
+                }
+                ]
+            }
             ]
         });
     }
 
     tp.subscribe('open-report-window', OpenReportWindow);
-    
+
 });

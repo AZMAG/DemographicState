@@ -1,6 +1,6 @@
 "use strict";
 define([
-    "../config/config",
+    "../config/appConfig",
     "magcore/resources/color-ramps",
     "esri/tasks/QueryTask",
     "dojo/domReady!"

@@ -1,7 +1,7 @@
 "use strict";
 define([
     "../config/acsFieldsConfig",
-    "../config/config",
+    "../config/appConfig",
     "dojo/topic"
 ], function (
     acsFieldsConfig,

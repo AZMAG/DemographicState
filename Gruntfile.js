@@ -1,23 +1,51 @@
 module.exports = function (grunt) {
 
     "use strict";
-    
+
     require("matchdep").filterDev(["grunt-*", "intern"]).forEach(grunt.loadNpmTasks);
 
     var VERSION_REGEXP = /\b(?:0|[1-9][0-9]*)\.(?:0|[1-9][0-9]*)\.(?:0|[1-9][0-9]*)(?:-[\da-z\-]+(?:\.[\da-z\-]+)*)?(?:\+[\da-z\-]+(?:\.[\da-z\-]+)*)?\b/i;
     var includedModules = [
-        "mag-demographics/main"
+        "mag-demographics/main",
+        "mag-demographics/sidebar",
+        "mag-demographics/maps/maps-panel",
+        "mag-demographics/maps/customClassBreaks",
+        "mag-demographics/maps/colorRamps",
+        "mag-demographics/maps/cbr",
+        "mag-demographics/reports/standardReports",
+        "mag-demographics/reports/reports",
+        "mag-demographics/reports/reportGrid",
+        "mag-demographics/reports/reportCharts",
+        "mag-demographics/reports/exportToExcel",
+        "mag-demographics/reports/customGeographyReports",
+        "mag-demographics/reports/advancedQueryReports",
+        "mag-demographics/widgets/zoom",
+        "mag-demographics/widgets/sketch",
+        "mag-demographics/widgets/share",
+        "mag-demographics/widgets/search",
+        "mag-demographics/widgets/print",
+        "mag-demographics/widgets/locate",
+        "mag-demographics/widgets/legend",
+        "mag-demographics/widgets/home",
+        "mag-demographics/widgets/basemapToggle",
+        "mag-demographics/widgets/drawing",
+        "mag-demographics/maps/maps"
     ]
     var excludedModules = [
         "dojo/domReady",
-        "dojo/parser",
-        "dojo/topic"
+        "dojo/topic",
+        "dojo/text",
+        "mag-demographics/config/acsFieldsConfig",
+        "mag-demographics/config/censusFieldsConfig",
+        "mag-demographics/config/appConfig",
+        "mag-demographics/config/mapsConfig"        
     ]
     var paths = {
         "mag-demographics": "",
         "magcore": "empty:",
         "dojo": "empty:",
         "dojo/domReady": "../../node_modules/requirejs-domready/domReady",
+        "dojo/text": "../../node_modules/requirejs-text/text",
         "esri": "empty:"
     }
     grunt.initConfig({
@@ -121,7 +149,7 @@ module.exports = function (grunt) {
         requirejs: {
             debug: {
                 options: {
-                    baseUrl: './<%=config.src%>/js',
+                    baseUrl: './<%=config.out%>/js',
                     out: './<%=config.out%>/js/<%=pkg.name%>.js',
                     // allow dependencies to be resolved but don't include in output (empty:)
                     paths: paths,
@@ -138,7 +166,7 @@ module.exports = function (grunt) {
             },
             release: {
                 options: {
-                    baseUrl: './<%=config.src%>/js',
+                    baseUrl: './<%=config.out%>/js',
                     // allow dependencies to be resolved but don't include in output (empty:)
                     paths: paths,
                     // but don't include them in the main build
@@ -161,7 +189,20 @@ module.exports = function (grunt) {
                 }
             }
         },
-
+        babel: {
+            options: {
+                sourceMaps: false,
+                presets: ["@babel/preset-env"]
+            },
+            release: {
+                files: [{
+                    expand: true,
+                    cwd: "<%=config.src%>/js/",
+                    src: ["**/*.js"],
+                    dest: "<%=config.out%>/js/"
+                }]
+            }
+        },
         htmlmin: {
             htmlmin1: {
                 options: {
@@ -218,16 +259,15 @@ module.exports = function (grunt) {
             }
         },
         clean: {
-            build: {
-                src: ["<%=config.out%>/"]
-            }
+            build: ["<%=config.out%>/"],
+            babel: ["<%=config.out%>/js/*", "!<%=config.out%>/js/<%=pkg.name%>*.js", "!<%=config.out%>/js/config/**"]
         },
         copy: {
             build: {
                 files: [
                     {
                         cwd: "<%=config.src%>",
-                        src: ["*", "images/**", "vendor/**", "views/**", "!index.html", "!css"],
+                        src: ["*", "images/**", "vendor/**", "!index.html", "!css"],
                         dest: "<%=config.out%>/",
                         expand: true
                     },
@@ -240,6 +280,14 @@ module.exports = function (grunt) {
                         dest: "<%=config.out%>/libs/"
                     }
                 ]
+            },
+            views: {
+                files: [{
+                    cwd: "<%=config.src%>/js",
+                    src: ["views/**"],
+                    dest: "<%=config.out%>/js",
+                    expand: true
+                }]
             }
         },
         toggleComments: {
@@ -270,15 +318,33 @@ module.exports = function (grunt) {
                         to: 'libs/magcore/dist/js/magcore.min.js'
                     },
                     {
+                        from: '../node_modules/magcore/dist/css',
+                        to: 'libs/magcore/dist/css'
+                    },
+                    {
                         from: '<script src="libs/magcore/dist/js/magcore.min.js"></script>\n',
                         to: '<script src="libs/magcore/dist/js/magcore.min.js"></script>\n\t' +
                             '<script src="js/<%=pkg.name%>.min.js"></script>\t\n'
                     }
                 ]
             },
+            release: {
+                src: '<%=config.out%>/js/<%= pkg.name %>.min.js',
+                dest: '<%=config.out%>/js/<%= pkg.name %>.min.js',
+                replacements: [{
+                    from: 'dojo/text!', to: ''
+                }]
+            },
+            debug: {
+                src: '<%=config.out%>/js/<%= pkg.name %>.js',
+                dest: '<%=config.out%>/js/<%= pkg.name %>.js',
+                replacements: [{
+                    from: 'dojo/text!', to: ''
+                }]
+            },
             src: {
-                src: [ '<%=config.src%>/js/main.js'],
-                dest: [ '<%=config.src%>/js/main.js'],
+                src: ['<%=config.src%>/js/main.js'],
+                dest: ['<%=config.src%>/js/main.js'],
                 replacements: [{
                     from: VERSION_REGEXP,
                     to: '<%=pkg.version%>'
@@ -449,16 +515,20 @@ module.exports = function (grunt) {
     });
 
     // main build of the application
-    grunt.registerTask("default", [
-        "intern",
+    grunt.registerTask("default", [        
         "replace:metadata",
-        "clean",      
+        "clean",
+        "copy:build",
+        "babel",
+        "copy:views",
         "requirejs",
+        "clean:babel",
         "replace:index",
+        "replace:debug",
+        "replace:release",
         "concat",
         "cssmin",
         "postcss",
-        "copy",
         "toggleComments",
         "htmlmin",
         "usebanner"

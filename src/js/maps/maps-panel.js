@@ -1,23 +1,20 @@
 "use strict";
 define([
+    "../main",
     "../config/mapsConfig",
-    "../config/initConfig",
     "dojo/topic",
     "dojo/domReady!"
 ], function (
-        mapsConfig,
-        initConfig,
-        tp
-    ){
+    mag,
+    mapsConfig,
+    tp
+) {
     //Cache Maps List Element
     let $mapsList = $("#mapsList");
     let configLookup = [];
     let counter = 0;
-    tp.subscribe("map-loaded", function (panel) {
-
-        StartupMapsList();
-
-    });
+    
+    StartupMapsList();
 
     //This is the function that helps generate the maps html.
     //It is called recursively, so all future levels of categories will work correctly
@@ -61,7 +58,7 @@ define([
 
             $(item).data("mapsConfig", data);
 
-            if (initConfig.mapDataFieldNameMatches(data.FieldName)) {
+            if (mag.mapDataFieldNameMatches(data.FieldName)) {
                 $initMap = $(this);
             }
         });

@@ -1,6 +1,6 @@
 "use strict";
 define([
-    "../config/config",
+    "../config/appConfig",
     '../utilities',
     "../maps/maps-utils",
     'magcore/utils/reports',
@@ -25,14 +25,11 @@ define([
         $comparisonContainer,
         $compareCheckbox,
         $specificReportComparison;
-    tp.subscribe("panel-loaded", initReports);
+    
     tp.subscribe("openReport-by-geoids", openReportByGEOIDs);
-
+    initReports();
     //Initializes the standard reports dropdowns, events, etc.
-    function initReports(panel) {
-        if (panel !== "reports-view") {
-            return;
-        }
+    function initReports() {       
         //set references to dom elements
         $reportForm = $("#reportForm");
         $reportType = $reportForm.find("#reportType");
