@@ -127,7 +127,7 @@ define([
             }
             return `<span style="flex: 1;">${names[0]} Report</span>`;
         } else {
-            return `<span style="flex: 1;">${names[0]} & ${names[1]} Comparitive Report</span>`;
+            return `<span style="flex: 1;">${names[0]} & ${names[1]} Comparative Report</span>`;
         }
     }
 
