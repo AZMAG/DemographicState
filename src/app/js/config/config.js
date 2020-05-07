@@ -1,17 +1,17 @@
 app.config = {
-    version: 'v4.0.8 | 2019-12-03',
-    copyright: '2019',
+    version: 'v4.0.9 | 2020-05-07',
+    copyright: '2020',
 
-    LegendSource: 'American Community Survey 2013-2017 5yr',
+    LegendSource: 'American Community Survey 2014-2018 5yr',
     emailLink: 'https://www.azmag.gov/Contact/4788?s=geo.azmag.gov/maps/azdemographics&n=Jason%20Howard&popUp=true',
 
     ArcGISInstanceURL: 'https://geo.azmag.gov/arcgis/rest',
 
-    mainUrl: 'https://geo.azmag.gov/arcgis/rest/services/maps/DemographicState2017/MapServer',
+    mainUrl: 'https://geo.azmag.gov/arcgis/rest/services/maps/DemographicState2018/MapServer',
     printUrl: 'https://geo.azmag.gov/arcgis/rest/services/gp/Demographic_Print/GPServer/Export%20Web%20Map',
     pdfService: {
-        defaultUrl: 'https://geo.azmag.gov/services/demographics2017/Reports.html?',
-        compareUrl: 'https://geo.azmag.gov/services/demographics2017/CompareReport.html?'
+        defaultUrl: 'https://geo.azmag.gov/services/demographics2018/Reports.html?',
+        compareUrl: 'https://geo.azmag.gov/services/demographics2018/CompareReport.html?'
     },
     siteUrl: 'https://geo.azmag.gov/maps/azdemographics/?',
 
@@ -22,6 +22,10 @@ app.config = {
         },
         {
             name: 'Supervisors District',
+            displayValue: 'Supervisor'
+        },
+        {
+            name: 'County Supervisor',
             displayValue: 'Supervisor'
         },
         {
@@ -37,10 +41,36 @@ app.config = {
             displayValue: 'AZ Senator'
         },
         {
+            name: 'AZ State Senator',
+            displayValue: 'AZ Senator'
+        },
+        {
             name: 'AZ State House',
             displayValue: 'AZ House Representative'
+        },
+        {
+            name: 'U.S. Representative',
+            displayValue: 'US House Representative'
+        }, {
+            name: 'State Representative',
+            displayValue: 'AZ State Representative'
+        }, {
+            name: 'City Council Member',
+            displayValue: 'City Council Member'
         }
+
     ],
+
+    // "name": "Phoenix Mayor",
+    // "name": "Maricopa County Supervisor",
+    // "name": "Pinal County Supervisor",
+    // "name": "Glendale City Council Member",
+    // "name": "Phoenix City Council Member",
+    // "name": "Glendale City Council Member",
+    // "name": "Peoria City Council Member",
+    // "name": "AZ State Senator",
+    // "name": "AZ State Representative",
+    // "name": "U.S. Representative",
 
     bitly: {
         login: 'vwolfley',
@@ -56,7 +86,7 @@ app.config = {
             legend: true,
             id: 'blockGroups',
             layerName: 'Block_Groups',
-            title: 'American Community Survey by Block Group, 2013-2017 5 year estimates',
+            title: 'American Community Survey by Block Group, 2014-2018 5 year estimates',
             type: 'image',
             outFields: ["*"],
             opacity: 0.8,
@@ -432,11 +462,11 @@ app.config = {
 
     textSymbolFontSizes: [8, 9, 10, 11, 12, 14, 16, 18, 20, 24, 30, 50],
 
-    sourceLabel: 'Source: United States Census Bureau, American Community Survey 2013-2017 5yr Estimates',
+    sourceLabel: 'Source: United States Census Bureau, American Community Survey 2014-2018 5yr Estimates',
 
     sourceLabel2: 'Source: United States Census Bureau, 2010 Decennial Census',
 
-    legalACSDisclaimer: 'Source: U.S. Census Bureau, 2013-2017 American Community Survey (ACS) 5-Year Estimates. ACS data are based on a sample and are subject to sampling variability.  The degree of uncertainty for an estimate is represented through the use of a margin of error (MOE).  In addition to sampling variability, the ACS estimates are subject to nonsampling error. The MOE and effect of nonsampling error is not represented in these tables. Supporting documentation on subject definitions, data accuracy, and statistical testing can be found on the American Community Survey website (www.census.gov/acs) in the Data and Documentation section. Sample size and data quality measures (including coverage rates, allocation rates, and response rates) can be found on the American Community Survey website (www.census.gov/acs) in the Methodology section.  The MOE for individual data elements can be found on the American FactFinder website (factfinder2.census.gov).  Note: Although the ACS produces population, demographic and housing unit estimates, the 2010 Census provides the official counts of the population and housing units for the nation, states, counties, cities and towns.  Prepared by: Maricopa Association of Governments, www.azmag.gov, (602) 254-6300',
+    legalACSDisclaimer: 'Source: U.S. Census Bureau, 2014-2018 American Community Survey (ACS) 5-Year Estimates. ACS data are based on a sample and are subject to sampling variability.  The degree of uncertainty for an estimate is represented through the use of a margin of error (MOE).  In addition to sampling variability, the ACS estimates are subject to nonsampling error. The MOE and effect of nonsampling error is not represented in these tables. Supporting documentation on subject definitions, data accuracy, and statistical testing can be found on the American Community Survey website (www.census.gov/acs) in the Data and Documentation section. Sample size and data quality measures (including coverage rates, allocation rates, and response rates) can be found on the American Community Survey website (www.census.gov/acs) in the Methodology section.  The MOE for individual data elements can be found on the American FactFinder website (factfinder2.census.gov).  Note: Although the ACS produces population, demographic and housing unit estimates, the 2010 Census provides the official counts of the population and housing units for the nation, states, counties, cities and towns.  Prepared by: Maricopa Association of Governments, www.azmag.gov, (602) 254-6300',
 
     legalCensusDisclaimer: 'Source: United States Census Bureau, 2010 Decennial Census. Additional information about the 2010 Decennial Cenuss can be found on the US Census Bureau website at www.census.gov/2010census. Prepared by: Maricopa Association of Governments, www.azmag.gov, (602) 254-6300'
 }; //End Config

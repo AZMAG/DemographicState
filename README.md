@@ -32,17 +32,23 @@ Map viewer for selected census info for Arizona
 [![Built with Grunt](http://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
 [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
-Arizona Demographics is one of the Maricopa Association of Governments interactive mapping and analysis sites, showing selected population and housing data. The viewer allows you to graphically view selected population and housing data for all Census block groups for the State of Arizona. The viewer provides interactive mapping and reporting tools to allow exploration of data from Census 2010 and the American Community Survey (ACS) 2013-2017.
+Arizona Demographics is one of the Maricopa Association of Governments interactive mapping and analysis sites, showing selected population and housing data. The viewer allows you to graphically view selected population and housing data for all Census block groups for the State of Arizona. The viewer provides interactive mapping and reporting tools to allow exploration of data from Census 2010 and the American Community Survey (ACS) 2014-2018.
 
-Use this site to explore Explore data from Census 2010 and American Community Survey (ACS) 2013-2017.
+Use this site to explore Explore data from Census 2010 and American Community Survey (ACS) 2014-2018.
 
 This web app viewer was developed by MAG staff for MAG member agencies and the public using ESRI's JavaScript API.
 
 ## Keywords
 
-`Demographics` `Census` `2010` `American Community Survey` `ACS` `2013-2017` `5yr` `Counties` `State` `Arizona` `Maps` `MAG` `ESRI` `#MAGmaps`
+`Demographics` `Census` `2010` `American Community Survey` `ACS` `2014-2018` `5yr` `Counties` `State` `Arizona` `Maps` `MAG` `ESRI` `#MAGmaps`
 
 ## Version
+
+### version | 4.0.9 ###
+
+* Updated | 2020-05-07
+
+* Created | 2014-10-21
 
 Releases will be numbered with the following format:
 
@@ -54,12 +60,6 @@ And constructed with the following guidelines:
 2. **MINOR** version when you add functionality in a backwards-compatible manner **bumps the minor** resets patch
 3. **PATCH** version when you make backwards-compatible bug fixes and misc changes **bumps only the patch**
 
-### version | 4.0.8 ###
-
-* Updated | 2019-12-03
-
-* Created | 2014-10-21
-
 ## Credits
 
 Maricopa Association of Governments (MAG) and the MAG member agencies
@@ -67,6 +67,17 @@ Maricopa Association of Governments (MAG) and the MAG member agencies
 ## Site URL
 
 -   [Arizona Demographics](http://geo.azmag.gov/maps/azdemographics/)
+
+## Technologies
+
+* jQuery v3.5.0
+* Bootstrap v4.3.1
+* ESRI JavaScript API v4.11
+* Kendo UI R3 2018 SP1
+* Font-Awesome v5.6.3
+* Modernizr v3.5.0
+* Google Analytics
+* Grunt v1.0.4
 
 ## Documentation
 
