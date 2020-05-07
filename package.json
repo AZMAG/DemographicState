@@ -1,8 +1,8 @@
 {
   "name": "Demographics-State-App",
-  "version": "4.0.8",
-  "date": "2019-12-03",
-  "copyright": "2019",
+  "version": "4.0.9",
+  "date": "2020-05-07",
+  "copyright": "2020",
   "description": "MAG State Demographic Viewer",
   "keywords": [
     "Demographics",
@@ -23,7 +23,7 @@
   ],
   "main": "index.js",
   "homepage": "https://geo.azmag.gov/maps/azdemographics/",
-  "author": "MAG Regional Analytics Devision (http://www.azmag.gov/About-Us/Divisions/Regional-Analytics-Division/)",
+  "author": "MAG Regional Analytics Division (http://www.azmag.gov/About-Us/Divisions/Regional-Analytics-Division/)",
   "contributors": [
     {
       "name": "Vern Wolfley",
@@ -34,21 +34,23 @@
       "email": "jfairfield@azmag.gov"
     }
   ],
-  "repository": [
-    {
-      "type": "git",
-      "url": "https://github.com/AZMAG/map-DemographicState"
-    }
-  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AZMAG/map-DemographicState"
+  },
   "private": true,
   "dependencies": {
-    "arcgis-js-api": "^4.11.1",
-    "babel-polyfill": "^6.26.0",
-    "geostats": "^1.8.0"
+    "arcgis-js-api": "^4.15.2",
+    "bootstrap": "^4.3.1",
+    "geostats": "^1.8.0",
+    "grunt-cli": "^1.3.2",
+    "jquery": "^3.5.0",
+    "normalize.css": ">=8.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.4.4",
     "@babel/preset-env": "^7.4.4",
+    "babel-polyfill": "^6.26.0",
     "autoprefixer": "^9.5.1",
     "cssnano": "^4.1.10",
     "grunt": "^1.0.4",
@@ -66,11 +68,15 @@
     "grunt-text-replace": "^0.4.0",
     "jshint-stylish-ex": "^0.2.0",
     "lodash": "^4.17.15",
+    "load-grunt-tasks": "^5.1.0",
     "matchdep": "^2.0.0",
-    "normalize.css": ">=8.0.1",
     "pixrem": "^5.0.0",
     "postcss-preset-env": "^6.6.0",
-    "request": "^2.88.0"
+    "request": "^2.88.2"
+  },
+  "engines": {
+    "node": ">=12.13.1",
+    "npm": ">=6.13.1"
   },
   "browserslist": [
     "last 1 version",

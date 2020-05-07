@@ -3,13 +3,16 @@ function randomString(length, chars) {
     for (var i = length; i > 0; --i) result += chars[Math.round(Math.random() * (chars.length - 1))];
     return result;
 }
-const fileHash = randomString(32, '0123456789abcdefghijklmnopqrstuvwxyz');
+const fileHash = '<%= pkg.version %>' + '.' + '<%= grunt.template.today("yyyymmddHHMM") %>';
 const jsFilePath = `dist/app/js/main.${fileHash}.js`;
+// const fileHash = randomString(32, '0123456789abcdefghijklmnopqrstuvwxyz');
+// const jsFilePath = `dist/app/js/main.${fileHash}.js`;
 
 module.exports = function (grunt) {
 
     "use strict";
 
+    require('load-grunt-tasks')(grunt);
     require("matchdep").filterDev("grunt-*").forEach(grunt.loadNpmTasks);
 
     grunt.initConfig({
@@ -214,6 +217,10 @@ module.exports = function (grunt) {
                     // html pages
                     from: /(<meta name="version" content=")([0-9]+)(?:\.([0-9]+))(?:\.([0-9]+))/g,
                     to: '<meta name="version" content="' + "<%= pkg.version %>",
+                }, {
+                    // html pages - build-info
+                    from: /(<meta name="build-info" content=")([0-9]+)(?:\.([0-9]+))(?:\.([0-9]+))(?:\.)(\d{12})(">)/g,
+                    to: '<meta name="build-info" content="' + '<%= pkg.version %>' + '.' + '<%= grunt.template.today("yyyymmddHHMM") %>' + '">',
                 }, {
                     // config.js
                     from: /(v)([0-9]+)(?:\.([0-9]+))(?:\.([0-9]+))( \| )[0-9]{4}-[0-9]{2}-[0-9]{2}/g,

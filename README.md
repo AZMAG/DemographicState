@@ -44,6 +44,12 @@ This web app viewer was developed by MAG staff for MAG member agencies and the p
 
 ## Version
 
+### version | 4.0.9 ###
+
+* Updated | 2020-05-07
+
+* Created | 2014-10-21
+
 Releases will be numbered with the following format:
 
 **`<major>.<minor>.<patch>`**
@@ -54,12 +60,6 @@ And constructed with the following guidelines:
 2. **MINOR** version when you add functionality in a backwards-compatible manner **bumps the minor** resets patch
 3. **PATCH** version when you make backwards-compatible bug fixes and misc changes **bumps only the patch**
 
-### version | 4.0.8 ###
-
-* Updated | 2019-12-03
-
-* Created | 2014-10-21
-
 ## Credits
 
 Maricopa Association of Governments (MAG) and the MAG member agencies
@@ -67,6 +67,17 @@ Maricopa Association of Governments (MAG) and the MAG member agencies
 ## Site URL
 
 -   [Arizona Demographics](http://geo.azmag.gov/maps/azdemographics/)
+
+## Technologies
+
+* jQuery v3.5.0
+* Bootstrap v4.3.1
+* ESRI JavaScript API v4.11
+* Kendo UI R3 2018 SP1
+* Font-Awesome v5.6.3
+* Modernizr v3.5.0
+* Google Analytics
+* Grunt v1.0.4
 
 ## Documentation
 
