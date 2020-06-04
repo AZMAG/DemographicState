@@ -478,8 +478,8 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function(tp, QueryTask) {
                 Footnote: 'b',
                 Total: attr['income_below_poverty'],
                 Percent: attr['income_below_poverty'] / attr['pop_for_poverty'],
-                NumberOfBlocks: attr['affected_income_below_poverty_count'] || 0,
-                PercentOfBlocks: (attr['affected_income_below_poverty_count'] || 0) / totalBlockCount,
+                NumberOfBlocks: attr['affected_income_below_poverty_c'],
+                PercentOfBlocks: (attr['affected_income_below_poverty_c']) / totalBlockCount,
                 AffectedPopulation: attr['affected_income_below_poverty'],
                 PercentAffectedCaptured: attr['affected_income_below_poverty'] / attr['income_below_poverty']
             },
