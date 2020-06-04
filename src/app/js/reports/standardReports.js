@@ -51,14 +51,14 @@ require(["dojo/topic"], function (tp) {
                     let template = getTemplate(dataItem);
                     $specificReport.kendoComboBox({
                         dataSource: dataSrc,
-                        value: dataSrc[0].GEOID,
+                        value: dataSrc[0].geoid,
                         dataBound: highLightSelection,
-                        dataValueField: "GEOID",
-                        dataTextField: "NAME",
+                        dataValueField: "geoid",
+                        dataTextField: "name",
                         select: function (e) {
                             if (e.dataItem) {
                                 compareSrc = dataSrc.slice().filter((row) => {
-                                    if (row.GEOID !== e.dataItem.GEOID) {
+                                    if (row.geoid !== e.dataItem.geoid) {
                                         return row;
                                     }
                                 })
@@ -67,7 +67,7 @@ require(["dojo/topic"], function (tp) {
                                     kCompareComboBox.setDataSource(compareSrc);
                                     //If compare cbox doesn't have an item selected select the first one.
                                     if (kCompareComboBox.selectedIndex === -1) {
-                                        kCompareComboBox.value(compareSrc[0].GEOID)
+                                        kCompareComboBox.value(compareSrc[0].geoid)
                                     }
                                 }
                             }
@@ -79,10 +79,10 @@ require(["dojo/topic"], function (tp) {
 
                     $specificReportComparison.kendoComboBox({
                         dataSource: compareSrc,
-                        value: compareSrc[0].GEOID,
+                        value: compareSrc[0].geoid,
                         dataBound: highLightSelection,
-                        dataValueField: "GEOID",
-                        dataTextField: "NAME",
+                        dataValueField: "geoid",
+                        dataTextField: "name",
                         template: template,
                         filter: "contains",
                         index: 3
@@ -108,11 +108,11 @@ require(["dojo/topic"], function (tp) {
                     OpenReportByGEOIDs(conf, ["04"]);
                 } else {
                     let specificReport = $specificReport.data('kendoComboBox').dataItem();
-                    let GEOIDs = [specificReport["GEOID"]];
+                    let GEOIDs = [specificReport["geoid"]];
 
                     if ($compareCheckbox.is(":checked")) {
                         let specificReportComparison = $specificReportComparison.data('kendoComboBox').dataItem();
-                        let comparisonGEOID = specificReportComparison["GEOID"];
+                        let comparisonGEOID = specificReportComparison["geoid"];
                         GEOIDs.push(comparisonGEOID);
                     }
 
@@ -122,9 +122,9 @@ require(["dojo/topic"], function (tp) {
         }
 
         async function getSpecificData(conf) {
-            let displayField = "NAME";
+            let displayField = "name";
             let optionalFields = conf.displayFields || [displayField];
-            let outFields = ["OBJECTID", "GEOID"].concat(optionalFields.slice());
+            let outFields = ["objectid", "geoid"].concat(optionalFields.slice());
 
             let layer = app.map.findLayerById(conf.id);
 

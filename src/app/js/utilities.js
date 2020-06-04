@@ -295,13 +295,13 @@ app.PopupFormat = async function(gfx) {
     }
 
     return `
-                <span class="popf">${attr["NAME"]}</span>
+                <span class="popf">${attr["name"]}</span>
                 <hr class="pop">
-                <div>Total Population: <strong>${attr["TOTAL_POP"].toLocaleString()}</strong></div>
-                <div>Minority Population: <strong>${attr["MINORITY_POP"].toLocaleString()}</strong></div>
-                ${attr["MEDIAN_AGE"] ? `<div>Median Age: <strong>${attr["MEDIAN_AGE"]} years</strong></div>` : ""}
-                <div>Number of Households: <strong>${attr["TOTAL_HOUSEHOLDS"].toLocaleString()}</strong></div>
-                ${attr["MEDIAN_HOUSEHOLD_INCOME"] ? `<div>Median Household Income: <strong>$${attr["MEDIAN_HOUSEHOLD_INCOME"].toLocaleString()}</strong></div>` : ""}
+                <div>Total Population: <strong>${attr["total_pop"].toLocaleString()}</strong></div>
+                <div>Minority Population: <strong>${attr["minority_pop"].toLocaleString()}</strong></div>
+                ${attr["median_age"] ? `<div>Median Age: <strong>${attr["median_age"]} years</strong></div>` : ""}
+                <div>Number of Households: <strong>${attr["total_households"].toLocaleString()}</strong></div>
+                ${attr["median_household_income"] ? `<div>Median Household Income: <strong>$${attr["median_household_income"].toLocaleString()}</strong></div>` : ""}
                 ${repHtml ? `
                 <hr>
                 <h6>Representative Info</h6>

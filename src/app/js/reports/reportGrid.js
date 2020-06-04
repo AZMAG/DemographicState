@@ -78,8 +78,8 @@ require(['dojo/topic'], function (tp) {
                 <tr>
                     <th class="k-header"></th>
                     <th class="k-header"></th>
-                    <th class="k-header compareHeader" colspan="2">${features[0].attributes['NAME']}</th>
-                    <th class="k-header compareHeader" colspan="2">${features[1].attributes['NAME']}</th>
+                    <th class="k-header compareHeader" colspan="2">${features[0].attributes['name']}</th>
+                    <th class="k-header compareHeader" colspan="2">${features[1].attributes['name']}</th>
                 </tr>
                 `
             );

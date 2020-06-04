@@ -1,5 +1,5 @@
 app.censusFieldsConfig = [{
-        fieldName: 'ACRES',
+        fieldName: 'acres',
         fieldAlias: 'ACRES',
         fieldType: 'Number',
         tableHeader: 'Total Acres',
@@ -17,7 +17,7 @@ app.censusFieldsConfig = [{
         percentOfField: ''
     },
     {
-        fieldName: 'SQMI',
+        fieldName: 'sqmi',
         fieldAlias: 'SQMI',
         fieldType: 'Number',
         tableHeader: 'Total Square Miles',
@@ -35,7 +35,7 @@ app.censusFieldsConfig = [{
         percentOfField: ''
     },
     {
-        fieldName: 'TOTAL_POP',
+        fieldName: 'total_pop',
         fieldAlias: 'TOTAL_POP',
         fieldType: 'Number',
         tableHeader: 'Total Population',
@@ -53,7 +53,7 @@ app.censusFieldsConfig = [{
         percentOfField: ''
     },
     {
-        fieldName: 'TOTAL_POP',
+        fieldName: 'total_pop',
         fieldAlias: 'TOTAL_POP',
         fieldType: 'Number',
         tableHeader: 'Total Population ',
@@ -71,7 +71,7 @@ app.censusFieldsConfig = [{
         percentOfField: ''
     },
     {
-        fieldName: 'MEDIAN_AGE',
+        fieldName: 'median_age',
         fieldAlias: 'MEDIAN_AGE',
         fieldType: 'Number',
         tableHeader: 'Median Age',
@@ -89,7 +89,7 @@ app.censusFieldsConfig = [{
         percentOfField: ''
     },
     {
-        fieldName: 'UNDER5',
+        fieldName: 'under5',
         fieldAlias: 'Under 5',
         fieldType: 'Number',
         tableHeader: 'Under 5',
@@ -107,7 +107,7 @@ app.censusFieldsConfig = [{
         percentOfField: 'TOTAL_POP'
     },
     {
-        fieldName: 'AGE5TO17',
+        fieldName: 'age5to17',
         fieldAlias: '5 to 17',
         fieldType: 'Number',
         tableHeader: '5 to 17',
@@ -125,7 +125,7 @@ app.censusFieldsConfig = [{
         percentOfField: 'TOTAL_POP'
     },
     {
-        fieldName: 'AGE18TO34',
+        fieldName: 'age18to34',
         fieldAlias: '18 to 34',
         fieldType: 'Number',
         tableHeader: '18 to 34',
@@ -143,7 +143,7 @@ app.censusFieldsConfig = [{
         percentOfField: 'TOTAL_POP'
     },
     {
-        fieldName: 'AGE35TO49',
+        fieldName: 'age35to49',
         fieldAlias: '35 to 49',
         fieldType: 'Number',
         tableHeader: '35 to 49',
@@ -161,7 +161,7 @@ app.censusFieldsConfig = [{
         percentOfField: 'TOTAL_POP'
     },
     {
-        fieldName: 'AGE50TO64',
+        fieldName: 'age50to64',
         fieldAlias: '50 to 64',
         fieldType: 'Number',
         tableHeader: '50 to 64',
@@ -179,7 +179,7 @@ app.censusFieldsConfig = [{
         percentOfField: 'TOTAL_POP'
     },
     {
-        fieldName: 'AGE65TO84',
+        fieldName: 'age65to84',
         fieldAlias: '65 to 84',
         fieldType: 'Number',
         tableHeader: '65 to 84',
@@ -197,7 +197,7 @@ app.censusFieldsConfig = [{
         percentOfField: 'TOTAL_POP'
     },
     {
-        fieldName: 'AGE85PLUS',
+        fieldName: 'age85plus',
         fieldAlias: '85 and over',
         fieldType: 'Number',
         tableHeader: '85 and over',
@@ -215,7 +215,7 @@ app.censusFieldsConfig = [{
         percentOfField: 'TOTAL_POP'
     },
     {
-        fieldName: 'AGE50PLUS',
+        fieldName: 'age50plus',
         fieldAlias: '50 and over',
         fieldType: 'Number',
         tableHeader: '50 and over',
@@ -233,7 +233,7 @@ app.censusFieldsConfig = [{
         percentOfField: 'TOTAL_POP'
     },
     {
-        fieldName: 'AGE60PLUS',
+        fieldName: 'age60plus',
         fieldAlias: 'AGE60PLUS',
         fieldType: 'Number',
         tableHeader: '60 and over',
@@ -251,7 +251,7 @@ app.censusFieldsConfig = [{
         percentOfField: 'TOTAL_POP'
     },
     {
-        fieldName: 'AGE65PLUS',
+        fieldName: 'age65plus',
         fieldAlias: '65 and over',
         fieldType: 'Number',
         tableHeader: '65 and over',
@@ -269,7 +269,7 @@ app.censusFieldsConfig = [{
         percentOfField: 'TOTAL_POP'
     },
     {
-        fieldName: 'AGE70PLUS',
+        fieldName: 'age70plus',
         fieldAlias: '70 and over',
         fieldType: 'Number',
         tableHeader: '70 and over',
@@ -287,7 +287,7 @@ app.censusFieldsConfig = [{
         percentOfField: 'TOTAL_POP'
     },
     {
-        fieldName: 'AGE75PLUS',
+        fieldName: 'age75plus',
         fieldAlias: '75 and over',
         fieldType: 'Number',
         tableHeader: '75 and over',
@@ -305,7 +305,7 @@ app.censusFieldsConfig = [{
         percentOfField: 'TOTAL_POP'
     },
     {
-        fieldName: 'TOTAL_POP',
+        fieldName: 'total_pop',
         fieldAlias: 'TOTAL_POP',
         fieldType: 'Number',
         tableHeader: 'Total Population  ',
@@ -323,7 +323,7 @@ app.censusFieldsConfig = [{
         percentOfField: ''
     },
     {
-        fieldName: 'WHITE',
+        fieldName: 'white',
         fieldAlias: 'White',
         fieldType: 'Number',
         tableHeader: 'White, Non-Hispanic',
@@ -341,7 +341,7 @@ app.censusFieldsConfig = [{
         percentOfField: 'TOTAL_POP'
     },
     {
-        fieldName: 'BLACK',
+        fieldName: 'black',
         fieldAlias: 'Black',
         fieldType: 'Number',
         tableHeader: 'Black, Non-Hispanic',
@@ -359,7 +359,7 @@ app.censusFieldsConfig = [{
         percentOfField: 'TOTAL_POP'
     },
     {
-        fieldName: 'NATIVE',
+        fieldName: 'native',
         fieldAlias: 'Native American',
         fieldType: 'Number',
         tableHeader: 'Native American, Non-Hispanic',
@@ -377,7 +377,7 @@ app.censusFieldsConfig = [{
         percentOfField: 'TOTAL_POP'
     },
     {
-        fieldName: 'ASIAN',
+        fieldName: 'asian',
         fieldAlias: 'Asian',
         fieldType: 'Number',
         tableHeader: 'Asian, Non-Hispanic',
@@ -395,7 +395,7 @@ app.censusFieldsConfig = [{
         percentOfField: 'TOTAL_POP'
     },
     {
-        fieldName: 'PACIFIC',
+        fieldName: 'pacific',
         fieldAlias: 'Pacific Islander',
         fieldType: 'Number',
         tableHeader: 'Pacific Islander, Non-Hispanic',
@@ -413,7 +413,7 @@ app.censusFieldsConfig = [{
         percentOfField: 'TOTAL_POP'
     },
     {
-        fieldName: 'OTHER',
+        fieldName: 'other',
         fieldAlias: 'Other',
         fieldType: 'Number',
         tableHeader: 'Other Race, Non-Hispanic',
@@ -431,7 +431,7 @@ app.censusFieldsConfig = [{
         percentOfField: 'TOTAL_POP'
     },
     {
-        fieldName: 'TWO_OR_MORE',
+        fieldName: 'two_or_more',
         fieldAlias: 'Two or More',
         fieldType: 'Number',
         tableHeader: 'Two or More, Non-Hispanic',
@@ -449,7 +449,7 @@ app.censusFieldsConfig = [{
         percentOfField: 'TOTAL_POP'
     },
     {
-        fieldName: 'TOTAL_POP',
+        fieldName: 'total_pop',
         fieldAlias: 'TOTAL_POP',
         fieldType: 'Number',
         tableHeader: 'Total Population    ',
@@ -467,7 +467,7 @@ app.censusFieldsConfig = [{
         percentOfField: ''
     },
     {
-        fieldName: 'HISPANIC',
+        fieldName: 'hispanic',
         fieldAlias: 'Hispanic',
         fieldType: 'Number',
         tableHeader: 'Hispanic',
@@ -485,7 +485,7 @@ app.censusFieldsConfig = [{
         percentOfField: 'TOTAL_POP'
     },
     {
-        fieldName: 'NOT_HISPANIC',
+        fieldName: 'not_hispanic',
         fieldAlias: 'Non-Hispanic',
         fieldType: 'Number',
         tableHeader: 'Non-Hispanic',
@@ -503,7 +503,7 @@ app.censusFieldsConfig = [{
         percentOfField: 'TOTAL_POP'
     },
     {
-        fieldName: 'MINORITY_POP',
+        fieldName: 'minority_pop',
         fieldAlias: 'MINORITY_POP',
         fieldType: 'Number',
         tableHeader: 'Minority Population',
@@ -521,7 +521,7 @@ app.censusFieldsConfig = [{
         percentOfField: 'TOTAL_POP'
     },
     {
-        fieldName: 'TOTAL_HU',
+        fieldName: 'total_hu',
         fieldAlias: 'TOTAL_HU',
         fieldType: 'Number',
         tableHeader: 'Housing Units',
@@ -539,7 +539,7 @@ app.censusFieldsConfig = [{
         percentOfField: ''
     },
     {
-        fieldName: 'OCCUPIED_HU',
+        fieldName: 'occupied_hu',
         fieldAlias: 'OCCUPIED_HU',
         fieldType: 'Number',
         tableHeader: 'Occupied Housing Units',
@@ -557,7 +557,7 @@ app.censusFieldsConfig = [{
         percentOfField: 'TOTAL_HU'
     },
     {
-        fieldName: 'AVG_HH_SIZE',
+        fieldName: 'avg_hh_size',
         fieldAlias: 'AVG_HH_SIZE',
         fieldType: 'Number',
         tableHeader: 'Average Household Size',
@@ -575,7 +575,7 @@ app.censusFieldsConfig = [{
         percentOfField: ''
     },
     {
-        fieldName: 'OWNER_OCC_HU',
+        fieldName: 'owner_occ_hu',
         fieldAlias: 'OWNER_OCC_HU',
         fieldType: 'Number',
         tableHeader: 'Owner-Occupied Housing Units',
@@ -593,7 +593,7 @@ app.censusFieldsConfig = [{
         percentOfField: 'TOTAL_HU'
     },
     {
-        fieldName: 'AVG_HH_SIZE_OWNER_HU',
+        fieldName: 'avg_hh_size_owner_hu',
         fieldAlias: 'AVG_HH_SIZE_OWNER_HU',
         fieldType: 'Number',
         tableHeader: 'Avg Household Size for Owner-Occupied Housing Units',
@@ -611,7 +611,7 @@ app.censusFieldsConfig = [{
         percentOfField: ''
     },
     {
-        fieldName: 'RENTER_OCC_HU',
+        fieldName: 'renter_occ_hu',
         fieldAlias: 'RENTER_OCC_HU',
         fieldType: 'Number',
         tableHeader: 'Renter-Occupied Housing Units',
@@ -629,7 +629,7 @@ app.censusFieldsConfig = [{
         percentOfField: 'TOTAL_HU'
     },
     {
-        fieldName: 'AVG_HH_SIZE_RENTER_HU',
+        fieldName: 'avg_hh_size_renter_hu',
         fieldAlias: 'AVG_HH_SIZE_RENTER_HU',
         fieldType: 'Number',
         tableHeader: 'Avg Household Size for Renter-Occupied Housing Units',
@@ -647,7 +647,7 @@ app.censusFieldsConfig = [{
         percentOfField: ''
     },
     {
-        fieldName: 'VACANT_HU',
+        fieldName: 'vacant_hu',
         fieldAlias: 'VACANT_HU',
         fieldType: 'Number',
         tableHeader: 'Vacant Housing Units',
@@ -665,7 +665,7 @@ app.censusFieldsConfig = [{
         percentOfField: 'TOTAL_HU'
     },
     {
-        fieldName: 'SEASONAL_HU',
+        fieldName: 'seasonal_hu',
         fieldAlias: 'SEASONAL_HU',
         fieldType: 'Number',
         tableHeader: 'For seasonal, recreational, or occasional use',
@@ -683,7 +683,7 @@ app.censusFieldsConfig = [{
         percentOfField: 'TOTAL_HU'
     },
     {
-        fieldName: 'NON_SEASONAL_VACANT_HU',
+        fieldName: 'non_seasonal_vacant_hu',
         fieldAlias: 'NON_SEASONAL_VACANT_HU',
         fieldType: 'Number',
         tableHeader: 'All other Vacant',

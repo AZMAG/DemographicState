@@ -54,7 +54,7 @@ require([
                 if (e.action.id === 'open-report') {
                     tp.publish('toggle-panel', 'reports');
                     let f = e.target.selectedFeature;
-                    let geoid = f.attributes["GEOID"];
+                    let geoid = f.attributes["geoid"];
                     let layerId = f.layer.id;
                     let conf = app.config.layerDef[layerId];
 

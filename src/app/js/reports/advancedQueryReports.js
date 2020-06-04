@@ -99,55 +99,55 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function(tp, QueryTask) {
             ShortName: 'Area',
             expanded: false,
             items: [{
-                    FieldName: 'COUNTY',
+                    FieldName: 'county',
                     Name: 'County',
                     ShortName: 'County',
                     Type: 'string'
                 },
                 {
-                    FieldName: 'LEGDIST',
+                    FieldName: 'legdist',
                     Name: 'Legislative District',
                     ShortName: 'Legislative District',
                     Type: 'string'
                 },
                 {
-                    FieldName: 'CONDIST',
+                    FieldName: 'condist',
                     Name: 'Congressional District',
                     ShortName: 'Congressional District',
                     Type: 'string'
                 },
                 {
-                    FieldName: 'UNIFIED_DIST',
+                    FieldName: 'unified_dist',
                     Name: 'Unified School District',
                     ShortName: 'Unified School District',
                     Type: 'string'
                 },
                 {
-                    FieldName: 'SEC_DIST',
+                    FieldName: 'sec_dist',
                     Name: 'Secondary School District',
                     ShortName: 'Secondary School District',
                     Type: 'string'
                 },
                 {
-                    FieldName: 'ELEM_DIST',
+                    FieldName: 'elem_dist',
                     Name: 'Elementary School District',
                     ShortName: 'Elementary School District',
                     Type: 'string'
                 },
                 {
-                    FieldName: 'TRACTCE',
+                    FieldName: 'tract',
                     Name: 'Tract',
                     ShortName: 'Tract',
                     Type: 'string'
                 },
                 {
-                    FieldName: 'BLKGRPCE',
+                    FieldName: 'blkgrp',
                     Name: 'Block Group',
                     ShortName: 'Block Group',
                     Type: 'string'
                 },
                 {
-                    FieldName: 'SQMI',
+                    FieldName: 'sqmi',
                     Name: 'Square Miles',
                     ShortName: 'Square Miles',
                     Type: 'number'
@@ -303,7 +303,7 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function(tp, QueryTask) {
             let q = {
                 where: BuildQueryString(),
                 returnGeometry: false,
-                outFields: ['GEOID']
+                outFields: ['geoid']
             };
 
             let qt = new QueryTask({
@@ -314,7 +314,7 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function(tp, QueryTask) {
                 let geoids = [];
 
                 res.features.forEach(feature => {
-                    geoids.push(feature.attributes['GEOID']);
+                    geoids.push(feature.attributes['geoid']);
                 });
 
                 app.GetData(app.config.layerDef['blockGroups'], geoids).then(function(data) {
@@ -325,7 +325,7 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function(tp, QueryTask) {
                         features: [{
                             attributes: acsdata,
                             count: data.acsData.features.length,
-                            ids: data.acsData.features.map(feature => feature.attributes["GEOID"])
+                            ids: data.acsData.features.map(feature => feature.attributes["geoid"])
                         }],
                         blockGroups: data.acsData.features
                     };
@@ -334,7 +334,7 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function(tp, QueryTask) {
                         features: [{
                             attributes: censusdata,
                             count: data.acsData.features.length,
-                            ids: data.censusData.features.map(feature => feature.attributes["GEOID"])
+                            ids: data.censusData.features.map(feature => feature.attributes["geoid"])
                         }],
                         blockGroups: data.censusData.features
                     };
@@ -616,6 +616,9 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function(tp, QueryTask) {
                             }
                             return ddlSrc;
                         }, []);
+                        
+                        console.log(ddlSrc);
+                        
 
                         $('#strMS' + count).kendoDropDownList({
                             dataSource: ddlSrc,

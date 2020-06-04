@@ -188,7 +188,7 @@ require(["dojo/topic",
                                 features: [{
                                     attributes: acsData,
                                     count: data.acsData.features.length,
-                                    ids: data.acsData.features.map(feature => feature.attributes["GEOID"])
+                                    ids: data.acsData.features.map(feature => feature.attributes["geoid"])
                                 }],
                                 blockGroups: data.acsData.features
                             };
@@ -197,7 +197,7 @@ require(["dojo/topic",
                                 features: [{
                                     attributes: censusData,
                                     count: data.censusData.features.length,
-                                    ids: data.censusData.features.map(feature => feature.attributes["GEOID"])
+                                    ids: data.censusData.features.map(feature => feature.attributes["geoid"])
                                 }],
                                 blockGroups: data.censusData.features
                             };
