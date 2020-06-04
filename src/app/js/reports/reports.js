@@ -438,10 +438,10 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function(tp, QueryTask) {
                 $title6Toggle.toggleClass('k-i-expand k-i-collapse');
             });
 
-        let fivePlus = attr['TOTAL_POP'] - attr['UNDER5'];
-        let totalPop = attr['TOTAL_POP'];
-        let totalBlockCount = attr['TOT_BLOCKGROUP_COUNT'];
-        let age65Plus = attr['AGE65TO74'] + attr['AGE75TO84'] + attr['AGE85PLUS'];
+        let fivePlus = attr['total_pop'] - attr['under5'];
+        let totalPop = attr['total_pop'];
+        let totalBlockCount = attr['tot_blockgroup_count'];
+        let age65Plus = attr['age65to74'] + attr['age75to84'] + attr['age85plus'];
 
         let dataSrc = [{
                 Category: 'Population',
@@ -478,8 +478,8 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function(tp, QueryTask) {
                 Footnote: 'b',
                 Total: attr['income_below_poverty'],
                 Percent: attr['income_below_poverty'] / attr['pop_for_poverty'],
-                NumberOfBlocks: attr['affected_income_below_poverty_count'],
-                PercentOfBlocks: attr['affected_income_below_poverty_count'] / totalBlockCount,
+                NumberOfBlocks: attr['affected_income_below_poverty_count'] || 0,
+                PercentOfBlocks: (attr['affected_income_below_poverty_count'] || 0) / totalBlockCount,
                 AffectedPopulation: attr['affected_income_below_poverty'],
                 PercentAffectedCaptured: attr['affected_income_below_poverty'] / attr['income_below_poverty']
             },
