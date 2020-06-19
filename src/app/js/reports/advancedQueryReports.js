@@ -422,7 +422,7 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function(tp, QueryTask) {
             if (queryString === '' || queryString.indexOf('null') > -1) {
                 queryString = '1=1';
             }
-            return queryString;
+            return queryString + " AND (total_pop <> 0)";
         }
 
         /**
@@ -432,7 +432,7 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function(tp, QueryTask) {
             **/
         function VerifyQuery() {
             var queryString = BuildQueryString();
-
+            
             let q = {
                 where: queryString
             };
