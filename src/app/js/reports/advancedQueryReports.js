@@ -422,7 +422,23 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function(tp, QueryTask) {
             if (queryString === '' || queryString.indexOf('null') > -1) {
                 queryString = '1=1';
             }
-            return queryString + " AND (total_pop <> 0)";
+            var normalizedFieldsLU = {};
+            var normalizedFields = [];
+
+            QueryItems.forEach(function(queryItem) {
+                if (queryItem.normalizeField && !normalizedFieldsLU[queryItem.normalizeField]) {
+                    normalizedFields.push(`(${queryItem.normalizeField} <> 0)`);
+                    normalizedFieldsLU[queryItem.normalizeField] = true;
+                }
+            });
+            
+            var divideByZeroStr = normalizedFields.join('AND');
+            
+            if (divideByZeroStr.length > 0) {
+                queryString = queryString + ' AND' + divideByZeroStr;
+            }
+            
+            return queryString
         }
 
         /**
@@ -573,6 +589,7 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function(tp, QueryTask) {
                         operator: '#operatorDDL' + count,
                         join: '#joinDDL' + (count + 1),
                         fieldName: dataItem.FieldName,
+                        normalizeField: dataItem.NormalizeField,
                         name: dataItem.ShortName,
                         maxVal: maxValue,
                         type: dataItem.Type,
@@ -594,6 +611,7 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function(tp, QueryTask) {
                         join: '#joinDDL' + (count + 1),
                         fieldName: dataItem.FieldName,
                         name: dataItem.ShortName,
+                        normalizeField: dataItem.NormalizeField,
                         maxVal: dataItem.Placeholder,
                         type: dataItem.Type,
                         strDDL: '#strMS' + count
@@ -616,9 +634,7 @@ require(['dojo/topic', 'esri/tasks/QueryTask'], function(tp, QueryTask) {
                             }
                             return ddlSrc;
                         }, []);
-                        
-                        console.log(ddlSrc);
-                        
+
 
                         $('#strMS' + count).kendoDropDownList({
                             dataSource: ddlSrc,
