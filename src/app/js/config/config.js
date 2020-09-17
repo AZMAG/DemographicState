@@ -282,7 +282,8 @@ app.config = {
             visible: false,
             showReport: true,
             showTOC: true,
-            definition: "",
+            definition:
+                "The City of Phoenix is divided into 15 urban Villages. Each Village has a Village Planning Committee (VPC) appointed by Mayor & City Council. The VPCs assist the Planning Commission in the performance of its duties. VPCs are part of the Planning & Development Department.  The Committees help identify areas or provisions of the General Plan​ text that need refinement and updating; identify problems and needs related to implementation of the General Plan; define in greater detail the intended future function, density and character of subareas of the village; and comment on proposals for new zoning districts or land use districts.",
             layerListOrder: 9,
         },
         {
