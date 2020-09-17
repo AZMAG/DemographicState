@@ -1,15 +1,10 @@
 //This file listens for any changes to color ramps, number of class breaks,
 //or map changes and updates the block groups renderer.
 "use strict";
-define([
-    "mag/maps/maps-utils",
-    "dojo/topic",
-    "dojo/domReady!"
-], function (
+define(["mag/maps/maps-utils", "dojo/topic", "dojo/domReady!"], function (
     mapsutils,
     tp
-    ) {
-
+) {
     var cbr = {
         GetCurrentRenderer: async function () {
             let data = await mapsutils.GetCurrentMapsParams();
@@ -20,7 +15,7 @@ define([
                 normalizationField: data.conf.NormalizeField,
                 classBreakInfos: data.cbInfos,
                 legendOptions: {
-                    title: `${data.conf.category}  -  ${data.conf.Name}`
+                    title: `${data.conf.category}  -  ${data.conf.Name}`,
                 },
                 defaultLabel: "No Data",
                 defaultSymbol: {
@@ -28,20 +23,20 @@ define([
                     color: {
                         r: "211",
                         g: "211",
-                        b: "211"
+                        b: "211",
                     },
                     outline: {
                         color: [0, 0, 0, 0.1],
-                        width: 0.5
-                    }
-                }
-            }
+                        width: 0.5,
+                    },
+                },
+            };
             return {
                 renderer,
-                data
+                data,
             };
-        }
-    }
+        },
+    };
 
     function UpdateMapRenderer() {
         cbr.GetCurrentRenderer().then(function (res) {
@@ -53,7 +48,7 @@ define([
                 subLayer.renderer = res.renderer;
                 tp.publish("BlockGroupRendererUpdated", res.data);
             }
-        })
+        });
     }
 
     let $dynamicCBRCheckbox = $("#dynamicCBRCheckbox");
@@ -62,7 +57,7 @@ define([
         let dynamic = $dynamicCBRCheckbox.is(":checked");
 
         if (type === "Custom" && dynamic) {
-            $dynamicCBRCheckbox.prop('checked', false);
+            $dynamicCBRCheckbox.prop("checked", false);
             $dynamicCBRCheckbox.attr("disabled", true);
         } else {
             $dynamicCBRCheckbox.attr("disabled", false);
@@ -101,13 +96,12 @@ define([
 
         $dynamicCBRCheckbox.change(function () {
             UpdateMapRenderer();
-        })
+        });
 
         let $dynamicHelp = $("#dynamicHelp");
         $dynamicHelp.popover({
-            html: true
+            html: true,
         });
-
     });
     return cbr;
 });

@@ -1,36 +1,34 @@
 "use strict";
 define([
-        "mag/config/config",
-        "mag/config/initConfig",        
-        "mag/utilities",
-        "mag/maps/maps-utils",
-        "mag/maps/cbr",
-        "esri/Map",
-        "esri/views/MapView",
-        "esri/layers/FeatureLayer",
-        "esri/layers/MapImageLayer",
-        "esri/layers/TileLayer",
-        "esri/geometry/Extent",
-        "esri/layers/GraphicsLayer",
-        "dojo/topic",
-        "dojo/domReady!"
-    ],
-    function (
-        config,
-        initConfig,        
-        utilities,
-        mapsutils,
-        cbr,
-        Map,
-        MapView,
-        FeatureLayer,
-        MapImageLayer,
-        TileLayer,
-        Extent,
-        GraphicsLayer,
-        tp
-    ){
-
+    "mag/config/config",
+    "mag/config/initConfig",
+    "mag/utilities",
+    "mag/maps/maps-utils",
+    "mag/maps/cbr",
+    "esri/Map",
+    "esri/views/MapView",
+    "esri/layers/FeatureLayer",
+    "esri/layers/MapImageLayer",
+    "esri/layers/TileLayer",
+    "esri/geometry/Extent",
+    "esri/layers/GraphicsLayer",
+    "dojo/topic",
+    "dojo/domReady!",
+], function (
+    config,
+    initConfig,
+    utilities,
+    mapsutils,
+    cbr,
+    Map,
+    MapView,
+    FeatureLayer,
+    MapImageLayer,
+    TileLayer,
+    Extent,
+    GraphicsLayer,
+    tp
+) {
     tp.subscribe("config-loaded", initMap);
 
     if (config.configLoaded) {
@@ -39,19 +37,21 @@ define([
 
     function initMap() {
         mapsutils.map = new Map({
-            basemap: "gray"
+            basemap: "gray",
         });
 
         mapsutils.view = new MapView({
             container: "viewDiv",
             map: mapsutils.map,
-            extent: initConfig.getExtent() ? initConfig.getExtent() : config.initExtent,
+            extent: initConfig.getExtent()
+                ? initConfig.getExtent()
+                : config.initExtent,
             constraints: {
                 rotationEnabled: false,
-                minZoom: 7
+                minZoom: 7,
             },
             ui: {
-                components: []
+                components: [],
             },
             popup: {
                 dockEnabled: false,
@@ -59,21 +59,21 @@ define([
                 dockOptions: {
                     buttonEnabled: false,
                     breakpoint: false,
-                }
-            }
+                },
+            },
         });
 
         mapsutils.view.when(function () {
-            tp.publish('map-loaded');
-            mapsutils.view.popup.on('trigger-action', function (e) {
-                if (e.action.id === 'open-report') {
-                    tp.publish('toggle-panel', 'reports');
+            tp.publish("map-loaded");
+            mapsutils.view.popup.on("trigger-action", function (e) {
+                if (e.action.id === "open-report") {
+                    tp.publish("toggle-panel", "reports");
                     let f = e.target.selectedFeature;
                     let geoid = f.attributes["GEOID"];
                     let layerId = f.layer.id;
                     let conf = config.layerDef[layerId];
 
-                    tp.publish('openReport-by-geoids', conf, [geoid]);
+                    tp.publish("openReport-by-geoids", conf, [geoid]);
                 }
             });
         });
@@ -82,7 +82,7 @@ define([
 
         async function addBGLayer() {
             let res = await cbr.GetCurrentRenderer();
-            let conf = config.layerDef['blockGroups'];
+            let conf = config.layerDef["blockGroups"];
             let url = config.mainUrl;
             if (conf.url) {
                 url = conf.url;
@@ -95,10 +95,12 @@ define([
                 visible: conf.visible,
                 labelsVisible: false,
                 labelingInfo: [{}],
-                sublayers: [{
-                    id: conf.ACSIndex,
-                    opacity: 1
-                }]
+                sublayers: [
+                    {
+                        id: conf.ACSIndex,
+                        opacity: 1,
+                    },
+                ],
             });
 
             bgLayer.findSublayerById(0).renderer = res.renderer;
@@ -110,10 +112,10 @@ define([
             await addBGLayer();
 
             var layersToAdd = [];
-            config.layers.forEach(layer => {
+            config.layers.forEach((layer) => {
                 var layerToAdd;
                 var url = config.mainUrl;
-                if (layer.type === 'feature') {
+                if (layer.type === "feature") {
                     if (layer.url) {
                         url = layer.url;
                     }
@@ -125,19 +127,28 @@ define([
                         layerId: layer.ACSIndex,
                         visible: layer.visible,
                         popupTemplate: {
-                            title: layer.title + '<div style="display:none">{*}</div>',
+                            title:
+                                layer.title +
+                                '<div style="display:none">{*}</div>',
                             content: utilities.PopupFormat,
-                            actions: [{
-                                title: "Open Report",
-                                id: "open-report",
-                                className: "esri-icon-table"
-                            }]
+                            actions: [
+                                {
+                                    title: "Open Report",
+                                    id: "open-report",
+                                    className: "esri-icon-table",
+                                },
+                            ],
                         },
                         outFields: layer.outFields || ["*"],
                         opacity: layer.opacity,
-                        labelingInfo: layer.labelClass ? [layer.labelClass] : undefined
+                        labelingInfo: layer.labelClass
+                            ? [layer.labelClass]
+                            : undefined,
                     });
-                } else if (layer.type === "image" && layer.id !== "blockGroups") {
+                } else if (
+                    layer.type === "image" &&
+                    layer.id !== "blockGroups"
+                ) {
                     if (layer.url) {
                         url = layer.url;
                     }
@@ -149,10 +160,12 @@ define([
                         visible: layer.visible,
                         labelsVisible: false,
                         labelingInfo: [{}],
-                        sublayers: [{
-                            id: layer.ACSIndex,
-                            opacity: 1
-                        }]
+                        sublayers: [
+                            {
+                                id: layer.ACSIndex,
+                                opacity: 1,
+                            },
+                        ],
                     });
                 } else if (layer.type === "tile") {
                     if (layer.url) {
@@ -163,7 +176,7 @@ define([
                         id: layer.id,
                         opacity: layer.opacity || 1,
                         title: layer.title,
-                        visible: layer.visible
+                        visible: layer.visible,
                     });
                 }
                 if (layerToAdd) {
@@ -172,15 +185,13 @@ define([
                 }
             });
 
-
-
             var gfxLayer = new GraphicsLayer({
-                id: "gfxLayer"
+                id: "gfxLayer",
             });
             mapsutils.map.add(gfxLayer);
 
             let bufferGraphicsLayer = new GraphicsLayer({
-                id: "bufferGraphics"
+                id: "bufferGraphics",
             });
             mapsutils.map.layers.add(bufferGraphicsLayer);
 
@@ -188,7 +199,6 @@ define([
             // layersToAdd.sort(function(a, b) {
             //     return b.sortOrder - a.sortOrder;
             // });
-
 
             //For now.... I'm waiting until the block groups layer is finished to publish the layers-added event.
             //TODO: This should prevent the legend from trying to load to early.
@@ -198,7 +208,7 @@ define([
             mapsutils.view.whenLayerView(bgLayer).then(function (lyrView) {
                 lyrView.watch("updating", function (value) {
                     if (!value && !once) {
-                        $('.loading-container').css('display', 'none');
+                        $(".loading-container").css("display", "none");
                         // blockGroupLyrView = lyrView;
                         tp.publish("layers-added");
                         once = true;
@@ -206,25 +216,24 @@ define([
                 });
             });
 
-
             var onc = false;
             mapsutils.view.whenLayerView(gfxLayer).then(function (lyrView) {
                 lyrView.watch("updating", function (value) {
                     if (!value && !onc) {
                         tp.publish("gfxLayer-loaded");
                     }
-                })
-            })
+                });
+            });
 
             var maxExtent = new Extent({
                 xmax: -12014782.270383481,
                 xmin: -12867208.009819541,
                 ymax: 4497591.978076571,
                 ymin: 3571786.6914867624,
-                spatialReference: 102100
+                spatialReference: 102100,
             });
 
-            mapsutils.view.watch('extent', function (extent) {
+            mapsutils.view.watch("extent", function (extent) {
                 let currentCenter = extent.center;
                 if (!maxExtent.contains(currentCenter)) {
                     let newCenter = extent.center;

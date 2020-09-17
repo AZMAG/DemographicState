@@ -1,25 +1,21 @@
-'use strict';
+"use strict";
 
-var request = require('request');
-var fs = require('fs');
+var request = require("request");
+var fs = require("fs");
 
 module.exports = function (grunt, async, options) {
     console.log(options);
 
-    var done = async ();
+    var done = async();
     if (!options) {
-        throw new Error('options is undefined');
+        throw new Error("options is undefined");
     }
 
     var thematicMaps = JSON.parse(fs.readFileSync(options.inputLocation));
 
-    console.log(options.geoStatsPath);
-
-
     var geostats = require(options.geoStatsPath);
     var series = new geostats();
     var counter = 0;
-
 
     function generateClassBreaks(data) {
         for (const thematicMap of thematicMaps) {
@@ -48,9 +44,15 @@ module.exports = function (grunt, async, options) {
                     series.setSerie(arr);
                     thematicMap["breaks"] = {};
                     for (var i = 3; i <= 9; i++) {
-                        thematicMap.breaks[`Jenks${i}`] = series.getClassJenks(i);
-                        thematicMap.breaks[`EqInterval${i}`] = series.getClassEqInterval(i);
-                        thematicMap.breaks[`Quantile${i}`] = series.getClassQuantile(i);
+                        thematicMap.breaks[`Jenks${i}`] = series.getClassJenks(
+                            i
+                        );
+                        thematicMap.breaks[
+                            `EqInterval${i}`
+                        ] = series.getClassEqInterval(i);
+                        thematicMap.breaks[
+                            `Quantile${i}`
+                        ] = series.getClassQuantile(i);
                     }
                 }
             } else {
