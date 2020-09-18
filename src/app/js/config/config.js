@@ -275,7 +275,7 @@ app.config = {
             legend: true,
             id: "phoenixVillages",
             layerName: "PhoenixVillages",
-            title: "City Villages",
+            title: "Phoenix Villages",
             // displayFields: ["county", "name"],
             type: "feature",
             opacity: 1,
