@@ -5,7 +5,7 @@ define(["mag/utilities"], function (utilities) {
         "Number with commas - 567"() {
             var inputval = 567;
             var returnval = utilities.numberWithCommas(inputval);
-            assert.equal(returnval, "5637");
+            assert.equal(returnval, "567");
         },
         "Number with commas - 1000"() {
             var inputval = 1000;
