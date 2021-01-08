@@ -7516,8 +7516,8 @@
   },
   {
     "NodeType": "cat",
-    "Name": "Household Income (in 2018 inflation-adjusted dollars)",
-    "ShortName": "Household Income (in 2018 inflation-adjusted dollars)",
+    "Name": "Household Income (in 2019 inflation-adjusted dollars)",
+    "ShortName": "Household Income (in 2019 inflation-adjusted dollars)",
     "Description": "...",
     "items": [
       {
