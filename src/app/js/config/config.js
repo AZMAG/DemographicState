@@ -95,7 +95,7 @@ app.config = {
             id: "blockGroups",
             layerName: "Block_Groups",
             title:
-                "American Community Survey by Block Group, 2014-2018 5 year estimates",
+                "American Community Survey by Block Group, 2015-2019 5 year estimates",
             type: "image",
             outFields: ["*"],
             opacity: 0.8,
