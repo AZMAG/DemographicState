@@ -1,6 +1,6 @@
 app.acsFieldsConfig = [
     {
-        fieldName: "total_pop",
+        fieldName: "TOTAL_POP",
         fieldAlias: "Total Population",
         fieldType: "Number",
         tableHeader: "Total Population ",
@@ -16,7 +16,7 @@ app.acsFieldsConfig = [
         percentOfField: "",
     },
     {
-        fieldName: "gender",
+        fieldName: "GENDER",
         fieldAlias: "Gender",
         fieldType: "Number",
         tableHeader: "Gender",
@@ -32,7 +32,7 @@ app.acsFieldsConfig = [
         percentOfField: "",
     },
     {
-        fieldName: "male",
+        fieldName: "MALE",
         fieldAlias: "Male",
         fieldType: "Number",
         tableHeader: "Male",
@@ -48,7 +48,7 @@ app.acsFieldsConfig = [
         percentOfField: "total_pop",
     },
     {
-        fieldName: "female",
+        fieldName: "FEMALE",
         fieldAlias: "Female",
         fieldType: "Number",
         tableHeader: "Female",
@@ -64,7 +64,7 @@ app.acsFieldsConfig = [
         percentOfField: "total_pop",
     },
     {
-        fieldName: "age",
+        fieldName: "AGE",
         fieldAlias: "Age",
         fieldType: "Number",
         tableHeader: "Age",
@@ -80,7 +80,7 @@ app.acsFieldsConfig = [
         percentOfField: "total_pop",
     },
     {
-        fieldName: "median_age",
+        fieldName: "MEDIAN_AGE",
         fieldAlias: "Median Age",
         fieldType: "Number",
         tableHeader: "Median Age",
@@ -96,7 +96,7 @@ app.acsFieldsConfig = [
         percentOfField: "",
     },
     {
-        fieldName: "under5",
+        fieldName: "UNDER5",
         fieldAlias: "Under 5 years",
         fieldType: "Number",
         tableHeader: "Under 5 years",
@@ -112,7 +112,7 @@ app.acsFieldsConfig = [
         percentOfField: "total_pop",
     },
     {
-        fieldName: "age5to9",
+        fieldName: "AGE5TO9",
         fieldAlias: "5 to 9 years",
         fieldType: "Number",
         tableHeader: "5 to 9 years",
@@ -128,7 +128,7 @@ app.acsFieldsConfig = [
         percentOfField: "total_pop",
     },
     {
-        fieldName: "age10to14",
+        fieldName: "AGE10TO14",
         fieldAlias: "10 to 14 years",
         fieldType: "Number",
         tableHeader: "10 to 14 years",
@@ -144,7 +144,7 @@ app.acsFieldsConfig = [
         percentOfField: "total_pop",
     },
     {
-        fieldName: "age15to19",
+        fieldName: "AGE15TO19",
         fieldAlias: "15 to 19 years",
         fieldType: "Number",
         tableHeader: "15 to 19 years",
@@ -160,7 +160,7 @@ app.acsFieldsConfig = [
         percentOfField: "total_pop",
     },
     {
-        fieldName: "age20to24",
+        fieldName: "AGE20TO24",
         fieldAlias: "20 to 24 years",
         fieldType: "Number",
         tableHeader: "20 to 24 years",
@@ -176,7 +176,7 @@ app.acsFieldsConfig = [
         percentOfField: "total_pop",
     },
     {
-        fieldName: "age25to34",
+        fieldName: "AGE25TO34",
         fieldAlias: "25 to 34 years",
         fieldType: "Number",
         tableHeader: "25 to 34 years",
@@ -192,7 +192,7 @@ app.acsFieldsConfig = [
         percentOfField: "total_pop",
     },
     {
-        fieldName: "age35to44",
+        fieldName: "AGE35TO44",
         fieldAlias: "35 to 44 years",
         fieldType: "Number",
         tableHeader: "35 to 44 years",
@@ -208,7 +208,7 @@ app.acsFieldsConfig = [
         percentOfField: "total_pop",
     },
     {
-        fieldName: "age45to54",
+        fieldName: "AGE45TO54",
         fieldAlias: "45 to 54 years",
         fieldType: "Number",
         tableHeader: "45 to 54 years",
@@ -224,7 +224,7 @@ app.acsFieldsConfig = [
         percentOfField: "total_pop",
     },
     {
-        fieldName: "age55to59",
+        fieldName: "AGE55TO59",
         fieldAlias: "55 to 59 years",
         fieldType: "Number",
         tableHeader: "55 to 59 years",
@@ -240,7 +240,7 @@ app.acsFieldsConfig = [
         percentOfField: "total_pop",
     },
     {
-        fieldName: "age60to64",
+        fieldName: "AGE60TO64",
         fieldAlias: "60 to 64 years",
         fieldType: "Number",
         tableHeader: "60 to 64 years",
@@ -256,7 +256,7 @@ app.acsFieldsConfig = [
         percentOfField: "total_pop",
     },
     {
-        fieldName: "age65to74",
+        fieldName: "AGE65TO74",
         fieldAlias: "65 to 74 years",
         fieldType: "Number",
         tableHeader: "65 to 74 years",
@@ -272,7 +272,7 @@ app.acsFieldsConfig = [
         percentOfField: "total_pop",
     },
     {
-        fieldName: "age75to84",
+        fieldName: "AGE75TO84",
         fieldAlias: "75 to 84 years",
         fieldType: "Number",
         tableHeader: "75 to 84 years",
@@ -288,7 +288,7 @@ app.acsFieldsConfig = [
         percentOfField: "total_pop",
     },
     {
-        fieldName: "age85plus",
+        fieldName: "AGE85PLUS",
         fieldAlias: "85 years and over",
         fieldType: "Number",
         tableHeader: "85 years and over",
@@ -304,7 +304,7 @@ app.acsFieldsConfig = [
         percentOfField: "total_pop",
     },
     {
-        fieldName: "select age groups",
+        fieldName: "SELECT AGE GROUPS",
         fieldAlias: "Select Age Groups",
         fieldType: "Number",
         tableHeader: "Select Age Groups",
@@ -320,7 +320,7 @@ app.acsFieldsConfig = [
         percentOfField: "",
     },
     {
-        fieldName: "age18plus",
+        fieldName: "AGE18PLUS",
         fieldAlias: "18 years and over",
         fieldType: "Number",
         tableHeader: "18 years and over",
@@ -336,7 +336,7 @@ app.acsFieldsConfig = [
         percentOfField: "total_pop",
     },
     {
-        fieldName: "age21plus",
+        fieldName: "AGE21PLUS",
         fieldAlias: "21 years and over",
         fieldType: "Number",
         tableHeader: "21 years and over",
@@ -352,7 +352,7 @@ app.acsFieldsConfig = [
         percentOfField: "total_pop",
     },
     {
-        fieldName: "age62plus",
+        fieldName: "AGE62PLUS",
         fieldAlias: "62 years and over",
         fieldType: "Number",
         tableHeader: "62 years and over",
@@ -368,7 +368,7 @@ app.acsFieldsConfig = [
         percentOfField: "total_pop",
     },
     {
-        fieldName: "age65plus",
+        fieldName: "AGE65PLUS",
         fieldAlias: "65 years and over",
         fieldType: "Number",
         tableHeader: "65 years and over",
@@ -384,7 +384,7 @@ app.acsFieldsConfig = [
         percentOfField: "total_pop",
     },
     {
-        fieldName: "total_pop",
+        fieldName: "TOTAL_POP",
         fieldAlias: "Total Population",
         fieldType: "Number",
         tableHeader: "Total Population",
@@ -400,7 +400,7 @@ app.acsFieldsConfig = [
         percentOfField: "",
     },
     {
-        fieldName: "hispanic",
+        fieldName: "HISPANIC",
         fieldAlias: "Hispanic",
         fieldType: "Number",
         tableHeader: "Hispanic",
@@ -416,7 +416,7 @@ app.acsFieldsConfig = [
         percentOfField: "total_pop",
     },
     {
-        fieldName: "non-hispanic",
+        fieldName: "NON-HISPANIC",
         fieldAlias: "Non-Hispanic",
         fieldType: "Number",
         tableHeader: "Non-Hispanic",
@@ -432,7 +432,7 @@ app.acsFieldsConfig = [
         percentOfField: "total_pop",
     },
     {
-        fieldName: "white_non_hispanic",
+        fieldName: "WHITE_NON_HISPANIC",
         fieldAlias: "White, Non-Hispanic",
         fieldType: "Number",
         tableHeader: "White, Non-Hispanic",
@@ -448,7 +448,7 @@ app.acsFieldsConfig = [
         percentOfField: "total_pop",
     },
     {
-        fieldName: "black_non_hispanic",
+        fieldName: "BLACK_NON_HISPANIC",
         fieldAlias: "Black, Non-Hispanic",
         fieldType: "Number",
         tableHeader: "Black, Non-Hispanic",
@@ -464,7 +464,7 @@ app.acsFieldsConfig = [
         percentOfField: "total_pop",
     },
     {
-        fieldName: "native_non_hispanic",
+        fieldName: "NATIVE_NON_HISPANIC",
         fieldAlias: "Native American, Non-Hispanic",
         fieldType: "Number",
         tableHeader: "Native American, Non-Hispanic",
@@ -480,7 +480,7 @@ app.acsFieldsConfig = [
         percentOfField: "total_pop",
     },
     {
-        fieldName: "asian_non_hispanic",
+        fieldName: "ASIAN_NON_HISPANIC",
         fieldAlias: "Asian, Non-Hispanic",
         fieldType: "Number",
         tableHeader: "Asian, Non-Hispanic",
@@ -496,7 +496,7 @@ app.acsFieldsConfig = [
         percentOfField: "total_pop",
     },
     {
-        fieldName: "pacific_non_hispanic",
+        fieldName: "PACIFIC_NON_HISPANIC",
         fieldAlias: "Pacific Islander, Non-Hispanic",
         fieldType: "Number",
         tableHeader: "Pacific Islander, Non-Hispanic",
@@ -512,7 +512,7 @@ app.acsFieldsConfig = [
         percentOfField: "total_pop",
     },
     {
-        fieldName: "other_non_hispanic",
+        fieldName: "OTHER_NON_HISPANIC",
         fieldAlias: "Other, Non-Hispanic",
         fieldType: "Number",
         tableHeader: "Other, Non-Hispanic",
@@ -528,7 +528,7 @@ app.acsFieldsConfig = [
         percentOfField: "total_pop",
     },
     {
-        fieldName: "two_or_more_non_hispanic",
+        fieldName: "TWO_OR_MORE_NON_HISPANIC",
         fieldAlias: "Two or More, Non-Hispanic",
         fieldType: "Number",
         tableHeader: "Two or More, Non-Hispanic",
@@ -544,7 +544,7 @@ app.acsFieldsConfig = [
         percentOfField: "total_pop",
     },
     {
-        fieldName: "minority_pop",
+        fieldName: "MINORITY_POP",
         fieldAlias: "Minority",
         fieldType: "Number",
         tableHeader:
@@ -561,7 +561,7 @@ app.acsFieldsConfig = [
         percentOfField: "total_pop",
     },
     {
-        fieldName: "age25plus",
+        fieldName: "AGE25PLUS",
         fieldAlias: "Population 25 years and over",
         fieldType: "Number",
         tableHeader: "Population 25 years and over",
@@ -577,7 +577,7 @@ app.acsFieldsConfig = [
         percentOfField: "",
     },
     {
-        fieldName: "lt9grade",
+        fieldName: "LT9GRADE",
         fieldAlias: "Less than 9th Grade",
         fieldType: "Number",
         tableHeader: "Less than 9th Grade",
@@ -593,7 +593,7 @@ app.acsFieldsConfig = [
         percentOfField: "age25plus",
     },
     {
-        fieldName: "nohsdiploma",
+        fieldName: "NOHSDIPLOMA",
         fieldAlias: "9th to 12th Grade, No Diploma",
         fieldType: "Number",
         tableHeader: "9th to 12th Grade, No Diploma",
@@ -609,7 +609,7 @@ app.acsFieldsConfig = [
         percentOfField: "age25plus",
     },
     {
-        fieldName: "hsgrad",
+        fieldName: "HSGRAD",
         fieldAlias: "High School Graduate (includes equivalency)",
         fieldType: "Number",
         tableHeader: "High School Graduate (includes equivalency)",
@@ -625,7 +625,7 @@ app.acsFieldsConfig = [
         percentOfField: "age25plus",
     },
     {
-        fieldName: "somecollege",
+        fieldName: "SOMECOLLEGE",
         fieldAlias: "Some College, No Degree",
         fieldType: "Number",
         tableHeader: "Some College, No Degree",
@@ -641,7 +641,7 @@ app.acsFieldsConfig = [
         percentOfField: "age25plus",
     },
     {
-        fieldName: "associates",
+        fieldName: "ASSOCIATES",
         fieldAlias: "Associate Degree",
         fieldType: "Number",
         tableHeader: "Associate Degree",
@@ -657,7 +657,7 @@ app.acsFieldsConfig = [
         percentOfField: "age25plus",
     },
     {
-        fieldName: "bachelors",
+        fieldName: "BACHELORS",
         fieldAlias: "Bachelor's Degree",
         fieldType: "Number",
         tableHeader: "Bachelor's Degree",
@@ -673,7 +673,7 @@ app.acsFieldsConfig = [
         percentOfField: "age25plus",
     },
     {
-        fieldName: "gradprof",
+        fieldName: "GRADPROF",
         fieldAlias: "Graduate or Professional Degree",
         fieldType: "Number",
         tableHeader: "Graduate or Professional Degree",
@@ -689,7 +689,7 @@ app.acsFieldsConfig = [
         percentOfField: "age25plus",
     },
     {
-        fieldName: "age5plus",
+        fieldName: "AGE5PLUS",
         fieldAlias: "Population 5 years and over",
         fieldType: "Number",
         tableHeader: "Population 5 years and over",
@@ -706,7 +706,7 @@ app.acsFieldsConfig = [
         percentOfField: "",
     },
     {
-        fieldName: "speak_only_eng",
+        fieldName: "SPEAK_ONLY_ENG",
         fieldAlias: "Speak Only English",
         fieldType: "Number",
         tableHeader: "Speak Only English",
@@ -723,7 +723,7 @@ app.acsFieldsConfig = [
         percentOfField: "age5plus",
     },
     {
-        fieldName: "speak_other_langs",
+        fieldName: "SPEAK_OTHER_LANGS",
         fieldAlias: "Speak Other Languages",
         fieldType: "Number",
         tableHeader: "Speak Other Languages",
@@ -740,7 +740,7 @@ app.acsFieldsConfig = [
         percentOfField: "age5plus",
     },
     {
-        fieldName: "speak_eng_verywell",
+        fieldName: "SPEAK_ENG_VERYWELL",
         fieldAlias: "Speak English ''very well''",
         fieldType: "Number",
         tableHeader: "Speak English ''very well''",
@@ -757,7 +757,7 @@ app.acsFieldsConfig = [
         percentOfField: "",
     },
     {
-        fieldName: "limited_eng_prof",
+        fieldName: "LIMITED_ENG_PROF",
         fieldAlias: "Persons with Limited English Proficiency (LEP)",
         fieldType: "Number",
         tableHeader: "Persons with Limited English Proficiency (LEP)",
@@ -774,7 +774,7 @@ app.acsFieldsConfig = [
         percentOfField: "",
     },
     {
-        fieldName: "speak_eng_well",
+        fieldName: "SPEAK_ENG_WELL",
         fieldAlias: "Speak English ''well''",
         fieldType: "Number",
         tableHeader: "Speak English ''well''",
@@ -791,7 +791,7 @@ app.acsFieldsConfig = [
         percentOfField: "",
     },
     {
-        fieldName: "speak_eng_notwell",
+        fieldName: "SPEAK_ENG_NOTWELL",
         fieldAlias: "Speak English ''not well''",
         fieldType: "Number",
         tableHeader: "Speak English ''not well''",
@@ -808,7 +808,7 @@ app.acsFieldsConfig = [
         percentOfField: "",
     },
     {
-        fieldName: "speak_eng_notatall",
+        fieldName: "SPEAK_ENG_NOTATALL",
         fieldAlias: "Speak English ''not at all''",
         fieldType: "Number",
         tableHeader: "Speak English ''not at all''",
@@ -825,7 +825,7 @@ app.acsFieldsConfig = [
         percentOfField: "",
     },
     {
-        fieldName: "civ_pop_18plus",
+        fieldName: "CIV_POP_18PLUS",
         fieldAlias: "Civilian Population 18 years and over",
         fieldType: "Number",
         tableHeader: "Civilian Population 18 years and over",
@@ -841,7 +841,7 @@ app.acsFieldsConfig = [
         percentOfField: "",
     },
     {
-        fieldName: "veterans",
+        fieldName: "VETERANS",
         fieldAlias: "Civilian veterans",
         fieldType: "Number",
         tableHeader: "Civilian veterans",
@@ -857,7 +857,7 @@ app.acsFieldsConfig = [
         percentOfField: "civ_pop_18plus",
     },
     {
-        fieldName: "veterans by gender",
+        fieldName: "VETERANS BY GENDER",
         fieldAlias: "Veterans by Gender",
         fieldType: "Number",
         tableHeader: "Veterans by Gender",
@@ -873,7 +873,7 @@ app.acsFieldsConfig = [
         percentOfField: "veterans",
     },
     {
-        fieldName: "male_veterans",
+        fieldName: "MALE_VETERANS",
         fieldAlias: "Male",
         fieldType: "Number",
         tableHeader: "Male",
@@ -889,7 +889,7 @@ app.acsFieldsConfig = [
         percentOfField: "",
     },
     {
-        fieldName: "female_veterans",
+        fieldName: "FEMALE_VETERANS",
         fieldAlias: "Female",
         fieldType: "Number",
         tableHeader: "Female",
@@ -905,7 +905,7 @@ app.acsFieldsConfig = [
         percentOfField: "",
     },
     {
-        fieldName: "veterans by age",
+        fieldName: "VETERANS BY AGE",
         fieldAlias: "Veterans by Age",
         fieldType: "Number",
         tableHeader: "Veterans by Age",
@@ -921,7 +921,7 @@ app.acsFieldsConfig = [
         percentOfField: "",
     },
     {
-        fieldName: "vets_18to34",
+        fieldName: "VETS_18TO34",
         fieldAlias: "18 to 34 years",
         fieldType: "Number",
         tableHeader: "18 to 34 years",
@@ -937,7 +937,7 @@ app.acsFieldsConfig = [
         percentOfField: "",
     },
     {
-        fieldName: "vets_35to54",
+        fieldName: "VETS_35TO54",
         fieldAlias: "35 to 54 years",
         fieldType: "Number",
         tableHeader: "35 to 54 years",
@@ -953,7 +953,7 @@ app.acsFieldsConfig = [
         percentOfField: "",
     },
     {
-        fieldName: "vets_55to64",
+        fieldName: "VETS_55TO64",
         fieldAlias: "55 to 64 years",
         fieldType: "Number",
         tableHeader: "55 to 64 years",
@@ -969,7 +969,7 @@ app.acsFieldsConfig = [
         percentOfField: "",
     },
     {
-        fieldName: "vets_65to74",
+        fieldName: "VETS_65TO74",
         fieldAlias: "65 to 74 years ",
         fieldType: "Number",
         tableHeader: "65 to 74 years ",
@@ -985,7 +985,7 @@ app.acsFieldsConfig = [
         percentOfField: "",
     },
     {
-        fieldName: "vets_75plus",
+        fieldName: "VETS_75PLUS",
         fieldAlias: "75 years and over",
         fieldType: "Number",
         tableHeader: "75 years and over",
@@ -1001,7 +1001,7 @@ app.acsFieldsConfig = [
         percentOfField: "",
     },
     {
-        fieldName: "total_households",
+        fieldName: "TOTAL_HOUSEHOLDS",
         fieldAlias: "Total Households",
         fieldType: "Number",
         tableHeader: "Total Households",
@@ -1017,7 +1017,7 @@ app.acsFieldsConfig = [
         percentOfField: "",
     },
     {
-        fieldName: "avg_hh_size",
+        fieldName: "AVG_HH_SIZE",
         fieldAlias: "Average Household Size",
         fieldType: "Number",
         tableHeader: "Average Household Size",
@@ -1033,7 +1033,7 @@ app.acsFieldsConfig = [
         percentOfField: "",
     },
     {
-        fieldName: "family_households",
+        fieldName: "FAMILY_HOUSEHOLDS",
         fieldAlias: "Family Households (Families)",
         fieldType: "Number",
         tableHeader: "Family Households (Families)",
@@ -1049,7 +1049,7 @@ app.acsFieldsConfig = [
         percentOfField: "total_households",
     },
     {
-        fieldName: "married_couple_family",
+        fieldName: "MARRIED_COUPLE_FAMILY",
         fieldAlias: "Married-couple family",
         fieldType: "Number",
         tableHeader: "Married-couple family",
@@ -1065,7 +1065,7 @@ app.acsFieldsConfig = [
         percentOfField: "",
     },
     {
-        fieldName: "female_householder_nospouse",
+        fieldName: "FEMALE_HOUSEHOLDER_NOSPOUSE",
         fieldAlias: "Female Householder, no spouse present",
         fieldType: "Number",
         tableHeader: "Female Householder, no spouse present",
@@ -1081,7 +1081,7 @@ app.acsFieldsConfig = [
         percentOfField: "",
     },
     {
-        fieldName: "female_hh_child_under18",
+        fieldName: "FEMALE_HH_CHILD_UNDER18",
         fieldAlias: "with own children under 18 years",
         fieldType: "Number",
         tableHeader: "with own children under 18 years",
@@ -1097,7 +1097,7 @@ app.acsFieldsConfig = [
         percentOfField: "",
     },
     {
-        fieldName: "non_family_households",
+        fieldName: "NON_FAMILY_HOUSEHOLDS",
         fieldAlias: "Nonfamily Households",
         fieldType: "Number",
         tableHeader: "Nonfamily Households",
@@ -1113,7 +1113,7 @@ app.acsFieldsConfig = [
         percentOfField: "total_households",
     },
     {
-        fieldName: "nonfam_hh_live_alone",
+        fieldName: "NONFAM_HH_LIVE_ALONE",
         fieldAlias: "Householder living alone",
         fieldType: "Number",
         tableHeader: "Householder living alone",
@@ -1129,7 +1129,7 @@ app.acsFieldsConfig = [
         percentOfField: "",
     },
     {
-        fieldName: "total_hh_for_income",
+        fieldName: "TOTAL_HH_FOR_INCOME",
         fieldAlias: "Total Households",
         fieldType: "Number",
         tableHeader: "Total Households",
@@ -1146,7 +1146,7 @@ app.acsFieldsConfig = [
         percentOfField: "",
     },
     {
-        fieldName: "median_household_income",
+        fieldName: "MEDIAN_HOUSEHOLD_INCOME",
         fieldAlias: "Median Household Income (dollars)",
         fieldType: "Currency",
         tableHeader: "Median Household Income (dollars)",
@@ -1163,7 +1163,7 @@ app.acsFieldsConfig = [
         percentOfField: "",
     },
     {
-        fieldName: "hh_less_than_10k",
+        fieldName: "HH_LESS_THAN_10K",
         fieldAlias: "Less than $10,000",
         fieldType: "Number",
         tableHeader: "Less than $10,000",
@@ -1180,7 +1180,7 @@ app.acsFieldsConfig = [
         percentOfField: "total_hh_for_income",
     },
     {
-        fieldName: "hh_10k_to_14k",
+        fieldName: "HH_10K_TO_14K",
         fieldAlias: "$10,000 to $14,999",
         fieldType: "Number",
         tableHeader: "$10,000 to $14,999",
@@ -1197,7 +1197,7 @@ app.acsFieldsConfig = [
         percentOfField: "total_hh_for_income",
     },
     {
-        fieldName: "hh_15k_to_24k",
+        fieldName: "HH_15K_TO_24K",
         fieldAlias: "$15,000 to $24,999",
         fieldType: "Number",
         tableHeader: "$15,000 to $24,999",
@@ -1214,7 +1214,7 @@ app.acsFieldsConfig = [
         percentOfField: "total_hh_for_income",
     },
     {
-        fieldName: "hh_25k_to_34k",
+        fieldName: "HH_25K_TO_34K",
         fieldAlias: "$25,000 to $34,999",
         fieldType: "Number",
         tableHeader: "$25,000 to $34,999",
@@ -1231,7 +1231,7 @@ app.acsFieldsConfig = [
         percentOfField: "total_hh_for_income",
     },
     {
-        fieldName: "hh_35k_to_49k",
+        fieldName: "HH_35K_TO_49K",
         fieldAlias: "$35,000 to 49,999",
         fieldType: "Number",
         tableHeader: "$35,000 to 49,999",
@@ -1248,7 +1248,7 @@ app.acsFieldsConfig = [
         percentOfField: "total_hh_for_income",
     },
     {
-        fieldName: "hh_50k_to_74k",
+        fieldName: "HH_50K_TO_74K",
         fieldAlias: "$50,000 to $74,999",
         fieldType: "Number",
         tableHeader: "$50,000 to $74,999",
@@ -1265,7 +1265,7 @@ app.acsFieldsConfig = [
         percentOfField: "total_hh_for_income",
     },
     {
-        fieldName: "hh_75k_to_99k",
+        fieldName: "HH_75K_TO_99K",
         fieldAlias: "$75,000 to $99,999",
         fieldType: "Number",
         tableHeader: "$75,000 to $99,999",
@@ -1282,7 +1282,7 @@ app.acsFieldsConfig = [
         percentOfField: "total_hh_for_income",
     },
     {
-        fieldName: "hh_100k_to_149k",
+        fieldName: "HH_100K_TO_149K",
         fieldAlias: "$100,000 to $149,999",
         fieldType: "Number",
         tableHeader: "$100,000 to $149,999",
@@ -1299,7 +1299,7 @@ app.acsFieldsConfig = [
         percentOfField: "total_hh_for_income",
     },
     {
-        fieldName: "hh_150k_to_199k",
+        fieldName: "HH_150K_TO_199K",
         fieldAlias: "$150,000 to $199,999",
         fieldType: "Number",
         tableHeader: "$150,000 to $199,999",
@@ -1316,7 +1316,7 @@ app.acsFieldsConfig = [
         percentOfField: "total_hh_for_income",
     },
     {
-        fieldName: "hh_200k_plus",
+        fieldName: "HH_200K_PLUS",
         fieldAlias: "$200,000 or more",
         fieldType: "Number",
         tableHeader: "$200,000 or more",
@@ -1333,7 +1333,7 @@ app.acsFieldsConfig = [
         percentOfField: "total_hh_for_income",
     },
     {
-        fieldName: "pop_for_poverty",
+        fieldName: "POP_FOR_POVERTY",
         fieldAlias: "Persons for whom poverty status is determined",
         fieldType: "Number",
         tableHeader: "Persons for whom poverty status is determined",
@@ -1350,7 +1350,7 @@ app.acsFieldsConfig = [
         percentOfField: "",
     },
     {
-        fieldName: "income_below_poverty",
+        fieldName: "INCOME_BELOW_POVERTY",
         fieldAlias: "Persons with income below poverty level",
         fieldType: "Number",
         tableHeader: "Persons with income below poverty level",
@@ -1367,7 +1367,7 @@ app.acsFieldsConfig = [
         percentOfField: "pop_for_poverty",
     },
     {
-        fieldName: "income_below_150pct_poverty",
+        fieldName: "INCOME_BELOW_150PCT_POVERTY",
         fieldAlias: "Persons with income below 150% of poverty level",
         fieldType: "Number",
         tableHeader: "Persons with income below 150% of poverty level",
@@ -1384,7 +1384,7 @@ app.acsFieldsConfig = [
         percentOfField: "pop_for_poverty",
     },
     {
-        fieldName: "income_below_200pct_poverty",
+        fieldName: "INCOME_BELOW_200PCT_POVERTY",
         fieldAlias: "Persons with income below 200% of poverty level",
         fieldType: "Number",
         tableHeader: "Persons with income below 200% of poverty level",
@@ -1401,7 +1401,7 @@ app.acsFieldsConfig = [
         percentOfField: "pop_for_poverty",
     },
     {
-        fieldName: "total_families",
+        fieldName: "TOTAL_FAMILIES",
         fieldAlias: "Total Families",
         fieldType: "Number",
         tableHeader: "Total Families",
@@ -1418,7 +1418,7 @@ app.acsFieldsConfig = [
         percentOfField: "",
     },
     {
-        fieldName: "fam_income_below_poverty",
+        fieldName: "FAM_INCOME_BELOW_POVERTY",
         fieldAlias: "Families with income below poverty level",
         fieldType: "Number",
         tableHeader: "Families with income below poverty level",
@@ -1435,7 +1435,7 @@ app.acsFieldsConfig = [
         percentOfField: "total_families",
     },
     {
-        fieldName: "marriedcouple_belowpov",
+        fieldName: "MARRIEDCOUPLE_BELOWPOV",
         fieldAlias: "Married-couple family",
         fieldType: "Number",
         tableHeader: "Married-couple family",
@@ -1452,7 +1452,7 @@ app.acsFieldsConfig = [
         percentOfField: "",
     },
     {
-        fieldName: "couple_blwpov_childunder18",
+        fieldName: "COUPLE_BLWPOV_CHILDUNDER18",
         fieldAlias: "with related children under 18 years ",
         fieldType: "Number",
         tableHeader: "with related children under 18 years ",
@@ -1469,7 +1469,7 @@ app.acsFieldsConfig = [
         percentOfField: "",
     },
     {
-        fieldName: "female_blwpov_nospouse",
+        fieldName: "FEMALE_BLWPOV_NOSPOUSE",
         fieldAlias: "Female householder, no spouse present",
         fieldType: "Number",
         tableHeader: "Female householder, no spouse present",
@@ -1486,7 +1486,7 @@ app.acsFieldsConfig = [
         percentOfField: "",
     },
     {
-        fieldName: "female_blwpov_childunder18",
+        fieldName: "FEMALE_BLWPOV_CHILDUNDER18",
         fieldAlias: "with related children under 18 years",
         fieldType: "Number",
         tableHeader: "with related children under 18 years",
@@ -1503,7 +1503,7 @@ app.acsFieldsConfig = [
         percentOfField: "",
     },
     {
-        fieldName: "male_blwpov_nospouse",
+        fieldName: "MALE_BLWPOV_NOSPOUSE",
         fieldAlias: "Male householder, no spouse present",
         fieldType: "Number",
         tableHeader: "Male householder, no spouse present",
@@ -1520,7 +1520,7 @@ app.acsFieldsConfig = [
         percentOfField: "",
     },
     {
-        fieldName: "male_blwpov_childunder18",
+        fieldName: "MALE_BLWPOV_CHILDUNDER18",
         fieldAlias: "with related children under 18 years   ",
         fieldType: "Number",
         tableHeader: "with related children under 18 years   ",
@@ -1537,7 +1537,7 @@ app.acsFieldsConfig = [
         percentOfField: "",
     },
     {
-        fieldName: "civilian_labor_force",
+        fieldName: "CIVILIAN_LABOR_FORCE",
         fieldAlias: "Civilian Labor Force, 16 Years and Over",
         fieldType: "Number",
         tableHeader: "Civilian Labor Force, 16 Years and Over",
@@ -1553,7 +1553,7 @@ app.acsFieldsConfig = [
         percentOfField: "",
     },
     {
-        fieldName: "employed",
+        fieldName: "EMPLOYED",
         fieldAlias: "Employed",
         fieldType: "Number",
         tableHeader: "Employed",
@@ -1569,7 +1569,7 @@ app.acsFieldsConfig = [
         percentOfField: "civilian_labor_force",
     },
     {
-        fieldName: "unemployed",
+        fieldName: "UNEMPLOYED",
         fieldAlias: "Unemployed",
         fieldType: "Number",
         tableHeader: "Unemployed",
@@ -1585,7 +1585,7 @@ app.acsFieldsConfig = [
         percentOfField: "civilian_labor_force",
     },
     {
-        fieldName: "tot_workers_16plus",
+        fieldName: "TOT_WORKERS_16PLUS",
         fieldAlias: "Workers 16 years and over",
         fieldType: "Number",
         tableHeader: "Workers 16 years and over",
@@ -1601,7 +1601,7 @@ app.acsFieldsConfig = [
         percentOfField: "",
     },
     {
-        fieldName: "drove_alone",
+        fieldName: "DROVE_ALONE",
         fieldAlias: "Car or Truck - drive alone",
         fieldType: "Number",
         tableHeader: "Car or Truck - drive alone",
@@ -1617,7 +1617,7 @@ app.acsFieldsConfig = [
         percentOfField: "tot_workers_16plus",
     },
     {
-        fieldName: "carpooled",
+        fieldName: "CARPOOLED",
         fieldAlias: "Car or Truck - carpool",
         fieldType: "Number",
         tableHeader: "Car or Truck - carpool",
@@ -1633,7 +1633,7 @@ app.acsFieldsConfig = [
         percentOfField: "tot_workers_16plus",
     },
     {
-        fieldName: "public_transportation",
+        fieldName: "PUBLIC_TRANSPORTATION",
         fieldAlias: "Public Transportation",
         fieldType: "Number",
         tableHeader: "Public Transportation",
@@ -1649,7 +1649,7 @@ app.acsFieldsConfig = [
         percentOfField: "tot_workers_16plus",
     },
     {
-        fieldName: "bicycle",
+        fieldName: "BICYCLE",
         fieldAlias: "Bicycle",
         fieldType: "Number",
         tableHeader: "Bicycle",
@@ -1665,7 +1665,7 @@ app.acsFieldsConfig = [
         percentOfField: "tot_workers_16plus",
     },
     {
-        fieldName: "walked",
+        fieldName: "WALKED",
         fieldAlias: "Walked",
         fieldType: "Number",
         tableHeader: "Walked",
@@ -1681,7 +1681,7 @@ app.acsFieldsConfig = [
         percentOfField: "tot_workers_16plus",
     },
     {
-        fieldName: "taxi_motorcycle_or_other",
+        fieldName: "TAXI_MOTORCYCLE_OR_OTHER",
         fieldAlias: "Other means (taxicab, motorcycle, etc.)",
         fieldType: "Number",
         tableHeader: "Other means (taxicab, motorcycle, etc.)",
@@ -1697,7 +1697,7 @@ app.acsFieldsConfig = [
         percentOfField: "tot_workers_16plus",
     },
     {
-        fieldName: "worked_from_home",
+        fieldName: "WORKED_FROM_HOME",
         fieldAlias: "Work at home",
         fieldType: "Number",
         tableHeader: "Work at home",
@@ -1713,7 +1713,7 @@ app.acsFieldsConfig = [
         percentOfField: "tot_workers_16plus",
     },
     {
-        fieldName: "civilian_employed_16_plus",
+        fieldName: "CIVILIAN_EMPLOYED_16_PLUS",
         fieldAlias: "Civilian employed population 16 years and over",
         fieldType: "Number",
         tableHeader: "Civilian employed population 16 years and over",
@@ -1729,7 +1729,7 @@ app.acsFieldsConfig = [
         percentOfField: "",
     },
     {
-        fieldName: "mgbizsciart",
+        fieldName: "MGBIZSCIART",
         fieldAlias: "Management, business, science, and arts occupations",
         fieldType: "Number",
         tableHeader: "Management, business, science, and arts occupations",
@@ -1745,7 +1745,7 @@ app.acsFieldsConfig = [
         percentOfField: "civilian_employed_16_plus",
     },
     {
-        fieldName: "mgbizfin",
+        fieldName: "MGBIZFIN",
         fieldAlias: "Management, business, and financial occupations",
         fieldType: "Number",
         tableHeader: "Management, business, and financial occupations",
@@ -1761,7 +1761,7 @@ app.acsFieldsConfig = [
         percentOfField: "",
     },
     {
-        fieldName: "mgmt",
+        fieldName: "MGMT",
         fieldAlias: "Management occupations",
         fieldType: "Number",
         tableHeader: "Management occupations",
@@ -1777,7 +1777,7 @@ app.acsFieldsConfig = [
         percentOfField: "",
     },
     {
-        fieldName: "bizfin",
+        fieldName: "BIZFIN",
         fieldAlias: "Business and financial operations occupations",
         fieldType: "Number",
         tableHeader: "Business and financial operations occupations",
@@ -1793,7 +1793,7 @@ app.acsFieldsConfig = [
         percentOfField: "",
     },
     {
-        fieldName: "compengsci",
+        fieldName: "COMPENGSCI",
         fieldAlias: "Computer, engineering, and science occupations",
         fieldType: "Number",
         tableHeader: "Computer, engineering, and science occupations",
@@ -1809,7 +1809,7 @@ app.acsFieldsConfig = [
         percentOfField: "",
     },
     {
-        fieldName: "compmath",
+        fieldName: "COMPMATH",
         fieldAlias: "Computer and mathematical occupations",
         fieldType: "Number",
         tableHeader: "Computer and mathematical occupations",
@@ -1825,7 +1825,7 @@ app.acsFieldsConfig = [
         percentOfField: "",
     },
     {
-        fieldName: "archengin",
+        fieldName: "ARCHENGIN",
         fieldAlias: "Architecture and engineering occupations",
         fieldType: "Number",
         tableHeader: "Architecture and engineering occupations",
@@ -1841,7 +1841,7 @@ app.acsFieldsConfig = [
         percentOfField: "",
     },
     {
-        fieldName: "lifephyssocsci",
+        fieldName: "LIFEPHYSSOCSCI",
         fieldAlias: "Life, physical, and social science occupations",
         fieldType: "Number",
         tableHeader: "Life, physical, and social science occupations",
@@ -1857,7 +1857,7 @@ app.acsFieldsConfig = [
         percentOfField: "",
     },
     {
-        fieldName: "edulegcomartmedia",
+        fieldName: "EDULEGCOMARTMEDIA",
         fieldAlias:
             "Education, legal, community service, arts, and media occupations",
         fieldType: "Number",
@@ -1875,7 +1875,7 @@ app.acsFieldsConfig = [
         percentOfField: "",
     },
     {
-        fieldName: "commsocserv",
+        fieldName: "COMMSOCSERV",
         fieldAlias: "Community and social service occupations",
         fieldType: "Number",
         tableHeader: "Community and social service occupations",
@@ -1891,7 +1891,7 @@ app.acsFieldsConfig = [
         percentOfField: "",
     },
     {
-        fieldName: "legal",
+        fieldName: "LEGAL",
         fieldAlias: "Legal occupations",
         fieldType: "Number",
         tableHeader: "Legal occupations",
@@ -1907,7 +1907,7 @@ app.acsFieldsConfig = [
         percentOfField: "",
     },
     {
-        fieldName: "edutrainlib",
+        fieldName: "EDUTRAINLIB",
         fieldAlias: "Education, training, and library occupations",
         fieldType: "Number",
         tableHeader: "Education, training, and library occupations",
@@ -1923,7 +1923,7 @@ app.acsFieldsConfig = [
         percentOfField: "",
     },
     {
-        fieldName: "artentsportmedia",
+        fieldName: "ARTENTSPORTMEDIA",
         fieldAlias:
             "Arts, design, entertainment, sports, and media occupations",
         fieldType: "Number",
@@ -1941,7 +1941,7 @@ app.acsFieldsConfig = [
         percentOfField: "",
     },
     {
-        fieldName: "healthtechnical",
+        fieldName: "HEALTHTECHNICAL",
         fieldAlias: "Healthcare practitioners and technical occupations",
         fieldType: "Number",
         tableHeader: "Healthcare practitioners and technical occupations",
@@ -1957,7 +1957,7 @@ app.acsFieldsConfig = [
         percentOfField: "",
     },
     {
-        fieldName: "healthdiagtechocc",
+        fieldName: "HEALTHDIAGTECHOCC",
         fieldAlias:
             "Health diagnosing and treating practitioners and other technical occupations",
         fieldType: "Number",
@@ -1975,7 +1975,7 @@ app.acsFieldsConfig = [
         percentOfField: "",
     },
     {
-        fieldName: "healthtech",
+        fieldName: "HEALTHTECH",
         fieldAlias: "Health technologists and technicians ",
         fieldType: "Number",
         tableHeader: "Health technologists and technicians ",
@@ -1991,7 +1991,7 @@ app.acsFieldsConfig = [
         percentOfField: "",
     },
     {
-        fieldName: "serviceocc",
+        fieldName: "SERVICEOCC",
         fieldAlias: "Service occupations",
         fieldType: "Number",
         tableHeader: "Service occupations",
@@ -2007,7 +2007,7 @@ app.acsFieldsConfig = [
         percentOfField: "civilian_employed_16_plus",
     },
     {
-        fieldName: "healthsupport",
+        fieldName: "HEALTHSUPPORT",
         fieldAlias: "Healthcare support occupations",
         fieldType: "Number",
         tableHeader: "Healthcare support occupations",
@@ -2023,7 +2023,7 @@ app.acsFieldsConfig = [
         percentOfField: "",
     },
     {
-        fieldName: "protectiveserv",
+        fieldName: "PROTECTIVESERV",
         fieldAlias: "Protective service occupations",
         fieldType: "Number",
         tableHeader: "Protective service occupations",
@@ -2039,7 +2039,7 @@ app.acsFieldsConfig = [
         percentOfField: "",
     },
     {
-        fieldName: "firefighting",
+        fieldName: "FIREFIGHTING",
         fieldAlias:
             "Firefighting and prevention, and other protective service workers including supervisors",
         fieldType: "Number",
@@ -2057,7 +2057,7 @@ app.acsFieldsConfig = [
         percentOfField: "",
     },
     {
-        fieldName: "lawenforcement",
+        fieldName: "LAWENFORCEMENT",
         fieldAlias: "Law enforcement workers including supervisors",
         fieldType: "Number",
         tableHeader: "Law enforcement workers including supervisors",
@@ -2073,7 +2073,7 @@ app.acsFieldsConfig = [
         percentOfField: "",
     },
     {
-        fieldName: "foodprep",
+        fieldName: "FOODPREP",
         fieldAlias: "Food preparation and serving related occupations",
         fieldType: "Number",
         tableHeader: "Food preparation and serving related occupations",
@@ -2089,7 +2089,7 @@ app.acsFieldsConfig = [
         percentOfField: "",
     },
     {
-        fieldName: "groundsmaint",
+        fieldName: "GROUNDSMAINT",
         fieldAlias: "Building and grounds cleaning and maintenance occupations",
         fieldType: "Number",
         tableHeader:
@@ -2106,7 +2106,7 @@ app.acsFieldsConfig = [
         percentOfField: "",
     },
     {
-        fieldName: "personalcare",
+        fieldName: "PERSONALCARE",
         fieldAlias: "Personal care and service occupations",
         fieldType: "Number",
         tableHeader: "Personal care and service occupations",
@@ -2122,7 +2122,7 @@ app.acsFieldsConfig = [
         percentOfField: "",
     },
     {
-        fieldName: "salesofficeocc",
+        fieldName: "SALESOFFICEOCC",
         fieldAlias: "Sales and office occupations",
         fieldType: "Number",
         tableHeader: "Sales and office occupations",
@@ -2138,7 +2138,7 @@ app.acsFieldsConfig = [
         percentOfField: "civilian_employed_16_plus",
     },
     {
-        fieldName: "salesocc",
+        fieldName: "SALESOCC",
         fieldAlias: "Sales and related occupations",
         fieldType: "Number",
         tableHeader: "Sales and related occupations",
@@ -2154,7 +2154,7 @@ app.acsFieldsConfig = [
         percentOfField: "",
     },
     {
-        fieldName: "officeadmin",
+        fieldName: "OFFICEADMIN",
         fieldAlias: "Office and administrative support occupations",
         fieldType: "Number",
         tableHeader: "Office and administrative support occupations",
@@ -2170,7 +2170,7 @@ app.acsFieldsConfig = [
         percentOfField: "",
     },
     {
-        fieldName: "natresources",
+        fieldName: "NATRESOURCES",
         fieldAlias:
             "Natural resources, construction, and maintenance occupations",
         fieldType: "Number",
@@ -2188,7 +2188,7 @@ app.acsFieldsConfig = [
         percentOfField: "civilian_employed_16_plus",
     },
     {
-        fieldName: "farmfish",
+        fieldName: "FARMFISH",
         fieldAlias: "Farming, fishing, and forestry occupations",
         fieldType: "Number",
         tableHeader: "Farming, fishing, and forestry occupations",
@@ -2204,7 +2204,7 @@ app.acsFieldsConfig = [
         percentOfField: "",
     },
     {
-        fieldName: "construction",
+        fieldName: "CONSTRUCTION",
         fieldAlias: "Construction and extraction occupations",
         fieldType: "Number",
         tableHeader: "Construction and extraction occupations",
@@ -2220,7 +2220,7 @@ app.acsFieldsConfig = [
         percentOfField: "",
     },
     {
-        fieldName: "instrepair",
+        fieldName: "INSTREPAIR",
         fieldAlias: "Installation, maintenance, and repair occupations",
         fieldType: "Number",
         tableHeader: "Installation, maintenance, and repair occupations",
@@ -2236,7 +2236,7 @@ app.acsFieldsConfig = [
         percentOfField: "",
     },
     {
-        fieldName: "prodtransmaterial",
+        fieldName: "PRODTRANSMATERIAL",
         fieldAlias:
             "Production, transportation, and material moving occupations",
         fieldType: "Number",
@@ -2254,7 +2254,7 @@ app.acsFieldsConfig = [
         percentOfField: "civilian_employed_16_plus",
     },
     {
-        fieldName: "production",
+        fieldName: "PRODUCTION",
         fieldAlias: "Production occupations",
         fieldType: "Number",
         tableHeader: "Production occupations",
@@ -2270,7 +2270,7 @@ app.acsFieldsConfig = [
         percentOfField: "",
     },
     {
-        fieldName: "transportation",
+        fieldName: "TRANSPORTATION",
         fieldAlias: "Transportation occupations",
         fieldType: "Number",
         tableHeader: "Transportation occupations",
@@ -2286,7 +2286,7 @@ app.acsFieldsConfig = [
         percentOfField: "",
     },
     {
-        fieldName: "materialmoving",
+        fieldName: "MATERIALMOVING",
         fieldAlias: "Material moving occupations",
         fieldType: "Number",
         tableHeader: "Material moving occupations",
@@ -2302,7 +2302,7 @@ app.acsFieldsConfig = [
         percentOfField: "",
     },
     {
-        fieldName: "total_housing_units",
+        fieldName: "TOTAL_HOUSING_UNITS",
         fieldAlias: "Total Housing Units",
         fieldType: "Number",
         tableHeader: "Total Housing Units",
@@ -2318,7 +2318,7 @@ app.acsFieldsConfig = [
         percentOfField: "",
     },
     {
-        fieldName: "units",
+        fieldName: "UNITS",
         fieldAlias: "Occupancy and Tenure",
         fieldType: "Number",
         tableHeader: "Occupancy and Tenure",
@@ -2334,7 +2334,7 @@ app.acsFieldsConfig = [
         percentOfField: "total_housing_units",
     },
     {
-        fieldName: "occupied_hu",
+        fieldName: "OCCUPIED_HU",
         fieldAlias: "Occupied Housing Units",
         fieldType: "Number",
         tableHeader: "Occupied Housing Units",
@@ -2350,7 +2350,7 @@ app.acsFieldsConfig = [
         percentOfField: "total_housing_units",
     },
     {
-        fieldName: "avg_household_size",
+        fieldName: "AVG_HOUSEHOLD_SIZE",
         fieldAlias: "Average Household Size",
         fieldType: "Number",
         tableHeader: "Average Household Size",
@@ -2366,7 +2366,7 @@ app.acsFieldsConfig = [
         percentOfField: "",
     },
     {
-        fieldName: "owner_occ_hu",
+        fieldName: "OWNER_OCC_HU",
         fieldAlias: "Owner Occupied Housing Units",
         fieldType: "Number",
         tableHeader: "Owner Occupied Housing Units",
@@ -2382,7 +2382,7 @@ app.acsFieldsConfig = [
         percentOfField: "occupied_hu",
     },
     {
-        fieldName: "avg_hh_size_owner_hu",
+        fieldName: "AVG_HH_SIZE_OWNER_HU",
         fieldAlias: "Average Household size of Owner Occupied Housing Units",
         fieldType: "Number",
         tableHeader: "Average Household size of Owner Occupied Housing Units",
@@ -2398,7 +2398,7 @@ app.acsFieldsConfig = [
         percentOfField: "",
     },
     {
-        fieldName: "median_value",
+        fieldName: "MEDIAN_VALUE",
         fieldAlias: "Median Value (dollars)",
         fieldType: "Currency",
         tableHeader: "Median Value (dollars)",
@@ -2414,7 +2414,7 @@ app.acsFieldsConfig = [
         percentOfField: "",
     },
     {
-        fieldName: "renter_occ_hu",
+        fieldName: "RENTER_OCC_HU",
         fieldAlias: "Renter Occupied Housing Units",
         fieldType: "Number",
         tableHeader: "Renter Occupied Housing Units",
@@ -2430,7 +2430,7 @@ app.acsFieldsConfig = [
         percentOfField: "occupied_hu",
     },
     {
-        fieldName: "avg_hh_size_renter_hu",
+        fieldName: "AVG_HH_SIZE_RENTER_HU",
         fieldAlias: "Average Household size of Renter Occupied Housing Units",
         fieldType: "Number",
         tableHeader: "Average Household size of Renter Occupied Housing Units",
@@ -2446,7 +2446,7 @@ app.acsFieldsConfig = [
         percentOfField: "",
     },
     {
-        fieldName: "median_gross_rent",
+        fieldName: "MEDIAN_GROSS_RENT",
         fieldAlias: "Median Rent (dollars)",
         fieldType: "Currency",
         tableHeader: "Median Rent (dollars)",
@@ -2462,7 +2462,7 @@ app.acsFieldsConfig = [
         percentOfField: "",
     },
     {
-        fieldName: "vacant_hu",
+        fieldName: "VACANT_HU",
         fieldAlias: "Vacant Housing Units",
         fieldType: "Number",
         tableHeader: "Vacant Housing Units",
@@ -2478,7 +2478,7 @@ app.acsFieldsConfig = [
         percentOfField: "total_housing_units",
     },
     {
-        fieldName: "seasonal_vacant",
+        fieldName: "SEASONAL_VACANT",
         fieldAlias: "For seasonal, recreational, or occasional use",
         fieldType: "Number",
         tableHeader: "For seasonal, recreational, or occasional use",
@@ -2494,7 +2494,7 @@ app.acsFieldsConfig = [
         percentOfField: "",
     },
     {
-        fieldName: "all_other_vacant",
+        fieldName: "ALL_OTHER_VACANT",
         fieldAlias: "All other vacant",
         fieldType: "Number",
         tableHeader: "All other vacant",
@@ -2510,7 +2510,7 @@ app.acsFieldsConfig = [
         percentOfField: "",
     },
     {
-        fieldName: "units",
+        fieldName: "UNITS",
         fieldAlias: "Units in Structure",
         fieldType: "Number",
         tableHeader: "Units in Structure",
@@ -2526,7 +2526,7 @@ app.acsFieldsConfig = [
         percentOfField: "total_housing_units",
     },
     {
-        fieldName: "one_unit_detached",
+        fieldName: "ONE_UNIT_DETACHED",
         fieldAlias: "1, detached",
         fieldType: "Number",
         tableHeader: "1, detached",
@@ -2542,7 +2542,7 @@ app.acsFieldsConfig = [
         percentOfField: "total_housing_units",
     },
     {
-        fieldName: "one_unit_attached",
+        fieldName: "ONE_UNIT_ATTACHED",
         fieldAlias: "1, attached",
         fieldType: "Number",
         tableHeader: "1, attached",
@@ -2558,7 +2558,7 @@ app.acsFieldsConfig = [
         percentOfField: "total_housing_units",
     },
     {
-        fieldName: "two_to_nine_units",
+        fieldName: "TWO_TO_NINE_UNITS",
         fieldAlias: "2 to 9",
         fieldType: "Number",
         tableHeader: "2 to 9",
@@ -2574,7 +2574,7 @@ app.acsFieldsConfig = [
         percentOfField: "total_housing_units",
     },
     {
-        fieldName: "ten_or_more_units",
+        fieldName: "TEN_OR_MORE_UNITS",
         fieldAlias: "10 or more",
         fieldType: "Number",
         tableHeader: "10 or more",
@@ -2590,7 +2590,7 @@ app.acsFieldsConfig = [
         percentOfField: "total_housing_units",
     },
     {
-        fieldName: "mobile_home",
+        fieldName: "MOBILE_HOME",
         fieldAlias: "Mobile Home",
         fieldType: "Number",
         tableHeader: "Mobile Home",
@@ -2606,7 +2606,7 @@ app.acsFieldsConfig = [
         percentOfField: "total_housing_units",
     },
     {
-        fieldName: "boat_rv_van_etc",
+        fieldName: "BOAT_RV_VAN_ETC",
         fieldAlias: "Boat, RV, van, etc.",
         fieldType: "Number",
         tableHeader: "Boat, RV, van, etc.",
@@ -2622,7 +2622,7 @@ app.acsFieldsConfig = [
         percentOfField: "total_housing_units",
     },
     {
-        fieldName: "total_occupied_hu",
+        fieldName: "TOTAL_OCCUPIED_HU",
         fieldAlias: "Occupied Housing Units",
         fieldType: "Number",
         tableHeader: "Occupied Housing Units",
@@ -2638,7 +2638,7 @@ app.acsFieldsConfig = [
         percentOfField: "",
     },
     {
-        fieldName: "no_vehicle",
+        fieldName: "NO_VEHICLE",
         fieldAlias: "No vehicle available",
         fieldType: "Number",
         tableHeader: "No vehicle available",
@@ -2654,7 +2654,7 @@ app.acsFieldsConfig = [
         percentOfField: "total_occupied_hu",
     },
     {
-        fieldName: "one_vehicle",
+        fieldName: "ONE_VEHICLE",
         fieldAlias: "1 vehicle available",
         fieldType: "Number",
         tableHeader: "1 vehicle available",
@@ -2670,7 +2670,7 @@ app.acsFieldsConfig = [
         percentOfField: "total_occupied_hu",
     },
     {
-        fieldName: "two_vehicles",
+        fieldName: "TWO_VEHICLES",
         fieldAlias: "2 vehicles available",
         fieldType: "Number",
         tableHeader: "2 vehicles available",
@@ -2686,7 +2686,7 @@ app.acsFieldsConfig = [
         percentOfField: "total_occupied_hu",
     },
     {
-        fieldName: "three_plus_vehicles",
+        fieldName: "THREE_PLUS_VEHICLES",
         fieldAlias: "3 or more vehicles available",
         fieldType: "Number",
         tableHeader: "3 or more vehicles available",
@@ -2702,7 +2702,7 @@ app.acsFieldsConfig = [
         percentOfField: "total_occupied_hu",
     },
     {
-        fieldName: "acres",
+        fieldName: "ACRES",
         fieldAlias: "Total Area in Acres",
         fieldType: "Number",
         tableHeader: "Total Area in Acres",
@@ -2718,7 +2718,7 @@ app.acsFieldsConfig = [
         percentOfField: "",
     },
     {
-        fieldName: "sqmi",
+        fieldName: "SQMI",
         fieldAlias: "Total Area in Square Miles",
         fieldType: "Number",
         tableHeader: "Total Area in Square Miles",
