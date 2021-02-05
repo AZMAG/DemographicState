@@ -1,6 +1,6 @@
 app.config = {
     version: "v4.0.9 | 2020-05-07",
-    copyright: "2020",
+    copyright: "2021",
 
     LegendSource: "American Community Survey 2015-2019 5yr",
     emailLink:
@@ -161,21 +161,7 @@ app.config = {
                 "Census geographic entities that cover areas of American Indian and Alaska Native settlements, collectively termed American Indian and Alaska Native areas(AIANAs).The major types of AIANAs are American Indian reservations and trust lands, tribal jurisdiction statistical areas(TJSAs), Alaska Native Regional Corporations(ANRCs), Alaska Native village statistical areas(ANVSAs), and tribal designated statistical areas(TDSAs).",
             layerListOrder: 3,
         },
-        {
-            legend: true,
-            id: "azcted",
-            displayFields: ["FULL_NAME"],
-            layerName: "AZCTED",
-            title: "West-MEC's Career and Technical Ed Districts",
-            type: "feature",
-            opacity: 0.8,
-            visible: false,
-            showReport: true,
-            showTOC: true,
-            definition:
-                "Western Maricopa Education Center (West-MEC) is a public school district dedicated to providing innovative career and technical education (CTE) programs that prepare students to enter the workforce and pursue continuing education.",
-            layerListOrder: 3.5,
-        },
+
         {
             legend: true,
             id: "zipCodes",
@@ -369,6 +355,21 @@ app.config = {
             definition:
                 "A Unified School District is a school district that generally includes and operates both Elementary and Secondary schools under the same district control. Unified school districts provide education to children of all school ages in their service areas - Grades K-12.",
             layerListOrder: 13,
+        },
+        {
+            legend: true,
+            id: "azcted",
+            displayFields: ["FULL_NAME"],
+            layerName: "AZCTED",
+            title: "Career and Technical Education Districts (CTED)",
+            type: "feature",
+            opacity: 0.8,
+            visible: false,
+            showReport: true,
+            showTOC: true,
+            definition:
+                "Western Maricopa Education Center (West-MEC) is a public school district dedicated to providing innovative career and technical education (CTE) programs that prepare students to enter the workforce and pursue continuing education.",
+            layerListOrder: 14,
         },
         {
             legend: true,
