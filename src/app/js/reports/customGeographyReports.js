@@ -1,14 +1,10 @@
 "use strict";
-require(["dojo/topic",
+require([
+    "dojo/topic",
     "esri/widgets/Sketch/SketchViewModel",
     "esri/Graphic",
-    "esri/geometry/geometryEngine"
-], function(
-    tp,
-    SketchViewModel,
-    Graphic,
-    geometryEngine
-) {
+    "esri/geometry/geometryEngine",
+], function (tp, SketchViewModel, Graphic, geometryEngine) {
     let isInited = false;
     tp.subscribe("panel-loaded", init);
 
@@ -16,14 +12,10 @@ require(["dojo/topic",
         init();
     }
 
-
     function init() {
-
         if (!isInited) {
-
             isInited = true;
-            tp.subscribe("gfxLayer-loaded", function() {
-
+            tp.subscribe("gfxLayer-loaded", function () {
                 let $customGeographyReports = $("#customGeographyReports");
                 let $bufferCheckbox = $("#useBuffer");
                 let $bufferOptions = $("#bufferOptions");
@@ -35,20 +27,26 @@ require(["dojo/topic",
 
                 let drawMessages = {
                     point: {
-                        start: "Click anywhere to select a point of interest."
+                        start: "Click anywhere to select a point of interest.",
                     },
                     polygon: {
-                        start: "Click or drag anywhere on the map to start drawing.",
-                        during: "Double click to finish drawing, or click/drag to change the selected shape."
+                        start:
+                            "Click or drag anywhere on the map to start drawing.",
+                        during:
+                            "Double click to finish drawing, or click/drag to change the selected shape.",
                     },
                     polyline: {
-                        start: "Click to add first point in the corridor of interest.",
-                        during: "Double click to finish drawing, or Click to add another point to the selected corridor."
+                        start:
+                            "Click to add first point in the corridor of interest.",
+                        during:
+                            "Double click to finish drawing, or Click to add another point to the selected corridor.",
                     },
                     rectangle: {
-                        start: "Click and drag to create a rectangle and select a region of interest.",
-                        during: "Release to finish drawing and select a region of interest."
-                    }
+                        start:
+                            "Click and drag to create a rectangle and select a region of interest.",
+                        during:
+                            "Release to finish drawing and select a region of interest.",
+                    },
                 };
                 let sketchVM;
                 sketchVM = new SketchViewModel({
@@ -62,26 +60,26 @@ require(["dojo/topic",
                         color: [255, 0, 0],
                         outline: {
                             color: [50, 50, 50],
-                            width: 1
-                        }
+                            width: 1,
+                        },
                     },
                     polygonSymbol: {
                         type: "simple-fill",
                         style: "backward-diagonal",
                         color: [255, 0, 0, 1],
                         outline: {
-                            color: 'red',
-                            width: 2
-                        }
+                            color: "red",
+                            width: 2,
+                        },
                     },
                     polylineSymbol: {
                         type: "simple-line",
                         color: [255, 0, 0],
-                        width: 2
-                    }
+                        width: 2,
+                    },
                 });
 
-                $bufferCheckbox.change(function(e) {
+                $bufferCheckbox.change(function (e) {
                     let checked = $bufferCheckbox.prop("checked");
                     if (checked) {
                         $bufferOptions.css("display", "flex");
@@ -90,18 +88,18 @@ require(["dojo/topic",
                     }
                 });
 
-                $customSummaryButton.click(function(e) {
+                $customSummaryButton.off("click").on("click", function (e) {
                     e.preventDefault();
                     $customSummaryButton.removeClass("active");
                     $(this).addClass("active");
                     let type = $(this).data("val");
                     $drawingTooltip.html(drawMessages[type].start);
                     sketchVM.create(type, {
-                        mode: "click drag"
+                        mode: "click drag",
                     });
 
                     //Creates a tooltip to give user instructions on drawing
-                    $("#viewDiv").mousemove(function(e) {
+                    $("#viewDiv").mousemove(function (e) {
                         $drawingTooltip
                             .css("left", e.pageX + 10)
                             .css("top", e.pageY + 10)
@@ -109,7 +107,7 @@ require(["dojo/topic",
                     });
                 });
 
-                sketchVM.on("update", function(e) {
+                sketchVM.on("update", function (e) {
                     let buffer = $bufferCheckbox.is(":checked");
                     if (buffer) {
                         AddBufferedGraphic(e);
@@ -118,10 +116,16 @@ require(["dojo/topic",
 
                 function AddBufferedGraphic(e) {
                     if (e.graphic) {
-                        let bufferGraphicsLayer = app.map.findLayerById("bufferGraphics");
+                        let bufferGraphicsLayer = app.map.findLayerById(
+                            "bufferGraphics"
+                        );
                         bufferGraphicsLayer.removeAll();
                         let buffGfx = null;
-                        let buffered = geometryEngine.buffer(e.graphic.geometry, $bufferSize.val(), $bufferUnit.val());
+                        let buffered = geometryEngine.buffer(
+                            e.graphic.geometry,
+                            $bufferSize.val(),
+                            $bufferUnit.val()
+                        );
                         buffGfx = new Graphic({
                             geometry: buffered,
                             symbol: {
@@ -130,16 +134,16 @@ require(["dojo/topic",
                                 outline: {
                                     style: "dot",
                                     color: "black",
-                                    width: 2
-                                }
-                            }
+                                    width: 2,
+                                },
+                            },
                         });
                         bufferGraphicsLayer.add(buffGfx);
                         return buffGfx;
                     }
                 }
 
-                sketchVM.on("create", function(e) {
+                sketchVM.on("create", function (e) {
                     let buffer = $bufferCheckbox.is(":checked");
 
                     if (e.state === "complete") {
@@ -174,7 +178,11 @@ require(["dojo/topic",
                 tp.subscribe("reset-reports", resetReport);
 
                 function ProcessSelection(gfx) {
-                    app.GetData(app.config.layerDef["blockGroups"], null, gfx.geometry).then(function(data) {
+                    app.GetData(
+                        app.config.layerDef["blockGroups"],
+                        null,
+                        gfx.geometry
+                    ).then(function (data) {
                         var acsData = app.summarizeFeatures(data.acsData);
                         var censusData = app.summarizeFeatures(data.censusData);
 
@@ -182,35 +190,52 @@ require(["dojo/topic",
                             app.clearDrawnGraphics();
                             // TODO: This should be prettied up at some point.
                             // Just using the basic alert function isn"t pretty enough.
-                            alert("Your selection did not return any results.  Please try again.");
+                            alert(
+                                "Your selection did not return any results.  Please try again."
+                            );
                         } else {
                             app.selectedReport.acsData = {
-                                features: [{
-                                    attributes: acsData,
-                                    count: data.acsData.features.length,
-                                    ids: data.acsData.features.map(feature => feature.attributes["geoid"])
-                                }],
-                                blockGroups: data.acsData.features
+                                features: [
+                                    {
+                                        attributes: acsData,
+                                        count: data.acsData.features.length,
+                                        ids: data.acsData.features.map(
+                                            (feature) =>
+                                                feature.attributes["GEOID"]
+                                        ),
+                                    },
+                                ],
+                                blockGroups: data.acsData.features,
                             };
 
                             app.selectedReport.censusData = {
-                                features: [{
-                                    attributes: censusData,
-                                    count: data.censusData.features.length,
-                                    ids: data.censusData.features.map(feature => feature.attributes["geoid"])
-                                }],
-                                blockGroups: data.censusData.features
+                                features: [
+                                    {
+                                        attributes: censusData,
+                                        count: data.censusData.features.length,
+                                        ids: data.censusData.features.map(
+                                            (feature) =>
+                                                feature.attributes["GEOID"]
+                                        ),
+                                    },
+                                ],
+                                blockGroups: data.censusData.features,
                             };
-                            tp.publish("open-report-window", app.selectedReport, "acs");
+                            tp.publish(
+                                "open-report-window",
+                                app.selectedReport,
+                                "acs"
+                            );
                             $customGeographyReports.hide();
-                            app.AddHighlightGraphics(data.acsData.features, $useZoom.is(":checked"));
+                            app.AddHighlightGraphics(
+                                data.acsData.features,
+                                $useZoom.is(":checked")
+                            );
                             $(".reportFormArea").hide();
                         }
                     });
                 }
-            })
+            });
         }
     }
-
-
 });

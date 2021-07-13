@@ -8,9 +8,17 @@ require([
     "esri/geometry/Extent",
     "esri/layers/GraphicsLayer",
     "dojo/topic",
-    "dojo/domReady!"
-], function(Map, MapView, FeatureLayer, MapImageLayer, TileLayer, Extent, GraphicsLayer, tp) {
-
+    "dojo/domReady!",
+], function (
+    Map,
+    MapView,
+    FeatureLayer,
+    MapImageLayer,
+    TileLayer,
+    Extent,
+    GraphicsLayer,
+    tp
+) {
     tp.subscribe("config-loaded", initMap);
 
     if (app.configLoaded) {
@@ -19,19 +27,21 @@ require([
 
     function initMap() {
         app.map = new Map({
-            basemap: "gray"
+            basemap: "gray",
         });
 
         app.view = new MapView({
             container: "viewDiv",
             map: app.map,
-            extent: app.initConfig ? app.initConfig.extent : app.config.initExtent,
+            extent: app.initConfig
+                ? app.initConfig.extent
+                : app.config.initExtent,
             constraints: {
                 rotationEnabled: false,
-                minZoom: 7
+                minZoom: 7,
             },
             ui: {
-                components: []
+                components: [],
             },
             popup: {
                 dockEnabled: false,
@@ -39,7 +49,7 @@ require([
                 dockOptions: {
                     buttonEnabled: false,
                     breakpoint: false,
-                }
+                },
             },
             // highlightOptions: {
             //     color: [255, 255, 0, 1],
@@ -48,17 +58,17 @@ require([
             // }
         });
 
-        app.view.when(function() {
-            tp.publish('map-loaded');
-            app.view.popup.on('trigger-action', function(e) {
-                if (e.action.id === 'open-report') {
-                    tp.publish('toggle-panel', 'reports');
+        app.view.when(function () {
+            tp.publish("map-loaded");
+            app.view.popup.on("trigger-action", function (e) {
+                if (e.action.id === "open-report") {
+                    tp.publish("toggle-panel", "reports");
                     let f = e.target.selectedFeature;
                     let geoid = f.attributes["geoid"];
                     let layerId = f.layer.id;
                     let conf = app.config.layerDef[layerId];
 
-                    tp.publish('openReport-by-geoids', conf, [geoid]);
+                    tp.publish("openReport-by-geoids", conf, [geoid]);
                 }
             });
         });
@@ -67,7 +77,7 @@ require([
 
         async function addBGLayer() {
             let res = await app.GetCurrentRenderer();
-            let conf = app.config.layerDef['blockGroups'];
+            let conf = app.config.layerDef["blockGroups"];
             let url = app.config.mainUrl;
             if (conf.url) {
                 url = conf.url;
@@ -80,10 +90,12 @@ require([
                 visible: conf.visible,
                 labelsVisible: false,
                 labelingInfo: [{}],
-                sublayers: [{
-                    id: conf.ACSIndex,
-                    opacity: 1
-                }]
+                sublayers: [
+                    {
+                        id: conf.ACSIndex,
+                        opacity: 1,
+                    },
+                ],
             });
 
             bgLayer.findSublayerById(0).renderer = res.renderer;
@@ -95,10 +107,10 @@ require([
             await addBGLayer();
 
             var layersToAdd = [];
-            app.config.layers.forEach(layer => {
+            app.config.layers.forEach((layer) => {
                 var layerToAdd;
                 var url = app.config.mainUrl;
-                if (layer.type === 'feature') {
+                if (layer.type === "feature") {
                     if (layer.url) {
                         url = layer.url;
                     }
@@ -110,19 +122,28 @@ require([
                         layerId: layer.ACSIndex,
                         visible: layer.visible,
                         popupTemplate: {
-                            title: layer.title + '<div style="display:none">{*}</div>',
+                            title:
+                                layer.title +
+                                '<div style="display:none">{*}</div>',
                             content: app.PopupFormat,
-                            actions: [{
-                                title: "Open Report",
-                                id: "open-report",
-                                className: "esri-icon-table"
-                            }]
+                            actions: [
+                                {
+                                    title: "Open Report",
+                                    id: "open-report",
+                                    className: "esri-icon-table",
+                                },
+                            ],
                         },
                         outFields: layer.outFields || ["*"],
                         opacity: layer.opacity,
-                        labelingInfo: layer.labelClass ? [layer.labelClass] : undefined
+                        labelingInfo: layer.labelClass
+                            ? [layer.labelClass]
+                            : undefined,
                     });
-                } else if (layer.type === "image" && layer.id !== "blockGroups") {
+                } else if (
+                    layer.type === "image" &&
+                    layer.id !== "blockGroups"
+                ) {
                     if (layer.url) {
                         url = layer.url;
                     }
@@ -134,10 +155,12 @@ require([
                         visible: layer.visible,
                         labelsVisible: false,
                         labelingInfo: [{}],
-                        sublayers: [{
-                            id: layer.ACSIndex,
-                            opacity: 1
-                        }]
+                        sublayers: [
+                            {
+                                id: layer.ACSIndex,
+                                opacity: 1,
+                            },
+                        ],
                     });
                 } else if (layer.type === "tile") {
                     if (layer.url) {
@@ -148,7 +171,7 @@ require([
                         id: layer.id,
                         opacity: layer.opacity || 1,
                         title: layer.title,
-                        visible: layer.visible
+                        visible: layer.visible,
                     });
                 }
                 if (layerToAdd) {
@@ -157,15 +180,13 @@ require([
                 }
             });
 
-
-
             var gfxLayer = new GraphicsLayer({
-                id: "gfxLayer"
+                id: "gfxLayer",
             });
             app.map.add(gfxLayer);
 
             let bufferGraphicsLayer = new GraphicsLayer({
-                id: "bufferGraphics"
+                id: "bufferGraphics",
             });
             app.map.layers.add(bufferGraphicsLayer);
 
@@ -174,16 +195,15 @@ require([
             //     return b.sortOrder - a.sortOrder;
             // });
 
-
             //For now.... I'm waiting until the block groups layer is finished to publish the layers-added event.
             //TODO: This should prevent the legend from trying to load to early.
             //It Should probably be refactored at some point
             let bgLayer = app.map.findLayerById("blockGroups");
             var once = false;
-            app.view.whenLayerView(bgLayer).then(function(lyrView) {
-                lyrView.watch("updating", function(value) {
+            app.view.whenLayerView(bgLayer).then(function (lyrView) {
+                lyrView.watch("updating", function (value) {
                     if (!value && !once) {
-                        $('.loading-container').css('display', 'none');
+                        $(".loading-container").css("display", "none");
                         app.blockGroupLyrView = lyrView;
 
                         tp.publish("layers-added");
@@ -192,25 +212,24 @@ require([
                 });
             });
 
-
             var onc = false;
-            app.view.whenLayerView(gfxLayer).then(function(lyrView) {
-                lyrView.watch("updating", function(value) {
+            app.view.whenLayerView(gfxLayer).then(function (lyrView) {
+                lyrView.watch("updating", function (value) {
                     if (!value && !onc) {
                         tp.publish("gfxLayer-loaded");
                     }
-                })
-            })
+                });
+            });
 
             var maxExtent = new Extent({
                 xmax: -12014782.270383481,
                 xmin: -12867208.009819541,
                 ymax: 4497591.978076571,
                 ymin: 3571786.6914867624,
-                spatialReference: 102100
+                spatialReference: 102100,
             });
 
-            app.view.watch('extent', function(extent) {
+            app.view.watch("extent", function (extent) {
                 let currentCenter = extent.center;
                 if (!maxExtent.contains(currentCenter)) {
                     let newCenter = extent.center;

@@ -30,9 +30,8 @@ require(["dojo/topic", "esri/tasks/QueryTask"], function (tp, QueryTask) {
                     reportTypeDDL.select(0);
                 }
 
-                let specificReportCbox = $("#specificReport").data(
-                    "kendoComboBox"
-                );
+                let specificReportCbox =
+                    $("#specificReport").data("kendoComboBox");
                 if (specificReportCbox) {
                     specificReportCbox.select(0);
                 }
@@ -75,7 +74,7 @@ require(["dojo/topic", "esri/tasks/QueryTask"], function (tp, QueryTask) {
 
                 let dataSrc = $(this).data("val");
                 let d = app.selectedReport;
-
+                console.log(dataSrc);
                 if (dataSrc === "acs") {
                     //Show Title 6 data
                     $title6Area.show();
@@ -119,7 +118,9 @@ require(["dojo/topic", "esri/tasks/QueryTask"], function (tp, QueryTask) {
         let idStr = ids.join(",");
         let url = `${app.config.pdfService.defaultUrl}layer=${conf.layerName}&ids=${idStr}`;
         if (ids.length > 1) {
+            // console.log(conf);
             if (conf.id === "blockGroups") {
+                console.log("asdf");
                 localStorage.setItem("magDemoSelectedGEOIDs", idStr);
                 url = `${app.config.pdfService.defaultUrl}layer=${conf.layerName}&ids=interactive`;
             } else {
@@ -244,10 +245,12 @@ require(["dojo/topic", "esri/tasks/QueryTask"], function (tp, QueryTask) {
         `);
         $header.css("display", "Flex");
 
-        let ids = [attr["geoid"]];
+        let ids = [attr["GEOID"]];
 
+        // console.log(features);
         if (features.length > 1) {
-            ids = features.map((feature) => feature.attributes["geoid"]);
+            ids = features.map((feature) => feature.attributes["GEOID"]);
+            // console.log(ids);
         }
 
         if (feature.ids) {
@@ -290,9 +293,9 @@ require(["dojo/topic", "esri/tasks/QueryTask"], function (tp, QueryTask) {
             $("#tabs-tab").find("li").first().find("a").tab("show");
         }
 
-        if (attr["affected_disability_count"] && attr["total_pop"] > 5000) {
+        $("#title6Area").show();
+        if (attr["AFFECTED_DISABILITY_COUNT"] && attr["TOTAL_POP"] > 5000) {
             SetupTitle6Grid(attr);
-            $("#title6Area").show();
         } else {
             $("#title6Grid").html("");
             $("#title6Area").hide();
@@ -459,12 +462,12 @@ require(["dojo/topic", "esri/tasks/QueryTask"], function (tp, QueryTask) {
                 $title6Toggle.toggleClass("k-i-expand k-i-collapse");
             });
 
-        let fivePlus = attr["total_pop"] - attr["under5"];
-        let totalPop = attr["total_pop"];
-        let totalBlockCount = attr["tot_blockgroup_count"];
+        let fivePlus = attr["TOTAL_POP"] - attr["UNDER5"];
+        let totalPop = attr["TOTAL_POP"];
+        let totalBlockCount = attr["TOT_BLOCKGROUP_COUNT"];
         let age65Plus =
-            attr["age65to74"] + attr["age75to84"] + attr["age85plus"];
-
+            attr["AGE65TO74"] + attr["AGE75TO84"] + attr["AGE85PLUS"];
+        console.log(attr);
         let dataSrc = [
             {
                 Category: "Population",
@@ -479,63 +482,64 @@ require(["dojo/topic", "esri/tasks/QueryTask"], function (tp, QueryTask) {
             {
                 Category: "Minority",
                 Footnote: "a",
-                Total: attr["minority_pop"],
-                Percent: attr["minority_pop"] / totalPop,
-                NumberOfBlocks: attr["affected_minority_pop_count"],
+                Total: attr["MINORITY_POP"],
+                Percent: attr["MINORITY_POP"] / totalPop,
+                NumberOfBlocks: attr["AFFECTED_MINORITY_POP_COUNT"],
                 PercentOfBlocks:
-                    attr["affected_minority_pop_count"] / totalBlockCount,
-                AffectedPopulation: attr["affected_minority_pop"],
+                    attr["AFFECTED_MINORITY_POP_COUNT"] / totalBlockCount,
+                AffectedPopulation: attr["AFFECTED_MINORITY_POP"],
                 PercentAffectedCaptured:
-                    attr["affected_minority_pop"] / attr["minority_pop"],
+                    attr["AFFECTED_MINORITY_POP"] / attr["MINORITY_POP"],
             },
             {
                 Category: "Age 65+",
                 Footnote: "",
                 Total: age65Plus,
                 Percent: age65Plus / totalPop,
-                NumberOfBlocks: attr["affected_age65plus_count"],
+                NumberOfBlocks: attr["AFFECTED_AGE65PLUS_COUNT"],
                 PercentOfBlocks:
-                    attr["affected_age65plus_count"] / totalBlockCount,
-                AffectedPopulation: attr["affected_age65plus"],
-                PercentAffectedCaptured: attr["affected_age65plus"] / age65Plus,
+                    attr["AFFECTED_AGE65PLUS_COUNT"] / totalBlockCount,
+                AffectedPopulation: attr["AFFECTED_AGE65PLUS"],
+                PercentAffectedCaptured: attr["AFFECTED_AGE65PLUS"] / age65Plus,
             },
             {
                 Category: "Below Poverty Level",
                 Footnote: "b",
-                Total: attr["income_below_poverty"],
-                Percent: attr["income_below_poverty"] / attr["pop_for_poverty"],
-                NumberOfBlocks: attr["affected_income_below_poverty_c"],
+                Total: attr["INCOME_BELOW_POVERTY"],
+                Percent: attr["INCOME_BELOW_POVERTY"] / attr["POP_FOR_POVERTY"],
+                NumberOfBlocks: attr["AFFECTED_INCOME_BELOW_POVERTY_COUNT"],
                 PercentOfBlocks:
-                    attr["affected_income_below_poverty_c"] / totalBlockCount,
-                AffectedPopulation: attr["affected_income_below_poverty"],
+                    attr["AFFECTED_INCOME_BELOW_POVERTY_COUNT"] /
+                    totalBlockCount,
+                AffectedPopulation: attr["AFFECTED_INCOME_BELOW_POVERTY"],
                 PercentAffectedCaptured:
-                    attr["affected_income_below_poverty"] /
-                    attr["income_below_poverty"],
+                    attr["AFFECTED_INCOME_BELOW_POVERTY"] /
+                    attr["INCOME_BELOW_POVERTY"],
             },
             {
                 Category: "Population with a Disability",
                 Footnote: "c",
-                Total: attr["disability"],
-                Percent: attr["disability"] / attr["civ_noninst_pop"],
-                NumberOfBlocks: attr["affected_disability_count"],
+                Total: attr["DISABILITY"],
+                Percent: attr["DISABILITY"] / attr["CIV_NONINST_POP"],
+                NumberOfBlocks: attr["AFFECTED_DISABILITY_COUNT"],
                 PercentOfBlocks:
-                    attr["affected_disability_count"] / totalBlockCount,
-                AffectedPopulation: attr["affected_disability"],
+                    attr["AFFECTED_DISABILITY_COUNT"] / totalBlockCount,
+                AffectedPopulation: attr["AFFECTED_DISABILITY"],
                 PercentAffectedCaptured:
-                    attr["affected_disability"] / attr["disability"],
+                    attr["AFFECTED_DISABILITY"] / attr["DISABILITY"],
             },
             {
                 Category: "Limited English Proficient Persons (LEP)",
                 Footnote: "d",
-                Total: attr["limited_eng_prof"],
-                Percent: attr["limited_eng_prof"] / fivePlus,
-                NumberOfBlocks: attr["affected_limited_eng_prof_count"],
+                Total: attr["LIMITED_ENG_PROF"],
+                Percent: attr["LIMITED_ENG_PROF"] / fivePlus,
+                NumberOfBlocks: attr["AFFECTED_LIMITED_ENG_PROF_COUNT"],
                 PercentOfBlocks:
-                    attr["affected_limited_eng_prof_count"] / totalBlockCount,
-                AffectedPopulation: attr["affected_limited_eng_prof"],
+                    attr["AFFECTED_LIMITED_ENG_PROF_COUNT"] / totalBlockCount,
+                AffectedPopulation: attr["AFFECTED_LIMITED_ENG_PROF"],
                 PercentAffectedCaptured:
-                    attr["affected_limited_eng_prof"] /
-                    attr["limited_eng_prof"],
+                    attr["AFFECTED_LIMITED_ENG_PROF"] /
+                    attr["LIMITED_ENG_PROF"],
             },
         ];
 
@@ -592,8 +596,7 @@ require(["dojo/topic", "esri/tasks/QueryTask"], function (tp, QueryTask) {
                         },
                         {
                             field: "PercentAffectedCaptured",
-                            title:
-                                "% of Affected Population Captured in Census Block Groups",
+                            title: "% of Affected Population Captured in Census Block Groups",
                             width: "85px",
                             format: "{0:p1}",
                         },

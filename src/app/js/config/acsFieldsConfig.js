@@ -45,7 +45,7 @@ app.acsFieldsConfig = [
         chartType: "",
         canSum: true,
         parentField: "",
-        percentOfField: "total_pop",
+        percentOfField: "TOTAL_POP",
     },
     {
         fieldName: "FEMALE",
@@ -61,7 +61,7 @@ app.acsFieldsConfig = [
         chartType: "",
         canSum: true,
         parentField: "",
-        percentOfField: "total_pop",
+        percentOfField: "TOTAL_POP",
     },
     {
         fieldName: "AGE",
@@ -77,7 +77,7 @@ app.acsFieldsConfig = [
         chartType: "",
         canSum: true,
         parentField: "",
-        percentOfField: "total_pop",
+        percentOfField: "TOTAL_POP",
     },
     {
         fieldName: "MEDIAN_AGE",
@@ -109,7 +109,7 @@ app.acsFieldsConfig = [
         chartType: "bar",
         canSum: true,
         parentField: "",
-        percentOfField: "total_pop",
+        percentOfField: "TOTAL_POP",
     },
     {
         fieldName: "AGE5TO9",
@@ -125,7 +125,7 @@ app.acsFieldsConfig = [
         chartType: "bar",
         canSum: true,
         parentField: "",
-        percentOfField: "total_pop",
+        percentOfField: "TOTAL_POP",
     },
     {
         fieldName: "AGE10TO14",
@@ -141,7 +141,7 @@ app.acsFieldsConfig = [
         chartType: "bar",
         canSum: true,
         parentField: "",
-        percentOfField: "total_pop",
+        percentOfField: "TOTAL_POP",
     },
     {
         fieldName: "AGE15TO19",
@@ -157,7 +157,7 @@ app.acsFieldsConfig = [
         chartType: "bar",
         canSum: true,
         parentField: "",
-        percentOfField: "total_pop",
+        percentOfField: "TOTAL_POP",
     },
     {
         fieldName: "AGE20TO24",
@@ -173,7 +173,7 @@ app.acsFieldsConfig = [
         chartType: "bar",
         canSum: true,
         parentField: "",
-        percentOfField: "total_pop",
+        percentOfField: "TOTAL_POP",
     },
     {
         fieldName: "AGE25TO34",
@@ -189,7 +189,7 @@ app.acsFieldsConfig = [
         chartType: "bar",
         canSum: true,
         parentField: "",
-        percentOfField: "total_pop",
+        percentOfField: "TOTAL_POP",
     },
     {
         fieldName: "AGE35TO44",
@@ -205,7 +205,7 @@ app.acsFieldsConfig = [
         chartType: "bar",
         canSum: true,
         parentField: "",
-        percentOfField: "total_pop",
+        percentOfField: "TOTAL_POP",
     },
     {
         fieldName: "AGE45TO54",
@@ -221,7 +221,7 @@ app.acsFieldsConfig = [
         chartType: "bar",
         canSum: true,
         parentField: "",
-        percentOfField: "total_pop",
+        percentOfField: "TOTAL_POP",
     },
     {
         fieldName: "AGE55TO59",
@@ -237,7 +237,7 @@ app.acsFieldsConfig = [
         chartType: "bar",
         canSum: true,
         parentField: "",
-        percentOfField: "total_pop",
+        percentOfField: "TOTAL_POP",
     },
     {
         fieldName: "AGE60TO64",
@@ -253,7 +253,7 @@ app.acsFieldsConfig = [
         chartType: "bar",
         canSum: true,
         parentField: "",
-        percentOfField: "total_pop",
+        percentOfField: "TOTAL_POP",
     },
     {
         fieldName: "AGE65TO74",
@@ -269,7 +269,7 @@ app.acsFieldsConfig = [
         chartType: "bar",
         canSum: true,
         parentField: "",
-        percentOfField: "total_pop",
+        percentOfField: "TOTAL_POP",
     },
     {
         fieldName: "AGE75TO84",
@@ -285,7 +285,7 @@ app.acsFieldsConfig = [
         chartType: "bar",
         canSum: true,
         parentField: "",
-        percentOfField: "total_pop",
+        percentOfField: "TOTAL_POP",
     },
     {
         fieldName: "AGE85PLUS",
@@ -301,7 +301,7 @@ app.acsFieldsConfig = [
         chartType: "bar",
         canSum: true,
         parentField: "",
-        percentOfField: "total_pop",
+        percentOfField: "TOTAL_POP",
     },
     {
         fieldName: "SELECT AGE GROUPS",
@@ -333,7 +333,7 @@ app.acsFieldsConfig = [
         chartType: "",
         canSum: true,
         parentField: "",
-        percentOfField: "total_pop",
+        percentOfField: "TOTAL_POP",
     },
     {
         fieldName: "AGE21PLUS",
@@ -349,7 +349,7 @@ app.acsFieldsConfig = [
         chartType: "",
         canSum: true,
         parentField: "",
-        percentOfField: "total_pop",
+        percentOfField: "TOTAL_POP",
     },
     {
         fieldName: "AGE62PLUS",
@@ -365,7 +365,7 @@ app.acsFieldsConfig = [
         chartType: "",
         canSum: true,
         parentField: "",
-        percentOfField: "total_pop",
+        percentOfField: "TOTAL_POP",
     },
     {
         fieldName: "AGE65PLUS",
@@ -381,7 +381,7 @@ app.acsFieldsConfig = [
         chartType: "",
         canSum: true,
         parentField: "",
-        percentOfField: "total_pop",
+        percentOfField: "TOTAL_POP",
     },
     {
         fieldName: "TOTAL_POP",
@@ -413,7 +413,7 @@ app.acsFieldsConfig = [
         chartType: "pie",
         canSum: true,
         parentField: "",
-        percentOfField: "total_pop",
+        percentOfField: "TOTAL_POP",
     },
     {
         fieldName: "NON-HISPANIC",
@@ -429,7 +429,7 @@ app.acsFieldsConfig = [
         chartType: "",
         canSum: true,
         parentField: "",
-        percentOfField: "total_pop",
+        percentOfField: "TOTAL_POP",
     },
     {
         fieldName: "WHITE_NON_HISPANIC",
@@ -445,7 +445,7 @@ app.acsFieldsConfig = [
         chartType: "pie",
         canSum: true,
         parentField: "",
-        percentOfField: "total_pop",
+        percentOfField: "TOTAL_POP",
     },
     {
         fieldName: "BLACK_NON_HISPANIC",
@@ -461,7 +461,7 @@ app.acsFieldsConfig = [
         chartType: "pie",
         canSum: true,
         parentField: "",
-        percentOfField: "total_pop",
+        percentOfField: "TOTAL_POP",
     },
     {
         fieldName: "NATIVE_NON_HISPANIC",
@@ -477,7 +477,7 @@ app.acsFieldsConfig = [
         chartType: "pie",
         canSum: true,
         parentField: "",
-        percentOfField: "total_pop",
+        percentOfField: "TOTAL_POP",
     },
     {
         fieldName: "ASIAN_NON_HISPANIC",
@@ -493,7 +493,7 @@ app.acsFieldsConfig = [
         chartType: "pie",
         canSum: true,
         parentField: "",
-        percentOfField: "total_pop",
+        percentOfField: "TOTAL_POP",
     },
     {
         fieldName: "PACIFIC_NON_HISPANIC",
@@ -509,7 +509,7 @@ app.acsFieldsConfig = [
         chartType: "pie",
         canSum: true,
         parentField: "",
-        percentOfField: "total_pop",
+        percentOfField: "TOTAL_POP",
     },
     {
         fieldName: "OTHER_NON_HISPANIC",
@@ -525,7 +525,7 @@ app.acsFieldsConfig = [
         chartType: "pie",
         canSum: true,
         parentField: "",
-        percentOfField: "total_pop",
+        percentOfField: "TOTAL_POP",
     },
     {
         fieldName: "TWO_OR_MORE_NON_HISPANIC",
@@ -541,7 +541,7 @@ app.acsFieldsConfig = [
         chartType: "pie",
         canSum: true,
         parentField: "",
-        percentOfField: "total_pop",
+        percentOfField: "TOTAL_POP",
     },
     {
         fieldName: "MINORITY_POP",
@@ -558,7 +558,7 @@ app.acsFieldsConfig = [
         chartType: "",
         canSum: true,
         parentField: "",
-        percentOfField: "total_pop",
+        percentOfField: "TOTAL_POP",
     },
     {
         fieldName: "AGE25PLUS",
@@ -590,7 +590,7 @@ app.acsFieldsConfig = [
         chartType: "bar",
         canSum: true,
         parentField: "",
-        percentOfField: "age25plus",
+        percentOfField: "AGE25PLUS",
     },
     {
         fieldName: "NOHSDIPLOMA",
@@ -606,7 +606,7 @@ app.acsFieldsConfig = [
         chartType: "bar",
         canSum: true,
         parentField: "",
-        percentOfField: "age25plus",
+        percentOfField: "AGE25PLUS",
     },
     {
         fieldName: "HSGRAD",
@@ -622,7 +622,7 @@ app.acsFieldsConfig = [
         chartType: "bar",
         canSum: true,
         parentField: "",
-        percentOfField: "age25plus",
+        percentOfField: "AGE25PLUS",
     },
     {
         fieldName: "SOMECOLLEGE",
@@ -638,7 +638,7 @@ app.acsFieldsConfig = [
         chartType: "bar",
         canSum: true,
         parentField: "",
-        percentOfField: "age25plus",
+        percentOfField: "AGE25PLUS",
     },
     {
         fieldName: "ASSOCIATES",
@@ -654,7 +654,7 @@ app.acsFieldsConfig = [
         chartType: "bar",
         canSum: true,
         parentField: "",
-        percentOfField: "age25plus",
+        percentOfField: "AGE25PLUS",
     },
     {
         fieldName: "BACHELORS",
@@ -670,7 +670,7 @@ app.acsFieldsConfig = [
         chartType: "bar",
         canSum: true,
         parentField: "",
-        percentOfField: "age25plus",
+        percentOfField: "AGE25PLUS",
     },
     {
         fieldName: "GRADPROF",
@@ -686,7 +686,7 @@ app.acsFieldsConfig = [
         chartType: "bar",
         canSum: true,
         parentField: "",
-        percentOfField: "age25plus",
+        percentOfField: "AGE25PLUS",
     },
     {
         fieldName: "AGE5PLUS",
@@ -720,7 +720,7 @@ app.acsFieldsConfig = [
         chartType: "",
         canSum: true,
         parentField: "",
-        percentOfField: "age5plus",
+        percentOfField: "AGE5PLUS",
     },
     {
         fieldName: "SPEAK_OTHER_LANGS",
@@ -737,7 +737,7 @@ app.acsFieldsConfig = [
         chartType: "",
         canSum: true,
         parentField: "",
-        percentOfField: "age5plus",
+        percentOfField: "AGE5PLUS",
     },
     {
         fieldName: "SPEAK_ENG_VERYWELL",
@@ -854,7 +854,7 @@ app.acsFieldsConfig = [
         chartType: "",
         canSum: true,
         parentField: "",
-        percentOfField: "civ_pop_18plus",
+        percentOfField: "CIV_POP_18PLUS",
     },
     {
         fieldName: "VETERANS BY GENDER",
@@ -870,7 +870,7 @@ app.acsFieldsConfig = [
         chartType: "",
         canSum: null,
         parentField: "",
-        percentOfField: "veterans",
+        percentOfField: "VETERANS",
     },
     {
         fieldName: "MALE_VETERANS",
@@ -1046,7 +1046,7 @@ app.acsFieldsConfig = [
         chartType: "",
         canSum: true,
         parentField: "",
-        percentOfField: "total_households",
+        percentOfField: "TOTAL_HOUSEHOLDS",
     },
     {
         fieldName: "MARRIED_COUPLE_FAMILY",
@@ -1110,7 +1110,7 @@ app.acsFieldsConfig = [
         chartType: "",
         canSum: true,
         parentField: "",
-        percentOfField: "total_households",
+        percentOfField: "TOTAL_HOUSEHOLDS",
     },
     {
         fieldName: "NONFAM_HH_LIVE_ALONE",
@@ -1177,7 +1177,7 @@ app.acsFieldsConfig = [
         chartType: "bar",
         canSum: true,
         parentField: "",
-        percentOfField: "total_hh_for_income",
+        percentOfField: "TOTAL_HH_FOR_INCOME",
     },
     {
         fieldName: "HH_10K_TO_14K",
@@ -1194,7 +1194,7 @@ app.acsFieldsConfig = [
         chartType: "bar",
         canSum: true,
         parentField: "",
-        percentOfField: "total_hh_for_income",
+        percentOfField: "TOTAL_HH_FOR_INCOME",
     },
     {
         fieldName: "HH_15K_TO_24K",
@@ -1211,7 +1211,7 @@ app.acsFieldsConfig = [
         chartType: "bar",
         canSum: true,
         parentField: "",
-        percentOfField: "total_hh_for_income",
+        percentOfField: "TOTAL_HH_FOR_INCOME",
     },
     {
         fieldName: "HH_25K_TO_34K",
@@ -1228,7 +1228,7 @@ app.acsFieldsConfig = [
         chartType: "bar",
         canSum: true,
         parentField: "",
-        percentOfField: "total_hh_for_income",
+        percentOfField: "TOTAL_HH_FOR_INCOME",
     },
     {
         fieldName: "HH_35K_TO_49K",
@@ -1245,7 +1245,7 @@ app.acsFieldsConfig = [
         chartType: "bar",
         canSum: true,
         parentField: "",
-        percentOfField: "total_hh_for_income",
+        percentOfField: "TOTAL_HH_FOR_INCOME",
     },
     {
         fieldName: "HH_50K_TO_74K",
@@ -1262,7 +1262,7 @@ app.acsFieldsConfig = [
         chartType: "bar",
         canSum: true,
         parentField: "",
-        percentOfField: "total_hh_for_income",
+        percentOfField: "TOTAL_HH_FOR_INCOME",
     },
     {
         fieldName: "HH_75K_TO_99K",
@@ -1279,7 +1279,7 @@ app.acsFieldsConfig = [
         chartType: "bar",
         canSum: true,
         parentField: "",
-        percentOfField: "total_hh_for_income",
+        percentOfField: "TOTAL_HH_FOR_INCOME",
     },
     {
         fieldName: "HH_100K_TO_149K",
@@ -1296,7 +1296,7 @@ app.acsFieldsConfig = [
         chartType: "bar",
         canSum: true,
         parentField: "",
-        percentOfField: "total_hh_for_income",
+        percentOfField: "TOTAL_HH_FOR_INCOME",
     },
     {
         fieldName: "HH_150K_TO_199K",
@@ -1313,7 +1313,7 @@ app.acsFieldsConfig = [
         chartType: "bar",
         canSum: true,
         parentField: "",
-        percentOfField: "total_hh_for_income",
+        percentOfField: "TOTAL_HH_FOR_INCOME",
     },
     {
         fieldName: "HH_200K_PLUS",
@@ -1330,7 +1330,7 @@ app.acsFieldsConfig = [
         chartType: "bar",
         canSum: true,
         parentField: "",
-        percentOfField: "total_hh_for_income",
+        percentOfField: "TOTAL_HH_FOR_INCOME",
     },
     {
         fieldName: "POP_FOR_POVERTY",
@@ -1364,7 +1364,7 @@ app.acsFieldsConfig = [
         chartType: "bar",
         canSum: true,
         parentField: "",
-        percentOfField: "pop_for_poverty",
+        percentOfField: "POP_FOR_POVERTY",
     },
     {
         fieldName: "INCOME_BELOW_150PCT_POVERTY",
@@ -1381,7 +1381,7 @@ app.acsFieldsConfig = [
         chartType: "bar",
         canSum: true,
         parentField: "",
-        percentOfField: "pop_for_poverty",
+        percentOfField: "POP_FOR_POVERTY",
     },
     {
         fieldName: "INCOME_BELOW_200PCT_POVERTY",
@@ -1398,7 +1398,7 @@ app.acsFieldsConfig = [
         chartType: "bar",
         canSum: true,
         parentField: "",
-        percentOfField: "pop_for_poverty",
+        percentOfField: "POP_FOR_POVERTY",
     },
     {
         fieldName: "TOTAL_FAMILIES",
@@ -1432,7 +1432,7 @@ app.acsFieldsConfig = [
         chartType: "",
         canSum: true,
         parentField: "",
-        percentOfField: "total_families",
+        percentOfField: "TOTAL_FAMILIES",
     },
     {
         fieldName: "MARRIEDCOUPLE_BELOWPOV",
@@ -1566,7 +1566,7 @@ app.acsFieldsConfig = [
         chartType: "pie",
         canSum: true,
         parentField: "",
-        percentOfField: "civilian_labor_force",
+        percentOfField: "CIVILIAN_LABOR_FORCE",
     },
     {
         fieldName: "UNEMPLOYED",
@@ -1582,7 +1582,7 @@ app.acsFieldsConfig = [
         chartType: "pie",
         canSum: true,
         parentField: "",
-        percentOfField: "civilian_labor_force",
+        percentOfField: "CIVILIAN_LABOR_FORCE",
     },
     {
         fieldName: "TOT_WORKERS_16PLUS",
@@ -1614,7 +1614,7 @@ app.acsFieldsConfig = [
         chartType: "pie",
         canSum: true,
         parentField: "",
-        percentOfField: "tot_workers_16plus",
+        percentOfField: "TOT_WORKERS_16PLUS",
     },
     {
         fieldName: "CARPOOLED",
@@ -1630,7 +1630,7 @@ app.acsFieldsConfig = [
         chartType: "pie",
         canSum: true,
         parentField: "",
-        percentOfField: "tot_workers_16plus",
+        percentOfField: "TOT_WORKERS_16PLUS",
     },
     {
         fieldName: "PUBLIC_TRANSPORTATION",
@@ -1646,7 +1646,7 @@ app.acsFieldsConfig = [
         chartType: "pie",
         canSum: true,
         parentField: "",
-        percentOfField: "tot_workers_16plus",
+        percentOfField: "TOT_WORKERS_16PLUS",
     },
     {
         fieldName: "BICYCLE",
@@ -1662,7 +1662,7 @@ app.acsFieldsConfig = [
         chartType: "pie",
         canSum: true,
         parentField: "",
-        percentOfField: "tot_workers_16plus",
+        percentOfField: "TOT_WORKERS_16PLUS",
     },
     {
         fieldName: "WALKED",
@@ -1678,7 +1678,7 @@ app.acsFieldsConfig = [
         chartType: "pie",
         canSum: true,
         parentField: "",
-        percentOfField: "tot_workers_16plus",
+        percentOfField: "TOT_WORKERS_16PLUS",
     },
     {
         fieldName: "TAXI_MOTORCYCLE_OR_OTHER",
@@ -1694,7 +1694,7 @@ app.acsFieldsConfig = [
         chartType: "pie",
         canSum: true,
         parentField: "",
-        percentOfField: "tot_workers_16plus",
+        percentOfField: "TOT_WORKERS_16PLUS",
     },
     {
         fieldName: "WORKED_FROM_HOME",
@@ -1710,7 +1710,7 @@ app.acsFieldsConfig = [
         chartType: "pie",
         canSum: true,
         parentField: "",
-        percentOfField: "tot_workers_16plus",
+        percentOfField: "TOT_WORKERS_16PLUS",
     },
     {
         fieldName: "CIVILIAN_EMPLOYED_16_PLUS",
@@ -1742,7 +1742,7 @@ app.acsFieldsConfig = [
         chartType: "pie",
         canSum: true,
         parentField: "",
-        percentOfField: "civilian_employed_16_plus",
+        percentOfField: "CIVILIAN_EMPLOYED_16_PLUS",
     },
     {
         fieldName: "MGBIZFIN",
@@ -2004,7 +2004,7 @@ app.acsFieldsConfig = [
         chartType: "pie",
         canSum: true,
         parentField: "",
-        percentOfField: "civilian_employed_16_plus",
+        percentOfField: "CIVILIAN_EMPLOYED_16_PLUS",
     },
     {
         fieldName: "HEALTHSUPPORT",
@@ -2135,7 +2135,7 @@ app.acsFieldsConfig = [
         chartType: "pie",
         canSum: true,
         parentField: "",
-        percentOfField: "civilian_employed_16_plus",
+        percentOfField: "CIVILIAN_EMPLOYED_16_PLUS",
     },
     {
         fieldName: "SALESOCC",
@@ -2185,7 +2185,7 @@ app.acsFieldsConfig = [
         chartType: "pie",
         canSum: true,
         parentField: "",
-        percentOfField: "civilian_employed_16_plus",
+        percentOfField: "CIVILIAN_EMPLOYED_16_PLUS",
     },
     {
         fieldName: "FARMFISH",
@@ -2251,7 +2251,7 @@ app.acsFieldsConfig = [
         chartType: "pie",
         canSum: true,
         parentField: "",
-        percentOfField: "civilian_employed_16_plus",
+        percentOfField: "CIVILIAN_EMPLOYED_16_PLUS",
     },
     {
         fieldName: "PRODUCTION",
@@ -2331,7 +2331,7 @@ app.acsFieldsConfig = [
         chartType: "",
         canSum: true,
         parentField: "",
-        percentOfField: "total_housing_units",
+        percentOfField: "TOTAL_HOUSING_UNITS",
     },
     {
         fieldName: "OCCUPIED_HU",
@@ -2347,7 +2347,7 @@ app.acsFieldsConfig = [
         chartType: "pie",
         canSum: true,
         parentField: "",
-        percentOfField: "total_housing_units",
+        percentOfField: "TOTAL_HOUSING_UNITS",
     },
     {
         fieldName: "AVG_HOUSEHOLD_SIZE",
@@ -2379,7 +2379,7 @@ app.acsFieldsConfig = [
         chartType: "pie",
         canSum: true,
         parentField: "",
-        percentOfField: "occupied_hu",
+        percentOfField: "OCCUPIED_HU",
     },
     {
         fieldName: "AVG_HH_SIZE_OWNER_HU",
@@ -2427,7 +2427,7 @@ app.acsFieldsConfig = [
         chartType: "pie",
         canSum: true,
         parentField: "",
-        percentOfField: "occupied_hu",
+        percentOfField: "OCCUPIED_HU",
     },
     {
         fieldName: "AVG_HH_SIZE_RENTER_HU",
@@ -2475,7 +2475,7 @@ app.acsFieldsConfig = [
         chartType: "pie",
         canSum: true,
         parentField: "",
-        percentOfField: "total_housing_units",
+        percentOfField: "TOTAL_HOUSING_UNITS",
     },
     {
         fieldName: "SEASONAL_VACANT",
@@ -2523,7 +2523,7 @@ app.acsFieldsConfig = [
         chartType: "",
         canSum: true,
         parentField: "",
-        percentOfField: "total_housing_units",
+        percentOfField: "TOTAL_HOUSING_UNITS",
     },
     {
         fieldName: "ONE_UNIT_DETACHED",
@@ -2539,7 +2539,7 @@ app.acsFieldsConfig = [
         chartType: "",
         canSum: true,
         parentField: "",
-        percentOfField: "total_housing_units",
+        percentOfField: "TOTAL_HOUSING_UNITS",
     },
     {
         fieldName: "ONE_UNIT_ATTACHED",
@@ -2555,7 +2555,7 @@ app.acsFieldsConfig = [
         chartType: "",
         canSum: true,
         parentField: "",
-        percentOfField: "total_housing_units",
+        percentOfField: "TOTAL_HOUSING_UNITS",
     },
     {
         fieldName: "TWO_TO_NINE_UNITS",
@@ -2571,7 +2571,7 @@ app.acsFieldsConfig = [
         chartType: "",
         canSum: true,
         parentField: "",
-        percentOfField: "total_housing_units",
+        percentOfField: "TOTAL_HOUSING_UNITS",
     },
     {
         fieldName: "TEN_OR_MORE_UNITS",
@@ -2587,7 +2587,7 @@ app.acsFieldsConfig = [
         chartType: "",
         canSum: true,
         parentField: "",
-        percentOfField: "total_housing_units",
+        percentOfField: "TOTAL_HOUSING_UNITS",
     },
     {
         fieldName: "MOBILE_HOME",
@@ -2603,7 +2603,7 @@ app.acsFieldsConfig = [
         chartType: "",
         canSum: true,
         parentField: "",
-        percentOfField: "total_housing_units",
+        percentOfField: "TOTAL_HOUSING_UNITS",
     },
     {
         fieldName: "BOAT_RV_VAN_ETC",
@@ -2619,7 +2619,7 @@ app.acsFieldsConfig = [
         chartType: "",
         canSum: true,
         parentField: "",
-        percentOfField: "total_housing_units",
+        percentOfField: "TOTAL_HOUSING_UNITS",
     },
     {
         fieldName: "TOTAL_OCCUPIED_HU",
@@ -2651,7 +2651,7 @@ app.acsFieldsConfig = [
         chartType: "pie",
         canSum: true,
         parentField: "",
-        percentOfField: "total_occupied_hu",
+        percentOfField: "TOTAL_OCCUPIED_HU",
     },
     {
         fieldName: "ONE_VEHICLE",
@@ -2667,7 +2667,7 @@ app.acsFieldsConfig = [
         chartType: "pie",
         canSum: true,
         parentField: "",
-        percentOfField: "total_occupied_hu",
+        percentOfField: "TOTAL_OCCUPIED_HU",
     },
     {
         fieldName: "TWO_VEHICLES",
@@ -2683,7 +2683,7 @@ app.acsFieldsConfig = [
         chartType: "pie",
         canSum: true,
         parentField: "",
-        percentOfField: "total_occupied_hu",
+        percentOfField: "TOTAL_OCCUPIED_HU",
     },
     {
         fieldName: "THREE_PLUS_VEHICLES",
@@ -2699,7 +2699,7 @@ app.acsFieldsConfig = [
         chartType: "pie",
         canSum: true,
         parentField: "",
-        percentOfField: "total_occupied_hu",
+        percentOfField: "TOTAL_OCCUPIED_HU",
     },
     {
         fieldName: "ACRES",

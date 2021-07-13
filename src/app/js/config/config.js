@@ -14,9 +14,9 @@ app.config = {
         "https://geo.azmag.gov/arcgis/rest/services/gp/GenericPrintService/GPServer/Export%20Web%20Map",
     pdfService: {
         defaultUrl:
-            "https://geo.azmag.gov/services/demographics2018/Reports.html?",
+            "https://geo.azmag.gov/services/demographics2019/Reports.html?",
         compareUrl:
-            "https://geo.azmag.gov/services/demographics2018/CompareReport.html?",
+            "https://geo.azmag.gov/services/demographics2019/CompareReport.html?",
     },
     siteUrl: "https://geo.azmag.gov/maps/azdemographics/?",
 
